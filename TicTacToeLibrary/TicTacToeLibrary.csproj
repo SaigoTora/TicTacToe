@@ -46,6 +46,8 @@
     <Compile Include="CellType.cs" />
     <Compile Include="Difficulty.cs" />
     <Compile Include="Field.cs" />
+    <Compile Include="Node.cs" />
+    <Compile Include="PerfectMoveFinder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

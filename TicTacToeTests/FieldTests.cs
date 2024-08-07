@@ -6,38 +6,11 @@ public class FieldTests
 {
 	[SetUp]
 	public void Setup()
-	{
-	}
-
-	internal static Field CreateAndSetField(CellType[,] cells, int winningCellsCount)
-	{
-		Field field = new(cells.GetLength(0), winningCellsCount);
-
-		for (int i = 0; i < cells.GetLength(0); i++)
-			for (int j = 0; j < cells.GetLength(1); j++)
-				field.FillCell(new Cell(i, j), cells[i, j]);
-
-		return field;
-	}
-	private static bool CompareWinningCells(Cell[] winningCells, Cell[] expectedWinningCells)
-	{
-		if (winningCells == null || expectedWinningCells == null)
-			return winningCells == expectedWinningCells;
-
-		if (winningCells.Length != expectedWinningCells.Length)
-			return false;
-
-		for (int i = 0; i < winningCells.Length; i++)
-			if (winningCells[i].row != expectedWinningCells[i].row
-				|| winningCells[i].column != expectedWinningCells[i].column)
-				return false;
-
-		return true;
-	}
+	{ }
 
 	#region GameIsNotOver
 	[Test]
-	public void TestNoEndD3_1()
+	public void TestIsGameEnd_D3_NoEnd1()
 	{
 		// Arrange
 		CellType[,] cells = new CellType[3, 3]
@@ -47,7 +20,7 @@ public class FieldTests
 			{ CellType.None, CellType.None, CellType.Zero }
 		};
 
-		Field field = CreateAndSetField(cells, 3);
+		Field field = TestHelper.CreateAndSetField(cells, 3);
 
 		// Act
 		bool isGameEnd = field.IsGameEnd();
@@ -61,7 +34,7 @@ public class FieldTests
 		Assert.That(isGameEnd == expectedGameEnd && winner == expectedWinner && winningCells == null);
 	}
 	[Test]
-	public void TestNoEndD3_2()
+	public void TestIsGameEnd_D3_NoEnd2()
 	{
 		// Arrange
 		CellType[,] cells = new CellType[3, 3]
@@ -71,7 +44,7 @@ public class FieldTests
 			{ CellType.Zero, CellType.None, CellType.Zero }
 		};
 
-		Field field = CreateAndSetField(cells, 3);
+		Field field = TestHelper.CreateAndSetField(cells, 3);
 
 		// Act
 		bool isGameEnd = field.IsGameEnd();
@@ -86,7 +59,7 @@ public class FieldTests
 	}
 
 	[Test]
-	public void TestNoEndD5_1()
+	public void TestIsGameEnd_D5_NoEnd1()
 	{
 		// Arrange
 		CellType[,] cells = new CellType[5, 5]
@@ -98,7 +71,7 @@ public class FieldTests
 			{ CellType.Zero, CellType.Zero, CellType.Zero, CellType.Cross, CellType.Cross}
 		};
 
-		Field field = CreateAndSetField(cells, 4);
+		Field field = TestHelper.CreateAndSetField(cells, 4);
 
 		// Act
 		bool isGameEnd = field.IsGameEnd();
@@ -112,7 +85,7 @@ public class FieldTests
 		Assert.That(isGameEnd == expectedGameEnd && winner == expectedWinner && winningCells == null);
 	}
 	[Test]
-	public void TestNoEndD5_2()
+	public void TestIsGameEnd_D5_NoEnd2()
 	{
 		// Arrange
 		CellType[,] cells = new CellType[5, 5]
@@ -124,7 +97,7 @@ public class FieldTests
 			{ CellType.Zero, CellType.None, CellType.None, CellType.Cross, CellType.Zero }
 		};
 
-		Field field = CreateAndSetField(cells, 4);
+		Field field = TestHelper.CreateAndSetField(cells, 4);
 
 		// Act
 		bool isGameEnd = field.IsGameEnd();
@@ -141,7 +114,7 @@ public class FieldTests
 
 	#region GameEndedInDraw
 	[Test]
-	public void TestWinnerNoneD3_1()
+	public void TestIsGameEnd_D3_WinnerNone1()
 	{
 		// Arrange
 		CellType[,] cells = new CellType[3, 3]
@@ -151,7 +124,7 @@ public class FieldTests
 			{ CellType.Cross, CellType.Cross, CellType.Zero }
 		};
 
-		Field field = CreateAndSetField(cells, 3);
+		Field field = TestHelper.CreateAndSetField(cells, 3);
 
 		// Act
 		bool isGameEnd = field.IsGameEnd();
@@ -165,7 +138,7 @@ public class FieldTests
 		Assert.That(isGameEnd == expectedGameEnd && winner == expectedWinner && winningCells == null);
 	}
 	[Test]
-	public void TestWinnerNoneD3_2()
+	public void TestIsGameEnd_D3_WinnerNone2()
 	{
 		// Arrange
 		CellType[,] cells = new CellType[3, 3]
@@ -175,7 +148,7 @@ public class FieldTests
 			{ CellType.Cross, CellType.Zero, CellType.Zero }
 		};
 
-		Field field = CreateAndSetField(cells, 3);
+		Field field = TestHelper.CreateAndSetField(cells, 3);
 
 		// Act
 		bool isGameEnd = field.IsGameEnd();
@@ -190,7 +163,7 @@ public class FieldTests
 	}
 
 	[Test]
-	public void TestWinnerNoneD5_1()
+	public void TestIsGameEnd_D5_WinnerNone1()
 	{
 		// Arrange
 		CellType[,] cells = new CellType[5, 5]
@@ -202,7 +175,7 @@ public class FieldTests
 			{ CellType.Zero, CellType.Cross, CellType.Zero, CellType.Cross, CellType.Zero }
 		};
 
-		Field field = CreateAndSetField(cells, 4);
+		Field field = TestHelper.CreateAndSetField(cells, 4);
 
 		// Act
 		bool isGameEnd = field.IsGameEnd();
@@ -216,7 +189,7 @@ public class FieldTests
 		Assert.That(isGameEnd == expectedGameEnd && winner == expectedWinner && winningCells == null);
 	}
 	[Test]
-	public void TestWinnerNoneD5_2()
+	public void TestIsGameEnd_D5_WinnerNone2()
 	{
 		// Arrange
 		CellType[,] cells = new CellType[5, 5]
@@ -228,7 +201,7 @@ public class FieldTests
 			{ CellType.Zero, CellType.Zero, CellType.Zero, CellType.Cross, CellType.Cross }
 		};
 
-		Field field = CreateAndSetField(cells, 4);
+		Field field = TestHelper.CreateAndSetField(cells, 4);
 
 		// Act
 		bool isGameEnd = field.IsGameEnd();
@@ -245,7 +218,7 @@ public class FieldTests
 
 	#region GameEndedWithVictoryCross
 	[Test]
-	public void TestWinnerCrossD3_1()
+	public void TestIsGameEnd_D3_WinnerCross1()
 	{
 		// Arrange
 		CellType[,] cells = new CellType[3, 3]
@@ -255,7 +228,7 @@ public class FieldTests
 			{ CellType.None, CellType.None, CellType.None }
 		};
 
-		Field field = CreateAndSetField(cells, 3);
+		Field field = TestHelper.CreateAndSetField(cells, 3);
 
 		// Act
 		bool isGameEnd = field.IsGameEnd();
@@ -266,12 +239,12 @@ public class FieldTests
 		bool expectedGameEnd = true;
 		CellType expectedWinner = CellType.Cross;
 		Cell[] expectedWinningCells = [new Cell(1, 0), new Cell(1, 1), new Cell(1, 2)];
-		bool resultWinningCells = CompareWinningCells(winningCells, expectedWinningCells);
+		bool resultWinningCells = TestHelper.CompareCellArrays(winningCells, expectedWinningCells);
 
 		Assert.That(isGameEnd == expectedGameEnd && winner == expectedWinner && resultWinningCells);
 	}
 	[Test]
-	public void TestWinnerCrossD3_2()
+	public void TestIsGameEnd_D3_WinnerCross2()
 	{
 		// Arrange
 		CellType[,] cells = new CellType[3, 3]
@@ -281,7 +254,7 @@ public class FieldTests
 			{ CellType.Cross, CellType.Zero, CellType.None }
 		};
 
-		Field field = CreateAndSetField(cells, 3);
+		Field field = TestHelper.CreateAndSetField(cells, 3);
 
 		// Act
 		bool isGameEnd = field.IsGameEnd();
@@ -292,13 +265,13 @@ public class FieldTests
 		bool expectedGameEnd = true;
 		CellType expectedWinner = CellType.Cross;
 		Cell[] expectedWinningCells = [new Cell(0, 2), new Cell(1, 1), new Cell(2, 0)];
-		bool resultWinningCells = CompareWinningCells(winningCells, expectedWinningCells);
+		bool resultWinningCells = TestHelper.CompareCellArrays(winningCells, expectedWinningCells);
 
 		Assert.That(isGameEnd == expectedGameEnd && winner == expectedWinner && resultWinningCells);
 	}
 
 	[Test]
-	public void TestWinnerCrossD5_1()
+	public void TestIsGameEnd_D5_WinnerCross1()
 	{
 		// Arrange
 		CellType[,] cells = new CellType[5, 5]
@@ -310,7 +283,7 @@ public class FieldTests
 			{ CellType.Zero, CellType.Cross, CellType.Cross, CellType.Zero, CellType.Cross }
 		};
 
-		Field field = CreateAndSetField(cells, 4);
+		Field field = TestHelper.CreateAndSetField(cells, 4);
 
 		// Act
 		bool isGameEnd = field.IsGameEnd();
@@ -321,12 +294,12 @@ public class FieldTests
 		bool expectedGameEnd = true;
 		CellType expectedWinner = CellType.Cross;
 		Cell[] expectedWinningCells = [new Cell(1, 1), new Cell(2, 1), new Cell(3, 1), new Cell(4, 1)];
-		bool resultWinningCells = CompareWinningCells(winningCells, expectedWinningCells);
+		bool resultWinningCells = TestHelper.CompareCellArrays(winningCells, expectedWinningCells);
 
 		Assert.That(isGameEnd == expectedGameEnd && winner == expectedWinner && resultWinningCells);
 	}
 	[Test]
-	public void TestWinnerCrossD5_2()
+	public void TestIsGameEnd_D5_WinnerCross2()
 	{
 		// Arrange
 		CellType[,] cells = new CellType[5, 5]
@@ -338,7 +311,7 @@ public class FieldTests
 			{ CellType.None, CellType.None, CellType.None, CellType.None, CellType.Cross}
 		};
 
-		Field field = CreateAndSetField(cells, 4);
+		Field field = TestHelper.CreateAndSetField(cells, 4);
 
 		// Act
 		bool isGameEnd = field.IsGameEnd();
@@ -349,7 +322,7 @@ public class FieldTests
 		bool expectedGameEnd = true;
 		CellType expectedWinner = CellType.Cross;
 		Cell[] expectedWinningCells = [new Cell(1, 1), new Cell(2, 2), new Cell(3, 3), new Cell(4, 4)];
-		bool resultWinningCells = CompareWinningCells(winningCells, expectedWinningCells);
+		bool resultWinningCells = TestHelper.CompareCellArrays(winningCells, expectedWinningCells);
 
 		Assert.That(isGameEnd == expectedGameEnd && winner == expectedWinner && resultWinningCells);
 	}
@@ -357,7 +330,7 @@ public class FieldTests
 
 	#region GameEndedWithVictoryZero
 	[Test]
-	public void TestWinnerZeroD3_1()
+	public void TestIsGameEnd_D3_WinnerZero1()
 	{
 		// Arrange
 		CellType[,] cells = new CellType[3, 3]
@@ -367,7 +340,7 @@ public class FieldTests
 			{ CellType.None, CellType.Cross, CellType.Zero }
 		};
 
-		Field field = CreateAndSetField(cells, 3);
+		Field field = TestHelper.CreateAndSetField(cells, 3);
 
 		// Act
 		bool isGameEnd = field.IsGameEnd();
@@ -378,12 +351,12 @@ public class FieldTests
 		bool expectedGameEnd = true;
 		CellType expectedWinner = CellType.Zero;
 		Cell[] expectedWinningCells = [new Cell(0, 0), new Cell(1, 1), new Cell(2, 2)];
-		bool resultWinningCells = CompareWinningCells(winningCells, expectedWinningCells);
+		bool resultWinningCells = TestHelper.CompareCellArrays(winningCells, expectedWinningCells);
 
 		Assert.That(isGameEnd == expectedGameEnd && winner == expectedWinner && resultWinningCells);
 	}
 	[Test]
-	public void TestWinnerZeroD3_2()
+	public void TestIsGameEnd_D3_WinnerZero2()
 	{
 		// Arrange
 		CellType[,] cells = new CellType[3, 3]
@@ -393,7 +366,7 @@ public class FieldTests
 			{ CellType.Zero, CellType.Cross, CellType.None }
 		};
 
-		Field field = CreateAndSetField(cells, 3);
+		Field field = TestHelper.CreateAndSetField(cells, 3);
 
 		// Act
 		bool isGameEnd = field.IsGameEnd();
@@ -404,13 +377,13 @@ public class FieldTests
 		bool expectedGameEnd = true;
 		CellType expectedWinner = CellType.Zero;
 		Cell[] expectedWinningCells = [new Cell(0, 0), new Cell(1, 0), new Cell(2, 0)];
-		bool resultWinningCells = CompareWinningCells(winningCells, expectedWinningCells);
+		bool resultWinningCells = TestHelper.CompareCellArrays(winningCells, expectedWinningCells);
 
 		Assert.That(isGameEnd == expectedGameEnd && winner == expectedWinner && resultWinningCells);
 	}
 
 	[Test]
-	public void TestWinnerZeroD5_1()
+	public void TestIsGameEnd_D5_WinnerZero1()
 	{
 		// Arrange
 		CellType[,] cells = new CellType[5, 5]
@@ -422,7 +395,7 @@ public class FieldTests
 			{ CellType.None, CellType.Zero, CellType.Cross, CellType.None, CellType.Zero }
 		};
 
-		Field field = CreateAndSetField(cells, 4);
+		Field field = TestHelper.CreateAndSetField(cells, 4);
 
 		// Act
 		bool isGameEnd = field.IsGameEnd();
@@ -433,12 +406,12 @@ public class FieldTests
 		bool expectedGameEnd = true;
 		CellType expectedWinner = CellType.Zero;
 		Cell[] expectedWinningCells = [new Cell(1, 4), new Cell(2, 3), new Cell(3, 2), new Cell(4, 1)];
-		bool resultWinningCells = CompareWinningCells(winningCells, expectedWinningCells);
+		bool resultWinningCells = TestHelper.CompareCellArrays(winningCells, expectedWinningCells);
 
 		Assert.That(isGameEnd == expectedGameEnd && winner == expectedWinner && resultWinningCells);
 	}
 	[Test]
-	public void TestWinnerZeroD5_2()
+	public void TestIsGameEnd_D5_WinnerZero2()
 	{
 		// Arrange
 		CellType[,] cells = new CellType[5, 5]
@@ -450,7 +423,7 @@ public class FieldTests
 			{ CellType.Zero, CellType.Zero, CellType.Zero, CellType.Zero, CellType.Cross }
 		};
 
-		Field field = CreateAndSetField(cells, 4);
+		Field field = TestHelper.CreateAndSetField(cells, 4);
 
 		// Act
 		bool isGameEnd = field.IsGameEnd();
@@ -461,7 +434,7 @@ public class FieldTests
 		bool expectedGameEnd = true;
 		CellType expectedWinner = CellType.Zero;
 		Cell[] expectedWinningCells = [new Cell(4, 0), new Cell(4, 1), new Cell(4, 2), new Cell(4, 3)];
-		bool resultWinningCells = CompareWinningCells(winningCells, expectedWinningCells);
+		bool resultWinningCells = TestHelper.CompareCellArrays(winningCells, expectedWinningCells);
 
 		Assert.That(isGameEnd == expectedGameEnd && winner == expectedWinner && resultWinningCells);
 	}

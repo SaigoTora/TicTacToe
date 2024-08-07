@@ -4,13 +4,14 @@ namespace TicTacToeTests;
 
 public class BotTests
 {
-	private static bool CompareCells(Cell firstCell, Cell secondCell)
-		=> firstCell.row == secondCell.row && firstCell.column == secondCell.column;
+	[SetUp]
+	public void Setup()
+	{ }
 
 	#region AttackMove
 	#region EasyBot
 	[Test]
-	public void TestAttackEasyD3_1()
+	public void TestMove_CrossEasyD3_Attack1()
 	{
 		// Arrange
 		Difficulty difficult = Difficulty.Easy;
@@ -23,17 +24,17 @@ public class BotTests
 		};
 
 		Bot bot = new(difficult);
-		Field field = FieldTests.CreateAndSetField(cells, 3);
+		Field field = TestHelper.CreateAndSetField(cells, 3);
 
 		// Act
 		Cell result = bot.Move(field, botCellType);
 
 		// Assert
 		Cell expect = new(0, 2);
-		Assert.That(CompareCells(result, expect));
+		Assert.That(TestHelper.CompareCells(result, expect));
 	}
 	[Test]
-	public void TestAttackEasyD3_2()
+	public void TestMove_ZeroEasyD3_Attack2()
 	{
 		// Arrange
 		Difficulty difficult = Difficulty.Easy;
@@ -46,18 +47,18 @@ public class BotTests
 		};
 
 		Bot bot = new(difficult);
-		Field field = FieldTests.CreateAndSetField(cells, 3);
+		Field field = TestHelper.CreateAndSetField(cells, 3);
 
 		// Act
 		Cell result = bot.Move(field, botCellType);
 
 		// Assert
 		Cell expect = new(1, 1);
-		Assert.That(CompareCells(result, expect));
+		Assert.That(TestHelper.CompareCells(result, expect));
 	}
 
 	[Test]
-	public void TestAttackEasyD5_1()
+	public void TestMove_CrossEasyD5_Attack1()
 	{
 		// Arrange
 		Difficulty difficult = Difficulty.Easy;
@@ -72,17 +73,17 @@ public class BotTests
 		};
 
 		Bot bot = new(difficult);
-		Field field = FieldTests.CreateAndSetField(cells, 4);
+		Field field = TestHelper.CreateAndSetField(cells, 4);
 
 		// Act
 		Cell result = bot.Move(field, botCellType);
 
 		// Assert
 		Cell expect = new(3, 2);
-		Assert.That(CompareCells(result, expect));
+		Assert.That(TestHelper.CompareCells(result, expect));
 	}
 	[Test]
-	public void TestAttackEasyD5_2()
+	public void TestMove_ZeroEasyD5_Attack2()
 	{
 		// Arrange
 		Difficulty difficult = Difficulty.Easy;
@@ -97,20 +98,20 @@ public class BotTests
 		};
 
 		Bot bot = new(difficult);
-		Field field = FieldTests.CreateAndSetField(cells, 4);
+		Field field = TestHelper.CreateAndSetField(cells, 4);
 
 		// Act
 		Cell result = bot.Move(field, botCellType);
 
 		// Assert
 		Cell expect = new(2, 3);
-		Assert.That(CompareCells(result, expect));
+		Assert.That(TestHelper.CompareCells(result, expect));
 	}
 	#endregion
 
 	#region MediumBot
 	[Test]
-	public void TestAttackMediumyD3_1()
+	public void TestMove_ZeroMediumyD3_Attack1()
 	{
 		// Arrange
 		Difficulty difficult = Difficulty.Medium;
@@ -123,17 +124,17 @@ public class BotTests
 		};
 
 		Bot bot = new(difficult);
-		Field field = FieldTests.CreateAndSetField(cells, 3);
+		Field field = TestHelper.CreateAndSetField(cells, 3);
 
 		// Act
 		Cell result = bot.Move(field, botCellType);
 
 		// Assert
 		Cell expect = new(1, 0);
-		Assert.That(CompareCells(result, expect));
+		Assert.That(TestHelper.CompareCells(result, expect));
 	}
 	[Test]
-	public void TestAttackMediumyD3_2()
+	public void TestMove_CrossMediumyD3_Attack2()
 	{
 		// Arrange
 		Difficulty difficult = Difficulty.Medium;
@@ -146,18 +147,18 @@ public class BotTests
 		};
 
 		Bot bot = new(difficult);
-		Field field = FieldTests.CreateAndSetField(cells, 3);
+		Field field = TestHelper.CreateAndSetField(cells, 3);
 
 		// Act
 		Cell result = bot.Move(field, botCellType);
 
 		// Assert
 		Cell expect = new(1, 1);
-		Assert.That(CompareCells(result, expect));
+		Assert.That(TestHelper.CompareCells(result, expect));
 	}
 
 	[Test]
-	public void TestAttackMediumyD5_1()
+	public void TestMove_ZeroMediumyD5_Attack1()
 	{
 		// Arrange
 		Difficulty difficult = Difficulty.Medium;
@@ -172,20 +173,20 @@ public class BotTests
 		};
 
 		Bot bot = new(difficult);
-		Field field = FieldTests.CreateAndSetField(cells, 4);
+		Field field = TestHelper.CreateAndSetField(cells, 4);
 
 		// Act
 		Cell result = bot.Move(field, botCellType);
 
 		// Assert
 		Cell expect = new(3, 2);
-		Assert.That(CompareCells(result, expect));
+		Assert.That(TestHelper.CompareCells(result, expect));
 	}
 	#endregion
 
 	#region HardBot
 	[Test]
-	public void TestAttackHardD3_1()
+	public void TestMove_AttackHardD3_1()
 	{
 		// Arrange
 		Difficulty difficult = Difficulty.Hard;
@@ -198,17 +199,17 @@ public class BotTests
 		};
 
 		Bot bot = new(difficult);
-		Field field = FieldTests.CreateAndSetField(cells, 3);
+		Field field = TestHelper.CreateAndSetField(cells, 3);
 
 		// Act
 		Cell result = bot.Move(field, botCellType);
 
 		// Assert
 		Cell expect = new(2, 2);
-		Assert.That(CompareCells(result, expect));
+		Assert.That(TestHelper.CompareCells(result, expect));
 	}
 	[Test]
-	public void TestAttackHardD3_2()
+	public void TestMove_AttackHardD3_2()
 	{
 		// Arrange
 		Difficulty difficult = Difficulty.Hard;
@@ -221,18 +222,18 @@ public class BotTests
 		};
 
 		Bot bot = new(difficult);
-		Field field = FieldTests.CreateAndSetField(cells, 3);
+		Field field = TestHelper.CreateAndSetField(cells, 3);
 
 		// Act
 		Cell result = bot.Move(field, botCellType);
 
 		// Assert
 		Cell expect = new(1, 1);
-		Assert.That(CompareCells(result, expect));
+		Assert.That(TestHelper.CompareCells(result, expect));
 	}
 
 	[Test]
-	public void TestAttackHardD5_1()
+	public void TestMove_AttackHardD5_1()
 	{
 		// Arrange
 		Difficulty difficult = Difficulty.Hard;
@@ -247,21 +248,21 @@ public class BotTests
 		};
 
 		Bot bot = new(difficult);
-		Field field = FieldTests.CreateAndSetField(cells, 4);
+		Field field = TestHelper.CreateAndSetField(cells, 4);
 
 		// Act
 		Cell result = bot.Move(field, botCellType);
 
 		// Assert
 		Cell expect = new(2, 2);
-		Assert.That(CompareCells(result, expect));
+		Assert.That(TestHelper.CompareCells(result, expect));
 	}
 	#endregion
 	#endregion
 
 	#region DefenseMove
 	[Test]
-	public void TestDefenseHardD3_1()
+	public void TestMove_CrossHardD3_Defense1()
 	{
 		// Arrange
 		Difficulty difficult = Difficulty.Hard;
@@ -274,17 +275,17 @@ public class BotTests
 		};
 
 		Bot bot = new(difficult);
-		Field field = FieldTests.CreateAndSetField(cells, 3);
+		Field field = TestHelper.CreateAndSetField(cells, 3);
 
 		// Act
 		Cell result = bot.Move(field, botCellType);
 
 		// Assert
 		Cell expect = new(2, 1);
-		Assert.That(CompareCells(result, expect));
+		Assert.That(TestHelper.CompareCells(result, expect));
 	}
 	[Test]
-	public void TestDefenseHardD3_2()
+	public void TestMove_ZeroHardD3_Defense2()
 	{
 		// Arrange
 		Difficulty difficult = Difficulty.Hard;
@@ -297,17 +298,17 @@ public class BotTests
 		};
 
 		Bot bot = new(difficult);
-		Field field = FieldTests.CreateAndSetField(cells, 3);
+		Field field = TestHelper.CreateAndSetField(cells, 3);
 
 		// Act
 		Cell result = bot.Move(field, botCellType);
 
 		// Assert
 		Cell expect = new(1, 0);
-		Assert.That(CompareCells(result, expect));
+		Assert.That(TestHelper.CompareCells(result, expect));
 	}
 	[Test]
-	public void TestDefenseHardD3_3()
+	public void TestMove_CrossHardD3_Defense3()
 	{
 		// Arrange
 		Difficulty difficult = Difficulty.Hard;
@@ -320,17 +321,17 @@ public class BotTests
 		};
 
 		Bot bot = new(difficult);
-		Field field = FieldTests.CreateAndSetField(cells, 3);
+		Field field = TestHelper.CreateAndSetField(cells, 3);
 
 		// Act
 		Cell result = bot.Move(field, botCellType);
 
 		// Assert
 		Cell expect = new(2, 2);
-		Assert.That(CompareCells(result, expect));
+		Assert.That(TestHelper.CompareCells(result, expect));
 	}
 	[Test]
-	public void TestDefenseHardD3_4()
+	public void TestMove_ZeroHardD3_Defense4()
 	{
 		// Arrange
 		Difficulty difficult = Difficulty.Hard;
@@ -343,17 +344,17 @@ public class BotTests
 		};
 
 		Bot bot = new(difficult);
-		Field field = FieldTests.CreateAndSetField(cells, 3);
+		Field field = TestHelper.CreateAndSetField(cells, 3);
 
 		// Act
 		Cell result = bot.Move(field, botCellType);
 
 		// Assert
 		Cell expect = new(0, 0);
-		Assert.That(CompareCells(result, expect));
+		Assert.That(TestHelper.CompareCells(result, expect));
 	}
 	[Test]
-	public void TestDefenseHardD3_5()
+	public void TestMove_CrossHardD3_Defense5()
 	{
 		// Arrange
 		Difficulty difficult = Difficulty.Hard;
@@ -366,17 +367,17 @@ public class BotTests
 		};
 
 		Bot bot = new(difficult);
-		Field field = FieldTests.CreateAndSetField(cells, 3);
+		Field field = TestHelper.CreateAndSetField(cells, 3);
 
 		// Act
 		Cell result = bot.Move(field, botCellType);
 
 		// Assert
 		Cell expect = new(2, 0);
-		Assert.That(CompareCells(result, expect));
+		Assert.That(TestHelper.CompareCells(result, expect));
 	}
 	[Test]
-	public void TestDefenseHardD3_6()
+	public void TestMove_ZeroHardD3_Defense6()
 	{
 		// Arrange
 		Difficulty difficult = Difficulty.Hard;
@@ -389,18 +390,18 @@ public class BotTests
 		};
 
 		Bot bot = new(difficult);
-		Field field = FieldTests.CreateAndSetField(cells, 3);
+		Field field = TestHelper.CreateAndSetField(cells, 3);
 
 		// Act
 		Cell result = bot.Move(field, botCellType);
 
 		// Assert
 		Cell expect = new(0, 2);
-		Assert.That(CompareCells(result, expect));
+		Assert.That(TestHelper.CompareCells(result, expect));
 	}
 
 	[Test]
-	public void TestDefenseHardD5_1()
+	public void TestMove_CrossHardD5_Defense1()
 	{
 		// Arrange
 		Difficulty difficult = Difficulty.Hard;
@@ -415,17 +416,17 @@ public class BotTests
 		};
 
 		Bot bot = new(difficult);
-		Field field = FieldTests.CreateAndSetField(cells, 4);
+		Field field = TestHelper.CreateAndSetField(cells, 4);
 
 		// Act
 		Cell result = bot.Move(field, botCellType);
 
 		// Assert
 		Cell expect = new(1, 2);
-		Assert.That(CompareCells(result, expect));
+		Assert.That(TestHelper.CompareCells(result, expect));
 	}
 	[Test]
-	public void TestDefenseHardD5_2()
+	public void TestMove_ZeroHardD5_Defense2()
 	{
 		// Arrange
 		Difficulty difficult = Difficulty.Hard;
@@ -440,17 +441,17 @@ public class BotTests
 		};
 
 		Bot bot = new(difficult);
-		Field field = FieldTests.CreateAndSetField(cells, 4);
+		Field field = TestHelper.CreateAndSetField(cells, 4);
 
 		// Act
 		Cell result = bot.Move(field, botCellType);
 
 		// Assert
 		Cell expect = new(1, 4);
-		Assert.That(CompareCells(result, expect));
+		Assert.That(TestHelper.CompareCells(result, expect));
 	}
 	[Test]
-	public void TestDefenseHardD5_3()
+	public void TestMove_CrossHardD5_Defense3()
 	{
 		// Arrange
 		Difficulty difficult = Difficulty.Hard;
@@ -465,17 +466,17 @@ public class BotTests
 		};
 
 		Bot bot = new(difficult);
-		Field field = FieldTests.CreateAndSetField(cells, 4);
+		Field field = TestHelper.CreateAndSetField(cells, 4);
 
 		// Act
 		Cell result = bot.Move(field, botCellType);
 
 		// Assert
 		Cell expect = new(3, 3);
-		Assert.That(CompareCells(result, expect));
+		Assert.That(TestHelper.CompareCells(result, expect));
 	}
 	[Test]
-	public void TestDefenseHardD5_4()
+	public void TestMove_ZeroHardD5_Defense4()
 	{
 		// Arrange
 		Difficulty difficult = Difficulty.Hard;
@@ -490,14 +491,14 @@ public class BotTests
 		};
 
 		Bot bot = new(difficult);
-		Field field = FieldTests.CreateAndSetField(cells, 4);
+		Field field = TestHelper.CreateAndSetField(cells, 4);
 
 		// Act
 		Cell result = bot.Move(field, botCellType);
 
 		// Assert
 		Cell expect = new(1, 2);
-		Assert.That(CompareCells(result, expect));
+		Assert.That(TestHelper.CompareCells(result, expect));
 	}
 	#endregion
 }

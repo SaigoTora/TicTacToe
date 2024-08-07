@@ -12,55 +12,114 @@ namespace TicTacToeLibrary
 
 		private readonly CellType[,] _cells;
 
-		public Field(int cellCount, int winningCellsCount)
+		public Field(int fieldSize, int winningCellsCount)
 		{
-			if (cellCount < winningCellsCount)
+			if (fieldSize < winningCellsCount)
 				throw new ArgumentOutOfRangeException("The cell count must be greater than or equal to the winning cells count.");
 
-			_cells = new CellType[cellCount, cellCount];
+			_cells = new CellType[fieldSize, fieldSize];
 			WinningCellsCount = winningCellsCount;
 		}
 
-		public CellType[,] GetAllCells() => _cells;
+		public CellType[,] GetAllCells()
+		{
+			CellType[,] newCells = new CellType[_cells.GetLength(0), _cells.GetLength(1)];
+			for (int i = 0; i < _cells.GetLength(0); i++)
+				for (int j = 0; j < _cells.GetLength(1); j++)
+					newCells[i, j] = _cells[i, j];
 
+			return _cells;
+		}
+		public int GetFieldSize() => _cells.GetLength(0);
+		public CellType GetCell(Cell cell)
+			=> _cells[cell.row, cell.column];
 		public void FillCell(Cell cell, CellType cellType)
 			=> _cells[cell.row, cell.column] = cellType;
 
+		public Field Copy()
+		{
+			Field newField = new Field(_cells.GetLength(0), WinningCellsCount);
+			for (int i = 0; i < _cells.GetLength(0); i++)
+				for (int j = 0; j < _cells.GetLength(1); j++)
+					newField.FillCell(new Cell(i, j), _cells[i, j]);
+
+			newField.Winner = Winner;
+			if (WinningCells != null)
+				newField.WinningCells = (Cell[])WinningCells.Clone();
+
+			return newField;
+		}
+		public Cell? GetFirstCellMismatch(CellType[,] cells)
+		{// The method returns the first mismatch between the cell arrays.
+			if (_cells.GetLength(0) != cells.GetLength(0) || _cells.GetLength(1) != cells.GetLength(1))
+				throw new ArgumentException("The field sizes must be the same.");
+
+			for (int i = 0; i < cells.GetLength(0); i++)
+				for (int j = 0; j < cells.GetLength(1); j++)
+					if (_cells[i, j] != cells[i, j])
+						return new Cell(i, j);
+
+			return null;
+		}
+
+		public int CountFilledCells()
+		{
+			int result = 0;
+
+			for (int i = 0; i < _cells.GetLength(0); i++)
+				for (int j = 0; j < _cells.GetLength(1); j++)
+					if (_cells[i, j] != CellType.None)
+						result++;
+
+			return result;
+		}
 		public bool IsGameEnd(bool needToSetWinnerCells = true)
 		{
+			Winner = CellType.None;
 			if (CountFilledCells() <= MIN_CELLS_TO_CHECK_END_GAME)
 				return false;
 
-			int rowCount = _cells.GetLength(0);
-			int columnCount = _cells.GetLength(1);
+			if (HorizontalAndVerticalCheck(needToSetWinnerCells)
+				|| DiagonalCheck(needToSetWinnerCells))
+				return true;
+
+			// If all cells are filled
+			if (CountFilledCells() == _cells.Length)
+				return true;
+
+			return false;
+		}
 
 
-			for (int i = 0; i < rowCount; i++)// Horizontal
+		private bool HorizontalAndVerticalCheck(bool needToSetWinnerCells)
+		{
+			int fieldSize = _cells.GetLength(0);
+
+			for (int i = 0; i < fieldSize; i++)// Horizontal
 				if (CheckLine(i, 0, 0, 1, needToSetWinnerCells))
 					return true;
 
-			for (int j = 0; j < columnCount; j++)// Vertical
+			for (int j = 0; j < fieldSize; j++)// Vertical
 				if (CheckLine(0, j, 1, 0, needToSetWinnerCells))
 					return true;
 
-			for (int i = 0; i < rowCount; i++)// Diagonal (top left - bottom right)
+			return false;
+		}
+		private bool DiagonalCheck(bool needToSetWinnerCells)
+		{
+			int fieldSize = _cells.GetLength(0);
+
+			for (int i = 0; i < fieldSize; i++)// Diagonal (top left - bottom right)
 				if (CheckLine(0, i, 1, 1, needToSetWinnerCells)
 					|| CheckLine(i, 0, 1, 1, needToSetWinnerCells))
 					return true;
 
-			for (int i = rowCount - 1; i >= 0; i--)// Diagonal (top right - bottom left)
+			for (int i = fieldSize - 1; i >= 0; i--)// Diagonal (top right - bottom left)
 				if (CheckLine(0, i, 1, -1, needToSetWinnerCells)
-					|| CheckLine(rowCount - i - 1, rowCount - 1, 1, -1, needToSetWinnerCells))
+					|| CheckLine(fieldSize - i - 1, fieldSize - 1, 1, -1, needToSetWinnerCells))
 					return true;
 
-
-			// If there is at least one empty cell, the game is not over yet.
-			for (int i = 0; i < rowCount; i++)
-				for (int j = 0; j < columnCount; j++)
-					if (_cells[i, j] == CellType.None)
-						return false;
-
-			return true;
+			return false;
 		}
 		private bool CheckLine(int startRow, int startCol, int rowStep, int colStep, bool needToSetWinnerCells)
 		{
@@ -109,18 +168,6 @@ namespace TicTacToeLibrary
 				currentCol = startCol + k * colStep;
 				WinningCells[winningCellIndex++] = new Cell(currentRow, currentCol);
 			}
-		}
-
-		private int CountFilledCells()
-		{
-			int result = 0;
-
-			for (int i = 0; i < _cells.GetLength(0); i++)
-				for (int j = 0; j < _cells.GetLength(1); j++)
-					if (_cells[i, j] != CellType.None)
-						result++;
-
-			return result;
 		}
 	}
 }
