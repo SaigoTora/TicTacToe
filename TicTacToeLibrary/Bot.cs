@@ -6,7 +6,12 @@ namespace TicTacToeLibrary
 	public class Bot
 	{
 		private const string BOT_NAME_PREFIX = "BOT";
-		private const int MEDIUM_BOT_DEFENSE_PERCENTAGE = 50;
+		private const int MEDIUM_BOT_DEFENSE_PERCENTAGE = 70;
+		private const int MEDIUM_BOT_PERFECT_MOVE_PERCENTAGE = 35;
+		private const int HARD_BOT_PERFECT_MOVE_PERCENTAGE = 70;
+
+
+		private static readonly Random _random = new Random();
 
 		private readonly string[] _easyBotName = { "Boot", "Beginner", "Tube", "Harmless", "Rookie",
 			"GameJoy", "Nooblet", "Cheerful", "Newbie", "Slipper", "Lightheart", "Novice", "Joyful", "Noob" };
@@ -60,7 +65,7 @@ namespace TicTacToeLibrary
 			if (attackCell.HasValue)
 				return attackCell.Value;
 
-			int randomPercent = new Random().Next(1, 101);
+			int randomPercent = _random.Next(1, 101);
 			if (Difficulty == Difficulty.Medium && randomPercent <= MEDIUM_BOT_DEFENSE_PERCENTAGE
 				|| Difficulty == Difficulty.Hard)
 			{
@@ -68,6 +73,11 @@ namespace TicTacToeLibrary
 				if (defenseCell.HasValue)
 					return defenseCell.Value;
 			}
+
+			randomPercent = _random.Next(1, 101);
+			if (Difficulty == Difficulty.Medium && randomPercent <= MEDIUM_BOT_PERFECT_MOVE_PERCENTAGE
+				|| Difficulty == Difficulty.Hard && randomPercent <= HARD_BOT_PERFECT_MOVE_PERCENTAGE)
+				return PerfectMoveFinder.FindCell(field, botCellType);
 
 			return GetRandomEmptyCell(cells);
 		}
