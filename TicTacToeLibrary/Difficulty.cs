@@ -4,6 +4,7 @@
 	{
 		Easy = 0,
 		Medium,
-		Hard
+		Hard,
+		Impossible
 	}
 }

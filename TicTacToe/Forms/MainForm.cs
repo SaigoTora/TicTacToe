@@ -23,8 +23,8 @@ namespace TicTacToe.Forms
 		private readonly (Color Default, Color Selected) _foreColorLabel =
 			(Color.Black, Color.White);
 
-		private readonly (Color Easy, Color Medium, Color Hard) _difficultyButtonColor =
-			(Color.FromArgb(0, 107, 60), Color.FromArgb(229, 158, 31), Color.FromArgb(127, 24, 13));
+		private readonly (Color Easy, Color Medium, Color Hard, Color Impossible) _difficultyButtonColor =
+			(Color.FromArgb(0, 107, 60), Color.FromArgb(229, 158, 31), Color.FromArgb(127, 24, 13), Color.FromArgb(71, 67, 137));
 
 		private readonly Player _player;
 		private Difficulty _selectedDifficulty;
@@ -78,19 +78,25 @@ namespace TicTacToe.Forms
 			{
 				_selectedDifficulty = Difficulty.Easy;
 				buttonPlay.BackColor = _difficultyButtonColor.Easy;
-				SetDefaultColorsForDifficultyLabels(labelMedium, labelHard);
+				SetDefaultColorsForDifficultyLabels(labelMedium, labelHard, labelImpossible);
 			}
 			else if (label == labelMedium)
 			{
 				_selectedDifficulty = Difficulty.Medium;
 				buttonPlay.BackColor = _difficultyButtonColor.Medium;
-				SetDefaultColorsForDifficultyLabels(labelEasy, labelHard);
+				SetDefaultColorsForDifficultyLabels(labelEasy, labelHard, labelImpossible);
 			}
 			else if (label == labelHard)
 			{
 				_selectedDifficulty = Difficulty.Hard;
 				buttonPlay.BackColor = _difficultyButtonColor.Hard;
-				SetDefaultColorsForDifficultyLabels(labelEasy, labelMedium);
+				SetDefaultColorsForDifficultyLabels(labelEasy, labelMedium, labelImpossible);
+			}
+			else if (label == labelImpossible)
+			{
+				_selectedDifficulty = Difficulty.Impossible;
+				buttonPlay.BackColor = _difficultyButtonColor.Impossible;
+				SetDefaultColorsForDifficultyLabels(labelEasy, labelMedium, labelHard);
 			}
 		}
 		private void SetDefaultColorsForDifficultyLabels(params Label[] labels)
@@ -166,7 +172,7 @@ namespace TicTacToe.Forms
 				pictureBox.BackgroundImage = Resources.eyeClose;
 
 				await ChangeVisibilityOfControlsWithDelay(false, DELAY_VISIBILITY_OF_SETTINGS,
-					numericUpDownNumberOfRounds, labelNumberOfRounds, labelHard,
+					numericUpDownNumberOfRounds, labelNumberOfRounds, labelImpossible, labelHard,
 					labelMedium, labelEasy, labelDifficult);
 			}
 			else
@@ -175,7 +181,7 @@ namespace TicTacToe.Forms
 				pictureBox.BackgroundImage = Resources.eyeOpen;
 
 				await ChangeVisibilityOfControlsWithDelay(true, DELAY_VISIBILITY_OF_SETTINGS,
-					labelDifficult, labelEasy, labelMedium, labelHard,
+					labelDifficult, labelEasy, labelMedium, labelHard, labelImpossible,
 					labelNumberOfRounds, numericUpDownNumberOfRounds);
 			}
 			pictureBox.Enabled = true;

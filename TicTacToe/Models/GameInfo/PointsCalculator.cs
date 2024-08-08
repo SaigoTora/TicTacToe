@@ -8,6 +8,7 @@ namespace TicTacToe.Models.GameInfo
 		private const int EASY_REQUIRED_POINTS = 0;
 		private const int MEDIUM_REQUIRED_POINTS = 5;
 		private const int HARD_REQUIRED_POINTS = 10;
+		private const int IMPOSSIBLE_REQUIRED_POINTS = 15;
 
 		private const int EASY_WIN_POINTS = 2;
 		private const int EASY_DRAW_POINTS = 0;
@@ -20,6 +21,10 @@ namespace TicTacToe.Models.GameInfo
 		private const int HARD_WIN_POINTS = 15;
 		private const int HARD_DRAW_POINTS = 2;
 		private const int HARD_LOSS_POINTS = -10;
+
+		private const int IMPOSSIBLE_WIN_POINTS = 30;
+		private const int IMPOSSIBLE_DRAW_POINTS = 2;
+		private const int IMPOSSIBLE_LOSS_POINTS = -15;
 
 		internal static int CalculatePoints(Difficulty botDifficult, PlayerType gameWinner)
 		{
@@ -55,6 +60,16 @@ namespace TicTacToe.Models.GameInfo
 							return HARD_LOSS_POINTS;
 						break;
 					}
+				case Difficulty.Impossible:
+					{
+						if (gameWinner == PlayerType.Human)
+							return IMPOSSIBLE_WIN_POINTS;
+						else if (gameWinner == PlayerType.None)
+							return IMPOSSIBLE_DRAW_POINTS;
+						else if (gameWinner == PlayerType.Bot)
+							return IMPOSSIBLE_LOSS_POINTS;
+						break;
+					}
 				default: break;
 			}
 			return 0;
@@ -69,6 +84,8 @@ namespace TicTacToe.Models.GameInfo
 					return MEDIUM_REQUIRED_POINTS;
 				case Difficulty.Hard:
 					return HARD_REQUIRED_POINTS;
+				case Difficulty.Impossible:
+					return IMPOSSIBLE_REQUIRED_POINTS;
 				default:
 					break;
 			}

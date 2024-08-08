@@ -9,6 +9,7 @@ namespace TicTacToeLibrary
 		private const int MEDIUM_BOT_DEFENSE_PERCENTAGE = 70;
 		private const int MEDIUM_BOT_PERFECT_MOVE_PERCENTAGE = 35;
 		private const int HARD_BOT_PERFECT_MOVE_PERCENTAGE = 70;
+		private const int IMPOSSIBLE_BOT_PERFECT_MOVE_PERCENTAGE = 95;
 
 
 		private static readonly Random _random = new Random();
@@ -19,7 +20,8 @@ namespace TicTacToeLibrary
 			"Average", "Gentleman", "Brainy", "Advanced", "Skillful", "Planner", "Thinker", "Sneaky", "Smart" };
 		private readonly string[] _hardBotName = { "Machine", "CyberBeast", "Champion", "Titan",
 			"Emperor", "Powerful", "Unstoppable", "Guru", "Greatest", "Legendary", "Grinder", "King", "Strong", "Expert" };
-
+		private readonly string[] _impossibleBotName = { "Invincible", "Godlike", "Overlord", "Immortal", "Omniscient",
+			"Ultimate", "Eternal", "Infinity", "Unbeatable", "Absolute" };
 		public string Name { get; private set; }
 		public Difficulty Difficulty { get; private set; }
 
@@ -31,23 +33,27 @@ namespace TicTacToeLibrary
 		}
 		private void SelectRandomNameForBot()
 		{
-			Random rnd = new Random();
 			Name = BOT_NAME_PREFIX + " ";
 			switch (Difficulty)
 			{
 				case Difficulty.Easy:
 					{
-						Name += _easyBotName[rnd.Next(_easyBotName.Length)];
+						Name += _easyBotName[_random.Next(_easyBotName.Length)];
 						break;
 					}
 				case Difficulty.Medium:
 					{
-						Name += _mediumBotName[rnd.Next(_mediumBotName.Length)];
+						Name += _mediumBotName[_random.Next(_mediumBotName.Length)];
 						break;
 					}
 				case Difficulty.Hard:
 					{
-						Name += _hardBotName[rnd.Next(_hardBotName.Length)];
+						Name += _hardBotName[_random.Next(_hardBotName.Length)];
+						break;
+					}
+				case Difficulty.Impossible:
+					{
+						Name += _impossibleBotName[_random.Next(_impossibleBotName.Length)];
 						break;
 					}
 				default: break;
@@ -60,10 +66,12 @@ namespace TicTacToeLibrary
 				throw new ArgumentException($"{nameof(botCellType)} cannot be equal {botCellType}");
 
 			CellType[,] cells = field.GetAllCells();
-
-			Cell? attackCell = AttackMove(cells, botCellType, field.WinningCellsCount);
-			if (attackCell.HasValue)
-				return attackCell.Value;
+			if (Difficulty != Difficulty.Impossible)
+			{
+				Cell? attackCell = AttackMove(cells, botCellType, field.WinningCellsCount);
+				if (attackCell.HasValue)
+					return attackCell.Value;
+			}
 
 			int randomPercent = _random.Next(1, 101);
 			if (Difficulty == Difficulty.Medium && randomPercent <= MEDIUM_BOT_DEFENSE_PERCENTAGE
@@ -76,7 +84,8 @@ namespace TicTacToeLibrary
 
 			randomPercent = _random.Next(1, 101);
 			if (Difficulty == Difficulty.Medium && randomPercent <= MEDIUM_BOT_PERFECT_MOVE_PERCENTAGE
-				|| Difficulty == Difficulty.Hard && randomPercent <= HARD_BOT_PERFECT_MOVE_PERCENTAGE)
+				|| Difficulty == Difficulty.Hard && randomPercent <= HARD_BOT_PERFECT_MOVE_PERCENTAGE
+				|| Difficulty == Difficulty.Impossible && randomPercent <= IMPOSSIBLE_BOT_PERFECT_MOVE_PERCENTAGE)
 				return PerfectMoveFinder.FindCell(field, botCellType);
 
 			return GetRandomEmptyCell(cells);

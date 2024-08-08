@@ -130,6 +130,8 @@ namespace TicTacToe.Forms
 				pictureBoxBotAvatar.Image = Properties.Resources.botMedium;
 			else if (_bot.Difficulty == Difficulty.Hard)
 				pictureBoxBotAvatar.Image = Properties.Resources.botHard;
+			else if (_bot.Difficulty == Difficulty.Impossible)
+				pictureBoxBotAvatar.Image = Properties.Resources.botImpossible;
 		}
 
 		private Cell FindIndexPictureBoxCell(PictureBox pictureBox)

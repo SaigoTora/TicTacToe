@@ -44,6 +44,7 @@
 			this.buttonProfile = new System.Windows.Forms.Button();
 			this.pictureBoxShowSettings = new System.Windows.Forms.PictureBox();
 			this.numericUpDownNumberOfRounds = new System.Windows.Forms.NumericUpDown();
+			this.labelImpossible = new System.Windows.Forms.Label();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxAvatar)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxShowSettings)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownNumberOfRounds)).BeginInit();
@@ -86,7 +87,7 @@
 			this.labelAuthor.Location = new System.Drawing.Point(636, 721);
 			this.labelAuthor.Name = "labelAuthor";
 			this.labelAuthor.Size = new System.Drawing.Size(171, 31);
-			this.labelAuthor.TabIndex = 14;
+			this.labelAuthor.TabIndex = 15;
 			this.labelAuthor.Text = "Author: SaigoTora";
 			// 
 			// labelEasy
@@ -157,7 +158,7 @@
 			this.buttonExit.Location = new System.Drawing.Point(309, 500);
 			this.buttonExit.Name = "buttonExit";
 			this.buttonExit.Size = new System.Drawing.Size(300, 60);
-			this.buttonExit.TabIndex = 13;
+			this.buttonExit.TabIndex = 14;
 			this.buttonExit.Text = "Exit";
 			this.buttonExit.UseVisualStyleBackColor = false;
 			this.buttonExit.Click += new System.EventHandler(this.ButtonExit_Click);
@@ -168,10 +169,10 @@
 			this.labelNumberOfRounds.BackColor = System.Drawing.Color.LightSteelBlue;
 			this.labelNumberOfRounds.Font = new System.Drawing.Font("Trebuchet MS", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.labelNumberOfRounds.ForeColor = System.Drawing.Color.Black;
-			this.labelNumberOfRounds.Location = new System.Drawing.Point(9, 326);
+			this.labelNumberOfRounds.Location = new System.Drawing.Point(9, 353);
 			this.labelNumberOfRounds.Name = "labelNumberOfRounds";
 			this.labelNumberOfRounds.Size = new System.Drawing.Size(186, 27);
-			this.labelNumberOfRounds.TabIndex = 9;
+			this.labelNumberOfRounds.TabIndex = 10;
 			this.labelNumberOfRounds.Text = "Number of rounds:";
 			// 
 			// labelPlayerName
@@ -199,7 +200,7 @@
 			this.buttonShop.Location = new System.Drawing.Point(309, 312);
 			this.buttonShop.Name = "buttonShop";
 			this.buttonShop.Size = new System.Drawing.Size(300, 60);
-			this.buttonShop.TabIndex = 12;
+			this.buttonShop.TabIndex = 13;
 			this.buttonShop.Text = "Shop";
 			this.buttonShop.UseVisualStyleBackColor = false;
 			this.buttonShop.Click += new System.EventHandler(this.ButtonShop_Click);
@@ -226,7 +227,7 @@
 			this.buttonProfile.Location = new System.Drawing.Point(309, 222);
 			this.buttonProfile.Name = "buttonProfile";
 			this.buttonProfile.Size = new System.Drawing.Size(300, 60);
-			this.buttonProfile.TabIndex = 11;
+			this.buttonProfile.TabIndex = 12;
 			this.buttonProfile.Text = "Profile";
 			this.buttonProfile.UseVisualStyleBackColor = false;
 			this.buttonProfile.Click += new System.EventHandler(this.ButtonProfile_Click);
@@ -246,7 +247,7 @@
 			// numericUpDownNumberOfRounds
 			// 
 			this.numericUpDownNumberOfRounds.Font = new System.Drawing.Font("Courier New", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.numericUpDownNumberOfRounds.Location = new System.Drawing.Point(201, 326);
+			this.numericUpDownNumberOfRounds.Location = new System.Drawing.Point(201, 353);
 			this.numericUpDownNumberOfRounds.Minimum = new decimal(new int[] {
             1,
             0,
@@ -254,13 +255,28 @@
             0});
 			this.numericUpDownNumberOfRounds.Name = "numericUpDownNumberOfRounds";
 			this.numericUpDownNumberOfRounds.Size = new System.Drawing.Size(75, 29);
-			this.numericUpDownNumberOfRounds.TabIndex = 10;
+			this.numericUpDownNumberOfRounds.TabIndex = 11;
 			this.numericUpDownNumberOfRounds.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
 			this.numericUpDownNumberOfRounds.Value = new decimal(new int[] {
             2,
             0,
             0,
             0});
+			// 
+			// labelImpossible
+			// 
+			this.labelImpossible.BackColor = System.Drawing.Color.LightSteelBlue;
+			this.labelImpossible.Font = new System.Drawing.Font("Trebuchet MS", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.labelImpossible.ForeColor = System.Drawing.Color.Black;
+			this.labelImpossible.Location = new System.Drawing.Point(9, 309);
+			this.labelImpossible.Name = "labelImpossible";
+			this.labelImpossible.Size = new System.Drawing.Size(167, 27);
+			this.labelImpossible.TabIndex = 9;
+			this.labelImpossible.Text = "Impossible";
+			this.labelImpossible.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			this.labelImpossible.Click += new System.EventHandler(this.LabelDifficulty_Click);
+			this.labelImpossible.MouseEnter += new System.EventHandler(this.LabelDifficulty_MouseEnter);
+			this.labelImpossible.MouseLeave += new System.EventHandler(this.LabelDifficulty_MouseLeave);
 			// 
 			// MainForm
 			// 
@@ -269,6 +285,7 @@
 			this.BackColor = System.Drawing.Color.White;
 			this.BackgroundImage = global::TicTacToe.Properties.Resources.background1;
 			this.ClientSize = new System.Drawing.Size(818, 761);
+			this.Controls.Add(this.labelImpossible);
 			this.Controls.Add(this.numericUpDownNumberOfRounds);
 			this.Controls.Add(this.pictureBoxShowSettings);
 			this.Controls.Add(this.buttonProfile);
@@ -319,6 +336,7 @@
 		private System.Windows.Forms.Button buttonProfile;
 		public System.Windows.Forms.PictureBox pictureBoxShowSettings;
 		private System.Windows.Forms.NumericUpDown numericUpDownNumberOfRounds;
+		private System.Windows.Forms.Label labelImpossible;
 	}
 }
 

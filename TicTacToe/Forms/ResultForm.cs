@@ -18,8 +18,8 @@ namespace TicTacToe.Forms
 
 		private readonly (Color Win, Color Loss) _colorOfPoints = (Color.Lime, Color.Red);
 
-		private readonly (Color Easy, Color Medium, Color Hard) _colorOfDifficulty =
-			(Color.FromArgb(0, 107, 60), Color.FromArgb(229, 158, 31), Color.FromArgb(127, 24, 13));
+		private readonly (Color Easy, Color Medium, Color Hard, Color Impossible) _colorOfDifficulty =
+			(Color.FromArgb(0, 107, 60), Color.FromArgb(229, 158, 31), Color.FromArgb(127, 24, 13), Color.FromArgb(71, 67, 137));
 
 		private readonly Player _player;
 		private readonly PlayerType _winner;
@@ -75,6 +75,8 @@ namespace TicTacToe.Forms
 				labelDifficult.BackColor = _colorOfDifficulty.Medium;
 			else if (_difficult == Difficulty.Hard)
 				labelDifficult.BackColor = _colorOfDifficulty.Hard;
+			else if (_difficult == Difficulty.Impossible)
+				labelDifficult.BackColor = _colorOfDifficulty.Impossible;
 		}
 
 		private async void DelayToClose(int seconds)
