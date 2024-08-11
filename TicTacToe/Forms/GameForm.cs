@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Drawing;
-using System.Drawing.Imaging;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -73,8 +72,8 @@ namespace TicTacToe.Forms
 									{ pictureBoxCell4, pictureBoxCell5, pictureBoxCell6 },
 									{ pictureBoxCell7, pictureBoxCell8, pictureBoxCell9 } };
 
-			previewCross = ChangeImageOpacity(Properties.Resources.cross, PREVIEW_OPACITY_LEVEL);
-			previewZero = ChangeImageOpacity(Properties.Resources.zero, PREVIEW_OPACITY_LEVEL);
+			previewCross = Properties.Resources.cross.ChangeOpacity(PREVIEW_OPACITY_LEVEL);
+			previewZero = Properties.Resources.zero.ChangeOpacity(PREVIEW_OPACITY_LEVEL);
 		}
 
 		private void GameForm_Load(object sender, EventArgs e)
@@ -94,27 +93,6 @@ namespace TicTacToe.Forms
 
 			if (_isBotMoveFirst)
 				_ = BotMove();
-		}
-
-		private Bitmap ChangeImageOpacity(Image image, float opacity)
-		{
-			if (image == null)
-				throw new ArgumentNullException(nameof(image));
-
-			Bitmap bmp = new Bitmap(image.Width, image.Height);
-			using (Graphics graphics = Graphics.FromImage(bmp))
-			{
-				ColorMatrix matrix = new ColorMatrix
-				{ Matrix33 = opacity };
-
-				ImageAttributes attributes = new ImageAttributes();
-				attributes.SetColorMatrix(matrix, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
-
-				graphics.DrawImage(image, new Rectangle(0, 0, bmp.Width, bmp.Height), 0, 0,
-					image.Width, image.Height, GraphicsUnit.Pixel, attributes);
-			}
-
-			return bmp;
 		}
 
 		private void SetPlayerNameSize(Label label)

@@ -8,9 +8,13 @@ using TicTacToe.Models.Utilities;
 
 namespace TicTacToe.Forms
 {
-	internal partial class StartForm : Form
+	internal partial class StartForm : BaseForm
 	{
-		private readonly Color _selectedAvatarColor = Color.FromArgb(189, 236, 182);
+		private static readonly string DEFAULT_PLAYER_NAME = Environment.UserName;
+		private readonly (Color placeholderColor, Color textColor) _foreColorTextBoxName = (Color.Gray, Color.White);
+
+		private static readonly Color _selectedAvatarColor = Color.FromArgb(71, 167, 106);
+		private readonly CustomTitleBar _customTitleBar;
 
 		private Player _player;
 		private bool _isPlayerMan = true;
@@ -19,13 +23,14 @@ namespace TicTacToe.Forms
 		{
 			InitializeComponent();
 
+			_customTitleBar = new CustomTitleBar(this, "Tic Tac Toe", Properties.Resources.ticTacToe, true, false);
 			_player = new Player();
 		}
 
 		private void StartForm_Load(object sender, EventArgs e)
 		{
-			textBoxName.Text = Environment.UserName;
 			textBoxName.MaxLength = PlayerValidator.MAX_NAME_LENGTH;
+			TextBoxName_Leave(textBoxName, e);
 			PictureBoxAvatar_Click(pictureBoxMan, e);
 
 			FormEventHandlers.SubscribeToHoverPictureBoxes(pictureBoxMan, pictureBoxWoman);
@@ -39,7 +44,7 @@ namespace TicTacToe.Forms
 			ValidationResult result = validator.Validate(_player);
 			if (!result.IsValid)
 			{
-				MessageBox.Show(result.Errors[0].ErrorMessage);
+				MessageBox.Show(result.Errors[0].ErrorMessage, "Invalid input", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 				return false;
 			}
 			else
@@ -87,6 +92,42 @@ namespace TicTacToe.Forms
 				Visible = false;
 				mainForm.Show();
 			}
+		}
+
+		private void LabelName_Click(object sender, EventArgs e)
+		{
+			textBoxName.Focus();
+			textBoxName.SelectAll();
+		}
+		private void LabelName_MouseEnter(object sender, EventArgs e)
+		{
+			labelName.Font = new Font(labelName.Font, FontStyle.Underline);
+		}
+		private void LabelName_MouseLeave(object sender, EventArgs e)
+		{
+			labelName.Font = new Font(labelName.Font, FontStyle.Regular);
+		}
+
+		private void TextBoxName_Enter(object sender, EventArgs e)
+		{
+			if (textBoxName.Text == DEFAULT_PLAYER_NAME)
+			{
+				textBoxName.Text = string.Empty;
+				textBoxName.ForeColor = _foreColorTextBoxName.textColor;
+			}
+		}
+		private void TextBoxName_Leave(object sender, EventArgs e)
+		{
+			if (string.IsNullOrWhiteSpace(textBoxName.Text))
+			{
+				textBoxName.Text = DEFAULT_PLAYER_NAME;
+				textBoxName.ForeColor = _foreColorTextBoxName.placeholderColor;
+			}
+		}
+
+		private void StartForm_FormClosed(object sender, FormClosedEventArgs e)
+		{
+			_customTitleBar.Dispose();
 		}
 	}
 }

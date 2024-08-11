@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Text;
@@ -38,6 +39,34 @@ namespace TicTacToe.Models.Utilities
 				image.Save(ms, ImageFormat.Png);
 				return ms.ToArray();
 			}
+		}
+
+		/// <summary>
+		/// Changes the opacity level of an image.
+		/// </summary>
+		/// <param name="image">This instance.</param>
+		/// <param name="opacity">Opacity level in the range from 0 to 1.</param>
+		/// <returns>Returns a new Bitmap object with the specified opacity.</returns>
+		/// <exception cref="ArgumentNullException"></exception>
+		public static Bitmap ChangeOpacity(this Image image, float opacity)
+		{
+			if (image == null)
+				throw new ArgumentNullException(nameof(image));
+
+			Bitmap bmp = new Bitmap(image.Width, image.Height);
+			using (Graphics graphics = Graphics.FromImage(bmp))
+			{
+				ColorMatrix matrix = new ColorMatrix
+				{ Matrix33 = opacity };
+
+				ImageAttributes attributes = new ImageAttributes();
+				attributes.SetColorMatrix(matrix, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
+
+				graphics.DrawImage(image, new Rectangle(0, 0, bmp.Width, bmp.Height), 0, 0,
+					image.Width, image.Height, GraphicsUnit.Pixel, attributes);
+			}
+
+			return bmp;
 		}
 		#endregion
 

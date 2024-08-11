@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using Guna.UI2.WinForms;
 
 namespace TicTacToe.Models.Utilities
 {
@@ -8,7 +9,7 @@ namespace TicTacToe.Models.Utilities
 	{
 		private const byte PICTURE_SIZE_PERCENT_SCALER = 10;
 
-		private const byte BUTTON_SIZE_PERCENT_SCALER = 7;
+		private const byte BUTTON_SIZE_PERCENT_SCALER = 4;
 		private const byte BUTTON_FONT_SCALER = 2;
 
 		private static bool isControlIncreased = false;
@@ -42,9 +43,9 @@ namespace TicTacToe.Models.Utilities
 		#endregion
 
 		#region ButtonHover
-		public static void SubscribeToHoverButtons(params Button[] buttons)
+		public static void SubscribeToHoverButtons(params Guna2GradientButton[] buttons)
 		{
-			foreach (Button button in buttons)
+			foreach (Guna2GradientButton button in buttons)
 			{
 				button.MouseEnter += Button_MouseEnter;
 				button.MouseLeave += Button_MouseLeave;
@@ -52,7 +53,7 @@ namespace TicTacToe.Models.Utilities
 		}
 		private static void Button_MouseEnter(object sender, EventArgs e)
 		{
-			if (!(sender is Button button) || isControlIncreased)
+			if (!(sender is Guna2GradientButton button) || isControlIncreased)
 				return;
 
 			ResizeControl(button, BUTTON_SIZE_PERCENT_SCALER, true);
@@ -61,7 +62,7 @@ namespace TicTacToe.Models.Utilities
 		}
 		private static void Button_MouseLeave(object sender, EventArgs e)
 		{
-			if (!(sender is Button button))
+			if (!(sender is Guna2GradientButton button))
 				return;
 
 			ResizeControl(button, BUTTON_SIZE_PERCENT_SCALER, false);

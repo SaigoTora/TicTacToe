@@ -44,8 +44,8 @@ namespace TicTacToe.Forms
 
 			FormEventHandlers.SubscribeToHoverPictureBoxes(pictureBoxAvatar,
 				pictureBoxShowSettings);
-			FormEventHandlers.SubscribeToHoverButtons(buttonPlay, buttonProfile,
-				buttonShop, buttonExit);
+			//FormEventHandlers.SubscribeToHoverButtons(buttonPlay, buttonProfile,
+			//	buttonShop, buttonExit);
 		}
 
 		private void DisplayPlayerData()
