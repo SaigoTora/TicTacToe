@@ -31,7 +31,8 @@ public class BotTests
 
 		// Assert
 		Cell expectedCell = new(0, 2);
-		Assert.That(TestHelper.CompareCells(result, expectedCell));
+		Assert.That(result, Is.EqualTo(expectedCell), $"The resulting cell({result.row};{result.column}) " +
+			$"isn't equal to the expected one({expectedCell.row};{expectedCell.column}).");
 	}
 	[Test]
 	public void TestMove_ZeroEasyD3_Attack2()
@@ -54,7 +55,8 @@ public class BotTests
 
 		// Assert
 		Cell expectedCell = new(1, 1);
-		Assert.That(TestHelper.CompareCells(result, expectedCell));
+		Assert.That(result, Is.EqualTo(expectedCell), $"The resulting cell({result.row};{result.column}) " +
+			$"isn't equal to the expected one({expectedCell.row};{expectedCell.column}).");
 	}
 
 	[Test]
@@ -80,7 +82,8 @@ public class BotTests
 
 		// Assert
 		Cell expectedCell = new(3, 2);
-		Assert.That(TestHelper.CompareCells(result, expectedCell));
+		Assert.That(result, Is.EqualTo(expectedCell), $"The resulting cell({result.row};{result.column}) " +
+			$"isn't equal to the expected one({expectedCell.row};{expectedCell.column}).");
 	}
 	[Test]
 	public void TestMove_ZeroEasyD5_Attack2()
@@ -105,7 +108,8 @@ public class BotTests
 
 		// Assert
 		Cell expectedCell = new(2, 3);
-		Assert.That(TestHelper.CompareCells(result, expectedCell));
+		Assert.That(result, Is.EqualTo(expectedCell), $"The resulting cell({result.row};{result.column}) " +
+			$"isn't equal to the expected one({expectedCell.row};{expectedCell.column}).");
 	}
 	#endregion
 
@@ -131,7 +135,8 @@ public class BotTests
 
 		// Assert
 		Cell expectedCell = new(1, 0);
-		Assert.That(TestHelper.CompareCells(result, expectedCell));
+		Assert.That(result, Is.EqualTo(expectedCell), $"The resulting cell({result.row};{result.column}) " +
+			$"isn't equal to the expected one({expectedCell.row};{expectedCell.column}).");
 	}
 	[Test]
 	public void TestMove_CrossMediumyD3_Attack2()
@@ -154,7 +159,8 @@ public class BotTests
 
 		// Assert
 		Cell expectedCell = new(1, 1);
-		Assert.That(TestHelper.CompareCells(result, expectedCell));
+		Assert.That(result, Is.EqualTo(expectedCell), $"The resulting cell({result.row};{result.column}) " +
+			$"isn't equal to the expected one({expectedCell.row};{expectedCell.column}).");
 	}
 
 	[Test]
@@ -180,7 +186,8 @@ public class BotTests
 
 		// Assert
 		Cell expectedCell = new(3, 2);
-		Assert.That(TestHelper.CompareCells(result, expectedCell));
+		Assert.That(result, Is.EqualTo(expectedCell), $"The resulting cell({result.row};{result.column}) " +
+			$"isn't equal to the expected one({expectedCell.row};{expectedCell.column}).");
 	}
 	#endregion
 
@@ -206,7 +213,8 @@ public class BotTests
 
 		// Assert
 		Cell expectedCell = new(2, 2);
-		Assert.That(TestHelper.CompareCells(result, expectedCell));
+		Assert.That(result, Is.EqualTo(expectedCell), $"The resulting cell({result.row};{result.column}) " +
+			$"isn't equal to the expected one({expectedCell.row};{expectedCell.column}).");
 	}
 	[Test]
 	public void TestMove_AttackHardD3_2()
@@ -229,7 +237,8 @@ public class BotTests
 
 		// Assert
 		Cell expectedCell = new(1, 1);
-		Assert.That(TestHelper.CompareCells(result, expectedCell));
+		Assert.That(result, Is.EqualTo(expectedCell), $"The resulting cell({result.row};{result.column}) " +
+			$"isn't equal to the expected one({expectedCell.row};{expectedCell.column}).");
 	}
 
 	[Test]
@@ -255,7 +264,8 @@ public class BotTests
 
 		// Assert
 		Cell expectedCell = new(2, 2);
-		Assert.That(TestHelper.CompareCells(result, expectedCell));
+		Assert.That(result, Is.EqualTo(expectedCell), $"The resulting cell({result.row};{result.column}) " +
+			$"isn't equal to the expected one({expectedCell.row};{expectedCell.column}).");
 	}
 	#endregion
 	#endregion
@@ -282,7 +292,8 @@ public class BotTests
 
 		// Assert
 		Cell expectedCell = new(2, 1);
-		Assert.That(TestHelper.CompareCells(result, expectedCell));
+		Assert.That(result, Is.EqualTo(expectedCell), $"The resulting cell({result.row};{result.column}) " +
+			$"isn't equal to the expected one({expectedCell.row};{expectedCell.column}).");
 	}
 	[Test]
 	public void TestMove_ZeroHardD3_Defense2()
@@ -305,7 +316,8 @@ public class BotTests
 
 		// Assert
 		Cell expectedCell = new(1, 0);
-		Assert.That(TestHelper.CompareCells(result, expectedCell));
+		Assert.That(result, Is.EqualTo(expectedCell), $"The resulting cell({result.row};{result.column}) " +
+			$"isn't equal to the expected one({expectedCell.row};{expectedCell.column}).");
 	}
 	[Test]
 	public void TestMove_CrossHardD3_Defense3()
@@ -328,7 +340,8 @@ public class BotTests
 
 		// Assert
 		Cell expectedCell = new(2, 2);
-		Assert.That(TestHelper.CompareCells(result, expectedCell));
+		Assert.That(result, Is.EqualTo(expectedCell), $"The resulting cell({result.row};{result.column}) " +
+			$"isn't equal to the expected one({expectedCell.row};{expectedCell.column}).");
 	}
 	[Test]
 	public void TestMove_ZeroHardD3_Defense4()
@@ -351,7 +364,8 @@ public class BotTests
 
 		// Assert
 		Cell expectedCell = new(0, 0);
-		Assert.That(TestHelper.CompareCells(result, expectedCell));
+		Assert.That(result, Is.EqualTo(expectedCell), $"The resulting cell({result.row};{result.column}) " +
+			$"isn't equal to the expected one({expectedCell.row};{expectedCell.column}).");
 	}
 	[Test]
 	public void TestMove_CrossHardD3_Defense5()
@@ -374,7 +388,8 @@ public class BotTests
 
 		// Assert
 		Cell expectedCell = new(2, 0);
-		Assert.That(TestHelper.CompareCells(result, expectedCell));
+		Assert.That(result, Is.EqualTo(expectedCell), $"The resulting cell({result.row};{result.column}) " +
+			$"isn't equal to the expected one({expectedCell.row};{expectedCell.column}).");
 	}
 	[Test]
 	public void TestMove_ZeroHardD3_Defense6()
@@ -397,7 +412,8 @@ public class BotTests
 
 		// Assert
 		Cell expectedCell = new(0, 2);
-		Assert.That(TestHelper.CompareCells(result, expectedCell));
+		Assert.That(result, Is.EqualTo(expectedCell), $"The resulting cell({result.row};{result.column}) " +
+			$"isn't equal to the expected one({expectedCell.row};{expectedCell.column}).");
 	}
 
 	[Test]
@@ -423,7 +439,8 @@ public class BotTests
 
 		// Assert
 		Cell expectedCell = new(1, 2);
-		Assert.That(TestHelper.CompareCells(result, expectedCell));
+		Assert.That(result, Is.EqualTo(expectedCell), $"The resulting cell({result.row};{result.column}) " +
+			$"isn't equal to the expected one({expectedCell.row};{expectedCell.column}).");
 	}
 	[Test]
 	public void TestMove_ZeroHardD5_Defense2()
@@ -448,7 +465,8 @@ public class BotTests
 
 		// Assert
 		Cell expectedCell = new(1, 4);
-		Assert.That(TestHelper.CompareCells(result, expectedCell));
+		Assert.That(result, Is.EqualTo(expectedCell), $"The resulting cell({result.row};{result.column}) " +
+			$"isn't equal to the expected one({expectedCell.row};{expectedCell.column}).");
 	}
 	[Test]
 	public void TestMove_CrossHardD5_Defense3()
@@ -473,7 +491,8 @@ public class BotTests
 
 		// Assert
 		Cell expectedCell = new(3, 3);
-		Assert.That(TestHelper.CompareCells(result, expectedCell));
+		Assert.That(result, Is.EqualTo(expectedCell), $"The resulting cell({result.row};{result.column}) " +
+			$"isn't equal to the expected one({expectedCell.row};{expectedCell.column}).");
 	}
 	[Test]
 	public void TestMove_ZeroHardD5_Defense4()
@@ -498,7 +517,8 @@ public class BotTests
 
 		// Assert
 		Cell expectedCell = new(1, 2);
-		Assert.That(TestHelper.CompareCells(result, expectedCell));
+		Assert.That(result, Is.EqualTo(expectedCell), $"The resulting cell({result.row};{result.column}) " +
+			$"isn't equal to the expected one({expectedCell.row};{expectedCell.column}).");
 	}
 	#endregion
 }

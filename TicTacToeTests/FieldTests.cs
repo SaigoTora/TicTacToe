@@ -31,7 +31,9 @@ public class FieldTests
 		bool expectedGameEnd = false;
 		CellType expectedWinner = CellType.None;
 
-		Assert.That(isGameEnd == expectedGameEnd && winner == expectedWinner && winningCells == null);
+		Assert.That(isGameEnd, Is.EqualTo(expectedGameEnd), "The resulting end of the game and the expected end are not equal.");
+		Assert.That(winner, Is.EqualTo(expectedWinner), "The resulting winner isn't equal to the expected one.");
+		Assert.IsNull(winningCells, "Winning cells must be null.");
 	}
 	[Test]
 	public void TestIsGameEnd_D3_NoEnd2()
@@ -55,7 +57,9 @@ public class FieldTests
 		bool expectedGameEnd = false;
 		CellType expectedWinner = CellType.None;
 
-		Assert.That(isGameEnd == expectedGameEnd && winner == expectedWinner && winningCells == null);
+		Assert.That(isGameEnd, Is.EqualTo(expectedGameEnd), "The resulting end of the game and the expected end are not equal.");
+		Assert.That(winner, Is.EqualTo(expectedWinner), "The resulting winner isn't equal to the expected one.");
+		Assert.IsNull(winningCells, "Winning cells must be null.");
 	}
 
 	[Test]
@@ -82,7 +86,9 @@ public class FieldTests
 		bool expectedGameEnd = false;
 		CellType expectedWinner = CellType.None;
 
-		Assert.That(isGameEnd == expectedGameEnd && winner == expectedWinner && winningCells == null);
+		Assert.That(isGameEnd, Is.EqualTo(expectedGameEnd), "The resulting end of the game and the expected end are not equal.");
+		Assert.That(winner, Is.EqualTo(expectedWinner), "The resulting winner isn't equal to the expected one.");
+		Assert.IsNull(winningCells, "Winning cells must be null.");
 	}
 	[Test]
 	public void TestIsGameEnd_D5_NoEnd2()
@@ -108,7 +114,9 @@ public class FieldTests
 		bool expectedGameEnd = false;
 		CellType expectedWinner = CellType.None;
 
-		Assert.That(isGameEnd == expectedGameEnd && winner == expectedWinner && winningCells == null);
+		Assert.That(isGameEnd, Is.EqualTo(expectedGameEnd), "The resulting end of the game and the expected end are not equal.");
+		Assert.That(winner, Is.EqualTo(expectedWinner), "The resulting winner isn't equal to the expected one.");
+		Assert.IsNull(winningCells, "Winning cells must be null.");
 	}
 	#endregion
 
@@ -135,7 +143,9 @@ public class FieldTests
 		bool expectedGameEnd = true;
 		CellType expectedWinner = CellType.None;
 
-		Assert.That(isGameEnd == expectedGameEnd && winner == expectedWinner && winningCells == null);
+		Assert.That(isGameEnd, Is.EqualTo(expectedGameEnd), "The resulting end of the game and the expected end are not equal.");
+		Assert.That(winner, Is.EqualTo(expectedWinner), "The resulting winner isn't equal to the expected one.");
+		Assert.IsNull(winningCells, "Winning cells must be null.");
 	}
 	[Test]
 	public void TestIsGameEnd_D3_WinnerNone2()
@@ -159,7 +169,9 @@ public class FieldTests
 		bool expectedGameEnd = true;
 		CellType expectedWinner = CellType.None;
 
-		Assert.That(isGameEnd == expectedGameEnd && winner == expectedWinner && winningCells == null);
+		Assert.That(isGameEnd, Is.EqualTo(expectedGameEnd), "The resulting end of the game and the expected end are not equal.");
+		Assert.That(winner, Is.EqualTo(expectedWinner), "The resulting winner isn't equal to the expected one.");
+		Assert.IsNull(winningCells, "Winning cells must be null.");
 	}
 
 	[Test]
@@ -186,7 +198,9 @@ public class FieldTests
 		bool expectedGameEnd = true;
 		CellType expectedWinner = CellType.None;
 
-		Assert.That(isGameEnd == expectedGameEnd && winner == expectedWinner && winningCells == null);
+		Assert.That(isGameEnd, Is.EqualTo(expectedGameEnd), "The resulting end of the game and the expected end are not equal.");
+		Assert.That(winner, Is.EqualTo(expectedWinner), "The resulting winner isn't equal to the expected one.");
+		Assert.IsNull(winningCells, "Winning cells must be null.");
 	}
 	[Test]
 	public void TestIsGameEnd_D5_WinnerNone2()
@@ -212,7 +226,9 @@ public class FieldTests
 		bool expectedGameEnd = true;
 		CellType expectedWinner = CellType.None;
 
-		Assert.That(isGameEnd == expectedGameEnd && winner == expectedWinner && winningCells == null);
+		Assert.That(isGameEnd, Is.EqualTo(expectedGameEnd), "The resulting end of the game and the expected end are not equal.");
+		Assert.That(winner, Is.EqualTo(expectedWinner), "The resulting winner isn't equal to the expected one.");
+		Assert.IsNull(winningCells, "Winning cells must be null.");
 	}
 	#endregion
 
@@ -239,9 +255,10 @@ public class FieldTests
 		bool expectedGameEnd = true;
 		CellType expectedWinner = CellType.Cross;
 		Cell[] expectedWinningCells = [new Cell(1, 0), new Cell(1, 1), new Cell(1, 2)];
-		bool resultWinningCells = TestHelper.CompareCellArrays(winningCells, expectedWinningCells);
 
-		Assert.That(isGameEnd == expectedGameEnd && winner == expectedWinner && resultWinningCells);
+		Assert.That(isGameEnd, Is.EqualTo(expectedGameEnd), "The resulting end of the game and the expected end are not equal.");
+		Assert.That(winner, Is.EqualTo(expectedWinner), "The resulting winner isn't equal to the expected one.");
+		CollectionAssert.AreEqual(expectedWinningCells, winningCells, "The resulting winning cells are not equal to the expected ones.");
 	}
 	[Test]
 	public void TestIsGameEnd_D3_WinnerCross2()
@@ -265,9 +282,10 @@ public class FieldTests
 		bool expectedGameEnd = true;
 		CellType expectedWinner = CellType.Cross;
 		Cell[] expectedWinningCells = [new Cell(0, 2), new Cell(1, 1), new Cell(2, 0)];
-		bool resultWinningCells = TestHelper.CompareCellArrays(winningCells, expectedWinningCells);
 
-		Assert.That(isGameEnd == expectedGameEnd && winner == expectedWinner && resultWinningCells);
+		Assert.That(isGameEnd, Is.EqualTo(expectedGameEnd), "The resulting end of the game and the expected end are not equal.");
+		Assert.That(winner, Is.EqualTo(expectedWinner), "The resulting winner isn't equal to the expected one.");
+		CollectionAssert.AreEqual(expectedWinningCells, winningCells, "The resulting winning cells are not equal to the expected ones.");
 	}
 
 	[Test]
@@ -294,9 +312,10 @@ public class FieldTests
 		bool expectedGameEnd = true;
 		CellType expectedWinner = CellType.Cross;
 		Cell[] expectedWinningCells = [new Cell(1, 1), new Cell(2, 1), new Cell(3, 1), new Cell(4, 1)];
-		bool resultWinningCells = TestHelper.CompareCellArrays(winningCells, expectedWinningCells);
 
-		Assert.That(isGameEnd == expectedGameEnd && winner == expectedWinner && resultWinningCells);
+		Assert.That(isGameEnd, Is.EqualTo(expectedGameEnd), "The resulting end of the game and the expected end are not equal.");
+		Assert.That(winner, Is.EqualTo(expectedWinner), "The resulting winner isn't equal to the expected one.");
+		CollectionAssert.AreEqual(expectedWinningCells, winningCells, "The resulting winning cells are not equal to the expected ones.");
 	}
 	[Test]
 	public void TestIsGameEnd_D5_WinnerCross2()
@@ -322,9 +341,10 @@ public class FieldTests
 		bool expectedGameEnd = true;
 		CellType expectedWinner = CellType.Cross;
 		Cell[] expectedWinningCells = [new Cell(1, 1), new Cell(2, 2), new Cell(3, 3), new Cell(4, 4)];
-		bool resultWinningCells = TestHelper.CompareCellArrays(winningCells, expectedWinningCells);
 
-		Assert.That(isGameEnd == expectedGameEnd && winner == expectedWinner && resultWinningCells);
+		Assert.That(isGameEnd, Is.EqualTo(expectedGameEnd), "The resulting end of the game and the expected end are not equal.");
+		Assert.That(winner, Is.EqualTo(expectedWinner), "The resulting winner isn't equal to the expected one.");
+		CollectionAssert.AreEqual(expectedWinningCells, winningCells, "The resulting winning cells are not equal to the expected ones.");
 	}
 	#endregion
 
@@ -351,9 +371,10 @@ public class FieldTests
 		bool expectedGameEnd = true;
 		CellType expectedWinner = CellType.Zero;
 		Cell[] expectedWinningCells = [new Cell(0, 0), new Cell(1, 1), new Cell(2, 2)];
-		bool resultWinningCells = TestHelper.CompareCellArrays(winningCells, expectedWinningCells);
 
-		Assert.That(isGameEnd == expectedGameEnd && winner == expectedWinner && resultWinningCells);
+		Assert.That(isGameEnd, Is.EqualTo(expectedGameEnd), "The resulting end of the game and the expected end are not equal.");
+		Assert.That(winner, Is.EqualTo(expectedWinner), "The resulting winner isn't equal to the expected one.");
+		CollectionAssert.AreEqual(expectedWinningCells, winningCells, "The resulting winning cells are not equal to the expected ones.");
 	}
 	[Test]
 	public void TestIsGameEnd_D3_WinnerZero2()
@@ -377,9 +398,10 @@ public class FieldTests
 		bool expectedGameEnd = true;
 		CellType expectedWinner = CellType.Zero;
 		Cell[] expectedWinningCells = [new Cell(0, 0), new Cell(1, 0), new Cell(2, 0)];
-		bool resultWinningCells = TestHelper.CompareCellArrays(winningCells, expectedWinningCells);
 
-		Assert.That(isGameEnd == expectedGameEnd && winner == expectedWinner && resultWinningCells);
+		Assert.That(isGameEnd, Is.EqualTo(expectedGameEnd), "The resulting end of the game and the expected end are not equal.");
+		Assert.That(winner, Is.EqualTo(expectedWinner), "The resulting winner isn't equal to the expected one.");
+		CollectionAssert.AreEqual(expectedWinningCells, winningCells, "The resulting winning cells are not equal to the expected ones.");
 	}
 
 	[Test]
@@ -406,9 +428,10 @@ public class FieldTests
 		bool expectedGameEnd = true;
 		CellType expectedWinner = CellType.Zero;
 		Cell[] expectedWinningCells = [new Cell(1, 4), new Cell(2, 3), new Cell(3, 2), new Cell(4, 1)];
-		bool resultWinningCells = TestHelper.CompareCellArrays(winningCells, expectedWinningCells);
 
-		Assert.That(isGameEnd == expectedGameEnd && winner == expectedWinner && resultWinningCells);
+		Assert.That(isGameEnd, Is.EqualTo(expectedGameEnd), "The resulting end of the game and the expected end are not equal.");
+		Assert.That(winner, Is.EqualTo(expectedWinner), "The resulting winner isn't equal to the expected one.");
+		CollectionAssert.AreEqual(expectedWinningCells, winningCells, "The resulting winning cells are not equal to the expected ones.");
 	}
 	[Test]
 	public void TestIsGameEnd_D5_WinnerZero2()
@@ -434,9 +457,10 @@ public class FieldTests
 		bool expectedGameEnd = true;
 		CellType expectedWinner = CellType.Zero;
 		Cell[] expectedWinningCells = [new Cell(4, 0), new Cell(4, 1), new Cell(4, 2), new Cell(4, 3)];
-		bool resultWinningCells = TestHelper.CompareCellArrays(winningCells, expectedWinningCells);
 
-		Assert.That(isGameEnd == expectedGameEnd && winner == expectedWinner && resultWinningCells);
+		Assert.That(isGameEnd, Is.EqualTo(expectedGameEnd), "The resulting end of the game and the expected end are not equal.");
+		Assert.That(winner, Is.EqualTo(expectedWinner), "The resulting winner isn't equal to the expected one.");
+		CollectionAssert.AreEqual(expectedWinningCells, winningCells, "The resulting winning cells are not equal to the expected ones.");
 	}
 	#endregion
 }

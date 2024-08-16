@@ -26,7 +26,8 @@ namespace TicTacToeTests
 
 			// Assert
 			Cell expectedCell = new(2, 2);
-			Assert.That(TestHelper.CompareCells(result, expectedCell));
+			Assert.That(result, Is.EqualTo(expectedCell), $"The resulting cell({result.row};{result.column}) " +
+				$"isn't equal to the expected one({expectedCell.row};{expectedCell.column}).");
 		}
 		[Test]
 		public void TestFindCell_ZeroD3_2()
@@ -45,7 +46,8 @@ namespace TicTacToeTests
 
 			// Assert
 			Cell expectedCell = new(0, 0);
-			Assert.That(TestHelper.CompareCells(result, expectedCell));
+			Assert.That(result, Is.EqualTo(expectedCell), $"The resulting cell({result.row};{result.column}) " +
+				$"isn't equal to the expected one({expectedCell.row};{expectedCell.column}).");
 		}
 		[Test]
 		public void TestFindCell_ZeroD3_3()
@@ -64,7 +66,8 @@ namespace TicTacToeTests
 
 			// Assert
 			Cell expectedCell = new(1, 2);
-			Assert.That(TestHelper.CompareCells(result, expectedCell));
+			Assert.That(result, Is.EqualTo(expectedCell), $"The resulting cell({result.row};{result.column}) " +
+				$"isn't equal to the expected one({expectedCell.row};{expectedCell.column}).");
 		}
 		[Test]
 		public void TestFindCell_ZeroD3_4()
@@ -83,7 +86,8 @@ namespace TicTacToeTests
 
 			// Assert
 			Cell expectedCell = new(1, 0);
-			Assert.That(TestHelper.CompareCells(result, expectedCell));
+			Assert.That(result, Is.EqualTo(expectedCell), $"The resulting cell({result.row};{result.column}) " +
+				$"isn't equal to the expected one({expectedCell.row};{expectedCell.column}).");
 		}
 
 		[Test]
@@ -105,7 +109,8 @@ namespace TicTacToeTests
 
 			// Assert
 			Cell expectedCell = new(1, 1);
-			Assert.That(TestHelper.CompareCells(result, expectedCell));
+			Assert.That(result, Is.EqualTo(expectedCell), $"The resulting cell({result.row};{result.column}) " +
+				$"isn't equal to the expected one({expectedCell.row};{expectedCell.column}).");
 		}
 		[Test]
 		public void TestFindCell_MaxDepth3ZeroD5_2()
@@ -126,7 +131,8 @@ namespace TicTacToeTests
 
 			// Assert
 			Cell expectedCell = new(4, 3);
-			Assert.That(TestHelper.CompareCells(result, expectedCell));
+			Assert.That(result, Is.EqualTo(expectedCell), $"The resulting cell({result.row};{result.column}) " +
+				$"isn't equal to the expected one({expectedCell.row};{expectedCell.column}).");
 		}
 		#endregion
 
@@ -148,7 +154,8 @@ namespace TicTacToeTests
 
 			// Assert
 			Cell expectedCell = new(2, 1);
-			Assert.That(TestHelper.CompareCells(result, expectedCell));
+			Assert.That(result, Is.EqualTo(expectedCell), $"The resulting cell({result.row};{result.column}) " +
+				$"isn't equal to the expected one({expectedCell.row};{expectedCell.column}).");
 		}
 		[Test]
 		public void TestFindCell_CrossD3_2()
@@ -167,7 +174,8 @@ namespace TicTacToeTests
 
 			// Assert
 			Cell expectedCell = new(1, 0);
-			Assert.That(TestHelper.CompareCells(result, expectedCell));
+			Assert.That(result, Is.EqualTo(expectedCell), $"The resulting cell({result.row};{result.column}) " +
+				$"isn't equal to the expected one({expectedCell.row};{expectedCell.column}).");
 		}
 		[Test]
 		public void TestFindCell_CrossD3_3()
@@ -186,7 +194,8 @@ namespace TicTacToeTests
 
 			// Assert
 			Cell expectedCell = new(2, 2);
-			Assert.That(TestHelper.CompareCells(result, expectedCell));
+			Assert.That(result, Is.EqualTo(expectedCell), $"The resulting cell({result.row};{result.column}) " +
+				$"isn't equal to the expected one({expectedCell.row};{expectedCell.column}).");
 		}
 		[Test]
 		public void TestFindCell_CrossD3_4()
@@ -205,7 +214,8 @@ namespace TicTacToeTests
 
 			// Assert
 			Cell expectedCell = new(2, 1);
-			Assert.That(TestHelper.CompareCells(result, expectedCell));
+			Assert.That(result, Is.EqualTo(expectedCell), $"The resulting cell({result.row};{result.column}) " +
+				$"isn't equal to the expected one({expectedCell.row};{expectedCell.column}).");
 		}
 
 		[Test]
@@ -227,7 +237,8 @@ namespace TicTacToeTests
 
 			// Assert
 			Cell expectedCell = new(3, 1);
-			Assert.That(TestHelper.CompareCells(result, expectedCell));
+			Assert.That(result, Is.EqualTo(expectedCell), $"The resulting cell({result.row};{result.column}) " +
+				$"isn't equal to the expected one({expectedCell.row};{expectedCell.column}).");
 		}
 		[Test]
 		public void TestFindCell_MaxDepth3CrossD5_2()
@@ -248,7 +259,8 @@ namespace TicTacToeTests
 
 			// Assert
 			Cell expectedCell = new(3, 3);
-			Assert.That(TestHelper.CompareCells(result, expectedCell));
+			Assert.That(result, Is.EqualTo(expectedCell), $"The resulting cell({result.row};{result.column}) " +
+				$"isn't equal to the expected one({expectedCell.row};{expectedCell.column}).");
 		}
 		#endregion
 	}
