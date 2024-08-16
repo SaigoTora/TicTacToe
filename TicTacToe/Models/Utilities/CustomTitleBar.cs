@@ -22,7 +22,7 @@ namespace TicTacToe.Models.Utilities
 		private bool _isFormDragging;
 		private Point _dragCursorPoint, _dragFormPoint;
 
-		public CustomTitleBar(Form form, string formName, System.Drawing.Icon icon = null, bool minimizeBox = true, bool maximizeBox = true)
+		internal CustomTitleBar(Form form, string formName, System.Drawing.Icon icon = null, bool minimizeBox = true, bool maximizeBox = true)
 		{
 			_scalingForm.Minimize = minimizeBox;
 			_scalingForm.Maximize = maximizeBox;
@@ -68,6 +68,34 @@ namespace TicTacToe.Models.Utilities
 			MainPanel.Padding = new Padding(LEFT_PADDING, 0, 0, 0);
 
 			ToggleEventHandlers(MainPanel, true);
+		}
+
+		internal void MoveFormElementsDown()
+			=> MoveFormElementsDown(_form);
+		private void MoveFormElementsDown(Control control)
+		{
+			if (control.Controls.Count > 0 && !(control is NumericUpDown))
+				foreach (Control item in control.Controls)
+					MoveFormElementsDown(item);
+			else
+				control.Location = new Point(control.Location.X, control.Location.Y + DEFAULT_PANEL_HEIGHT);
+		}
+		internal void Dispose()
+		{
+			ToggleEventHandlers(MainPanel, false);
+			foreach (Control control in MainPanel.Controls)
+			{
+				if (control is IconButton iconButton)
+				{
+					iconButton.Click -= ButtonMinimize_Click;
+					iconButton.Click -= ButtonMaximize_Click;
+					iconButton.Click -= ButtonExit_Click;
+				}
+				else if (control is PictureBox pictureBox)
+					ToggleEventHandlers(pictureBox, false);
+				else if (control is Label label)
+					ToggleEventHandlers(label, false);
+			}
 		}
 
 		private IconButton CreateIconButton(IconChar iconChar)
@@ -158,29 +186,17 @@ namespace TicTacToe.Models.Utilities
 		}
 
 
-		internal void Dispose()
-		{
-			ToggleEventHandlers(MainPanel, false);
-			foreach (Control control in MainPanel.Controls)
-			{
-				if (control is IconButton iconButton)
-				{
-					iconButton.Click -= ButtonMinimize_Click;
-					iconButton.Click -= ButtonMaximize_Click;
-					iconButton.Click -= ButtonExit_Click;
-				}
-				else if (control is PictureBox pictureBox)
-					ToggleEventHandlers(pictureBox, false);
-				else if (control is Label label)
-					ToggleEventHandlers(label, false);
-			}
-		}
-
 		#region EventHandlers
 		private void ButtonMaximize_Click(object sender, EventArgs e)
-			=> ToggleWindowState();
+		{
+			_form.ActiveControl = null;
+			ToggleWindowState();
+		}
 		private void ButtonMinimize_Click(object sender, EventArgs e)
-			=> _form.WindowState = FormWindowState.Minimized;
+		{
+			_form.ActiveControl = null;
+			_form.WindowState = FormWindowState.Minimized;
+		}
 		private void ButtonExit_Click(object sender, EventArgs e)
 			=> _form.Close();
 

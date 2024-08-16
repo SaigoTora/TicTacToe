@@ -36,7 +36,7 @@
 			this.labelAvatar = new System.Windows.Forms.Label();
 			this.pictureBoxMan = new System.Windows.Forms.PictureBox();
 			this.pictureBoxWoman = new System.Windows.Forms.PictureBox();
-			this.guna2BorderlessForm1 = new Guna.UI2.WinForms.Guna2BorderlessForm(this.components);
+			this.guna2BorderlessForm = new Guna.UI2.WinForms.Guna2BorderlessForm(this.components);
 			this.buttonReady = new Guna.UI2.WinForms.Guna2GradientButton();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxMan)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxWoman)).BeginInit();
@@ -126,15 +126,14 @@
 			this.pictureBoxWoman.TabStop = false;
 			this.pictureBoxWoman.Click += new System.EventHandler(this.PictureBoxAvatar_Click);
 			// 
-			// guna2BorderlessForm1
+			// guna2BorderlessForm
 			// 
-			this.guna2BorderlessForm1.AnimationType = Guna.UI2.WinForms.Guna2BorderlessForm.AnimateWindowType.AW_VER_NEGATIVE;
-			this.guna2BorderlessForm1.BorderRadius = 30;
-			this.guna2BorderlessForm1.ContainerControl = this;
-			this.guna2BorderlessForm1.DockIndicatorTransparencyValue = 0.6D;
-			this.guna2BorderlessForm1.DragForm = false;
-			this.guna2BorderlessForm1.ResizeForm = false;
-			this.guna2BorderlessForm1.TransparentWhileDrag = true;
+			this.guna2BorderlessForm.BorderRadius = 30;
+			this.guna2BorderlessForm.ContainerControl = this;
+			this.guna2BorderlessForm.DockIndicatorTransparencyValue = 0.6D;
+			this.guna2BorderlessForm.DragForm = false;
+			this.guna2BorderlessForm.ResizeForm = false;
+			this.guna2BorderlessForm.TransparentWhileDrag = true;
 			// 
 			// buttonReady
 			// 
@@ -202,7 +201,7 @@
 		private System.Windows.Forms.Label labelAvatar;
 		private System.Windows.Forms.PictureBox pictureBoxMan;
 		private System.Windows.Forms.PictureBox pictureBoxWoman;
-		private Guna.UI2.WinForms.Guna2BorderlessForm guna2BorderlessForm1;
+		private Guna.UI2.WinForms.Guna2BorderlessForm guna2BorderlessForm;
 		private Guna.UI2.WinForms.Guna2GradientButton buttonReady;
 	}
 }

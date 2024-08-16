@@ -75,7 +75,7 @@ namespace TicTacToe.Forms
 			PictureBox pictureBox = avatarCreator.CreateItemToSelect(avatar);
 			_avatarList.Add(pictureBox);
 
-			if (!_isSelectedAvatarCreated && avatar.Image.CompareTo(_player.Settings.Avatar))
+			if (!_isSelectedAvatarCreated && avatar.Image.CompareTo(_player.Preferences.Avatar))
 			{
 				SelectAvatar(pictureBox, EventArgs.Empty);
 				_isSelectedAvatarCreated = true;
@@ -86,7 +86,7 @@ namespace TicTacToe.Forms
 			PictureBox pictureBox = menuBackCreator.CreateItemToSelect(imageItem);
 			_menuBackList.Add(pictureBox);
 
-			if (!_isSelectedMenuBackCreated && imageItem.Image.CompareTo(_player.Settings.BackgroundMenu))
+			if (!_isSelectedMenuBackCreated && imageItem.Image.CompareTo(_player.Preferences.BackgroundMenu))
 			{
 				SelectMenuBack(pictureBox, EventArgs.Empty);
 				_isSelectedMenuBackCreated = true;
@@ -97,7 +97,7 @@ namespace TicTacToe.Forms
 			PictureBox pictureBox = gameBackCreator.CreateItemToSelect(colorItem);
 			_gameBackList.Add(pictureBox);
 
-			if (!_isSelectedGameBackCreated && colorItem.Color == _player.Settings.BackgroundGame)
+			if (!_isSelectedGameBackCreated && colorItem.Color == _player.Preferences.BackgroundGame)
 			{
 				SelectGameBack(pictureBox, EventArgs.Empty);
 				_isSelectedGameBackCreated = true;

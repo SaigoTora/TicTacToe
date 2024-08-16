@@ -74,18 +74,18 @@ namespace TicTacToe.Forms
 		private void ButtonReady_Click(object sender, EventArgs e)
 		{
 			textBoxName.Text = textBoxName.Text.Trim(' ').DeleteDuplicateChars(' ');
-			_player = new Player(textBoxName.Text, _player.Points, _player.Settings);
+			_player = new Player(textBoxName.Text, _player.Points, _player.Preferences);
 
 			if (IsPlayerDataValid())
 			{
-				PlayerVisualSettings settings = new PlayerVisualSettings();
+				PlayerVisualPreferences preferences = new PlayerVisualPreferences();
 
 				if (_isPlayerMan)
-					settings.Avatar = pictureBoxMan.Image;
+					preferences.Avatar = pictureBoxMan.Image;
 				else
-					settings.Avatar = pictureBoxWoman.Image;
+					preferences.Avatar = pictureBoxWoman.Image;
 
-				_player = new Player(_player.Name, _player.Points, settings);
+				_player = new Player(_player.Name, _player.Points, preferences);
 
 				MainForm mainForm = new MainForm(_player);
 				mainForm.FormClosed += (s, args) => { Close(); };
@@ -126,8 +126,6 @@ namespace TicTacToe.Forms
 		}
 
 		private void StartForm_FormClosed(object sender, FormClosedEventArgs e)
-		{
-			_customTitleBar.Dispose();
-		}
+			=> _customTitleBar.Dispose();
 	}
 }

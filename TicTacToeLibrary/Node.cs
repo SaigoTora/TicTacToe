@@ -19,7 +19,7 @@ namespace TicTacToeLibrary
 
 		internal Node(Field field, CellType childrenCellType, int maxDepthLevel)
 		{// Constructor for the first node
-			_field = field.Copy();
+			_field = (Field)field.Clone();
 
 			_firstCellType = childrenCellType;
 			_maxDepthLevel = maxDepthLevel;
@@ -30,7 +30,7 @@ namespace TicTacToeLibrary
 		}
 		internal Node(Field field, CellType childrenCellType, int depthLevel, bool hasChildren)
 		{// Constructor for other nodes
-			_field = field.Copy();
+			_field = (Field)field.Clone();
 			_depthLevel = depthLevel;
 
 			if (hasChildren && _depthLevel <= _maxDepthLevel)

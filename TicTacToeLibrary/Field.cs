@@ -2,7 +2,7 @@
 
 namespace TicTacToeLibrary
 {
-	public class Field
+	public class Field : ICloneable
 	{
 		private const int MIN_CELLS_TO_CHECK_END_GAME = 4;
 
@@ -36,7 +36,7 @@ namespace TicTacToeLibrary
 		public void FillCell(Cell cell, CellType cellType)
 			=> _cells[cell.row, cell.column] = cellType;
 
-		public Field Copy()
+		public object Clone()
 		{
 			Field newField = new Field(_cells.GetLength(0), WinningCellsCount);
 			for (int i = 0; i < _cells.GetLength(0); i++)

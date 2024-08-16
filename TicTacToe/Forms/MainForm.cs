@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FontAwesome.Sharp;
+using System;
 using System.Drawing;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -11,20 +12,20 @@ using TicTacToeLibrary;
 
 namespace TicTacToe.Forms
 {
-	internal partial class MainForm : Form
+	internal partial class MainForm : BaseForm
 	{
-		private const int DELAY_VISIBILITY_OF_SETTINGS = 150;
-
 		private readonly Color _backColorSelectedLabelName = Color.CornflowerBlue;
 
-		private readonly (Color Default, Color Selected) _backColorLabelDifficulty =
-			(Color.LightSteelBlue, Color.Blue);
+		private readonly (Color Default, Color Selected) _foreColorDifficulty = (Color.Black, Color.White);
+		private readonly (Color Default, Color Selected) _iconColorDifficulty = (Color.Black, Color.Lime);
+		private readonly (IconChar Default, IconChar Selected) _iconCharDifficulty = (IconChar.Circle, IconChar.CircleCheck);
 
-		private readonly (Color Default, Color Selected) _foreColorLabel =
-			(Color.Black, Color.White);
-
-		private readonly (Color Easy, Color Medium, Color Hard, Color Impossible) _difficultyButtonColor =
-			(Color.FromArgb(0, 107, 60), Color.FromArgb(229, 158, 31), Color.FromArgb(127, 24, 13), Color.FromArgb(71, 67, 137));
+		private static readonly (Color Easy, Color Medium, Color Hard, Color Impossible) _difficultyButtonFillColor =
+			(Color.FromArgb(71, 167, 106), Color.SandyBrown, Color.FromArgb(171, 52, 58), Color.FromArgb(71, 67, 137));
+		private static readonly (Color Easy, Color Medium, Color Hard, Color Impossible) _difficultyButtonFillColor2 =
+			(Color.FromArgb(30, 129, 69), Color.FromArgb(236, 124, 38), Color.FromArgb(155, 17, 30), Color.FromArgb(83, 55, 122));
+		private readonly int _panelSettingsWidth;
+		private readonly CustomTitleBar _customTitleBar;
 
 		private readonly Player _player;
 		private Difficulty _selectedDifficulty;
@@ -32,101 +33,120 @@ namespace TicTacToe.Forms
 
 		public MainForm(Player player)
 		{
+			_customTitleBar = new CustomTitleBar(this, "Tic Tac Toe", Resources.ticTacToe, true, true);
 			InitializeComponent();
 
+			_panelSettingsWidth = panelSettingsMain.Width;
+			_customTitleBar.MoveFormElementsDown();
 			_player = player;
 		}
 		private void MainForm_Load(object sender, EventArgs e)
 		{
-			SetDefaultColorsForDifficultyLabels();
-			LabelDifficulty_Click(labelEasy, e);
+			SetDefaultColorsForDifficultyButtons();
+			ButtonDifficulty_Click(buttonEasy, e);
 			DisplayPlayerData();
 
-			FormEventHandlers.SubscribeToHoverPictureBoxes(pictureBoxAvatar,
-				pictureBoxShowSettings);
-			//FormEventHandlers.SubscribeToHoverButtons(buttonPlay, buttonProfile,
-			//	buttonShop, buttonExit);
+			FormEventHandlers.SubscribeToHoverPictureBoxes(pictureBoxAvatar);
+			FormEventHandlers.SubscribeToHoverButtons(buttonPlay, buttonProfile,
+				buttonShop, buttonExit);
 		}
 
 		private void DisplayPlayerData()
 		{
-			labelPoints.Text = _player.Points.ToString();
+			labelPoints.Text = $"{_player.Points:N0}".Replace(',', ' ');
 			labelPlayerName.Text = _player.Name;
-			pictureBoxAvatar.Image = _player.Settings.Avatar;
-			BackgroundImage = _player.Settings.BackgroundMenu;
+			pictureBoxAvatar.Image = _player.Preferences.Avatar;
+			BackgroundImage = _player.Preferences.BackgroundMenu;
 		}
-		private async Task ChangeVisibilityOfControlsWithDelay(bool visible, int millisecondsDelay, params Control[] controls)
+		private async Task ChangeSizePanelSettingsWithDelay(bool needToOpen)
 		{
-			for (int i = 0; i < controls.Length; i++)
+			const int DELAY = 2;
+			int step = 5;
+
+			if (!needToOpen)
+				step *= -1;
+
+			int targetWidth = needToOpen ? _panelSettingsWidth : buttonShowSettings.Width;
+
+			while ((needToOpen && panelSettingsMain.Width < targetWidth) ||
+				   (!needToOpen && panelSettingsMain.Width > targetWidth))
 			{
-				controls[i].Visible = visible;
-				if (i < controls.Length - 1)
-					await Task.Delay(millisecondsDelay);
+				panelSettingsMain.Width += step;
+				await Task.Delay(DELAY);
 			}
 		}
 
 		#region DifficultyLabels
-		private void LabelDifficulty_Click(object sender, EventArgs e)
+		private void ButtonDifficulty_Click(object sender, EventArgs e)
 		{
-			if (!(sender is Label label))
+			if (!(sender is IconButton button))
 				return;
 
-			label.BackColor = _backColorLabelDifficulty.Selected;
-			label.ForeColor = _foreColorLabel.Selected;
+			ActiveControl = null;
+			button.IconChar = _iconCharDifficulty.Selected;
+			button.IconColor = _iconColorDifficulty.Selected;
+			button.ForeColor = _foreColorDifficulty.Selected;
 
-			if (label == labelEasy)
+			if (button == buttonEasy)
 			{
-				_selectedDifficulty = Difficulty.Easy;
-				buttonPlay.BackColor = _difficultyButtonColor.Easy;
-				SetDefaultColorsForDifficultyLabels(labelMedium, labelHard, labelImpossible);
+				SetDifficultySettings(Difficulty.Easy, _difficultyButtonFillColor.Easy,
+					_difficultyButtonFillColor2.Easy);
+				SetDefaultColorsForDifficultyButtons(buttonMedium, buttonHard, buttonImpossible);
 			}
-			else if (label == labelMedium)
+			else if (button == buttonMedium)
 			{
-				_selectedDifficulty = Difficulty.Medium;
-				buttonPlay.BackColor = _difficultyButtonColor.Medium;
-				SetDefaultColorsForDifficultyLabels(labelEasy, labelHard, labelImpossible);
+				SetDifficultySettings(Difficulty.Medium, _difficultyButtonFillColor.Medium,
+					_difficultyButtonFillColor2.Medium);
+				SetDefaultColorsForDifficultyButtons(buttonEasy, buttonHard, buttonImpossible);
 			}
-			else if (label == labelHard)
+			else if (button == buttonHard)
 			{
-				_selectedDifficulty = Difficulty.Hard;
-				buttonPlay.BackColor = _difficultyButtonColor.Hard;
-				SetDefaultColorsForDifficultyLabels(labelEasy, labelMedium, labelImpossible);
+				SetDifficultySettings(Difficulty.Hard, _difficultyButtonFillColor.Hard,
+					_difficultyButtonFillColor2.Hard);
+				SetDefaultColorsForDifficultyButtons(buttonEasy, buttonMedium, buttonImpossible);
 			}
-			else if (label == labelImpossible)
+			else if (button == buttonImpossible)
 			{
-				_selectedDifficulty = Difficulty.Impossible;
-				buttonPlay.BackColor = _difficultyButtonColor.Impossible;
-				SetDefaultColorsForDifficultyLabels(labelEasy, labelMedium, labelHard);
+				SetDifficultySettings(Difficulty.Impossible, _difficultyButtonFillColor.Impossible,
+					_difficultyButtonFillColor2.Impossible);
+				SetDefaultColorsForDifficultyButtons(buttonEasy, buttonMedium, buttonHard);
 			}
 		}
-		private void SetDefaultColorsForDifficultyLabels(params Label[] labels)
+		private void SetDifficultySettings(Difficulty difficulty, Color buttonPlayFillColor, Color buttonPlayFillColor2)
 		{
-			foreach (Label label in labels)
+			_selectedDifficulty = difficulty;
+			buttonPlay.FillColor = buttonPlayFillColor;
+			buttonPlay.FillColor2 = buttonPlayFillColor2;
+		}
+		private void SetDefaultColorsForDifficultyButtons(params IconButton[] buttons)
+		{
+			foreach (IconButton button in buttons)
 			{
-				label.BackColor = _backColorLabelDifficulty.Default;
-				label.ForeColor = _foreColorLabel.Default;
+				button.IconChar = _iconCharDifficulty.Default;
+				button.IconColor = _iconColorDifficulty.Default;
+				button.ForeColor = _foreColorDifficulty.Default;
 			}
 		}
 
-		private void LabelDifficulty_MouseEnter(object sender, EventArgs e)
+		private void ButtonDifficulty_MouseEnter(object sender, EventArgs e)
 		{
-			if (!(sender is Label label))
+			if (!(sender is IconButton iconButton))
 				return;
 
-			label.ForeColor = _foreColorLabel.Selected;
+			iconButton.ForeColor = _foreColorDifficulty.Selected;
 		}
-		private void LabelDifficulty_MouseLeave(object sender, EventArgs e)
+		private void ButtonDifficulty_MouseLeave(object sender, EventArgs e)
 		{
-			if (!(sender is Label label))
+			if (!(sender is IconButton iconButton))
 				return;
 
-			// If the mouse has left the difficulty level already selected
-			if (label == labelEasy && _selectedDifficulty == Difficulty.Easy
-				|| label == labelMedium && _selectedDifficulty == Difficulty.Medium
-				|| label == labelHard && _selectedDifficulty == Difficulty.Hard)
+			if (_selectedDifficulty == Difficulty.Easy && iconButton == buttonEasy
+				|| _selectedDifficulty == Difficulty.Medium && iconButton == buttonMedium
+				|| _selectedDifficulty == Difficulty.Hard && iconButton == buttonHard
+				|| _selectedDifficulty == Difficulty.Impossible && iconButton == buttonImpossible)
 				return;
 
-			label.ForeColor = _foreColorLabel.Default;
+			iconButton.ForeColor = _foreColorDifficulty.Default;
 		}
 		#endregion
 
@@ -160,31 +180,28 @@ namespace TicTacToe.Forms
 		#endregion
 
 		#region OtherEventHandlers
-		private async void PictureBoxShowSettings_Click(object sender, EventArgs e)
+		private async void ButtonShowSettings_Click(object sender, EventArgs e)
 		{
-			if (!(sender is PictureBox pictureBox))
+			if (!(sender is IconButton iconButton))
 				return;
 
-			pictureBox.Enabled = false;
+			ActiveControl = null;
+			iconButton.Enabled = false;
 			if (_isSettingsVisible)
 			{
+				await ChangeSizePanelSettingsWithDelay(false);
 				_isSettingsVisible = false;
-				pictureBox.BackgroundImage = Resources.eyeClose;
-
-				await ChangeVisibilityOfControlsWithDelay(false, DELAY_VISIBILITY_OF_SETTINGS,
-					numericUpDownNumberOfRounds, labelNumberOfRounds, labelImpossible, labelHard,
-					labelMedium, labelEasy, labelDifficult);
+				panelSettings.Visible = false;
+				iconButton.Flip = FlipOrientation.Normal;
 			}
 			else
 			{
+				panelSettings.Visible = true;
+				await ChangeSizePanelSettingsWithDelay(true);
 				_isSettingsVisible = true;
-				pictureBox.BackgroundImage = Resources.eyeOpen;
-
-				await ChangeVisibilityOfControlsWithDelay(true, DELAY_VISIBILITY_OF_SETTINGS,
-					labelDifficult, labelEasy, labelMedium, labelHard, labelImpossible,
-					labelNumberOfRounds, numericUpDownNumberOfRounds);
+				iconButton.Flip = FlipOrientation.Horizontal;
 			}
-			pictureBox.Enabled = true;
+			iconButton.Enabled = true;
 		}
 
 		private void LabelName_MouseEnter(object sender, EventArgs e)
@@ -193,7 +210,7 @@ namespace TicTacToe.Forms
 				return;
 
 			label.BackColor = _backColorSelectedLabelName;
-			label.ForeColor = _foreColorLabel.Selected;
+			label.ForeColor = _foreColorDifficulty.Selected;
 		}
 		private void LabelName_MouseLeave(object sender, EventArgs e)
 		{
@@ -201,7 +218,7 @@ namespace TicTacToe.Forms
 				return;
 
 			label.BackColor = Color.Transparent;
-			label.ForeColor = _foreColorLabel.Default;
+			label.ForeColor = _foreColorDifficulty.Default;
 		}
 
 		private void Menu_VisibleChanged(object sender, EventArgs e)
@@ -213,6 +230,7 @@ namespace TicTacToe.Forms
 		private void ButtonExit_Click(object sender, EventArgs e) { Application.Exit(); }
 		private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
 		{
+			_customTitleBar.Dispose();
 			Serializator.Serialize(_player, Program.SerializePath, Program.EncryptKey);
 		}
 		#endregion

@@ -100,7 +100,7 @@
     <Compile Include="Models\PlayerItem\AvatarRarity.cs" />
     <Compile Include="Models\PlayerItem\ColorItem.cs" />
     <Compile Include="Models\PlayerInfo\PlayerType.cs" />
-    <Compile Include="Models\PlayerInfo\PlayerVisualSettings.cs" />
+    <Compile Include="Models\PlayerInfo\PlayerVisualPreferences.cs" />
     <Compile Include="Models\PlayerItemCreator\ImageCreator.cs" />
     <Compile Include="Models\PlayerItem\ImageItem.cs" />
     <Compile Include="Models\PlayerInfo\Player.cs" />
@@ -191,9 +191,6 @@
     <None Include="Resources\Icons\ticTacToe.ico" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Images\background1.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\Images\background2.png" />
   </ItemGroup>
   <ItemGroup>
@@ -222,12 +219,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Images\cross.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Images\eyeClose.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Images\eyeOpen.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Images\legendaryAvatar1.png" />
@@ -291,6 +282,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Images\backgroundStartForm.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\coin.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\background1.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

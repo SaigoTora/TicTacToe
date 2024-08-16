@@ -14,20 +14,20 @@ namespace TicTacToe.Models.PlayerInfo
 	{
 		internal string Name { get; private set; }
 		internal int Points { get; private set; }
-		internal PlayerVisualSettings Settings { get; private set; }
+		internal PlayerVisualPreferences Preferences { get; private set; }
 
 		private List<Item> _inventory = new List<Item>();
 
-		internal Player(string Name, int Points, PlayerVisualSettings settings)
+		internal Player(string name, int points, PlayerVisualPreferences preferences)
 		{
-			this.Name = Name;
-			this.Points = Points;
-			Settings = settings;
+			Name = name;
+			Points = points;
+			Preferences = preferences;
 			SetDefaultInventory();
 		}
 		internal Player()
 		{
-			Settings = new PlayerVisualSettings();
+			Preferences = new PlayerVisualPreferences();
 			SetDefaultInventory();
 		}
 
@@ -61,17 +61,17 @@ namespace TicTacToe.Models.PlayerInfo
 			{
 				case Avatar avatar:
 					{
-						Settings.Avatar = avatar.Image;
+						Preferences.Avatar = avatar.Image;
 						break;
 					}
 				case ImageItem imageItem:
 					{
-						Settings.BackgroundMenu = imageItem.Image;
+						Preferences.BackgroundMenu = imageItem.Image;
 						break;
 					}
 				case ColorItem colorItem:
 					{
-						Settings.BackgroundGame = colorItem.Color;
+						Preferences.BackgroundGame = colorItem.Color;
 						break;
 					}
 				default:
