@@ -74,7 +74,7 @@ namespace TicTacToe.Forms
 		private void ButtonReady_Click(object sender, EventArgs e)
 		{
 			textBoxName.Text = textBoxName.Text.Trim(' ').DeleteDuplicateChars(' ');
-			_player = new Player(textBoxName.Text, _player.Points, _player.Preferences);
+			_player = new Player(textBoxName.Text, _player.Coins, _player.Preferences);
 
 			if (IsPlayerDataValid())
 			{
@@ -85,7 +85,7 @@ namespace TicTacToe.Forms
 				else
 					preferences.Avatar = pictureBoxWoman.Image;
 
-				_player = new Player(_player.Name, _player.Points, preferences);
+				_player = new Player(_player.Name, _player.Coins, preferences);
 
 				MainForm mainForm = new MainForm(_player);
 				mainForm.FormClosed += (s, args) => { Close(); };

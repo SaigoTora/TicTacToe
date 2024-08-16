@@ -53,7 +53,7 @@ namespace TicTacToe.Forms
 
 		private void DisplayPlayerData()
 		{
-			labelPoints.Text = $"{_player.Points:N0}".Replace(',', ' ');
+			labelCoins.Text = $"{_player.Coins:N0}".Replace(',', ' ');
 			labelPlayerName.Text = _player.Name;
 			pictureBoxAvatar.Image = _player.Preferences.Avatar;
 			BackgroundImage = _player.Preferences.BackgroundMenu;
@@ -157,7 +157,7 @@ namespace TicTacToe.Forms
 			RoundManager roundManager = new RoundManager((int)numericUpDownNumberOfRounds.Value);
 
 			GameForm gameForm = new GameForm(this, _player, bot, roundManager, true);
-			if (!gameForm.IsDisposed)// If a player have enough points to play
+			if (!gameForm.IsDisposed)// If a player have enough coints to play
 			{
 				Hide();
 				gameForm.Show();

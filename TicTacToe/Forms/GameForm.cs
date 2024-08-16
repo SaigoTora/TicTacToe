@@ -60,11 +60,11 @@ namespace TicTacToe.Forms
 
 			try
 			{
-				player.DeductPoints(bot.Difficulty);
+				player.DeductCoins(bot.Difficulty);
 			}
-			catch (NotEnoughPointToStartGameException exception)
+			catch (NotEnoughCoinsToStartGameException exception)
 			{
-				MessageBox.Show(exception.Message, "Not enough points", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				MessageBox.Show(exception.Message, "Not enough coins", MessageBoxButtons.OK, MessageBoxIcon.Error);
 				Close();
 			}
 
@@ -193,7 +193,7 @@ namespace TicTacToe.Forms
 
 		private async Task FinishGame()
 		{
-			_player.ReturnPoints(_bot.Difficulty);
+			_player.ReturnCoins(_bot.Difficulty);
 			SetPictureBoxesEnabled(false);
 
 			await ShowWinningCells(_field.Winner);
@@ -222,7 +222,7 @@ namespace TicTacToe.Forms
 				_roundManager.AddRound();
 
 				GameForm gameForm = new GameForm(_mainForm, _player, _bot, _roundManager, !_isBotMoveFirst);
-				if (!gameForm.IsDisposed)// If a player have enough points to play
+				if (!gameForm.IsDisposed)// If a player have enough coins to play
 					gameForm.Show();
 				else
 					_isFormClosingForNextRound = false;

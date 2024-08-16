@@ -16,7 +16,7 @@ namespace TicTacToe.Forms
 		private const string TEXT_DRAW = "Draw!";
 		private const string TEXT_LOSS = "Loss!";
 
-		private readonly (Color Win, Color Loss) _colorOfPoints = (Color.Lime, Color.Red);
+		private readonly (Color Win, Color Loss) _colorOfCoins = (Color.Lime, Color.Red);
 
 		private readonly (Color Easy, Color Medium, Color Hard, Color Impossible) _colorOfDifficulty =
 			(Color.FromArgb(0, 107, 60), Color.FromArgb(229, 158, 31), Color.FromArgb(127, 24, 13), Color.FromArgb(71, 67, 137));
@@ -40,29 +40,29 @@ namespace TicTacToe.Forms
 			else if (_winner == PlayerType.None) labelResult.Text = TEXT_DRAW;
 			else if (_winner == PlayerType.Bot) labelResult.Text = TEXT_LOSS;
 
-			DisplayPointsResult();
+			DisplayCoinsResult();
 			DisplayDifficultyLabel();
-			labelCurrentPoints.Text = _player.Points.ToString();
+			labelCurrentCoins.Text = _player.Coins.ToString();
 
 			DelayToClose(DELAY_SECONDS_TO_CLOSE);
 		}
 
-		private void DisplayPointsResult()
+		private void DisplayCoinsResult()
 		{
-			int prevPoints = _player.Points;
-			_player.UpdatePoints(_difficult, _winner);
+			int prevCoins = _player.Coins;
+			_player.UpdateCoins(_difficult, _winner);
 
-			if (_player.Points > prevPoints)
+			if (_player.Coins > prevCoins)
 			{
-				labelPointsResult.Text = '+' + (_player.Points - prevPoints).ToString();
-				labelPointsResult.ForeColor = _colorOfPoints.Win;
+				labelCoinsResult.Text = '+' + (_player.Coins - prevCoins).ToString();
+				labelCoinsResult.ForeColor = _colorOfCoins.Win;
 			}
-			else if (_player.Points == prevPoints)
-				labelPointsResult.Text = string.Empty;
+			else if (_player.Coins == prevCoins)
+				labelCoinsResult.Text = string.Empty;
 			else
 			{
-				labelPointsResult.Text = '-' + (prevPoints - _player.Points).ToString();
-				labelPointsResult.ForeColor = _colorOfPoints.Loss;
+				labelCoinsResult.Text = '-' + (prevCoins - _player.Coins).ToString();
+				labelCoinsResult.ForeColor = _colorOfCoins.Loss;
 			}
 		}
 		private void DisplayDifficultyLabel()

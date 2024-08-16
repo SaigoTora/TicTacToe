@@ -28,7 +28,7 @@ namespace TicTacToe.Forms
 
 		private void ShopForm_Load(object sender, EventArgs e)
 		{
-			labelPoints.Text = _player.Points.ToString();
+			labelCoins.Text = _player.Coins.ToString();
 
 			SetImageItems();
 			SetAvatarItems();
@@ -111,7 +111,7 @@ namespace TicTacToe.Forms
 
 		private void DefaultSuceesBuy(object sender, EventArgs e)
 		{
-			labelPoints.Text = _player.Points.ToString();
+			labelCoins.Text = _player.Coins.ToString();
 			MessageBox.Show("The product has been successfully purchased!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 		}
 		private void Shop_FormClosed(object sender, FormClosedEventArgs e)

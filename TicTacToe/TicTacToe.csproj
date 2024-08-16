@@ -92,7 +92,7 @@
     <Compile Include="Forms\ProfileForm.Designer.cs">
       <DependentUpon>ProfileForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\CustomExceptions\NotEnoughPointToStartGameException.cs" />
+    <Compile Include="Models\CustomExceptions\NotEnoughCoinsToStartGameException.cs" />
     <Compile Include="Models\Utilities\CustomTitleBar.cs" />
     <Compile Include="Models\Utilities\Extensions.cs" />
     <Compile Include="Models\Utilities\FormEventHandlers.cs" />
@@ -111,12 +111,12 @@
       <DependentUpon>StartForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\PlayerInfo\PlayerValidator.cs" />
-    <Compile Include="Models\CustomExceptions\NotEnoughPointToBuyException.cs" />
+    <Compile Include="Models\CustomExceptions\NotEnoughCoinsToBuyException.cs" />
     <Compile Include="Models\PlayerItem\Avatar.cs" />
     <Compile Include="Models\PlayerItem\Item.cs" />
     <Compile Include="Models\PlayerItemCreator\ColorCreator.cs" />
     <Compile Include="Models\PlayerItemCreator\ItemCreator.cs" />
-    <Compile Include="Models\GameInfo\PointsCalculator.cs" />
+    <Compile Include="Models\GameInfo\CoinsCalculator.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Forms\ResultForm.cs">

@@ -13,15 +13,15 @@ namespace TicTacToe.Models.PlayerInfo
 	internal class Player
 	{
 		internal string Name { get; private set; }
-		internal int Points { get; private set; }
+		internal int Coins { get; private set; }
 		internal PlayerVisualPreferences Preferences { get; private set; }
 
 		private List<Item> _inventory = new List<Item>();
 
-		internal Player(string name, int points, PlayerVisualPreferences preferences)
+		internal Player(string name, int coins, PlayerVisualPreferences preferences)
 		{
 			Name = name;
-			Points = points;
+			Coins = coins;
 			Preferences = preferences;
 			SetDefaultInventory();
 		}
@@ -42,17 +42,17 @@ namespace TicTacToe.Models.PlayerInfo
 		}
 
 		/// <summary>
-		/// The method takes away points from the user and adds the item to the inventory.
+		/// The method takes away coins from the user and adds the item to the inventory.
 		/// </summary>
 		/// <param name="item">Item being purchased.</param>
-		/// <exception cref="NotEnoughPointToBuyException">If the user doesn't have enough points to make a purchase, 
+		/// <exception cref="NotEnoughCoinsToBuyException">If the user doesn't have enough coins to make a purchase, 
 		/// an exception will be thrown.</exception>
 		internal void BuyItem(Item item)
 		{
-			if (item.Price > Points)
-				throw new NotEnoughPointToBuyException(item);
+			if (item.Price > Coins)
+				throw new NotEnoughCoinsToBuyException(item);
 
-			Points -= item.Price;
+			Coins -= item.Price;
 			AddItemToInventory(item);
 		}
 		internal void SelectItem(Item item)
@@ -82,31 +82,29 @@ namespace TicTacToe.Models.PlayerInfo
 			}
 		}
 
-		internal void UpdatePoints(Difficulty botDifficulty, PlayerType gameWinner)
+		internal void UpdateCoins(Difficulty botDifficulty, PlayerType gameWinner)
 		{
-			Points += PointsCalculator.CalculatePoints(botDifficulty, gameWinner);
+			Coins += CoinsCalculator.CalculateCoins(botDifficulty, gameWinner);
 
-			if (Points < 0)
-				Points = 0;
+			if (Coins < 0)
+				Coins = 0;
 		}
 
 		/// <summary>
-		/// The method takes points from the player depending on the difficulty of the bot.
+		/// The method takes coins from the player depending on the difficulty of the bot.
 		/// </summary>
 		/// <param name="botDifficulty">Bot difficulty level.</param>
-		/// <exception cref="NotEnoughPointToStartGameException">If the user doesn't have enough points, an exception will be thrown.</exception>
-		internal void DeductPoints(Difficulty botDifficulty)
+		/// <exception cref="NotEnoughCoinsToStartGameException">If the user doesn't have enough coins, an exception will be thrown.</exception>
+		internal void DeductCoins(Difficulty botDifficulty)
 		{
-			int deductedPoints = PointsCalculator.GetRequiredPoints(botDifficulty);
+			int deductedCoins = CoinsCalculator.GetRequiredCoins(botDifficulty);
 
-			if (Points - deductedPoints < 0)
-				throw new NotEnoughPointToStartGameException(deductedPoints, botDifficulty);
-			Points -= deductedPoints;
+			if (Coins - deductedCoins < 0)
+				throw new NotEnoughCoinsToStartGameException(deductedCoins, botDifficulty);
+			Coins -= deductedCoins;
 		}
-		internal void ReturnPoints(Difficulty botDifficult)
-		{
-			Points += PointsCalculator.GetRequiredPoints(botDifficult);
-		}
+		internal void ReturnCoins(Difficulty botDifficult)
+			=> Coins += CoinsCalculator.GetRequiredCoins(botDifficult);
 
 		private void AddItemToInventory(Item item)
 		{

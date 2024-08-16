@@ -30,11 +30,10 @@
 		{
 			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-			this.guna2BorderlessForm = new Guna.UI2.WinForms.Guna2BorderlessForm(this.components);
 			this.labelAuthor = new System.Windows.Forms.Label();
 			this.labelDifficult = new System.Windows.Forms.Label();
 			this.labelNumberOfRounds = new System.Windows.Forms.Label();
-			this.labelPoints = new System.Windows.Forms.Label();
+			this.labelCoins = new System.Windows.Forms.Label();
 			this.panelLeft = new Guna.UI2.WinForms.Guna2Panel();
 			this.panelMenu = new Guna.UI2.WinForms.Guna2Panel();
 			this.buttonPlay = new Guna.UI2.WinForms.Guna2GradientButton();
@@ -55,6 +54,7 @@
 			this.buttonMedium = new FontAwesome.Sharp.IconButton();
 			this.buttonEasy = new FontAwesome.Sharp.IconButton();
 			this.numericUpDownNumberOfRounds = new System.Windows.Forms.NumericUpDown();
+			this.guna2BorderlessForm = new Guna.UI2.WinForms.Guna2BorderlessForm(this.components);
 			this.panelLeft.SuspendLayout();
 			this.panelMenu.SuspendLayout();
 			this.panelProfile.SuspendLayout();
@@ -66,14 +66,6 @@
 			this.panelSettings.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownNumberOfRounds)).BeginInit();
 			this.SuspendLayout();
-			// 
-			// guna2BorderlessForm
-			// 
-			this.guna2BorderlessForm.BorderRadius = 30;
-			this.guna2BorderlessForm.ContainerControl = this;
-			this.guna2BorderlessForm.DockIndicatorTransparencyValue = 0.6D;
-			this.guna2BorderlessForm.DragForm = false;
-			this.guna2BorderlessForm.TransparentWhileDrag = true;
 			// 
 			// labelAuthor
 			// 
@@ -112,18 +104,18 @@
 			this.labelNumberOfRounds.TabIndex = 10;
 			this.labelNumberOfRounds.Text = "Number of rounds:";
 			// 
-			// labelPoints
+			// labelCoins
 			// 
-			this.labelPoints.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.labelPoints.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
-			this.labelPoints.Font = new System.Drawing.Font("Courier New", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.labelPoints.ForeColor = System.Drawing.Color.Khaki;
-			this.labelPoints.Location = new System.Drawing.Point(955, 8);
-			this.labelPoints.Name = "labelPoints";
-			this.labelPoints.Size = new System.Drawing.Size(116, 27);
-			this.labelPoints.TabIndex = 2;
-			this.labelPoints.Text = "999 999";
-			this.labelPoints.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+			this.labelCoins.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.labelCoins.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
+			this.labelCoins.Font = new System.Drawing.Font("Courier New", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.labelCoins.ForeColor = System.Drawing.Color.Khaki;
+			this.labelCoins.Location = new System.Drawing.Point(955, 8);
+			this.labelCoins.Name = "labelCoins";
+			this.labelCoins.Size = new System.Drawing.Size(116, 27);
+			this.labelCoins.TabIndex = 2;
+			this.labelCoins.Text = "999 999";
+			this.labelCoins.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
 			// 
 			// panelLeft
 			// 
@@ -305,7 +297,7 @@
 			this.panelMain.Controls.Add(this.pictureBoxCoin);
 			this.panelMain.Controls.Add(this.panelSettingsMain);
 			this.panelMain.Controls.Add(this.panelLeft);
-			this.panelMain.Controls.Add(this.labelPoints);
+			this.panelMain.Controls.Add(this.labelCoins);
 			this.panelMain.Controls.Add(this.labelAuthor);
 			this.panelMain.Location = new System.Drawing.Point(5, 0);
 			this.panelMain.Margin = new System.Windows.Forms.Padding(5, 0, 5, 5);
@@ -520,6 +512,14 @@
             0,
             0});
 			// 
+			// guna2BorderlessForm
+			// 
+			this.guna2BorderlessForm.BorderRadius = 30;
+			this.guna2BorderlessForm.ContainerControl = this;
+			this.guna2BorderlessForm.DockIndicatorTransparencyValue = 0.6D;
+			this.guna2BorderlessForm.DragForm = false;
+			this.guna2BorderlessForm.TransparentWhileDrag = true;
+			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -556,7 +556,6 @@
 		}
 
 		#endregion
-		private Guna.UI2.WinForms.Guna2BorderlessForm guna2BorderlessForm;
 		private Guna.UI2.WinForms.Guna2Panel panelMain;
 		private Guna.UI2.WinForms.Guna2Panel panelSettingsMain;
 		private Guna.UI2.WinForms.Guna2Panel panelLeft;
@@ -568,7 +567,7 @@
 		private Guna.UI2.WinForms.Guna2Panel panelProfile;
 		private System.Windows.Forms.Label labelPlayerName;
 		public System.Windows.Forms.PictureBox pictureBoxAvatar;
-		private System.Windows.Forms.Label labelPoints;
+		private System.Windows.Forms.Label labelCoins;
 		private System.Windows.Forms.Label labelNumberOfRounds;
 		private System.Windows.Forms.Label labelDifficult;
 		private System.Windows.Forms.Label labelAuthor;
@@ -581,5 +580,6 @@
 		private FontAwesome.Sharp.IconButton buttonHard;
 		private System.Windows.Forms.NumericUpDown numericUpDownNumberOfRounds;
 		private System.Windows.Forms.PictureBox pictureBoxCoin;
+		private Guna.UI2.WinForms.Guna2BorderlessForm guna2BorderlessForm;
 	}
 }

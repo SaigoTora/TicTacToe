@@ -136,9 +136,9 @@ namespace TicTacToe.Models.PlayerItemCreator
 					_successBuy(control, e);
 					parentPanel.Visible = false;
 				}
-				catch (NotEnoughPointToBuyException pointException)
+				catch (NotEnoughCoinsToBuyException coinsException)
 				{
-					MessageBox.Show(pointException.Message, "Not enough points", MessageBoxButtons.OK, MessageBoxIcon.Error);
+					MessageBox.Show(coinsException.Message, "Not enough coins", MessageBoxButtons.OK, MessageBoxIcon.Error);
 				}
 			};
 		}

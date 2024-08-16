@@ -1,35 +1,35 @@
 ﻿namespace TicTacToe.Forms
 {
-    partial class ShopForm
+	partial class ShopForm
 	{
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
-        private System.ComponentModel.IContainer components = null;
+		/// <summary>
+		/// Required designer variable.
+		/// </summary>
+		private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
-                components.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+		/// <summary>
+		/// Clean up any resources being used.
+		/// </summary>
+		/// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+		protected override void Dispose(bool disposing)
+		{
+			if (disposing && (components != null))
+			{
+				components.Dispose();
+			}
+			base.Dispose(disposing);
+		}
 
-        #region Windows Form Designer generated code
+		#region Windows Form Designer generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
-        private void InitializeComponent()
-        {
+		/// <summary>
+		/// Required method for Designer support - do not modify
+		/// the contents of this method with the code editor.
+		/// </summary>
+		private void InitializeComponent()
+		{
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ShopForm));
-			this.labelPoints = new System.Windows.Forms.Label();
+			this.labelCoins = new System.Windows.Forms.Label();
 			this.labelBackMenu = new System.Windows.Forms.Label();
 			this.labelAvatar = new System.Windows.Forms.Label();
 			this.labelBackGame = new System.Windows.Forms.Label();
@@ -38,17 +38,17 @@
 			this.flpBackGame = new System.Windows.Forms.FlowLayoutPanel();
 			this.SuspendLayout();
 			// 
-			// labelPoints
+			// labelCoins
 			// 
-			this.labelPoints.BackColor = System.Drawing.Color.Khaki;
-			this.labelPoints.Font = new System.Drawing.Font("Courier New", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.labelPoints.ForeColor = System.Drawing.Color.Black;
-			this.labelPoints.Location = new System.Drawing.Point(966, 9);
-			this.labelPoints.Name = "labelPoints";
-			this.labelPoints.Size = new System.Drawing.Size(206, 31);
-			this.labelPoints.TabIndex = 0;
-			this.labelPoints.Text = "99999";
-			this.labelPoints.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+			this.labelCoins.BackColor = System.Drawing.Color.Khaki;
+			this.labelCoins.Font = new System.Drawing.Font("Courier New", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.labelCoins.ForeColor = System.Drawing.Color.Black;
+			this.labelCoins.Location = new System.Drawing.Point(966, 9);
+			this.labelCoins.Name = "labelCoins";
+			this.labelCoins.Size = new System.Drawing.Size(206, 31);
+			this.labelCoins.TabIndex = 0;
+			this.labelCoins.Text = "99999";
+			this.labelCoins.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
 			// 
 			// labelBackMenu
 			// 
@@ -123,7 +123,7 @@
 			this.Controls.Add(this.labelBackGame);
 			this.Controls.Add(this.labelAvatar);
 			this.Controls.Add(this.labelBackMenu);
-			this.Controls.Add(this.labelPoints);
+			this.Controls.Add(this.labelCoins);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.MaximizeBox = false;
@@ -136,14 +136,14 @@
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
-        }
+		}
 
-        #endregion
+		#endregion
 
-        private System.Windows.Forms.Label labelPoints;
-        private System.Windows.Forms.Label labelBackMenu;
-        private System.Windows.Forms.Label labelAvatar;
-        private System.Windows.Forms.Label labelBackGame;
+		private System.Windows.Forms.Label labelCoins;
+		private System.Windows.Forms.Label labelBackMenu;
+		private System.Windows.Forms.Label labelAvatar;
+		private System.Windows.Forms.Label labelBackGame;
 		private System.Windows.Forms.FlowLayoutPanel flpBackMenu;
 		private System.Windows.Forms.FlowLayoutPanel flpAvatar;
 		private System.Windows.Forms.FlowLayoutPanel flpBackGame;
