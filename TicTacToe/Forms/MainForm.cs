@@ -34,6 +34,7 @@ namespace TicTacToe.Forms
 		public MainForm(Player player)
 		{
 			_customTitleBar = new CustomTitleBar(this, "Tic Tac Toe", Resources.ticTacToe, true, true);
+			base.IsResizable = true;
 			InitializeComponent();
 
 			_panelSettingsWidth = panelSettingsMain.Width;

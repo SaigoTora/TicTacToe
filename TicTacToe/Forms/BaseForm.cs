@@ -22,6 +22,8 @@ namespace TicTacToe.Forms
 		#endregion
 
 		#region ResizingForm
+		protected bool IsResizable { get; set; } = false;
+
 		private const int HTLEFT = 10;
 		private const int HTRIGHT = 11;
 		private const int HTTOP = 12;
@@ -37,6 +39,9 @@ namespace TicTacToe.Forms
 		protected override void WndProc(ref Message m)
 		{
 			base.WndProc(ref m);
+
+			if (!IsResizable)
+				return;
 
 			if (m.Msg == WM_NCHITTEST)
 			{
