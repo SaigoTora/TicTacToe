@@ -78,7 +78,7 @@ namespace TicTacToe.Forms
 
 			if (IsPlayerDataValid())
 			{
-				PlayerVisualPreferences preferences = new PlayerVisualPreferences();
+				PlayerPreferences preferences = new PlayerPreferences();
 
 				if (_isPlayerMan)
 					preferences.Avatar = pictureBoxMan.Image;

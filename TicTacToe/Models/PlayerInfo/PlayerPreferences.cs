@@ -5,17 +5,17 @@ using TicTacToe.Properties;
 namespace TicTacToe.Models.PlayerInfo
 {
 	[Serializable]
-	internal class PlayerVisualPreferences
+	internal class PlayerPreferences
 	{
 		internal Image Avatar;
 		internal Image BackgroundMenu;
 		internal Color BackgroundGame;
 
-		internal PlayerVisualPreferences()
+		internal PlayerPreferences()
 		{
 			Avatar = Resources.manAvatar1;
 			BackgroundMenu = Resources.background1;
-			BackgroundGame = Color.White;
+			BackgroundGame = Color.FromArgb(235, 235, 235);
 		}
 	}
 }

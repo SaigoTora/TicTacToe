@@ -100,7 +100,7 @@
     <Compile Include="Models\PlayerItem\AvatarRarity.cs" />
     <Compile Include="Models\PlayerItem\ColorItem.cs" />
     <Compile Include="Models\PlayerInfo\PlayerType.cs" />
-    <Compile Include="Models\PlayerInfo\PlayerVisualPreferences.cs" />
+    <Compile Include="Models\PlayerInfo\PlayerPreferences.cs" />
     <Compile Include="Models\PlayerItemCreator\ImageCreator.cs" />
     <Compile Include="Models\PlayerItem\ImageItem.cs" />
     <Compile Include="Models\PlayerInfo\Player.cs" />

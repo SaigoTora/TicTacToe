@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 
 using TicTacToe.Models.CustomExceptions;
 using TicTacToe.Models.GameInfo;
@@ -14,11 +13,11 @@ namespace TicTacToe.Models.PlayerInfo
 	{
 		internal string Name { get; private set; }
 		internal int Coins { get; private set; }
-		internal PlayerVisualPreferences Preferences { get; private set; }
+		internal PlayerPreferences Preferences { get; private set; }
 
 		private List<Item> _inventory = new List<Item>();
 
-		internal Player(string name, int coins, PlayerVisualPreferences preferences)
+		internal Player(string name, int coins, PlayerPreferences preferences)
 		{
 			Name = name;
 			Coins = coins;
@@ -27,7 +26,7 @@ namespace TicTacToe.Models.PlayerInfo
 		}
 		internal Player()
 		{
-			Preferences = new PlayerVisualPreferences();
+			Preferences = new PlayerPreferences();
 			SetDefaultInventory();
 		}
 
@@ -116,10 +115,10 @@ namespace TicTacToe.Models.PlayerInfo
 		private void SetDefaultInventory()
 		{
 			_inventory = new List<Item>();
-			ImageItem imageItem = new ImageItem(0, Properties.Resources.background1);
+			ImageItem imageItem = new ImageItem(0, Preferences.BackgroundMenu);
 			Avatar profilePhotoItemMan = new Avatar(0, Properties.Resources.manAvatar1, AvatarRarity.Common);
 			Avatar profilePhotoItemWoman = new Avatar(0, Properties.Resources.womanAvatar1, AvatarRarity.Common);
-			ColorItem colorItem = new ColorItem(0, Color.White);
+			ColorItem colorItem = new ColorItem(0, Preferences.BackgroundGame);
 
 			_inventory.Add(imageItem);
 			_inventory.Add(profilePhotoItemMan);

@@ -28,6 +28,7 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
+			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GameForm));
 			this.pictureBoxLine3 = new System.Windows.Forms.PictureBox();
 			this.pictureBoxLine4 = new System.Windows.Forms.PictureBox();
@@ -47,6 +48,7 @@
 			this.pictureBoxCell7 = new System.Windows.Forms.PictureBox();
 			this.pictureBoxCell8 = new System.Windows.Forms.PictureBox();
 			this.pictureBoxCell9 = new System.Windows.Forms.PictureBox();
+			this.guna2BorderlessForm = new Guna.UI2.WinForms.Guna2BorderlessForm(this.components);
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxLine3)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxLine4)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxLine2)).BeginInit();
@@ -107,8 +109,8 @@
 			// labelPlayerName
 			// 
 			this.labelPlayerName.BackColor = System.Drawing.Color.Transparent;
-			this.labelPlayerName.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.labelPlayerName.Location = new System.Drawing.Point(4, 165);
+			this.labelPlayerName.Font = new System.Drawing.Font("Trebuchet MS", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.labelPlayerName.Location = new System.Drawing.Point(4, 166);
 			this.labelPlayerName.Name = "labelPlayerName";
 			this.labelPlayerName.Size = new System.Drawing.Size(230, 25);
 			this.labelPlayerName.TabIndex = 1;
@@ -118,8 +120,8 @@
 			// labelBotName
 			// 
 			this.labelBotName.BackColor = System.Drawing.Color.Transparent;
-			this.labelBotName.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.labelBotName.Location = new System.Drawing.Point(384, 165);
+			this.labelBotName.Font = new System.Drawing.Font("Trebuchet MS", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.labelBotName.Location = new System.Drawing.Point(384, 166);
 			this.labelBotName.Name = "labelBotName";
 			this.labelBotName.Size = new System.Drawing.Size(230, 25);
 			this.labelBotName.TabIndex = 4;
@@ -162,6 +164,7 @@
 			// pictureBoxCell1
 			// 
 			this.pictureBoxCell1.BackColor = System.Drawing.Color.Transparent;
+			this.pictureBoxCell1.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.pictureBoxCell1.Location = new System.Drawing.Point(44, 248);
 			this.pictureBoxCell1.Name = "pictureBoxCell1";
 			this.pictureBoxCell1.Size = new System.Drawing.Size(150, 150);
@@ -175,6 +178,7 @@
 			// pictureBoxCell2
 			// 
 			this.pictureBoxCell2.BackColor = System.Drawing.Color.Transparent;
+			this.pictureBoxCell2.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.pictureBoxCell2.Location = new System.Drawing.Point(234, 248);
 			this.pictureBoxCell2.Name = "pictureBoxCell2";
 			this.pictureBoxCell2.Size = new System.Drawing.Size(150, 150);
@@ -188,6 +192,7 @@
 			// pictureBoxCell3
 			// 
 			this.pictureBoxCell3.BackColor = System.Drawing.Color.Transparent;
+			this.pictureBoxCell3.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.pictureBoxCell3.Location = new System.Drawing.Point(423, 248);
 			this.pictureBoxCell3.Name = "pictureBoxCell3";
 			this.pictureBoxCell3.Size = new System.Drawing.Size(150, 150);
@@ -201,6 +206,7 @@
 			// pictureBoxCell4
 			// 
 			this.pictureBoxCell4.BackColor = System.Drawing.Color.Transparent;
+			this.pictureBoxCell4.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.pictureBoxCell4.Location = new System.Drawing.Point(44, 438);
 			this.pictureBoxCell4.Name = "pictureBoxCell4";
 			this.pictureBoxCell4.Size = new System.Drawing.Size(150, 150);
@@ -214,6 +220,7 @@
 			// pictureBoxCell5
 			// 
 			this.pictureBoxCell5.BackColor = System.Drawing.Color.Transparent;
+			this.pictureBoxCell5.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.pictureBoxCell5.Location = new System.Drawing.Point(234, 438);
 			this.pictureBoxCell5.Name = "pictureBoxCell5";
 			this.pictureBoxCell5.Size = new System.Drawing.Size(150, 150);
@@ -227,6 +234,7 @@
 			// pictureBoxCell6
 			// 
 			this.pictureBoxCell6.BackColor = System.Drawing.Color.Transparent;
+			this.pictureBoxCell6.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.pictureBoxCell6.Location = new System.Drawing.Point(423, 438);
 			this.pictureBoxCell6.Name = "pictureBoxCell6";
 			this.pictureBoxCell6.Size = new System.Drawing.Size(150, 150);
@@ -240,6 +248,7 @@
 			// pictureBoxCell7
 			// 
 			this.pictureBoxCell7.BackColor = System.Drawing.Color.Transparent;
+			this.pictureBoxCell7.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.pictureBoxCell7.Location = new System.Drawing.Point(44, 628);
 			this.pictureBoxCell7.Name = "pictureBoxCell7";
 			this.pictureBoxCell7.Size = new System.Drawing.Size(150, 150);
@@ -253,6 +262,7 @@
 			// pictureBoxCell8
 			// 
 			this.pictureBoxCell8.BackColor = System.Drawing.Color.Transparent;
+			this.pictureBoxCell8.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.pictureBoxCell8.Location = new System.Drawing.Point(234, 628);
 			this.pictureBoxCell8.Name = "pictureBoxCell8";
 			this.pictureBoxCell8.Size = new System.Drawing.Size(150, 150);
@@ -266,6 +276,7 @@
 			// pictureBoxCell9
 			// 
 			this.pictureBoxCell9.BackColor = System.Drawing.Color.Transparent;
+			this.pictureBoxCell9.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.pictureBoxCell9.Location = new System.Drawing.Point(423, 628);
 			this.pictureBoxCell9.Name = "pictureBoxCell9";
 			this.pictureBoxCell9.Size = new System.Drawing.Size(150, 150);
@@ -275,6 +286,15 @@
 			this.pictureBoxCell9.Click += new System.EventHandler(this.PictureBoxCell_Click);
 			this.pictureBoxCell9.MouseEnter += new System.EventHandler(this.PictureBoxCell_MouseEnter);
 			this.pictureBoxCell9.MouseLeave += new System.EventHandler(this.PictureBoxCella_MouseLeave);
+			// 
+			// guna2BorderlessForm
+			// 
+			this.guna2BorderlessForm.BorderRadius = 30;
+			this.guna2BorderlessForm.ContainerControl = this;
+			this.guna2BorderlessForm.DockIndicatorTransparencyValue = 0.6D;
+			this.guna2BorderlessForm.DragForm = false;
+			this.guna2BorderlessForm.ResizeForm = false;
+			this.guna2BorderlessForm.TransparentWhileDrag = true;
 			// 
 			// GameForm
 			// 
@@ -300,8 +320,7 @@
 			this.Controls.Add(this.pictureBoxPlayerAvatar);
 			this.Controls.Add(this.labelBotName);
 			this.Controls.Add(this.labelPlayerName);
-			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
 			this.MaximizeBox = false;
 			this.Name = "GameForm";
 			this.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -349,5 +368,6 @@
 		private System.Windows.Forms.PictureBox pictureBoxCell7;
 		private System.Windows.Forms.PictureBox pictureBoxCell8;
 		private System.Windows.Forms.PictureBox pictureBoxCell9;
+		private Guna.UI2.WinForms.Guna2BorderlessForm guna2BorderlessForm;
 	}
 }

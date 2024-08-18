@@ -71,13 +71,16 @@ namespace TicTacToe.Models.Utilities
 		}
 
 		internal void MoveFormElementsDown()
-			=> MoveFormElementsDown(_form);
+		{
+			MoveFormElementsDown(_form);
+			_form.Height = _form.Height + DEFAULT_PANEL_HEIGHT;
+		}
 		private void MoveFormElementsDown(Control control)
 		{
 			if (control.Controls.Count > 0 && !(control is NumericUpDown))
 				foreach (Control item in control.Controls)
 					MoveFormElementsDown(item);
-			else
+			else if (!control.Anchor.HasFlag(AnchorStyles.Bottom))
 				control.Location = new Point(control.Location.X, control.Location.Y + DEFAULT_PANEL_HEIGHT);
 		}
 		internal void Dispose()

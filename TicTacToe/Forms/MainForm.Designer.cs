@@ -74,10 +74,10 @@
 			this.labelAuthor.BackColor = System.Drawing.Color.Transparent;
 			this.labelAuthor.Font = new System.Drawing.Font("Lobster", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.labelAuthor.ForeColor = System.Drawing.Color.Silver;
-			this.labelAuthor.Location = new System.Drawing.Point(950, 705);
+			this.labelAuthor.Location = new System.Drawing.Point(961, 713);
 			this.labelAuthor.Name = "labelAuthor";
 			this.labelAuthor.Size = new System.Drawing.Size(152, 28);
-			this.labelAuthor.TabIndex = 15;
+			this.labelAuthor.TabIndex = 5;
 			this.labelAuthor.Text = "Author: SaigoTora";
 			// 
 			// labelDifficult
@@ -89,7 +89,7 @@
 			this.labelDifficult.Location = new System.Drawing.Point(12, -15);
 			this.labelDifficult.Name = "labelDifficult";
 			this.labelDifficult.Size = new System.Drawing.Size(195, 29);
-			this.labelDifficult.TabIndex = 5;
+			this.labelDifficult.TabIndex = 0;
 			this.labelDifficult.Text = "Select difficulty:";
 			// 
 			// labelNumberOfRounds
@@ -101,7 +101,7 @@
 			this.labelNumberOfRounds.Location = new System.Drawing.Point(12, 200);
 			this.labelNumberOfRounds.Name = "labelNumberOfRounds";
 			this.labelNumberOfRounds.Size = new System.Drawing.Size(212, 29);
-			this.labelNumberOfRounds.TabIndex = 10;
+			this.labelNumberOfRounds.TabIndex = 4;
 			this.labelNumberOfRounds.Text = "Number of rounds:";
 			// 
 			// labelCoins
@@ -113,7 +113,7 @@
 			this.labelCoins.Location = new System.Drawing.Point(955, 8);
 			this.labelCoins.Name = "labelCoins";
 			this.labelCoins.Size = new System.Drawing.Size(116, 27);
-			this.labelCoins.TabIndex = 2;
+			this.labelCoins.TabIndex = 3;
 			this.labelCoins.Text = "999 999";
 			this.labelCoins.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
 			// 
@@ -124,8 +124,8 @@
 			this.panelLeft.Dock = System.Windows.Forms.DockStyle.Left;
 			this.panelLeft.Location = new System.Drawing.Point(0, 0);
 			this.panelLeft.Name = "panelLeft";
-			this.panelLeft.Size = new System.Drawing.Size(320, 775);
-			this.panelLeft.TabIndex = 16;
+			this.panelLeft.Size = new System.Drawing.Size(320, 745);
+			this.panelLeft.TabIndex = 1;
 			// 
 			// panelMenu
 			// 
@@ -138,8 +138,8 @@
 			this.panelMenu.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.panelMenu.Location = new System.Drawing.Point(0, 220);
 			this.panelMenu.Name = "panelMenu";
-			this.panelMenu.Size = new System.Drawing.Size(320, 555);
-			this.panelMenu.TabIndex = 12;
+			this.panelMenu.Size = new System.Drawing.Size(320, 525);
+			this.panelMenu.TabIndex = 1;
 			// 
 			// buttonPlay
 			// 
@@ -162,7 +162,7 @@
 			this.buttonPlay.Location = new System.Drawing.Point(15, 25);
 			this.buttonPlay.Name = "buttonPlay";
 			this.buttonPlay.Size = new System.Drawing.Size(280, 50);
-			this.buttonPlay.TabIndex = 7;
+			this.buttonPlay.TabIndex = 0;
 			this.buttonPlay.TabStop = false;
 			this.buttonPlay.Text = "Play";
 			this.buttonPlay.Click += new System.EventHandler(this.ButtonPlay_Click);
@@ -188,7 +188,7 @@
 			this.buttonExit.Location = new System.Drawing.Point(15, 325);
 			this.buttonExit.Name = "buttonExit";
 			this.buttonExit.Size = new System.Drawing.Size(280, 50);
-			this.buttonExit.TabIndex = 8;
+			this.buttonExit.TabIndex = 3;
 			this.buttonExit.TabStop = false;
 			this.buttonExit.Text = "Exit";
 			this.buttonExit.Click += new System.EventHandler(this.ButtonExit_Click);
@@ -214,7 +214,7 @@
 			this.buttonShop.Location = new System.Drawing.Point(15, 175);
 			this.buttonShop.Name = "buttonShop";
 			this.buttonShop.Size = new System.Drawing.Size(280, 50);
-			this.buttonShop.TabIndex = 10;
+			this.buttonShop.TabIndex = 2;
 			this.buttonShop.TabStop = false;
 			this.buttonShop.Text = "Shop";
 			this.buttonShop.Click += new System.EventHandler(this.ButtonShop_Click);
@@ -240,7 +240,7 @@
 			this.buttonProfile.Location = new System.Drawing.Point(15, 100);
 			this.buttonProfile.Name = "buttonProfile";
 			this.buttonProfile.Size = new System.Drawing.Size(280, 50);
-			this.buttonProfile.TabIndex = 9;
+			this.buttonProfile.TabIndex = 1;
 			this.buttonProfile.TabStop = false;
 			this.buttonProfile.Text = "Profile";
 			this.buttonProfile.Click += new System.EventHandler(this.ButtonProfile_Click);
@@ -256,7 +256,7 @@
 			this.panelProfile.Name = "panelProfile";
 			this.panelProfile.Padding = new System.Windows.Forms.Padding(0, 0, 3, 0);
 			this.panelProfile.Size = new System.Drawing.Size(320, 220);
-			this.panelProfile.TabIndex = 11;
+			this.panelProfile.TabIndex = 0;
 			// 
 			// labelPlayerName
 			// 
@@ -302,8 +302,8 @@
 			this.panelMain.Location = new System.Drawing.Point(5, 0);
 			this.panelMain.Margin = new System.Windows.Forms.Padding(5, 0, 5, 5);
 			this.panelMain.Name = "panelMain";
-			this.panelMain.Size = new System.Drawing.Size(1120, 775);
-			this.panelMain.TabIndex = 16;
+			this.panelMain.Size = new System.Drawing.Size(1120, 745);
+			this.panelMain.TabIndex = 0;
 			// 
 			// pictureBoxCoin
 			// 
@@ -313,7 +313,7 @@
 			this.pictureBoxCoin.Name = "pictureBoxCoin";
 			this.pictureBoxCoin.Size = new System.Drawing.Size(42, 42);
 			this.pictureBoxCoin.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-			this.pictureBoxCoin.TabIndex = 18;
+			this.pictureBoxCoin.TabIndex = 4;
 			this.pictureBoxCoin.TabStop = false;
 			// 
 			// panelSettingsMain
@@ -324,7 +324,7 @@
 			this.panelSettingsMain.Location = new System.Drawing.Point(320, 220);
 			this.panelSettingsMain.Name = "panelSettingsMain";
 			this.panelSettingsMain.Size = new System.Drawing.Size(340, 380);
-			this.panelSettingsMain.TabIndex = 17;
+			this.panelSettingsMain.TabIndex = 2;
 			// 
 			// panelSettingsRight
 			// 
@@ -337,7 +337,7 @@
 			this.panelSettingsRight.Location = new System.Drawing.Point(298, 25);
 			this.panelSettingsRight.Name = "panelSettingsRight";
 			this.panelSettingsRight.Size = new System.Drawing.Size(41, 41);
-			this.panelSettingsRight.TabIndex = 18;
+			this.panelSettingsRight.TabIndex = 1;
 			// 
 			// buttonShowSettings
 			// 
@@ -377,7 +377,7 @@
 			this.panelSettings.Location = new System.Drawing.Point(0, 0);
 			this.panelSettings.Name = "panelSettings";
 			this.panelSettings.Size = new System.Drawing.Size(300, 380);
-			this.panelSettings.TabIndex = 1;
+			this.panelSettings.TabIndex = 0;
 			// 
 			// buttonImpossible
 			// 
@@ -396,7 +396,7 @@
 			this.buttonImpossible.Margin = new System.Windows.Forms.Padding(0);
 			this.buttonImpossible.Name = "buttonImpossible";
 			this.buttonImpossible.Size = new System.Drawing.Size(160, 40);
-			this.buttonImpossible.TabIndex = 8;
+			this.buttonImpossible.TabIndex = 3;
 			this.buttonImpossible.TabStop = false;
 			this.buttonImpossible.Text = " Impossible";
 			this.buttonImpossible.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -423,7 +423,7 @@
 			this.buttonHard.Margin = new System.Windows.Forms.Padding(0);
 			this.buttonHard.Name = "buttonHard";
 			this.buttonHard.Size = new System.Drawing.Size(160, 40);
-			this.buttonHard.TabIndex = 7;
+			this.buttonHard.TabIndex = 2;
 			this.buttonHard.TabStop = false;
 			this.buttonHard.Text = " Hard";
 			this.buttonHard.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -477,7 +477,7 @@
 			this.buttonEasy.Margin = new System.Windows.Forms.Padding(0);
 			this.buttonEasy.Name = "buttonEasy";
 			this.buttonEasy.Size = new System.Drawing.Size(160, 40);
-			this.buttonEasy.TabIndex = 0;
+			this.buttonEasy.TabIndex = 1;
 			this.buttonEasy.TabStop = false;
 			this.buttonEasy.Text = " Easy";
 			this.buttonEasy.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -504,7 +504,7 @@
             0});
 			this.numericUpDownNumberOfRounds.Name = "numericUpDownNumberOfRounds";
 			this.numericUpDownNumberOfRounds.Size = new System.Drawing.Size(55, 29);
-			this.numericUpDownNumberOfRounds.TabIndex = 11;
+			this.numericUpDownNumberOfRounds.TabIndex = 5;
 			this.numericUpDownNumberOfRounds.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
 			this.numericUpDownNumberOfRounds.Value = new decimal(new int[] {
             2,
@@ -526,7 +526,7 @@
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.Color.DarkGray;
 			this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-			this.ClientSize = new System.Drawing.Size(1130, 780);
+			this.ClientSize = new System.Drawing.Size(1130, 750);
 			this.Controls.Add(this.panelMain);
 			this.ForeColor = System.Drawing.Color.Transparent;
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;

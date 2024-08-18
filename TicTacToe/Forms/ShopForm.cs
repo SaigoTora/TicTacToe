@@ -46,7 +46,6 @@ namespace TicTacToe.Forms
 		#region ShopItems
 		private void SetImageItems()
 		{
-			_imageItems.Add(new ImageItem(0, Properties.Resources.background1));
 			_imageItems.Add(new ImageItem(100, Properties.Resources.background5));
 			_imageItems.Add(new ImageItem(100, Properties.Resources.background9));
 			_imageItems.Add(new ImageItem(150, Properties.Resources.background2, Properties.Resources.mystery1));
@@ -59,7 +58,6 @@ namespace TicTacToe.Forms
 		}
 		private void SetAvatarItems()
 		{
-			_avatarItems.Add(new Avatar(0, Properties.Resources.manAvatar1, AvatarRarity.Common));
 			_avatarItems.Add(new Avatar(0, Properties.Resources.womanAvatar1, AvatarRarity.Common));
 			_avatarItems.Add(new Avatar(25, Properties.Resources.manAvatar2, AvatarRarity.Common));
 			_avatarItems.Add(new Avatar(25, Properties.Resources.womanAvatar2, AvatarRarity.Common));
@@ -76,7 +74,6 @@ namespace TicTacToe.Forms
 		}
 		private void SetColorItems()
 		{
-			_colorItems.Add(new ColorItem(0, Color.White));
 			_colorItems.Add(new ColorItem(35, Color.DimGray));
 			_colorItems.Add(new ColorItem(35, Color.RosyBrown));
 			_colorItems.Add(new ColorItem(35, Color.NavajoWhite));

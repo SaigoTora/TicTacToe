@@ -11,12 +11,10 @@ using TicTacToeLibrary;
 
 namespace TicTacToe.Forms
 {
-	internal partial class GameForm : Form
+	internal partial class GameForm : BaseForm
 	{
-		private const int BOT_MOVE_DELAY = 500;
 		private const int WINNING_CELL_SHOW_DELAY = 300;
-		private const int WINNING_CELL_SIZE_SCALER = 15;
-		private const float PREVIEW_OPACITY_LEVEL = 0.2f;
+		private const float PREVIEW_OPACITY_LEVEL = 0.35f;
 
 		private readonly (Color Cross, Color Zero) _backColorWinningCells = (Color.FromArgb(220, 173, 162),
 			Color.FromArgb(162, 190, 220));
@@ -27,6 +25,7 @@ namespace TicTacToe.Forms
 		private readonly Bot _bot;
 		private readonly RoundManager _roundManager;
 		private readonly PictureBox[,] _pictureCells;
+		private readonly CustomTitleBar _customTitleBar;
 
 		private readonly bool _isBotMoveFirst = false;
 		private readonly CellType _playerCellType;
@@ -46,6 +45,8 @@ namespace TicTacToe.Forms
 			_isBotMoveFirst = isBotFirst;
 			_roundManager = roundManager;
 			_mainForm = mainForm;
+			_customTitleBar = new CustomTitleBar(this, $"Round {_roundManager.CurrentNumberOfRounds} / {_roundManager.MaxNumberOfRounds}", Properties.Resources.ticTacToe, true, false);
+			_customTitleBar.MoveFormElementsDown();
 
 			if (isBotFirst)
 			{
@@ -79,6 +80,7 @@ namespace TicTacToe.Forms
 		private void GameForm_Load(object sender, EventArgs e)
 		{
 			BackColor = _player.Preferences.BackgroundGame;
+			SelectControlsColor();
 
 			pictureBoxPlayerAvatar.Image = _player.Preferences.Avatar;
 			SetBotAvatar();
@@ -89,7 +91,6 @@ namespace TicTacToe.Forms
 			SetPlayerNameSize(labelBotName);
 
 			labelScore.Text = $"{_roundManager.NumberOfWinsFirstPlayer} : {_roundManager.NumberOfWinsSecondPlayer}";
-			Text = $"Round # {_roundManager.CurrentNumberOfRounds} of {_roundManager.MaxNumberOfRounds}";
 
 			if (_isBotMoveFirst)
 				_ = BotMove();
@@ -110,6 +111,34 @@ namespace TicTacToe.Forms
 				pictureBoxBotAvatar.Image = Properties.Resources.botHard;
 			else if (_bot.Difficulty == Difficulty.Impossible)
 				pictureBoxBotAvatar.Image = Properties.Resources.botImpossible;
+		}
+		private void SelectControlsColor()
+		{
+			double avgBackColor = BackColor.R * 0.299 + BackColor.G * 0.587 + BackColor.B * 0.114;
+			if (avgBackColor < byte.MaxValue / 2)
+			{
+				SetLabelsColor(Color.White);
+				SetLinesColor(Color.FromArgb(200, 200, 200));
+			}
+			else
+			{
+				SetLabelsColor(Color.Black);
+				SetLinesColor(Color.FromArgb(20, 20, 20));
+			}
+
+		}
+		private void SetLabelsColor(Color labelColor)
+		{
+			labelPlayerName.ForeColor = labelColor;
+			labelScore.ForeColor = labelColor;
+			labelBotName.ForeColor = labelColor;
+		}
+		private void SetLinesColor(Color lineColor)
+		{
+			pictureBoxLine1.BackColor = lineColor;
+			pictureBoxLine2.BackColor = lineColor;
+			pictureBoxLine3.BackColor = lineColor;
+			pictureBoxLine4.BackColor = lineColor;
 		}
 
 		private Cell FindIndexPictureBoxCell(PictureBox pictureBox)
@@ -148,6 +177,7 @@ namespace TicTacToe.Forms
 		private void FillCellWithImage(Cell cell, PlayerType playerType)
 		{
 			PictureBox pictureBox = _pictureCells[cell.row, cell.column];
+			pictureBox.Cursor = Cursors.Default;
 
 			if (_isBotMoveFirst && playerType == PlayerType.Human || !_isBotMoveFirst && playerType == PlayerType.Bot)
 				pictureBox.Image = Properties.Resources.zero;
@@ -172,6 +202,8 @@ namespace TicTacToe.Forms
 
 		private async Task BotMove()
 		{
+			const int BOT_MOVE_DELAY = 500;
+
 			SetPictureBoxesEnabled(false);
 
 			Cell botMove = _bot.Move(_field, _botCellType);
@@ -231,6 +263,8 @@ namespace TicTacToe.Forms
 		}
 		private async Task ShowWinningCells(CellType winner)
 		{
+			const int WINNING_CELL_SIZE_SCALER = 15;
+
 			if (winner == CellType.None)
 				return;
 
@@ -274,6 +308,7 @@ namespace TicTacToe.Forms
 
 		private void GameForm_FormClosed(object sender, FormClosedEventArgs e)
 		{
+			_customTitleBar.Dispose();
 			if (!_isFormClosingForNextRound)
 				_mainForm.Show();
 		}

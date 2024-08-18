@@ -19,7 +19,7 @@ namespace TicTacToe.Models.GameInfo
 		private const int MEDIUM_LOSS_COINS = -5;
 
 		private const int HARD_WIN_COINS = 15;
-		private const int HARD_DRAW_COINS = 2;
+		private const int HARD_DRAW_COINS = 1;
 		private const int HARD_LOSS_COINS = -10;
 
 		private const int IMPOSSIBLE_WIN_COINS = 30;

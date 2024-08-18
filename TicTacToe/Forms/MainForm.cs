@@ -14,8 +14,7 @@ namespace TicTacToe.Forms
 {
 	internal partial class MainForm : BaseForm
 	{
-		private readonly Color _backColorSelectedLabelName = Color.CornflowerBlue;
-
+		private readonly (Color Default, Color Selected) _backColorLabelName = (Color.Transparent, Color.CornflowerBlue);
 		private readonly (Color Default, Color Selected) _foreColorDifficulty = (Color.Black, Color.White);
 		private readonly (Color Default, Color Selected) _iconColorDifficulty = (Color.Black, Color.Lime);
 		private readonly (IconChar Default, IconChar Selected) _iconCharDifficulty = (IconChar.Circle, IconChar.CircleCheck);
@@ -34,11 +33,11 @@ namespace TicTacToe.Forms
 		public MainForm(Player player)
 		{
 			_customTitleBar = new CustomTitleBar(this, "Tic Tac Toe", Resources.ticTacToe, true, true);
-			base.IsResizable = true;
+			IsResizable = true;
 			InitializeComponent();
 
-			_panelSettingsWidth = panelSettingsMain.Width;
 			_customTitleBar.MoveFormElementsDown();
+			_panelSettingsWidth = panelSettingsMain.Width;
 			_player = player;
 		}
 		private void MainForm_Load(object sender, EventArgs e)
@@ -210,7 +209,7 @@ namespace TicTacToe.Forms
 			if (!(sender is Label label))
 				return;
 
-			label.BackColor = _backColorSelectedLabelName;
+			label.BackColor = _backColorLabelName.Selected;
 			label.ForeColor = _foreColorDifficulty.Selected;
 		}
 		private void LabelName_MouseLeave(object sender, EventArgs e)
@@ -218,7 +217,7 @@ namespace TicTacToe.Forms
 			if (!(sender is Label label))
 				return;
 
-			label.BackColor = Color.Transparent;
+			label.BackColor = _backColorLabelName.Default;
 			label.ForeColor = _foreColorDifficulty.Default;
 		}
 
