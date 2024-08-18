@@ -5,7 +5,7 @@ namespace TicTacToe.Models.GameInfo
 {
 	internal static class CoinsCalculator
 	{
-		private const int EASY_REQUIRED_COINS = 0;
+		private const int EASY_REQUIRED_COINS = 2;
 		private const int MEDIUM_REQUIRED_COINS = 5;
 		private const int HARD_REQUIRED_COINS = 10;
 		private const int IMPOSSIBLE_REQUIRED_COINS = 15;

@@ -89,6 +89,7 @@ namespace TicTacToe.Forms
 
 				MainForm mainForm = new MainForm(_player);
 				mainForm.FormClosed += (s, args) => { Close(); };
+
 				Visible = false;
 				mainForm.Show();
 			}
@@ -100,13 +101,9 @@ namespace TicTacToe.Forms
 			textBoxName.SelectAll();
 		}
 		private void LabelName_MouseEnter(object sender, EventArgs e)
-		{
-			labelName.Font = new Font(labelName.Font, FontStyle.Underline);
-		}
+			=> labelName.Font = new Font(labelName.Font, FontStyle.Underline);
 		private void LabelName_MouseLeave(object sender, EventArgs e)
-		{
-			labelName.Font = new Font(labelName.Font, FontStyle.Regular);
-		}
+			=> labelName.Font = new Font(labelName.Font, FontStyle.Regular);
 
 		private void TextBoxName_Enter(object sender, EventArgs e)
 		{

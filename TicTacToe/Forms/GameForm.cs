@@ -35,6 +35,7 @@ namespace TicTacToe.Forms
 		private readonly Bitmap previewZero;
 
 		private bool _isFormClosingForNextRound = false;
+		private bool _wasPressedButtonBack = false;
 
 		internal GameForm(MainForm mainForm, Player player, Bot bot, RoundManager roundManager, bool isBotFirst)
 		{
@@ -229,25 +230,11 @@ namespace TicTacToe.Forms
 			SetPictureBoxesEnabled(false);
 
 			await ShowWinningCells(_field.Winner);
-
-			PlayerType winner = PlayerType.None;
-			if (_field.Winner == _playerCellType)
-			{
-				winner = PlayerType.Human;
-				_roundManager.AddWinToTheFirstPlayer();
-			}
-			if (_field.Winner == _botCellType)
-			{
-				winner = PlayerType.Bot;
-				_roundManager.AddWinToTheSecondPlayer();
-			}
-
-			ResultForm resultForm = new ResultForm(_player, winner, _bot.Difficulty);
 			await Task.Delay(WINNING_CELL_SHOW_DELAY);
-			resultForm.ShowDialog();
+			OpenResultForm();
 
 			_isFormClosingForNextRound = true;
-			if (_roundManager.IsLastRound())
+			if (_roundManager.IsLastRound() || _wasPressedButtonBack)
 				_mainForm.Show();
 			else
 			{
@@ -260,6 +247,29 @@ namespace TicTacToe.Forms
 					_isFormClosingForNextRound = false;
 			}
 			Close();
+		}
+		private void OpenResultForm()
+		{
+			PlayerType winner = PlayerType.None;
+			if (_field.Winner == _playerCellType)
+			{
+				winner = PlayerType.Human;
+				_roundManager.AddWinToTheFirstPlayer();
+			}
+			if (_field.Winner == _botCellType)
+			{
+				winner = PlayerType.Bot;
+				_roundManager.AddWinToTheSecondPlayer();
+			}
+
+			void backToMainForm(object s, EventArgs e)
+			{
+				_wasPressedButtonBack = true;
+				_isFormClosingForNextRound = false;
+				Close();
+			}
+			ResultForm resultForm = new ResultForm(_player, winner, _bot.Difficulty, _roundManager.IsLastRound(), backToMainForm);
+			resultForm.ShowDialog();
 		}
 		private async Task ShowWinningCells(CellType winner)
 		{

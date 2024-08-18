@@ -16,7 +16,7 @@ namespace TicTacToe.Models.PlayerInfo
 		internal PlayerPreferences Preferences { get; private set; }
 
 		private List<Item> _inventory = new List<Item>();
-
+		private int deductedCoins;
 		internal Player(string name, int coins, PlayerPreferences preferences)
 		{
 			Name = name;
@@ -96,14 +96,23 @@ namespace TicTacToe.Models.PlayerInfo
 		/// <exception cref="NotEnoughCoinsToStartGameException">If the user doesn't have enough coins, an exception will be thrown.</exception>
 		internal void DeductCoins(Difficulty botDifficulty)
 		{
-			int deductedCoins = CoinsCalculator.GetRequiredCoins(botDifficulty);
+			deductedCoins = CoinsCalculator.GetRequiredCoins(botDifficulty);
 
 			if (Coins - deductedCoins < 0)
-				throw new NotEnoughCoinsToStartGameException(deductedCoins, botDifficulty);
-			Coins -= deductedCoins;
+			{
+				if (botDifficulty == Difficulty.Easy)
+				{// if there are not enough coins for easy difficulty, then subtract all the coins
+					deductedCoins = Coins;
+					Coins = 0;
+				}
+				else
+					throw new NotEnoughCoinsToStartGameException(deductedCoins, botDifficulty);
+			}
+			else
+				Coins -= deductedCoins;
 		}
 		internal void ReturnCoins(Difficulty botDifficult)
-			=> Coins += CoinsCalculator.GetRequiredCoins(botDifficult);
+			=> Coins += deductedCoins;
 
 		private void AddItemToInventory(Item item)
 		{

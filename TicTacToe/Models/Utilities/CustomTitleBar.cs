@@ -15,6 +15,7 @@ namespace TicTacToe.Models.Utilities
 		private static readonly Color _defaultButtonColor = Color.FromArgb(200, 200, 200);
 		private static readonly Color _defaultNameColor = Color.FromArgb(255, 255, 255);
 		private readonly (bool Minimize, bool Maximize) _scalingForm;
+		private readonly bool _canFormBeClosed;
 		private readonly Form _form;
 
 		internal Panel MainPanel { get; private set; } = new Panel();
@@ -22,10 +23,11 @@ namespace TicTacToe.Models.Utilities
 		private bool _isFormDragging;
 		private Point _dragCursorPoint, _dragFormPoint;
 
-		internal CustomTitleBar(Form form, string formName, System.Drawing.Icon icon = null, bool minimizeBox = true, bool maximizeBox = true)
+		internal CustomTitleBar(Form form, string formName, System.Drawing.Icon icon = null, bool minimizeBox = true, bool maximizeBox = true, bool canFormBeClosed = true)
 		{
 			_scalingForm.Minimize = minimizeBox;
 			_scalingForm.Maximize = maximizeBox;
+			_canFormBeClosed = canFormBeClosed;
 			InitializeComponents();
 
 			if (!string.IsNullOrWhiteSpace(formName))
@@ -54,9 +56,12 @@ namespace TicTacToe.Models.Utilities
 				MainPanel.Controls.Add(buttonMaximize);
 			}
 
-			IconButton buttonClose = CreateIconButton(IconChar.TimesCircle);
-			buttonClose.Click += ButtonExit_Click;
-			MainPanel.Controls.Add(buttonClose);
+			if (_canFormBeClosed)
+			{
+				IconButton buttonClose = CreateIconButton(IconChar.TimesCircle);
+				buttonClose.Click += ButtonExit_Click;
+				MainPanel.Controls.Add(buttonClose);
+			}
 		}
 		private void InitializeMainPanel()
 		{
