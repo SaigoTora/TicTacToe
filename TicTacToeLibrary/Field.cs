@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace TicTacToeLibrary
 {
@@ -62,6 +63,21 @@ namespace TicTacToeLibrary
 			return null;
 		}
 
+		public Cell GetRandomEmptyCell()
+		{// The method returns a random cell with type cellType.None
+			List<Cell> listEmptyCells = new List<Cell>();
+
+			for (int i = 0; i < _cells.GetLength(0); i++)
+				for (int j = 0; j < _cells.GetLength(1); j++)
+					if (_cells[i, j] == CellType.None)
+						listEmptyCells.Add(new Cell(i, j));
+
+			if (listEmptyCells.Count == 0)
+				throw new InvalidOperationException("All cells on the field are filled!");
+
+			Random random = new Random();
+			return listEmptyCells[random.Next(0, listEmptyCells.Count)];
+		}
 		public int CountFilledCells()
 		{
 			int result = 0;

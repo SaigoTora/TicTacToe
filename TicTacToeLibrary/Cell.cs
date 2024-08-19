@@ -6,9 +6,19 @@
 		public int column;
 
 		public Cell(int row, int column)
-		{// Конструктор
+		{
 			this.row = row;
 			this.column = column;
 		}
+
+		public override bool Equals(object obj)
+		{
+			return obj is Cell cell &&
+				   row == cell.row &&
+				   column == cell.column;
+		}
+
+		public override int GetHashCode()
+			=> base.GetHashCode();
 	}
 }

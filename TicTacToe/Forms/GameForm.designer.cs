@@ -49,6 +49,7 @@
 			this.pictureBoxCell8 = new System.Windows.Forms.PictureBox();
 			this.pictureBoxCell9 = new System.Windows.Forms.PictureBox();
 			this.guna2BorderlessForm = new Guna.UI2.WinForms.Guna2BorderlessForm(this.components);
+			this.progressBarTimer = new Guna.UI2.WinForms.Guna2CircleProgressBar();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxLine3)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxLine4)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxLine2)).BeginInit();
@@ -154,7 +155,7 @@
 			// 
 			this.labelScore.BackColor = System.Drawing.Color.Transparent;
 			this.labelScore.Font = new System.Drawing.Font("Lucida Console", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.labelScore.Location = new System.Drawing.Point(194, 12);
+			this.labelScore.Location = new System.Drawing.Point(194, 114);
 			this.labelScore.Name = "labelScore";
 			this.labelScore.Size = new System.Drawing.Size(230, 48);
 			this.labelScore.TabIndex = 2;
@@ -296,12 +297,34 @@
 			this.guna2BorderlessForm.ResizeForm = false;
 			this.guna2BorderlessForm.TransparentWhileDrag = true;
 			// 
+			// progressBarTimer
+			// 
+			this.progressBarTimer.BackColor = System.Drawing.Color.Transparent;
+			this.progressBarTimer.Backwards = true;
+			this.progressBarTimer.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(150)))), ((int)(((byte)(213)))), ((int)(((byte)(218)))), ((int)(((byte)(223)))));
+			this.progressBarTimer.FillThickness = 15;
+			this.progressBarTimer.Font = new System.Drawing.Font("Segoe UI", 12F);
+			this.progressBarTimer.ForeColor = System.Drawing.Color.White;
+			this.progressBarTimer.Image = ((System.Drawing.Image)(resources.GetObject("progressBarTimer.Image")));
+			this.progressBarTimer.ImageSize = new System.Drawing.Size(50, 50);
+			this.progressBarTimer.Location = new System.Drawing.Point(259, 12);
+			this.progressBarTimer.Minimum = 0;
+			this.progressBarTimer.Name = "progressBarTimer";
+			this.progressBarTimer.ProgressBrushMode = Guna.UI2.WinForms.Enums.BrushMode.Solid;
+			this.progressBarTimer.ProgressColor = System.Drawing.Color.Lime;
+			this.progressBarTimer.ProgressEndCap = System.Drawing.Drawing2D.LineCap.Round;
+			this.progressBarTimer.ProgressThickness = 16;
+			this.progressBarTimer.Size = new System.Drawing.Size(100, 100);
+			this.progressBarTimer.TabIndex = 18;
+			this.progressBarTimer.Value = 100;
+			// 
 			// GameForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.Color.White;
 			this.ClientSize = new System.Drawing.Size(618, 822);
+			this.Controls.Add(this.progressBarTimer);
 			this.Controls.Add(this.pictureBoxLine3);
 			this.Controls.Add(this.pictureBoxLine4);
 			this.Controls.Add(this.pictureBoxLine2);
@@ -369,5 +392,6 @@
 		private System.Windows.Forms.PictureBox pictureBoxCell8;
 		private System.Windows.Forms.PictureBox pictureBoxCell9;
 		private Guna.UI2.WinForms.Guna2BorderlessForm guna2BorderlessForm;
+		private Guna.UI2.WinForms.Guna2CircleProgressBar progressBarTimer;
 	}
 }

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace TicTacToeLibrary
 {
@@ -88,7 +87,7 @@ namespace TicTacToeLibrary
 				|| Difficulty == Difficulty.Impossible && randomPercent <= IMPOSSIBLE_BOT_PERFECT_MOVE_PERCENTAGE)
 				return PerfectMoveFinder.FindCell(field, botCellType);
 
-			return GetRandomEmptyCell(cells);
+			return field.GetRandomEmptyCell();
 		}
 		private Cell? DefenseMove(CellType[,] cells, CellType botCellType, int winningCellsCount)
 		{// Defense against a player's winning move
@@ -149,19 +148,6 @@ namespace TicTacToeLibrary
 			if (countNeededCells >= winningCellsCount - 1) return true;
 
 			return false;
-		}
-
-		private Cell GetRandomEmptyCell(CellType[,] cells)
-		{// The method returns a random cell with type cellType.None
-			List<Cell> listEmptyCells = new List<Cell>();
-
-			for (int i = 0; i < cells.GetLength(0); i++)
-				for (int j = 0; j < cells.GetLength(1); j++)
-					if (cells[i, j] == CellType.None)
-						listEmptyCells.Add(new Cell(i, j));
-
-			Random random = new Random();
-			return listEmptyCells[random.Next(0, listEmptyCells.Count)];
 		}
 	}
 }

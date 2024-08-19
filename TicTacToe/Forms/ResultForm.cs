@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Drawing;
+using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 using TicTacToe.Models.PlayerInfo;
 using TicTacToe.Models.Utilities;
@@ -16,6 +18,7 @@ namespace TicTacToe.Forms
 		private readonly CustomTitleBar _customTitleBar;
 
 		private readonly EventHandler _backToMainForm;
+		private readonly CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
 		internal ResultForm(Player player, PlayerType winner, Difficulty difficult, bool isGameEnd, EventHandler backToMainForm)
 		{
 			InitializeComponent();
@@ -45,7 +48,7 @@ namespace TicTacToe.Forms
 			DisplayDifficultyLabel();
 			labelCurrentCoins.Text = _player.Coins.ToString();
 
-			DelayToClose();
+			_ = DelayToClose();
 		}
 
 		private void DisplayGameResult()
@@ -110,20 +113,25 @@ namespace TicTacToe.Forms
 		private void ButtonPlay_Click(object sender, EventArgs e)
 			=> Close();
 
-		private async void DelayToClose()
+		private async Task DelayToClose()
 		{
 			const byte DELAY_SECONDS_TO_CLOSE = 60;
 
 			for (int i = DELAY_SECONDS_TO_CLOSE; i >= 1; i--)
 			{
+				if (_cancellationTokenSource.IsCancellationRequested)
+					return;
+
 				labelTimeToClose.Text = "This window will close in: " + i.ToString() + " sec.";
 				await Task.Delay(1000);
 			}
 
-			_backToMainForm(this, EventArgs.Empty);
+			if (!_cancellationTokenSource.IsCancellationRequested)
+				_backToMainForm(this, EventArgs.Empty);
 		}
-		private void ResultForm_FormClosed(object sender, System.Windows.Forms.FormClosedEventArgs e)
+		private void ResultForm_FormClosed(object sender, FormClosedEventArgs e)
 		{
+			_cancellationTokenSource.Cancel();
 			buttonBack.Click -= _backToMainForm;
 			_customTitleBar.Dispose();
 		}

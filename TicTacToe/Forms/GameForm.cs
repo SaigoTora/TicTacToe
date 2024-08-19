@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -7,13 +8,14 @@ using TicTacToe.Models.CustomExceptions;
 using TicTacToe.Models.GameInfo;
 using TicTacToe.Models.PlayerInfo;
 using TicTacToe.Models.Utilities;
+using TicTacToe.Properties;
 using TicTacToeLibrary;
 
 namespace TicTacToe.Forms
 {
 	internal partial class GameForm : BaseForm
 	{
-		private const int WINNING_CELL_SHOW_DELAY = 300;
+		private const int WINNING_CELL_SHOW_DELAY = 350;
 		private const float PREVIEW_OPACITY_LEVEL = 0.35f;
 
 		private readonly (Color Cross, Color Zero) _backColorWinningCells = (Color.FromArgb(220, 173, 162),
@@ -34,6 +36,7 @@ namespace TicTacToe.Forms
 		private readonly Bitmap previewCross;
 		private readonly Bitmap previewZero;
 
+		private CancellationTokenSource _cancellationTokenSource;
 		private bool _isFormClosingForNextRound = false;
 		private bool _wasPressedButtonBack = false;
 
@@ -46,24 +49,15 @@ namespace TicTacToe.Forms
 			_isBotMoveFirst = isBotFirst;
 			_roundManager = roundManager;
 			_mainForm = mainForm;
-			_customTitleBar = new CustomTitleBar(this, $"Round {_roundManager.CurrentNumberOfRounds} / {_roundManager.MaxNumberOfRounds}", Properties.Resources.ticTacToe, true, false);
+			_customTitleBar = new CustomTitleBar(this, $"Round {_roundManager.CurrentNumberOfRounds} / {_roundManager.MaxNumberOfRounds}",
+				Resources.ticTacToe, true, false, false);
 			_customTitleBar.MoveFormElementsDown();
 
-			if (isBotFirst)
-			{
-				_playerCellType = CellType.Zero;
-				_botCellType = CellType.Cross;
-			}
-			else
-			{
-				_playerCellType = CellType.Cross;
-				_botCellType = CellType.Zero;
-			}
+			_botCellType = isBotFirst ? CellType.Cross : CellType.Zero;
+			_playerCellType = isBotFirst ? CellType.Zero : CellType.Cross;
 
 			try
-			{
-				player.DeductCoins(bot.Difficulty);
-			}
+			{ player.DeductCoins(bot.Difficulty); }
 			catch (NotEnoughCoinsToStartGameException exception)
 			{
 				MessageBox.Show(exception.Message, "Not enough coins", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -74,12 +68,13 @@ namespace TicTacToe.Forms
 									{ pictureBoxCell4, pictureBoxCell5, pictureBoxCell6 },
 									{ pictureBoxCell7, pictureBoxCell8, pictureBoxCell9 } };
 
-			previewCross = Properties.Resources.cross.ChangeOpacity(PREVIEW_OPACITY_LEVEL);
-			previewZero = Properties.Resources.zero.ChangeOpacity(PREVIEW_OPACITY_LEVEL);
+			previewCross = Resources.cross.ChangeOpacity(PREVIEW_OPACITY_LEVEL);
+			previewZero = Resources.zero.ChangeOpacity(PREVIEW_OPACITY_LEVEL);
 		}
 
 		private void GameForm_Load(object sender, EventArgs e)
 		{
+			BackColor = Color.FromArgb(20, 20, 20);
 			BackColor = _player.Preferences.BackgroundGame;
 			SelectControlsColor();
 
@@ -95,6 +90,8 @@ namespace TicTacToe.Forms
 
 			if (_isBotMoveFirst)
 				_ = BotMove();
+			else
+				StartTimerToMove();
 		}
 
 		private void SetPlayerNameSize(Label label)
@@ -105,13 +102,13 @@ namespace TicTacToe.Forms
 		private void SetBotAvatar()
 		{
 			if (_bot.Difficulty == Difficulty.Easy)
-				pictureBoxBotAvatar.Image = Properties.Resources.botEasy;
+				pictureBoxBotAvatar.Image = Resources.botEasy;
 			else if (_bot.Difficulty == Difficulty.Medium)
-				pictureBoxBotAvatar.Image = Properties.Resources.botMedium;
+				pictureBoxBotAvatar.Image = Resources.botMedium;
 			else if (_bot.Difficulty == Difficulty.Hard)
-				pictureBoxBotAvatar.Image = Properties.Resources.botHard;
+				pictureBoxBotAvatar.Image = Resources.botHard;
 			else if (_bot.Difficulty == Difficulty.Impossible)
-				pictureBoxBotAvatar.Image = Properties.Resources.botImpossible;
+				pictureBoxBotAvatar.Image = Resources.botImpossible;
 		}
 		private void SelectControlsColor()
 		{
@@ -120,11 +117,13 @@ namespace TicTacToe.Forms
 			{
 				SetLabelsColor(Color.White);
 				SetLinesColor(Color.FromArgb(200, 200, 200));
+				progressBarTimer.Image = Resources.clockWhite;
 			}
 			else
 			{
 				SetLabelsColor(Color.Black);
 				SetLinesColor(Color.FromArgb(20, 20, 20));
+				progressBarTimer.Image = Resources.clockBlack;
 			}
 
 		}
@@ -164,6 +163,9 @@ namespace TicTacToe.Forms
 			if (!(sender is PictureBox pictureBox))
 				return;
 
+			StopTimerToMove();
+			await Task.Delay(10);// Add a delay to complete the current execution of the timer
+
 			SetPictureBoxesEnabled(false);
 			Cell cell = FindIndexPictureBoxCell(pictureBox);
 			_field.FillCell(cell, _playerCellType);
@@ -181,9 +183,9 @@ namespace TicTacToe.Forms
 			pictureBox.Cursor = Cursors.Default;
 
 			if (_isBotMoveFirst && playerType == PlayerType.Human || !_isBotMoveFirst && playerType == PlayerType.Bot)
-				pictureBox.Image = Properties.Resources.zero;
+				pictureBox.Image = Resources.zero;
 			else
-				pictureBox.Image = Properties.Resources.cross;
+				pictureBox.Image = Resources.cross;
 
 			pictureBox.Click -= PictureBoxCell_Click;
 
@@ -203,7 +205,7 @@ namespace TicTacToe.Forms
 
 		private async Task BotMove()
 		{
-			const int BOT_MOVE_DELAY = 500;
+			const int BOT_MOVE_DELAY = 600;
 
 			SetPictureBoxesEnabled(false);
 
@@ -216,6 +218,7 @@ namespace TicTacToe.Forms
 				await FinishGame();
 
 			SetPictureBoxesEnabled(true);
+			StartTimerToMove();
 		}
 		private void SetPictureBoxesEnabled(bool enabled)
 		{
@@ -224,9 +227,88 @@ namespace TicTacToe.Forms
 					_pictureCells[i, j].Enabled = enabled;
 		}
 
+		private void StartTimerToMove()
+		{
+			progressBarTimer.Visible = true;
+			_cancellationTokenSource?.Cancel();
+			_cancellationTokenSource = new CancellationTokenSource();
+
+			_ = TimerForMove(_cancellationTokenSource.Token);
+		}
+		private void StopTimerToMove()
+		{
+			progressBarTimer.Visible = false;
+			_cancellationTokenSource?.Cancel();
+		}
+		private async Task TimerForMove(CancellationToken cancellationToken)
+		{
+			const int TIMER_DELAY = 1200;
+
+			progressBarTimer.Maximum = TIMER_DELAY;
+			progressBarTimer.Value = TIMER_DELAY;
+			for (int i = progressBarTimer.Maximum; i >= 0; i--)
+			{
+				if (cancellationToken.IsCancellationRequested || IsDisposed)
+					return;
+
+				progressBarTimer.Value = i;
+				progressBarTimer.ProgressColor = GetColorForPercentage((double)i / TIMER_DELAY);
+				await Task.Delay(1);
+			}
+
+			Cell selectedCell = SelectCellAfterInactivity();
+
+			if (cancellationToken.IsCancellationRequested || IsDisposed)
+				return;
+
+			PictureBoxCell_Click(_pictureCells[selectedCell.row, selectedCell.column], EventArgs.Empty);
+		}
+		private Color GetColorForPercentage(double percentage)
+		{
+			int r, g, b;
+
+			if (percentage > 0.5)
+			{// Green to yellow
+				r = (int)(255 * (1 - percentage) * 2);
+				g = 255;
+				b = 0;
+			}
+			else
+			{// Yellow to red
+				r = 255;
+				g = (int)(255 * percentage * 2);
+				b = 0;
+			}
+
+			return Color.FromArgb(r, g, b);
+		}
+		private Cell SelectCellAfterInactivity()
+		{
+			Cell defaultCell = new Cell(-1, -1);
+			Cell selectedCell = defaultCell;
+
+			for (int i = 0; i < _pictureCells.GetLength(0); i++)
+			{
+				for (int j = 0; j < _pictureCells.GetLength(1); j++)
+					if (_isBotMoveFirst && _pictureCells[i, j].Image.CompareTo(previewZero)
+						|| !_isBotMoveFirst && _pictureCells[i, j].Image.CompareTo(previewCross))
+					{
+						selectedCell = new Cell(i, j);
+						break;
+					}
+				if (!selectedCell.Equals(defaultCell))
+					break;
+			}
+
+			if (selectedCell.Equals(defaultCell))
+				selectedCell = _field.GetRandomEmptyCell();
+
+			return selectedCell;
+		}
+
 		private async Task FinishGame()
 		{
-			_player.ReturnCoins(_bot.Difficulty);
+			_player.ReturnCoins();
 			SetPictureBoxesEnabled(false);
 
 			await ShowWinningCells(_field.Winner);
@@ -292,8 +374,6 @@ namespace TicTacToe.Forms
 					pictureBox.BackColor = _backColorWinningCells.Cross;
 				else
 					pictureBox.BackColor = _backColorWinningCells.Zero;
-
-				pictureBox.Click -= PictureBoxCell_Click;
 			}
 		}
 
@@ -318,6 +398,7 @@ namespace TicTacToe.Forms
 
 		private void GameForm_FormClosed(object sender, FormClosedEventArgs e)
 		{
+			StopTimerToMove();
 			_customTitleBar.Dispose();
 			if (!_isFormClosingForNextRound)
 				_mainForm.Show();

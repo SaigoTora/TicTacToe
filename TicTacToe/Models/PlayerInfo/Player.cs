@@ -111,8 +111,11 @@ namespace TicTacToe.Models.PlayerInfo
 			else
 				Coins -= deductedCoins;
 		}
-		internal void ReturnCoins(Difficulty botDifficult)
-			=> Coins += deductedCoins;
+		internal void ReturnCoins()
+		{
+			Coins += deductedCoins;
+			deductedCoins = 0;
+		}
 
 		private void AddItemToInventory(Item item)
 		{
