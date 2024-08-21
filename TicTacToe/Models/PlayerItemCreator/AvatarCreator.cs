@@ -39,7 +39,8 @@ namespace TicTacToe.Models.PlayerItemCreator
 		{
 			PictureBox pictureBox = new PictureBox
 			{
-				Image = item.Image
+				Image = item.Image,
+				Cursor = Cursors.Hand
 			};
 
 			CreateItem(pictureBox);

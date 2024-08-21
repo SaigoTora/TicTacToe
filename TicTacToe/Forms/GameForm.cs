@@ -18,7 +18,7 @@ namespace TicTacToe.Forms
 		private const int WINNING_CELL_SHOW_DELAY = 350;
 		private const float PREVIEW_OPACITY_LEVEL = 0.35f;
 
-		private readonly (Color Cross, Color Zero) _backColorWinningCells = (Color.FromArgb(220, 173, 162),
+		private static readonly (Color Cross, Color Zero) _backColorWinningCells = (Color.FromArgb(220, 173, 162),
 			Color.FromArgb(162, 190, 220));
 
 		private readonly MainForm _mainForm;

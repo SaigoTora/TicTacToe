@@ -41,7 +41,8 @@ namespace TicTacToe.Models.PlayerItemCreator
 			PictureBox pictureBox = new PictureBox
 			{
 				BackColor = item.Color,
-				BorderStyle = BorderStyle.FixedSingle
+				BorderStyle = BorderStyle.FixedSingle,
+				Cursor = Cursors.Hand
 			};
 
 			CreateItem(pictureBox);

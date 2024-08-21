@@ -79,7 +79,7 @@ namespace TicTacToe.Models.PlayerItemCreator
 		/// <param name="percentPicturePadding">The padding between the image and the panel in percent.</param>
 		/// <returns>Returns the created panel with information about the item.</returns>
 		/// <exception cref="ArgumentNullException">If PictureBox is null, an exception will be thrown.</exception>
-		protected Panel CreateItem(PictureBox pictureBox, Label labelPrice = null, int percentPicturePadding = 20)
+		protected Panel CreateItem(PictureBox pictureBox, Label labelPrice = null, int percentPicturePadding = 12)
 		{
 			if (pictureBox == null)
 				throw new ArgumentNullException();

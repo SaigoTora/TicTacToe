@@ -260,12 +260,12 @@
 			// 
 			// labelPlayerName
 			// 
-			this.labelPlayerName.BackColor = System.Drawing.Color.Transparent;
+			this.labelPlayerName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
 			this.labelPlayerName.Cursor = System.Windows.Forms.Cursors.Arrow;
 			this.labelPlayerName.Dock = System.Windows.Forms.DockStyle.Bottom;
 			this.labelPlayerName.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.labelPlayerName.Font = new System.Drawing.Font("Trebuchet MS", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.labelPlayerName.ForeColor = System.Drawing.Color.Black;
+			this.labelPlayerName.ForeColor = System.Drawing.Color.White;
 			this.labelPlayerName.Location = new System.Drawing.Point(0, 193);
 			this.labelPlayerName.Name = "labelPlayerName";
 			this.labelPlayerName.Size = new System.Drawing.Size(317, 27);
@@ -279,7 +279,7 @@
 			// 
 			this.pictureBoxAvatar.BackColor = System.Drawing.Color.Transparent;
 			this.pictureBoxAvatar.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.pictureBoxAvatar.Image = global::TicTacToe.Properties.Resources.manAvatar1;
+			this.pictureBoxAvatar.Image = global::TicTacToe.Properties.Resources.legendaryAvatar1;
 			this.pictureBoxAvatar.Location = new System.Drawing.Point(95, 10);
 			this.pictureBoxAvatar.Name = "pictureBoxAvatar";
 			this.pictureBoxAvatar.Size = new System.Drawing.Size(130, 130);
@@ -524,14 +524,13 @@
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.BackColor = System.Drawing.Color.DarkGray;
+			this.BackColor = System.Drawing.Color.White;
 			this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
 			this.ClientSize = new System.Drawing.Size(1130, 750);
 			this.Controls.Add(this.panelMain);
 			this.ForeColor = System.Drawing.Color.Transparent;
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-			this.MaximumSize = new System.Drawing.Size(1440, 900);
 			this.MinimumSize = new System.Drawing.Size(1024, 700);
 			this.Name = "MainForm";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

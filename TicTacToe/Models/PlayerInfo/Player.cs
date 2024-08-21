@@ -30,6 +30,7 @@ namespace TicTacToe.Models.PlayerInfo
 			SetDefaultInventory();
 		}
 
+		internal void ChangeName(string newName) => Name = newName;
 		internal List<Item> GetPlayerItems()
 		{
 			List<Item> resultList = new List<Item>();

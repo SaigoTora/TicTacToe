@@ -20,10 +20,12 @@ namespace TicTacToe.Models.Utilities
 
 		internal Panel MainPanel { get; private set; } = new Panel();
 
+		private readonly Label _labelCaption;
 		private bool _isFormDragging;
 		private Point _dragCursorPoint, _dragFormPoint;
 
-		internal CustomTitleBar(Form form, string formName, System.Drawing.Icon icon = null, bool minimizeBox = true, bool maximizeBox = true, bool canFormBeClosed = true)
+		internal CustomTitleBar(Form form, string formName, System.Drawing.Icon icon = null,
+			bool minimizeBox = true, bool maximizeBox = true, bool canFormBeClosed = true)
 		{
 			_scalingForm.Minimize = minimizeBox;
 			_scalingForm.Maximize = maximizeBox;
@@ -31,7 +33,10 @@ namespace TicTacToe.Models.Utilities
 			InitializeComponents();
 
 			if (!string.IsNullOrWhiteSpace(formName))
-				MainPanel.Controls.Add(CreateFormName(formName));
+			{
+				_labelCaption = CreateFormCaption(formName);
+				MainPanel.Controls.Add(_labelCaption);
+			}
 			if (icon != null)
 				MainPanel.Controls.Add(CreateFormIcon(icon));
 
@@ -75,6 +80,7 @@ namespace TicTacToe.Models.Utilities
 			ToggleEventHandlers(MainPanel, true);
 		}
 
+		internal void ChangeFormCaption(string newCaption) => _labelCaption.Text = newCaption;
 		internal void MoveFormElementsDown()
 		{
 			MoveFormElementsDown(_form);
@@ -144,7 +150,7 @@ namespace TicTacToe.Models.Utilities
 
 			return iconPictureBox;
 		}
-		private Label CreateFormName(string name)
+		private Label CreateFormCaption(string name)
 		{
 			const int MAX_NAME_LENGTH = 80;
 

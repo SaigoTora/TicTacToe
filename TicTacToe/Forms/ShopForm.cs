@@ -101,7 +101,7 @@ namespace TicTacToe.Forms
 							break;
 						}
 					}
-					else if (i == playerItems.Count - 1)// If no matches were found,
+					if (i == playerItems.Count - 1)// If no matches were found,
 						creator.CreateItemToBuy(shopItem);// then the item should be created
 				}
 		}

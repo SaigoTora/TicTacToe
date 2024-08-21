@@ -36,7 +36,10 @@ namespace TicTacToe.Models.PlayerItemCreator
 		internal override PictureBox CreateItemToSelect(ImageItem item)
 		{
 			PictureBox pictureBox = new PictureBox
-			{ Image = item.Image };
+			{
+				Image = item.Image,
+				Cursor = Cursors.Hand
+			};
 
 			CreateItem(pictureBox);
 			SubscribeToSelect(pictureBox, item);

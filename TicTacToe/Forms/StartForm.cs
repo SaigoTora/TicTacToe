@@ -11,7 +11,7 @@ namespace TicTacToe.Forms
 	internal partial class StartForm : BaseForm
 	{
 		private static readonly string DEFAULT_PLAYER_NAME = Environment.UserName;
-		private readonly (Color placeholderColor, Color textColor) _foreColorTextBoxName = (Color.Gray, Color.White);
+		private static readonly (Color placeholderColor, Color textColor) _foreColorTextBoxName = (Color.Gray, Color.White);
 
 		private static readonly Color _selectedAvatarColor = Color.FromArgb(71, 167, 106);
 		private readonly CustomTitleBar _customTitleBar;

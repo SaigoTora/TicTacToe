@@ -14,10 +14,10 @@ namespace TicTacToe.Forms
 {
 	internal partial class MainForm : BaseForm
 	{
-		private readonly (Color Default, Color Selected) _backColorLabelName = (Color.Transparent, Color.CornflowerBlue);
-		private readonly (Color Default, Color Selected) _foreColorDifficulty = (Color.Black, Color.White);
-		private readonly (Color Default, Color Selected) _iconColorDifficulty = (Color.Black, Color.Lime);
-		private readonly (IconChar Default, IconChar Selected) _iconCharDifficulty = (IconChar.Circle, IconChar.CircleCheck);
+		private static readonly (Color Default, Color Selected) _backColorLabelName = (Color.FromArgb(125, 35, 35, 35), Color.CornflowerBlue);
+		private static readonly (Color Default, Color Selected) _foreColorDifficulty = (Color.Black, Color.White);
+		private static readonly (Color Default, Color Selected) _iconColorDifficulty = (Color.Black, Color.Lime);
+		private static readonly (IconChar Default, IconChar Selected) _iconCharDifficulty = (IconChar.Circle, IconChar.CircleCheck);
 
 		private static readonly (Color Easy, Color Medium, Color Hard, Color Impossible) _difficultyButtonFillColor =
 			(Color.FromArgb(71, 167, 106), Color.SandyBrown, Color.FromArgb(171, 52, 58), Color.FromArgb(71, 67, 137));
@@ -210,7 +210,6 @@ namespace TicTacToe.Forms
 				return;
 
 			label.BackColor = _backColorLabelName.Selected;
-			label.ForeColor = _foreColorDifficulty.Selected;
 		}
 		private void LabelName_MouseLeave(object sender, EventArgs e)
 		{
@@ -218,7 +217,6 @@ namespace TicTacToe.Forms
 				return;
 
 			label.BackColor = _backColorLabelName.Default;
-			label.ForeColor = _foreColorDifficulty.Default;
 		}
 
 		private void Menu_VisibleChanged(object sender, EventArgs e)

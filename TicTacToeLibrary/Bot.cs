@@ -5,6 +5,7 @@ namespace TicTacToeLibrary
 	public class Bot
 	{
 		private const string BOT_NAME_PREFIX = "BOT";
+		private const int EASY_BOT_DEFENSE_PERCENTAGE = 35;
 		private const int MEDIUM_BOT_DEFENSE_PERCENTAGE = 70;
 		private const int MEDIUM_BOT_PERFECT_MOVE_PERCENTAGE = 35;
 		private const int HARD_BOT_PERFECT_MOVE_PERCENTAGE = 70;
@@ -73,7 +74,8 @@ namespace TicTacToeLibrary
 			}
 
 			int randomPercent = _random.Next(1, 101);
-			if (Difficulty == Difficulty.Medium && randomPercent <= MEDIUM_BOT_DEFENSE_PERCENTAGE
+			if (Difficulty == Difficulty.Easy && randomPercent <= EASY_BOT_DEFENSE_PERCENTAGE
+				|| Difficulty == Difficulty.Medium && randomPercent <= MEDIUM_BOT_DEFENSE_PERCENTAGE
 				|| Difficulty == Difficulty.Hard)
 			{
 				Cell? defenseCell = DefenseMove(cells, botCellType, field.WinningCellsCount);
