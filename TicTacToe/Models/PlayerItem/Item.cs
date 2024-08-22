@@ -20,5 +20,16 @@ namespace TicTacToe.Models.PlayerItem
 
 		internal void SetDateTimePurchaseNow()
 			=> _dateTimePurchase = DateTime.UtcNow;
+
+		public override bool Equals(object obj)
+		{
+			if (!GetType().Equals(obj.GetType()))
+				return false;
+
+			return obj is Item item &&
+				   Name == item.Name &&
+				   Price == item.Price;
+		}
+		public override int GetHashCode() => base.GetHashCode();
 	}
 }

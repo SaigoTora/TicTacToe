@@ -55,8 +55,8 @@ namespace TicTacToe.Forms
 		{
 			labelCoins.Text = $"{_player.Coins:N0}".Replace(',', ' ');
 			labelPlayerName.Text = _player.Name;
-			pictureBoxAvatar.Image = _player.Preferences.Avatar;
-			BackgroundImage = _player.Preferences.BackgroundMenu;
+			pictureBoxAvatar.Image = _player.Preferences.Avatar.Image;
+			BackgroundImage = _player.Preferences.BackgroundMenu.Image;
 		}
 		private async Task ChangeSizePanelSettingsWithDelay(bool needToOpen)
 		{

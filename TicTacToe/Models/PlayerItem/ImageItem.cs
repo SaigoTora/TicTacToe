@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Drawing;
 
-using TicTacToe.Models.Utilities;
-
 namespace TicTacToe.Models.PlayerItem
 {
 	[Serializable]
@@ -23,14 +21,5 @@ namespace TicTacToe.Models.PlayerItem
 		{ }
 
 		internal Image GetPreviewImage() => _previewImage;
-
-		public override bool Equals(object obj)
-		{
-			if (obj == null || !(obj is ImageItem item))
-				return false;
-
-			return Image.CompareTo(item.Image);
-		}
-		public override int GetHashCode() => base.GetHashCode();
 	}
 }

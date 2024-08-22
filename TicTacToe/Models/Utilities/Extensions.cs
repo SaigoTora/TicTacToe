@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Drawing;
 using System.Drawing.Imaging;
-using System.IO;
 using System.Text;
 
 namespace TicTacToe.Models.Utilities
@@ -9,37 +8,6 @@ namespace TicTacToe.Models.Utilities
 	public static class Extensions
 	{
 		#region ImageExtensions
-		/// <summary>
-		/// Compares this instance with an Image object.
-		/// </summary>
-		/// <param name="image1">This instance.</param>
-		/// <param name="image2">Image compared to this instance.</param>
-		/// <returns>If the images are equal, the method will return true, otherwise - false.</returns>
-		public static bool CompareTo(this Image image1, Image image2)
-		{
-			if (image1 == null || image2 == null)
-				return false;
-
-			if (image1.Width != image2.Width || image1.Height != image2.Height)
-				return false;
-
-			byte[] img1Bytes = ImageToByteArray(image1);
-			byte[] img2Bytes = ImageToByteArray(image2);
-
-			for (int i = 0; i < img1Bytes.Length; i++)
-				if (img1Bytes[i] != img2Bytes[i])
-					return false;
-
-			return true;
-		}
-		private static byte[] ImageToByteArray(Image image)
-		{
-			using (MemoryStream ms = new MemoryStream())
-			{
-				image.Save(ms, ImageFormat.Png);
-				return ms.ToArray();
-			}
-		}
 
 		/// <summary>
 		/// Changes the opacity level of an image.

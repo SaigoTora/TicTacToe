@@ -13,14 +13,5 @@ namespace TicTacToe.Models.PlayerItem
 		{
 			Color = color;
 		}
-
-		public override bool Equals(object obj)
-		{
-			if (obj == null || !(obj is ColorItem item))
-				return false;
-
-			return Color == item.Color;
-		}
-		public override int GetHashCode() => base.GetHashCode();
 	}
 }

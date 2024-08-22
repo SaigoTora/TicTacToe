@@ -53,7 +53,7 @@ namespace TicTacToe.Forms
 			const int ITEM_SIZE = 100;
 
 			buttonPreferencesLeft.IconChar = FontAwesome.Sharp.IconChar.CircleArrowLeft;
-			pictureBoxPlayerAvatar.Image = _player.Preferences.Avatar;
+			pictureBoxPlayerAvatar.Image = _player.Preferences.Avatar.Image;
 			textBoxPlayerName.MaxLength = PlayerValidator.MAX_NAME_LENGTH;
 			textBoxPlayerName.Text = _player.Name;
 			textBoxPlayerName.BackColor = BackColor;
@@ -103,7 +103,7 @@ namespace TicTacToe.Forms
 			PictureBox pictureBox = avatarCreator.CreateItemToSelect(avatar);
 			_avatarList.Add(pictureBox);
 
-			if (!_isSelectedAvatarCreated && avatar.Image.CompareTo(_player.Preferences.Avatar))
+			if (!_isSelectedAvatarCreated && avatar.Name == _player.Preferences.Avatar.Name)
 			{
 				SelectAvatar(pictureBox, EventArgs.Empty);
 				_isSelectedAvatarCreated = true;
@@ -114,7 +114,7 @@ namespace TicTacToe.Forms
 			PictureBox pictureBox = menuBackCreator.CreateItemToSelect(imageItem);
 			_menuBackList.Add(pictureBox);
 
-			if (!_isSelectedMenuBackCreated && imageItem.Image.CompareTo(_player.Preferences.BackgroundMenu))
+			if (!_isSelectedMenuBackCreated && imageItem.Name == _player.Preferences.BackgroundMenu.Name)
 			{
 				SelectMenuBack(pictureBox, EventArgs.Empty);
 				_isSelectedMenuBackCreated = true;
@@ -125,7 +125,7 @@ namespace TicTacToe.Forms
 			PictureBox pictureBox = gameBackCreator.CreateItemToSelect(colorItem);
 			_gameBackList.Add(pictureBox);
 
-			if (!_isSelectedGameBackCreated && colorItem.Color == _player.Preferences.BackgroundGame)
+			if (!_isSelectedGameBackCreated && colorItem.Name == _player.Preferences.BackgroundGame.Name)
 			{
 				SelectGameBack(pictureBox, EventArgs.Empty);
 				_isSelectedGameBackCreated = true;

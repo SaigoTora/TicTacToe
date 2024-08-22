@@ -1,21 +1,21 @@
 ﻿using System;
 using System.Drawing;
-using TicTacToe.Properties;
+using TicTacToe.Models.PlayerItem;
 
 namespace TicTacToe.Models.PlayerInfo
 {
 	[Serializable]
 	internal class PlayerPreferences
 	{
-		internal Image Avatar;
-		internal Image BackgroundMenu;
-		internal Color BackgroundGame;
+		internal Avatar Avatar;
+		internal ImageItem BackgroundMenu;
+		internal ColorItem BackgroundGame;
 
 		internal PlayerPreferences()
 		{
-			Avatar = Resources.manAvatar1;
-			BackgroundMenu = Resources.background1;
-			BackgroundGame = Color.FromArgb(235, 235, 235);
+			Avatar = new Avatar("avatarItem1", 0, Properties.Resources.manAvatar1, AvatarRarity.Common);
+			BackgroundMenu = new ImageItem("imageItem1", 0, Properties.Resources.background1);
+			BackgroundGame = new ColorItem("colorItem1", 0, Color.FromArgb(235, 235, 235));
 		}
 	}
 }

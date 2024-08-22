@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using FluentValidation.Results;
 
 using TicTacToe.Models.PlayerInfo;
+using TicTacToe.Models.PlayerItem;
 using TicTacToe.Models.Utilities;
 
 namespace TicTacToe.Forms
@@ -81,9 +82,9 @@ namespace TicTacToe.Forms
 				PlayerPreferences preferences = new PlayerPreferences();
 
 				if (_isPlayerMan)
-					preferences.Avatar = pictureBoxMan.Image;
+					preferences.Avatar = new Avatar("avatarItem1", 0, Properties.Resources.manAvatar1, AvatarRarity.Common);
 				else
-					preferences.Avatar = pictureBoxWoman.Image;
+					preferences.Avatar = new Avatar("avatarItem2", 0, Properties.Resources.womanAvatar1, AvatarRarity.Common); ;
 
 				_player = new Player(_player.Name, _player.Coins, preferences);
 

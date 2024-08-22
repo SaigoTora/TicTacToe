@@ -62,17 +62,17 @@ namespace TicTacToe.Models.PlayerInfo
 			{
 				case Avatar avatar:
 					{
-						Preferences.Avatar = avatar.Image;
+						Preferences.Avatar = avatar;
 						break;
 					}
 				case ImageItem imageItem:
 					{
-						Preferences.BackgroundMenu = imageItem.Image;
+						Preferences.BackgroundMenu = imageItem;
 						break;
 					}
 				case ColorItem colorItem:
 					{
-						Preferences.BackgroundGame = colorItem.Color;
+						Preferences.BackgroundGame = colorItem;
 						break;
 					}
 				default:
@@ -129,10 +129,10 @@ namespace TicTacToe.Models.PlayerInfo
 		private void SetDefaultInventory()
 		{
 			_inventory = new List<Item>();
-			ImageItem imageItem = new ImageItem("imageItem1", 0, Preferences.BackgroundMenu);
-			Avatar profilePhotoItemMan = new Avatar("avatarItem1", 0, Properties.Resources.manAvatar1, AvatarRarity.Common);
+			ImageItem imageItem = Preferences.BackgroundMenu;
+			Avatar profilePhotoItemMan = Preferences.Avatar;
 			Avatar profilePhotoItemWoman = new Avatar("avatarItem2", 0, Properties.Resources.womanAvatar1, AvatarRarity.Common);
-			ColorItem colorItem = new ColorItem("colorItem1", 0, Preferences.BackgroundGame);
+			ColorItem colorItem = Preferences.BackgroundGame;
 
 			_inventory.Add(imageItem);
 			_inventory.Add(profilePhotoItemMan);

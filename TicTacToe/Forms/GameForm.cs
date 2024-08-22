@@ -75,10 +75,10 @@ namespace TicTacToe.Forms
 		private void GameForm_Load(object sender, EventArgs e)
 		{
 			BackColor = Color.FromArgb(20, 20, 20);
-			BackColor = _player.Preferences.BackgroundGame;
+			BackColor = _player.Preferences.BackgroundGame.Color;
 			SelectControlsColor();
 
-			pictureBoxPlayerAvatar.Image = _player.Preferences.Avatar;
+			pictureBoxPlayerAvatar.Image = _player.Preferences.Avatar.Image;
 			SetBotAvatar();
 
 			labelPlayerName.Text = _player.Name;
