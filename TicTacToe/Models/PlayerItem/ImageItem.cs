@@ -12,14 +12,14 @@ namespace TicTacToe.Models.PlayerItem
 		[NonSerialized]
 		private readonly Image _previewImage;
 
-		internal ImageItem(int price, Image image, Image previewImage)
-			: base(price)
+		internal ImageItem(string name, int price, Image image, Image previewImage)
+			: base(name, price)
 		{
 			Image = image;
 			_previewImage = previewImage;
 		}
-		internal ImageItem(int price, Image image)
-			: this(price, image, image)
+		internal ImageItem(string name, int price, Image image)
+			: this(name, price, image, image)
 		{ }
 
 		internal Image GetPreviewImage() => _previewImage;

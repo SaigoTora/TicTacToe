@@ -301,6 +301,7 @@ namespace TicTacToe.Forms
 			SetPreferenceVisibility(_preferenceIndex);
 		}
 		#endregion
+
 		private void Shop_FormClosed(object sender, FormClosedEventArgs e)
 		{
 			Serializator.Serialize(_player, Program.SerializePath, Program.EncryptKey);

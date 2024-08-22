@@ -8,8 +8,8 @@ namespace TicTacToe.Models.PlayerItem
 	{
 		internal Color Color { get; private set; }
 
-		internal ColorItem(int price, Color color)
-			: base(price)
+		internal ColorItem(string name, int price, Color color)
+			: base(name, price)
 		{
 			Color = color;
 		}

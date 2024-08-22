@@ -8,9 +8,9 @@ namespace TicTacToe.Models.PlayerItem
 	{
 		public AvatarRarity Rarity { get; private set; }
 
-		internal Avatar(int price, Image image, AvatarRarity rarity) : base(price, image)
+		internal Avatar(string name, int price, Image image, AvatarRarity rarity) : base(name, price, image)
 		{ Rarity = rarity; }
-		internal Avatar(int price, Image image, Image previewImage, AvatarRarity rarity) : base(price, image, previewImage)
+		internal Avatar(string name, int price, Image image, Image previewImage, AvatarRarity rarity) : base(name, price, image, previewImage)
 		{ Rarity = rarity; }
 	}
 }

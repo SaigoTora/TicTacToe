@@ -54,6 +54,7 @@ namespace TicTacToe.Models.PlayerInfo
 
 			Coins -= item.Price;
 			AddItemToInventory(item);
+			item.SetDateTimePurchaseNow();
 		}
 		internal void SelectItem(Item item)
 		{
@@ -128,15 +129,18 @@ namespace TicTacToe.Models.PlayerInfo
 		private void SetDefaultInventory()
 		{
 			_inventory = new List<Item>();
-			ImageItem imageItem = new ImageItem(0, Preferences.BackgroundMenu);
-			Avatar profilePhotoItemMan = new Avatar(0, Properties.Resources.manAvatar1, AvatarRarity.Common);
-			Avatar profilePhotoItemWoman = new Avatar(0, Properties.Resources.womanAvatar1, AvatarRarity.Common);
-			ColorItem colorItem = new ColorItem(0, Preferences.BackgroundGame);
+			ImageItem imageItem = new ImageItem("imageItem1", 0, Preferences.BackgroundMenu);
+			Avatar profilePhotoItemMan = new Avatar("avatarItem1", 0, Properties.Resources.manAvatar1, AvatarRarity.Common);
+			Avatar profilePhotoItemWoman = new Avatar("avatarItem2", 0, Properties.Resources.womanAvatar1, AvatarRarity.Common);
+			ColorItem colorItem = new ColorItem("colorItem1", 0, Preferences.BackgroundGame);
 
 			_inventory.Add(imageItem);
 			_inventory.Add(profilePhotoItemMan);
 			_inventory.Add(profilePhotoItemWoman);
 			_inventory.Add(colorItem);
+
+			foreach (Item item in _inventory)
+				item.SetDateTimePurchaseNow();
 		}
 	}
 }
