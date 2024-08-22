@@ -174,7 +174,7 @@
 			this.pictureBoxCell1.TabStop = false;
 			this.pictureBoxCell1.Click += new System.EventHandler(this.PictureBoxCell_Click);
 			this.pictureBoxCell1.MouseEnter += new System.EventHandler(this.PictureBoxCell_MouseEnter);
-			this.pictureBoxCell1.MouseLeave += new System.EventHandler(this.PictureBoxCella_MouseLeave);
+			this.pictureBoxCell1.MouseLeave += new System.EventHandler(this.PictureBoxCell_MouseLeave);
 			// 
 			// pictureBoxCell2
 			// 
@@ -188,7 +188,7 @@
 			this.pictureBoxCell2.TabStop = false;
 			this.pictureBoxCell2.Click += new System.EventHandler(this.PictureBoxCell_Click);
 			this.pictureBoxCell2.MouseEnter += new System.EventHandler(this.PictureBoxCell_MouseEnter);
-			this.pictureBoxCell2.MouseLeave += new System.EventHandler(this.PictureBoxCella_MouseLeave);
+			this.pictureBoxCell2.MouseLeave += new System.EventHandler(this.PictureBoxCell_MouseLeave);
 			// 
 			// pictureBoxCell3
 			// 
@@ -202,7 +202,7 @@
 			this.pictureBoxCell3.TabStop = false;
 			this.pictureBoxCell3.Click += new System.EventHandler(this.PictureBoxCell_Click);
 			this.pictureBoxCell3.MouseEnter += new System.EventHandler(this.PictureBoxCell_MouseEnter);
-			this.pictureBoxCell3.MouseLeave += new System.EventHandler(this.PictureBoxCella_MouseLeave);
+			this.pictureBoxCell3.MouseLeave += new System.EventHandler(this.PictureBoxCell_MouseLeave);
 			// 
 			// pictureBoxCell4
 			// 
@@ -216,7 +216,7 @@
 			this.pictureBoxCell4.TabStop = false;
 			this.pictureBoxCell4.Click += new System.EventHandler(this.PictureBoxCell_Click);
 			this.pictureBoxCell4.MouseEnter += new System.EventHandler(this.PictureBoxCell_MouseEnter);
-			this.pictureBoxCell4.MouseLeave += new System.EventHandler(this.PictureBoxCella_MouseLeave);
+			this.pictureBoxCell4.MouseLeave += new System.EventHandler(this.PictureBoxCell_MouseLeave);
 			// 
 			// pictureBoxCell5
 			// 
@@ -230,7 +230,7 @@
 			this.pictureBoxCell5.TabStop = false;
 			this.pictureBoxCell5.Click += new System.EventHandler(this.PictureBoxCell_Click);
 			this.pictureBoxCell5.MouseEnter += new System.EventHandler(this.PictureBoxCell_MouseEnter);
-			this.pictureBoxCell5.MouseLeave += new System.EventHandler(this.PictureBoxCella_MouseLeave);
+			this.pictureBoxCell5.MouseLeave += new System.EventHandler(this.PictureBoxCell_MouseLeave);
 			// 
 			// pictureBoxCell6
 			// 
@@ -244,7 +244,7 @@
 			this.pictureBoxCell6.TabStop = false;
 			this.pictureBoxCell6.Click += new System.EventHandler(this.PictureBoxCell_Click);
 			this.pictureBoxCell6.MouseEnter += new System.EventHandler(this.PictureBoxCell_MouseEnter);
-			this.pictureBoxCell6.MouseLeave += new System.EventHandler(this.PictureBoxCella_MouseLeave);
+			this.pictureBoxCell6.MouseLeave += new System.EventHandler(this.PictureBoxCell_MouseLeave);
 			// 
 			// pictureBoxCell7
 			// 
@@ -258,7 +258,7 @@
 			this.pictureBoxCell7.TabStop = false;
 			this.pictureBoxCell7.Click += new System.EventHandler(this.PictureBoxCell_Click);
 			this.pictureBoxCell7.MouseEnter += new System.EventHandler(this.PictureBoxCell_MouseEnter);
-			this.pictureBoxCell7.MouseLeave += new System.EventHandler(this.PictureBoxCella_MouseLeave);
+			this.pictureBoxCell7.MouseLeave += new System.EventHandler(this.PictureBoxCell_MouseLeave);
 			// 
 			// pictureBoxCell8
 			// 
@@ -272,7 +272,7 @@
 			this.pictureBoxCell8.TabStop = false;
 			this.pictureBoxCell8.Click += new System.EventHandler(this.PictureBoxCell_Click);
 			this.pictureBoxCell8.MouseEnter += new System.EventHandler(this.PictureBoxCell_MouseEnter);
-			this.pictureBoxCell8.MouseLeave += new System.EventHandler(this.PictureBoxCella_MouseLeave);
+			this.pictureBoxCell8.MouseLeave += new System.EventHandler(this.PictureBoxCell_MouseLeave);
 			// 
 			// pictureBoxCell9
 			// 
@@ -286,7 +286,7 @@
 			this.pictureBoxCell9.TabStop = false;
 			this.pictureBoxCell9.Click += new System.EventHandler(this.PictureBoxCell_Click);
 			this.pictureBoxCell9.MouseEnter += new System.EventHandler(this.PictureBoxCell_MouseEnter);
-			this.pictureBoxCell9.MouseLeave += new System.EventHandler(this.PictureBoxCella_MouseLeave);
+			this.pictureBoxCell9.MouseLeave += new System.EventHandler(this.PictureBoxCell_MouseLeave);
 			// 
 			// guna2BorderlessForm
 			// 

@@ -33,8 +33,8 @@ namespace TicTacToe.Forms
 		private readonly CellType _playerCellType;
 		private readonly CellType _botCellType;
 
-		private readonly Bitmap previewCross;
-		private readonly Bitmap previewZero;
+		private readonly (Bitmap Cross, Bitmap Zero) _bitmapPreviewCell;
+		private readonly (string Cross, string Zero) _tagPreviewCell = ("Preview Cross", "Preview_Zero");
 
 		private CancellationTokenSource _cancellationTokenSource;
 		private bool _isFormClosingForNextRound = false;
@@ -68,8 +68,8 @@ namespace TicTacToe.Forms
 									{ pictureBoxCell4, pictureBoxCell5, pictureBoxCell6 },
 									{ pictureBoxCell7, pictureBoxCell8, pictureBoxCell9 } };
 
-			previewCross = Resources.cross.ChangeOpacity(PREVIEW_OPACITY_LEVEL);
-			previewZero = Resources.zero.ChangeOpacity(PREVIEW_OPACITY_LEVEL);
+			_bitmapPreviewCell.Cross = Resources.cross.ChangeOpacity(PREVIEW_OPACITY_LEVEL);
+			_bitmapPreviewCell.Zero = Resources.zero.ChangeOpacity(PREVIEW_OPACITY_LEVEL);
 		}
 
 		private void GameForm_Load(object sender, EventArgs e)
@@ -180,6 +180,7 @@ namespace TicTacToe.Forms
 		private void FillCellWithImage(Cell cell, PlayerType playerType)
 		{
 			PictureBox pictureBox = _pictureCells[cell.row, cell.column];
+			pictureBox.Tag = null;
 			pictureBox.Cursor = Cursors.Default;
 
 			if (_isBotMoveFirst && playerType == PlayerType.Human || !_isBotMoveFirst && playerType == PlayerType.Bot)
@@ -242,7 +243,7 @@ namespace TicTacToe.Forms
 		}
 		private async Task TimerForMove(CancellationToken cancellationToken)
 		{
-			const int TIMER_DELAY = 1200;
+			const int TIMER_DELAY = 900;
 
 			progressBarTimer.Maximum = TIMER_DELAY;
 			progressBarTimer.Value = TIMER_DELAY;
@@ -284,26 +285,13 @@ namespace TicTacToe.Forms
 		}
 		private Cell SelectCellAfterInactivity()
 		{
-			Cell defaultCell = new Cell(-1, -1);
-			Cell selectedCell = defaultCell;
-
 			for (int i = 0; i < _pictureCells.GetLength(0); i++)
-			{
 				for (int j = 0; j < _pictureCells.GetLength(1); j++)
-					if (_isBotMoveFirst && _pictureCells[i, j].Image.CompareTo(previewZero)
-						|| !_isBotMoveFirst && _pictureCells[i, j].Image.CompareTo(previewCross))
-					{
-						selectedCell = new Cell(i, j);
-						break;
-					}
-				if (!selectedCell.Equals(defaultCell))
-					break;
-			}
+					if (_isBotMoveFirst && _pictureCells[i, j].Tag?.ToString() == _tagPreviewCell.Zero
+						|| !_isBotMoveFirst && _pictureCells[i, j].Tag?.ToString() == _tagPreviewCell.Cross)
+						return new Cell(i, j);
 
-			if (selectedCell.Equals(defaultCell))
-				selectedCell = _field.GetRandomEmptyCell();
-
-			return selectedCell;
+			return _field.GetRandomEmptyCell();
 		}
 
 		private async Task FinishGame()
@@ -383,17 +371,26 @@ namespace TicTacToe.Forms
 				return;
 
 			if (_isBotMoveFirst)
-				pictureBox.Image = previewZero;
+			{
+				pictureBox.Image = _bitmapPreviewCell.Zero;
+				pictureBox.Tag = _tagPreviewCell.Zero;
+			}
 			else
-				pictureBox.Image = previewCross;
+			{
+				pictureBox.Image = _bitmapPreviewCell.Cross;
+				pictureBox.Tag = _tagPreviewCell.Cross;
+			}
 		}
-		private void PictureBoxCella_MouseLeave(object sender, EventArgs e)
+		private void PictureBoxCell_MouseLeave(object sender, EventArgs e)
 		{
 			if (!(sender is PictureBox pictureBox))
 				return;
 
-			if (pictureBox.Image == previewCross || pictureBox.Image == previewZero)
+			if (pictureBox.Image == _bitmapPreviewCell.Cross || pictureBox.Image == _bitmapPreviewCell.Zero)
+			{
 				pictureBox.Image = null;
+				pictureBox.Tag = null;
+			}
 		}
 
 		private void GameForm_FormClosed(object sender, FormClosedEventArgs e)
