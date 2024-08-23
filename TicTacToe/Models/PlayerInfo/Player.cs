@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using System.Runtime.Serialization;
 using TicTacToe.Models.CustomExceptions;
 using TicTacToe.Models.GameInfo;
 using TicTacToe.Models.PlayerItem;
@@ -129,18 +129,18 @@ namespace TicTacToe.Models.PlayerInfo
 		private void SetDefaultInventory()
 		{
 			_inventory = new List<Item>();
-			ImageItem imageItem = Preferences.BackgroundMenu;
-			Avatar profilePhotoItemMan = Preferences.Avatar;
-			Avatar profilePhotoItemWoman = new Avatar("avatarItem2", 0, Properties.Resources.womanAvatar1, AvatarRarity.Common);
-			ColorItem colorItem = Preferences.BackgroundGame;
-
-			_inventory.Add(imageItem);
-			_inventory.Add(profilePhotoItemMan);
-			_inventory.Add(profilePhotoItemWoman);
-			_inventory.Add(colorItem);
-
-			foreach (Item item in _inventory)
+			List<Item> defaultItems = ItemManager.GetDefaultItems();
+			foreach (Item item in defaultItems)
+			{
 				item.SetDateTimePurchaseNow();
+				_inventory.Add(item);
+			}
+		}
+		[OnDeserialized]
+		private void OnDeserialized(StreamingContext context)
+		{
+			for (int i = 0; i < _inventory.Count; i++)
+				_inventory[i] = ItemManager.FindItem(_inventory[i]);
 		}
 	}
 }

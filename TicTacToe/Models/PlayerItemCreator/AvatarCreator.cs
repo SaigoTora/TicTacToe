@@ -27,7 +27,7 @@ namespace TicTacToe.Models.PlayerItemCreator
 		{
 			PictureBox pictureBox = new PictureBox
 			{
-				Image = item.GetPreviewImage()
+				Image = item.PreviewImage
 			};
 
 			Label label = CreateLabelPrice(item, Color.Khaki);

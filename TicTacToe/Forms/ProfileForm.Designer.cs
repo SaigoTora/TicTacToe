@@ -28,15 +28,12 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.components = new System.ComponentModel.Container();
-			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ProfileForm));
 			this.labelBackgroundMenu = new System.Windows.Forms.Label();
 			this.labelAvatar = new System.Windows.Forms.Label();
 			this.labelBackgroundGame = new System.Windows.Forms.Label();
 			this.flpBackgroundMenu = new System.Windows.Forms.FlowLayoutPanel();
 			this.flpAvatar = new System.Windows.Forms.FlowLayoutPanel();
 			this.flpBackgroundGame = new System.Windows.Forms.FlowLayoutPanel();
-			this.guna2BorderlessForm = new Guna.UI2.WinForms.Guna2BorderlessForm(this.components);
 			this.panelMain = new Guna.UI2.WinForms.Guna2Panel();
 			this.buttonRename = new FontAwesome.Sharp.IconButton();
 			this.textBoxPlayerName = new System.Windows.Forms.TextBox();
@@ -132,15 +129,6 @@
 			this.flpBackgroundGame.Size = new System.Drawing.Size(680, 270);
 			this.flpBackgroundGame.TabIndex = 5;
 			this.flpBackgroundGame.Visible = false;
-			// 
-			// guna2BorderlessForm
-			// 
-			this.guna2BorderlessForm.BorderRadius = 30;
-			this.guna2BorderlessForm.ContainerControl = this;
-			this.guna2BorderlessForm.DockIndicatorTransparencyValue = 0.6D;
-			this.guna2BorderlessForm.DragForm = false;
-			this.guna2BorderlessForm.ResizeForm = false;
-			this.guna2BorderlessForm.TransparentWhileDrag = true;
 			// 
 			// panelMain
 			// 
@@ -298,8 +286,6 @@
 			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(20)))));
 			this.ClientSize = new System.Drawing.Size(1130, 750);
 			this.Controls.Add(this.panelMain);
-			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
 			this.MinimumSize = new System.Drawing.Size(1024, 700);
@@ -325,7 +311,6 @@
 		private System.Windows.Forms.FlowLayoutPanel flpBackgroundMenu;
 		private System.Windows.Forms.FlowLayoutPanel flpAvatar;
 		private System.Windows.Forms.FlowLayoutPanel flpBackgroundGame;
-		private Guna.UI2.WinForms.Guna2BorderlessForm guna2BorderlessForm;
 		private Guna.UI2.WinForms.Guna2Panel panelMain;
 		private Guna.UI2.WinForms.Guna2TabControl tabControl;
 		private System.Windows.Forms.TabPage tabPagePreferences;

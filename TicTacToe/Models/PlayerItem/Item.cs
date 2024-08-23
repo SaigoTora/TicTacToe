@@ -1,35 +1,48 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace TicTacToe.Models.PlayerItem
 {
 	[Serializable]
-	internal abstract class Item
+	internal abstract class Item : ICloneable
 	{
 		internal string Name { get; private set; }
-		internal int Price { get; private set; }
 
-		private DateTime _dateTimePurchase;
+		[NonSerialized]
+		private readonly int _price;
+		internal int Price => _price;
+
+		protected DateTime _dateTimePurchase;
 		internal DateTime DateTimePurchase
-		{ get => _dateTimePurchase.ToLocalTime(); }
+			=> _dateTimePurchase.ToLocalTime();
 
 		protected Item(string name, int price)
 		{
 			Name = name;
-			Price = price;
+			_price = price;
 		}
+		public abstract object Clone();
 
 		internal void SetDateTimePurchaseNow()
 			=> _dateTimePurchase = DateTime.UtcNow;
 
 		public override bool Equals(object obj)
 		{
-			if (!GetType().Equals(obj.GetType()))
-				return false;
-
-			return obj is Item item &&
-				   Name == item.Name &&
-				   Price == item.Price;
+			if (obj is Item item)
+			{
+				return Name == item.Name &&
+					   Price == item.Price;
+			}
+			return false;
 		}
-		public override int GetHashCode() => base.GetHashCode();
+		public override int GetHashCode()
+		{
+			int hashCode = 1557183321;
+			hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Name);
+			hashCode = hashCode * -1521134295 + _price.GetHashCode();
+			hashCode = hashCode * -1521134295 + _dateTimePurchase.GetHashCode();
+
+			return hashCode;
+		}
 	}
 }

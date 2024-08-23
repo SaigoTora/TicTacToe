@@ -24,7 +24,7 @@ namespace TicTacToe.Forms
 		{
 			InitializeComponent();
 
-			_customTitleBar = new CustomTitleBar(this, "Tic Tac Toe", Properties.Resources.ticTacToe, true, false);
+			_customTitleBar = new CustomTitleBar(this, "Tic Tac Toe", Properties.Resources.ticTacToe, maximizeBox: false);
 			_player = new Player();
 		}
 
@@ -82,9 +82,9 @@ namespace TicTacToe.Forms
 				PlayerPreferences preferences = new PlayerPreferences();
 
 				if (_isPlayerMan)
-					preferences.Avatar = new Avatar("avatarItem1", 0, Properties.Resources.manAvatar1, AvatarRarity.Common);
+					preferences.Avatar = ItemManager.GetDefaultAvatar(0);
 				else
-					preferences.Avatar = new Avatar("avatarItem2", 0, Properties.Resources.womanAvatar1, AvatarRarity.Common); ;
+					preferences.Avatar = ItemManager.GetDefaultAvatar(1);
 
 				_player = new Player(_player.Name, _player.Coins, preferences);
 

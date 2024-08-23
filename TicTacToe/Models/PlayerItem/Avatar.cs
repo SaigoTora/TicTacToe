@@ -6,11 +6,26 @@ namespace TicTacToe.Models.PlayerItem
 	[Serializable]
 	internal class Avatar : ImageItem
 	{
-		public AvatarRarity Rarity { get; private set; }
+		[NonSerialized]
+		private readonly AvatarRarity _rarity;
+		internal AvatarRarity Rarity => _rarity;
 
-		internal Avatar(string name, int price, Image image, AvatarRarity rarity) : base(name, price, image)
-		{ Rarity = rarity; }
-		internal Avatar(string name, int price, Image image, Image previewImage, AvatarRarity rarity) : base(name, price, image, previewImage)
-		{ Rarity = rarity; }
+		internal Avatar(string name, int price, Image image, AvatarRarity rarity)
+			: base(name, price, image)
+		{ _rarity = rarity; }
+		internal Avatar(string name, int price, Image image, Image previewImage, AvatarRarity rarity)
+			: base(name, price, image, previewImage)
+		{ _rarity = rarity; }
+
+		public override object Clone()
+		{
+			Image newImage = (Image)Image.Clone();
+			Image newPreviewImage = (Image)PreviewImage.Clone();
+
+			Avatar newAvatar = new Avatar(Name, Price, newImage, newPreviewImage, Rarity)
+			{ _dateTimePurchase = _dateTimePurchase };
+
+			return newAvatar;
+		}
 	}
 }

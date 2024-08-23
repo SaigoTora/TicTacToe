@@ -34,6 +34,8 @@ namespace TicTacToe.Forms
 		private const int HTBOTTOMRIGHT = 17;
 
 		private const int WM_NCHITTEST = 0x84;
+		internal Guna.UI2.WinForms.Guna2BorderlessForm guna2BorderlessForm;
+		private System.ComponentModel.IContainer components;
 		private const int RESIZE_HANDLE_SIZE = 10;
 
 		protected override void WndProc(ref Message m)
@@ -45,11 +47,11 @@ namespace TicTacToe.Forms
 
 			if (m.Msg == WM_NCHITTEST)
 			{
-				var cursor = this.PointToClient(Cursor.Position);
+				var cursor = PointToClient(Cursor.Position);
 
-				if (cursor.X >= this.ClientSize.Width - RESIZE_HANDLE_SIZE && cursor.Y >= this.ClientSize.Height - RESIZE_HANDLE_SIZE)
+				if (cursor.X >= ClientSize.Width - RESIZE_HANDLE_SIZE && cursor.Y >= ClientSize.Height - RESIZE_HANDLE_SIZE)
 					m.Result = (IntPtr)HTBOTTOMRIGHT;
-				else if (cursor.X <= RESIZE_HANDLE_SIZE && cursor.Y >= this.ClientSize.Height - RESIZE_HANDLE_SIZE)
+				else if (cursor.X <= RESIZE_HANDLE_SIZE && cursor.Y >= ClientSize.Height - RESIZE_HANDLE_SIZE)
 					m.Result = (IntPtr)HTBOTTOMLEFT;
 				else if (cursor.X <= RESIZE_HANDLE_SIZE && cursor.Y <= RESIZE_HANDLE_SIZE)
 					m.Result = (IntPtr)HTTOPLEFT;
@@ -66,5 +68,32 @@ namespace TicTacToe.Forms
 			}
 		}
 		#endregion
+		public BaseForm()
+		{
+			InitializeComponent();
+		}
+
+		private void InitializeComponent()
+		{
+			this.components = new System.ComponentModel.Container();
+			this.guna2BorderlessForm = new Guna.UI2.WinForms.Guna2BorderlessForm(this.components);
+			this.SuspendLayout();
+			// 
+			// guna2BorderlessForm
+			// 
+			this.guna2BorderlessForm.BorderRadius = 30;
+			this.guna2BorderlessForm.ContainerControl = this;
+			this.guna2BorderlessForm.DockIndicatorTransparencyValue = 0.6D;
+			this.guna2BorderlessForm.DragForm = false;
+			this.guna2BorderlessForm.TransparentWhileDrag = true;
+			// 
+			// BaseForm
+			// 
+			this.ClientSize = new System.Drawing.Size(284, 261);
+			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+			this.Name = "BaseForm";
+			this.ResumeLayout(false);
+
+		}
 	}
 }

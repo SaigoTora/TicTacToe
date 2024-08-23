@@ -29,10 +29,7 @@ namespace TicTacToe.Forms
 		private void ShopForm_Load(object sender, EventArgs e)
 		{
 			labelCoins.Text = _player.Coins.ToString();
-
-			SetImageItems();
-			SetAvatarItems();
-			SetColorItems();
+			FillListsOfItems();
 
 			ImageCreator menuBackCreator = new ImageCreator(_player, flpBackMenu, _fontPrice, DefaultSuceesBuy, 100);
 			AvatarCreator avatarCreator = new AvatarCreator(_player, flpAvatar, _fontPrice, DefaultSuceesBuy, 100);
@@ -42,48 +39,34 @@ namespace TicTacToe.Forms
 			CreateNotBoughtItems(_avatarItems, avatarCreator);
 			CreateNotBoughtItems(_colorItems, gameBackCreator);
 		}
-
-		#region ShopItems
-		private void SetImageItems()
+		private void FillListsOfItems()
 		{
-			_imageItems.Add(new ImageItem("imageItem2", 100, Properties.Resources.background5));
-			_imageItems.Add(new ImageItem("imageItem3", 100, Properties.Resources.background9));
-			_imageItems.Add(new ImageItem("imageItem4", 150, Properties.Resources.background2, Properties.Resources.mystery1));
-			_imageItems.Add(new ImageItem("imageItem5", 150, Properties.Resources.background3, Properties.Resources.mystery1));
-			_imageItems.Add(new ImageItem("imageItem6", 150, Properties.Resources.background6, Properties.Resources.mystery1));
-			_imageItems.Add(new ImageItem("imageItem7", 150, Properties.Resources.background7, Properties.Resources.mystery1));
-			_imageItems.Add(new ImageItem("imageItem8", 200, Properties.Resources.background4, Properties.Resources.mystery1));
-			_imageItems.Add(new ImageItem("imageItem9", 200, Properties.Resources.background8, Properties.Resources.mystery1));
-			_imageItems.Add(new ImageItem("imageItem10", 200, Properties.Resources.background10, Properties.Resources.mystery1));
+			Item[] allItems = ItemManager.GetAllItems();
+			for (int i = 0; i < allItems.Length; i++)
+				switch (allItems[i])
+				{
+					case Avatar avatar:
+						{
+							_avatarItems.Add(avatar);
+							break;
+						}
+					case ImageItem imageItem:
+						{
+							_imageItems.Add(imageItem);
+							break;
+						}
+					case ColorItem colorItem:
+						{
+							_colorItems.Add(colorItem);
+							break;
+						}
+					default:
+						{
+							throw new InvalidOperationException
+								($"Unknown item type: {allItems[i].GetType().Name}");
+						}
+				}
 		}
-		private void SetAvatarItems()
-		{
-			_avatarItems.Add(new Avatar("avatarItem3", 25, Properties.Resources.manAvatar2, AvatarRarity.Common));
-			_avatarItems.Add(new Avatar("avatarItem4", 25, Properties.Resources.womanAvatar2, AvatarRarity.Common));
-			_avatarItems.Add(new Avatar("avatarItem5", 25, Properties.Resources.manAvatar3, AvatarRarity.Common));
-			_avatarItems.Add(new Avatar("avatarItem6", 25, Properties.Resources.womanAvatar3, AvatarRarity.Common));
-			_avatarItems.Add(new Avatar("avatarItem7", 25, Properties.Resources.manAvatar4, AvatarRarity.Common));
-			_avatarItems.Add(new Avatar("avatarItem8", 25, Properties.Resources.womanAvatar4, AvatarRarity.Common));
-			_avatarItems.Add(new Avatar("avatarItem9", 25, Properties.Resources.manAvatar5, AvatarRarity.Common));
-			_avatarItems.Add(new Avatar("avatarItem10", 25, Properties.Resources.womanAvatar5, AvatarRarity.Common));
-			_avatarItems.Add(new Avatar("avatarItem11", 100, Properties.Resources.legendaryAvatar1, Properties.Resources.mystery1, AvatarRarity.Legendary));
-			_avatarItems.Add(new Avatar("avatarItem12", 100, Properties.Resources.legendaryAvatar2, Properties.Resources.mystery1, AvatarRarity.Legendary));
-			_avatarItems.Add(new Avatar("avatarItem13", 100, Properties.Resources.legendaryAvatar3, Properties.Resources.mystery1, AvatarRarity.Legendary));
-			_avatarItems.Add(new Avatar("avatarItem14", 100, Properties.Resources.legendaryAvatar4, Properties.Resources.mystery1, AvatarRarity.Legendary));
-		}
-		private void SetColorItems()
-		{
-			_colorItems.Add(new ColorItem("colorItem2", 35, Color.DimGray));
-			_colorItems.Add(new ColorItem("colorItem3", 35, Color.RosyBrown));
-			_colorItems.Add(new ColorItem("colorItem4", 35, Color.NavajoWhite));
-			_colorItems.Add(new ColorItem("colorItem5", 35, Color.Khaki));
-			_colorItems.Add(new ColorItem("colorItem6", 35, Color.DarkSeaGreen));
-			_colorItems.Add(new ColorItem("colorItem7", 35, Color.Turquoise));
-			_colorItems.Add(new ColorItem("colorItem8", 35, Color.SteelBlue));
-			_colorItems.Add(new ColorItem("colorItem9", 35, Color.MediumPurple));
-			_colorItems.Add(new ColorItem("colorItem10", 35, Color.PaleVioletRed));
-		}
-		#endregion
 
 		private void CreateNotBoughtItems<T>(List<T> shopItems, ItemCreator<T> creator) where T : Item
 		{

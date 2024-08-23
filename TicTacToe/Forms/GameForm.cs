@@ -49,9 +49,9 @@ namespace TicTacToe.Forms
 			_isBotMoveFirst = isBotFirst;
 			_roundManager = roundManager;
 			_mainForm = mainForm;
+
 			_customTitleBar = new CustomTitleBar(this, $"Round {_roundManager.CurrentNumberOfRounds} / {_roundManager.MaxNumberOfRounds}",
-				Resources.ticTacToe, true, false, false);
-			_customTitleBar.MoveFormElementsDown();
+				maximizeBox: false, canFormBeClosed: false);
 
 			_botCellType = isBotFirst ? CellType.Cross : CellType.Zero;
 			_playerCellType = isBotFirst ? CellType.Zero : CellType.Cross;

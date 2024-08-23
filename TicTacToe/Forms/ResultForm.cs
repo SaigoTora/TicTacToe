@@ -24,7 +24,6 @@ namespace TicTacToe.Forms
 			InitializeComponent();
 
 			_customTitleBar = new CustomTitleBar(this, "Results", Properties.Resources.info, false, false, false);
-			_customTitleBar.MoveFormElementsDown();
 			_player = player;
 			_winner = winner;
 			_difficult = difficult;

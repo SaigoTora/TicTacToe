@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using TicTacToe.Forms;
 using FontAwesome.Sharp;
 
 namespace TicTacToe.Models.Utilities
@@ -16,15 +17,17 @@ namespace TicTacToe.Models.Utilities
 		private static readonly Color _defaultNameColor = Color.FromArgb(255, 255, 255);
 		private readonly (bool Minimize, bool Maximize) _scalingForm;
 		private readonly bool _canFormBeClosed;
-		private readonly Form _form;
+		private readonly BaseForm _form;
 
 		internal Panel MainPanel { get; private set; } = new Panel();
+
+		private int _formBorderRadius;
 
 		private readonly Label _labelCaption;
 		private bool _isFormDragging;
 		private Point _dragCursorPoint, _dragFormPoint;
 
-		internal CustomTitleBar(Form form, string formName, System.Drawing.Icon icon = null,
+		internal CustomTitleBar(BaseForm form, string formName, System.Drawing.Icon icon = null,
 			bool minimizeBox = true, bool maximizeBox = true, bool canFormBeClosed = true)
 		{
 			_scalingForm.Minimize = minimizeBox;
@@ -38,11 +41,27 @@ namespace TicTacToe.Models.Utilities
 				MainPanel.Controls.Add(_labelCaption);
 			}
 			if (icon != null)
+			{
 				MainPanel.Controls.Add(CreateFormIcon(icon));
+				form.Icon = icon;
+			}
 
 			_form = form;
+			_form.MaximumSize = Screen.PrimaryScreen.WorkingArea.Size;
+			_form.Load += Form_Load;
 			_form.Controls.Add(MainPanel);
 		}
+
+		private void Form_Load(object sender, EventArgs e)
+		{
+			_formBorderRadius = _form.guna2BorderlessForm.BorderRadius;
+			if (_form.WindowState == FormWindowState.Maximized)
+				_form.guna2BorderlessForm.BorderRadius = 0;
+
+			MoveFormElementsDown(_form);
+			_form.Height += DEFAULT_PANEL_HEIGHT;
+		}
+
 		private void InitializeComponents()
 		{
 			InitializeMainPanel();
@@ -81,21 +100,9 @@ namespace TicTacToe.Models.Utilities
 		}
 
 		internal void ChangeFormCaption(string newCaption) => _labelCaption.Text = newCaption;
-		internal void MoveFormElementsDown()
-		{
-			MoveFormElementsDown(_form);
-			_form.Height = _form.Height + DEFAULT_PANEL_HEIGHT;
-		}
-		private void MoveFormElementsDown(Control control)
-		{
-			if (control.Controls.Count > 0 && !(control is NumericUpDown))
-				foreach (Control item in control.Controls)
-					MoveFormElementsDown(item);
-			else if (!control.Anchor.HasFlag(AnchorStyles.Bottom))
-				control.Location = new Point(control.Location.X, control.Location.Y + DEFAULT_PANEL_HEIGHT);
-		}
 		internal void Dispose()
 		{
+			_form.Load -= Form_Load;
 			ToggleEventHandlers(MainPanel, false);
 			foreach (Control control in MainPanel.Controls)
 			{
@@ -110,6 +117,14 @@ namespace TicTacToe.Models.Utilities
 				else if (control is Label label)
 					ToggleEventHandlers(label, false);
 			}
+		}
+		private void MoveFormElementsDown(Control control)
+		{
+			if (control.Controls.Count > 0 && !(control is NumericUpDown))
+				foreach (Control item in control.Controls)
+					MoveFormElementsDown(item);
+			else if (!control.Anchor.HasFlag(AnchorStyles.Bottom))
+				control.Location = new Point(control.Location.X, control.Location.Y + DEFAULT_PANEL_HEIGHT);
 		}
 
 		private IconButton CreateIconButton(IconChar iconChar)
@@ -175,11 +190,15 @@ namespace TicTacToe.Models.Utilities
 		{
 			if (_form.WindowState == FormWindowState.Maximized)
 			{
+				_form.guna2BorderlessForm.BorderRadius = _formBorderRadius;
 				_form.WindowState = FormWindowState.Normal;
 				_form.StartPosition = FormStartPosition.CenterScreen;
 			}
 			else
+			{
+				_form.guna2BorderlessForm.BorderRadius = 0;
 				_form.WindowState = FormWindowState.Maximized;
+			}
 		}
 		private void ToggleEventHandlers(Control control, bool subscribe)
 		{
@@ -199,7 +218,6 @@ namespace TicTacToe.Models.Utilities
 			}
 		}
 
-
 		#region EventHandlers
 		private void ButtonMaximize_Click(object sender, EventArgs e)
 		{
@@ -216,8 +234,19 @@ namespace TicTacToe.Models.Utilities
 
 		private void Control_DoubleClick(object sender, EventArgs e)
 		{ if (_scalingForm.Maximize) ToggleWindowState(); }
-		private void Control_MouseDown(object sender, EventArgs e)
+		private void Control_MouseDown(object sender, MouseEventArgs e)
 		{
+			if (_form.WindowState == FormWindowState.Maximized)
+			{
+				ToggleWindowState();
+				int screenWidth = Screen.PrimaryScreen.Bounds.Width;
+
+				// Transfer the cursor coordinate from the screen range to the form range
+				int offsetX = (int)(Cursor.Position.X / (double)screenWidth * _form.Width);
+				_form.Location = new Point(Cursor.Position.X - offsetX, Cursor.Position.Y);
+			}
+
+
 			_isFormDragging = true;
 			_dragCursorPoint = Cursor.Position;
 			_dragFormPoint = _form.Location;

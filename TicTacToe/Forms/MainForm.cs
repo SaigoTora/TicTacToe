@@ -32,11 +32,10 @@ namespace TicTacToe.Forms
 
 		public MainForm(Player player)
 		{
-			_customTitleBar = new CustomTitleBar(this, "Tic Tac Toe", Resources.ticTacToe, true, true);
+			_customTitleBar = new CustomTitleBar(this, "Tic Tac Toe", Resources.ticTacToe);
 			IsResizable = true;
 			InitializeComponent();
 
-			_customTitleBar.MoveFormElementsDown();
 			_panelSettingsWidth = panelSettingsMain.Width;
 			_player = player;
 		}
@@ -168,6 +167,8 @@ namespace TicTacToe.Forms
 			ProfileForm profileForm = new ProfileForm(_player);
 			profileForm.FormClosed += (s, args) => { Visible = true; };
 			Visible = false;
+			if (WindowState == FormWindowState.Maximized)
+				profileForm.WindowState = FormWindowState.Maximized;
 			profileForm.Show();
 		}
 		private void ButtonShop_Click(object sender, EventArgs e)
@@ -175,6 +176,8 @@ namespace TicTacToe.Forms
 			ShopForm shopForm = new ShopForm(_player);
 			shopForm.FormClosed += (s, args) => { Visible = true; };
 			Visible = false;
+			if (WindowState == FormWindowState.Maximized)
+				shopForm.WindowState = FormWindowState.Maximized;
 			shopForm.Show();
 		}
 		#endregion

@@ -93,6 +93,7 @@
       <DependentUpon>ProfileForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\CustomExceptions\NotEnoughCoinsToStartGameException.cs" />
+    <Compile Include="Models\PlayerItem\ItemManager.cs" />
     <Compile Include="Models\Utilities\CustomTitleBar.cs" />
     <Compile Include="Models\Utilities\Extensions.cs" />
     <Compile Include="Models\Utilities\FormEventHandlers.cs" />
@@ -133,6 +134,9 @@
     <Compile Include="Forms\ShopForm.Designer.cs">
       <DependentUpon>ShopForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Forms\BaseForm.resx">
+      <DependentUpon>BaseForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\GameForm.resx">
       <DependentUpon>GameForm.cs</DependentUpon>
       <SubType>Designer</SubType>

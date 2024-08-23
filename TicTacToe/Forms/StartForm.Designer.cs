@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StartForm));
 			this.labelGreeting = new System.Windows.Forms.Label();
 			this.labelName = new System.Windows.Forms.Label();
@@ -36,7 +35,6 @@
 			this.labelAvatar = new System.Windows.Forms.Label();
 			this.pictureBoxMan = new System.Windows.Forms.PictureBox();
 			this.pictureBoxWoman = new System.Windows.Forms.PictureBox();
-			this.guna2BorderlessForm = new Guna.UI2.WinForms.Guna2BorderlessForm(this.components);
 			this.buttonReady = new Guna.UI2.WinForms.Guna2GradientButton();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxMan)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxWoman)).BeginInit();
@@ -126,15 +124,6 @@
 			this.pictureBoxWoman.TabStop = false;
 			this.pictureBoxWoman.Click += new System.EventHandler(this.PictureBoxAvatar_Click);
 			// 
-			// guna2BorderlessForm
-			// 
-			this.guna2BorderlessForm.BorderRadius = 30;
-			this.guna2BorderlessForm.ContainerControl = this;
-			this.guna2BorderlessForm.DockIndicatorTransparencyValue = 0.6D;
-			this.guna2BorderlessForm.DragForm = false;
-			this.guna2BorderlessForm.ResizeForm = false;
-			this.guna2BorderlessForm.TransparentWhileDrag = true;
-			// 
 			// buttonReady
 			// 
 			this.buttonReady.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
@@ -179,7 +168,6 @@
 			this.Controls.Add(this.labelName);
 			this.Controls.Add(this.labelGreeting);
 			this.DoubleBuffered = true;
-			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
 			this.MaximizeBox = false;
 			this.Name = "StartForm";
 			this.ShowIcon = false;
@@ -201,7 +189,6 @@
 		private System.Windows.Forms.Label labelAvatar;
 		private System.Windows.Forms.PictureBox pictureBoxMan;
 		private System.Windows.Forms.PictureBox pictureBoxWoman;
-		private Guna.UI2.WinForms.Guna2BorderlessForm guna2BorderlessForm;
 		private Guna.UI2.WinForms.Guna2GradientButton buttonReady;
 	}
 }

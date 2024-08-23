@@ -28,8 +28,6 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.components = new System.ComponentModel.Container();
-			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
 			this.labelAuthor = new System.Windows.Forms.Label();
 			this.labelDifficult = new System.Windows.Forms.Label();
 			this.labelNumberOfRounds = new System.Windows.Forms.Label();
@@ -54,7 +52,6 @@
 			this.buttonMedium = new FontAwesome.Sharp.IconButton();
 			this.buttonEasy = new FontAwesome.Sharp.IconButton();
 			this.numericUpDownNumberOfRounds = new System.Windows.Forms.NumericUpDown();
-			this.guna2BorderlessForm = new Guna.UI2.WinForms.Guna2BorderlessForm(this.components);
 			this.panelLeft.SuspendLayout();
 			this.panelMenu.SuspendLayout();
 			this.panelProfile.SuspendLayout();
@@ -143,6 +140,8 @@
 			// 
 			// buttonPlay
 			// 
+			this.buttonPlay.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonPlay.Animated = true;
 			this.buttonPlay.BackColor = System.Drawing.Color.Transparent;
 			this.buttonPlay.BorderRadius = 20;
@@ -169,6 +168,8 @@
 			// 
 			// buttonExit
 			// 
+			this.buttonExit.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonExit.Animated = true;
 			this.buttonExit.BackColor = System.Drawing.Color.Transparent;
 			this.buttonExit.BorderRadius = 20;
@@ -195,6 +196,8 @@
 			// 
 			// buttonShop
 			// 
+			this.buttonShop.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonShop.Animated = true;
 			this.buttonShop.BackColor = System.Drawing.Color.Transparent;
 			this.buttonShop.BorderRadius = 20;
@@ -221,6 +224,8 @@
 			// 
 			// buttonProfile
 			// 
+			this.buttonProfile.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonProfile.Animated = true;
 			this.buttonProfile.BackColor = System.Drawing.Color.Transparent;
 			this.buttonProfile.BorderRadius = 20;
@@ -512,14 +517,6 @@
             0,
             0});
 			// 
-			// guna2BorderlessForm
-			// 
-			this.guna2BorderlessForm.BorderRadius = 30;
-			this.guna2BorderlessForm.ContainerControl = this;
-			this.guna2BorderlessForm.DockIndicatorTransparencyValue = 0.6D;
-			this.guna2BorderlessForm.DragForm = false;
-			this.guna2BorderlessForm.TransparentWhileDrag = true;
-			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -529,8 +526,6 @@
 			this.ClientSize = new System.Drawing.Size(1130, 750);
 			this.Controls.Add(this.panelMain);
 			this.ForeColor = System.Drawing.Color.Transparent;
-			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.MinimumSize = new System.Drawing.Size(1024, 700);
 			this.Name = "MainForm";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -579,6 +574,5 @@
 		private FontAwesome.Sharp.IconButton buttonHard;
 		private System.Windows.Forms.NumericUpDown numericUpDownNumberOfRounds;
 		private System.Windows.Forms.PictureBox pictureBoxCoin;
-		private Guna.UI2.WinForms.Guna2BorderlessForm guna2BorderlessForm;
 	}
 }

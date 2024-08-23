@@ -28,7 +28,6 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GameForm));
 			this.pictureBoxLine3 = new System.Windows.Forms.PictureBox();
 			this.pictureBoxLine4 = new System.Windows.Forms.PictureBox();
@@ -48,7 +47,6 @@
 			this.pictureBoxCell7 = new System.Windows.Forms.PictureBox();
 			this.pictureBoxCell8 = new System.Windows.Forms.PictureBox();
 			this.pictureBoxCell9 = new System.Windows.Forms.PictureBox();
-			this.guna2BorderlessForm = new Guna.UI2.WinForms.Guna2BorderlessForm(this.components);
 			this.progressBarTimer = new Guna.UI2.WinForms.Guna2CircleProgressBar();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxLine3)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxLine4)).BeginInit();
@@ -288,15 +286,6 @@
 			this.pictureBoxCell9.MouseEnter += new System.EventHandler(this.PictureBoxCell_MouseEnter);
 			this.pictureBoxCell9.MouseLeave += new System.EventHandler(this.PictureBoxCell_MouseLeave);
 			// 
-			// guna2BorderlessForm
-			// 
-			this.guna2BorderlessForm.BorderRadius = 30;
-			this.guna2BorderlessForm.ContainerControl = this;
-			this.guna2BorderlessForm.DockIndicatorTransparencyValue = 0.6D;
-			this.guna2BorderlessForm.DragForm = false;
-			this.guna2BorderlessForm.ResizeForm = false;
-			this.guna2BorderlessForm.TransparentWhileDrag = true;
-			// 
 			// progressBarTimer
 			// 
 			this.progressBarTimer.BackColor = System.Drawing.Color.Transparent;
@@ -343,7 +332,6 @@
 			this.Controls.Add(this.pictureBoxPlayerAvatar);
 			this.Controls.Add(this.labelBotName);
 			this.Controls.Add(this.labelPlayerName);
-			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
 			this.MaximizeBox = false;
 			this.Name = "GameForm";
 			this.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -391,7 +379,6 @@
 		private System.Windows.Forms.PictureBox pictureBoxCell7;
 		private System.Windows.Forms.PictureBox pictureBoxCell8;
 		private System.Windows.Forms.PictureBox pictureBoxCell9;
-		private Guna.UI2.WinForms.Guna2BorderlessForm guna2BorderlessForm;
 		private Guna.UI2.WinForms.Guna2CircleProgressBar progressBarTimer;
 	}
 }

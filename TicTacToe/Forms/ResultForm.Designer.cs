@@ -28,14 +28,12 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.components = new System.ComponentModel.Container();
 			this.labelResult = new System.Windows.Forms.Label();
 			this.labelCoinsResult = new System.Windows.Forms.Label();
 			this.labelDifficultTitle = new System.Windows.Forms.Label();
 			this.labelDifficult = new System.Windows.Forms.Label();
 			this.labelCurrentCoinsTitle = new System.Windows.Forms.Label();
 			this.labelTimeToClose = new System.Windows.Forms.Label();
-			this.guna2BorderlessForm = new Guna.UI2.WinForms.Guna2BorderlessForm(this.components);
 			this.pictureBoxCoin = new System.Windows.Forms.PictureBox();
 			this.labelCurrentCoins = new System.Windows.Forms.Label();
 			this.buttonBack = new Guna.UI2.WinForms.Guna2GradientButton();
@@ -109,15 +107,6 @@
 			this.labelTimeToClose.TabIndex = 9;
 			this.labelTimeToClose.Text = "This window will close in: 60 sec.";
 			this.labelTimeToClose.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-			// 
-			// guna2BorderlessForm
-			// 
-			this.guna2BorderlessForm.BorderRadius = 30;
-			this.guna2BorderlessForm.ContainerControl = this;
-			this.guna2BorderlessForm.DockIndicatorTransparencyValue = 0.6D;
-			this.guna2BorderlessForm.DragForm = false;
-			this.guna2BorderlessForm.ResizeForm = false;
-			this.guna2BorderlessForm.TransparentWhileDrag = true;
 			// 
 			// pictureBoxCoin
 			// 
@@ -212,7 +201,6 @@
 			this.Controls.Add(this.labelDifficultTitle);
 			this.Controls.Add(this.labelCoinsResult);
 			this.Controls.Add(this.labelResult);
-			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
 			this.Name = "ResultForm";
@@ -235,7 +223,6 @@
 		private System.Windows.Forms.Label labelDifficult;
 		private System.Windows.Forms.Label labelCurrentCoinsTitle;
 		private System.Windows.Forms.Label labelTimeToClose;
-		private Guna.UI2.WinForms.Guna2BorderlessForm guna2BorderlessForm;
 		private System.Windows.Forms.PictureBox pictureBoxCoin;
 		private System.Windows.Forms.Label labelCurrentCoins;
 		private Guna.UI2.WinForms.Guna2GradientButton buttonBack;

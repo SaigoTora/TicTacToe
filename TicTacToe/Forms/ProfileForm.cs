@@ -37,7 +37,6 @@ namespace TicTacToe.Forms
 			IsResizable = true;
 			InitializeComponent();
 
-			_customTitleBar.MoveFormElementsDown();
 			_player = player;
 
 			_preferences = new List<(Label, FlowLayoutPanel)>
