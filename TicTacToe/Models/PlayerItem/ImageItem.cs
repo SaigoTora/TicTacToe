@@ -30,7 +30,7 @@ namespace TicTacToe.Models.PlayerItem
 			Image newPreviewImage = (Image)PreviewImage.Clone();
 
 			ImageItem newImageItem = new ImageItem(Name, Price, newImage, newPreviewImage)
-			{ _dateTimePurchase = this._dateTimePurchase };
+			{ dateTimePurchase = this.dateTimePurchase };
 
 			return newImageItem;
 		}

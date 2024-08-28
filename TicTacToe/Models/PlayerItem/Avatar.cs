@@ -23,7 +23,7 @@ namespace TicTacToe.Models.PlayerItem
 			Image newPreviewImage = (Image)PreviewImage.Clone();
 
 			Avatar newAvatar = new Avatar(Name, Price, newImage, newPreviewImage, Rarity)
-			{ _dateTimePurchase = _dateTimePurchase };
+			{ dateTimePurchase = dateTimePurchase };
 
 			return newAvatar;
 		}

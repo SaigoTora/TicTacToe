@@ -124,6 +124,10 @@ namespace TicTacToe.Forms
 		}
 
 		private void StartForm_FormClosed(object sender, FormClosedEventArgs e)
-			=> _customTitleBar.Dispose();
+		{
+			FormEventHandlers.UnsubscribeFromHoverPictureBoxes(pictureBoxMan, pictureBoxWoman);
+			FormEventHandlers.UnsubscribeFromHoverButtons(buttonReady);
+			_customTitleBar.Dispose();
+		}
 	}
 }

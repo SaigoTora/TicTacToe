@@ -13,6 +13,7 @@ namespace TicTacToe
 		internal static readonly string EncryptKey = "pR7sF2xK6lO4mN7y";
 
 		/// <summary>
+		/// <summary>
 		/// The main entry point for the application.
 		/// </summary>
 		[STAThread]

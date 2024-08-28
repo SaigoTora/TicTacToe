@@ -34,29 +34,29 @@
 			this.flpBackgroundMenu = new System.Windows.Forms.FlowLayoutPanel();
 			this.flpAvatar = new System.Windows.Forms.FlowLayoutPanel();
 			this.flpBackgroundGame = new System.Windows.Forms.FlowLayoutPanel();
-			this.panelMain = new Guna.UI2.WinForms.Guna2Panel();
-			this.buttonRename = new FontAwesome.Sharp.IconButton();
+			this.buttonChangeName = new FontAwesome.Sharp.IconButton();
 			this.textBoxPlayerName = new System.Windows.Forms.TextBox();
 			this.pictureBoxPlayerAvatar = new System.Windows.Forms.PictureBox();
 			this.tabControl = new Guna.UI2.WinForms.Guna2TabControl();
 			this.tabPagePreferences = new System.Windows.Forms.TabPage();
-			this.buttonPreferencesRight = new FontAwesome.Sharp.IconButton();
+			this.panelPreferenceNavigation = new Guna.UI2.WinForms.Guna2Panel();
 			this.buttonPreferencesLeft = new FontAwesome.Sharp.IconButton();
-			this.panelMain.SuspendLayout();
+			this.buttonPreferencesRight = new FontAwesome.Sharp.IconButton();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxPlayerAvatar)).BeginInit();
 			this.tabControl.SuspendLayout();
 			this.tabPagePreferences.SuspendLayout();
+			this.panelPreferenceNavigation.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// labelBackgroundMenu
 			// 
 			this.labelBackgroundMenu.BackColor = System.Drawing.Color.Transparent;
-			this.labelBackgroundMenu.Dock = System.Windows.Forms.DockStyle.Top;
+			this.labelBackgroundMenu.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.labelBackgroundMenu.Font = new System.Drawing.Font("Trebuchet MS", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.labelBackgroundMenu.ForeColor = System.Drawing.Color.White;
-			this.labelBackgroundMenu.Location = new System.Drawing.Point(3, 3);
+			this.labelBackgroundMenu.Location = new System.Drawing.Point(0, 0);
 			this.labelBackgroundMenu.Name = "labelBackgroundMenu";
-			this.labelBackgroundMenu.Size = new System.Drawing.Size(1106, 50);
+			this.labelBackgroundMenu.Size = new System.Drawing.Size(470, 50);
 			this.labelBackgroundMenu.TabIndex = 1;
 			this.labelBackgroundMenu.Text = "Menu background";
 			this.labelBackgroundMenu.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -64,12 +64,12 @@
 			// labelAvatar
 			// 
 			this.labelAvatar.BackColor = System.Drawing.Color.Transparent;
-			this.labelAvatar.Dock = System.Windows.Forms.DockStyle.Top;
+			this.labelAvatar.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.labelAvatar.Font = new System.Drawing.Font("Trebuchet MS", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.labelAvatar.ForeColor = System.Drawing.Color.White;
-			this.labelAvatar.Location = new System.Drawing.Point(3, 53);
+			this.labelAvatar.Location = new System.Drawing.Point(0, 0);
 			this.labelAvatar.Name = "labelAvatar";
-			this.labelAvatar.Size = new System.Drawing.Size(1106, 50);
+			this.labelAvatar.Size = new System.Drawing.Size(470, 50);
 			this.labelAvatar.TabIndex = 2;
 			this.labelAvatar.Text = "Avatar";
 			this.labelAvatar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -78,12 +78,12 @@
 			// labelBackgroundGame
 			// 
 			this.labelBackgroundGame.BackColor = System.Drawing.Color.Transparent;
-			this.labelBackgroundGame.Dock = System.Windows.Forms.DockStyle.Top;
+			this.labelBackgroundGame.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.labelBackgroundGame.Font = new System.Drawing.Font("Trebuchet MS", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.labelBackgroundGame.ForeColor = System.Drawing.Color.White;
-			this.labelBackgroundGame.Location = new System.Drawing.Point(3, 103);
+			this.labelBackgroundGame.Location = new System.Drawing.Point(0, 0);
 			this.labelBackgroundGame.Name = "labelBackgroundGame";
-			this.labelBackgroundGame.Size = new System.Drawing.Size(1106, 50);
+			this.labelBackgroundGame.Size = new System.Drawing.Size(470, 50);
 			this.labelBackgroundGame.TabIndex = 3;
 			this.labelBackgroundGame.Text = "Game background";
 			this.labelBackgroundGame.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -96,11 +96,11 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.flpBackgroundMenu.AutoScroll = true;
 			this.flpBackgroundMenu.BackColor = System.Drawing.Color.Transparent;
-			this.flpBackgroundMenu.Location = new System.Drawing.Point(216, 80);
+			this.flpBackgroundMenu.Location = new System.Drawing.Point(249, 80);
 			this.flpBackgroundMenu.Name = "flpBackgroundMenu";
-			this.flpBackgroundMenu.Padding = new System.Windows.Forms.Padding(10, 10, 0, 0);
-			this.flpBackgroundMenu.Size = new System.Drawing.Size(680, 270);
-			this.flpBackgroundMenu.TabIndex = 7;
+			this.flpBackgroundMenu.Padding = new System.Windows.Forms.Padding(40, 10, 0, 0);
+			this.flpBackgroundMenu.Size = new System.Drawing.Size(700, 300);
+			this.flpBackgroundMenu.TabIndex = 1;
 			// 
 			// flpAvatar
 			// 
@@ -109,11 +109,11 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.flpAvatar.AutoScroll = true;
 			this.flpAvatar.BackColor = System.Drawing.Color.Transparent;
-			this.flpAvatar.Location = new System.Drawing.Point(216, 80);
+			this.flpAvatar.Location = new System.Drawing.Point(249, 80);
 			this.flpAvatar.Name = "flpAvatar";
-			this.flpAvatar.Padding = new System.Windows.Forms.Padding(10, 10, 0, 0);
-			this.flpAvatar.Size = new System.Drawing.Size(680, 270);
-			this.flpAvatar.TabIndex = 6;
+			this.flpAvatar.Padding = new System.Windows.Forms.Padding(40, 10, 0, 0);
+			this.flpAvatar.Size = new System.Drawing.Size(700, 300);
+			this.flpAvatar.TabIndex = 2;
 			this.flpAvatar.Visible = false;
 			// 
 			// flpBackgroundGame
@@ -123,46 +123,30 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.flpBackgroundGame.AutoScroll = true;
 			this.flpBackgroundGame.BackColor = System.Drawing.Color.Transparent;
-			this.flpBackgroundGame.Location = new System.Drawing.Point(216, 80);
+			this.flpBackgroundGame.Location = new System.Drawing.Point(249, 80);
 			this.flpBackgroundGame.Name = "flpBackgroundGame";
-			this.flpBackgroundGame.Padding = new System.Windows.Forms.Padding(10, 10, 0, 0);
-			this.flpBackgroundGame.Size = new System.Drawing.Size(680, 270);
-			this.flpBackgroundGame.TabIndex = 5;
+			this.flpBackgroundGame.Padding = new System.Windows.Forms.Padding(40, 10, 0, 0);
+			this.flpBackgroundGame.Size = new System.Drawing.Size(700, 300);
+			this.flpBackgroundGame.TabIndex = 3;
 			this.flpBackgroundGame.Visible = false;
 			// 
-			// panelMain
+			// buttonChangeName
 			// 
-			this.panelMain.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.panelMain.BackColor = System.Drawing.Color.Transparent;
-			this.panelMain.Controls.Add(this.buttonRename);
-			this.panelMain.Controls.Add(this.textBoxPlayerName);
-			this.panelMain.Controls.Add(this.pictureBoxPlayerAvatar);
-			this.panelMain.Controls.Add(this.tabControl);
-			this.panelMain.Location = new System.Drawing.Point(5, 0);
-			this.panelMain.Margin = new System.Windows.Forms.Padding(5, 0, 5, 5);
-			this.panelMain.Name = "panelMain";
-			this.panelMain.Size = new System.Drawing.Size(1120, 745);
-			this.panelMain.TabIndex = 0;
-			// 
-			// buttonRename
-			// 
-			this.buttonRename.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
-			this.buttonRename.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.buttonRename.FlatAppearance.BorderSize = 0;
-			this.buttonRename.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.buttonRename.IconChar = FontAwesome.Sharp.IconChar.Pencil;
-			this.buttonRename.IconColor = System.Drawing.Color.White;
-			this.buttonRename.IconFont = FontAwesome.Sharp.IconFont.Auto;
-			this.buttonRename.IconSize = 38;
-			this.buttonRename.Location = new System.Drawing.Point(567, 9);
-			this.buttonRename.Name = "buttonRename";
-			this.buttonRename.Size = new System.Drawing.Size(41, 41);
-			this.buttonRename.TabIndex = 2;
-			this.buttonRename.TabStop = false;
-			this.buttonRename.UseVisualStyleBackColor = false;
-			this.buttonRename.Click += new System.EventHandler(this.ButtonChangeName_Click);
+			this.buttonChangeName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
+			this.buttonChangeName.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.buttonChangeName.FlatAppearance.BorderSize = 0;
+			this.buttonChangeName.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.buttonChangeName.IconChar = FontAwesome.Sharp.IconChar.Pencil;
+			this.buttonChangeName.IconColor = System.Drawing.Color.White;
+			this.buttonChangeName.IconFont = FontAwesome.Sharp.IconFont.Auto;
+			this.buttonChangeName.IconSize = 38;
+			this.buttonChangeName.Location = new System.Drawing.Point(567, 9);
+			this.buttonChangeName.Name = "buttonChangeName";
+			this.buttonChangeName.Size = new System.Drawing.Size(41, 41);
+			this.buttonChangeName.TabIndex = 2;
+			this.buttonChangeName.TabStop = false;
+			this.buttonChangeName.UseVisualStyleBackColor = false;
+			this.buttonChangeName.Click += new System.EventHandler(this.ButtonChangeName_Click);
 			// 
 			// textBoxPlayerName
 			// 
@@ -175,6 +159,7 @@
 			this.textBoxPlayerName.ReadOnly = true;
 			this.textBoxPlayerName.Size = new System.Drawing.Size(350, 34);
 			this.textBoxPlayerName.TabIndex = 1;
+			this.textBoxPlayerName.TabStop = false;
 			this.textBoxPlayerName.Text = "AAAAAAAAAAAAAAAAAAAA";
 			this.textBoxPlayerName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBoxPlayerName_KeyDown);
 			this.textBoxPlayerName.Leave += new System.EventHandler(this.TextBoxPlayerName_Leave);
@@ -197,10 +182,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.tabControl.Controls.Add(this.tabPagePreferences);
 			this.tabControl.ItemSize = new System.Drawing.Size(400, 50);
-			this.tabControl.Location = new System.Drawing.Point(0, 295);
+			this.tabControl.Location = new System.Drawing.Point(0, 300);
 			this.tabControl.Name = "tabControl";
 			this.tabControl.SelectedIndex = 0;
-			this.tabControl.Size = new System.Drawing.Size(1120, 450);
+			this.tabControl.Size = new System.Drawing.Size(1200, 480);
 			this.tabControl.TabButtonHoverState.BorderColor = System.Drawing.Color.Empty;
 			this.tabControl.TabButtonHoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(52)))), ((int)(((byte)(70)))));
 			this.tabControl.TabButtonHoverState.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
@@ -225,11 +210,7 @@
 			// 
 			this.tabPagePreferences.AutoScroll = true;
 			this.tabPagePreferences.BackColor = System.Drawing.Color.Black;
-			this.tabPagePreferences.Controls.Add(this.buttonPreferencesRight);
-			this.tabPagePreferences.Controls.Add(this.buttonPreferencesLeft);
-			this.tabPagePreferences.Controls.Add(this.labelBackgroundGame);
-			this.tabPagePreferences.Controls.Add(this.labelAvatar);
-			this.tabPagePreferences.Controls.Add(this.labelBackgroundMenu);
+			this.tabPagePreferences.Controls.Add(this.panelPreferenceNavigation);
 			this.tabPagePreferences.Controls.Add(this.flpBackgroundMenu);
 			this.tabPagePreferences.Controls.Add(this.flpAvatar);
 			this.tabPagePreferences.Controls.Add(this.flpBackgroundGame);
@@ -237,46 +218,58 @@
 			this.tabPagePreferences.Location = new System.Drawing.Point(4, 54);
 			this.tabPagePreferences.Name = "tabPagePreferences";
 			this.tabPagePreferences.Padding = new System.Windows.Forms.Padding(3);
-			this.tabPagePreferences.Size = new System.Drawing.Size(1112, 392);
+			this.tabPagePreferences.Size = new System.Drawing.Size(1192, 422);
 			this.tabPagePreferences.TabIndex = 0;
 			this.tabPagePreferences.Text = "Preferences";
 			// 
-			// buttonPreferencesRight
+			// panelPreferenceNavigation
 			// 
-			this.buttonPreferencesRight.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.buttonPreferencesRight.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
-			this.buttonPreferencesRight.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.buttonPreferencesRight.FlatAppearance.BorderSize = 0;
-			this.buttonPreferencesRight.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.buttonPreferencesRight.IconChar = FontAwesome.Sharp.IconChar.CircleArrowRight;
-			this.buttonPreferencesRight.IconColor = System.Drawing.Color.White;
-			this.buttonPreferencesRight.IconFont = FontAwesome.Sharp.IconFont.Auto;
-			this.buttonPreferencesRight.IconSize = 45;
-			this.buttonPreferencesRight.Location = new System.Drawing.Point(685, -25);
-			this.buttonPreferencesRight.Name = "buttonPreferencesRight";
-			this.buttonPreferencesRight.Size = new System.Drawing.Size(41, 41);
-			this.buttonPreferencesRight.TabIndex = 4;
-			this.buttonPreferencesRight.TabStop = false;
-			this.buttonPreferencesRight.UseVisualStyleBackColor = false;
-			this.buttonPreferencesRight.Click += new System.EventHandler(this.ButtonPreferencesRight_Click);
+			this.panelPreferenceNavigation.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.panelPreferenceNavigation.BackColor = System.Drawing.Color.Transparent;
+			this.panelPreferenceNavigation.Controls.Add(this.buttonPreferencesLeft);
+			this.panelPreferenceNavigation.Controls.Add(this.buttonPreferencesRight);
+			this.panelPreferenceNavigation.Controls.Add(this.labelBackgroundMenu);
+			this.panelPreferenceNavigation.Controls.Add(this.labelAvatar);
+			this.panelPreferenceNavigation.Controls.Add(this.labelBackgroundGame);
+			this.panelPreferenceNavigation.Location = new System.Drawing.Point(361, 12);
+			this.panelPreferenceNavigation.Name = "panelPreferenceNavigation";
+			this.panelPreferenceNavigation.Size = new System.Drawing.Size(470, 50);
+			this.panelPreferenceNavigation.TabIndex = 0;
 			// 
 			// buttonPreferencesLeft
 			// 
-			this.buttonPreferencesLeft.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
+			this.buttonPreferencesLeft.BackColor = System.Drawing.Color.Transparent;
 			this.buttonPreferencesLeft.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.buttonPreferencesLeft.Dock = System.Windows.Forms.DockStyle.Left;
 			this.buttonPreferencesLeft.FlatAppearance.BorderSize = 0;
 			this.buttonPreferencesLeft.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.buttonPreferencesLeft.IconChar = FontAwesome.Sharp.IconChar.CircleArrowLeft;
 			this.buttonPreferencesLeft.IconColor = System.Drawing.Color.White;
 			this.buttonPreferencesLeft.IconFont = FontAwesome.Sharp.IconFont.Auto;
-			this.buttonPreferencesLeft.IconSize = 45;
-			this.buttonPreferencesLeft.Location = new System.Drawing.Point(380, -25);
+			this.buttonPreferencesLeft.Location = new System.Drawing.Point(0, 0);
 			this.buttonPreferencesLeft.Name = "buttonPreferencesLeft";
-			this.buttonPreferencesLeft.Size = new System.Drawing.Size(41, 41);
+			this.buttonPreferencesLeft.Size = new System.Drawing.Size(50, 50);
 			this.buttonPreferencesLeft.TabIndex = 0;
 			this.buttonPreferencesLeft.TabStop = false;
 			this.buttonPreferencesLeft.UseVisualStyleBackColor = false;
-			this.buttonPreferencesLeft.Click += new System.EventHandler(this.ButtonPreferencesLeft_Click);
+			// 
+			// buttonPreferencesRight
+			// 
+			this.buttonPreferencesRight.BackColor = System.Drawing.Color.Transparent;
+			this.buttonPreferencesRight.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.buttonPreferencesRight.Dock = System.Windows.Forms.DockStyle.Right;
+			this.buttonPreferencesRight.FlatAppearance.BorderSize = 0;
+			this.buttonPreferencesRight.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.buttonPreferencesRight.IconChar = FontAwesome.Sharp.IconChar.CircleArrowRight;
+			this.buttonPreferencesRight.IconColor = System.Drawing.Color.White;
+			this.buttonPreferencesRight.IconFont = FontAwesome.Sharp.IconFont.Auto;
+			this.buttonPreferencesRight.Location = new System.Drawing.Point(420, 0);
+			this.buttonPreferencesRight.Name = "buttonPreferencesRight";
+			this.buttonPreferencesRight.Size = new System.Drawing.Size(50, 50);
+			this.buttonPreferencesRight.TabIndex = 4;
+			this.buttonPreferencesRight.TabStop = false;
+			this.buttonPreferencesRight.UseVisualStyleBackColor = false;
 			// 
 			// ProfileForm
 			// 
@@ -284,23 +277,26 @@
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.AutoScroll = true;
 			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(20)))));
-			this.ClientSize = new System.Drawing.Size(1130, 750);
-			this.Controls.Add(this.panelMain);
+			this.ClientSize = new System.Drawing.Size(1200, 780);
+			this.Controls.Add(this.buttonChangeName);
+			this.Controls.Add(this.textBoxPlayerName);
+			this.Controls.Add(this.pictureBoxPlayerAvatar);
+			this.Controls.Add(this.tabControl);
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
-			this.MinimumSize = new System.Drawing.Size(1024, 700);
+			this.MinimumSize = new System.Drawing.Size(1076, 760);
 			this.Name = "ProfileForm";
 			this.ShowIcon = false;
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Profile";
 			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Shop_FormClosed);
 			this.Load += new System.EventHandler(this.ProfileForm_Load);
-			this.panelMain.ResumeLayout(false);
-			this.panelMain.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxPlayerAvatar)).EndInit();
 			this.tabControl.ResumeLayout(false);
 			this.tabPagePreferences.ResumeLayout(false);
+			this.panelPreferenceNavigation.ResumeLayout(false);
 			this.ResumeLayout(false);
+			this.PerformLayout();
 
 		}
 
@@ -311,13 +307,13 @@
 		private System.Windows.Forms.FlowLayoutPanel flpBackgroundMenu;
 		private System.Windows.Forms.FlowLayoutPanel flpAvatar;
 		private System.Windows.Forms.FlowLayoutPanel flpBackgroundGame;
-		private Guna.UI2.WinForms.Guna2Panel panelMain;
 		private Guna.UI2.WinForms.Guna2TabControl tabControl;
 		private System.Windows.Forms.TabPage tabPagePreferences;
 		private System.Windows.Forms.PictureBox pictureBoxPlayerAvatar;
 		private System.Windows.Forms.TextBox textBoxPlayerName;
-		private FontAwesome.Sharp.IconButton buttonRename;
+		private FontAwesome.Sharp.IconButton buttonChangeName;
 		private FontAwesome.Sharp.IconButton buttonPreferencesLeft;
 		private FontAwesome.Sharp.IconButton buttonPreferencesRight;
+		private Guna.UI2.WinForms.Guna2Panel panelPreferenceNavigation;
 	}
 }

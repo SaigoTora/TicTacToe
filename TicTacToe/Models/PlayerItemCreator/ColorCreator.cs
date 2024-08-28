@@ -1,5 +1,4 @@
-﻿using System;
-using System.Drawing;
+﻿using System.Drawing;
 using System.Windows.Forms;
 
 using TicTacToe.Models.PlayerInfo;
@@ -12,15 +11,15 @@ namespace TicTacToe.Models.PlayerItemCreator
 		/// <summary>
 		/// Constructor for creating items for purchase.
 		/// </summary>
-		internal ColorCreator(Player player, Panel mainPanel, Font priceFont, EventHandler successBuy, int itemSize)
-			: base(player, mainPanel, priceFont, successBuy, itemSize)
+		internal ColorCreator(Player player, Panel mainPanel, Font priceFont, int itemSize)
+			: base(player, mainPanel, priceFont, itemSize)
 		{ }
 
 		/// <summary>
 		/// Constructor for creating items to choose from.
 		/// </summary>
-		internal ColorCreator(Player player, Panel mainPanel, EventHandler selectItem, int itemSize)
-			: base(player, mainPanel, selectItem, itemSize)
+		internal ColorCreator(Player player, Panel mainPanel, int itemSize)
+			: base(player, mainPanel, itemSize)
 		{ }
 
 		internal override void CreateItemToBuy(ColorItem item)
@@ -31,21 +30,20 @@ namespace TicTacToe.Models.PlayerItemCreator
 				BorderStyle = BorderStyle.FixedSingle
 			};
 
-			Label label = CreateLabelPrice(item, Color.Khaki);
-			Panel currentPanel = CreateItem(pictureBox, label);
+			Label label = CreateLabelPrice(item);
+			CreateItemToBuy(item, pictureBox, label);
 
-			SubscribeControlToBuy(currentPanel, pictureBox, item);
+			SubscribeControlToBuy(pictureBox, item);
 		}
 		internal override PictureBox CreateItemToSelect(ColorItem item)
 		{
 			PictureBox pictureBox = new PictureBox
 			{
 				BackColor = item.Color,
-				BorderStyle = BorderStyle.FixedSingle,
-				Cursor = Cursors.Hand
+				BorderStyle = BorderStyle.FixedSingle
 			};
 
-			CreateItem(pictureBox);
+			CreateItemToSelect(pictureBox);
 			SubscribeToSelect(pictureBox, item);
 
 			return pictureBox;

@@ -105,11 +105,11 @@
 			// 
 			this.labelCoins.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelCoins.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
-			this.labelCoins.Font = new System.Drawing.Font("Courier New", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.labelCoins.Font = new System.Drawing.Font("Courier New", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.labelCoins.ForeColor = System.Drawing.Color.Khaki;
-			this.labelCoins.Location = new System.Drawing.Point(955, 8);
+			this.labelCoins.Location = new System.Drawing.Point(941, 8);
 			this.labelCoins.Name = "labelCoins";
-			this.labelCoins.Size = new System.Drawing.Size(116, 27);
+			this.labelCoins.Size = new System.Drawing.Size(130, 27);
 			this.labelCoins.TabIndex = 3;
 			this.labelCoins.Text = "999 999";
 			this.labelCoins.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -521,7 +521,6 @@
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.BackColor = System.Drawing.Color.White;
 			this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
 			this.ClientSize = new System.Drawing.Size(1130, 750);
 			this.Controls.Add(this.panelMain);

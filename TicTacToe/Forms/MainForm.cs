@@ -14,7 +14,7 @@ namespace TicTacToe.Forms
 {
 	internal partial class MainForm : BaseForm
 	{
-		private static readonly (Color Default, Color Selected) _backColorLabelName = (Color.FromArgb(125, 35, 35, 35), Color.CornflowerBlue);
+		private static readonly (Color Default, Color Hover) _backColorLabelName = (Color.FromArgb(125, 35, 35, 35), Color.CornflowerBlue);
 		private static readonly (Color Default, Color Selected) _foreColorDifficulty = (Color.Black, Color.White);
 		private static readonly (Color Default, Color Selected) _iconColorDifficulty = (Color.Black, Color.Lime);
 		private static readonly (IconChar Default, IconChar Selected) _iconCharDifficulty = (IconChar.Circle, IconChar.CircleCheck);
@@ -129,10 +129,8 @@ namespace TicTacToe.Forms
 
 		private void ButtonDifficulty_MouseEnter(object sender, EventArgs e)
 		{
-			if (!(sender is IconButton iconButton))
-				return;
-
-			iconButton.ForeColor = _foreColorDifficulty.Selected;
+			if (sender is IconButton iconButton)
+				iconButton.ForeColor = _foreColorDifficulty.Selected;
 		}
 		private void ButtonDifficulty_MouseLeave(object sender, EventArgs e)
 		{
@@ -209,17 +207,13 @@ namespace TicTacToe.Forms
 
 		private void LabelName_MouseEnter(object sender, EventArgs e)
 		{
-			if (!(sender is Label label))
-				return;
-
-			label.BackColor = _backColorLabelName.Selected;
+			if (sender is Label label)
+				label.BackColor = _backColorLabelName.Hover;
 		}
 		private void LabelName_MouseLeave(object sender, EventArgs e)
 		{
-			if (!(sender is Label label))
-				return;
-
-			label.BackColor = _backColorLabelName.Default;
+			if (sender is Label label)
+				label.BackColor = _backColorLabelName.Default;
 		}
 
 		private void Menu_VisibleChanged(object sender, EventArgs e)
@@ -231,7 +225,11 @@ namespace TicTacToe.Forms
 		private void ButtonExit_Click(object sender, EventArgs e) { Application.Exit(); }
 		private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
 		{
+			FormEventHandlers.UnsubscribeFromHoverPictureBoxes(pictureBoxAvatar);
+			FormEventHandlers.UnsubscribeFromHoverButtons(buttonPlay, buttonProfile,
+				buttonShop, buttonExit);
 			_customTitleBar.Dispose();
+
 			Serializator.Serialize(_player, Program.SerializePath, Program.EncryptKey);
 		}
 		#endregion

@@ -396,7 +396,12 @@ namespace TicTacToe.Forms
 		private void GameForm_FormClosed(object sender, FormClosedEventArgs e)
 		{
 			StopTimerToMove();
+
+			for (int i = 0; i < _pictureCells.GetLength(0); i++)
+				for (int j = 0; j < _pictureCells.GetLength(1); j++)
+					FormEventHandlers.UnsubscribeFromHoverPictureBoxes(_pictureCells[i, j]);
 			_customTitleBar.Dispose();
+
 			if (!_isFormClosingForNextRound)
 				_mainForm.Show();
 		}

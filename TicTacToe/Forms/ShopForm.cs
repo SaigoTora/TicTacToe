@@ -1,43 +1,92 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 
 using TicTacToe.Models.PlayerInfo;
 using TicTacToe.Models.PlayerItem;
 using TicTacToe.Models.PlayerItemCreator;
 using TicTacToe.Models.Utilities;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace TicTacToe.Forms
 {
-	internal partial class ShopForm : Form
+	internal partial class ShopForm : ItemManagementForm
 	{
-		private readonly Font _fontPrice = new Font("Courier New", 16F, FontStyle.Bold);
+		private readonly CustomTitleBar _customTitleBar;
 
-		private readonly Player _player;
 		private readonly List<ImageItem> _imageItems = new List<ImageItem>();
 		private readonly List<Avatar> _avatarItems = new List<Avatar>();
 		private readonly List<ColorItem> _colorItems = new List<ColorItem>();
 
-		internal ShopForm(Player player)
+		private readonly Size _startPreferencePanelSize;
+
+		internal ShopForm(Player player) : base(player)
 		{
+			IsResizable = true;
+			_customTitleBar = new CustomTitleBar(this, "Tic Tac Toe", Properties.Resources.shop);
 			InitializeComponent();
 
-			_player = player;
+			InitializeCreators();
+			_startPreferencePanelSize = panelPreferenceNavigation.Size;
+			preferences = new List<(Label, FlowLayoutPanel)>
+			{
+				(labelBackgroundMenu, flpBackgroundMenu),
+				(labelAvatar, flpAvatar),
+				(labelBackgroundGame, flpBackgroundGame)
+			};
 		}
 
 		private void ShopForm_Load(object sender, EventArgs e)
 		{
-			labelCoins.Text = _player.Coins.ToString();
+			tabControl.TabButtonSelectedState.FillColor = BackColor;
+			tabControl.TabMenuBackColor = BackColor;
+			tabPagePreferences.BackColor = BackColor;
+			labelCoins.Text = $"{player.Coins:N0}".Replace(',', ' ');
 			FillListsOfItems();
-
-			ImageCreator menuBackCreator = new ImageCreator(_player, flpBackMenu, _fontPrice, DefaultSuceesBuy, 100);
-			AvatarCreator avatarCreator = new AvatarCreator(_player, flpAvatar, _fontPrice, DefaultSuceesBuy, 100);
-			ColorCreator gameBackCreator = new ColorCreator(_player, flpBackGame, _fontPrice, DefaultSuceesBuy, 100);
 
 			CreateNotBoughtItems(_imageItems, menuBackCreator);
 			CreateNotBoughtItems(_avatarItems, avatarCreator);
 			CreateNotBoughtItems(_colorItems, gameBackCreator);
+
+			menuBackCreator.ConfirmPurchase += ConfirmPurchase;
+			avatarCreator.ConfirmPurchase += ConfirmPurchase;
+			gameBackCreator.ConfirmPurchase += ConfirmPurchase;
+			SubscribeToNavigationButtonEvents(buttonPreferencesLeft,
+				buttonPreferencesRight);
+			TryToCreateEmptyLabels();
+		}
+
+		private void InitializeCreators()
+		{
+			const int ITEM_SIZE = 100;
+			Font fontPrice = new Font("Courier New", 16F, FontStyle.Bold);
+
+			menuBackCreator = new ImageCreator(player, flpBackgroundMenu, fontPrice, ITEM_SIZE);
+			avatarCreator = new AvatarCreator(player, flpAvatar, fontPrice, ITEM_SIZE);
+			gameBackCreator = new ColorCreator(player, flpBackgroundGame, fontPrice, ITEM_SIZE);
+
+			menuBackCreator.Buy += DefaultBuy;
+			avatarCreator.Buy += DefaultBuy;
+			gameBackCreator.Buy += DefaultBuy;
+		}
+		private Label InitializeLabelEmpty(string text)
+		{
+			const int TOP_MARGIN = 30;
+
+			Label labelEmpty = new Label()
+			{
+				Text = text,
+				AutoSize = true,
+				Margin = new Padding(0, TOP_MARGIN, 0, 0),
+				TextAlign = ContentAlignment.MiddleCenter,
+				Font = new Font("Trebuchet MS", 16F),
+				BackColor = Color.Transparent,
+				ForeColor = Color.White,
+			};
+
+			return labelEmpty;
 		}
 		private void FillListsOfItems()
 		{
@@ -67,10 +116,9 @@ namespace TicTacToe.Forms
 						}
 				}
 		}
-
 		private void CreateNotBoughtItems<T>(List<T> shopItems, ItemCreator<T> creator) where T : Item
 		{
-			List<Item> playerItems = _player.GetPlayerItems();
+			List<Item> playerItems = player.GetPlayerItems();
 
 			foreach (T shopItem in shopItems)
 				for (int i = 0; i < playerItems.Count; i++)
@@ -84,15 +132,54 @@ namespace TicTacToe.Forms
 						creator.CreateItemToBuy(shopItem);// then the item should be created
 				}
 		}
-
-		private void DefaultSuceesBuy(object sender, EventArgs e)
+		private bool ConfirmPurchase(Item item)
 		{
-			labelCoins.Text = _player.Coins.ToString();
-			MessageBox.Show("The product has been successfully purchased!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+			DialogResult result = MessageBox.Show($"Are you sure you want to buy product \"{item.Name}\" for {item.Price} coins?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+			if (result == DialogResult.Yes)
+				return true;
+			return false;
 		}
+		private void DefaultBuy(object sender, ItemBuyEventArgs e)
+		{
+			if (e.Success)
+			{
+				labelCoins.Text = $"{player.Coins:N0}".Replace(',', ' ');
+				TryToCreateEmptyLabels();
+				MessageBox.Show("The product has been successfully purchased!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+			}
+			else
+			{
+				MessageBox.Show($"You don't have enough coins to buy this item!\nThis item costs {e.Item.Price} coins.",
+					"Not enough coins", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
+		}
+		private void TryToCreateEmptyLabels()
+		{
+			const string EMPTY_TEXT_BACK_MENU = "Unbelievable! All the menu backgrounds have been bought.";
+			const string EMPTY_TEXT_AVATAR = "No way! There are no more avatars in the store.";
+			const string EMPTY_TEXT_BACK_GAME = "Wow, looks like you bought all the backgrounds for the game.";
+
+			if (!flpBackgroundMenu.HasChildren)
+				flpBackgroundMenu.Controls.Add(InitializeLabelEmpty(EMPTY_TEXT_BACK_MENU));
+			if (!flpAvatar.HasChildren)
+				flpAvatar.Controls.Add(InitializeLabelEmpty(EMPTY_TEXT_AVATAR));
+			if (!flpBackgroundGame.HasChildren)
+				flpBackgroundGame.Controls.Add(InitializeLabelEmpty(EMPTY_TEXT_BACK_GAME));
+		}
+
 		private void Shop_FormClosed(object sender, FormClosedEventArgs e)
 		{
-			Serializator.Serialize(_player, Program.SerializePath, Program.EncryptKey);
+			UnsubscribeFromNavigationButtonEvents(buttonPreferencesLeft,
+				buttonPreferencesRight);
+			_customTitleBar.Dispose();
+
+			Serializator.Serialize(player, Program.SerializePath, Program.EncryptKey);
+		}
+
+		private void ShopForm_Resize(object sender, EventArgs e)
+		{
+			//panelPreferenceNavigation.Size = _startPreferencePanelSize;
 		}
 	}
 }

@@ -12,9 +12,9 @@ namespace TicTacToe.Models.PlayerItem
 		private readonly int _price;
 		internal int Price => _price;
 
-		protected DateTime _dateTimePurchase;
+		protected DateTime dateTimePurchase;
 		internal DateTime DateTimePurchase
-			=> _dateTimePurchase.ToLocalTime();
+			=> dateTimePurchase.ToLocalTime();
 
 		protected Item(string name, int price)
 		{
@@ -24,15 +24,14 @@ namespace TicTacToe.Models.PlayerItem
 		public abstract object Clone();
 
 		internal void SetDateTimePurchaseNow()
-			=> _dateTimePurchase = DateTime.UtcNow;
+			=> dateTimePurchase = DateTime.UtcNow;
 
 		public override bool Equals(object obj)
 		{
 			if (obj is Item item)
-			{
 				return Name == item.Name &&
 					   Price == item.Price;
-			}
+
 			return false;
 		}
 		public override int GetHashCode()
@@ -40,7 +39,7 @@ namespace TicTacToe.Models.PlayerItem
 			int hashCode = 1557183321;
 			hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Name);
 			hashCode = hashCode * -1521134295 + _price.GetHashCode();
-			hashCode = hashCode * -1521134295 + _dateTimePurchase.GetHashCode();
+			hashCode = hashCode * -1521134295 + dateTimePurchase.GetHashCode();
 
 			return hashCode;
 		}

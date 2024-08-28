@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 
 using TicTacToe.Models.PlayerInfo;
@@ -11,68 +12,73 @@ using TicTacToe.Models.Utilities;
 
 namespace TicTacToe.Forms
 {
-	internal partial class ProfileForm : BaseForm
+	internal partial class ProfileForm : ItemManagementForm
 	{
-		private const int SELECTED_ITEM_INDENT = 15;
-		private const string SELECTED_PICTURE_TAG = "Selected";
+		private const int SELECTED_ITEM_INDENT = 12;
+		private const string SELECTED_ITEM_TEXT = "Selected";
+		private const string SELECTED_PICTURE_TAG = "ItemSelected";
 
-		private static readonly (Color Default, Color DuringRenaming) _buttonRenameColor = (Color.White, Color.Yellow);
-		private readonly Player _player;
+		private static readonly (Color Default, Color DuringRenaming) _buttonChangeNameColor = (Color.White, Color.Yellow);
+
+		private readonly CustomTitleBar _customTitleBar;
 
 		private readonly List<PictureBox> _menuBackList = new List<PictureBox>();
 		private readonly List<PictureBox> _gameBackList = new List<PictureBox>();
 		private readonly List<PictureBox> _avatarList = new List<PictureBox>();
-		private readonly CustomTitleBar _customTitleBar;
 
 		private bool _isSelectedMenuBackCreated = false;
 		private bool _isSelectedGameBackCreated = false;
 		private bool _isSelectedAvatarCreated = false;
 
-		private readonly List<(Label label, FlowLayoutPanel flp)> _preferences;
-		private int _preferenceIndex = 0;
-
-		internal ProfileForm(Player player)
+		internal ProfileForm(Player player) : base(player)
 		{
-			_customTitleBar = new CustomTitleBar(this, $"{player.Name}");
 			IsResizable = true;
+			_customTitleBar = new CustomTitleBar(this, $"{player.Name}");
 			InitializeComponent();
 
-			_player = player;
-
-			_preferences = new List<(Label, FlowLayoutPanel)>
-				{
-					(labelBackgroundMenu, flpBackgroundMenu),
-					(labelAvatar, flpAvatar),
-					(labelBackgroundGame, flpBackgroundGame)
-				};
+			InitializeCreators();
+			preferences = new List<(Label, FlowLayoutPanel)>
+			{
+				(labelBackgroundMenu, flpBackgroundMenu),
+				(labelAvatar, flpAvatar),
+				(labelBackgroundGame, flpBackgroundGame)
+			};
 		}
 
 		private void ProfileForm_Load(object sender, EventArgs e)
 		{
-			const int ITEM_SIZE = 100;
+			buttonChangeName.IconColor = _buttonChangeNameColor.Default;
+			pictureBoxPlayerAvatar.Image = player.Preferences.Avatar.Image;
 
-			buttonPreferencesLeft.IconChar = FontAwesome.Sharp.IconChar.CircleArrowLeft;
-			pictureBoxPlayerAvatar.Image = _player.Preferences.Avatar.Image;
 			textBoxPlayerName.MaxLength = PlayerValidator.MAX_NAME_LENGTH;
-			textBoxPlayerName.Text = _player.Name;
+			textBoxPlayerName.Text = player.Name;
 			textBoxPlayerName.BackColor = BackColor;
-			buttonRename.IconColor = _buttonRenameColor.Default;
+
 			tabControl.TabButtonSelectedState.FillColor = BackColor;
 			tabControl.TabMenuBackColor = BackColor;
 			tabPagePreferences.BackColor = BackColor;
 
-			ImageCreator creatorMenuBack = new ImageCreator(_player, flpBackgroundMenu, SelectMenuBack, ITEM_SIZE);
-			AvatarCreator creatorAvatar = new AvatarCreator(_player, flpAvatar, SelectAvatar, ITEM_SIZE);
-			ColorCreator creatorGameBack = new ColorCreator(_player, flpBackgroundGame, SelectGameBack, ITEM_SIZE);
+			CreateItems();
+			SubscribeToNavigationButtonEvents(buttonPreferencesLeft,
+				buttonPreferencesRight);
+		}
+		private void InitializeCreators()
+		{
+			const int ITEM_SIZE = 100;
 
-			CreatePlayerItems(creatorMenuBack, creatorAvatar, creatorGameBack);
+			menuBackCreator = new ImageCreator(player, flpBackgroundMenu, ITEM_SIZE);
+			avatarCreator = new AvatarCreator(player, flpAvatar, ITEM_SIZE);
+			gameBackCreator = new ColorCreator(player, flpBackgroundGame, ITEM_SIZE);
+
+			menuBackCreator.Select += SelectMenuBack;
+			avatarCreator.Select += SelectAvatar;
+			gameBackCreator.Select += SelectGameBack;
 		}
 
 		#region CreateItems
-		private void CreatePlayerItems(ImageCreator menuBackCreator,
-			AvatarCreator avatarCreator, ColorCreator gameBackCreator)
+		private void CreateItems()
 		{
-			foreach (Item item in _player.GetPlayerItems())
+			foreach (Item item in player.GetPlayerItems())
 				switch (item)
 				{
 					case Avatar avatar:
@@ -102,9 +108,9 @@ namespace TicTacToe.Forms
 			PictureBox pictureBox = avatarCreator.CreateItemToSelect(avatar);
 			_avatarList.Add(pictureBox);
 
-			if (!_isSelectedAvatarCreated && avatar.Name == _player.Preferences.Avatar.Name)
+			if (!_isSelectedAvatarCreated && avatar.Name == player.Preferences.Avatar.Name)
 			{
-				SelectAvatar(pictureBox, EventArgs.Empty);
+				SelectAvatar(this, new ItemEventArgs(avatar, pictureBox));
 				_isSelectedAvatarCreated = true;
 			}
 		}
@@ -113,9 +119,9 @@ namespace TicTacToe.Forms
 			PictureBox pictureBox = menuBackCreator.CreateItemToSelect(imageItem);
 			_menuBackList.Add(pictureBox);
 
-			if (!_isSelectedMenuBackCreated && imageItem.Name == _player.Preferences.BackgroundMenu.Name)
+			if (!_isSelectedMenuBackCreated && imageItem.Name == player.Preferences.BackgroundMenu.Name)
 			{
-				SelectMenuBack(pictureBox, EventArgs.Empty);
+				SelectMenuBack(this, new ItemEventArgs(imageItem, pictureBox));
 				_isSelectedMenuBackCreated = true;
 			}
 		}
@@ -124,35 +130,35 @@ namespace TicTacToe.Forms
 			PictureBox pictureBox = gameBackCreator.CreateItemToSelect(colorItem);
 			_gameBackList.Add(pictureBox);
 
-			if (!_isSelectedGameBackCreated && colorItem.Name == _player.Preferences.BackgroundGame.Name)
+			if (!_isSelectedGameBackCreated && colorItem.Name == player.Preferences.BackgroundGame.Name)
 			{
-				SelectGameBack(pictureBox, EventArgs.Empty);
+				SelectGameBack(this, new ItemEventArgs(colorItem, pictureBox));
 				_isSelectedGameBackCreated = true;
 			}
 		}
 		#endregion
 
 		#region SelectAndDeselectItems
-		private void SelectAvatar(object sender, EventArgs e)
+		private void SelectAvatar(object sender, ItemEventArgs e)
 		{
-			if (!(sender is PictureBox selectedPicture))
+			if (!(e.ClickableControl is PictureBox selectedPicture))
 				return;
 
 			DeselectPreviousItem(_avatarList);
 			DefaultSelect(selectedPicture);
 			pictureBoxPlayerAvatar.Image = selectedPicture.Image;
 		}
-		private void SelectMenuBack(object sender, EventArgs e)
+		private void SelectMenuBack(object sender, ItemEventArgs e)
 		{
-			if (!(sender is PictureBox selectedPicture))
+			if (!(e.ClickableControl is PictureBox selectedPicture))
 				return;
 
 			DeselectPreviousItem(_menuBackList);
 			DefaultSelect(selectedPicture);
 		}
-		private void SelectGameBack(object sender, EventArgs e)
+		private void SelectGameBack(object sender, ItemEventArgs e)
 		{
-			if (!(sender is PictureBox selectedPicture))
+			if (!(e.ClickableControl is PictureBox selectedPicture))
 				return;
 
 			DeselectPreviousItem(_gameBackList);
@@ -187,23 +193,21 @@ namespace TicTacToe.Forms
 		{
 			Color foreColor = Color.Yellow;
 
-			new Label()
+			Label selectLabel = new Label()
 			{
 				Parent = parent,
-				Text = "Selected",
-				BackColor = Color.Transparent,
+				Text = SELECTED_ITEM_TEXT,
 				ForeColor = foreColor,
 				Dock = DockStyle.Bottom,
 				TextAlign = ContentAlignment.MiddleCenter,
-				Font = new Font("Trebuchet MS", 10F, FontStyle.Bold)
+				Font = new Font("Trebuchet MS", 10F, FontStyle.Bold),
 			};
-
+			selectLabel.Size = new Size(0, SELECTED_ITEM_INDENT*2);
 		}
 		private void DeleteSelectionLabel(Control parent)
 		{
-			foreach (Control child in parent.Controls)
-				if (child is Label label)
-					label.Dispose();
+			var labelToRemove = parent.Controls.OfType<Label>().FirstOrDefault(lbl => lbl.Text == SELECTED_ITEM_TEXT);
+			labelToRemove?.Dispose();
 		}
 		#endregion
 
@@ -212,14 +216,14 @@ namespace TicTacToe.Forms
 		{
 			if (textBoxPlayerName.ReadOnly)
 			{
-				buttonRename.IconColor = _buttonRenameColor.DuringRenaming;
+				buttonChangeName.IconColor = _buttonChangeNameColor.DuringRenaming;
 				textBoxPlayerName.ReadOnly = false;
 				textBoxPlayerName.Focus();
 				textBoxPlayerName.SelectAll();
 			}
-			else if (_player.Name == textBoxPlayerName.Text)
+			else if (player.Name == textBoxPlayerName.Text)
 			{
-				buttonRename.IconColor = _buttonRenameColor.Default;
+				buttonChangeName.IconColor = _buttonChangeNameColor.Default;
 				textBoxPlayerName.ReadOnly = true;
 				ActiveControl = null;
 			}
@@ -229,8 +233,8 @@ namespace TicTacToe.Forms
 		{
 			PlayerValidator validator = new PlayerValidator();
 
-			Player player = new Player(textBoxPlayerName.Text, _player.Coins, _player.Preferences);
-			ValidationResult result = validator.Validate(player);
+			Player newPlayer = new Player(textBoxPlayerName.Text, player.Coins, player.Preferences);
+			ValidationResult result = validator.Validate(newPlayer);
 			if (!result.IsValid)
 			{
 				MessageBox.Show(result.Errors[0].ErrorMessage, "Invalid input", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -248,10 +252,10 @@ namespace TicTacToe.Forms
 			{
 				ActiveControl = null;
 				textBoxPlayerName.ReadOnly = true;
-				buttonRename.IconColor = _buttonRenameColor.Default;
-				if (_player.Name != textBoxPlayerName.Text)
+				buttonChangeName.IconColor = _buttonChangeNameColor.Default;
+				if (player.Name != textBoxPlayerName.Text)
 				{
-					_player.ChangeName(textBoxPlayerName.Text);
+					player.ChangeName(textBoxPlayerName.Text);
 					_customTitleBar.ChangeFormCaption(textBoxPlayerName.Text);
 					MessageBox.Show("Your nickname has been successfully changed.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 				}
@@ -268,42 +272,13 @@ namespace TicTacToe.Forms
 			=> TryToChangeName();
 		#endregion
 
-		#region ChangePreferenceNavigation
-		private void SetPreferenceVisibility(int index)
-		{
-			for (int i = 0; i < _preferences.Count; i++)
-			{
-				_preferences[i].label.Visible = (i == index);
-				_preferences[i].flp.Visible = (i == index);
-			}
-		}
-		private void ButtonPreferencesLeft_Click(object sender, EventArgs e)
-		{
-			ActiveControl = null;
-
-			_preferenceIndex--;
-
-			if (_preferenceIndex < 0)
-				_preferenceIndex = _preferences.Count - 1;
-
-			SetPreferenceVisibility(_preferenceIndex);
-		}
-		private void ButtonPreferencesRight_Click(object sender, EventArgs e)
-		{
-			ActiveControl = null;
-
-			_preferenceIndex++;
-
-			if (_preferenceIndex >= _preferences.Count)
-				_preferenceIndex = 0;
-
-			SetPreferenceVisibility(_preferenceIndex);
-		}
-		#endregion
-
 		private void Shop_FormClosed(object sender, FormClosedEventArgs e)
 		{
-			Serializator.Serialize(_player, Program.SerializePath, Program.EncryptKey);
+			UnsubscribeFromNavigationButtonEvents(buttonPreferencesLeft,
+				buttonPreferencesRight);
+			_customTitleBar.Dispose();
+
+			Serializator.Serialize(player, Program.SerializePath, Program.EncryptKey);
 		}
 	}
 }

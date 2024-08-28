@@ -72,7 +72,6 @@ namespace TicTacToe.Forms
 		{
 			InitializeComponent();
 		}
-
 		private void InitializeComponent()
 		{
 			this.components = new System.ComponentModel.Container();
@@ -85,15 +84,23 @@ namespace TicTacToe.Forms
 			this.guna2BorderlessForm.ContainerControl = this;
 			this.guna2BorderlessForm.DockIndicatorTransparencyValue = 0.6D;
 			this.guna2BorderlessForm.DragForm = false;
+			this.guna2BorderlessForm.ResizeForm = false;
 			this.guna2BorderlessForm.TransparentWhileDrag = true;
 			// 
 			// BaseForm
 			// 
 			this.ClientSize = new System.Drawing.Size(284, 261);
-			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+			this.FormBorderStyle = FormBorderStyle.None;
 			this.Name = "BaseForm";
 			this.ResumeLayout(false);
+		}
+		protected override void Dispose(bool disposing)
+		{
+			if (disposing && (components != null))
+				components.Dispose();
 
+			guna2BorderlessForm?.Dispose();
+			base.Dispose(disposing);
 		}
 	}
 }

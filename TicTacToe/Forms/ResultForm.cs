@@ -132,6 +132,8 @@ namespace TicTacToe.Forms
 		{
 			_cancellationTokenSource.Cancel();
 			buttonBack.Click -= _backToMainForm;
+
+			FormEventHandlers.UnsubscribeFromHoverButtons(buttonBack, buttonPlay);
 			_customTitleBar.Dispose();
 		}
 	}

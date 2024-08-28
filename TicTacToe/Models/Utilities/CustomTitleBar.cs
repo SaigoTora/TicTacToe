@@ -6,7 +6,7 @@ using FontAwesome.Sharp;
 
 namespace TicTacToe.Models.Utilities
 {
-	internal class CustomTitleBar
+	internal class CustomTitleBar : IDisposable
 	{
 		private const int DEFAULT_PANEL_HEIGHT = 35;
 
@@ -52,6 +52,7 @@ namespace TicTacToe.Models.Utilities
 			_form.Controls.Add(MainPanel);
 		}
 
+		#region Initialization
 		private void Form_Load(object sender, EventArgs e)
 		{
 			_formBorderRadius = _form.guna2BorderlessForm.BorderRadius;
@@ -98,29 +99,9 @@ namespace TicTacToe.Models.Utilities
 
 			ToggleEventHandlers(MainPanel, true);
 		}
-
-		internal void ChangeFormCaption(string newCaption) => _labelCaption.Text = newCaption;
-		internal void Dispose()
-		{
-			_form.Load -= Form_Load;
-			ToggleEventHandlers(MainPanel, false);
-			foreach (Control control in MainPanel.Controls)
-			{
-				if (control is IconButton iconButton)
-				{
-					iconButton.Click -= ButtonMinimize_Click;
-					iconButton.Click -= ButtonMaximize_Click;
-					iconButton.Click -= ButtonExit_Click;
-				}
-				else if (control is PictureBox pictureBox)
-					ToggleEventHandlers(pictureBox, false);
-				else if (control is Label label)
-					ToggleEventHandlers(label, false);
-			}
-		}
 		private void MoveFormElementsDown(Control control)
 		{
-			if (control.Controls.Count > 0 && !(control is NumericUpDown))
+			if (control.HasChildren && !(control is NumericUpDown))
 				foreach (Control item in control.Controls)
 					MoveFormElementsDown(item);
 			else if (!control.Anchor.HasFlag(AnchorStyles.Bottom))
@@ -184,6 +165,28 @@ namespace TicTacToe.Models.Utilities
 			ToggleEventHandlers(labelName, true);
 
 			return labelName;
+		}
+		#endregion
+
+		internal void ChangeFormCaption(string newCaption) => _labelCaption.Text = newCaption;
+		public void Dispose()
+		{
+			_form.Load -= Form_Load;
+			ToggleEventHandlers(MainPanel, false);
+			foreach (Control control in MainPanel.Controls)
+			{
+				if (control is IconButton iconButton)
+				{
+					iconButton.Click -= ButtonMinimize_Click;
+					iconButton.Click -= ButtonMaximize_Click;
+					iconButton.Click -= ButtonExit_Click;
+				}
+				else if (control is PictureBox pictureBox)
+					ToggleEventHandlers(pictureBox, false);
+				else if (control is Label label)
+					ToggleEventHandlers(label, false);
+			}
+			MainPanel.Dispose();
 		}
 
 		private void ToggleWindowState()

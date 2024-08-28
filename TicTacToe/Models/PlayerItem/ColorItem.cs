@@ -19,7 +19,7 @@ namespace TicTacToe.Models.PlayerItem
 		public override object Clone()
 		{
 			ColorItem newColorItem = new ColorItem(Name, Price, Color)
-			{ _dateTimePurchase = _dateTimePurchase };
+			{ dateTimePurchase = dateTimePurchase };
 
 			return newColorItem;
 		}

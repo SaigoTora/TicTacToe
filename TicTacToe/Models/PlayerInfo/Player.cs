@@ -30,6 +30,7 @@ namespace TicTacToe.Models.PlayerInfo
 			SetDefaultInventory();
 		}
 
+		internal bool HaveEnoughCoins(int coins) => Coins >= coins;
 		internal void ChangeName(string newName) => Name = newName;
 		internal List<Item> GetPlayerItems()
 		{

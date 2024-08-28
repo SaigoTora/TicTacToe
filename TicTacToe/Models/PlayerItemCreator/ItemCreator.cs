@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 
 using TicTacToe.Models.CustomExceptions;
@@ -9,19 +11,19 @@ using TicTacToe.Models.Utilities;
 
 namespace TicTacToe.Models.PlayerItemCreator
 {
-	internal abstract class ItemCreator<T> where T : Item
+	internal abstract class ItemCreator<T> : IDisposable where T : Item
 	{// Abstract creator
+		internal Func<Item, bool> ConfirmPurchase;
+		internal event EventHandler<ItemEventArgs> Select;
+		internal event EventHandler<ItemBuyEventArgs> Buy;
+
+		private readonly (Color Default, Color NotEnoughCoins) priceForeColor = (Color.Khaki, Color.FromArgb(191, 34, 51));
 		private readonly Player _player;
 		private readonly Panel _mainPanel;
-
 		private readonly Font _priceFont;
-		private readonly EventHandler _successBuy;
-		private readonly EventHandler _selectItem;
-
+		private readonly Dictionary<Control, Item> _controlItemMap = new Dictionary<Control, Item>();
+		private readonly List<(Item, PictureBox, Label)> _createdItems = new List<(Item, PictureBox, Label)>();
 		private readonly int _itemSize;
-
-		private int _padding;
-		private int _bottomPadding;
 
 
 		/// <summary>
@@ -32,12 +34,11 @@ namespace TicTacToe.Models.PlayerItemCreator
 		/// <param name="priceFont">Font for item price.</param>
 		/// <param name="successBuy">Successful purchase event handler.</param>
 		/// <param name="itemSize">Size for each item.</param>
-		internal ItemCreator(Player player, Panel mainPanel, Font priceFont, EventHandler successBuy, int itemSize)
+		internal ItemCreator(Player player, Panel mainPanel, Font priceFont, int itemSize)
 		{
 			_player = player;
 			_mainPanel = mainPanel;
 			_priceFont = priceFont;
-			_successBuy = successBuy;
 			_itemSize = itemSize;
 		}
 
@@ -48,11 +49,10 @@ namespace TicTacToe.Models.PlayerItemCreator
 		/// <param name="mainPanel">The panel where all created items will be stored.</param>
 		/// <param name="selectItem">Item selection event handler.</param>
 		/// <param name="itemSize">Size for each item.</param>
-		internal ItemCreator(Player player, Panel mainPanel, EventHandler selectItem, int itemSize)
+		internal ItemCreator(Player player, Panel mainPanel, int itemSize)
 		{
 			_player = player;
 			_mainPanel = mainPanel;
-			_selectItem = selectItem;
 			_itemSize = itemSize;
 		}
 
@@ -71,84 +71,184 @@ namespace TicTacToe.Models.PlayerItemCreator
 		internal abstract PictureBox CreateItemToSelect(T item);
 		#endregion
 
-		/// <summary>
-		/// The method creates an item.
-		/// </summary>
-		/// <param name="pictureBox">Displaying the contents of an item.</param>
-		/// <param name="labelPrice">Displaying the price of an item.</param>
-		/// <param name="percentPicturePadding">The padding between the image and the panel in percent.</param>
-		/// <returns>Returns the created panel with information about the item.</returns>
-		/// <exception cref="ArgumentNullException">If PictureBox is null, an exception will be thrown.</exception>
-		protected Panel CreateItem(PictureBox pictureBox, Label labelPrice = null, int percentPicturePadding = 12)
+		private Panel CreateItem(PictureBox pictureBox, int padding, int bottomPadding)
 		{
 			if (pictureBox == null)
 				throw new ArgumentNullException();
 
-			_padding = percentPicturePadding * _itemSize / 100;
-			_bottomPadding = 0;
-
-			if (labelPrice == null)// Calculating the bottom padding
-				_bottomPadding = _padding;
-			else
-				_bottomPadding = labelPrice.Font.Height + (int)(_padding * 0.25);
-
-			pictureBox.Location = new Point(_padding, _padding);
-			pictureBox.Size = new Size(_itemSize, _itemSize);
-			pictureBox.SizeMode = PictureBoxSizeMode.Zoom;
-
+			const int BOTTOM_MARGIN = 10;
+			CreatePicture(pictureBox, padding);
 			Panel currentPanel = new Panel
 			{
-				Size = new Size(_itemSize + _padding + _padding,
-				_itemSize + _padding + _bottomPadding)
+				Size = new Size(_itemSize + padding + padding,
+				_itemSize + padding + bottomPadding),
+				Margin = new Padding(0, 0, 0, BOTTOM_MARGIN)
 			};
 
 			currentPanel.Controls.Add(pictureBox);
-			if (labelPrice != null)
-				currentPanel.Controls.Add(labelPrice);
 
 			_mainPanel.Controls.Add(currentPanel);
 			FormEventHandlers.SubscribeToHoverPictureBoxes(pictureBox);
 
 			return currentPanel;
 		}
-		protected Label CreateLabelPrice(T item, Color foreColor, ContentAlignment textAlign = ContentAlignment.MiddleCenter)
+
+		/// <summary>
+		/// The method creates an item for purchase.
+		/// </summary>
+		/// <param name="item">The item being purchased.</param>
+		/// <param name="pictureBox">Displaying the contents of an item.</param>
+		/// <param name="labelPrice">Displaying the price of an item.</param>
+		/// <param name="percentPicturePadding">The padding between the image and the panel in percent.</param>
+		/// <exception cref="ArgumentOutOfRangeException">If percentPicturePadding is less than 0 or greater than 100, an exception will be thrown.</exception>
+		/// <exception cref="ArgumentNullException">If labelPrice is null, an exception will be thrown.</exception>
+		protected void CreateItemToBuy(Item item, PictureBox pictureBox, Label labelPrice, int percentPicturePadding = 12)
+		{
+			if (percentPicturePadding < 0 || percentPicturePadding > 100)
+				throw new ArgumentOutOfRangeException();
+
+			if (labelPrice == null)
+				throw new ArgumentNullException();
+
+			const double PADDING_SCALER = 0.5;
+			int padding = percentPicturePadding * _itemSize / 100;
+			int bottomPadding = labelPrice.Font.Height + (int)(padding * PADDING_SCALER);
+
+			Panel currentPanel = CreateItem(pictureBox, padding, bottomPadding);
+
+			UpdatePurchaseIndicators(item, pictureBox, labelPrice);
+			_createdItems.Add((item, pictureBox, labelPrice));
+			currentPanel.Controls.Add(labelPrice);
+		}
+		/// <summary>
+		/// The method creates a selectable item.
+		/// </summary>
+		/// <param name="pictureBox">Displaying the contents of an item.</param>
+		/// <param name="percentPicturePadding">The padding between the image and the panel in percent.</param>
+		/// <exception cref="ArgumentOutOfRangeException">If percentPicturePadding is less than 0 or greater than 100, an exception will be thrown.</exception>
+		protected void CreateItemToSelect(PictureBox pictureBox, int percentPicturePadding = 12)
+		{
+			if (percentPicturePadding < 0 || percentPicturePadding > 100)
+				throw new ArgumentOutOfRangeException();
+
+			int padding = percentPicturePadding * _itemSize / 100;
+
+			CreateItem(pictureBox, padding, padding);
+			_createdItems.Add((null, pictureBox, null));
+		}
+		protected Label CreateLabelPrice(T item, ContentAlignment textAlign = ContentAlignment.MiddleCenter)
 		{
 			Label priceLabel = new Label
 			{
 				Text = item.Price.ToString(),
 				Font = _priceFont,
-				Dock = DockStyle.Bottom
+				Dock = DockStyle.Bottom,
+				TextAlign = textAlign,
+				ForeColor = priceForeColor.Default
 			};
 			priceLabel.Size = new Size(0, priceLabel.Font.Height);
-			priceLabel.TextAlign = textAlign;
-			priceLabel.ForeColor = foreColor;
 
 			return priceLabel;
 		}
 
-		protected void SubscribeControlToBuy(Panel parentPanel, Control control, Item item)
+		private void CreatePicture(PictureBox pictureBox, int padding)
 		{
-			control.Click += (s, e) =>
-			{
-				try
-				{
-					_player.BuyItem(item);
-					_successBuy(control, e);
-					parentPanel.Visible = false;
-				}
-				catch (NotEnoughCoinsToBuyException coinsException)
-				{
-					MessageBox.Show(coinsException.Message, "Not enough coins", MessageBoxButtons.OK, MessageBoxIcon.Error);
-				}
-			};
+			pictureBox.Location = new Point(padding, padding);
+			pictureBox.Size = new Size(_itemSize, _itemSize);
+			pictureBox.SizeMode = PictureBoxSizeMode.Zoom;
+			pictureBox.Cursor = Cursors.Hand;
 		}
+		internal void UpdatePurchaseIndicatorsForAllItems()
+		{
+			foreach (var item in _createdItems)
+				UpdatePurchaseIndicators(item.Item1, item.Item2, item.Item3);
+		}
+		private void UpdatePurchaseIndicators(Item item, PictureBox pictureBox, Label labelPrice)
+		{
+			if (_player.HaveEnoughCoins(item.Price))
+			{
+				pictureBox.Cursor = Cursors.Hand;
+				labelPrice.ForeColor = priceForeColor.Default;
+			}
+			else
+			{
+				pictureBox.Cursor = Cursors.No;
+				labelPrice.ForeColor = priceForeColor.NotEnoughCoins;
+			}
+		}
+
+		#region ClickEventHandlers
+		protected void SubscribeControlToBuy(Control control, Item item)
+		{
+			_controlItemMap[control] = item;
+			control.Click += ControlBuy_Click;
+		}
+		private void ControlBuy_Click(object sender, EventArgs e)
+		{
+			if (!(sender is Control control))
+				return;
+
+			Item item = _controlItemMap[control];
+			if (_player.HaveEnoughCoins(item.Price) && ConfirmPurchase != null && !ConfirmPurchase(item))
+				return;
+
+			bool success = true;
+			try
+			{
+				_player.BuyItem(item);
+				if (control is PictureBox pictureBox)
+					FormEventHandlers.UnsubscribeFromHoverPictureBoxes(pictureBox);
+				control.Click -= ControlBuy_Click;
+				control.Parent.Dispose();
+				UpdatePurchaseIndicatorsForAllItems();
+			}
+			catch (NotEnoughCoinsToBuyException)
+			{ success = false; }
+			finally
+			{ OnBuy(new ItemBuyEventArgs(item, control, success)); }
+		}
+		protected void OnBuy(ItemBuyEventArgs e)
+		{
+			var temp = System.Threading.Volatile.Read(ref Buy);
+			temp?.Invoke(this, e);
+		}
+
 		protected void SubscribeToSelect(Control control, Item item)
 		{
-			control.Click += (s, e) =>
-			{
-				_player.SelectItem(item);
-				_selectItem(control, e);
-			};
+			_controlItemMap[control] = item;
+			control.Click += ControlSelect_Click;
+		}
+		private void ControlSelect_Click(object sender, EventArgs e)
+		{
+			if (!(sender is Control control))
+				return;
+
+			Item item = _controlItemMap[control];
+
+			_player.SelectItem(item);
+			OnSelect(new ItemEventArgs(item, control));
+		}
+		protected void OnSelect(ItemEventArgs e)
+		{
+			var temp = System.Threading.Volatile.Read(ref Select);
+			temp?.Invoke(this, e);
+		}
+		#endregion
+
+		public void Dispose()
+		{
+			IEnumerable<PictureBox> pictureBoxes = _createdItems.Select(item => item.Item2);
+			FormEventHandlers.UnsubscribeFromHoverPictureBoxes(pictureBoxes);
+
+			foreach (var item in _controlItemMap)
+				if (item.Key != null)
+				{
+					item.Key.Click -= ControlBuy_Click;
+					item.Key.Click -= ControlSelect_Click;
+					item.Key.Parent?.Dispose();
+				}
+
+			_controlItemMap?.Clear();
 		}
 	}
 }

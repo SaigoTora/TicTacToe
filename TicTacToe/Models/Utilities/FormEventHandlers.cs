@@ -1,11 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using Guna.UI2.WinForms;
 
 namespace TicTacToe.Models.Utilities
 {
-	public static class FormEventHandlers
+	internal static class FormEventHandlers
 	{
 		private const byte PICTURE_SIZE_PERCENT_SCALER = 10;
 
@@ -16,12 +17,24 @@ namespace TicTacToe.Models.Utilities
 		private static int widthScaler, heightScaler;// Current values ​​for increase in width and height
 
 		#region PictureBoxHover
-		public static void SubscribeToHoverPictureBoxes(params PictureBox[] pictureBoxes)
+		internal static void SubscribeToHoverPictureBoxes(params PictureBox[] pictureBoxes)
 		{
 			foreach (PictureBox pictureBox in pictureBoxes)
 			{
 				pictureBox.MouseEnter += PictureBox_MouseEnter;
 				pictureBox.MouseLeave += PictureBox_MouseLeave;
+			}
+		}
+		internal static void UnsubscribeFromHoverPictureBoxes(params PictureBox[] pictureBoxes)
+		{
+			UnsubscribeFromHoverPictureBoxes((IEnumerable<PictureBox>)pictureBoxes);
+		}
+		internal static void UnsubscribeFromHoverPictureBoxes(IEnumerable<PictureBox> pictureBoxes)
+		{
+			foreach (PictureBox pictureBox in pictureBoxes)
+			{
+				pictureBox.MouseEnter -= PictureBox_MouseEnter;
+				pictureBox.MouseLeave -= PictureBox_MouseLeave;
 			}
 		}
 		private static void PictureBox_MouseEnter(object sender, EventArgs e)
@@ -43,12 +56,20 @@ namespace TicTacToe.Models.Utilities
 		#endregion
 
 		#region ButtonHover
-		public static void SubscribeToHoverButtons(params Guna2GradientButton[] buttons)
+		internal static void SubscribeToHoverButtons(params Guna2GradientButton[] buttons)
 		{
 			foreach (Guna2GradientButton button in buttons)
 			{
 				button.MouseEnter += Button_MouseEnter;
 				button.MouseLeave += Button_MouseLeave;
+			}
+		}
+		internal static void UnsubscribeFromHoverButtons(params Guna2GradientButton[] buttons)
+		{
+			foreach (Guna2GradientButton button in buttons)
+			{
+				button.MouseEnter -= Button_MouseEnter;
+				button.MouseLeave -= Button_MouseLeave;
 			}
 		}
 		private static void Button_MouseEnter(object sender, EventArgs e)
