@@ -76,7 +76,7 @@
 			// 
 			// labelDifficult
 			// 
-			this.labelDifficult.Font = new System.Drawing.Font("Trebuchet MS", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.labelDifficult.Font = new System.Drawing.Font("Trebuchet MS", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.labelDifficult.ForeColor = System.Drawing.Color.White;
 			this.labelDifficult.Location = new System.Drawing.Point(276, 125);
 			this.labelDifficult.Name = "labelDifficult";
@@ -189,7 +189,7 @@
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
+			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
 			this.ClientSize = new System.Drawing.Size(500, 420);
 			this.Controls.Add(this.buttonPlay);
 			this.Controls.Add(this.buttonBack);

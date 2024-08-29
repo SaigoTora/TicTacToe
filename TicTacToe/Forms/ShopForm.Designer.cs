@@ -268,7 +268,6 @@
 			this.Text = "Shop";
 			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Shop_FormClosed);
 			this.Load += new System.EventHandler(this.ShopForm_Load);
-			this.Resize += new System.EventHandler(this.ShopForm_Resize);
 			this.tabControl.ResumeLayout(false);
 			this.tabPagePreferences.ResumeLayout(false);
 			this.panelPreferenceNavigation.ResumeLayout(false);

@@ -60,7 +60,7 @@ namespace TicTacToe.Forms
 			{ player.DeductCoins(bot.Difficulty); }
 			catch (NotEnoughCoinsToStartGameException exception)
 			{
-				MessageBox.Show(exception.Message, "Not enough coins", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				CustomMessageBox.Show(exception.Message, "Not enough coins", CustomMessageBoxButtons.OK, CustomMessageBoxIcon.Error);
 				Close();
 			}
 

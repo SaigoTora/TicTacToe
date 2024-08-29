@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
 using System.Windows.Forms;
 
 using TicTacToe.Models.PlayerInfo;
 using TicTacToe.Models.PlayerItem;
 using TicTacToe.Models.PlayerItemCreator;
 using TicTacToe.Models.Utilities;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace TicTacToe.Forms
 {
@@ -134,7 +132,7 @@ namespace TicTacToe.Forms
 		}
 		private bool ConfirmPurchase(Item item)
 		{
-			DialogResult result = MessageBox.Show($"Are you sure you want to buy product \"{item.Name}\" for {item.Price} coins?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+			DialogResult result = CustomMessageBox.Show($"Are you sure you want to buy this item for {item.Price} coins?", "Confirmation", CustomMessageBoxButtons.YesNo, CustomMessageBoxIcon.Question);
 
 			if (result == DialogResult.Yes)
 				return true;
@@ -146,12 +144,12 @@ namespace TicTacToe.Forms
 			{
 				labelCoins.Text = $"{player.Coins:N0}".Replace(',', ' ');
 				TryToCreateEmptyLabels();
-				MessageBox.Show("The product has been successfully purchased!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+				CustomMessageBox.Show("The item has been successfully purchased!", "Success", CustomMessageBoxButtons.OK, CustomMessageBoxIcon.OK);
 			}
 			else
 			{
-				MessageBox.Show($"You don't have enough coins to buy this item!\nThis item costs {e.Item.Price} coins.",
-					"Not enough coins", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				CustomMessageBox.Show($"You don't have enough coins to buy this item!\nThis item costs {e.Item.Price} coins.",
+					"Not enough coins", CustomMessageBoxButtons.OK, CustomMessageBoxIcon.Error);
 			}
 		}
 		private void TryToCreateEmptyLabels()
@@ -175,11 +173,6 @@ namespace TicTacToe.Forms
 			_customTitleBar.Dispose();
 
 			Serializator.Serialize(player, Program.SerializePath, Program.EncryptKey);
-		}
-
-		private void ShopForm_Resize(object sender, EventArgs e)
-		{
-			//panelPreferenceNavigation.Size = _startPreferencePanelSize;
 		}
 	}
 }

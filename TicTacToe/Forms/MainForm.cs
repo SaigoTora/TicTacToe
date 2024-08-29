@@ -222,7 +222,14 @@ namespace TicTacToe.Forms
 				DisplayPlayerData();
 		}
 
-		private void ButtonExit_Click(object sender, EventArgs e) { Application.Exit(); }
+		private void ButtonExit_Click(object sender, EventArgs e)
+		{
+			DialogResult result = CustomMessageBox.Show("Are you sure you want to exit the game?",
+				"Exit", CustomMessageBoxButtons.YesNo, CustomMessageBoxIcon.Question);
+
+			if (result == DialogResult.Yes)
+				Application.Exit();
+		}
 		private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
 		{
 			FormEventHandlers.UnsubscribeFromHoverPictureBoxes(pictureBoxAvatar);

@@ -25,7 +25,9 @@ namespace TicTacToe.Models.PlayerItemCreator
 		internal override void CreateItemToBuy(ImageItem item)
 		{
 			PictureBox pictureBox = new PictureBox
-			{ Image = item.PreviewImage };
+			{
+				Image = item.PreviewImage
+			};
 
 			Label label = CreateLabelPrice(item);
 			CreateItemToBuy(item, pictureBox, label);

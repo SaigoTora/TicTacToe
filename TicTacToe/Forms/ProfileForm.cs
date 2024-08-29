@@ -202,7 +202,7 @@ namespace TicTacToe.Forms
 				TextAlign = ContentAlignment.MiddleCenter,
 				Font = new Font("Trebuchet MS", 10F, FontStyle.Bold),
 			};
-			selectLabel.Size = new Size(0, SELECTED_ITEM_INDENT*2);
+			selectLabel.Size = new Size(0, SELECTED_ITEM_INDENT * 2);
 		}
 		private void DeleteSelectionLabel(Control parent)
 		{
@@ -237,7 +237,7 @@ namespace TicTacToe.Forms
 			ValidationResult result = validator.Validate(newPlayer);
 			if (!result.IsValid)
 			{
-				MessageBox.Show(result.Errors[0].ErrorMessage, "Invalid input", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				CustomMessageBox.Show(result.Errors[0].ErrorMessage, "Invalid input", CustomMessageBoxButtons.OK, CustomMessageBoxIcon.Error);
 				return false;
 			}
 			else
@@ -257,7 +257,7 @@ namespace TicTacToe.Forms
 				{
 					player.ChangeName(textBoxPlayerName.Text);
 					_customTitleBar.ChangeFormCaption(textBoxPlayerName.Text);
-					MessageBox.Show("Your nickname has been successfully changed.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+					CustomMessageBox.Show("Your nickname has been successfully changed.", "Success", CustomMessageBoxButtons.OK, CustomMessageBoxIcon.OK);
 				}
 			}
 			else

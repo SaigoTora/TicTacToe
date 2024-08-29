@@ -45,7 +45,7 @@ namespace TicTacToe.Forms
 			ValidationResult result = validator.Validate(_player);
 			if (!result.IsValid)
 			{
-				MessageBox.Show(result.Errors[0].ErrorMessage, "Invalid input", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				CustomMessageBox.Show(result.Errors[0].ErrorMessage.Replace("&", "&&"), "Invalid input", CustomMessageBoxButtons.OK, CustomMessageBoxIcon.Error);
 				return false;
 			}
 			else
