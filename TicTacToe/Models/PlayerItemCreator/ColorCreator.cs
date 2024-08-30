@@ -43,7 +43,7 @@ namespace TicTacToe.Models.PlayerItemCreator
 				BorderStyle = BorderStyle.FixedSingle
 			};
 
-			CreateItemToSelect(pictureBox);
+			CreateItemToSelect(item, pictureBox);
 			SubscribeToSelect(pictureBox, item);
 
 			return pictureBox;

@@ -25,6 +25,8 @@ namespace TicTacToe.Forms
 			(Color.FromArgb(30, 129, 69), Color.FromArgb(236, 124, 38), Color.FromArgb(155, 17, 30), Color.FromArgb(83, 55, 122));
 		private readonly int _panelSettingsWidth;
 		private readonly CustomTitleBar _customTitleBar;
+		private readonly PictureBoxEventHandlers _pictureBoxEventHandlers = new PictureBoxEventHandlers();
+		private readonly ButtonEventHandlers _buttonEventHandlers = new ButtonEventHandlers();
 
 		private readonly Player _player;
 		private Difficulty _selectedDifficulty;
@@ -45,8 +47,8 @@ namespace TicTacToe.Forms
 			ButtonDifficulty_Click(buttonEasy, e);
 			DisplayPlayerData();
 
-			FormEventHandlers.SubscribeToHoverPictureBoxes(pictureBoxAvatar);
-			FormEventHandlers.SubscribeToHoverButtons(buttonPlay, buttonProfile,
+			_pictureBoxEventHandlers.SubscribeToHoverPictureBoxes(pictureBoxAvatar);
+			_buttonEventHandlers.SubscribeToHoverButtons(buttonPlay, buttonProfile,
 				buttonShop, buttonExit);
 		}
 
@@ -178,6 +180,14 @@ namespace TicTacToe.Forms
 				shopForm.WindowState = FormWindowState.Maximized;
 			shopForm.Show();
 		}
+		private void ButtonExit_Click(object sender, EventArgs e)
+		{
+			DialogResult result = CustomMessageBox.Show("Are you sure you want to exit the game?",
+				"Exit", CustomMessageBoxButtons.YesNo, CustomMessageBoxIcon.Question);
+
+			if (result == DialogResult.Yes)
+				Application.Exit();
+		}
 		#endregion
 
 		#region OtherEventHandlers
@@ -222,19 +232,10 @@ namespace TicTacToe.Forms
 				DisplayPlayerData();
 		}
 
-		private void ButtonExit_Click(object sender, EventArgs e)
-		{
-			DialogResult result = CustomMessageBox.Show("Are you sure you want to exit the game?",
-				"Exit", CustomMessageBoxButtons.YesNo, CustomMessageBoxIcon.Question);
-
-			if (result == DialogResult.Yes)
-				Application.Exit();
-		}
 		private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
 		{
-			FormEventHandlers.UnsubscribeFromHoverPictureBoxes(pictureBoxAvatar);
-			FormEventHandlers.UnsubscribeFromHoverButtons(buttonPlay, buttonProfile,
-				buttonShop, buttonExit);
+			_pictureBoxEventHandlers.UnsubscribeAll();
+			_buttonEventHandlers.UnsubscribeAll();
 			_customTitleBar.Dispose();
 
 			Serializator.Serialize(_player, Program.SerializePath, Program.EncryptKey);

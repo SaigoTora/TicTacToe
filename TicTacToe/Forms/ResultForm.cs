@@ -16,6 +16,7 @@ namespace TicTacToe.Forms
 		private readonly PlayerType _winner;
 		private readonly Difficulty _difficult;
 		private readonly CustomTitleBar _customTitleBar;
+		private readonly ButtonEventHandlers _buttonEventHandlers = new ButtonEventHandlers();
 
 		private readonly EventHandler _backToMainForm;
 		private readonly CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
@@ -37,7 +38,7 @@ namespace TicTacToe.Forms
 			}
 			_backToMainForm = backToMainForm;
 			buttonBack.Click += _backToMainForm;
-			FormEventHandlers.SubscribeToHoverButtons(buttonBack, buttonPlay);
+			_buttonEventHandlers.SubscribeToHoverButtons(buttonBack, buttonPlay);
 		}
 
 		private void ResultForm_Load(object sender, EventArgs e)
@@ -133,7 +134,7 @@ namespace TicTacToe.Forms
 			_cancellationTokenSource.Cancel();
 			buttonBack.Click -= _backToMainForm;
 
-			FormEventHandlers.UnsubscribeFromHoverButtons(buttonBack, buttonPlay);
+			_buttonEventHandlers.UnsubscribeAll();
 			_customTitleBar.Dispose();
 		}
 	}

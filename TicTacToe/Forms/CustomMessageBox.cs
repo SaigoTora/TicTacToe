@@ -26,6 +26,7 @@ namespace TicTacToe.Forms
 	internal partial class CustomMessageBox : BaseForm
 	{
 		private readonly CustomTitleBar _customTitleBar;
+		private readonly ButtonEventHandlers _buttonEventHandlers = new ButtonEventHandlers();
 		private DialogResult _dialogResult = DialogResult.None;
 
 		private CustomMessageBox(string text, string caption, CustomMessageBoxButtons buttons, CustomMessageBoxIcon icon, int MaxWidth)
@@ -44,7 +45,7 @@ namespace TicTacToe.Forms
 			SetButtons(buttons);
 			SetIcon(icon);
 
-			FormEventHandlers.SubscribeToHoverButtons(button1, button2);
+			_buttonEventHandlers.SubscribeToHoverButtons(button1, button2);
 		}
 		private void SetButtons(CustomMessageBoxButtons buttons)
 		{
@@ -147,7 +148,7 @@ namespace TicTacToe.Forms
 
 		private void CustomMessageBox_FormClosed(object sender, FormClosedEventArgs e)
 		{
-			FormEventHandlers.UnsubscribeFromHoverButtons(button1, button2);
+			_buttonEventHandlers.UnsubscribeAll();
 			_customTitleBar.Dispose();
 		}
 	}

@@ -21,6 +21,8 @@ namespace TicTacToe.Models.PlayerItemCreator
 		private readonly Player _player;
 		private readonly Panel _mainPanel;
 		private readonly Font _priceFont;
+		private readonly PictureBoxEventHandlers _pictureBoxEventHandlers = new PictureBoxEventHandlers();
+
 		private readonly Dictionary<Control, Item> _controlItemMap = new Dictionary<Control, Item>();
 		private readonly List<(Item, PictureBox, Label)> _createdItems = new List<(Item, PictureBox, Label)>();
 		private readonly int _itemSize;
@@ -71,28 +73,6 @@ namespace TicTacToe.Models.PlayerItemCreator
 		internal abstract PictureBox CreateItemToSelect(T item);
 		#endregion
 
-		private Panel CreateItem(PictureBox pictureBox, int padding, int bottomPadding)
-		{
-			if (pictureBox == null)
-				throw new ArgumentNullException();
-
-			const int BOTTOM_MARGIN = 10;
-			CreatePicture(pictureBox, padding);
-			Panel currentPanel = new Panel
-			{
-				Size = new Size(_itemSize + padding + padding,
-				_itemSize + padding + bottomPadding),
-				Margin = new Padding(0, 0, 0, BOTTOM_MARGIN)
-			};
-
-			currentPanel.Controls.Add(pictureBox);
-
-			_mainPanel.Controls.Add(currentPanel);
-			FormEventHandlers.SubscribeToHoverPictureBoxes(pictureBox);
-
-			return currentPanel;
-		}
-
 		/// <summary>
 		/// The method creates an item for purchase.
 		/// </summary>
@@ -110,10 +90,12 @@ namespace TicTacToe.Models.PlayerItemCreator
 			if (labelPrice == null)
 				throw new ArgumentNullException();
 
+			const string PICTURE_NAME_PREFIX = "pictureBuy_";
 			const double PADDING_SCALER = 0.5;
 			int padding = percentPicturePadding * _itemSize / 100;
 			int bottomPadding = labelPrice.Font.Height + (int)(padding * PADDING_SCALER);
 
+			pictureBox.Name = PICTURE_NAME_PREFIX + item.Name;
 			Panel currentPanel = CreateItem(pictureBox, padding, bottomPadding);
 
 			UpdatePurchaseIndicators(item, pictureBox, labelPrice);
@@ -123,18 +105,42 @@ namespace TicTacToe.Models.PlayerItemCreator
 		/// <summary>
 		/// The method creates a selectable item.
 		/// </summary>
+		/// <param name="item">The item being selected.</param>
 		/// <param name="pictureBox">Displaying the contents of an item.</param>
 		/// <param name="percentPicturePadding">The padding between the image and the panel in percent.</param>
 		/// <exception cref="ArgumentOutOfRangeException">If percentPicturePadding is less than 0 or greater than 100, an exception will be thrown.</exception>
-		protected void CreateItemToSelect(PictureBox pictureBox, int percentPicturePadding = 12)
+		protected void CreateItemToSelect(Item item, PictureBox pictureBox, int percentPicturePadding = 12)
 		{
 			if (percentPicturePadding < 0 || percentPicturePadding > 100)
 				throw new ArgumentOutOfRangeException();
 
+			const string PICTURE_NAME_PREFIX = "pictureSelect_";
 			int padding = percentPicturePadding * _itemSize / 100;
 
+			pictureBox.Name = PICTURE_NAME_PREFIX + item.Name;
 			CreateItem(pictureBox, padding, padding);
 			_createdItems.Add((null, pictureBox, null));
+		}
+		private Panel CreateItem(PictureBox pictureBox, int padding, int bottomPadding)
+		{
+			if (pictureBox == null)
+				throw new ArgumentNullException();
+
+			const int BOTTOM_MARGIN = 10;
+			CreatePicture(pictureBox, padding);
+			Panel currentPanel = new Panel
+			{
+				Size = new Size(_itemSize + padding + padding,
+				_itemSize + padding + bottomPadding),
+				Margin = new Padding(0, 0, 0, BOTTOM_MARGIN)
+			};
+
+			currentPanel.Controls.Add(pictureBox);
+
+			_mainPanel.Controls.Add(currentPanel);
+			_pictureBoxEventHandlers.SubscribeToHoverPictureBoxes(pictureBox);
+
+			return currentPanel;
 		}
 		protected Label CreateLabelPrice(T item, ContentAlignment textAlign = ContentAlignment.MiddleCenter)
 		{
@@ -197,7 +203,7 @@ namespace TicTacToe.Models.PlayerItemCreator
 			{
 				_player.BuyItem(item);
 				if (control is PictureBox pictureBox)
-					FormEventHandlers.UnsubscribeFromHoverPictureBoxes(pictureBox);
+					_pictureBoxEventHandlers.Unsubscribe(pictureBox);
 				control.Click -= ControlBuy_Click;
 				control.Parent.Dispose();
 				UpdatePurchaseIndicatorsForAllItems();
@@ -237,8 +243,7 @@ namespace TicTacToe.Models.PlayerItemCreator
 
 		public void Dispose()
 		{
-			IEnumerable<PictureBox> pictureBoxes = _createdItems.Select(item => item.Item2);
-			FormEventHandlers.UnsubscribeFromHoverPictureBoxes(pictureBoxes);
+			_pictureBoxEventHandlers.UnsubscribeAll();
 
 			foreach (var item in _controlItemMap)
 				if (item.Key != null)

@@ -41,7 +41,7 @@ namespace TicTacToe.Models.PlayerItemCreator
 				Image = item.Image
 			};
 
-			CreateItemToSelect(pictureBox);
+			CreateItemToSelect(item, pictureBox);
 			SubscribeToSelect(pictureBox, item);
 
 			return pictureBox;

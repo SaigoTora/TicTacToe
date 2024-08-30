@@ -28,6 +28,7 @@ namespace TicTacToe.Forms
 		private readonly RoundManager _roundManager;
 		private readonly PictureBox[,] _pictureCells;
 		private readonly CustomTitleBar _customTitleBar;
+		private readonly PictureBoxEventHandlers _pictureBoxEventHandlers = new PictureBoxEventHandlers();
 
 		private readonly bool _isBotMoveFirst = false;
 		private readonly CellType _playerCellType;
@@ -193,14 +194,14 @@ namespace TicTacToe.Forms
 			if (playerType == PlayerType.Human)// Subscribe to one-time event handler
 				pictureBox.MouseLeave += EnableHoverAfterMouseLeave;
 			else
-				FormEventHandlers.SubscribeToHoverPictureBoxes(pictureBox);
+				_pictureBoxEventHandlers.SubscribeToHoverPictureBoxes(pictureBox);
 		}
 		private void EnableHoverAfterMouseLeave(object sender, EventArgs e)
 		{
 			if (!(sender is PictureBox pictureBox))
 				return;
 
-			FormEventHandlers.SubscribeToHoverPictureBoxes(pictureBox);
+			_pictureBoxEventHandlers.SubscribeToHoverPictureBoxes(pictureBox);
 			pictureBox.MouseLeave -= EnableHoverAfterMouseLeave;
 		}
 
@@ -397,9 +398,7 @@ namespace TicTacToe.Forms
 		{
 			StopTimerToMove();
 
-			for (int i = 0; i < _pictureCells.GetLength(0); i++)
-				for (int j = 0; j < _pictureCells.GetLength(1); j++)
-					FormEventHandlers.UnsubscribeFromHoverPictureBoxes(_pictureCells[i, j]);
+			_pictureBoxEventHandlers.UnsubscribeAll();
 			_customTitleBar.Dispose();
 
 			if (!_isFormClosingForNextRound)

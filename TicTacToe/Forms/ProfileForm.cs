@@ -193,7 +193,7 @@ namespace TicTacToe.Forms
 		{
 			Color foreColor = Color.Yellow;
 
-			Label selectLabel = new Label()
+			new Label
 			{
 				Parent = parent,
 				Text = SELECTED_ITEM_TEXT,
@@ -201,8 +201,8 @@ namespace TicTacToe.Forms
 				Dock = DockStyle.Bottom,
 				TextAlign = ContentAlignment.MiddleCenter,
 				Font = new Font("Trebuchet MS", 10F, FontStyle.Bold),
+				Size = new Size(0, SELECTED_ITEM_INDENT * 2)
 			};
-			selectLabel.Size = new Size(0, SELECTED_ITEM_INDENT * 2);
 		}
 		private void DeleteSelectionLabel(Control parent)
 		{

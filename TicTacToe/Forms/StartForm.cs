@@ -1,7 +1,7 @@
-﻿using System;
+﻿using FluentValidation.Results;
+using System;
 using System.Drawing;
 using System.Windows.Forms;
-using FluentValidation.Results;
 
 using TicTacToe.Models.PlayerInfo;
 using TicTacToe.Models.PlayerItem;
@@ -16,6 +16,8 @@ namespace TicTacToe.Forms
 
 		private static readonly Color _selectedAvatarColor = Color.FromArgb(71, 167, 106);
 		private readonly CustomTitleBar _customTitleBar;
+		private readonly PictureBoxEventHandlers _pictureBoxEventHandlers = new PictureBoxEventHandlers();
+		private readonly ButtonEventHandlers _buttonEventHandlers = new ButtonEventHandlers();
 
 		private Player _player;
 		private bool _isPlayerMan = true;
@@ -34,8 +36,8 @@ namespace TicTacToe.Forms
 			TextBoxName_Leave(textBoxName, e);
 			PictureBoxAvatar_Click(pictureBoxMan, e);
 
-			FormEventHandlers.SubscribeToHoverPictureBoxes(pictureBoxMan, pictureBoxWoman);
-			FormEventHandlers.SubscribeToHoverButtons(buttonReady);
+			_pictureBoxEventHandlers.SubscribeToHoverPictureBoxes(pictureBoxMan, pictureBoxWoman);
+			_buttonEventHandlers.SubscribeToHoverButtons(buttonReady);
 		}
 
 		private bool IsPlayerDataValid()
@@ -125,8 +127,8 @@ namespace TicTacToe.Forms
 
 		private void StartForm_FormClosed(object sender, FormClosedEventArgs e)
 		{
-			FormEventHandlers.UnsubscribeFromHoverPictureBoxes(pictureBoxMan, pictureBoxWoman);
-			FormEventHandlers.UnsubscribeFromHoverButtons(buttonReady);
+			_pictureBoxEventHandlers.UnsubscribeAll();
+			_buttonEventHandlers.UnsubscribeAll();
 			_customTitleBar.Dispose();
 		}
 	}
