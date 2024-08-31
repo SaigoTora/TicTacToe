@@ -1,7 +1,7 @@
 ﻿using System;
 using Guna.UI2.WinForms;
 
-namespace TicTacToe.Models.Utilities
+namespace TicTacToe.Models.Utilities.FormUtilities
 {
 	internal class ButtonEventHandlers : ControlEventHandlers<Guna2GradientButton>
 	{

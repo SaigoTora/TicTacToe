@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace TicTacToe.Models.Utilities
+namespace TicTacToe.Models.Utilities.FormUtilities
 {
 	internal class PictureBoxEventHandlers : ControlEventHandlers<PictureBox>
 	{

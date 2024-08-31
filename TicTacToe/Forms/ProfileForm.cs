@@ -9,6 +9,7 @@ using TicTacToe.Models.PlayerInfo;
 using TicTacToe.Models.PlayerItem;
 using TicTacToe.Models.PlayerItemCreator;
 using TicTacToe.Models.Utilities;
+using TicTacToe.Models.Utilities.FormUtilities;
 
 namespace TicTacToe.Forms
 {
@@ -274,6 +275,9 @@ namespace TicTacToe.Forms
 
 		private void Shop_FormClosed(object sender, FormClosedEventArgs e)
 		{
+			menuBackCreator.Select -= SelectMenuBack;
+			avatarCreator.Select -= SelectAvatar;
+			gameBackCreator.Select -= SelectGameBack;
 			UnsubscribeFromNavigationButtonEvents(buttonPreferencesLeft,
 				buttonPreferencesRight);
 			_customTitleBar.Dispose();

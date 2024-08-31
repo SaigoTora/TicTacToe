@@ -7,6 +7,7 @@ using TicTacToe.Models.PlayerInfo;
 using TicTacToe.Models.PlayerItem;
 using TicTacToe.Models.PlayerItemCreator;
 using TicTacToe.Models.Utilities;
+using TicTacToe.Models.Utilities.FormUtilities;
 
 namespace TicTacToe.Forms
 {
@@ -144,6 +145,7 @@ namespace TicTacToe.Forms
 			{
 				labelCoins.Text = $"{player.Coins:N0}".Replace(',', ' ');
 				TryToCreateEmptyLabels();
+				// TODO: Form with purchase results.
 				CustomMessageBox.Show("The item has been successfully purchased!", "Success", CustomMessageBoxButtons.OK, CustomMessageBoxIcon.OK);
 			}
 			else
@@ -168,6 +170,12 @@ namespace TicTacToe.Forms
 
 		private void Shop_FormClosed(object sender, FormClosedEventArgs e)
 		{
+			menuBackCreator.Buy -= DefaultBuy;
+			avatarCreator.Buy -= DefaultBuy;
+			gameBackCreator.Buy -= DefaultBuy;
+			menuBackCreator.ConfirmPurchase -= ConfirmPurchase;
+			avatarCreator.ConfirmPurchase -= ConfirmPurchase;
+			gameBackCreator.ConfirmPurchase -= ConfirmPurchase;
 			UnsubscribeFromNavigationButtonEvents(buttonPreferencesLeft,
 				buttonPreferencesRight);
 			_customTitleBar.Dispose();

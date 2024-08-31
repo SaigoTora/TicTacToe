@@ -7,7 +7,7 @@ using System.Windows.Forms;
 using TicTacToe.Models.CustomExceptions;
 using TicTacToe.Models.PlayerInfo;
 using TicTacToe.Models.PlayerItem;
-using TicTacToe.Models.Utilities;
+using TicTacToe.Models.Utilities.FormUtilities;
 
 namespace TicTacToe.Models.PlayerItemCreator
 {
@@ -136,9 +136,7 @@ namespace TicTacToe.Models.PlayerItemCreator
 			};
 
 			currentPanel.Controls.Add(pictureBox);
-
 			_mainPanel.Controls.Add(currentPanel);
-			_pictureBoxEventHandlers.SubscribeToHoverPictureBoxes(pictureBox);
 
 			return currentPanel;
 		}
@@ -163,6 +161,7 @@ namespace TicTacToe.Models.PlayerItemCreator
 			pictureBox.Size = new Size(_itemSize, _itemSize);
 			pictureBox.SizeMode = PictureBoxSizeMode.Zoom;
 			pictureBox.Cursor = Cursors.Hand;
+			_pictureBoxEventHandlers.SubscribeToHoverPictureBoxes(pictureBox);
 		}
 		internal void UpdatePurchaseIndicatorsForAllItems()
 		{

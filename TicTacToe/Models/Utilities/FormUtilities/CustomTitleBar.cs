@@ -4,7 +4,7 @@ using System.Windows.Forms;
 using TicTacToe.Forms;
 using FontAwesome.Sharp;
 
-namespace TicTacToe.Models.Utilities
+namespace TicTacToe.Models.Utilities.FormUtilities
 {
 	internal class CustomTitleBar : IDisposable
 	{

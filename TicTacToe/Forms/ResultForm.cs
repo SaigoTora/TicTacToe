@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using TicTacToe.Models.PlayerInfo;
-using TicTacToe.Models.Utilities;
+using TicTacToe.Models.Utilities.FormUtilities;
 using TicTacToeLibrary;
 
 namespace TicTacToe.Forms
