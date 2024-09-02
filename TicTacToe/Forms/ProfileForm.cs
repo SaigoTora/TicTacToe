@@ -15,6 +15,7 @@ namespace TicTacToe.Forms
 {
 	internal partial class ProfileForm : ItemManagementForm
 	{
+		private const float PREVIEW_OPACITY_LEVEL = 0.65f;
 		private const int SELECTED_ITEM_INDENT = 12;
 		private const string SELECTED_ITEM_TEXT = "Selected";
 		private const string SELECTED_PICTURE_TAG = "ItemSelected";
@@ -23,9 +24,9 @@ namespace TicTacToe.Forms
 
 		private readonly CustomTitleBar _customTitleBar;
 
-		private readonly List<PictureBox> _menuBackList = new List<PictureBox>();
-		private readonly List<PictureBox> _gameBackList = new List<PictureBox>();
-		private readonly List<PictureBox> _avatarList = new List<PictureBox>();
+		private readonly List<PictureBox> _menuBackPictureBoxes = new List<PictureBox>();
+		private readonly List<PictureBox> _gameBackPictureBoxes = new List<PictureBox>();
+		private readonly List<PictureBox> _avatarPictureBoxes = new List<PictureBox>();
 
 		private bool _isSelectedMenuBackCreated = false;
 		private bool _isSelectedGameBackCreated = false;
@@ -70,10 +71,38 @@ namespace TicTacToe.Forms
 			menuBackCreator = new ImageCreator(player, flpBackgroundMenu, ITEM_SIZE);
 			avatarCreator = new AvatarCreator(player, flpAvatar, ITEM_SIZE);
 			gameBackCreator = new ColorCreator(player, flpBackgroundGame, ITEM_SIZE);
+			ManageItemCreatorEvents(true);
+		}
+		private void ManageItemCreatorEvents(bool subscribe)
+		{
+			if (subscribe)
+			{
+				menuBackCreator.Select += SelectMenuBack;
+				avatarCreator.Select += SelectAvatar;
+				gameBackCreator.Select += SelectGameBack;
 
-			menuBackCreator.Select += SelectMenuBack;
-			avatarCreator.Select += SelectAvatar;
-			gameBackCreator.Select += SelectGameBack;
+				menuBackCreator.MouseEnter += MouseEnterMenuBack;
+				avatarCreator.MouseEnter += MouseEnterAvatar;
+				gameBackCreator.MouseEnter += MouseEnterGameBack;
+
+				menuBackCreator.MouseLeave += MouseLeaveItem;
+				avatarCreator.MouseLeave += MouseLeaveItem;
+				gameBackCreator.MouseLeave += MouseLeaveItem;
+			}
+			else
+			{
+				menuBackCreator.Select -= SelectMenuBack;
+				avatarCreator.Select -= SelectAvatar;
+				gameBackCreator.Select -= SelectGameBack;
+
+				menuBackCreator.MouseEnter -= MouseEnterMenuBack;
+				avatarCreator.MouseEnter -= MouseEnterAvatar;
+				gameBackCreator.MouseEnter -= MouseEnterGameBack;
+
+				menuBackCreator.MouseLeave -= MouseLeaveItem;
+				avatarCreator.MouseLeave -= MouseLeaveItem;
+				gameBackCreator.MouseLeave -= MouseLeaveItem;
+			}
 		}
 
 		#region CreateItems
@@ -83,42 +112,22 @@ namespace TicTacToe.Forms
 				switch (item)
 				{
 					case Avatar avatar:
-						{
-							CreateAvatar(avatarCreator, avatar);
-							break;
-						}
+						CreateAvatar(avatarCreator, avatar);
+						break;
 					case ImageItem imageItem:
-						{
-							CreateMenuBack(menuBackCreator, imageItem);
-							break;
-						}
+						CreateMenuBack(menuBackCreator, imageItem);
+						break;
 					case ColorItem colorItem:
-						{
-							CreateGameBack(gameBackCreator, colorItem);
-							break;
-						}
+						CreateGameBack(gameBackCreator, colorItem);
+						break;
 					default:
-						{
-							throw new InvalidOperationException
-								($"Unknown item type: {item.GetType().Name}");
-						}
+						throw new InvalidOperationException($"Unknown item type: {item.GetType().Name}");
 				}
-		}
-		private void CreateAvatar(AvatarCreator avatarCreator, Avatar avatar)
-		{
-			PictureBox pictureBox = avatarCreator.CreateItemToSelect(avatar);
-			_avatarList.Add(pictureBox);
-
-			if (!_isSelectedAvatarCreated && avatar.Name == player.Preferences.Avatar.Name)
-			{
-				SelectAvatar(this, new ItemEventArgs(avatar, pictureBox));
-				_isSelectedAvatarCreated = true;
-			}
 		}
 		private void CreateMenuBack(ImageCreator menuBackCreator, ImageItem imageItem)
 		{
 			PictureBox pictureBox = menuBackCreator.CreateItemToSelect(imageItem);
-			_menuBackList.Add(pictureBox);
+			_menuBackPictureBoxes.Add(pictureBox);
 
 			if (!_isSelectedMenuBackCreated && imageItem.Name == player.Preferences.BackgroundMenu.Name)
 			{
@@ -126,10 +135,21 @@ namespace TicTacToe.Forms
 				_isSelectedMenuBackCreated = true;
 			}
 		}
+		private void CreateAvatar(AvatarCreator avatarCreator, Avatar avatar)
+		{
+			PictureBox pictureBox = avatarCreator.CreateItemToSelect(avatar);
+			_avatarPictureBoxes.Add(pictureBox);
+
+			if (!_isSelectedAvatarCreated && avatar.Name == player.Preferences.Avatar.Name)
+			{
+				SelectAvatar(this, new ItemEventArgs(avatar, pictureBox));
+				_isSelectedAvatarCreated = true;
+			}
+		}
 		private void CreateGameBack(ColorCreator gameBackCreator, ColorItem colorItem)
 		{
 			PictureBox pictureBox = gameBackCreator.CreateItemToSelect(colorItem);
-			_gameBackList.Add(pictureBox);
+			_gameBackPictureBoxes.Add(pictureBox);
 
 			if (!_isSelectedGameBackCreated && colorItem.Name == player.Preferences.BackgroundGame.Name)
 			{
@@ -145,7 +165,7 @@ namespace TicTacToe.Forms
 			if (!(e.ClickableControl is PictureBox selectedPicture))
 				return;
 
-			DeselectPreviousItem(_avatarList);
+			DeselectPreviousItem(_avatarPictureBoxes);
 			DefaultSelect(selectedPicture);
 			pictureBoxPlayerAvatar.Image = selectedPicture.Image;
 		}
@@ -154,7 +174,7 @@ namespace TicTacToe.Forms
 			if (!(e.ClickableControl is PictureBox selectedPicture))
 				return;
 
-			DeselectPreviousItem(_menuBackList);
+			DeselectPreviousItem(_menuBackPictureBoxes);
 			DefaultSelect(selectedPicture);
 		}
 		private void SelectGameBack(object sender, ItemEventArgs e)
@@ -162,7 +182,7 @@ namespace TicTacToe.Forms
 			if (!(e.ClickableControl is PictureBox selectedPicture))
 				return;
 
-			DeselectPreviousItem(_gameBackList);
+			DeselectPreviousItem(_gameBackPictureBoxes);
 			DefaultSelect(selectedPicture);
 		}
 
@@ -273,11 +293,65 @@ namespace TicTacToe.Forms
 			=> TryToChangeName();
 		#endregion
 
-		private void Shop_FormClosed(object sender, FormClosedEventArgs e)
+		#region HoverItems
+		private void SetPreviewItem(Item item)
 		{
-			menuBackCreator.Select -= SelectMenuBack;
-			avatarCreator.Select -= SelectAvatar;
-			gameBackCreator.Select -= SelectGameBack;
+			labelItemName.Text = item.Name;
+			if (item.Price == 0)
+			{
+				labelPrice.Text = string.Empty;
+				pictureBoxCoin.Visible = false;
+			}
+			else
+			{
+				labelPrice.Text = $"{item.Price:N0}".Replace(',', ' ');
+				pictureBoxCoin.Visible = true;
+			}
+			labelDateTimePurchase.Text = item.DateTimePurchase.ToString("dd.MM.yyyy HH:mm");
+			labelDescription.Text = item.Description;
+		}
+		private void MouseEnterMenuBack(object sender, ItemEventArgs e)
+		{
+			if (!(e.Item is ImageItem imageItem))
+				return;
+
+			pictureBoxItem.Image = imageItem.Image.ChangeOpacity(PREVIEW_OPACITY_LEVEL);
+			SetPreviewItem(imageItem);
+			panelPreviewItem.Visible = true;
+		}
+		private void MouseEnterAvatar(object sender, ItemEventArgs e)
+		{
+			if (!(e.Item is Avatar avatar))
+				return;
+
+			pictureBoxItem.Image = avatar.Image.ChangeOpacity(PREVIEW_OPACITY_LEVEL);
+			SetPreviewItem(avatar);
+			panelPreviewItem.Visible = true;
+		}
+		private void MouseEnterGameBack(object sender, ItemEventArgs e)
+		{
+			if (!(e.Item is ColorItem colorItem))
+				return;
+
+			pictureBoxItem.BackColor = colorItem.Color;
+			SetPreviewItem(colorItem);
+			panelPreviewItem.Visible = true;
+		}
+		private void MouseLeaveItem(object sender, ItemEventArgs e)
+		{
+			panelPreviewItem.Visible = false;
+			pictureBoxItem.BackColor = Color.Transparent;
+			pictureBoxItem.Image = null;
+			labelItemName.Text = string.Empty;
+			labelPrice.Text = string.Empty;
+			labelDateTimePurchase.Text = string.Empty;
+			labelDescription.Text = string.Empty;
+		}
+		#endregion
+
+		private void Profile_FormClosed(object sender, FormClosedEventArgs e)
+		{
+			ManageItemCreatorEvents(false);
 			UnsubscribeFromNavigationButtonEvents(buttonPreferencesLeft,
 				buttonPreferencesRight);
 			_customTitleBar.Dispose();

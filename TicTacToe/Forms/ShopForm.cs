@@ -46,9 +46,6 @@ namespace TicTacToe.Forms
 			CreateNotBoughtItems(_avatarItems, avatarCreator);
 			CreateNotBoughtItems(_colorItems, gameBackCreator);
 
-			menuBackCreator.ConfirmPurchase += ConfirmPurchase;
-			avatarCreator.ConfirmPurchase += ConfirmPurchase;
-			gameBackCreator.ConfirmPurchase += ConfirmPurchase;
 			SubscribeToNavigationButtonEvents(buttonPreferencesLeft,
 				buttonPreferencesRight);
 			TryToCreateEmptyLabels();
@@ -63,27 +60,33 @@ namespace TicTacToe.Forms
 			avatarCreator = new AvatarCreator(player, flpAvatar, fontPrice, ITEM_SIZE);
 			gameBackCreator = new ColorCreator(player, flpBackgroundGame, fontPrice, ITEM_SIZE);
 
-			menuBackCreator.Buy += DefaultBuy;
-			avatarCreator.Buy += DefaultBuy;
-			gameBackCreator.Buy += DefaultBuy;
+			ManageItemCreatorEvents(true);
 		}
-		private Label InitializeLabelEmpty(string text)
+		private void ManageItemCreatorEvents(bool subscribe)
 		{
-			const int TOP_MARGIN = 30;
-
-			Label labelEmpty = new Label()
+			if (subscribe)
 			{
-				Text = text,
-				AutoSize = true,
-				Margin = new Padding(0, TOP_MARGIN, 0, 0),
-				TextAlign = ContentAlignment.MiddleCenter,
-				Font = new Font("Trebuchet MS", 16F),
-				BackColor = Color.Transparent,
-				ForeColor = Color.White,
-			};
+				menuBackCreator.ConfirmPurchase += ConfirmPurchase;
+				avatarCreator.ConfirmPurchase += ConfirmPurchase;
+				gameBackCreator.ConfirmPurchase += ConfirmPurchase;
 
-			return labelEmpty;
+				menuBackCreator.Buy += DefaultBuy;
+				avatarCreator.Buy += DefaultBuy;
+				gameBackCreator.Buy += DefaultBuy;
+			}
+			else
+			{
+				menuBackCreator.ConfirmPurchase -= ConfirmPurchase;
+				avatarCreator.ConfirmPurchase -= ConfirmPurchase;
+				gameBackCreator.ConfirmPurchase -= ConfirmPurchase;
+
+				menuBackCreator.Buy -= DefaultBuy;
+				avatarCreator.Buy -= DefaultBuy;
+				gameBackCreator.Buy -= DefaultBuy;
+
+			}
 		}
+
 		private void FillListsOfItems()
 		{
 			Item[] allItems = ItemManager.GetAllItems();
@@ -143,7 +146,7 @@ namespace TicTacToe.Forms
 				labelCoins.Text = $"{player.Coins:N0}".Replace(',', ' ');
 				TryToCreateEmptyLabels();
 
-				PurchaseResultForm resultForm = new PurchaseResultForm(e.Item);
+				PurchaseResultForm resultForm = new PurchaseResultForm(e.Item, player);
 				resultForm.ShowDialog();
 			}
 			else
@@ -151,6 +154,23 @@ namespace TicTacToe.Forms
 				CustomMessageBox.Show($"You don't have enough coins to buy this item!\nThis item costs {e.Item.Price} coins.",
 					"Not enough coins", CustomMessageBoxButtons.OK, CustomMessageBoxIcon.Error);
 			}
+		}
+		private Label InitializeLabelEmpty(string text)
+		{
+			const int TOP_MARGIN = 30;
+
+			Label labelEmpty = new Label()
+			{
+				Text = text,
+				AutoSize = true,
+				Margin = new Padding(0, TOP_MARGIN, 0, 0),
+				TextAlign = ContentAlignment.MiddleCenter,
+				Font = new Font("Trebuchet MS", 16F),
+				BackColor = Color.Transparent,
+				ForeColor = Color.White,
+			};
+
+			return labelEmpty;
 		}
 		private void TryToCreateEmptyLabels()
 		{
@@ -168,12 +188,7 @@ namespace TicTacToe.Forms
 
 		private void Shop_FormClosed(object sender, FormClosedEventArgs e)
 		{
-			menuBackCreator.Buy -= DefaultBuy;
-			avatarCreator.Buy -= DefaultBuy;
-			gameBackCreator.Buy -= DefaultBuy;
-			menuBackCreator.ConfirmPurchase -= ConfirmPurchase;
-			avatarCreator.ConfirmPurchase -= ConfirmPurchase;
-			gameBackCreator.ConfirmPurchase -= ConfirmPurchase;
+			ManageItemCreatorEvents(false);
 			UnsubscribeFromNavigationButtonEvents(buttonPreferencesLeft,
 				buttonPreferencesRight);
 			_customTitleBar.Dispose();

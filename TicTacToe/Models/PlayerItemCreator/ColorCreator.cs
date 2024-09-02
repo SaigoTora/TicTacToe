@@ -45,6 +45,7 @@ namespace TicTacToe.Models.PlayerItemCreator
 
 			CreateItemToSelect(item, pictureBox);
 			SubscribeToSelect(pictureBox, item);
+			SubscribeControlToHover(pictureBox, item);
 
 			return pictureBox;
 		}

@@ -15,6 +15,8 @@ namespace TicTacToe.Models.PlayerItemCreator
 	{// Abstract creator
 		internal Func<Item, bool> ConfirmPurchase;
 		internal event EventHandler<ItemEventArgs> Select;
+		internal event EventHandler<ItemEventArgs> MouseEnter;
+		internal event EventHandler<ItemEventArgs> MouseLeave;
 		internal event EventHandler<ItemBuyEventArgs> Buy;
 
 		private readonly (Color Default, Color NotEnoughCoins) priceForeColor = (Color.Khaki, Color.FromArgb(191, 34, 51));
@@ -212,7 +214,7 @@ namespace TicTacToe.Models.PlayerItemCreator
 			finally
 			{ OnBuy(new ItemBuyEventArgs(item, control, success)); }
 		}
-		protected void OnBuy(ItemBuyEventArgs e)
+		private void OnBuy(ItemBuyEventArgs e)
 		{
 			var temp = System.Threading.Volatile.Read(ref Buy);
 			temp?.Invoke(this, e);
@@ -233,13 +235,50 @@ namespace TicTacToe.Models.PlayerItemCreator
 			_player.SelectItem(item);
 			OnSelect(new ItemEventArgs(item, control));
 		}
-		protected void OnSelect(ItemEventArgs e)
+		private void OnSelect(ItemEventArgs e)
 		{
 			var temp = System.Threading.Volatile.Read(ref Select);
 			temp?.Invoke(this, e);
 		}
 		#endregion
 
+		#region HoverEventHandlers
+		protected void SubscribeControlToHover(Control control, Item item)
+		{
+			if (!_controlItemMap.ContainsKey(control))
+				_controlItemMap[control] = item;
+
+			control.MouseEnter += Control_MouseEnter;
+			control.MouseLeave += Control_MouseLeave;
+		}
+		private void Control_MouseEnter(object sender, EventArgs e)
+		{
+			if (!(sender is Control control))
+				return;
+
+			Item item = _controlItemMap[control];
+			OnMouseEnter(new ItemEventArgs(item, control));
+		}
+		private void OnMouseEnter(ItemEventArgs e)
+		{
+			var temp = System.Threading.Volatile.Read(ref MouseEnter);
+			temp?.Invoke(this, e);
+		}
+
+		private void Control_MouseLeave(object sender, EventArgs e)
+		{
+			if (!(sender is Control control))
+				return;
+
+			Item item = _controlItemMap[control];
+			OnMouseLeave(new ItemEventArgs(item, control));
+		}
+		private void OnMouseLeave(ItemEventArgs e)
+		{
+			var temp = System.Threading.Volatile.Read(ref MouseLeave);
+			temp?.Invoke(this, e);
+		}
+		#endregion
 		public void Dispose()
 		{
 			_pictureBoxEventHandlers.UnsubscribeAll();
@@ -249,6 +288,8 @@ namespace TicTacToe.Models.PlayerItemCreator
 				{
 					item.Key.Click -= ControlBuy_Click;
 					item.Key.Click -= ControlSelect_Click;
+					item.Key.MouseEnter -= Control_MouseEnter;
+					item.Key.MouseLeave -= Control_MouseLeave;
 					item.Key.Parent?.Dispose();
 				}
 

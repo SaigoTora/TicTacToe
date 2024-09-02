@@ -62,25 +62,17 @@ namespace TicTacToe.Models.PlayerInfo
 			switch (item)
 			{
 				case Avatar avatar:
-					{
-						Preferences.Avatar = avatar;
-						break;
-					}
+					Preferences.Avatar = avatar;
+					break;
 				case ImageItem imageItem:
-					{
-						Preferences.BackgroundMenu = imageItem;
-						break;
-					}
+					Preferences.BackgroundMenu = imageItem;
+					break;
 				case ColorItem colorItem:
-					{
-						Preferences.BackgroundGame = colorItem;
-						break;
-					}
+					Preferences.BackgroundGame = colorItem;
+					break;
 				default:
-					{
-						throw new InvalidOperationException
-							($"Unknown item type: {item.GetType().Name}");
-					}
+					throw new InvalidOperationException
+						($"Unknown item type: {item.GetType().Name}");
 			}
 		}
 

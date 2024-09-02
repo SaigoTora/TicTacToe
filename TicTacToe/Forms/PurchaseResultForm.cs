@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
-
+using TicTacToe.Models.PlayerInfo;
 using TicTacToe.Models.PlayerItem;
 using TicTacToe.Models.Utilities.FormUtilities;
 
@@ -8,10 +8,13 @@ namespace TicTacToe.Forms
 {
 	internal partial class PurchaseResultForm : BaseForm
 	{
+		private readonly Player _player;
+		private readonly Item _item;
+
 		private readonly CustomTitleBar _customTitleBar;
 		private readonly ButtonEventHandlers _buttonEventHandlers = new ButtonEventHandlers();
 
-		internal PurchaseResultForm(Item item)
+		internal PurchaseResultForm(Item item, Player player)
 		{
 			InitializeComponent();
 			_customTitleBar = new CustomTitleBar(this, "Item successfully purchased", minimizeBox: false, maximizeBox: false);
@@ -26,7 +29,10 @@ namespace TicTacToe.Forms
 			SetItemValues(item);
 			SetPicture(item);
 
-			_buttonEventHandlers.SubscribeToHoverButtons(buttonOK);
+			_player = player;
+			_item = item;
+			ActiveControl = buttonOK;
+			_buttonEventHandlers.SubscribeToHoverButtons(buttonOK, buttonSelect);
 		}
 		private void SetItemValues(Item item)
 		{
@@ -55,6 +61,11 @@ namespace TicTacToe.Forms
 			}
 		}
 
+		private void ButtonSelect_Click(object sender, EventArgs e)
+		{
+			_player.SelectItem(_item);
+			Close();
+		}
 		private void ButtonOK_Click(object sender, EventArgs e)
 			=> Close();
 		private void PurchaseResultForm_FormClosed(object sender, FormClosedEventArgs e)
@@ -62,5 +73,6 @@ namespace TicTacToe.Forms
 			_buttonEventHandlers.UnsubscribeAll();
 			_customTitleBar.Dispose();
 		}
+
 	}
 }

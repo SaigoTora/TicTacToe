@@ -39,12 +39,22 @@
 			this.pictureBoxPlayerAvatar = new System.Windows.Forms.PictureBox();
 			this.tabControl = new Guna.UI2.WinForms.Guna2TabControl();
 			this.tabPagePreferences = new System.Windows.Forms.TabPage();
+			this.panelPreviewItem = new Guna.UI2.WinForms.Guna2Panel();
+			this.labelDateTimePurchase = new System.Windows.Forms.Label();
+			this.labelDescription = new System.Windows.Forms.Label();
+			this.pictureBoxCoin = new System.Windows.Forms.PictureBox();
+			this.labelPrice = new System.Windows.Forms.Label();
+			this.labelItemName = new System.Windows.Forms.Label();
+			this.pictureBoxItem = new System.Windows.Forms.PictureBox();
 			this.panelPreferenceNavigation = new Guna.UI2.WinForms.Guna2Panel();
 			this.buttonPreferencesLeft = new FontAwesome.Sharp.IconButton();
 			this.buttonPreferencesRight = new FontAwesome.Sharp.IconButton();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxPlayerAvatar)).BeginInit();
 			this.tabControl.SuspendLayout();
 			this.tabPagePreferences.SuspendLayout();
+			this.panelPreviewItem.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.pictureBoxCoin)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.pictureBoxItem)).BeginInit();
 			this.panelPreferenceNavigation.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -58,7 +68,7 @@
 			this.labelBackgroundMenu.Name = "labelBackgroundMenu";
 			this.labelBackgroundMenu.Size = new System.Drawing.Size(470, 50);
 			this.labelBackgroundMenu.TabIndex = 1;
-			this.labelBackgroundMenu.Text = "Menu background";
+			this.labelBackgroundMenu.Text = "Menu Background";
 			this.labelBackgroundMenu.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			// 
 			// labelAvatar
@@ -85,7 +95,7 @@
 			this.labelBackgroundGame.Name = "labelBackgroundGame";
 			this.labelBackgroundGame.Size = new System.Drawing.Size(470, 50);
 			this.labelBackgroundGame.TabIndex = 3;
-			this.labelBackgroundGame.Text = "Game background";
+			this.labelBackgroundGame.Text = "Game Background";
 			this.labelBackgroundGame.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			this.labelBackgroundGame.Visible = false;
 			// 
@@ -96,11 +106,11 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.flpBackgroundMenu.AutoScroll = true;
 			this.flpBackgroundMenu.BackColor = System.Drawing.Color.Transparent;
-			this.flpBackgroundMenu.Location = new System.Drawing.Point(249, 80);
+			this.flpBackgroundMenu.Location = new System.Drawing.Point(484, 80);
 			this.flpBackgroundMenu.Name = "flpBackgroundMenu";
 			this.flpBackgroundMenu.Padding = new System.Windows.Forms.Padding(40, 10, 0, 0);
 			this.flpBackgroundMenu.Size = new System.Drawing.Size(700, 300);
-			this.flpBackgroundMenu.TabIndex = 1;
+			this.flpBackgroundMenu.TabIndex = 2;
 			// 
 			// flpAvatar
 			// 
@@ -109,11 +119,11 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.flpAvatar.AutoScroll = true;
 			this.flpAvatar.BackColor = System.Drawing.Color.Transparent;
-			this.flpAvatar.Location = new System.Drawing.Point(249, 80);
+			this.flpAvatar.Location = new System.Drawing.Point(484, 80);
 			this.flpAvatar.Name = "flpAvatar";
 			this.flpAvatar.Padding = new System.Windows.Forms.Padding(40, 10, 0, 0);
 			this.flpAvatar.Size = new System.Drawing.Size(700, 300);
-			this.flpAvatar.TabIndex = 2;
+			this.flpAvatar.TabIndex = 3;
 			this.flpAvatar.Visible = false;
 			// 
 			// flpBackgroundGame
@@ -123,11 +133,11 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.flpBackgroundGame.AutoScroll = true;
 			this.flpBackgroundGame.BackColor = System.Drawing.Color.Transparent;
-			this.flpBackgroundGame.Location = new System.Drawing.Point(249, 80);
+			this.flpBackgroundGame.Location = new System.Drawing.Point(484, 80);
 			this.flpBackgroundGame.Name = "flpBackgroundGame";
 			this.flpBackgroundGame.Padding = new System.Windows.Forms.Padding(40, 10, 0, 0);
 			this.flpBackgroundGame.Size = new System.Drawing.Size(700, 300);
-			this.flpBackgroundGame.TabIndex = 3;
+			this.flpBackgroundGame.TabIndex = 4;
 			this.flpBackgroundGame.Visible = false;
 			// 
 			// buttonChangeName
@@ -160,7 +170,7 @@
 			this.textBoxPlayerName.Size = new System.Drawing.Size(350, 34);
 			this.textBoxPlayerName.TabIndex = 1;
 			this.textBoxPlayerName.TabStop = false;
-			this.textBoxPlayerName.Text = "AAAAAAAAAAAAAAAAAAAA";
+			this.textBoxPlayerName.Text = "Player name";
 			this.textBoxPlayerName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBoxPlayerName_KeyDown);
 			this.textBoxPlayerName.Leave += new System.EventHandler(this.TextBoxPlayerName_Leave);
 			// 
@@ -210,6 +220,7 @@
 			// 
 			this.tabPagePreferences.AutoScroll = true;
 			this.tabPagePreferences.BackColor = System.Drawing.Color.Black;
+			this.tabPagePreferences.Controls.Add(this.panelPreviewItem);
 			this.tabPagePreferences.Controls.Add(this.panelPreferenceNavigation);
 			this.tabPagePreferences.Controls.Add(this.flpBackgroundMenu);
 			this.tabPagePreferences.Controls.Add(this.flpAvatar);
@@ -222,6 +233,100 @@
 			this.tabPagePreferences.TabIndex = 0;
 			this.tabPagePreferences.Text = "Preferences";
 			// 
+			// panelPreviewItem
+			// 
+			this.panelPreviewItem.BackColor = System.Drawing.Color.Transparent;
+			this.panelPreviewItem.Controls.Add(this.labelDateTimePurchase);
+			this.panelPreviewItem.Controls.Add(this.labelDescription);
+			this.panelPreviewItem.Controls.Add(this.pictureBoxCoin);
+			this.panelPreviewItem.Controls.Add(this.labelPrice);
+			this.panelPreviewItem.Controls.Add(this.labelItemName);
+			this.panelPreviewItem.Controls.Add(this.pictureBoxItem);
+			this.panelPreviewItem.Location = new System.Drawing.Point(8, 80);
+			this.panelPreviewItem.Name = "panelPreviewItem";
+			this.panelPreviewItem.Size = new System.Drawing.Size(450, 300);
+			this.panelPreviewItem.TabIndex = 0;
+			this.panelPreviewItem.Visible = false;
+			// 
+			// labelDateTimePurchase
+			// 
+			this.labelDateTimePurchase.BackColor = System.Drawing.Color.Transparent;
+			this.labelDateTimePurchase.Cursor = System.Windows.Forms.Cursors.Arrow;
+			this.labelDateTimePurchase.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.labelDateTimePurchase.Font = new System.Drawing.Font("Trebuchet MS", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.labelDateTimePurchase.ForeColor = System.Drawing.Color.Gainsboro;
+			this.labelDateTimePurchase.Location = new System.Drawing.Point(3, 100);
+			this.labelDateTimePurchase.Name = "labelDateTimePurchase";
+			this.labelDateTimePurchase.Size = new System.Drawing.Size(125, 39);
+			this.labelDateTimePurchase.TabIndex = 4;
+			this.labelDateTimePurchase.Text = "Date and time of purchase";
+			this.labelDateTimePurchase.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+			// 
+			// labelDescription
+			// 
+			this.labelDescription.BackColor = System.Drawing.Color.Transparent;
+			this.labelDescription.Cursor = System.Windows.Forms.Cursors.Arrow;
+			this.labelDescription.Dock = System.Windows.Forms.DockStyle.Bottom;
+			this.labelDescription.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.labelDescription.Font = new System.Drawing.Font("Trebuchet MS", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.labelDescription.ForeColor = System.Drawing.Color.Gainsboro;
+			this.labelDescription.Location = new System.Drawing.Point(0, 180);
+			this.labelDescription.Name = "labelDescription";
+			this.labelDescription.Size = new System.Drawing.Size(450, 120);
+			this.labelDescription.TabIndex = 5;
+			this.labelDescription.Text = "Item description\r\n";
+			// 
+			// pictureBoxCoin
+			// 
+			this.pictureBoxCoin.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.pictureBoxCoin.BackColor = System.Drawing.Color.Transparent;
+			this.pictureBoxCoin.Image = global::TicTacToe.Properties.Resources.coin;
+			this.pictureBoxCoin.Location = new System.Drawing.Point(134, 26);
+			this.pictureBoxCoin.Name = "pictureBoxCoin";
+			this.pictureBoxCoin.Size = new System.Drawing.Size(30, 30);
+			this.pictureBoxCoin.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+			this.pictureBoxCoin.TabIndex = 2;
+			this.pictureBoxCoin.TabStop = false;
+			// 
+			// labelPrice
+			// 
+			this.labelPrice.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.labelPrice.BackColor = System.Drawing.Color.Transparent;
+			this.labelPrice.Cursor = System.Windows.Forms.Cursors.Arrow;
+			this.labelPrice.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.labelPrice.Font = new System.Drawing.Font("Trebuchet MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.labelPrice.ForeColor = System.Drawing.Color.Khaki;
+			this.labelPrice.Location = new System.Drawing.Point(170, 26);
+			this.labelPrice.Name = "labelPrice";
+			this.labelPrice.Size = new System.Drawing.Size(277, 30);
+			this.labelPrice.TabIndex = 3;
+			this.labelPrice.Text = "999 999";
+			this.labelPrice.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
+			// labelItemName
+			// 
+			this.labelItemName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.labelItemName.BackColor = System.Drawing.Color.Transparent;
+			this.labelItemName.Cursor = System.Windows.Forms.Cursors.Arrow;
+			this.labelItemName.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.labelItemName.Font = new System.Drawing.Font("Trebuchet MS", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.labelItemName.ForeColor = System.Drawing.Color.Gainsboro;
+			this.labelItemName.Location = new System.Drawing.Point(134, -24);
+			this.labelItemName.Name = "labelItemName";
+			this.labelItemName.Size = new System.Drawing.Size(313, 50);
+			this.labelItemName.TabIndex = 1;
+			this.labelItemName.Text = "Item name";
+			// 
+			// pictureBoxItem
+			// 
+			this.pictureBoxItem.BackColor = System.Drawing.Color.Transparent;
+			this.pictureBoxItem.Location = new System.Drawing.Point(3, -27);
+			this.pictureBoxItem.Name = "pictureBoxItem";
+			this.pictureBoxItem.Size = new System.Drawing.Size(125, 125);
+			this.pictureBoxItem.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+			this.pictureBoxItem.TabIndex = 0;
+			this.pictureBoxItem.TabStop = false;
+			// 
 			// panelPreferenceNavigation
 			// 
 			this.panelPreferenceNavigation.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -232,10 +337,10 @@
 			this.panelPreferenceNavigation.Controls.Add(this.labelBackgroundMenu);
 			this.panelPreferenceNavigation.Controls.Add(this.labelAvatar);
 			this.panelPreferenceNavigation.Controls.Add(this.labelBackgroundGame);
-			this.panelPreferenceNavigation.Location = new System.Drawing.Point(361, 12);
+			this.panelPreferenceNavigation.Location = new System.Drawing.Point(596, 12);
 			this.panelPreferenceNavigation.Name = "panelPreferenceNavigation";
 			this.panelPreferenceNavigation.Size = new System.Drawing.Size(470, 50);
-			this.panelPreferenceNavigation.TabIndex = 0;
+			this.panelPreferenceNavigation.TabIndex = 1;
 			// 
 			// buttonPreferencesLeft
 			// 
@@ -289,11 +394,14 @@
 			this.ShowIcon = false;
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Profile";
-			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Shop_FormClosed);
+			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Profile_FormClosed);
 			this.Load += new System.EventHandler(this.ProfileForm_Load);
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxPlayerAvatar)).EndInit();
 			this.tabControl.ResumeLayout(false);
 			this.tabPagePreferences.ResumeLayout(false);
+			this.panelPreviewItem.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.pictureBoxCoin)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.pictureBoxItem)).EndInit();
 			this.panelPreferenceNavigation.ResumeLayout(false);
 			this.ResumeLayout(false);
 			this.PerformLayout();
@@ -315,5 +423,12 @@
 		private FontAwesome.Sharp.IconButton buttonPreferencesLeft;
 		private FontAwesome.Sharp.IconButton buttonPreferencesRight;
 		private Guna.UI2.WinForms.Guna2Panel panelPreferenceNavigation;
+		private Guna.UI2.WinForms.Guna2Panel panelPreviewItem;
+		private System.Windows.Forms.PictureBox pictureBoxItem;
+		private System.Windows.Forms.PictureBox pictureBoxCoin;
+		private System.Windows.Forms.Label labelPrice;
+		private System.Windows.Forms.Label labelItemName;
+		private System.Windows.Forms.Label labelDescription;
+		private System.Windows.Forms.Label labelDateTimePurchase;
 	}
 }
