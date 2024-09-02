@@ -125,7 +125,7 @@
 			this.buttonOK.Location = new System.Drawing.Point(528, 393);
 			this.buttonOK.Name = "buttonOK";
 			this.buttonOK.Size = new System.Drawing.Size(200, 45);
-			this.buttonOK.TabIndex = 5;
+			this.buttonOK.TabIndex = 6;
 			this.buttonOK.TabStop = false;
 			this.buttonOK.Text = "OK";
 			this.buttonOK.Click += new System.EventHandler(this.ButtonOK_Click);
@@ -153,7 +153,7 @@
 			this.buttonSelect.Location = new System.Drawing.Point(22, 393);
 			this.buttonSelect.Name = "buttonSelect";
 			this.buttonSelect.Size = new System.Drawing.Size(200, 45);
-			this.buttonSelect.TabIndex = 6;
+			this.buttonSelect.TabIndex = 5;
 			this.buttonSelect.TabStop = false;
 			this.buttonSelect.Text = "Select";
 			this.buttonSelect.Click += new System.EventHandler(this.ButtonSelect_Click);

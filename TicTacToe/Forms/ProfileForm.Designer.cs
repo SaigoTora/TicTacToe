@@ -106,7 +106,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.flpBackgroundMenu.AutoScroll = true;
 			this.flpBackgroundMenu.BackColor = System.Drawing.Color.Transparent;
-			this.flpBackgroundMenu.Location = new System.Drawing.Point(484, 80);
+			this.flpBackgroundMenu.Location = new System.Drawing.Point(8, 80);
 			this.flpBackgroundMenu.Name = "flpBackgroundMenu";
 			this.flpBackgroundMenu.Padding = new System.Windows.Forms.Padding(40, 10, 0, 0);
 			this.flpBackgroundMenu.Size = new System.Drawing.Size(700, 300);
@@ -119,7 +119,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.flpAvatar.AutoScroll = true;
 			this.flpAvatar.BackColor = System.Drawing.Color.Transparent;
-			this.flpAvatar.Location = new System.Drawing.Point(484, 80);
+			this.flpAvatar.Location = new System.Drawing.Point(8, 80);
 			this.flpAvatar.Name = "flpAvatar";
 			this.flpAvatar.Padding = new System.Windows.Forms.Padding(40, 10, 0, 0);
 			this.flpAvatar.Size = new System.Drawing.Size(700, 300);
@@ -133,7 +133,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.flpBackgroundGame.AutoScroll = true;
 			this.flpBackgroundGame.BackColor = System.Drawing.Color.Transparent;
-			this.flpBackgroundGame.Location = new System.Drawing.Point(484, 80);
+			this.flpBackgroundGame.Location = new System.Drawing.Point(8, 80);
 			this.flpBackgroundGame.Name = "flpBackgroundGame";
 			this.flpBackgroundGame.Padding = new System.Windows.Forms.Padding(40, 10, 0, 0);
 			this.flpBackgroundGame.Size = new System.Drawing.Size(700, 300);
@@ -235,6 +235,7 @@
 			// 
 			// panelPreviewItem
 			// 
+			this.panelPreviewItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.panelPreviewItem.BackColor = System.Drawing.Color.Transparent;
 			this.panelPreviewItem.Controls.Add(this.labelDateTimePurchase);
 			this.panelPreviewItem.Controls.Add(this.labelDescription);
@@ -242,20 +243,22 @@
 			this.panelPreviewItem.Controls.Add(this.labelPrice);
 			this.panelPreviewItem.Controls.Add(this.labelItemName);
 			this.panelPreviewItem.Controls.Add(this.pictureBoxItem);
-			this.panelPreviewItem.Location = new System.Drawing.Point(8, 80);
+			this.panelPreviewItem.Location = new System.Drawing.Point(740, 80);
 			this.panelPreviewItem.Name = "panelPreviewItem";
-			this.panelPreviewItem.Size = new System.Drawing.Size(450, 300);
+			this.panelPreviewItem.Padding = new System.Windows.Forms.Padding(0, 0, 15, 0);
+			this.panelPreviewItem.Size = new System.Drawing.Size(430, 300);
 			this.panelPreviewItem.TabIndex = 0;
 			this.panelPreviewItem.Visible = false;
 			// 
 			// labelDateTimePurchase
 			// 
+			this.labelDateTimePurchase.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelDateTimePurchase.BackColor = System.Drawing.Color.Transparent;
 			this.labelDateTimePurchase.Cursor = System.Windows.Forms.Cursors.Arrow;
 			this.labelDateTimePurchase.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.labelDateTimePurchase.Font = new System.Drawing.Font("Trebuchet MS", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.labelDateTimePurchase.ForeColor = System.Drawing.Color.Gainsboro;
-			this.labelDateTimePurchase.Location = new System.Drawing.Point(3, 100);
+			this.labelDateTimePurchase.Location = new System.Drawing.Point(290, 101);
 			this.labelDateTimePurchase.Name = "labelDateTimePurchase";
 			this.labelDateTimePurchase.Size = new System.Drawing.Size(125, 39);
 			this.labelDateTimePurchase.TabIndex = 4;
@@ -272,16 +275,17 @@
 			this.labelDescription.ForeColor = System.Drawing.Color.Gainsboro;
 			this.labelDescription.Location = new System.Drawing.Point(0, 180);
 			this.labelDescription.Name = "labelDescription";
-			this.labelDescription.Size = new System.Drawing.Size(450, 120);
+			this.labelDescription.Size = new System.Drawing.Size(415, 120);
 			this.labelDescription.TabIndex = 5;
 			this.labelDescription.Text = "Item description\r\n";
+			this.labelDescription.TextAlign = System.Drawing.ContentAlignment.TopRight;
 			// 
 			// pictureBoxCoin
 			// 
 			this.pictureBoxCoin.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.pictureBoxCoin.BackColor = System.Drawing.Color.Transparent;
 			this.pictureBoxCoin.Image = global::TicTacToe.Properties.Resources.coin;
-			this.pictureBoxCoin.Location = new System.Drawing.Point(134, 26);
+			this.pictureBoxCoin.Location = new System.Drawing.Point(254, 26);
 			this.pictureBoxCoin.Name = "pictureBoxCoin";
 			this.pictureBoxCoin.Size = new System.Drawing.Size(30, 30);
 			this.pictureBoxCoin.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -296,12 +300,12 @@
 			this.labelPrice.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.labelPrice.Font = new System.Drawing.Font("Trebuchet MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.labelPrice.ForeColor = System.Drawing.Color.Khaki;
-			this.labelPrice.Location = new System.Drawing.Point(170, 26);
+			this.labelPrice.Location = new System.Drawing.Point(4, 26);
 			this.labelPrice.Name = "labelPrice";
-			this.labelPrice.Size = new System.Drawing.Size(277, 30);
+			this.labelPrice.Size = new System.Drawing.Size(249, 30);
 			this.labelPrice.TabIndex = 3;
 			this.labelPrice.Text = "999 999";
-			this.labelPrice.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			this.labelPrice.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
 			// 
 			// labelItemName
 			// 
@@ -311,16 +315,18 @@
 			this.labelItemName.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.labelItemName.Font = new System.Drawing.Font("Trebuchet MS", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.labelItemName.ForeColor = System.Drawing.Color.Gainsboro;
-			this.labelItemName.Location = new System.Drawing.Point(134, -24);
+			this.labelItemName.Location = new System.Drawing.Point(4, -24);
 			this.labelItemName.Name = "labelItemName";
-			this.labelItemName.Size = new System.Drawing.Size(313, 50);
+			this.labelItemName.Size = new System.Drawing.Size(280, 50);
 			this.labelItemName.TabIndex = 1;
 			this.labelItemName.Text = "Item name";
+			this.labelItemName.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
 			// 
 			// pictureBoxItem
 			// 
+			this.pictureBoxItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.pictureBoxItem.BackColor = System.Drawing.Color.Transparent;
-			this.pictureBoxItem.Location = new System.Drawing.Point(3, -27);
+			this.pictureBoxItem.Location = new System.Drawing.Point(290, -27);
 			this.pictureBoxItem.Name = "pictureBoxItem";
 			this.pictureBoxItem.Size = new System.Drawing.Size(125, 125);
 			this.pictureBoxItem.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -337,7 +343,7 @@
 			this.panelPreferenceNavigation.Controls.Add(this.labelBackgroundMenu);
 			this.panelPreferenceNavigation.Controls.Add(this.labelAvatar);
 			this.panelPreferenceNavigation.Controls.Add(this.labelBackgroundGame);
-			this.panelPreferenceNavigation.Location = new System.Drawing.Point(596, 12);
+			this.panelPreferenceNavigation.Location = new System.Drawing.Point(120, 12);
 			this.panelPreferenceNavigation.Name = "panelPreferenceNavigation";
 			this.panelPreferenceNavigation.Size = new System.Drawing.Size(470, 50);
 			this.panelPreferenceNavigation.TabIndex = 1;
