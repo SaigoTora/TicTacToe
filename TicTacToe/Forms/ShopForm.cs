@@ -142,8 +142,9 @@ namespace TicTacToe.Forms
 			{
 				labelCoins.Text = $"{player.Coins:N0}".Replace(',', ' ');
 				TryToCreateEmptyLabels();
-				// TODO: Form with purchase results.
-				CustomMessageBox.Show("The item has been successfully purchased!", "Success", CustomMessageBoxButtons.OK, CustomMessageBoxIcon.OK);
+
+				PurchaseResultForm resultForm = new PurchaseResultForm(e.Item);
+				resultForm.ShowDialog();
 			}
 			else
 			{

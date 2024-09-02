@@ -340,7 +340,7 @@ namespace TicTacToe.Forms
 				_isFormClosingForNextRound = false;
 				Close();
 			}
-			ResultForm resultForm = new ResultForm(_player, winner, _bot.Difficulty, _roundManager.IsLastRound(), backToMainForm);
+			GameResultForm resultForm = new GameResultForm(_player, winner, _bot.Difficulty, _roundManager.IsLastRound(), backToMainForm);
 			resultForm.ShowDialog();
 		}
 		private async Task ShowWinningCells(CellType winner)

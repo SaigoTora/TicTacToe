@@ -10,7 +10,7 @@ using TicTacToeLibrary;
 
 namespace TicTacToe.Forms
 {
-	internal partial class ResultForm : BaseForm
+	internal partial class GameResultForm : BaseForm
 	{
 		private readonly Player _player;
 		private readonly PlayerType _winner;
@@ -20,7 +20,7 @@ namespace TicTacToe.Forms
 
 		private readonly EventHandler _backToMainForm;
 		private readonly CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
-		internal ResultForm(Player player, PlayerType winner, Difficulty difficult, bool isGameEnd, EventHandler backToMainForm)
+		internal GameResultForm(Player player, PlayerType winner, Difficulty difficult, bool isGameEnd, EventHandler backToMainForm)
 		{
 			InitializeComponent();
 

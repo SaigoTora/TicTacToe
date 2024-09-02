@@ -1,6 +1,6 @@
 ﻿namespace TicTacToe.Forms
 {
-	partial class ResultForm
+	partial class GameResultForm
 	{
 		/// <summary>
 		/// Required designer variable.
