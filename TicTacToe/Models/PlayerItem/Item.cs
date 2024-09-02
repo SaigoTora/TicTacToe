@@ -12,19 +12,26 @@ namespace TicTacToe.Models.PlayerItem
 		private readonly int _price;
 		internal int Price => _price;
 
+		[NonSerialized]
+		private readonly string _description;
+		internal string Description => _description;
+
 		protected DateTime dateTimePurchase;
 		internal DateTime DateTimePurchase
 			=> dateTimePurchase.ToLocalTime();
 
-		protected Item(string name, int price)
+		protected Item(string name, int price, string description)
 		{
 			Name = name;
 			_price = price;
+			_description = description;
 		}
 		public abstract object Clone();
 
 		internal void SetDateTimePurchaseNow()
 			=> dateTimePurchase = DateTime.UtcNow;
+		internal void SetDateTimePurchase(DateTime dateTime)
+			=> dateTimePurchase = dateTime.ToUniversalTime();
 
 		public override bool Equals(object obj)
 		{

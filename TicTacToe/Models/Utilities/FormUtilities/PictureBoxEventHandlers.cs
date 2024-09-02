@@ -28,7 +28,6 @@ namespace TicTacToe.Models.Utilities.FormUtilities
 
 			ResizeControl(picture, PICTURE_SIZE_PERCENT_SCALER, true);
 			isControlIncreased = true;
-			System.Diagnostics.Debug.WriteLine($"AFTER ENTER: {picture.Name} Size = {picture.Width};{picture.Height} Increased: {isControlIncreased}");
 		}
 		private void PictureBox_MouseLeave(object sender, EventArgs e)
 		{
@@ -37,7 +36,6 @@ namespace TicTacToe.Models.Utilities.FormUtilities
 
 			ResizeControl(picture, PICTURE_SIZE_PERCENT_SCALER, false);
 			isControlIncreased = false;
-			System.Diagnostics.Debug.WriteLine($"AFTER LEAVE: {picture.Name} Size = {picture.Width};{picture.Height} Increased: {isControlIncreased}");
 		}
 		#endregion
 

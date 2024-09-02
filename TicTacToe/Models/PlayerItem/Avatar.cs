@@ -10,11 +10,11 @@ namespace TicTacToe.Models.PlayerItem
 		private readonly AvatarRarity _rarity;
 		internal AvatarRarity Rarity => _rarity;
 
-		internal Avatar(string name, int price, Image image, AvatarRarity rarity)
-			: base(name, price, image)
+		internal Avatar(string name, int price, string description, Image image, AvatarRarity rarity)
+			: base(name, price, description, image)
 		{ _rarity = rarity; }
-		internal Avatar(string name, int price, Image image, Image previewImage, AvatarRarity rarity)
-			: base(name, price, image, previewImage)
+		internal Avatar(string name, int price, string description, Image image, Image previewImage, AvatarRarity rarity)
+			: base(name, price, description, image, previewImage)
 		{ _rarity = rarity; }
 
 		public override object Clone()
@@ -22,7 +22,7 @@ namespace TicTacToe.Models.PlayerItem
 			Image newImage = (Image)Image.Clone();
 			Image newPreviewImage = (Image)PreviewImage.Clone();
 
-			Avatar newAvatar = new Avatar(Name, Price, newImage, newPreviewImage, Rarity)
+			Avatar newAvatar = new Avatar(Name, Price, Description, newImage, newPreviewImage, Rarity)
 			{ dateTimePurchase = dateTimePurchase };
 
 			return newAvatar;

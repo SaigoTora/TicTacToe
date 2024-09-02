@@ -14,14 +14,14 @@ namespace TicTacToe.Models.PlayerItem
 		private readonly Image _previewImage;
 		internal Image PreviewImage => _previewImage;
 
-		internal ImageItem(string name, int price, Image image, Image previewImage)
-			: base(name, price)
+		internal ImageItem(string name, int price, string description, Image image, Image previewImage)
+			: base(name, price, description)
 		{
 			_image = image;
 			_previewImage = previewImage;
 		}
-		internal ImageItem(string name, int price, Image image)
-			: this(name, price, image, image)
+		internal ImageItem(string name, int price, string description, Image image)
+			: this(name, price, description, image, image)
 		{ }
 
 		public override object Clone()
@@ -29,7 +29,7 @@ namespace TicTacToe.Models.PlayerItem
 			Image newImage = (Image)Image.Clone();
 			Image newPreviewImage = (Image)PreviewImage.Clone();
 
-			ImageItem newImageItem = new ImageItem(Name, Price, newImage, newPreviewImage)
+			ImageItem newImageItem = new ImageItem(Name, Price, Description, newImage, newPreviewImage)
 			{ dateTimePurchase = this.dateTimePurchase };
 
 			return newImageItem;

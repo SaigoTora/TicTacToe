@@ -19,8 +19,6 @@ namespace TicTacToe.Forms
 		private readonly List<Avatar> _avatarItems = new List<Avatar>();
 		private readonly List<ColorItem> _colorItems = new List<ColorItem>();
 
-		private readonly Size _startPreferencePanelSize;
-
 		internal ShopForm(Player player) : base(player)
 		{
 			IsResizable = true;
@@ -28,7 +26,6 @@ namespace TicTacToe.Forms
 			InitializeComponent();
 
 			InitializeCreators();
-			_startPreferencePanelSize = panelPreferenceNavigation.Size;
 			preferences = new List<(Label, FlowLayoutPanel)>
 			{
 				(labelBackgroundMenu, flpBackgroundMenu),
