@@ -1,5 +1,6 @@
 ﻿using FontAwesome.Sharp;
 using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -28,6 +29,7 @@ namespace TicTacToe.Forms
 		private readonly CustomTitleBar _customTitleBar;
 		private readonly PictureBoxEventHandlers _pictureBoxEventHandlers = new PictureBoxEventHandlers();
 		private readonly ButtonEventHandlers _buttonEventHandlers = new ButtonEventHandlers();
+		private readonly LabelEventHandlers _labelEventHandlers = new LabelEventHandlers();
 
 		private readonly Player _player;
 		private Difficulty _selectedDifficulty;
@@ -48,9 +50,10 @@ namespace TicTacToe.Forms
 			ButtonDifficulty_Click(buttonEasy, e);
 			DisplayPlayerData();
 
-			_pictureBoxEventHandlers.SubscribeToHoverPictureBoxes(pictureBoxAvatar);
-			_buttonEventHandlers.SubscribeToHoverButtons(buttonPlay, buttonProfile,
+			_pictureBoxEventHandlers.SubscribeToHover(pictureBoxAvatar);
+			_buttonEventHandlers.SubscribeToHover(buttonPlay, buttonProfile,
 				buttonShop, buttonExit);
+			_labelEventHandlers.SubscribeToHoverUnderline(labelAuthor);
 		}
 
 		private void DisplayPlayerData()
@@ -227,6 +230,22 @@ namespace TicTacToe.Forms
 				label.BackColor = _backColorLabelName.Default;
 		}
 
+		private void LabelAuthor_Click(object sender, EventArgs e)
+		{
+			try
+			{
+				Process.Start(new ProcessStartInfo
+				{
+					FileName = "https://github.com/SaigoTora?tab=repositories",
+					UseShellExecute = true
+				});
+			}
+			catch (Exception ex)
+			{
+				CustomMessageBox.Show($"Failed to open link:\n{ex.Message}", "Error", icon: CustomMessageBoxIcon.Error);
+			}
+
+		}
 		private void Menu_VisibleChanged(object sender, EventArgs e)
 		{
 			if (Visible)
@@ -237,10 +256,12 @@ namespace TicTacToe.Forms
 		{
 			_pictureBoxEventHandlers.UnsubscribeAll();
 			_buttonEventHandlers.UnsubscribeAll();
+			_labelEventHandlers.UnsubscribeAll();
 			_customTitleBar.Dispose();
 
 			Serializator.Serialize(_player, Program.SerializePath, Program.EncryptKey);
 		}
 		#endregion
+
 	}
 }

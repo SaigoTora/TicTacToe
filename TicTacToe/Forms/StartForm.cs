@@ -19,6 +19,7 @@ namespace TicTacToe.Forms
 		private readonly CustomTitleBar _customTitleBar;
 		private readonly PictureBoxEventHandlers _pictureBoxEventHandlers = new PictureBoxEventHandlers();
 		private readonly ButtonEventHandlers _buttonEventHandlers = new ButtonEventHandlers();
+		private readonly LabelEventHandlers _labelEventHandlers = new LabelEventHandlers();
 
 		private Player _player;
 		private bool _isPlayerMan = true;
@@ -37,8 +38,9 @@ namespace TicTacToe.Forms
 			TextBoxName_Leave(textBoxName, e);
 			PictureBoxAvatar_Click(pictureBoxMan, e);
 
-			_pictureBoxEventHandlers.SubscribeToHoverPictureBoxes(pictureBoxMan, pictureBoxWoman);
-			_buttonEventHandlers.SubscribeToHoverButtons(buttonReady);
+			_pictureBoxEventHandlers.SubscribeToHover(pictureBoxMan, pictureBoxWoman);
+			_buttonEventHandlers.SubscribeToHover(buttonReady);
+			_labelEventHandlers.SubscribeToHoverUnderline(labelName);
 		}
 
 		private bool IsPlayerDataValid()
@@ -104,10 +106,6 @@ namespace TicTacToe.Forms
 			textBoxName.Focus();
 			textBoxName.SelectAll();
 		}
-		private void LabelName_MouseEnter(object sender, EventArgs e)
-			=> labelName.Font = new Font(labelName.Font, FontStyle.Underline);
-		private void LabelName_MouseLeave(object sender, EventArgs e)
-			=> labelName.Font = new Font(labelName.Font, FontStyle.Regular);
 
 		private void TextBoxName_Enter(object sender, EventArgs e)
 		{
@@ -130,6 +128,7 @@ namespace TicTacToe.Forms
 		{
 			_pictureBoxEventHandlers.UnsubscribeAll();
 			_buttonEventHandlers.UnsubscribeAll();
+			_labelEventHandlers.UnsubscribeAll();
 			_customTitleBar.Dispose();
 		}
 	}

@@ -8,7 +8,7 @@ namespace TicTacToe.Models.Utilities.FormUtilities
 		private const byte PICTURE_SIZE_PERCENT_SCALER = 10;
 
 		#region PictureBoxHover
-		internal void SubscribeToHoverPictureBoxes(params PictureBox[] pictureBoxes)
+		internal void SubscribeToHover(params PictureBox[] pictureBoxes)
 		{
 			foreach (PictureBox pictureBox in pictureBoxes)
 			{

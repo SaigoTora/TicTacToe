@@ -195,14 +195,14 @@ namespace TicTacToe.Forms
 			if (playerType == PlayerType.Human)// Subscribe to one-time event handler
 				pictureBox.MouseLeave += EnableHoverAfterMouseLeave;
 			else
-				_pictureBoxEventHandlers.SubscribeToHoverPictureBoxes(pictureBox);
+				_pictureBoxEventHandlers.SubscribeToHover(pictureBox);
 		}
 		private void EnableHoverAfterMouseLeave(object sender, EventArgs e)
 		{
 			if (!(sender is PictureBox pictureBox))
 				return;
 
-			_pictureBoxEventHandlers.SubscribeToHoverPictureBoxes(pictureBox);
+			_pictureBoxEventHandlers.SubscribeToHover(pictureBox);
 			pictureBox.MouseLeave -= EnableHoverAfterMouseLeave;
 		}
 

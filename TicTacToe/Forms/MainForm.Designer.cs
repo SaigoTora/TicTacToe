@@ -69,6 +69,7 @@
 			this.labelAuthor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelAuthor.AutoSize = true;
 			this.labelAuthor.BackColor = System.Drawing.Color.Transparent;
+			this.labelAuthor.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.labelAuthor.Font = new System.Drawing.Font("Lobster", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.labelAuthor.ForeColor = System.Drawing.Color.Silver;
 			this.labelAuthor.Location = new System.Drawing.Point(961, 713);
@@ -76,6 +77,7 @@
 			this.labelAuthor.Size = new System.Drawing.Size(152, 28);
 			this.labelAuthor.TabIndex = 5;
 			this.labelAuthor.Text = "Author: SaigoTora";
+			this.labelAuthor.Click += new System.EventHandler(this.LabelAuthor_Click);
 			// 
 			// labelDifficult
 			// 

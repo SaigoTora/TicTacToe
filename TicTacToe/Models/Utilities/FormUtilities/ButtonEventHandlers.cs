@@ -9,7 +9,7 @@ namespace TicTacToe.Models.Utilities.FormUtilities
 		private const byte BUTTON_FONT_SCALER = 2;
 
 		#region ButtonHover
-		internal void SubscribeToHoverButtons(params Guna2GradientButton[] buttons)
+		internal void SubscribeToHover(params Guna2GradientButton[] buttons)
 		{
 			foreach (Guna2GradientButton button in buttons)
 			{

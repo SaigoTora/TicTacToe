@@ -45,7 +45,7 @@ namespace TicTacToe.Forms
 			SetButtons(buttons);
 			SetIcon(icon);
 
-			_buttonEventHandlers.SubscribeToHoverButtons(button1, button2);
+			_buttonEventHandlers.SubscribeToHover(button1, button2);
 		}
 		private void SetButtons(CustomMessageBoxButtons buttons)
 		{

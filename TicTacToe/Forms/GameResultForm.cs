@@ -38,7 +38,7 @@ namespace TicTacToe.Forms
 			}
 			_backToMainForm = backToMainForm;
 			buttonBack.Click += _backToMainForm;
-			_buttonEventHandlers.SubscribeToHoverButtons(buttonBack, buttonPlay);
+			_buttonEventHandlers.SubscribeToHover(buttonBack, buttonPlay);
 		}
 
 		private void ResultForm_Load(object sender, EventArgs e)

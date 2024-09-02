@@ -32,7 +32,7 @@ namespace TicTacToe.Forms
 			_player = player;
 			_item = item;
 			ActiveControl = buttonOK;
-			_buttonEventHandlers.SubscribeToHoverButtons(buttonOK, buttonSelect);
+			_buttonEventHandlers.SubscribeToHover(buttonOK, buttonSelect);
 		}
 		private void SetItemValues(Item item)
 		{

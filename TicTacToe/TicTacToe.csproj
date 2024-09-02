@@ -139,6 +139,7 @@
     <Compile Include="Models\PlayerItemCreator\ColorCreator.cs" />
     <Compile Include="Models\PlayerItemCreator\ItemCreator.cs" />
     <Compile Include="Models\GameInfo\CoinsCalculator.cs" />
+    <Compile Include="Models\Utilities\FormUtilities\LabelEventHandlers.cs" />
     <Compile Include="Models\Utilities\FormUtilities\PictureBoxEventHandlers.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

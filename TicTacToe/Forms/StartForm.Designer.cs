@@ -67,8 +67,6 @@
 			this.labelName.Text = "Enter your nickname:";
 			this.labelName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			this.labelName.Click += new System.EventHandler(this.LabelName_Click);
-			this.labelName.MouseEnter += new System.EventHandler(this.LabelName_MouseEnter);
-			this.labelName.MouseLeave += new System.EventHandler(this.LabelName_MouseLeave);
 			// 
 			// textBoxName
 			// 

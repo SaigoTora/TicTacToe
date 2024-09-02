@@ -163,7 +163,7 @@ namespace TicTacToe.Models.PlayerItemCreator
 			pictureBox.Size = new Size(_itemSize, _itemSize);
 			pictureBox.SizeMode = PictureBoxSizeMode.Zoom;
 			pictureBox.Cursor = Cursors.Hand;
-			_pictureBoxEventHandlers.SubscribeToHoverPictureBoxes(pictureBox);
+			_pictureBoxEventHandlers.SubscribeToHover(pictureBox);
 		}
 		internal void UpdatePurchaseIndicatorsForAllItems()
 		{
