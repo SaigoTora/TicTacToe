@@ -24,7 +24,6 @@ namespace TicTacToe
 			Application.SetCompatibleTextRenderingDefault(false);
 
 			Player player = Serializator.Deserialize<Player>(SerializePath, EncryptKey);
-			player = new Player("Bohdan",50000,new PlayerPreferences());
 			if (player != null)
 				Application.Run(new Forms.MainForm(player));
 			else

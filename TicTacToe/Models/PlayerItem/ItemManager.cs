@@ -97,55 +97,16 @@ namespace TicTacToe.Models.PlayerItem
 		}
 		private static void FillColorItems()
 		{
-			AddItemToDictionary(new ColorItem("Arctic White", 25, "A crisp, clean white that brings to mind the cold purity of the Arctic.",
-				Color.FromArgb(235, 235, 235)), true);
-			AddItemToDictionary(new ColorItem("Desert Sand", 25, "A light, neutral beige reminiscent of sandy landscapes, offering a calming backdrop.",
-				Color.NavajoWhite));
-			AddItemToDictionary(new ColorItem("Soft Khaki", 25, "A gentle, muted yellow-brown that adds a touch of warmth without overpowering the senses.",
-				Color.Khaki));
-			AddItemToDictionary(new ColorItem("Coral Pink", 25, "A soft and inviting pink with coral undertones, ideal for a gentle touch.",
-				Color.FromArgb(255, 127, 80)));
-			AddItemToDictionary(new ColorItem("Burnt Sienna", 25, "A rich, warm brown with reddish undertones, reminiscent of earthy tones.",
-				Color.FromArgb(233, 116, 81)));
-			AddItemToDictionary(new ColorItem("Sunset Orange", 25, "A warm and fiery orange reminiscent of a breathtaking sunset.",
-				Color.FromArgb(255, 69, 0)));
-			AddItemToDictionary(new ColorItem("Dusty Rose", 25, "A soft, warm pink with a vintage feel, ideal for a cozy and inviting background.",
-				Color.RosyBrown));
-			AddItemToDictionary(new ColorItem("Royal Red", 25, "A regal and bold red, fit for royalty and commanding attention.",
-				Color.FromArgb(139, 0, 0)));
-			AddItemToDictionary(new ColorItem("Rose Blush", 25, "A delicate, pale red with violet undertones, creating a soft and romantic ambiance.",
-				Color.PaleVioletRed));
-			AddItemToDictionary(new ColorItem("Seafoam Green", 25, "A tranquil green with hints of blue, evoking the calm of the sea and refreshing the visual field.",
-				Color.DarkSeaGreen));
-			AddItemToDictionary(new ColorItem("Emerald Green", 25, "A lush, vibrant green that evokes the beauty of emerald gemstones.",
-				Color.FromArgb(0, 128, 0)));
-			AddItemToDictionary(new ColorItem("Ocean Teal", 35, "A calming teal that reflects the serene colors of the ocean.",
-				Color.FromArgb(0, 128, 128)));
-			AddItemToDictionary(new ColorItem("Bright Cyan", 35, "A vivid and bright cyan that pops with a refreshing, cool tone.",
-				Color.FromArgb(0, 255, 255)));
-			AddItemToDictionary(new ColorItem("Lagoon Blue", 35, "A vibrant turquoise that brings to mind tropical waters, ideal for lively and engaging designs.",
-				Color.Turquoise));
-			AddItemToDictionary(new ColorItem("Iron Blue", 35, "A deep, rich blue with a steel-like quality, giving a sense of strength and stability.",
-				Color.SteelBlue));
-			AddItemToDictionary(new ColorItem("Midnight Blue", 35, "A dark blue with hints of navy, ideal for creating a nighttime atmosphere.",
-				Color.FromArgb(25, 25, 112)));
-			AddItemToDictionary(new ColorItem("Deep Space Blue", 50, "A dark and mysterious shade reminiscent of the vastness of space.",
-				Color.FromArgb(10, 25, 47)));
-			AddItemToDictionary(new ColorItem("Cosmic Purple", 50, "A rich, deep purple with cosmic vibes, perfect for a galactic theme.",
-				Color.FromArgb(35, 0, 80)));
-			AddItemToDictionary(new ColorItem("Mystic Purple", 50, "A medium purple with a mystical quality, perfect for adding a touch of magic and intrigue.",
-				Color.MediumPurple));
-			AddItemToDictionary(new ColorItem("Electric Purple", 50, "A vibrant and electrifying purple with a futuristic touch.",
-				Color.FromArgb(153, 50, 204)));
-			AddItemToDictionary(new ColorItem("Steel Gray", 50, "A strong, industrial gray with a hint of blue, perfect for a sleek look.",
-				Color.FromArgb(70, 130, 180)));
-			AddItemToDictionary(new ColorItem("Shadow Gray", 50, "A subdued gray with a touch of elegance, perfect for creating a refined atmosphere.",
-				Color.DimGray));
-			AddItemToDictionary(new ColorItem("Charcoal Gray", 50, "A deep, dark gray with subtle hints of black, providing a sophisticated and sleek backdrop.",
-				Color.FromArgb(54, 69, 79)));
-			AddItemToDictionary(new ColorItem("Near Black", 50, "An extremely dark gray, nearly black, offering a deep and intense background color.",
-				Color.FromArgb(10, 10, 10)));
-
+			AddItemToDictionary(new ColorItem("colorItem1", 0, "Game background color.", Color.FromArgb(235, 235, 235)), true);
+			AddItemToDictionary(new ColorItem("colorItem2", 35, "Game background color.", Color.DimGray));
+			AddItemToDictionary(new ColorItem("colorItem3", 35, "Game background color.", Color.RosyBrown));
+			AddItemToDictionary(new ColorItem("colorItem4", 35, "Game background color.", Color.NavajoWhite));
+			AddItemToDictionary(new ColorItem("colorItem5", 35, "Game background color.", Color.Khaki));
+			AddItemToDictionary(new ColorItem("colorItem6", 35, "Game background color.", Color.DarkSeaGreen));
+			AddItemToDictionary(new ColorItem("colorItem7", 35, "Game background color.", Color.Turquoise));
+			AddItemToDictionary(new ColorItem("colorItem8", 35, "Game background color.", Color.SteelBlue));
+			AddItemToDictionary(new ColorItem("colorItem9", 35, "Game background color.", Color.MediumPurple));
+			AddItemToDictionary(new ColorItem("colorItem10", 35, "Game background color.", Color.PaleVioletRed));
 		}
 		#endregion
 
