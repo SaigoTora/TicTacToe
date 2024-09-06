@@ -286,7 +286,7 @@
 			// 
 			this.pictureBoxAvatar.BackColor = System.Drawing.Color.Transparent;
 			this.pictureBoxAvatar.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.pictureBoxAvatar.Image = global::TicTacToe.Properties.Resources.legendaryAvatar1;
+			this.pictureBoxAvatar.Image = global::TicTacToe.Properties.Resources.monkey;
 			this.pictureBoxAvatar.Location = new System.Drawing.Point(95, 10);
 			this.pictureBoxAvatar.Name = "pictureBoxAvatar";
 			this.pictureBoxAvatar.Size = new System.Drawing.Size(130, 130);

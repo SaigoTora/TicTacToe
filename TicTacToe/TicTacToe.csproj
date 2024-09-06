@@ -270,9 +270,6 @@
     <None Include="Resources\Images\legendaryAvatar2.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Images\legendaryAvatar3.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\Images\legendaryAvatar4.png" />
   </ItemGroup>
   <ItemGroup>
@@ -338,6 +335,290 @@
   <ItemGroup>
     <None Include="Resources\Images\clockWhite.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\Images\mystery.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\dog1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\dog2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\fox1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\fox2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\gorilla.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\horse.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\koala.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\owl.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\penguin.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\pig.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\tiger.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\bear.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\bunny.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\cat.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\Avatars\devil1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\Avatars\devil2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\Avatars\frankenstein.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\Avatars\ghost.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\Avatars\mummy.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\Avatars\skeleton.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\Avatars\witch1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\Avatars\witch2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\Avatars\alien.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\Avatars\BotAvatars\botImpossible.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\Avatars\BotAvatars\botEasy.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\Avatars\BotAvatars\botHard.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\Avatars\BotAvatars\botMedium.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\Avatars\PlayerAvatars\horse.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\Avatars\PlayerAvatars\koala.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\Avatars\PlayerAvatars\legendaryAvatar1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\Avatars\PlayerAvatars\legendaryAvatar2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\Avatars\PlayerAvatars\legendaryAvatar4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\Avatars\PlayerAvatars\manAvatar1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\Avatars\PlayerAvatars\manAvatar2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\Avatars\PlayerAvatars\manAvatar3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\Avatars\PlayerAvatars\manAvatar4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\Avatars\PlayerAvatars\manAvatar5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\Avatars\PlayerAvatars\owl.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\Avatars\PlayerAvatars\penguin.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\Avatars\PlayerAvatars\pig.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\Avatars\PlayerAvatars\tiger.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\Avatars\PlayerAvatars\womanAvatar1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\Avatars\PlayerAvatars\womanAvatar2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\Avatars\PlayerAvatars\womanAvatar3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\Avatars\PlayerAvatars\womanAvatar4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\Avatars\PlayerAvatars\womanAvatar5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\Avatars\PlayerAvatars\bear.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\Avatars\PlayerAvatars\bunny.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\Avatars\PlayerAvatars\cat.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\Avatars\PlayerAvatars\dog1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\Avatars\PlayerAvatars\dog2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\Avatars\PlayerAvatars\fox1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\Avatars\PlayerAvatars\fox2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\Avatars\PlayerAvatars\gorilla.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\Backgrounds\background3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\Backgrounds\background4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\Backgrounds\background5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\Backgrounds\background6.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\Backgrounds\background7.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\Backgrounds\background8.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\Backgrounds\background9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\Backgrounds\background10.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\Backgrounds\backgroundStartForm.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\Backgrounds\background1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\Backgrounds\background2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\Avatars\PlayerAvatars\mummy.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\Avatars\PlayerAvatars\skeleton.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\Avatars\PlayerAvatars\witch1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\Avatars\PlayerAvatars\witch2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\Avatars\PlayerAvatars\alien.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\Avatars\PlayerAvatars\devil1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\Avatars\PlayerAvatars\devil2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\Avatars\PlayerAvatars\frankenstein.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\Avatars\PlayerAvatars\ghost.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\Backgrounds\mystery.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\Other\coin.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\Other\clockBlack.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\Other\clockWhite.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\CrossZero\zero.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\CrossZero\cross.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\Avatars\PlayerAvatars\bird.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\Avatars\PlayerAvatars\bearChampion.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\Avatars\PlayerAvatars\cuteDog2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\Avatars\PlayerAvatars\cuteDog1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\Avatars\PlayerAvatars\lion.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\Avatars\PlayerAvatars\bugsBunny.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\Avatars\PlayerAvatars\pikachu.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\Avatars\PlayerAvatars\homer.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\Avatars\PlayerAvatars\tom.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\Avatars\PlayerAvatars\rageAvatar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\Avatars\PlayerAvatars\mysteryAvatar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\Avatars\PlayerAvatars\monkey.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\Avatars\PlayerAvatars\panda.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\Avatars\PlayerAvatars\bender.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

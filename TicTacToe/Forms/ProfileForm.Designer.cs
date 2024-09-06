@@ -177,7 +177,7 @@
 			// pictureBoxPlayerAvatar
 			// 
 			this.pictureBoxPlayerAvatar.BackColor = System.Drawing.Color.Transparent;
-			this.pictureBoxPlayerAvatar.Image = global::TicTacToe.Properties.Resources.legendaryAvatar1;
+			this.pictureBoxPlayerAvatar.Image = global::TicTacToe.Properties.Resources.monkey;
 			this.pictureBoxPlayerAvatar.Location = new System.Drawing.Point(5, 5);
 			this.pictureBoxPlayerAvatar.Name = "pictureBoxPlayerAvatar";
 			this.pictureBoxPlayerAvatar.Size = new System.Drawing.Size(200, 200);

@@ -118,118 +118,217 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="legendaryAvatar2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\legendaryAvatar2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="background2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\background2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="background1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\background1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="background9" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\background9.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="ticTacToe" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Icons\ticTacToe.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="manAvatar2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\manAvatar2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="background4" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\background4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="manAvatar4" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\manAvatar4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="womanAvatar3" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\womanAvatar3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="background7" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\background7.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="manAvatar1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\manAvatar1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="womanAvatar1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\womanAvatar1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="zero" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\zero.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="womanAvatar2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\womanAvatar2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="botMedium" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\botMedium.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="cross" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\cross.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="legendaryAvatar3" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\legendaryAvatar3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="background8" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\background8.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="mystery1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\mystery1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="legendaryAvatar4" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\legendaryAvatar4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="backgroundStartForm" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\backgroundStartForm.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="shop" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Icons\shop.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="womanAvatar5" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\womanAvatar5.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="background6" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\background6.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="info" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Icons\info.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="womanAvatar4" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\womanAvatar4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="alien" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\Avatars\PlayerAvatars\alien.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="botEasy" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\botEasy.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="background5" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\background5.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="botImpossible" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\botImpossible.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="manAvatar5" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\manAvatar5.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="manAvatar3" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\manAvatar3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="legendaryAvatar1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\legendaryAvatar1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="background3" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\background3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="background1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\Backgrounds\background1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="background10" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\background10.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\Resources\Images\Backgrounds\background10.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="background2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\Backgrounds\background2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="background3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\Backgrounds\background3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="background4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\Backgrounds\background4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="background5" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\Backgrounds\background5.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="background6" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\Backgrounds\background6.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="background7" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\Backgrounds\background7.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="background8" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\Backgrounds\background8.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="background9" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\Backgrounds\background9.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="backgroundStartForm" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\Backgrounds\backgroundStartForm.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bear" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\Avatars\PlayerAvatars\bear.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bearChampion" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\Avatars\PlayerAvatars\bearChampion.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bender" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\Avatars\PlayerAvatars\bender.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bird" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\Avatars\PlayerAvatars\bird.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="botEasy" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\Avatars\BotAvatars\botEasy.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="botHard" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\botHard.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\Resources\Images\Avatars\BotAvatars\botHard.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="coin" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\coin.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="botImpossible" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\Avatars\BotAvatars\botImpossible.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="botMedium" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\Avatars\BotAvatars\botMedium.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bugsBunny" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\Avatars\PlayerAvatars\bugsBunny.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bunny" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\Avatars\PlayerAvatars\bunny.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="cat" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\Avatars\PlayerAvatars\cat.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="clockBlack" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\clockBlack.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\Resources\Images\Other\clockBlack.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="clockWhite" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\clockWhite.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\Resources\Images\Other\clockWhite.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="coin" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\Other\coin.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="cross" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\CrossZero\cross.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="cuteDog1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\Avatars\PlayerAvatars\cuteDog1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="cuteDog2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\Avatars\PlayerAvatars\cuteDog2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="devil1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\Avatars\PlayerAvatars\devil1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="devil2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\Avatars\PlayerAvatars\devil2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="dog1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\Avatars\PlayerAvatars\dog1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="dog2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\Avatars\PlayerAvatars\dog2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="fox1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\Avatars\PlayerAvatars\fox1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="fox2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\Avatars\PlayerAvatars\fox2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="frankenstein" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\Avatars\PlayerAvatars\frankenstein.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ghost" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\Avatars\PlayerAvatars\ghost.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="gorilla" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\Avatars\PlayerAvatars\gorilla.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="homer" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\Avatars\PlayerAvatars\homer.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="horse" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\Avatars\PlayerAvatars\horse.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="koala" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\Avatars\PlayerAvatars\koala.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="lion" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\Avatars\PlayerAvatars\lion.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="manAvatar1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\Avatars\PlayerAvatars\manAvatar1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="manAvatar2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\Avatars\PlayerAvatars\manAvatar2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="manAvatar3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\Avatars\PlayerAvatars\manAvatar3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="manAvatar4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\Avatars\PlayerAvatars\manAvatar4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="manAvatar5" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\Avatars\PlayerAvatars\manAvatar5.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="monkey" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\Avatars\PlayerAvatars\monkey.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="mummy" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\Avatars\PlayerAvatars\mummy.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="mystery" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\Backgrounds\mystery.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="mysteryAvatar" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\Avatars\PlayerAvatars\mysteryAvatar.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="owl" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\Avatars\PlayerAvatars\owl.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="panda" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\Avatars\PlayerAvatars\panda.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="penguin" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\Avatars\PlayerAvatars\penguin.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="pig" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\Avatars\PlayerAvatars\pig.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="pikachu" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\Avatars\PlayerAvatars\pikachu.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="rageAvatar" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\Avatars\PlayerAvatars\rageAvatar.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="skeleton" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\Avatars\PlayerAvatars\skeleton.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="tiger" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\Avatars\PlayerAvatars\tiger.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="tom" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\Avatars\PlayerAvatars\tom.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="witch1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\Avatars\PlayerAvatars\witch1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="witch2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\Avatars\PlayerAvatars\witch2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="womanAvatar1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\Avatars\PlayerAvatars\womanAvatar1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="womanAvatar2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\Avatars\PlayerAvatars\womanAvatar2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="womanAvatar3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\Avatars\PlayerAvatars\womanAvatar3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="womanAvatar4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\Avatars\PlayerAvatars\womanAvatar4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="womanAvatar5" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\Avatars\PlayerAvatars\womanAvatar5.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="zero" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\CrossZero\zero.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

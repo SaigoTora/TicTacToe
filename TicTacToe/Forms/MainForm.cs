@@ -236,7 +236,7 @@ namespace TicTacToe.Forms
 			{
 				Process.Start(new ProcessStartInfo
 				{
-					FileName = "https://github.com/SaigoTora?tab=repositories",
+					FileName = "https://github.com/SaigoTora",
 					UseShellExecute = true
 				});
 			}
@@ -262,6 +262,5 @@ namespace TicTacToe.Forms
 			Serializator.Serialize(_player, Program.SerializePath, Program.EncryptKey);
 		}
 		#endregion
-
 	}
 }
