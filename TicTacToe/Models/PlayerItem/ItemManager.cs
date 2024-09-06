@@ -22,16 +22,61 @@ namespace TicTacToe.Models.PlayerItem
 		#region FillDictionary
 		private static void FillImageItems()
 		{
-			AddItemToDictionary(new ImageItem("imageItem1", 0, "Menu background image.", Properties.Resources.background1), true);
-			AddItemToDictionary(new ImageItem("imageItem2", 100, "Menu background image.", Properties.Resources.background5));
-			AddItemToDictionary(new ImageItem("imageItem3", 100, "Menu background image.", Properties.Resources.background9));
-			AddItemToDictionary(new ImageItem("imageItem4", 150, "Menu background image.", Properties.Resources.background2, Properties.Resources.mystery));
-			AddItemToDictionary(new ImageItem("imageItem5", 150, "Menu background image.", Properties.Resources.background3, Properties.Resources.mystery));
-			AddItemToDictionary(new ImageItem("imageItem6", 150, "Menu background image.", Properties.Resources.background6, Properties.Resources.mystery));
-			AddItemToDictionary(new ImageItem("imageItem7", 150, "Menu background image.", Properties.Resources.background7, Properties.Resources.mystery));
-			AddItemToDictionary(new ImageItem("imageItem8", 200, "Menu background image.", Properties.Resources.background4, Properties.Resources.mystery));
-			AddItemToDictionary(new ImageItem("imageItem9", 200, "Menu background image.", Properties.Resources.background8, Properties.Resources.mystery));
-			AddItemToDictionary(new ImageItem("imageItem10", 200, "Menu background image.", Properties.Resources.background10, Properties.Resources.mystery));
+			AddItemToDictionary(new ImageItem("Classic Gray", 0, "A standard gray background, perfect for minimalist and neutral designs.",
+				Properties.Resources.background1), true);
+			AddItemToDictionary(new ImageItem("Dark Waves", 50, "Black wavy lines create a minimalist and stylish background.",
+				Properties.Resources.background17));
+			AddItemToDictionary(new ImageItem("Leafy Blues", 50, "Blue patterns reminiscent of leaves create a natural and fresh feel.",
+				Properties.Resources.background11));
+			AddItemToDictionary(new ImageItem("Blue Wave", 50, "Patterns and waves that transition from white to blue create a sense of movement and calm.",
+				Properties.Resources.background8));
+			AddItemToDictionary(new ImageItem("Sea Breeze", 75, "Yellow background with images of sea creatures (mollusks, crabs) in a chaotic order, reflecting the summer sea theme.",
+				Properties.Resources.background5));
+			AddItemToDictionary(new ImageItem("Abstract Green", 75, "An abstract green background with lines, perfect for dynamic and creative designs.",
+				Properties.Resources.background6));
+			AddItemToDictionary(new ImageItem("Golden Clouds", 75, "Yellow clouds with an orange background and dots, reminiscent of warmth and a day full of light.",
+				Properties.Resources.background3));
+			AddItemToDictionary(new ImageItem("Frosty Blizzard", 75, "A blue blizzard background that gives a feeling of cold and winter calm.",
+				Properties.Resources.background7));
+			AddItemToDictionary(new ImageItem("Neon Grid", 100, "Yellow lines on a black background with dots create a dynamic and modern look.",
+				Properties.Resources.background16));
+			AddItemToDictionary(new ImageItem("Crimson Blood", 100, "A vibrant red background reminiscent of blood, creating a dramatic and energetic mood.",
+				Properties.Resources.background2));
+			AddItemToDictionary(new ImageItem("3D Violet Grid", 100, "Violet rectangles create a 3D space for an immersive effect.",
+				Properties.Resources.background9));
+			AddItemToDictionary(new ImageItem("Yellow Doodles", 100, "Yellow background with small details like dots, crosses and circles, adding a playful and dynamic feel.",
+				Properties.Resources.background12));
+			AddItemToDictionary(new ImageItem("Green Waves", 100, "Green lines form waves on a dark green background, creating a cybernetic feel.",
+				Properties.Resources.background19));
+			AddItemToDictionary(new ImageItem("Pastel Spheres", 100, "Light pink 3D spheres that create a soft and dimensional effect.",
+				Properties.Resources.background14));
+			AddItemToDictionary(new ImageItem("Neon Cubes", 100, "Blue and pink cubes on a purple background, adding volume and a 3D effect.",
+				Properties.Resources.background18));
+			AddItemToDictionary(new ImageItem("Hexagon Hive", 100, "Black hexagons placed in the center create a dynamic and futuristic background.",
+				Properties.Resources.background10));
+
+			AddItemToDictionary(new ImageItem("Twilight Lake", 150, "Purple landscape with a lake at sunset, birds and mountains, creating a dreamy atmosphere.",
+				Properties.Resources.background4, Properties.Resources.mystery));
+			AddItemToDictionary(new ImageItem("Candy Dots", 150, "Light blue and pink circles and dots add a candy-colored background.",
+				Properties.Resources.background15, Properties.Resources.mystery));
+			AddItemToDictionary(new ImageItem("Split Arrows", 150, "Blue and pink signs on the edges (> <) on a dark blue background, symbolizing movement and direction.",
+				Properties.Resources.background21, Properties.Resources.mystery));
+			AddItemToDictionary(new ImageItem("Chilly Mountains", 150, "Mountain landscape with lake and trees, where you can feel the cold and freshness.",
+				Properties.Resources.background26, Properties.Resources.mystery));
+			AddItemToDictionary(new ImageItem("Desert Sunrise", 200, "Desert landscape with sun and cacti, reminiscent of a hot and sunny day.",
+				Properties.Resources.background23, Properties.Resources.mystery));
+			AddItemToDictionary(new ImageItem("Midnight Island", 200, "Island landscape with trees and moon against the midnight sky, creating a calm atmosphere.",
+				Properties.Resources.background24, Properties.Resources.mystery));
+			AddItemToDictionary(new ImageItem("Geometric Teal", 200, "A teal background of squares and rectangles that reflects strong geometric shapes.",
+				Properties.Resources.background13, Properties.Resources.mystery));
+			AddItemToDictionary(new ImageItem("Starry Tree", 200, "Island landscape with a lonely tree and stars, immersing in the silence of the night.",
+				Properties.Resources.background25, Properties.Resources.mystery));
+			AddItemToDictionary(new ImageItem("Golden Leaves", 250, "Golden and green leaf patterns on a dark green background, adding natural elegance.",
+				Properties.Resources.background20, Properties.Resources.mystery));
+			AddItemToDictionary(new ImageItem("Neon Smoke", 250, "Gray smoke enveloping a neon circle creates a mysterious and futuristic effect.",
+				Properties.Resources.background22, Properties.Resources.mystery));
+			AddItemToDictionary(new ImageItem("Cartoon Studio", 250, "A cartoon workspace with a mirror, chair and accessories creates a cozy and creative backdrop.",
+				Properties.Resources.background27, Properties.Resources.mystery));
 		}
 		private static void FillAvatars()
 		{
@@ -72,10 +117,10 @@ namespace TicTacToe.Models.PlayerItem
 			AddItemToDictionary(new Avatar("Devil", 75, "A fiery red devil with a burning gaze and horns.", Properties.Resources.devil2, AvatarRarity.Rare));
 
 			AddItemToDictionary(new Avatar("Champion Bear", 75, "A bear wearing a gold medal, ready to win.", Properties.Resources.bearChampion, AvatarRarity.Rare));
-			AddItemToDictionary(new Avatar("Bella", 90, "An adorable dog with a friendly look.", Properties.Resources.cuteDog1, AvatarRarity.Rare));
-			AddItemToDictionary(new Avatar("Rusty", 90, "A fun and playful dog ready for adventure.", Properties.Resources.cuteDog2, AvatarRarity.Rare));
-			AddItemToDictionary(new Avatar("Lion with Glasses", 100, "A majestic lion wearing stylish glasses.", Properties.Resources.lion, AvatarRarity.Rare));
-			AddItemToDictionary(new Avatar("Cute Bird", 100, "A bird wearing glasses and a hat, looking fashionable and cozy.", Properties.Resources.bird, AvatarRarity.Rare));
+			AddItemToDictionary(new Avatar("Bella", 90, "An adorable dog with a friendly look.", Properties.Resources.cuteDog1, Properties.Resources.mysteryAvatar, AvatarRarity.Rare));
+			AddItemToDictionary(new Avatar("Rusty", 90, "A fun and playful dog ready for adventure.", Properties.Resources.cuteDog2, Properties.Resources.mysteryAvatar, AvatarRarity.Rare));
+			AddItemToDictionary(new Avatar("Lion with Glasses", 100, "A majestic lion wearing stylish glasses.", Properties.Resources.lion, Properties.Resources.mysteryAvatar, AvatarRarity.Rare));
+			AddItemToDictionary(new Avatar("Cute Bird", 100, "A bird wearing glasses and a hat, looking fashionable and cozy.", Properties.Resources.bird, Properties.Resources.mysteryAvatar, AvatarRarity.Rare));
 
 			AddItemToDictionary(new Avatar("Panda Sheriff", 125, "Panda with a cowboy hat, ready for adventure in the Wild West.", Properties.Resources.panda,
 				Properties.Resources.mysteryAvatar, AvatarRarity.Legendary));
