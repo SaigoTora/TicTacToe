@@ -32,7 +32,7 @@ namespace TicTacToe.Models.PlayerItemCreator
 			Label label = CreateLabelPrice(item);
 			CreateItemToBuy(item, pictureBox, label);
 
-			SubscribeControlToBuy(pictureBox, item);
+			SubscribeControlToClick(pictureBox, item);
 		}
 		internal override PictureBox CreateItemToSelect(ImageItem item)
 		{
@@ -42,7 +42,8 @@ namespace TicTacToe.Models.PlayerItemCreator
 			};
 
 			CreateItemToSelect(item, pictureBox);
-			SubscribeToSelect(pictureBox, item);
+
+			SubscribeControlToClick(pictureBox, item);
 			SubscribeControlToHover(pictureBox, item);
 
 			return pictureBox;

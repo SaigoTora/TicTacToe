@@ -77,9 +77,9 @@ namespace TicTacToe.Forms
 		{
 			if (subscribe)
 			{
-				menuBackCreator.Select += SelectMenuBack;
-				avatarCreator.Select += SelectAvatar;
-				gameBackCreator.Select += SelectGameBack;
+				menuBackCreator.Click += SelectMenuBack;
+				avatarCreator.Click += SelectAvatar;
+				gameBackCreator.Click += SelectGameBack;
 
 				menuBackCreator.MouseEnter += MouseEnterMenuBack;
 				avatarCreator.MouseEnter += MouseEnterAvatar;
@@ -91,9 +91,9 @@ namespace TicTacToe.Forms
 			}
 			else
 			{
-				menuBackCreator.Select -= SelectMenuBack;
-				avatarCreator.Select -= SelectAvatar;
-				gameBackCreator.Select -= SelectGameBack;
+				menuBackCreator.Click -= SelectMenuBack;
+				avatarCreator.Click -= SelectAvatar;
+				gameBackCreator.Click -= SelectGameBack;
 
 				menuBackCreator.MouseEnter -= MouseEnterMenuBack;
 				avatarCreator.MouseEnter -= MouseEnterAvatar;
@@ -165,6 +165,7 @@ namespace TicTacToe.Forms
 			if (!(e.ClickableControl is PictureBox selectedPicture))
 				return;
 
+			player.SelectItem(e.Item);
 			DeselectPreviousItem(_avatarPictureBoxes);
 			DefaultSelect(selectedPicture);
 			pictureBoxPlayerAvatar.Image = selectedPicture.Image;
@@ -174,6 +175,7 @@ namespace TicTacToe.Forms
 			if (!(e.ClickableControl is PictureBox selectedPicture))
 				return;
 
+			player.SelectItem(e.Item);
 			DeselectPreviousItem(_menuBackPictureBoxes);
 			DefaultSelect(selectedPicture);
 		}
@@ -182,6 +184,7 @@ namespace TicTacToe.Forms
 			if (!(e.ClickableControl is PictureBox selectedPicture))
 				return;
 
+			player.SelectItem(e.Item);
 			DeselectPreviousItem(_gameBackPictureBoxes);
 			DefaultSelect(selectedPicture);
 		}

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+
 using TicTacToe.Models.PlayerInfo;
 using TicTacToe.Models.PlayerItemCreator;
 
@@ -97,6 +98,7 @@ namespace TicTacToe.Forms
 
 		protected void ItemManagementForm_FormClosed(object sender, FormClosedEventArgs e)
 		{
+			Visible = false;
 			menuBackCreator?.Dispose();
 			avatarCreator?.Dispose();
 			gameBackCreator?.Dispose();

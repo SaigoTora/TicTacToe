@@ -111,7 +111,6 @@
       <DependentUpon>PurchaseResultForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\CustomExceptions\NotEnoughCoinsToStartGameException.cs" />
-    <Compile Include="Models\PlayerItemCreator\ItemBuyEventArgs.cs" />
     <Compile Include="Models\PlayerItemCreator\ItemEventArgs.cs" />
     <Compile Include="Models\PlayerItem\ItemManager.cs" />
     <Compile Include="Models\Utilities\FormUtilities\ButtonEventHandlers.cs" />

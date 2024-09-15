@@ -117,10 +117,10 @@ namespace TicTacToe.Models.PlayerItem
 			AddItemToDictionary(new Avatar("Devil", 75, "A fiery red devil with a burning gaze and horns.", Properties.Resources.devil2, AvatarRarity.Rare));
 
 			AddItemToDictionary(new Avatar("Champion Bear", 75, "A bear wearing a gold medal, ready to win.", Properties.Resources.bearChampion, AvatarRarity.Rare));
-			AddItemToDictionary(new Avatar("Bella", 90, "An adorable dog with a friendly look.", Properties.Resources.cuteDog1, Properties.Resources.mysteryAvatar, AvatarRarity.Rare));
-			AddItemToDictionary(new Avatar("Rusty", 90, "A fun and playful dog ready for adventure.", Properties.Resources.cuteDog2, Properties.Resources.mysteryAvatar, AvatarRarity.Rare));
-			AddItemToDictionary(new Avatar("Lion with Glasses", 100, "A majestic lion wearing stylish glasses.", Properties.Resources.lion, Properties.Resources.mysteryAvatar, AvatarRarity.Rare));
-			AddItemToDictionary(new Avatar("Cute Bird", 100, "A bird wearing glasses and a hat, looking fashionable and cozy.", Properties.Resources.bird, Properties.Resources.mysteryAvatar, AvatarRarity.Rare));
+			AddItemToDictionary(new Avatar("Bella", 90, "An adorable dog with a friendly look.", Properties.Resources.cuteDog1, Properties.Resources.mysteryAvatar, AvatarRarity.Legendary));
+			AddItemToDictionary(new Avatar("Rusty", 90, "A fun and playful dog ready for adventure.", Properties.Resources.cuteDog2, Properties.Resources.mysteryAvatar, AvatarRarity.Legendary));
+			AddItemToDictionary(new Avatar("Lion with Glasses", 100, "A majestic lion wearing stylish glasses.", Properties.Resources.lion, Properties.Resources.mysteryAvatar, AvatarRarity.Legendary));
+			AddItemToDictionary(new Avatar("Cute Bird", 100, "A bird wearing glasses and a hat, looking fashionable and cozy.", Properties.Resources.bird, Properties.Resources.mysteryAvatar, AvatarRarity.Legendary));
 
 			AddItemToDictionary(new Avatar("Panda Sheriff", 125, "Panda with a cowboy hat, ready for adventure in the Wild West.", Properties.Resources.panda,
 				Properties.Resources.mysteryAvatar, AvatarRarity.Legendary));

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
+using TicTacToe.Models.CustomExceptions;
 using TicTacToe.Models.PlayerInfo;
 using TicTacToe.Models.PlayerItem;
 using TicTacToe.Models.PlayerItemCreator;
@@ -66,24 +67,15 @@ namespace TicTacToe.Forms
 		{
 			if (subscribe)
 			{
-				menuBackCreator.ConfirmPurchase += ConfirmPurchase;
-				avatarCreator.ConfirmPurchase += ConfirmPurchase;
-				gameBackCreator.ConfirmPurchase += ConfirmPurchase;
-
-				menuBackCreator.Buy += DefaultBuy;
-				avatarCreator.Buy += DefaultBuy;
-				gameBackCreator.Buy += DefaultBuy;
+				menuBackCreator.Click += MenuBack_Click;
+				avatarCreator.Click += Avatar_Click;
+				gameBackCreator.Click += GameBack_Click;
 			}
 			else
 			{
-				menuBackCreator.ConfirmPurchase -= ConfirmPurchase;
-				avatarCreator.ConfirmPurchase -= ConfirmPurchase;
-				gameBackCreator.ConfirmPurchase -= ConfirmPurchase;
-
-				menuBackCreator.Buy -= DefaultBuy;
-				avatarCreator.Buy -= DefaultBuy;
-				gameBackCreator.Buy -= DefaultBuy;
-
+				menuBackCreator.Click -= MenuBack_Click;
+				avatarCreator.Click -= Avatar_Click;
+				gameBackCreator.Click -= GameBack_Click;
 			}
 		}
 
@@ -131,6 +123,14 @@ namespace TicTacToe.Forms
 						creator.CreateItemToBuy(shopItem);// then the item should be created
 				}
 		}
+
+		private void Avatar_Click(object sender, ItemEventArgs e)
+			=> DefaultBuy(avatarCreator, true, e);
+		private void MenuBack_Click(object sender, ItemEventArgs e)
+			=> DefaultBuy(menuBackCreator, true, e);
+		private void GameBack_Click(object sender, ItemEventArgs e)
+			=> DefaultBuy(gameBackCreator, true, e);
+
 		private bool ConfirmPurchase(Item item)
 		{
 			DialogResult result = CustomMessageBox.Show($"Are you sure you want to buy this item for {item.Price} coins?", "Confirmation", CustomMessageBoxButtons.YesNo, CustomMessageBoxIcon.Question);
@@ -139,22 +139,41 @@ namespace TicTacToe.Forms
 				return true;
 			return false;
 		}
-		private void DefaultBuy(object sender, ItemBuyEventArgs e)
+		private void DefaultBuy<T>(ItemCreator<T> itemCreator, bool needToDisposeParent, ItemEventArgs e) where T : Item
 		{
-			if (e.Success)
+			if (player.HaveEnoughCoins(e.Item.Price) && !ConfirmPurchase(e.Item))
+				return;
+
+			try
 			{
+				player.BuyItem(e.Item);
+
+				if (e.ClickableControl is PictureBox pictureBox)
+					itemCreator.PictureBoxEventHandlers.Unsubscribe(pictureBox);
+				itemCreator.UnSubscribeFromClick(e.ClickableControl);
+				if (needToDisposeParent)
+					e.ClickableControl.Parent.Dispose();
+				UpdateAllCreators();
+
 				labelCoins.Text = $"{player.Coins:N0}".Replace(',', ' ');
 				TryToCreateEmptyLabels();
 
 				PurchaseResultForm resultForm = new PurchaseResultForm(e.Item, player);
 				resultForm.ShowDialog();
 			}
-			else
+			catch (NotEnoughCoinsToBuyException)
 			{
 				CustomMessageBox.Show($"You don't have enough coins to buy this item!\nThis item costs {e.Item.Price} coins.",
 					"Not enough coins", CustomMessageBoxButtons.OK, CustomMessageBoxIcon.Error);
 			}
 		}
+		private void UpdateAllCreators()
+		{
+			menuBackCreator.UpdatePurchaseIndicatorsForAllItems();
+			avatarCreator.UpdatePurchaseIndicatorsForAllItems();
+			gameBackCreator.UpdatePurchaseIndicatorsForAllItems();
+		}
+
 		private Label InitializeLabelEmpty(string text)
 		{
 			const int TOP_MARGIN = 30;

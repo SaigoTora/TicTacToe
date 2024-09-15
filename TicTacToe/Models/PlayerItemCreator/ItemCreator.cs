@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
-using TicTacToe.Models.CustomExceptions;
 using TicTacToe.Models.PlayerInfo;
 using TicTacToe.Models.PlayerItem;
 using TicTacToe.Models.Utilities.FormUtilities;
@@ -12,17 +11,15 @@ namespace TicTacToe.Models.PlayerItemCreator
 {
 	internal abstract class ItemCreator<T> : IDisposable where T : Item
 	{// Abstract creator
-		internal Func<Item, bool> ConfirmPurchase;
-		internal event EventHandler<ItemEventArgs> Select;
+		internal event EventHandler<ItemEventArgs> Click;
 		internal event EventHandler<ItemEventArgs> MouseEnter;
 		internal event EventHandler<ItemEventArgs> MouseLeave;
-		internal event EventHandler<ItemBuyEventArgs> Buy;
+		internal readonly PictureBoxEventHandlers PictureBoxEventHandlers = new PictureBoxEventHandlers();
 
 		private readonly (Color Default, Color NotEnoughCoins) priceForeColor = (Color.Khaki, Color.FromArgb(191, 34, 51));
 		private readonly Player _player;
 		private readonly Panel _mainPanel;
 		private readonly Font _priceFont;
-		private readonly PictureBoxEventHandlers _pictureBoxEventHandlers = new PictureBoxEventHandlers();
 
 		private readonly Dictionary<Control, Item> _controlItemMap = new Dictionary<Control, Item>();
 		private readonly List<(Item, PictureBox, Label)> _createdItems = new List<(Item, PictureBox, Label)>();
@@ -122,6 +119,7 @@ namespace TicTacToe.Models.PlayerItemCreator
 			CreateItem(pictureBox, padding, padding);
 			_createdItems.Add((null, pictureBox, null));
 		}
+
 		private Panel CreateItem(PictureBox pictureBox, int padding, int bottomPadding)
 		{
 			if (pictureBox == null)
@@ -141,6 +139,14 @@ namespace TicTacToe.Models.PlayerItemCreator
 
 			return currentPanel;
 		}
+		private void CreatePicture(PictureBox pictureBox, int padding)
+		{
+			pictureBox.Location = new Point(padding, padding);
+			pictureBox.Size = new Size(_itemSize, _itemSize);
+			pictureBox.SizeMode = PictureBoxSizeMode.Zoom;
+			pictureBox.Cursor = Cursors.Hand;
+			PictureBoxEventHandlers.SubscribeToHover(pictureBox);
+		}
 		protected Label CreateLabelPrice(T item, ContentAlignment textAlign = ContentAlignment.MiddleCenter)
 		{
 			Label priceLabel = new Label
@@ -156,14 +162,6 @@ namespace TicTacToe.Models.PlayerItemCreator
 			return priceLabel;
 		}
 
-		private void CreatePicture(PictureBox pictureBox, int padding)
-		{
-			pictureBox.Location = new Point(padding, padding);
-			pictureBox.Size = new Size(_itemSize, _itemSize);
-			pictureBox.SizeMode = PictureBoxSizeMode.Zoom;
-			pictureBox.Cursor = Cursors.Hand;
-			_pictureBoxEventHandlers.SubscribeToHover(pictureBox);
-		}
 		internal void UpdatePurchaseIndicatorsForAllItems()
 		{
 			foreach (var item in _createdItems)
@@ -184,59 +182,24 @@ namespace TicTacToe.Models.PlayerItemCreator
 		}
 
 		#region ClickEventHandlers
-		protected void SubscribeControlToBuy(Control control, Item item)
+		internal void UnSubscribeFromClick(Control control)
+			=> control.Click -= Control_Click;
+		protected void SubscribeControlToClick(Control control, Item item)
 		{
 			_controlItemMap[control] = item;
-			control.Click += ControlBuy_Click;
+			control.Click += Control_Click;
 		}
-		private void ControlBuy_Click(object sender, EventArgs e)
+		private void Control_Click(object sender, EventArgs e)
 		{
 			if (!(sender is Control control))
 				return;
 
 			Item item = _controlItemMap[control];
-			if (_player.HaveEnoughCoins(item.Price) && ConfirmPurchase != null && !ConfirmPurchase(item))
-				return;
-
-			bool success = true;
-			try
-			{
-				_player.BuyItem(item);
-				if (control is PictureBox pictureBox)
-					_pictureBoxEventHandlers.Unsubscribe(pictureBox);
-				control.Click -= ControlBuy_Click;
-				control.Parent.Dispose();
-				UpdatePurchaseIndicatorsForAllItems();
-			}
-			catch (NotEnoughCoinsToBuyException)
-			{ success = false; }
-			finally
-			{ OnBuy(new ItemBuyEventArgs(item, control, success)); }
+			OnClick(new ItemEventArgs(item, control));
 		}
-		private void OnBuy(ItemBuyEventArgs e)
+		private void OnClick(ItemEventArgs e)
 		{
-			var temp = System.Threading.Volatile.Read(ref Buy);
-			temp?.Invoke(this, e);
-		}
-
-		protected void SubscribeToSelect(Control control, Item item)
-		{
-			_controlItemMap[control] = item;
-			control.Click += ControlSelect_Click;
-		}
-		private void ControlSelect_Click(object sender, EventArgs e)
-		{
-			if (!(sender is Control control))
-				return;
-
-			Item item = _controlItemMap[control];
-
-			_player.SelectItem(item);
-			OnSelect(new ItemEventArgs(item, control));
-		}
-		private void OnSelect(ItemEventArgs e)
-		{
-			var temp = System.Threading.Volatile.Read(ref Select);
+			var temp = System.Threading.Volatile.Read(ref Click);
 			temp?.Invoke(this, e);
 		}
 		#endregion
@@ -250,6 +213,7 @@ namespace TicTacToe.Models.PlayerItemCreator
 			control.MouseEnter += Control_MouseEnter;
 			control.MouseLeave += Control_MouseLeave;
 		}
+
 		private void Control_MouseEnter(object sender, EventArgs e)
 		{
 			if (!(sender is Control control))
@@ -278,15 +242,15 @@ namespace TicTacToe.Models.PlayerItemCreator
 			temp?.Invoke(this, e);
 		}
 		#endregion
+
 		public void Dispose()
 		{
-			_pictureBoxEventHandlers.UnsubscribeAll();
+			PictureBoxEventHandlers.UnsubscribeAll();
 
 			foreach (var item in _controlItemMap)
 				if (item.Key != null)
 				{
-					item.Key.Click -= ControlBuy_Click;
-					item.Key.Click -= ControlSelect_Click;
+					item.Key.Click -= Control_Click;
 					item.Key.MouseEnter -= Control_MouseEnter;
 					item.Key.MouseLeave -= Control_MouseLeave;
 					item.Key.Parent?.Dispose();
