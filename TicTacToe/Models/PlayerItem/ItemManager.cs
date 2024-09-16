@@ -17,6 +17,7 @@ namespace TicTacToe.Models.PlayerItem
 			FillImageItems();
 			FillAvatars();
 			FillColorItems();
+			FillCountableItems();
 		}
 
 		#region FillDictionary
@@ -192,11 +193,16 @@ namespace TicTacToe.Models.PlayerItem
 				Color.FromArgb(10, 10, 10)));
 
 		}
+		private static void FillCountableItems()
+		{
+			AddItemToDictionary(new CountableItem("Undo move", 6, "Undoes your last move.", Properties.Resources.undoMove, GameAssistType.UndoMove));
+			AddItemToDictionary(new CountableItem("Hint", 8, "Gives a hint for the next move.", Properties.Resources.hint, GameAssistType.Hint));
+		}
 		#endregion
 
 		internal static Item[] GetAllItems()
 			=> _dictionary.Values.Select(item => (Item)item.Clone()).ToArray();
-		internal static Item FindItem(Item item)
+		internal static Item GetFullItem(Item item)
 		{
 			DateTime dateTimePurchase = item.DateTimePurchase;
 			Item resultItem = (Item)_dictionary[GetKey(item)].Clone();
@@ -215,26 +221,20 @@ namespace TicTacToe.Models.PlayerItem
 			if (isDefault)
 				switch (item)
 				{
+					case CountableItem _:
+						break;
 					case Avatar avatar:
-						{
-							_defaultAvatars.Add(avatar);
-							break;
-						}
+						_defaultAvatars.Add(avatar);
+						break;
 					case ImageItem imageItem:
-						{
-							_defaultImageItems.Add(imageItem);
-							break;
-						}
+						_defaultImageItems.Add(imageItem);
+						break;
 					case ColorItem colorItem:
-						{
-							_defaultColorItems.Add(colorItem);
-							break;
-						}
+						_defaultColorItems.Add(colorItem);
+						break;
 					default:
-						{
-							throw new InvalidOperationException
-								($"Unknown item type: {item.GetType().Name}");
-						}
+						throw new InvalidOperationException
+							($"Unknown item type: {item.GetType().Name}");
 				}
 		}
 		private static string GetKey(Item item)

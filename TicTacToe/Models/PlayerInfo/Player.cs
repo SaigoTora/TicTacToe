@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Runtime.Serialization;
+
 using TicTacToe.Models.CustomExceptions;
 using TicTacToe.Models.GameInfo;
 using TicTacToe.Models.PlayerItem;
@@ -14,33 +14,25 @@ namespace TicTacToe.Models.PlayerInfo
 		internal string Name { get; private set; }
 		internal int Coins { get; private set; }
 		internal PlayerPreferences Preferences { get; private set; }
+		internal ItemsInventory ItemsInventory { get; private set; } = new ItemsInventory();
+		internal CountableItemsInventory CountableItemsInventory { get; private set; } = new CountableItemsInventory();
 
-		private List<Item> _inventory = new List<Item>();
 		private int deductedCoins;
 		internal Player(string name, int coins, PlayerPreferences preferences)
 		{
 			Name = name;
 			Coins = coins;
 			Preferences = preferences;
-			SetDefaultInventory();
+			ItemsInventory.SetDefaultInventory();
 		}
 		internal Player()
 		{
 			Preferences = new PlayerPreferences();
-			SetDefaultInventory();
+			ItemsInventory.SetDefaultInventory();
 		}
 
 		internal bool HaveEnoughCoins(int coins) => Coins >= coins;
 		internal void ChangeName(string newName) => Name = newName;
-		internal List<Item> GetPlayerItems()
-		{
-			List<Item> resultList = new List<Item>();
-
-			foreach (Item item in _inventory)
-				resultList.Add(item);
-
-			return resultList;
-		}
 
 		/// <summary>
 		/// The method takes away coins from the user and adds the item to the inventory.
@@ -54,8 +46,8 @@ namespace TicTacToe.Models.PlayerInfo
 				throw new NotEnoughCoinsToBuyException(item);
 
 			Coins -= item.Price;
-			AddItemToInventory(item);
 			item.SetDateTimePurchaseNow();
+			AddItemToInventory(item);
 		}
 		internal void SelectItem(Item item)
 		{
@@ -114,26 +106,17 @@ namespace TicTacToe.Models.PlayerInfo
 
 		private void AddItemToInventory(Item item)
 		{
-			if (_inventory == null)
-				_inventory = new List<Item>();
+			if (item is CountableItem countableItem)
+				CountableItemsInventory.AddItem(countableItem);
+			else
+				ItemsInventory.AddItem(item);
+		}
 
-			_inventory.Add(item);
-		}
-		private void SetDefaultInventory()
-		{
-			_inventory = new List<Item>();
-			List<Item> defaultItems = ItemManager.GetDefaultItems();
-			foreach (Item item in defaultItems)
-			{
-				item.SetDateTimePurchaseNow();
-				_inventory.Add(item);
-			}
-		}
 		[OnDeserialized]
 		private void OnDeserialized(StreamingContext context)
 		{
-			for (int i = 0; i < _inventory.Count; i++)
-				_inventory[i] = ItemManager.FindItem(_inventory[i]);
+			ItemsInventory.SetFullItems();
+			CountableItemsInventory.SetFullItems();
 		}
 	}
 }

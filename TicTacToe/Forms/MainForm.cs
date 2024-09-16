@@ -5,6 +5,8 @@ using System.Drawing;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using TicTacToe.Forms.ItemManagement.Profile;
+using TicTacToe.Forms.ItemManagement.Shop;
 using TicTacToe.Models.GameInfo;
 using TicTacToe.Models.PlayerInfo;
 using TicTacToe.Models.Utilities;

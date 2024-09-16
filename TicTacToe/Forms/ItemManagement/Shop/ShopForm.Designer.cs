@@ -1,4 +1,4 @@
-﻿namespace TicTacToe.Forms
+﻿namespace TicTacToe.Forms.ItemManagement.Shop
 {
 	partial class ShopForm
 	{
@@ -39,11 +39,14 @@
 			this.flpBackgroundMenu = new System.Windows.Forms.FlowLayoutPanel();
 			this.flpAvatar = new System.Windows.Forms.FlowLayoutPanel();
 			this.flpBackgroundGame = new System.Windows.Forms.FlowLayoutPanel();
+			this.tabPageGameAssistants = new System.Windows.Forms.TabPage();
+			this.flpGameAssistants = new System.Windows.Forms.FlowLayoutPanel();
 			this.pictureBoxCoin = new System.Windows.Forms.PictureBox();
 			this.labelCoins = new System.Windows.Forms.Label();
 			this.tabControl.SuspendLayout();
 			this.tabPagePreferences.SuspendLayout();
 			this.panelPreferenceNavigation.SuspendLayout();
+			this.tabPageGameAssistants.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxCoin)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -53,21 +56,22 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.tabControl.Controls.Add(this.tabPagePreferences);
+			this.tabControl.Controls.Add(this.tabPageGameAssistants);
 			this.tabControl.ItemSize = new System.Drawing.Size(400, 50);
 			this.tabControl.Location = new System.Drawing.Point(0, 300);
 			this.tabControl.Name = "tabControl";
 			this.tabControl.SelectedIndex = 0;
 			this.tabControl.Size = new System.Drawing.Size(1200, 520);
 			this.tabControl.TabButtonHoverState.BorderColor = System.Drawing.Color.Empty;
-			this.tabControl.TabButtonHoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(52)))), ((int)(((byte)(70)))));
-			this.tabControl.TabButtonHoverState.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
+			this.tabControl.TabButtonHoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
+			this.tabControl.TabButtonHoverState.Font = new System.Drawing.Font("Trebuchet MS", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.tabControl.TabButtonHoverState.ForeColor = System.Drawing.Color.White;
 			this.tabControl.TabButtonHoverState.InnerColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(52)))), ((int)(((byte)(70)))));
-			this.tabControl.TabButtonIdleState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(42)))), ((int)(((byte)(57)))));
-			this.tabControl.TabButtonIdleState.FillColor = System.Drawing.Color.Black;
-			this.tabControl.TabButtonIdleState.Font = new System.Drawing.Font("Trebuchet MS", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.tabControl.TabButtonIdleState.BorderColor = System.Drawing.Color.Transparent;
+			this.tabControl.TabButtonIdleState.FillColor = System.Drawing.Color.Transparent;
+			this.tabControl.TabButtonIdleState.Font = new System.Drawing.Font("Trebuchet MS", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.tabControl.TabButtonIdleState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(160)))), ((int)(((byte)(167)))));
-			this.tabControl.TabButtonIdleState.InnerColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(42)))), ((int)(((byte)(57)))));
+			this.tabControl.TabButtonIdleState.InnerColor = System.Drawing.Color.Transparent;
 			this.tabControl.TabButtonSelectedState.BorderColor = System.Drawing.Color.Empty;
 			this.tabControl.TabButtonSelectedState.FillColor = System.Drawing.Color.Black;
 			this.tabControl.TabButtonSelectedState.Font = new System.Drawing.Font("Trebuchet MS", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -86,7 +90,7 @@
 			this.tabPagePreferences.Controls.Add(this.flpBackgroundMenu);
 			this.tabPagePreferences.Controls.Add(this.flpAvatar);
 			this.tabPagePreferences.Controls.Add(this.flpBackgroundGame);
-			this.tabPagePreferences.Cursor = System.Windows.Forms.Cursors.Default;
+			this.tabPagePreferences.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.tabPagePreferences.Location = new System.Drawing.Point(4, 54);
 			this.tabPagePreferences.Name = "tabPagePreferences";
 			this.tabPagePreferences.Padding = new System.Windows.Forms.Padding(3);
@@ -225,6 +229,28 @@
 			this.flpBackgroundGame.TabIndex = 3;
 			this.flpBackgroundGame.Visible = false;
 			// 
+			// tabPageGameAssistants
+			// 
+			this.tabPageGameAssistants.BackColor = System.Drawing.Color.Black;
+			this.tabPageGameAssistants.Controls.Add(this.flpGameAssistants);
+			this.tabPageGameAssistants.Location = new System.Drawing.Point(4, 54);
+			this.tabPageGameAssistants.Name = "tabPageGameAssistants";
+			this.tabPageGameAssistants.Padding = new System.Windows.Forms.Padding(3);
+			this.tabPageGameAssistants.Size = new System.Drawing.Size(1192, 462);
+			this.tabPageGameAssistants.TabIndex = 1;
+			this.tabPageGameAssistants.Text = "Game Assistants";
+			// 
+			// flpGameAssistants
+			// 
+			this.flpGameAssistants.AutoScroll = true;
+			this.flpGameAssistants.BackColor = System.Drawing.Color.Transparent;
+			this.flpGameAssistants.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.flpGameAssistants.Location = new System.Drawing.Point(3, 3);
+			this.flpGameAssistants.Name = "flpGameAssistants";
+			this.flpGameAssistants.Padding = new System.Windows.Forms.Padding(40, 10, 0, 0);
+			this.flpGameAssistants.Size = new System.Drawing.Size(1186, 456);
+			this.flpGameAssistants.TabIndex = 0;
+			// 
 			// pictureBoxCoin
 			// 
 			this.pictureBoxCoin.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -271,6 +297,7 @@
 			this.tabControl.ResumeLayout(false);
 			this.tabPagePreferences.ResumeLayout(false);
 			this.panelPreferenceNavigation.ResumeLayout(false);
+			this.tabPageGameAssistants.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxCoin)).EndInit();
 			this.ResumeLayout(false);
 
@@ -290,5 +317,7 @@
 		private System.Windows.Forms.FlowLayoutPanel flpBackgroundGame;
 		private System.Windows.Forms.PictureBox pictureBoxCoin;
 		private System.Windows.Forms.Label labelCoins;
+		private System.Windows.Forms.TabPage tabPageGameAssistants;
+		private System.Windows.Forms.FlowLayoutPanel flpGameAssistants;
 	}
 }

@@ -21,9 +21,9 @@ namespace TicTacToe.Models.PlayerInfo
 		[OnDeserialized]
 		private void OnDeserialized(StreamingContext context)
 		{
-			Avatar = (Avatar)ItemManager.FindItem(Avatar);
-			BackgroundMenu = (ImageItem)ItemManager.FindItem(BackgroundMenu);
-			BackgroundGame = (ColorItem)ItemManager.FindItem(BackgroundGame);
+			Avatar = (Avatar)ItemManager.GetFullItem(Avatar);
+			BackgroundMenu = (ImageItem)ItemManager.GetFullItem(BackgroundMenu);
+			BackgroundGame = (ColorItem)ItemManager.GetFullItem(BackgroundGame);
 		}
 	}
 }

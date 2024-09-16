@@ -1,4 +1,4 @@
-﻿namespace TicTacToe.Forms
+﻿namespace TicTacToe.Forms.ItemManagement
 {
 	partial class ItemManagementForm
 	{

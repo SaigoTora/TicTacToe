@@ -5,7 +5,7 @@ using TicTacToe.Models.PlayerInfo;
 using TicTacToe.Models.PlayerItem;
 using TicTacToe.Models.Utilities.FormUtilities;
 
-namespace TicTacToe.Forms
+namespace TicTacToe.Forms.ItemManagement.Shop
 {
 	internal partial class PurchaseResultForm : BaseForm
 	{

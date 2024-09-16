@@ -1,4 +1,4 @@
-﻿namespace TicTacToe.Forms
+﻿namespace TicTacToe.Forms.ItemManagement.Shop
 {
 	partial class PurchaseResultForm
 	{

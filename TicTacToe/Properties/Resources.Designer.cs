@@ -613,6 +613,16 @@ namespace TicTacToe.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap hint {
+            get {
+                object obj = ResourceManager.GetObject("hint", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap homer {
             get {
                 object obj = ResourceManager.GetObject("homer", resourceCulture);
@@ -856,6 +866,16 @@ namespace TicTacToe.Properties {
         internal static System.Drawing.Bitmap tom {
             get {
                 object obj = ResourceManager.GetObject("tom", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap undoMove {
+            get {
+                object obj = ResourceManager.GetObject("undoMove", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

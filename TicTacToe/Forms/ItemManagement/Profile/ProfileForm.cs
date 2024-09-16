@@ -11,7 +11,7 @@ using TicTacToe.Models.PlayerItemCreator;
 using TicTacToe.Models.Utilities;
 using TicTacToe.Models.Utilities.FormUtilities;
 
-namespace TicTacToe.Forms
+namespace TicTacToe.Forms.ItemManagement.Profile
 {
 	internal partial class ProfileForm : ItemManagementForm
 	{
@@ -67,11 +67,14 @@ namespace TicTacToe.Forms
 		private void InitializeCreators()
 		{
 			const int ITEM_SIZE = 100;
+			const int GAME_ASSISTANTS_SIZE = 80;
 
 			menuBackCreator = new ImageCreator(player, flpBackgroundMenu, ITEM_SIZE);
 			avatarCreator = new AvatarCreator(player, flpAvatar, ITEM_SIZE);
 			gameBackCreator = new ColorCreator(player, flpBackgroundGame, ITEM_SIZE);
+			gameAssistantsCreator = new ImageCreator(player, flpGameAssistants, GAME_ASSISTANTS_SIZE);
 			ManageItemCreatorEvents(true);
+			MouseLeaveItem(this, ItemEventArgs.Empty);
 		}
 		private void ManageItemCreatorEvents(bool subscribe)
 		{
@@ -84,10 +87,12 @@ namespace TicTacToe.Forms
 				menuBackCreator.MouseEnter += MouseEnterMenuBack;
 				avatarCreator.MouseEnter += MouseEnterAvatar;
 				gameBackCreator.MouseEnter += MouseEnterGameBack;
+				gameAssistantsCreator.MouseEnter += MouseEnterGameAssistants;
 
 				menuBackCreator.MouseLeave += MouseLeaveItem;
 				avatarCreator.MouseLeave += MouseLeaveItem;
 				gameBackCreator.MouseLeave += MouseLeaveItem;
+				gameAssistantsCreator.MouseLeave += MouseLeaveItem;
 			}
 			else
 			{
@@ -98,17 +103,19 @@ namespace TicTacToe.Forms
 				menuBackCreator.MouseEnter -= MouseEnterMenuBack;
 				avatarCreator.MouseEnter -= MouseEnterAvatar;
 				gameBackCreator.MouseEnter -= MouseEnterGameBack;
+				gameAssistantsCreator.MouseEnter -= MouseEnterGameAssistants;
 
 				menuBackCreator.MouseLeave -= MouseLeaveItem;
 				avatarCreator.MouseLeave -= MouseLeaveItem;
 				gameBackCreator.MouseLeave -= MouseLeaveItem;
+				gameAssistantsCreator.MouseLeave -= MouseLeaveItem;
 			}
 		}
 
 		#region CreateItems
 		private void CreateItems()
 		{
-			foreach (Item item in player.GetPlayerItems())
+			foreach (Item item in player.ItemsInventory.GetItems())
 				switch (item)
 				{
 					case Avatar avatar:
@@ -123,6 +130,9 @@ namespace TicTacToe.Forms
 					default:
 						throw new InvalidOperationException($"Unknown item type: {item.GetType().Name}");
 				}
+
+			foreach (CountableItem item in player.CountableItemsInventory.GetItems())
+				gameAssistantsCreator.CreateItemToSelect(item);
 		}
 		private void CreateMenuBack(ImageCreator menuBackCreator, ImageItem imageItem)
 		{
@@ -297,9 +307,18 @@ namespace TicTacToe.Forms
 		#endregion
 
 		#region HoverItems
-		private void SetPreviewItem(Item item)
+		private void SetPreviewItem(Item item, bool needToSetPrice = true, bool needToSetDate = true)
 		{
 			labelItemName.Text = item.Name;
+			if (needToSetPrice)
+				SetPrice(item);
+			if (needToSetDate)
+				labelDateTimePurchase.Text = item.DateTimePurchase.ToString("dd.MM.yyyy HH:mm");
+			labelDescription.Text = item.Description;
+			panelPreviewItem.Visible = true;
+		}
+		private void SetPrice(Item item)
+		{
 			if (item.Price == 0)
 			{
 				labelPrice.Text = string.Empty;
@@ -310,9 +329,8 @@ namespace TicTacToe.Forms
 				labelPrice.Text = $"{item.Price:N0}".Replace(',', ' ');
 				pictureBoxCoin.Visible = true;
 			}
-			labelDateTimePurchase.Text = item.DateTimePurchase.ToString("dd.MM.yyyy HH:mm");
-			labelDescription.Text = item.Description;
 		}
+
 		private void MouseEnterMenuBack(object sender, ItemEventArgs e)
 		{
 			if (!(e.Item is ImageItem imageItem))
@@ -320,7 +338,6 @@ namespace TicTacToe.Forms
 
 			pictureBoxItem.Image = imageItem.Image.ChangeOpacity(PREVIEW_OPACITY_LEVEL);
 			SetPreviewItem(imageItem);
-			panelPreviewItem.Visible = true;
 		}
 		private void MouseEnterAvatar(object sender, ItemEventArgs e)
 		{
@@ -329,7 +346,6 @@ namespace TicTacToe.Forms
 
 			pictureBoxItem.Image = avatar.Image.ChangeOpacity(PREVIEW_OPACITY_LEVEL);
 			SetPreviewItem(avatar);
-			panelPreviewItem.Visible = true;
 		}
 		private void MouseEnterGameBack(object sender, ItemEventArgs e)
 		{
@@ -338,15 +354,25 @@ namespace TicTacToe.Forms
 
 			pictureBoxItem.BackColor = colorItem.Color;
 			SetPreviewItem(colorItem);
-			panelPreviewItem.Visible = true;
+		}
+		private void MouseEnterGameAssistants(object sender, ItemEventArgs e)
+		{
+			if (!(e.Item is CountableItem countableItem))
+				return;
+
+			pictureBoxItem.Image = countableItem.Image;
+			labelItemCount.Text = $"X {countableItem.Count:N0}".Replace(',', ' ');
+			SetPreviewItem(countableItem, false, false);
 		}
 		private void MouseLeaveItem(object sender, ItemEventArgs e)
 		{
 			panelPreviewItem.Visible = false;
 			pictureBoxItem.BackColor = Color.Transparent;
 			pictureBoxItem.Image = null;
+			pictureBoxCoin.Visible = false;
 			labelItemName.Text = string.Empty;
 			labelPrice.Text = string.Empty;
+			labelItemCount.Text = string.Empty;
 			labelDateTimePurchase.Text = string.Empty;
 			labelDescription.Text = string.Empty;
 		}

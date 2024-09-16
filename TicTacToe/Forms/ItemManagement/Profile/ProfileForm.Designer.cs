@@ -1,4 +1,4 @@
-﻿namespace TicTacToe.Forms
+﻿namespace TicTacToe.Forms.ItemManagement.Profile
 {
 	partial class ProfileForm
 	{
@@ -40,6 +40,7 @@
 			this.tabControl = new Guna.UI2.WinForms.Guna2TabControl();
 			this.tabPagePreferences = new System.Windows.Forms.TabPage();
 			this.panelPreviewItem = new Guna.UI2.WinForms.Guna2Panel();
+			this.labelItemCount = new System.Windows.Forms.Label();
 			this.labelDateTimePurchase = new System.Windows.Forms.Label();
 			this.labelDescription = new System.Windows.Forms.Label();
 			this.pictureBoxCoin = new System.Windows.Forms.PictureBox();
@@ -49,6 +50,7 @@
 			this.panelPreferenceNavigation = new Guna.UI2.WinForms.Guna2Panel();
 			this.buttonPreferencesLeft = new FontAwesome.Sharp.IconButton();
 			this.buttonPreferencesRight = new FontAwesome.Sharp.IconButton();
+			this.flpGameAssistants = new System.Windows.Forms.FlowLayoutPanel();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxPlayerAvatar)).BeginInit();
 			this.tabControl.SuspendLayout();
 			this.tabPagePreferences.SuspendLayout();
@@ -66,7 +68,7 @@
 			this.labelBackgroundMenu.ForeColor = System.Drawing.Color.White;
 			this.labelBackgroundMenu.Location = new System.Drawing.Point(0, 0);
 			this.labelBackgroundMenu.Name = "labelBackgroundMenu";
-			this.labelBackgroundMenu.Size = new System.Drawing.Size(470, 50);
+			this.labelBackgroundMenu.Size = new System.Drawing.Size(487, 50);
 			this.labelBackgroundMenu.TabIndex = 1;
 			this.labelBackgroundMenu.Text = "Menu Background";
 			this.labelBackgroundMenu.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -79,7 +81,7 @@
 			this.labelAvatar.ForeColor = System.Drawing.Color.White;
 			this.labelAvatar.Location = new System.Drawing.Point(0, 0);
 			this.labelAvatar.Name = "labelAvatar";
-			this.labelAvatar.Size = new System.Drawing.Size(470, 50);
+			this.labelAvatar.Size = new System.Drawing.Size(487, 50);
 			this.labelAvatar.TabIndex = 2;
 			this.labelAvatar.Text = "Avatar";
 			this.labelAvatar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -93,7 +95,7 @@
 			this.labelBackgroundGame.ForeColor = System.Drawing.Color.White;
 			this.labelBackgroundGame.Location = new System.Drawing.Point(0, 0);
 			this.labelBackgroundGame.Name = "labelBackgroundGame";
-			this.labelBackgroundGame.Size = new System.Drawing.Size(470, 50);
+			this.labelBackgroundGame.Size = new System.Drawing.Size(487, 50);
 			this.labelBackgroundGame.TabIndex = 3;
 			this.labelBackgroundGame.Text = "Game Background";
 			this.labelBackgroundGame.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -109,7 +111,7 @@
 			this.flpBackgroundMenu.Location = new System.Drawing.Point(8, 80);
 			this.flpBackgroundMenu.Name = "flpBackgroundMenu";
 			this.flpBackgroundMenu.Padding = new System.Windows.Forms.Padding(40, 10, 0, 0);
-			this.flpBackgroundMenu.Size = new System.Drawing.Size(700, 300);
+			this.flpBackgroundMenu.Size = new System.Drawing.Size(717, 342);
 			this.flpBackgroundMenu.TabIndex = 2;
 			// 
 			// flpAvatar
@@ -122,7 +124,7 @@
 			this.flpAvatar.Location = new System.Drawing.Point(8, 80);
 			this.flpAvatar.Name = "flpAvatar";
 			this.flpAvatar.Padding = new System.Windows.Forms.Padding(40, 10, 0, 0);
-			this.flpAvatar.Size = new System.Drawing.Size(700, 300);
+			this.flpAvatar.Size = new System.Drawing.Size(717, 342);
 			this.flpAvatar.TabIndex = 3;
 			this.flpAvatar.Visible = false;
 			// 
@@ -136,7 +138,7 @@
 			this.flpBackgroundGame.Location = new System.Drawing.Point(8, 80);
 			this.flpBackgroundGame.Name = "flpBackgroundGame";
 			this.flpBackgroundGame.Padding = new System.Windows.Forms.Padding(40, 10, 0, 0);
-			this.flpBackgroundGame.Size = new System.Drawing.Size(700, 300);
+			this.flpBackgroundGame.Size = new System.Drawing.Size(717, 342);
 			this.flpBackgroundGame.TabIndex = 4;
 			this.flpBackgroundGame.Visible = false;
 			// 
@@ -237,18 +239,34 @@
 			// 
 			this.panelPreviewItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.panelPreviewItem.BackColor = System.Drawing.Color.Transparent;
+			this.panelPreviewItem.Controls.Add(this.labelItemCount);
 			this.panelPreviewItem.Controls.Add(this.labelDateTimePurchase);
 			this.panelPreviewItem.Controls.Add(this.labelDescription);
 			this.panelPreviewItem.Controls.Add(this.pictureBoxCoin);
 			this.panelPreviewItem.Controls.Add(this.labelPrice);
 			this.panelPreviewItem.Controls.Add(this.labelItemName);
 			this.panelPreviewItem.Controls.Add(this.pictureBoxItem);
-			this.panelPreviewItem.Location = new System.Drawing.Point(740, 80);
+			this.panelPreviewItem.Location = new System.Drawing.Point(757, 80);
 			this.panelPreviewItem.Name = "panelPreviewItem";
 			this.panelPreviewItem.Padding = new System.Windows.Forms.Padding(0, 0, 15, 0);
 			this.panelPreviewItem.Size = new System.Drawing.Size(430, 300);
 			this.panelPreviewItem.TabIndex = 0;
 			this.panelPreviewItem.Visible = false;
+			// 
+			// labelItemCount
+			// 
+			this.labelItemCount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.labelItemCount.BackColor = System.Drawing.Color.Transparent;
+			this.labelItemCount.Cursor = System.Windows.Forms.Cursors.Arrow;
+			this.labelItemCount.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.labelItemCount.Font = new System.Drawing.Font("Trebuchet MS", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.labelItemCount.ForeColor = System.Drawing.Color.White;
+			this.labelItemCount.Location = new System.Drawing.Point(3, 59);
+			this.labelItemCount.Name = "labelItemCount";
+			this.labelItemCount.Size = new System.Drawing.Size(281, 39);
+			this.labelItemCount.TabIndex = 6;
+			this.labelItemCount.Text = "Count";
+			this.labelItemCount.TextAlign = System.Drawing.ContentAlignment.TopRight;
 			// 
 			// labelDateTimePurchase
 			// 
@@ -345,7 +363,7 @@
 			this.panelPreferenceNavigation.Controls.Add(this.labelBackgroundGame);
 			this.panelPreferenceNavigation.Location = new System.Drawing.Point(120, 12);
 			this.panelPreferenceNavigation.Name = "panelPreferenceNavigation";
-			this.panelPreferenceNavigation.Size = new System.Drawing.Size(470, 50);
+			this.panelPreferenceNavigation.Size = new System.Drawing.Size(487, 50);
 			this.panelPreferenceNavigation.TabIndex = 1;
 			// 
 			// buttonPreferencesLeft
@@ -375,12 +393,22 @@
 			this.buttonPreferencesRight.IconChar = FontAwesome.Sharp.IconChar.CircleArrowRight;
 			this.buttonPreferencesRight.IconColor = System.Drawing.Color.White;
 			this.buttonPreferencesRight.IconFont = FontAwesome.Sharp.IconFont.Auto;
-			this.buttonPreferencesRight.Location = new System.Drawing.Point(420, 0);
+			this.buttonPreferencesRight.Location = new System.Drawing.Point(437, 0);
 			this.buttonPreferencesRight.Name = "buttonPreferencesRight";
 			this.buttonPreferencesRight.Size = new System.Drawing.Size(50, 50);
 			this.buttonPreferencesRight.TabIndex = 4;
 			this.buttonPreferencesRight.TabStop = false;
 			this.buttonPreferencesRight.UseVisualStyleBackColor = false;
+			// 
+			// flpGameAssistants
+			// 
+			this.flpGameAssistants.AutoScroll = true;
+			this.flpGameAssistants.BackColor = System.Drawing.Color.Transparent;
+			this.flpGameAssistants.Location = new System.Drawing.Point(211, 97);
+			this.flpGameAssistants.Name = "flpGameAssistants";
+			this.flpGameAssistants.Padding = new System.Windows.Forms.Padding(10, 10, 0, 0);
+			this.flpGameAssistants.Size = new System.Drawing.Size(600, 110);
+			this.flpGameAssistants.TabIndex = 4;
 			// 
 			// ProfileForm
 			// 
@@ -389,6 +417,7 @@
 			this.AutoScroll = true;
 			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(20)))));
 			this.ClientSize = new System.Drawing.Size(1200, 780);
+			this.Controls.Add(this.flpGameAssistants);
 			this.Controls.Add(this.buttonChangeName);
 			this.Controls.Add(this.textBoxPlayerName);
 			this.Controls.Add(this.pictureBoxPlayerAvatar);
@@ -436,5 +465,7 @@
 		private System.Windows.Forms.Label labelItemName;
 		private System.Windows.Forms.Label labelDescription;
 		private System.Windows.Forms.Label labelDateTimePurchase;
+		private System.Windows.Forms.FlowLayoutPanel flpGameAssistants;
+		private System.Windows.Forms.Label labelItemCount;
 	}
 }

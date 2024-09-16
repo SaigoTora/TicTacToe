@@ -7,7 +7,7 @@ using System.Windows.Forms;
 using TicTacToe.Models.PlayerInfo;
 using TicTacToe.Models.PlayerItemCreator;
 
-namespace TicTacToe.Forms
+namespace TicTacToe.Forms.ItemManagement
 {
 	internal partial class ItemManagementForm : BaseForm
 	{
@@ -18,6 +18,7 @@ namespace TicTacToe.Forms
 		protected ImageCreator menuBackCreator;
 		protected AvatarCreator avatarCreator;
 		protected ColorCreator gameBackCreator;
+		protected ImageCreator gameAssistantsCreator;
 
 		protected List<(Label label, FlowLayoutPanel flp)> preferences;
 		private int _preferenceIndex = 0;
@@ -102,6 +103,7 @@ namespace TicTacToe.Forms
 			menuBackCreator?.Dispose();
 			avatarCreator?.Dispose();
 			gameBackCreator?.Dispose();
+			gameAssistantsCreator?.Dispose();
 		}
 	}
 }
