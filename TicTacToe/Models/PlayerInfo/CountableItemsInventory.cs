@@ -30,6 +30,14 @@ namespace TicTacToe.Models.PlayerInfo
 				foundItem.SetDateTimePurchase(item.DateTimePurchase);
 			}
 		}
+
+		internal CountableItem GetItem(GameAssistType type)
+			=> (CountableItem)_inventory.Find(i => i.Type == type).Clone();
+		internal void UseItem(GameAssistType type)
+		{
+			CountableItem foundItem = _inventory.Find(i => i.Type == type);
+			foundItem.UseItem();
+		}
 		internal void SetFullItems()
 		{
 			CountableItem item;

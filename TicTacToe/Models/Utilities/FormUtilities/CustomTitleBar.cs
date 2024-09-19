@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
-using TicTacToe.Forms;
 using FontAwesome.Sharp;
+
+using TicTacToe.Forms;
 
 namespace TicTacToe.Models.Utilities.FormUtilities
 {
 	internal class CustomTitleBar : IDisposable
 	{
+		private const string TAG_TO_MOVE_PARENT_CONTROL_DOWN = "needToMoveParentDown";
 		private const int DEFAULT_PANEL_HEIGHT = 35;
 
 		private static readonly Font _formNameFont = new Font("Segoe UI", 10F);
@@ -15,9 +17,11 @@ namespace TicTacToe.Models.Utilities.FormUtilities
 		private static readonly Color _pressedPanelColor = Color.FromArgb(35, 35, 35);
 		private static readonly Color _defaultButtonColor = Color.FromArgb(200, 200, 200);
 		private static readonly Color _defaultNameColor = Color.FromArgb(255, 255, 255);
+		private static readonly Color _hoverButtonExitColor = Color.FromArgb(232, 17, 35);
 		private readonly (bool Minimize, bool Maximize) _scalingForm;
 		private readonly bool _canFormBeClosed;
 		private readonly BaseForm _form;
+		private IconButton _buttonClose;
 
 		internal Panel MainPanel { get; private set; } = new Panel();
 
@@ -83,9 +87,11 @@ namespace TicTacToe.Models.Utilities.FormUtilities
 
 			if (_canFormBeClosed)
 			{
-				IconButton buttonClose = CreateIconButton(IconChar.TimesCircle);
-				buttonClose.Click += ButtonExit_Click;
-				MainPanel.Controls.Add(buttonClose);
+				_buttonClose = CreateIconButton(IconChar.TimesCircle);
+				_buttonClose.Click += ButtonClose_Click;
+				_buttonClose.MouseEnter += ButtonClose_MouseEnter;
+				_buttonClose.MouseLeave += ButtonClose_MouseLeave;
+				MainPanel.Controls.Add(_buttonClose);
 			}
 		}
 		private void InitializeMainPanel()
@@ -101,11 +107,19 @@ namespace TicTacToe.Models.Utilities.FormUtilities
 		}
 		private void MoveFormElementsDown(Control control)
 		{
+			Point movedLocation = new Point(control.Location.X, control.Location.Y + DEFAULT_PANEL_HEIGHT);
 			if (control.HasChildren && !(control is NumericUpDown))
+			{
 				foreach (Control item in control.Controls)
 					MoveFormElementsDown(item);
+
+				if (control.Tag != null && control.Tag.ToString().ToLower().
+					Contains(TAG_TO_MOVE_PARENT_CONTROL_DOWN.ToLower()))
+					control.Location = movedLocation;
+			}
+
 			else if (!control.Anchor.HasFlag(AnchorStyles.Bottom))
-				control.Location = new Point(control.Location.X, control.Location.Y + DEFAULT_PANEL_HEIGHT);
+				control.Location = movedLocation;
 		}
 
 		private IconButton CreateIconButton(IconChar iconChar)
@@ -179,12 +193,17 @@ namespace TicTacToe.Models.Utilities.FormUtilities
 				{
 					iconButton.Click -= ButtonMinimize_Click;
 					iconButton.Click -= ButtonMaximize_Click;
-					iconButton.Click -= ButtonExit_Click;
+					iconButton.Click -= ButtonClose_Click;
 				}
 				else if (control is PictureBox pictureBox)
 					ToggleEventHandlers(pictureBox, false);
 				else if (control is Label label)
 					ToggleEventHandlers(label, false);
+			}
+			if (_buttonClose != null)
+			{
+				_buttonClose.MouseEnter -= ButtonClose_MouseEnter;
+				_buttonClose.MouseLeave -= ButtonClose_MouseLeave;
 			}
 			MainPanel.Dispose();
 		}
@@ -232,7 +251,18 @@ namespace TicTacToe.Models.Utilities.FormUtilities
 			_form.ActiveControl = null;
 			_form.WindowState = FormWindowState.Minimized;
 		}
-		private void ButtonExit_Click(object sender, EventArgs e)
+
+		private void ButtonClose_MouseEnter(object sender, EventArgs e)
+		{
+			if (sender is IconButton button)
+				button.BackColor = _hoverButtonExitColor;
+		}
+		private void ButtonClose_MouseLeave(object sender, EventArgs e)
+		{
+			if (sender is IconButton button)
+				button.BackColor = Color.Transparent;
+		}
+		private void ButtonClose_Click(object sender, EventArgs e)
 			=> _form.Close();
 
 		private void Control_DoubleClick(object sender, EventArgs e)

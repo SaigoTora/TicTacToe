@@ -21,13 +21,8 @@ namespace TicTacToe.Forms.ItemManagement.Shop
 		{
 			InitializeComponent();
 			_customTitleBar = new CustomTitleBar(this, "Selecting the number of items", minimizeBox: false, maximizeBox: false);
-			base.guna2BorderlessForm.SetDrag(this);
-			base.guna2BorderlessForm.SetDrag(pictureBoxItem);
-			base.guna2BorderlessForm.SetDrag(labelName);
-			base.guna2BorderlessForm.SetDrag(pictureBoxCoin);
-			base.guna2BorderlessForm.SetDrag(labelPrice);
-			base.guna2BorderlessForm.SetDrag(labelNumberOfItems);
-			base.guna2BorderlessForm.SetDrag(labelDescription);
+			base.guna2BorderlessForm.SetDrag(new Control[] { this, pictureBoxItem, labelName,
+				pictureBoxCoin, labelPrice, labelNumberOfItems, labelDescription });
 			base.guna2BorderlessForm.TransparentWhileDrag = false;
 
 			SetItemValues(item);

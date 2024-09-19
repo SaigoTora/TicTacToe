@@ -7,6 +7,7 @@ namespace TicTacToe.Models.PlayerInfo
 	[Serializable]
 	internal class PlayerPreferences
 	{
+		internal GameView GameView = GameView.Score;
 		internal Avatar Avatar;
 		internal ImageItem BackgroundMenu;
 		internal ColorItem BackgroundGame;

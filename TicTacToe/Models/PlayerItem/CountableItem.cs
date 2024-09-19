@@ -28,7 +28,12 @@ namespace TicTacToe.Models.PlayerItem
 		internal void IncreaseCount(int quantity)
 			=> _count += quantity;
 		internal void UseItem()
-			=> _count--;
+		{
+			if (Count == 0)
+				throw new InvalidOperationException($"You cannot use the item '{Name}' because its quantity is 0!");
+
+			_count--;
+		}
 
 		public override object Clone()
 		{

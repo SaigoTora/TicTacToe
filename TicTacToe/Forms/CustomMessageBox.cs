@@ -19,6 +19,7 @@ namespace TicTacToe.Forms
 		None,
 		Error,
 		Warning,
+		Information,
 		OK,
 		Question
 	}
@@ -33,9 +34,7 @@ namespace TicTacToe.Forms
 		{
 			InitializeComponent();
 			_customTitleBar = new CustomTitleBar(this, caption, minimizeBox: false, maximizeBox: false);
-			base.guna2BorderlessForm.SetDrag(iconPicture);
-			base.guna2BorderlessForm.SetDrag(labelText);
-			base.guna2BorderlessForm.SetDrag(flpButtons);
+			base.guna2BorderlessForm.SetDrag(new Control[] { this, iconPicture, labelText, flpButtons });
 			base.guna2BorderlessForm.TransparentWhileDrag = false;
 
 			labelText.Text = text;
@@ -79,10 +78,10 @@ namespace TicTacToe.Forms
 		}
 		private void SetIcon(CustomMessageBoxIcon icon)
 		{
-			(IconChar Error, IconChar Warning, IconChar OK, IconChar Question) iconChar =
-				(IconChar.XmarkCircle, IconChar.Warning, IconChar.CheckCircle, IconChar.QuestionCircle);
-			(Color Error, Color Warning, Color OK, Color Question) iconColor =
-				(Color.Red, Color.Yellow, Color.Green, Color.SteelBlue);
+			(IconChar Error, IconChar Warning, IconChar Information, IconChar OK, IconChar Question) iconChar =
+				(IconChar.XmarkCircle, IconChar.Warning, IconChar.InfoCircle, IconChar.CheckCircle, IconChar.QuestionCircle);
+			(Color Error, Color Warning, Color Information, Color OK, Color Question) iconColor =
+				(Color.Red, Color.Yellow, Color.FromArgb(0, 149, 182), Color.Green, Color.SteelBlue);
 
 			switch (icon)
 			{
@@ -94,6 +93,9 @@ namespace TicTacToe.Forms
 					break;
 				case CustomMessageBoxIcon.Warning:
 					SetupIcon(iconChar.Warning, iconColor.Warning);
+					break;
+				case CustomMessageBoxIcon.Information:
+					SetupIcon(iconChar.Information, iconColor.Information);
 					break;
 				case CustomMessageBoxIcon.OK:
 					SetupIcon(iconChar.OK, iconColor.OK);

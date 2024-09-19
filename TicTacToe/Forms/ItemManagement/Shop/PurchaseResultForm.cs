@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+
 using TicTacToe.Models.PlayerInfo;
 using TicTacToe.Models.PlayerItem;
 using TicTacToe.Models.Utilities.FormUtilities;
@@ -19,12 +20,8 @@ namespace TicTacToe.Forms.ItemManagement.Shop
 		{
 			InitializeComponent();
 			_customTitleBar = new CustomTitleBar(this, "Item successfully purchased", minimizeBox: false, maximizeBox: false);
-			base.guna2BorderlessForm.SetDrag(this);
-			base.guna2BorderlessForm.SetDrag(pictureBoxItem);
-			base.guna2BorderlessForm.SetDrag(labelName);
-			base.guna2BorderlessForm.SetDrag(pictureBoxCoin);
-			base.guna2BorderlessForm.SetDrag(labelPrice);
-			base.guna2BorderlessForm.SetDrag(labelDescription);
+			base.guna2BorderlessForm.SetDrag(new Control[] { this, pictureBoxItem, labelName,
+			pictureBoxCoin, labelPrice, labelDescription });
 			base.guna2BorderlessForm.TransparentWhileDrag = false;
 
 			SetItemValues(item);

@@ -118,6 +118,7 @@
     </Compile>
     <Compile Include="Models\CustomExceptions\NotEnoughCoinsToStartGameException.cs" />
     <Compile Include="Models\PlayerInfo\CountableItemsInventory.cs" />
+    <Compile Include="Models\PlayerInfo\GameView.cs" />
     <Compile Include="Models\PlayerInfo\IInventory.cs" />
     <Compile Include="Models\PlayerInfo\ItemsInventory.cs" />
     <Compile Include="Models\PlayerItemCreator\ItemEventArgs.cs" />

@@ -132,7 +132,8 @@ namespace TicTacToe.Forms.ItemManagement.Profile
 				}
 
 			foreach (CountableItem item in player.CountableItemsInventory.GetItems())
-				gameAssistantsCreator.CreateItemToSelect(item);
+				if (item.Count > 0)
+					gameAssistantsCreator.CreateItemToSelect(item);
 		}
 		private void CreateMenuBack(ImageCreator menuBackCreator, ImageItem imageItem)
 		{

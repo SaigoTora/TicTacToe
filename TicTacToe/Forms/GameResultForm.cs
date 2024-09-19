@@ -25,6 +25,10 @@ namespace TicTacToe.Forms
 			InitializeComponent();
 
 			_customTitleBar = new CustomTitleBar(this, "Results", Properties.Resources.info, false, false, false);
+			base.guna2BorderlessForm.SetDrag(new Control[] { this, labelResult, labelCoinsResult,
+				labelDifficultTitle, labelDifficult, labelCurrentCoinsTitle, pictureBoxCoin,
+				labelCurrentCoins, labelTimeToClose });
+			base.guna2BorderlessForm.TransparentWhileDrag = false;
 			_player = player;
 			_winner = winner;
 			_difficult = difficult;
@@ -38,6 +42,10 @@ namespace TicTacToe.Forms
 			}
 			_backToMainForm = backToMainForm;
 			buttonBack.Click += _backToMainForm;
+			if (buttonPlay != null)
+				ActiveControl = buttonPlay;
+			else
+				ActiveControl = buttonBack;
 			_buttonEventHandlers.SubscribeToHover(buttonBack, buttonPlay);
 		}
 
@@ -48,7 +56,7 @@ namespace TicTacToe.Forms
 			DisplayDifficultyLabel();
 			labelCurrentCoins.Text = _player.Coins.ToString();
 
-			_ = DelayToClose();
+			_ = DelayToCloseAsync();
 		}
 
 		private void DisplayGameResult()
@@ -113,7 +121,7 @@ namespace TicTacToe.Forms
 		private void ButtonPlay_Click(object sender, EventArgs e)
 			=> Close();
 
-		private async Task DelayToClose()
+		private async Task DelayToCloseAsync()
 		{
 			const byte DELAY_SECONDS_TO_CLOSE = 60;
 

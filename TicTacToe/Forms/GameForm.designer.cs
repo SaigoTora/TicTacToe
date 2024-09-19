@@ -47,7 +47,12 @@
 			this.pictureBoxCell7 = new System.Windows.Forms.PictureBox();
 			this.pictureBoxCell8 = new System.Windows.Forms.PictureBox();
 			this.pictureBoxCell9 = new System.Windows.Forms.PictureBox();
-			this.progressBarTimer = new Guna.UI2.WinForms.Guna2CircleProgressBar();
+			this.progressBarCircleTimer = new Guna.UI2.WinForms.Guna2CircleProgressBar();
+			this.pictureBoxUndoMove = new System.Windows.Forms.PictureBox();
+			this.pictureBoxHint = new System.Windows.Forms.PictureBox();
+			this.flpGameAssistants = new System.Windows.Forms.FlowLayoutPanel();
+			this.buttonChangeView = new FontAwesome.Sharp.IconButton();
+			this.progressBarTimer = new Guna.UI2.WinForms.Guna2ProgressBar();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxLine3)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxLine4)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxLine2)).BeginInit();
@@ -63,6 +68,9 @@
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxCell7)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxCell8)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxCell9)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.pictureBoxUndoMove)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.pictureBoxHint)).BeginInit();
+			this.flpGameAssistants.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// pictureBoxLine3
@@ -107,6 +115,7 @@
 			// 
 			// labelPlayerName
 			// 
+			this.labelPlayerName.AccessibleDescription = "";
 			this.labelPlayerName.BackColor = System.Drawing.Color.Transparent;
 			this.labelPlayerName.Font = new System.Drawing.Font("Trebuchet MS", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.labelPlayerName.Location = new System.Drawing.Point(4, 166);
@@ -129,6 +138,7 @@
 			// 
 			// pictureBoxPlayerAvatar
 			// 
+			this.pictureBoxPlayerAvatar.AccessibleDescription = "";
 			this.pictureBoxPlayerAvatar.BackColor = System.Drawing.Color.Transparent;
 			this.pictureBoxPlayerAvatar.Image = global::TicTacToe.Properties.Resources.monkey;
 			this.pictureBoxPlayerAvatar.Location = new System.Drawing.Point(44, 12);
@@ -153,12 +163,13 @@
 			// 
 			this.labelScore.BackColor = System.Drawing.Color.Transparent;
 			this.labelScore.Font = new System.Drawing.Font("Lucida Console", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.labelScore.Location = new System.Drawing.Point(194, 114);
+			this.labelScore.Location = new System.Drawing.Point(194, 115);
 			this.labelScore.Name = "labelScore";
-			this.labelScore.Size = new System.Drawing.Size(230, 48);
+			this.labelScore.Size = new System.Drawing.Size(230, 47);
 			this.labelScore.TabIndex = 3;
 			this.labelScore.Text = "999:999";
-			this.labelScore.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			this.labelScore.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+			this.labelScore.Visible = false;
 			// 
 			// pictureBoxCell1
 			// 
@@ -286,26 +297,106 @@
 			this.pictureBoxCell9.MouseEnter += new System.EventHandler(this.PictureBoxCell_MouseEnter);
 			this.pictureBoxCell9.MouseLeave += new System.EventHandler(this.PictureBoxCell_MouseLeave);
 			// 
+			// progressBarCircleTimer
+			// 
+			this.progressBarCircleTimer.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.progressBarCircleTimer.BackColor = System.Drawing.Color.Transparent;
+			this.progressBarCircleTimer.Backwards = true;
+			this.progressBarCircleTimer.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(150)))), ((int)(((byte)(213)))), ((int)(((byte)(218)))), ((int)(((byte)(223)))));
+			this.progressBarCircleTimer.FillThickness = 15;
+			this.progressBarCircleTimer.Font = new System.Drawing.Font("Segoe UI", 12F);
+			this.progressBarCircleTimer.ForeColor = System.Drawing.Color.White;
+			this.progressBarCircleTimer.Image = ((System.Drawing.Image)(resources.GetObject("progressBarCircleTimer.Image")));
+			this.progressBarCircleTimer.ImageSize = new System.Drawing.Size(50, 50);
+			this.progressBarCircleTimer.Location = new System.Drawing.Point(259, 12);
+			this.progressBarCircleTimer.Minimum = 0;
+			this.progressBarCircleTimer.Name = "progressBarCircleTimer";
+			this.progressBarCircleTimer.ProgressBrushMode = Guna.UI2.WinForms.Enums.BrushMode.Solid;
+			this.progressBarCircleTimer.ProgressColor = System.Drawing.Color.Lime;
+			this.progressBarCircleTimer.ProgressEndCap = System.Drawing.Drawing2D.LineCap.Round;
+			this.progressBarCircleTimer.ProgressThickness = 16;
+			this.progressBarCircleTimer.Size = new System.Drawing.Size(100, 100);
+			this.progressBarCircleTimer.TabIndex = 2;
+			this.progressBarCircleTimer.Value = 100;
+			this.progressBarCircleTimer.Visible = false;
+			// 
+			// pictureBoxUndoMove
+			// 
+			this.pictureBoxUndoMove.BackColor = System.Drawing.Color.Transparent;
+			this.pictureBoxUndoMove.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.pictureBoxUndoMove.Image = global::TicTacToe.Properties.Resources.undoMove;
+			this.pictureBoxUndoMove.Location = new System.Drawing.Point(3, 3);
+			this.pictureBoxUndoMove.Name = "pictureBoxUndoMove";
+			this.pictureBoxUndoMove.Size = new System.Drawing.Size(62, 62);
+			this.pictureBoxUndoMove.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+			this.pictureBoxUndoMove.TabIndex = 19;
+			this.pictureBoxUndoMove.TabStop = false;
+			this.pictureBoxUndoMove.Visible = false;
+			this.pictureBoxUndoMove.Click += new System.EventHandler(this.PictureBoxUndoMove_Click);
+			// 
+			// pictureBoxHint
+			// 
+			this.pictureBoxHint.BackColor = System.Drawing.Color.Transparent;
+			this.pictureBoxHint.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.pictureBoxHint.Image = global::TicTacToe.Properties.Resources.hint;
+			this.pictureBoxHint.Location = new System.Drawing.Point(71, 3);
+			this.pictureBoxHint.Name = "pictureBoxHint";
+			this.pictureBoxHint.Size = new System.Drawing.Size(62, 62);
+			this.pictureBoxHint.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+			this.pictureBoxHint.TabIndex = 20;
+			this.pictureBoxHint.TabStop = false;
+			this.pictureBoxHint.Visible = false;
+			this.pictureBoxHint.Click += new System.EventHandler(this.PictureBoxHint_Click);
+			// 
+			// flpGameAssistants
+			// 
+			this.flpGameAssistants.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.flpGameAssistants.AutoScroll = true;
+			this.flpGameAssistants.BackColor = System.Drawing.Color.Transparent;
+			this.flpGameAssistants.Controls.Add(this.pictureBoxUndoMove);
+			this.flpGameAssistants.Controls.Add(this.pictureBoxHint);
+			this.flpGameAssistants.Location = new System.Drawing.Point(195, 38);
+			this.flpGameAssistants.Name = "flpGameAssistants";
+			this.flpGameAssistants.Size = new System.Drawing.Size(228, 125);
+			this.flpGameAssistants.TabIndex = 21;
+			this.flpGameAssistants.Tag = "needToMoveParentDown";
+			this.flpGameAssistants.Visible = false;
+			// 
+			// buttonChangeView
+			// 
+			this.buttonChangeView.BackColor = System.Drawing.Color.Transparent;
+			this.buttonChangeView.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.buttonChangeView.FlatAppearance.BorderSize = 0;
+			this.buttonChangeView.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.buttonChangeView.IconChar = FontAwesome.Sharp.IconChar.SyncAlt;
+			this.buttonChangeView.IconColor = System.Drawing.Color.Black;
+			this.buttonChangeView.IconFont = FontAwesome.Sharp.IconFont.Auto;
+			this.buttonChangeView.IconSize = 35;
+			this.buttonChangeView.Location = new System.Drawing.Point(12, 12);
+			this.buttonChangeView.Name = "buttonChangeView";
+			this.buttonChangeView.Size = new System.Drawing.Size(30, 30);
+			this.buttonChangeView.TabIndex = 0;
+			this.buttonChangeView.TabStop = false;
+			this.buttonChangeView.UseVisualStyleBackColor = false;
+			this.buttonChangeView.Click += new System.EventHandler(this.ButtonChangeView_Click);
+			// 
 			// progressBarTimer
 			// 
+			this.progressBarTimer.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			this.progressBarTimer.BackColor = System.Drawing.Color.Transparent;
-			this.progressBarTimer.Backwards = true;
+			this.progressBarTimer.BorderRadius = 7;
 			this.progressBarTimer.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(150)))), ((int)(((byte)(213)))), ((int)(((byte)(218)))), ((int)(((byte)(223)))));
-			this.progressBarTimer.FillThickness = 15;
-			this.progressBarTimer.Font = new System.Drawing.Font("Segoe UI", 12F);
-			this.progressBarTimer.ForeColor = System.Drawing.Color.White;
-			this.progressBarTimer.Image = ((System.Drawing.Image)(resources.GetObject("progressBarTimer.Image")));
-			this.progressBarTimer.ImageSize = new System.Drawing.Size(50, 50);
-			this.progressBarTimer.Location = new System.Drawing.Point(259, 12);
-			this.progressBarTimer.Minimum = 0;
+			this.progressBarTimer.Location = new System.Drawing.Point(195, 12);
 			this.progressBarTimer.Name = "progressBarTimer";
-			this.progressBarTimer.ProgressBrushMode = Guna.UI2.WinForms.Enums.BrushMode.Solid;
 			this.progressBarTimer.ProgressColor = System.Drawing.Color.Lime;
-			this.progressBarTimer.ProgressEndCap = System.Drawing.Drawing2D.LineCap.Round;
-			this.progressBarTimer.ProgressThickness = 16;
-			this.progressBarTimer.Size = new System.Drawing.Size(100, 100);
-			this.progressBarTimer.TabIndex = 2;
+			this.progressBarTimer.Size = new System.Drawing.Size(228, 20);
+			this.progressBarTimer.TabIndex = 22;
+			this.progressBarTimer.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault;
 			this.progressBarTimer.Value = 100;
+			this.progressBarTimer.Visible = false;
 			// 
 			// GameForm
 			// 
@@ -313,7 +404,11 @@
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.Color.White;
 			this.ClientSize = new System.Drawing.Size(618, 822);
+			this.Controls.Add(this.flpGameAssistants);
+			this.Controls.Add(this.labelScore);
+			this.Controls.Add(this.buttonChangeView);
 			this.Controls.Add(this.progressBarTimer);
+			this.Controls.Add(this.progressBarCircleTimer);
 			this.Controls.Add(this.pictureBoxLine3);
 			this.Controls.Add(this.pictureBoxLine4);
 			this.Controls.Add(this.pictureBoxLine2);
@@ -327,7 +422,6 @@
 			this.Controls.Add(this.pictureBoxCell3);
 			this.Controls.Add(this.pictureBoxCell2);
 			this.Controls.Add(this.pictureBoxCell1);
-			this.Controls.Add(this.labelScore);
 			this.Controls.Add(this.pictureBoxBotAvatar);
 			this.Controls.Add(this.pictureBoxPlayerAvatar);
 			this.Controls.Add(this.labelBotName);
@@ -356,6 +450,9 @@
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxCell7)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxCell8)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxCell9)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.pictureBoxUndoMove)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.pictureBoxHint)).EndInit();
+			this.flpGameAssistants.ResumeLayout(false);
 			this.ResumeLayout(false);
 
 		}
@@ -379,6 +476,11 @@
 		private System.Windows.Forms.PictureBox pictureBoxCell7;
 		private System.Windows.Forms.PictureBox pictureBoxCell8;
 		private System.Windows.Forms.PictureBox pictureBoxCell9;
-		private Guna.UI2.WinForms.Guna2CircleProgressBar progressBarTimer;
+		private Guna.UI2.WinForms.Guna2CircleProgressBar progressBarCircleTimer;
+		private System.Windows.Forms.PictureBox pictureBoxUndoMove;
+		private System.Windows.Forms.PictureBox pictureBoxHint;
+		private System.Windows.Forms.FlowLayoutPanel flpGameAssistants;
+		private FontAwesome.Sharp.IconButton buttonChangeView;
+		private Guna.UI2.WinForms.Guna2ProgressBar progressBarTimer;
 	}
 }

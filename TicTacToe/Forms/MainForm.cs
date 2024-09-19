@@ -65,7 +65,7 @@ namespace TicTacToe.Forms
 			pictureBoxAvatar.Image = _player.Preferences.Avatar.Image;
 			BackgroundImage = _player.Preferences.BackgroundMenu.Image;
 		}
-		private async Task ChangeSizePanelSettingsWithDelay(bool needToOpen)
+		private async Task ChangeSizePanelSettingsAsync(bool needToOpen)
 		{
 			const int DELAY = 2;
 			int step = 5;
@@ -206,7 +206,7 @@ namespace TicTacToe.Forms
 			iconButton.Enabled = false;
 			if (_isSettingsVisible)
 			{
-				await ChangeSizePanelSettingsWithDelay(false);
+				await ChangeSizePanelSettingsAsync(false);
 				_isSettingsVisible = false;
 				panelSettings.Visible = false;
 				iconButton.Flip = FlipOrientation.Normal;
@@ -214,7 +214,7 @@ namespace TicTacToe.Forms
 			else
 			{
 				panelSettings.Visible = true;
-				await ChangeSizePanelSettingsWithDelay(true);
+				await ChangeSizePanelSettingsAsync(true);
 				_isSettingsVisible = true;
 				iconButton.Flip = FlipOrientation.Horizontal;
 			}
