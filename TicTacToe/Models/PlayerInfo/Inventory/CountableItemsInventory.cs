@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 using TicTacToe.Models.PlayerItem;
 
-namespace TicTacToe.Models.PlayerInfo
+namespace TicTacToe.Models.PlayerInfo.Inventory
 {
 	[Serializable]
 	internal class CountableItemsInventory : IInventory<CountableItem>

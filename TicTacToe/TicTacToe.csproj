@@ -117,10 +117,10 @@
       <DependentUpon>PurchaseResultForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\CustomExceptions\NotEnoughCoinsToStartGameException.cs" />
-    <Compile Include="Models\PlayerInfo\CountableItemsInventory.cs" />
+    <Compile Include="Models\PlayerInfo\Inventory\CountableItemsInventory.cs" />
     <Compile Include="Models\PlayerInfo\GameView.cs" />
-    <Compile Include="Models\PlayerInfo\IInventory.cs" />
-    <Compile Include="Models\PlayerInfo\ItemsInventory.cs" />
+    <Compile Include="Models\PlayerInfo\Inventory\IInventory.cs" />
+    <Compile Include="Models\PlayerInfo\Inventory\ItemsInventory.cs" />
     <Compile Include="Models\PlayerItemCreator\ItemEventArgs.cs" />
     <Compile Include="Models\PlayerItem\CountableItem.cs" />
     <Compile Include="Models\PlayerItem\ItemManager.cs" />
@@ -212,6 +212,10 @@
       <DependentUpon>ShopForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <None Include="Forms\ItemManagement\ItemManagementFormDiagram.cd" />
+    <None Include="Models\PlayerItemCreator\ItemCreatorsDiagram.cd" />
+    <None Include="Models\PlayerItem\ItemsDiagram.cd" />
+    <None Include="Models\Utilities\FormUtilities\ControlEventHandlersDiagram.cd" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

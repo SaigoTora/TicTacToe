@@ -4,6 +4,7 @@ using System.Runtime.Serialization;
 using TicTacToe.Models.CustomExceptions;
 using TicTacToe.Models.GameInfo;
 using TicTacToe.Models.PlayerItem;
+using TicTacToe.Models.PlayerInfo.Inventory;
 using TicTacToeLibrary;
 
 namespace TicTacToe.Models.PlayerInfo

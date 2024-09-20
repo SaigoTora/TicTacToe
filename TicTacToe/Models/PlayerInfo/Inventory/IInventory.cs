@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace TicTacToe.Models.PlayerInfo
+namespace TicTacToe.Models.PlayerInfo.Inventory
 {
 	internal interface IInventory<T>
 	{

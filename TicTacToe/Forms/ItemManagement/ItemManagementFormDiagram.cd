@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="TicTacToe.Forms.ItemManagement.ItemManagementForm" Collapsed="true">
+    <Position X="1.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ASBAQAAQACAACAgAAACAAAAiIAAABQABCAAAALAAAAA=</HashCode>
+      <FileName>Forms\ItemManagement\ItemManagementForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TicTacToe.Forms.ItemManagement.Profile.ProfileForm" Collapsed="true">
+    <Position X="2.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BQEAEWAECiIIEDEJShagQAAHAAIAiiTIKKQgCAOIFAM=</HashCode>
+      <FileName>Forms\ItemManagement\Profile\ProfileForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TicTacToe.Forms.ItemManagement.Shop.ShopForm" Collapsed="true">
+    <Position X="0.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAEAAACCkIETEAQgKAQAACQAIACjRAEAABAJOICAY=</HashCode>
+      <FileName>Forms\ItemManagement\Shop\ShopForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
