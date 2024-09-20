@@ -507,5 +507,8 @@
   <ItemGroup>
     <None Include="Resources\Images\GameAssistants\undoMove.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\GameAssistants\surrender.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

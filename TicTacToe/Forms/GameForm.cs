@@ -102,7 +102,7 @@ namespace TicTacToe.Forms
 
 			labelScore.Text = $"{_roundManager.NumberOfWinsFirstPlayer} : {_roundManager.NumberOfWinsSecondPlayer}";
 
-			_pictureBoxEventHandlers.SubscribeToHover(gameAssistHoverColor, pictureBoxUndoMove, pictureBoxHint);
+			_pictureBoxEventHandlers.SubscribeToHover(gameAssistHoverColor, pictureBoxUndoMove, pictureBoxHint, pictureBoxSurrender);
 
 			if (_isBotMoveFirst)
 				_ = BotMoveAsync();
@@ -517,6 +517,9 @@ namespace TicTacToe.Forms
 					case GameAssistType.Hint:
 						pictureBoxHint.Visible = actualVisible;
 						break;
+					case GameAssistType.Surrender:
+						pictureBoxSurrender.Visible = actualVisible;
+						break;
 					default:
 						throw new InvalidOperationException
 							($"Unknown item type: {item.Type.GetType().Name}");
@@ -608,6 +611,16 @@ namespace TicTacToe.Forms
 				_pictureBoxCellHint.Image = null;
 		}
 
+		private void PictureBoxSurrender_Click(object sender, EventArgs e)
+		{
+			_wasAssistUsed = true;
+			_player.CountableItemsInventory.UseItem(GameAssistType.Surrender);
+
+			StopTimerToMove();
+			ChangeGameViewVisibility(false, needToChangeScore: false);
+			_ = FinishGameAsync();
+		}
+
 		private void TryToIndicateLastGameAssist(CountableItem item)
 		{
 			if (item != null && item.Count <= 0)
@@ -626,5 +639,6 @@ namespace TicTacToe.Forms
 			if (!_isFormClosingForNextRound)
 				_mainForm.Show();
 		}
+
 	}
 }

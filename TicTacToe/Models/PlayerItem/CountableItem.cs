@@ -6,7 +6,8 @@ namespace TicTacToe.Models.PlayerItem
 	internal enum GameAssistType : byte
 	{
 		UndoMove,
-		Hint
+		Hint,
+		Surrender
 	}
 
 	[Serializable]

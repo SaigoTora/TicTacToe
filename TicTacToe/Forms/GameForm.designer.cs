@@ -51,6 +51,7 @@
 			this.pictureBoxUndoMove = new System.Windows.Forms.PictureBox();
 			this.pictureBoxHint = new System.Windows.Forms.PictureBox();
 			this.flpGameAssistants = new System.Windows.Forms.FlowLayoutPanel();
+			this.pictureBoxSurrender = new System.Windows.Forms.PictureBox();
 			this.buttonChangeView = new FontAwesome.Sharp.IconButton();
 			this.progressBarTimer = new Guna.UI2.WinForms.Guna2ProgressBar();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxLine3)).BeginInit();
@@ -71,6 +72,7 @@
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxUndoMove)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxHint)).BeginInit();
 			this.flpGameAssistants.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.pictureBoxSurrender)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// pictureBoxLine3
@@ -80,7 +82,7 @@
 			this.pictureBoxLine3.Location = new System.Drawing.Point(12, 406);
 			this.pictureBoxLine3.Name = "pictureBoxLine3";
 			this.pictureBoxLine3.Size = new System.Drawing.Size(594, 25);
-			this.pictureBoxLine3.TabIndex = 17;
+			this.pictureBoxLine3.TabIndex = 20;
 			this.pictureBoxLine3.TabStop = false;
 			// 
 			// pictureBoxLine4
@@ -90,7 +92,7 @@
 			this.pictureBoxLine4.Location = new System.Drawing.Point(12, 596);
 			this.pictureBoxLine4.Name = "pictureBoxLine4";
 			this.pictureBoxLine4.Size = new System.Drawing.Size(594, 25);
-			this.pictureBoxLine4.TabIndex = 18;
+			this.pictureBoxLine4.TabIndex = 21;
 			this.pictureBoxLine4.TabStop = false;
 			// 
 			// pictureBoxLine2
@@ -100,7 +102,7 @@
 			this.pictureBoxLine2.Location = new System.Drawing.Point(391, 216);
 			this.pictureBoxLine2.Name = "pictureBoxLine2";
 			this.pictureBoxLine2.Size = new System.Drawing.Size(25, 594);
-			this.pictureBoxLine2.TabIndex = 16;
+			this.pictureBoxLine2.TabIndex = 19;
 			this.pictureBoxLine2.TabStop = false;
 			// 
 			// pictureBoxLine1
@@ -110,7 +112,7 @@
 			this.pictureBoxLine1.Location = new System.Drawing.Point(202, 216);
 			this.pictureBoxLine1.Name = "pictureBoxLine1";
 			this.pictureBoxLine1.Size = new System.Drawing.Size(25, 594);
-			this.pictureBoxLine1.TabIndex = 15;
+			this.pictureBoxLine1.TabIndex = 18;
 			this.pictureBoxLine1.TabStop = false;
 			// 
 			// labelPlayerName
@@ -121,7 +123,7 @@
 			this.labelPlayerName.Location = new System.Drawing.Point(4, 166);
 			this.labelPlayerName.Name = "labelPlayerName";
 			this.labelPlayerName.Size = new System.Drawing.Size(230, 25);
-			this.labelPlayerName.TabIndex = 1;
+			this.labelPlayerName.TabIndex = 2;
 			this.labelPlayerName.Text = "Player name";
 			this.labelPlayerName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			// 
@@ -132,7 +134,7 @@
 			this.labelBotName.Location = new System.Drawing.Point(384, 166);
 			this.labelBotName.Name = "labelBotName";
 			this.labelBotName.Size = new System.Drawing.Size(230, 25);
-			this.labelBotName.TabIndex = 5;
+			this.labelBotName.TabIndex = 8;
 			this.labelBotName.Text = "Bot name";
 			this.labelBotName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			// 
@@ -145,7 +147,7 @@
 			this.pictureBoxPlayerAvatar.Name = "pictureBoxPlayerAvatar";
 			this.pictureBoxPlayerAvatar.Size = new System.Drawing.Size(150, 150);
 			this.pictureBoxPlayerAvatar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-			this.pictureBoxPlayerAvatar.TabIndex = 0;
+			this.pictureBoxPlayerAvatar.TabIndex = 1;
 			this.pictureBoxPlayerAvatar.TabStop = false;
 			// 
 			// pictureBoxBotAvatar
@@ -156,7 +158,7 @@
 			this.pictureBoxBotAvatar.Name = "pictureBoxBotAvatar";
 			this.pictureBoxBotAvatar.Size = new System.Drawing.Size(150, 150);
 			this.pictureBoxBotAvatar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-			this.pictureBoxBotAvatar.TabIndex = 4;
+			this.pictureBoxBotAvatar.TabIndex = 7;
 			this.pictureBoxBotAvatar.TabStop = false;
 			// 
 			// labelScore
@@ -166,7 +168,7 @@
 			this.labelScore.Location = new System.Drawing.Point(194, 115);
 			this.labelScore.Name = "labelScore";
 			this.labelScore.Size = new System.Drawing.Size(230, 47);
-			this.labelScore.TabIndex = 3;
+			this.labelScore.TabIndex = 6;
 			this.labelScore.Text = "999:999";
 			this.labelScore.TextAlign = System.Drawing.ContentAlignment.TopCenter;
 			this.labelScore.Visible = false;
@@ -179,7 +181,7 @@
 			this.pictureBoxCell1.Name = "pictureBoxCell1";
 			this.pictureBoxCell1.Size = new System.Drawing.Size(150, 150);
 			this.pictureBoxCell1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-			this.pictureBoxCell1.TabIndex = 6;
+			this.pictureBoxCell1.TabIndex = 9;
 			this.pictureBoxCell1.TabStop = false;
 			this.pictureBoxCell1.Click += new System.EventHandler(this.PictureBoxCell_Click);
 			this.pictureBoxCell1.MouseEnter += new System.EventHandler(this.PictureBoxCell_MouseEnter);
@@ -193,7 +195,7 @@
 			this.pictureBoxCell2.Name = "pictureBoxCell2";
 			this.pictureBoxCell2.Size = new System.Drawing.Size(150, 150);
 			this.pictureBoxCell2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-			this.pictureBoxCell2.TabIndex = 7;
+			this.pictureBoxCell2.TabIndex = 10;
 			this.pictureBoxCell2.TabStop = false;
 			this.pictureBoxCell2.Click += new System.EventHandler(this.PictureBoxCell_Click);
 			this.pictureBoxCell2.MouseEnter += new System.EventHandler(this.PictureBoxCell_MouseEnter);
@@ -207,7 +209,7 @@
 			this.pictureBoxCell3.Name = "pictureBoxCell3";
 			this.pictureBoxCell3.Size = new System.Drawing.Size(150, 150);
 			this.pictureBoxCell3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-			this.pictureBoxCell3.TabIndex = 8;
+			this.pictureBoxCell3.TabIndex = 11;
 			this.pictureBoxCell3.TabStop = false;
 			this.pictureBoxCell3.Click += new System.EventHandler(this.PictureBoxCell_Click);
 			this.pictureBoxCell3.MouseEnter += new System.EventHandler(this.PictureBoxCell_MouseEnter);
@@ -221,7 +223,7 @@
 			this.pictureBoxCell4.Name = "pictureBoxCell4";
 			this.pictureBoxCell4.Size = new System.Drawing.Size(150, 150);
 			this.pictureBoxCell4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-			this.pictureBoxCell4.TabIndex = 9;
+			this.pictureBoxCell4.TabIndex = 12;
 			this.pictureBoxCell4.TabStop = false;
 			this.pictureBoxCell4.Click += new System.EventHandler(this.PictureBoxCell_Click);
 			this.pictureBoxCell4.MouseEnter += new System.EventHandler(this.PictureBoxCell_MouseEnter);
@@ -235,7 +237,7 @@
 			this.pictureBoxCell5.Name = "pictureBoxCell5";
 			this.pictureBoxCell5.Size = new System.Drawing.Size(150, 150);
 			this.pictureBoxCell5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-			this.pictureBoxCell5.TabIndex = 10;
+			this.pictureBoxCell5.TabIndex = 13;
 			this.pictureBoxCell5.TabStop = false;
 			this.pictureBoxCell5.Click += new System.EventHandler(this.PictureBoxCell_Click);
 			this.pictureBoxCell5.MouseEnter += new System.EventHandler(this.PictureBoxCell_MouseEnter);
@@ -249,7 +251,7 @@
 			this.pictureBoxCell6.Name = "pictureBoxCell6";
 			this.pictureBoxCell6.Size = new System.Drawing.Size(150, 150);
 			this.pictureBoxCell6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-			this.pictureBoxCell6.TabIndex = 11;
+			this.pictureBoxCell6.TabIndex = 14;
 			this.pictureBoxCell6.TabStop = false;
 			this.pictureBoxCell6.Click += new System.EventHandler(this.PictureBoxCell_Click);
 			this.pictureBoxCell6.MouseEnter += new System.EventHandler(this.PictureBoxCell_MouseEnter);
@@ -263,7 +265,7 @@
 			this.pictureBoxCell7.Name = "pictureBoxCell7";
 			this.pictureBoxCell7.Size = new System.Drawing.Size(150, 150);
 			this.pictureBoxCell7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-			this.pictureBoxCell7.TabIndex = 12;
+			this.pictureBoxCell7.TabIndex = 15;
 			this.pictureBoxCell7.TabStop = false;
 			this.pictureBoxCell7.Click += new System.EventHandler(this.PictureBoxCell_Click);
 			this.pictureBoxCell7.MouseEnter += new System.EventHandler(this.PictureBoxCell_MouseEnter);
@@ -277,7 +279,7 @@
 			this.pictureBoxCell8.Name = "pictureBoxCell8";
 			this.pictureBoxCell8.Size = new System.Drawing.Size(150, 150);
 			this.pictureBoxCell8.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-			this.pictureBoxCell8.TabIndex = 13;
+			this.pictureBoxCell8.TabIndex = 16;
 			this.pictureBoxCell8.TabStop = false;
 			this.pictureBoxCell8.Click += new System.EventHandler(this.PictureBoxCell_Click);
 			this.pictureBoxCell8.MouseEnter += new System.EventHandler(this.PictureBoxCell_MouseEnter);
@@ -291,7 +293,7 @@
 			this.pictureBoxCell9.Name = "pictureBoxCell9";
 			this.pictureBoxCell9.Size = new System.Drawing.Size(150, 150);
 			this.pictureBoxCell9.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-			this.pictureBoxCell9.TabIndex = 14;
+			this.pictureBoxCell9.TabIndex = 17;
 			this.pictureBoxCell9.TabStop = false;
 			this.pictureBoxCell9.Click += new System.EventHandler(this.PictureBoxCell_Click);
 			this.pictureBoxCell9.MouseEnter += new System.EventHandler(this.PictureBoxCell_MouseEnter);
@@ -317,7 +319,7 @@
 			this.progressBarCircleTimer.ProgressEndCap = System.Drawing.Drawing2D.LineCap.Round;
 			this.progressBarCircleTimer.ProgressThickness = 16;
 			this.progressBarCircleTimer.Size = new System.Drawing.Size(100, 100);
-			this.progressBarCircleTimer.TabIndex = 2;
+			this.progressBarCircleTimer.TabIndex = 4;
 			this.progressBarCircleTimer.Value = 100;
 			this.progressBarCircleTimer.Visible = false;
 			// 
@@ -330,7 +332,7 @@
 			this.pictureBoxUndoMove.Name = "pictureBoxUndoMove";
 			this.pictureBoxUndoMove.Size = new System.Drawing.Size(62, 62);
 			this.pictureBoxUndoMove.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-			this.pictureBoxUndoMove.TabIndex = 19;
+			this.pictureBoxUndoMove.TabIndex = 0;
 			this.pictureBoxUndoMove.TabStop = false;
 			this.pictureBoxUndoMove.Visible = false;
 			this.pictureBoxUndoMove.Click += new System.EventHandler(this.PictureBoxUndoMove_Click);
@@ -344,7 +346,7 @@
 			this.pictureBoxHint.Name = "pictureBoxHint";
 			this.pictureBoxHint.Size = new System.Drawing.Size(62, 62);
 			this.pictureBoxHint.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-			this.pictureBoxHint.TabIndex = 20;
+			this.pictureBoxHint.TabIndex = 2;
 			this.pictureBoxHint.TabStop = false;
 			this.pictureBoxHint.Visible = false;
 			this.pictureBoxHint.Click += new System.EventHandler(this.PictureBoxHint_Click);
@@ -357,12 +359,27 @@
 			this.flpGameAssistants.BackColor = System.Drawing.Color.Transparent;
 			this.flpGameAssistants.Controls.Add(this.pictureBoxUndoMove);
 			this.flpGameAssistants.Controls.Add(this.pictureBoxHint);
+			this.flpGameAssistants.Controls.Add(this.pictureBoxSurrender);
 			this.flpGameAssistants.Location = new System.Drawing.Point(195, 38);
 			this.flpGameAssistants.Name = "flpGameAssistants";
 			this.flpGameAssistants.Size = new System.Drawing.Size(228, 125);
-			this.flpGameAssistants.TabIndex = 21;
+			this.flpGameAssistants.TabIndex = 3;
 			this.flpGameAssistants.Tag = "needToMoveParentDown";
 			this.flpGameAssistants.Visible = false;
+			// 
+			// pictureBoxSurrender
+			// 
+			this.pictureBoxSurrender.BackColor = System.Drawing.Color.Transparent;
+			this.pictureBoxSurrender.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.pictureBoxSurrender.Image = global::TicTacToe.Properties.Resources.surrender;
+			this.pictureBoxSurrender.Location = new System.Drawing.Point(139, 3);
+			this.pictureBoxSurrender.Name = "pictureBoxSurrender";
+			this.pictureBoxSurrender.Size = new System.Drawing.Size(62, 62);
+			this.pictureBoxSurrender.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+			this.pictureBoxSurrender.TabIndex = 21;
+			this.pictureBoxSurrender.TabStop = false;
+			this.pictureBoxSurrender.Visible = false;
+			this.pictureBoxSurrender.Click += new System.EventHandler(this.PictureBoxSurrender_Click);
 			// 
 			// buttonChangeView
 			// 
@@ -393,7 +410,7 @@
 			this.progressBarTimer.Name = "progressBarTimer";
 			this.progressBarTimer.ProgressColor = System.Drawing.Color.Lime;
 			this.progressBarTimer.Size = new System.Drawing.Size(228, 20);
-			this.progressBarTimer.TabIndex = 22;
+			this.progressBarTimer.TabIndex = 3;
 			this.progressBarTimer.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault;
 			this.progressBarTimer.Value = 100;
 			this.progressBarTimer.Visible = false;
@@ -407,8 +424,6 @@
 			this.Controls.Add(this.flpGameAssistants);
 			this.Controls.Add(this.labelScore);
 			this.Controls.Add(this.buttonChangeView);
-			this.Controls.Add(this.progressBarTimer);
-			this.Controls.Add(this.progressBarCircleTimer);
 			this.Controls.Add(this.pictureBoxLine3);
 			this.Controls.Add(this.pictureBoxLine4);
 			this.Controls.Add(this.pictureBoxLine2);
@@ -426,6 +441,8 @@
 			this.Controls.Add(this.pictureBoxPlayerAvatar);
 			this.Controls.Add(this.labelBotName);
 			this.Controls.Add(this.labelPlayerName);
+			this.Controls.Add(this.progressBarTimer);
+			this.Controls.Add(this.progressBarCircleTimer);
 			this.MaximizeBox = false;
 			this.Name = "GameForm";
 			this.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -453,6 +470,7 @@
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxUndoMove)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxHint)).EndInit();
 			this.flpGameAssistants.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.pictureBoxSurrender)).EndInit();
 			this.ResumeLayout(false);
 
 		}
@@ -482,5 +500,6 @@
 		private System.Windows.Forms.FlowLayoutPanel flpGameAssistants;
 		private FontAwesome.Sharp.IconButton buttonChangeView;
 		private Guna.UI2.WinForms.Guna2ProgressBar progressBarTimer;
+		private System.Windows.Forms.PictureBox pictureBoxSurrender;
 	}
 }

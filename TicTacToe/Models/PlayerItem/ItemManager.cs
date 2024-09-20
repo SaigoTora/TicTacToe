@@ -195,8 +195,9 @@ namespace TicTacToe.Models.PlayerItem
 		}
 		private static void FillCountableItems()
 		{
-			AddItemToDictionary(new CountableItem("Undo move", 6, "Undoes your last move.", Properties.Resources.undoMove, GameAssistType.UndoMove));
-			AddItemToDictionary(new CountableItem("Hint", 8, "Gives a hint for the next move.", Properties.Resources.hint, GameAssistType.Hint));
+			AddItemToDictionary(new CountableItem("Undo move", 4, "Undoes your last move.", Properties.Resources.undoMove, GameAssistType.UndoMove));
+			AddItemToDictionary(new CountableItem("Surrender", 5, "Allows ending the game in a draw during play.", Properties.Resources.surrender, GameAssistType.Surrender));
+			AddItemToDictionary(new CountableItem("Hint", 6, "Gives a hint for the next move.", Properties.Resources.hint, GameAssistType.Hint));
 		}
 		#endregion
 
