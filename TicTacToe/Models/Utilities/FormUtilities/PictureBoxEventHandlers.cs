@@ -12,7 +12,7 @@ namespace TicTacToe.Models.Utilities.FormUtilities
 		private readonly Dictionary<PictureBox, (Color defaultColor, Color hoverColor)> _colorPictures
 			= new Dictionary<PictureBox, (Color, Color)>();
 
-		#region PictureBoxHover
+		#region PictureBox hover
 		internal void SubscribeToHover(params PictureBox[] pictureBoxes)
 		{
 			foreach (PictureBox pictureBox in pictureBoxes)

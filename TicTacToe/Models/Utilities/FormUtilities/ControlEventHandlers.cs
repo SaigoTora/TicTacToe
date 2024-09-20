@@ -11,7 +11,7 @@ namespace TicTacToe.Models.Utilities.FormUtilities
 		protected bool isControlIncreased = false;
 		protected int widthScaler, heightScaler;// Current values ​​for increase in width and height
 
-		#region AbstractMethods
+		#region Abstract methods
 		/// <summary>
 		/// Unsubscribes the specified control from its event handlers.
 		/// </summary>

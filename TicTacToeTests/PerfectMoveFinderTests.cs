@@ -8,7 +8,7 @@ namespace TicTacToeTests
 		public void Setup()
 		{ }
 
-		#region ZeroMove
+		#region The move of the zero
 		[Test]
 		public void TestFindCell_ZeroD3_1()
 		{
@@ -136,7 +136,7 @@ namespace TicTacToeTests
 		}
 		#endregion
 
-		#region CrossMove
+		#region The move of the cross
 		[Test]
 		public void TestFindCell_CrossD3_1()
 		{

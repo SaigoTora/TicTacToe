@@ -163,7 +163,7 @@ namespace TicTacToe.Forms
 		}
 		#endregion
 
-		#region GameActions
+		#region Actions of the game
 		private void FillCellWithImage(Cell cell, PlayerType playerType, bool wasButtonClick)
 		{
 			PictureBox pictureBox = _pictureCells[cell.row, cell.column];
@@ -373,7 +373,7 @@ namespace TicTacToe.Forms
 		}
 		#endregion
 
-		#region EndOfTheGame
+		#region End of the game
 		private async Task FinishGameAsync()
 		{
 			_player.ReturnCoins();
@@ -446,7 +446,7 @@ namespace TicTacToe.Forms
 		}
 		#endregion
 
-		#region GameView
+		#region Game view
 		private void ButtonChangeView_Click(object sender, EventArgs e)
 		{
 			ActiveControl = null;
@@ -528,7 +528,7 @@ namespace TicTacToe.Forms
 		}
 		#endregion
 
-		#region GameAssistants
+		#region Game assistants
 		private async void PictureBoxUndoMove_Click(object sender, EventArgs e)
 		{
 			int UNDO_MOVE_DELAY = 400;

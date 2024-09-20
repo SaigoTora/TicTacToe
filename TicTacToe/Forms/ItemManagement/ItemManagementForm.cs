@@ -32,7 +32,7 @@ namespace TicTacToe.Forms.ItemManagement
 			this.player = player;
 		}
 
-		#region ChangePreferenceNavigation
+		#region Change preference navigation
 		protected void SubscribeToNavigationButtonEvents(IconButton buttonLeft, IconButton buttonRight)
 		{
 			buttonLeft.Click += ButtonPreferencesLeft_Click;

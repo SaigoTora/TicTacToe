@@ -83,7 +83,7 @@ namespace TicTacToe.Forms
 			}
 		}
 
-		#region DifficultyLabels
+		#region Difficulty labels
 		private void ButtonDifficulty_Click(object sender, EventArgs e)
 		{
 			if (!(sender is IconButton button))
@@ -155,7 +155,7 @@ namespace TicTacToe.Forms
 		}
 		#endregion
 
-		#region ButtonsClick
+		#region Buttons click event handlers
 		private void ButtonPlay_Click(object sender, EventArgs e)
 		{
 			Bot bot = new Bot(_selectedDifficulty);
@@ -196,7 +196,7 @@ namespace TicTacToe.Forms
 		}
 		#endregion
 
-		#region OtherEventHandlers
+		#region Other event handlers
 		private async void ButtonShowSettings_Click(object sender, EventArgs e)
 		{
 			if (!(sender is IconButton iconButton))

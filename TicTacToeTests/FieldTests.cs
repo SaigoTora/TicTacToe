@@ -8,7 +8,7 @@ public class FieldTests
 	public void Setup()
 	{ }
 
-	#region GameIsNotOver
+	#region The game isn't over
 	[Test]
 	public void TestIsGameEnd_D3_NoEnd1()
 	{
@@ -120,7 +120,7 @@ public class FieldTests
 	}
 	#endregion
 
-	#region GameEndedInDraw
+	#region The game ended in a draw
 	[Test]
 	public void TestIsGameEnd_D3_WinnerNone1()
 	{
@@ -232,7 +232,7 @@ public class FieldTests
 	}
 	#endregion
 
-	#region GameEndedWithVictoryCross
+	#region The game ended with a winning cross
 	[Test]
 	public void TestIsGameEnd_D3_WinnerCross1()
 	{
@@ -348,7 +348,7 @@ public class FieldTests
 	}
 	#endregion
 
-	#region GameEndedWithVictoryZero
+	#region The game ended with a winning zero
 	[Test]
 	public void TestIsGameEnd_D3_WinnerZero1()
 	{

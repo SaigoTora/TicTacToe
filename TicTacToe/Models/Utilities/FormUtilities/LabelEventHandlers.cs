@@ -7,7 +7,7 @@ namespace TicTacToe.Models.Utilities.FormUtilities
 	internal class LabelEventHandlers : ControlEventHandlers<Label>
 	{
 
-		#region LabelHover
+		#region Label hover
 		internal void SubscribeToHoverUnderline(params Label[] labels)
 		{
 			foreach (Label label in labels)

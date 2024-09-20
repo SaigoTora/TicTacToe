@@ -8,8 +8,8 @@ public class BotTests
 	public void Setup()
 	{ }
 
-	#region AttackMove
-	#region EasyBot
+	#region Attack move
+	#region Easy bot
 	[Test]
 	public void TestMove_CrossEasyD3_Attack1()
 	{
@@ -113,7 +113,7 @@ public class BotTests
 	}
 	#endregion
 
-	#region MediumBot
+	#region Medium bot
 	[Test]
 	public void TestMove_ZeroMediumyD3_Attack1()
 	{
@@ -191,7 +191,7 @@ public class BotTests
 	}
 	#endregion
 
-	#region HardBot
+	#region Hard bot
 	[Test]
 	public void TestMove_AttackHardD3_1()
 	{
@@ -270,7 +270,7 @@ public class BotTests
 	#endregion
 	#endregion
 
-	#region DefenseMove
+	#region Defense move
 	[Test]
 	public void TestMove_CrossHardD3_Defense1()
 	{

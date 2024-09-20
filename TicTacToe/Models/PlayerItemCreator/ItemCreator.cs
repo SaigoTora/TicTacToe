@@ -56,7 +56,7 @@ namespace TicTacToe.Models.PlayerItemCreator
 			_itemSize = itemSize;
 		}
 
-		#region AbstractMethods
+		#region Abstract methods
 		/// <summary>
 		/// The method creates an item that the player can purchase.
 		/// </summary>
@@ -181,7 +181,7 @@ namespace TicTacToe.Models.PlayerItemCreator
 			}
 		}
 
-		#region ClickEventHandlers
+		#region Click event handlers
 		internal void UnSubscribeFromClick(Control control)
 			=> control.Click -= Control_Click;
 		protected void SubscribeControlToClick(Control control, Item item)
@@ -204,7 +204,7 @@ namespace TicTacToe.Models.PlayerItemCreator
 		}
 		#endregion
 
-		#region HoverEventHandlers
+		#region Hover event handlers
 		protected void SubscribeControlToHover(Control control, Item item)
 		{
 			if (!_controlItemMap.ContainsKey(control))

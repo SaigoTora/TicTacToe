@@ -5,7 +5,7 @@ namespace TicTacToe.Forms
 {
 	internal class BaseForm : Form
 	{
-		#region CollapseTheFormByClickingOnTheIcon
+		#region Collapse the form by clicking on the icon
 		const int WS_MINIMIZEBOX = 0x20000;
 		const int CS_DBLCLKS = 0x8;
 
@@ -21,7 +21,7 @@ namespace TicTacToe.Forms
 		}
 		#endregion
 
-		#region ResizingForm
+		#region Resizing form
 		protected bool IsResizable { get; set; } = false;
 
 		private const int HTLEFT = 10;

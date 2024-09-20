@@ -7,7 +7,7 @@ namespace TicTacToe.Models.Utilities
 {
 	public static class Extensions
 	{
-		#region ImageExtensions
+		#region Image extensions
 
 		/// <summary>
 		/// Changes the opacity level of an image.
@@ -38,7 +38,7 @@ namespace TicTacToe.Models.Utilities
 		}
 		#endregion
 
-		#region StringExtensions
+		#region String extensions
 		/// <summary>
 		/// The method leaves in the string only the first occurrence of characters that follow in a row.
 		/// </summary>

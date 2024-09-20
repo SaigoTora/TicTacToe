@@ -240,7 +240,7 @@ namespace TicTacToe.Models.Utilities.FormUtilities
 			}
 		}
 
-		#region EventHandlers
+		#region Event handlers
 		private void ButtonMaximize_Click(object sender, EventArgs e)
 		{
 			_form.ActiveControl = null;

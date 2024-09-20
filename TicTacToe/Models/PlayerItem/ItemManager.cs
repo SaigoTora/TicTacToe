@@ -20,7 +20,7 @@ namespace TicTacToe.Models.PlayerItem
 			FillCountableItems();
 		}
 
-		#region FillDictionary
+		#region Filling in the dictionary
 		private static void FillImageItems()
 		{
 			AddItemToDictionary(new ImageItem("Classic Gray", 0, "A standard gray background, perfect for minimalist and neutral designs.",
@@ -241,7 +241,7 @@ namespace TicTacToe.Models.PlayerItem
 		private static string GetKey(Item item)
 			=> $"{item.GetType().Name}.{item.Name}";
 
-		#region DefaultItems
+		#region Default items
 		internal static List<Item> GetDefaultItems()
 		{
 			List<Item> result = new List<Item>();

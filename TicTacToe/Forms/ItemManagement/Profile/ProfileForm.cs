@@ -112,7 +112,7 @@ namespace TicTacToe.Forms.ItemManagement.Profile
 			}
 		}
 
-		#region CreateItems
+		#region Create items
 		private void CreateItems()
 		{
 			foreach (Item item in player.ItemsInventory.GetItems())
@@ -170,7 +170,7 @@ namespace TicTacToe.Forms.ItemManagement.Profile
 		}
 		#endregion
 
-		#region SelectAndDeselectItems
+		#region Select and deselect items
 		private void SelectAvatar(object sender, ItemEventArgs e)
 		{
 			if (!(e.ClickableControl is PictureBox selectedPicture))
@@ -246,7 +246,7 @@ namespace TicTacToe.Forms.ItemManagement.Profile
 		}
 		#endregion
 
-		#region ChangeName
+		#region Change name
 		private void ButtonChangeName_Click(object sender, EventArgs e)
 		{
 			if (textBoxPlayerName.ReadOnly)
@@ -307,7 +307,7 @@ namespace TicTacToe.Forms.ItemManagement.Profile
 			=> TryToChangeName();
 		#endregion
 
-		#region HoverItems
+		#region Hover items
 		private void SetPreviewItem(Item item, bool needToSetPrice = true, bool needToSetDate = true)
 		{
 			labelItemName.Text = item.Name;

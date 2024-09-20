@@ -20,7 +20,7 @@
 			base.Dispose(disposing);
 		}
 
-		#region Код, автоматически созданный конструктором форм Windows
+		#region Windows Form Designer generated code
 
 		/// <summary>
 		/// Требуемый метод для поддержки конструктора — не изменяйте 
