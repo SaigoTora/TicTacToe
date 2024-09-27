@@ -4,6 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using TicTacToe.Models.GameInfo;
 using TicTacToe.Models.PlayerInfo;
 using TicTacToe.Models.Utilities.FormUtilities;
 using TicTacToeLibrary;
@@ -13,14 +14,15 @@ namespace TicTacToe.Forms
 	internal partial class GameResultForm : BaseForm
 	{
 		private readonly Player _player;
-		private readonly PlayerType _winner;
-		private readonly Difficulty _difficult;
+		private readonly GameResult _result;
+		private readonly Difficulty? _difficulty = null;
 		private readonly CustomTitleBar _customTitleBar;
 		private readonly ButtonEventHandlers _buttonEventHandlers = new ButtonEventHandlers();
 
 		private readonly EventHandler _backToMainForm;
 		private readonly CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
-		internal GameResultForm(Player player, PlayerType winner, Difficulty difficult, bool isGameEnd, EventHandler backToMainForm)
+
+		internal GameResultForm(Player player, GameResult result, bool isLastRound, EventHandler backToMainForm)
 		{
 			InitializeComponent();
 
@@ -30,10 +32,9 @@ namespace TicTacToe.Forms
 				labelCurrentCoins, labelTimeToClose });
 			base.guna2BorderlessForm.TransparentWhileDrag = false;
 			_player = player;
-			_winner = winner;
-			_difficult = difficult;
+			_result = result;
 
-			if (isGameEnd)
+			if (isLastRound)
 			{
 				buttonBack.Text = "Back to menu";
 				buttonBack.Location = new Point(100, buttonBack.Location.Y);
@@ -48,6 +49,9 @@ namespace TicTacToe.Forms
 				ActiveControl = buttonBack;
 			_buttonEventHandlers.SubscribeToHover(buttonBack, buttonPlay);
 		}
+		internal GameResultForm(Player player, GameResult result, Difficulty difficulty, bool isLastRound, EventHandler backToMainForm)
+			: this(player, result, isLastRound, backToMainForm)
+		{ _difficulty = difficulty; }
 
 		private void ResultForm_Load(object sender, EventArgs e)
 		{
@@ -65,28 +69,30 @@ namespace TicTacToe.Forms
 			(Color colorWin, Color colorDraw, Color colorLoss) = (Color.FromArgb(71, 167, 106),
 					Color.White, Color.Maroon);
 
-			if (_winner == PlayerType.Human)
+			switch (_result)
 			{
-				labelResult.Text = textWin;
-				labelResult.ForeColor = colorWin;
-
-			}
-			else if (_winner == PlayerType.None)
-			{
-				labelResult.Text = textDraw;
-				labelResult.ForeColor = colorDraw;
-			}
-			else if (_winner == PlayerType.Bot)
-			{
-				labelResult.Text = textLoss;
-				labelResult.ForeColor = colorLoss;
+				case GameResult.Loss:
+					labelResult.Text = textLoss;
+					labelResult.ForeColor = colorLoss;
+					break;
+				case GameResult.Draw:
+					labelResult.Text = textDraw;
+					labelResult.ForeColor = colorDraw;
+					break;
+				case GameResult.Win:
+					labelResult.Text = textWin;
+					labelResult.ForeColor = colorWin;
+					break;
+				default:
+					throw new InvalidOperationException($"Unknown game result: {_result}");
 			}
 		}
 		private void DisplayCoinsResult()
 		{
 			(Color colorWin, Color colorLoss) = (Color.Lime, Color.Red);
 			int prevCoins = _player.Coins;
-			_player.UpdateCoins(_difficult, _winner);
+			if (_difficulty.HasValue)
+				_player.UpdateCoins(_difficulty.Value, _result);
 
 			if (_player.Coins > prevCoins)
 			{
@@ -103,17 +109,20 @@ namespace TicTacToe.Forms
 		}
 		private void DisplayDifficultyLabel()
 		{
+			if (!_difficulty.HasValue)
+				return;
+
 			(Color colorEasy, Color colorMedium, Color colorHard, Color colorImpossible) =
 				(Color.FromArgb(30, 129, 69), Color.FromArgb(236, 124, 38), Color.FromArgb(155, 17, 30), Color.FromArgb(83, 55, 122));
-			labelDifficult.Text = _difficult.ToString();
+			labelDifficult.Text = _difficulty.ToString();
 
-			if (_difficult == Difficulty.Easy)
+			if (_difficulty == Difficulty.Easy)
 				labelDifficult.BackColor = colorEasy;
-			else if (_difficult == Difficulty.Medium)
+			else if (_difficulty == Difficulty.Medium)
 				labelDifficult.BackColor = colorMedium;
-			else if (_difficult == Difficulty.Hard)
+			else if (_difficulty == Difficulty.Hard)
 				labelDifficult.BackColor = colorHard;
-			else if (_difficult == Difficulty.Impossible)
+			else if (_difficulty == Difficulty.Impossible)
 				labelDifficult.BackColor = colorImpossible;
 		}
 

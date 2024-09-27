@@ -69,9 +69,9 @@ namespace TicTacToe.Models.PlayerInfo
 			}
 		}
 
-		internal void UpdateCoins(Difficulty botDifficulty, PlayerType gameWinner)
+		internal void UpdateCoins(Difficulty botDifficulty, GameResult gameResult)
 		{
-			Coins += CoinsCalculator.CalculateCoins(botDifficulty, gameWinner);
+			Coins += CoinsCalculator.CalculateCoins(botDifficulty, gameResult);
 
 			if (Coins < 0)
 				Coins = 0;

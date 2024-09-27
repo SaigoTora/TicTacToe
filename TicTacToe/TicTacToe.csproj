@@ -12,6 +12,21 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -34,6 +49,9 @@
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>Resources\Icons\ticTacToe.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>TicTacToe.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="FluentValidation, Version=11.0.0.0, Culture=neutral, PublicKeyToken=7de548da2fbae0f0, processorArchitecture=MSIL">
@@ -80,11 +98,17 @@
     <Compile Include="Forms\CustomMessageBox.Designer.cs">
       <DependentUpon>CustomMessageBox.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\GameForm.cs">
+    <Compile Include="Forms\Game\BaseGame3on3Form.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\GameForm.designer.cs">
-      <DependentUpon>GameForm.cs</DependentUpon>
+    <Compile Include="Forms\Game\BaseGame3on3Form.designer.cs">
+      <DependentUpon>BaseGame3on3Form.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Game\BaseGameForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Game\BaseGameForm.designer.cs">
+      <DependentUpon>BaseGameForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\ItemManagement\ItemManagementForm.cs">
       <SubType>Form</SubType>
@@ -117,6 +141,8 @@
       <DependentUpon>PurchaseResultForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\CustomExceptions\NotEnoughCoinsToStartGameException.cs" />
+    <Compile Include="Models\GameInfo\GameFormInfo.cs" />
+    <Compile Include="Models\GameInfo\GameResult.cs" />
     <Compile Include="Models\PlayerInfo\Inventory\CountableItemsInventory.cs" />
     <Compile Include="Models\PlayerInfo\GameView.cs" />
     <Compile Include="Models\PlayerInfo\Inventory\IInventory.cs" />
@@ -131,7 +157,6 @@
     <Compile Include="Models\PlayerItemCreator\AvatarCreator.cs" />
     <Compile Include="Models\PlayerItem\AvatarRarity.cs" />
     <Compile Include="Models\PlayerItem\ColorItem.cs" />
-    <Compile Include="Models\PlayerInfo\PlayerType.cs" />
     <Compile Include="Models\PlayerInfo\PlayerPreferences.cs" />
     <Compile Include="Models\PlayerItemCreator\ImageCreator.cs" />
     <Compile Include="Models\PlayerItem\ImageItem.cs" />
@@ -153,10 +178,10 @@
     <Compile Include="Models\Utilities\FormUtilities\PictureBoxEventHandlers.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Forms\GameResultForm.cs">
+    <Compile Include="Forms\Game\GameResultForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\GameResultForm.Designer.cs">
+    <Compile Include="Forms\Game\GameResultForm.Designer.cs">
       <DependentUpon>GameResultForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\GameInfo\RoundManager.cs" />
@@ -174,8 +199,12 @@
     <EmbeddedResource Include="Forms\CustomMessageBox.resx">
       <DependentUpon>CustomMessageBox.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\GameForm.resx">
-      <DependentUpon>GameForm.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Game\BaseGame3on3Form.resx">
+      <DependentUpon>BaseGame3on3Form.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Game\BaseGameForm.resx">
+      <DependentUpon>BaseGameForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ItemManagement\ItemManagementForm.resx">
@@ -204,7 +233,7 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\GameResultForm.resx">
+    <EmbeddedResource Include="Forms\Game\GameResultForm.resx">
       <DependentUpon>GameResultForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -513,6 +542,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Images\GameAssistants\surrender.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.8">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.8 %28x86 и x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

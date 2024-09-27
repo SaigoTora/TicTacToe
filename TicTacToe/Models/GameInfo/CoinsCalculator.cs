@@ -1,5 +1,4 @@
-﻿using TicTacToe.Models.PlayerInfo;
-using TicTacToeLibrary;
+﻿using TicTacToeLibrary;
 
 namespace TicTacToe.Models.GameInfo
 {
@@ -26,47 +25,47 @@ namespace TicTacToe.Models.GameInfo
 		private const int IMPOSSIBLE_DRAW_COINS = 2;
 		private const int IMPOSSIBLE_LOSS_COINS = -15;
 
-		internal static int CalculateCoins(Difficulty botDifficult, PlayerType gameWinner)
+		internal static int CalculateCoins(Difficulty botDifficult, GameResult gameResult)
 		{
 			switch (botDifficult)
 			{
 				case Difficulty.Easy:
 					{
-						if (gameWinner == PlayerType.Human)
+						if (gameResult == GameResult.Win)
 							return EASY_WIN_COINS;
-						else if (gameWinner == PlayerType.None)
+						else if (gameResult == GameResult.Draw)
 							return EASY_DRAW_COINS;
-						else if (gameWinner == PlayerType.Bot)
+						else if (gameResult == GameResult.Loss)
 							return EASY_LOSS_COINS;
 						break;
 					}
 				case Difficulty.Medium:
 					{
-						if (gameWinner == PlayerType.Human)
+						if (gameResult == GameResult.Win)
 							return MEDIUM_WIN_COINS;
-						else if (gameWinner == PlayerType.None)
+						else if (gameResult == GameResult.Draw)
 							return MEDIUM_DRAW_COINS;
-						else if (gameWinner == PlayerType.Bot)
+						else if (gameResult == GameResult.Loss)
 							return MEDIUM_LOSS_COINS;
 						break;
 					}
 				case Difficulty.Hard:
 					{
-						if (gameWinner == PlayerType.Human)
+						if (gameResult == GameResult.Win)
 							return HARD_WIN_COINS;
-						else if (gameWinner == PlayerType.None)
+						else if (gameResult == GameResult.Draw)
 							return HARD_DRAW_COINS;
-						else if (gameWinner == PlayerType.Bot)
+						else if (gameResult == GameResult.Loss)
 							return HARD_LOSS_COINS;
 						break;
 					}
 				case Difficulty.Impossible:
 					{
-						if (gameWinner == PlayerType.Human)
+						if (gameResult == GameResult.Win)
 							return IMPOSSIBLE_WIN_COINS;
-						else if (gameWinner == PlayerType.None)
+						else if (gameResult == GameResult.Draw)
 							return IMPOSSIBLE_DRAW_COINS;
-						else if (gameWinner == PlayerType.Bot)
+						else if (gameResult == GameResult.Loss)
 							return IMPOSSIBLE_LOSS_COINS;
 						break;
 					}

@@ -1,6 +1,6 @@
-﻿namespace TicTacToe.Forms
+﻿namespace TicTacToe.Forms.Game
 {
-	partial class GameForm
+	partial class BaseGame3on3Form
 	{
 		/// <summary>
 		/// Required designer variable.
@@ -28,7 +28,7 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GameForm));
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BaseGame3on3Form));
 			this.pictureBoxLine3 = new System.Windows.Forms.PictureBox();
 			this.pictureBoxLine4 = new System.Windows.Forms.PictureBox();
 			this.pictureBoxLine2 = new System.Windows.Forms.PictureBox();
@@ -301,8 +301,8 @@
 			// 
 			// progressBarCircleTimer
 			// 
-			this.progressBarCircleTimer.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+			this.progressBarCircleTimer.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+			| System.Windows.Forms.AnchorStyles.Right)));
 			this.progressBarCircleTimer.BackColor = System.Drawing.Color.Transparent;
 			this.progressBarCircleTimer.Backwards = true;
 			this.progressBarCircleTimer.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(150)))), ((int)(((byte)(213)))), ((int)(((byte)(218)))), ((int)(((byte)(223)))));
@@ -335,7 +335,6 @@
 			this.pictureBoxUndoMove.TabIndex = 0;
 			this.pictureBoxUndoMove.TabStop = false;
 			this.pictureBoxUndoMove.Visible = false;
-			this.pictureBoxUndoMove.Click += new System.EventHandler(this.PictureBoxUndoMove_Click);
 			// 
 			// pictureBoxHint
 			// 
@@ -349,12 +348,11 @@
 			this.pictureBoxHint.TabIndex = 2;
 			this.pictureBoxHint.TabStop = false;
 			this.pictureBoxHint.Visible = false;
-			this.pictureBoxHint.Click += new System.EventHandler(this.PictureBoxHint_Click);
 			// 
 			// flpGameAssistants
 			// 
-			this.flpGameAssistants.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+			this.flpGameAssistants.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+			| System.Windows.Forms.AnchorStyles.Right)));
 			this.flpGameAssistants.AutoScroll = true;
 			this.flpGameAssistants.BackColor = System.Drawing.Color.Transparent;
 			this.flpGameAssistants.Controls.Add(this.pictureBoxUndoMove);
@@ -379,7 +377,6 @@
 			this.pictureBoxSurrender.TabIndex = 21;
 			this.pictureBoxSurrender.TabStop = false;
 			this.pictureBoxSurrender.Visible = false;
-			this.pictureBoxSurrender.Click += new System.EventHandler(this.PictureBoxSurrender_Click);
 			// 
 			// buttonChangeView
 			// 
@@ -397,12 +394,11 @@
 			this.buttonChangeView.TabIndex = 0;
 			this.buttonChangeView.TabStop = false;
 			this.buttonChangeView.UseVisualStyleBackColor = false;
-			this.buttonChangeView.Click += new System.EventHandler(this.ButtonChangeView_Click);
 			// 
 			// progressBarTimer
 			// 
-			this.progressBarTimer.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+			this.progressBarTimer.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+			| System.Windows.Forms.AnchorStyles.Right)));
 			this.progressBarTimer.BackColor = System.Drawing.Color.Transparent;
 			this.progressBarTimer.BorderRadius = 7;
 			this.progressBarTimer.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(150)))), ((int)(((byte)(213)))), ((int)(((byte)(218)))), ((int)(((byte)(223)))));
