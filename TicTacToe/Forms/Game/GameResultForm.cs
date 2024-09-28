@@ -16,7 +16,6 @@ namespace TicTacToe.Forms
 		private readonly Player _player;
 		private readonly GameResult _result;
 		private readonly Difficulty? _difficulty = null;
-		private readonly CustomTitleBar _customTitleBar;
 		private readonly ButtonEventHandlers _buttonEventHandlers = new ButtonEventHandlers();
 
 		private readonly EventHandler _backToMainForm;
@@ -26,7 +25,7 @@ namespace TicTacToe.Forms
 		{
 			InitializeComponent();
 
-			_customTitleBar = new CustomTitleBar(this, "Results", Properties.Resources.info, false, false, false);
+			customTitleBar = new CustomTitleBar(this, "Results", Properties.Resources.info, false, false, false);
 			base.guna2BorderlessForm.SetDrag(new Control[] { this, labelResult, labelCoinsResult,
 				labelDifficultTitle, labelDifficult, labelCurrentCoinsTitle, pictureBoxCoin,
 				labelCurrentCoins, labelTimeToClose });
@@ -152,7 +151,6 @@ namespace TicTacToe.Forms
 			buttonBack.Click -= _backToMainForm;
 
 			_buttonEventHandlers.UnsubscribeAll();
-			_customTitleBar.Dispose();
 		}
 	}
 }

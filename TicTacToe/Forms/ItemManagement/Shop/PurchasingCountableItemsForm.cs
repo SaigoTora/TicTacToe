@@ -14,13 +14,12 @@ namespace TicTacToe.Forms.ItemManagement.Shop
 		private readonly CountableItem _item;
 		private readonly Action _successPurchase;
 
-		private readonly CustomTitleBar _customTitleBar;
 		private readonly ButtonEventHandlers _buttonEventHandlers = new ButtonEventHandlers();
 
 		internal PurchasingCountableItemsForm(CountableItem item, Player player, Action successPurchase)
 		{
 			InitializeComponent();
-			_customTitleBar = new CustomTitleBar(this, "Selecting the number of items", minimizeBox: false, maximizeBox: false);
+			customTitleBar = new CustomTitleBar(this, "Selecting the number of items", minimizeBox: false, maximizeBox: false);
 			base.guna2BorderlessForm.SetDrag(new Control[] { this, pictureBoxItem, labelName,
 				pictureBoxCoin, labelPrice, labelNumberOfItems, labelDescription });
 			base.guna2BorderlessForm.TransparentWhileDrag = false;
@@ -69,9 +68,6 @@ namespace TicTacToe.Forms.ItemManagement.Shop
 			=> labelPrice.Text = (_item.Price * numericUpDownNumberOfItems.Value).ToString();
 
 		private void PurchaseResultForm_FormClosed(object sender, FormClosedEventArgs e)
-		{
-			_buttonEventHandlers.UnsubscribeAll();
-			_customTitleBar.Dispose();
-		}
+			=> _buttonEventHandlers.UnsubscribeAll();
 	}
 }

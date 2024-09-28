@@ -22,8 +22,6 @@ namespace TicTacToe.Forms.ItemManagement.Profile
 
 		private static readonly (Color Default, Color DuringRenaming) _buttonChangeNameColor = (Color.White, Color.Yellow);
 
-		private readonly CustomTitleBar _customTitleBar;
-
 		private readonly List<PictureBox> _menuBackPictureBoxes = new List<PictureBox>();
 		private readonly List<PictureBox> _gameBackPictureBoxes = new List<PictureBox>();
 		private readonly List<PictureBox> _avatarPictureBoxes = new List<PictureBox>();
@@ -35,7 +33,7 @@ namespace TicTacToe.Forms.ItemManagement.Profile
 		internal ProfileForm(Player player) : base(player)
 		{
 			IsResizable = true;
-			_customTitleBar = new CustomTitleBar(this, $"{player.Name}");
+			customTitleBar = new CustomTitleBar(this, $"{player.Name}");
 			InitializeComponent();
 
 			InitializeCreators();
@@ -291,7 +289,7 @@ namespace TicTacToe.Forms.ItemManagement.Profile
 				if (player.Name != textBoxPlayerName.Text)
 				{
 					player.ChangeName(textBoxPlayerName.Text);
-					_customTitleBar.ChangeFormCaption(textBoxPlayerName.Text);
+					customTitleBar.ChangeFormCaption(textBoxPlayerName.Text);
 					CustomMessageBox.Show("Your nickname has been successfully changed.", "Success", CustomMessageBoxButtons.OK, CustomMessageBoxIcon.OK);
 				}
 			}
@@ -384,7 +382,6 @@ namespace TicTacToe.Forms.ItemManagement.Profile
 			ManageItemCreatorEvents(false);
 			UnsubscribeFromNavigationButtonEvents(buttonPreferencesLeft,
 				buttonPreferencesRight);
-			_customTitleBar.Dispose();
 
 			Serializator.Serialize(player, Program.SerializePath, Program.EncryptKey);
 		}

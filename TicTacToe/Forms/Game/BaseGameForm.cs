@@ -17,7 +17,7 @@ using TicTacToeLibrary;
 
 namespace TicTacToe.Forms.Game
 {
-	internal abstract partial class BaseGameForm : BaseForm
+	internal partial class BaseGameForm : BaseForm
 	{
 		private const int WINNING_CELL_SHOW_DELAY = 350;
 
@@ -25,7 +25,7 @@ namespace TicTacToe.Forms.Game
 		protected readonly Player player;
 		protected readonly Bot bot;
 		protected readonly RoundManager roundManager;
-		private Field _field;
+		protected Field field;
 		private GameFormInfo _gameInfo;
 
 		private List<PictureBox> _sequenceSelectedCells;
@@ -41,6 +41,8 @@ namespace TicTacToe.Forms.Game
 		private bool _wasAssistUsed, _isCellHintHovered,
 			_isFormClosingForNextRound, _wasPressedButtonBack;
 
+		private BaseGameForm()
+		{ InitializeComponent(); }
 		internal BaseGameForm(MainForm mainForm, Player player, Bot bot, RoundManager roundManager, CellType playerCellType)
 			: this(mainForm, player, roundManager, playerCellType)
 		{ this.bot = bot; }
@@ -60,10 +62,6 @@ namespace TicTacToe.Forms.Game
 			_bitmapPreviewCell.Cross = Resources.cross.ChangeOpacity(PREVIEW_OPACITY_LEVEL);
 			_bitmapPreviewCell.Zero = Resources.zero.ChangeOpacity(PREVIEW_OPACITY_LEVEL);
 		}
-		private void GameForm_Load(object sender, EventArgs e)
-		{ BackColor = player.Preferences.BackgroundGame.Color; }
-
-		protected abstract BaseGameForm GetNextGameForm();
 
 		#region Initialization
 		protected void InitializeGame(GameFormInfo gameFormInfo)
@@ -71,19 +69,15 @@ namespace TicTacToe.Forms.Game
 			_gameInfo = gameFormInfo;
 
 			_gameInfo.Score.Text = $"{roundManager.NumberOfWinsFirstPlayer} : {roundManager.NumberOfWinsSecondPlayer}";
+			_sequenceSelectedCells = new List<PictureBox>(_gameInfo.PictureCells.Length);
+			BackColor = player.Preferences.BackgroundGame.Color;
 			InitializePlayerInfo(_gameInfo.PlayerInfo);
-			InitializeField(_gameInfo.PictureCells);
 			InitializeGameAssists(_gameInfo.GameAssistsInfo);
 		}
 		private void InitializePlayerInfo(PlayerInfo playerInfo)
 		{
 			playerInfo.Avatar.Image = player.Preferences.Avatar.Image;
 			playerInfo.Name.Text = player.Name;
-		}
-		private void InitializeField(PictureBox[,] pictureCells)
-		{
-			_field = new Field(pictureCells.GetLength(0), pictureCells.GetLength(1));
-			_sequenceSelectedCells = new List<PictureBox>(pictureCells.Length);
 		}
 		private void InitializeGameAssists(GameAssistsInfo gameAssistsInfo)
 		{
@@ -102,6 +96,7 @@ namespace TicTacToe.Forms.Game
 				_gameInfo.GameAssistsInfo.Hint.Click += PictureBoxHint_Click;
 				_gameInfo.GameAssistsInfo.Surrender.Click += PictureBoxSurrender_Click;
 				_gameInfo.GameAssistsInfo.ButtonChangeView.Click += ButtonChangeView_Click;
+				_gameInfo.GameAssistsInfo.ButtonChangeView.MouseEnter += ButtonChangeView_MouseEnter;
 			}
 			else
 			{
@@ -109,6 +104,7 @@ namespace TicTacToe.Forms.Game
 				_gameInfo.GameAssistsInfo.Hint.Click -= PictureBoxHint_Click;
 				_gameInfo.GameAssistsInfo.Surrender.Click -= PictureBoxSurrender_Click;
 				_gameInfo.GameAssistsInfo.ButtonChangeView.Click -= ButtonChangeView_Click;
+				_gameInfo.GameAssistsInfo.ButtonChangeView.MouseEnter -= ButtonChangeView_MouseEnter;
 			}
 		}
 
@@ -188,11 +184,11 @@ namespace TicTacToe.Forms.Game
 
 			SetPictureBoxesEnabled(false);
 			Cell cell = FindIndexPictureBoxCell(pictureBox);
-			_field.FillCell(cell, playerCellType);
+			field.FillCell(cell, playerCellType);
 
 			FillCellWithImage(cell, playerCellType, wasClicked);
 
-			if (_field.IsGameEnd())
+			if (field.IsGameEnd())
 				await FinishGameAsync();
 			else if (bot != null)
 				await BotMoveAsync();
@@ -203,13 +199,13 @@ namespace TicTacToe.Forms.Game
 
 			SetPictureBoxesEnabled(false);
 
-			Cell botMove = bot.Move(_field, opponentCellType);
-			_field.FillCell(botMove, opponentCellType);
+			Cell botMove = bot.Move(field, opponentCellType);
+			field.FillCell(botMove, opponentCellType);
 			await Task.Delay(BOT_MOVE_DELAY);
 
 			FillCellWithImage(botMove, opponentCellType, false);
 
-			if (_field.IsGameEnd())
+			if (field.IsGameEnd())
 				await FinishGameAsync();
 
 			SetPictureBoxesEnabled(true);
@@ -308,7 +304,7 @@ namespace TicTacToe.Forms.Game
 			player.ReturnCoins();
 			SetPictureBoxesEnabled(false);
 
-			await ShowWinningCellsAsync(_field.Winner);
+			await ShowWinningCellsAsync(field.Winner);
 			await Task.Delay(WINNING_CELL_SHOW_DELAY);
 			OpenResultForm();
 
@@ -319,7 +315,7 @@ namespace TicTacToe.Forms.Game
 			{
 				roundManager.AddRound();
 
-				BaseGameForm nextGameForm = GetNextGameForm();
+				BaseGameForm nextGameForm = _gameInfo.NextGameForm;
 				if (!nextGameForm.IsDisposed)// If a player have enough coins to play
 					nextGameForm.Show();
 				else
@@ -330,12 +326,12 @@ namespace TicTacToe.Forms.Game
 		private void OpenResultForm()
 		{
 			GameResult gameResult = GameResult.Draw;
-			if (_field.Winner == playerCellType)
+			if (field.Winner == playerCellType)
 			{
 				gameResult = GameResult.Win;
 				roundManager.AddWinToTheFirstPlayer();
 			}
-			if (_field.Winner == opponentCellType)
+			if (field.Winner == opponentCellType)
 			{
 				gameResult = GameResult.Loss;
 				roundManager.AddWinToTheSecondPlayer();
@@ -366,11 +362,11 @@ namespace TicTacToe.Forms.Game
 				Color.FromArgb(162, 190, 220));
 			PictureBox pictureBox;
 
-			for (int i = 0; i < _field.WinningCells.Length; i++)
+			for (int i = 0; i < field.WinningCells.Length; i++)
 			{
 				await Task.Delay(WINNING_CELL_SHOW_DELAY);
 
-				pictureBox = _gameInfo.PictureCells[_field.WinningCells[i].row, _field.WinningCells[i].column];
+				pictureBox = _gameInfo.PictureCells[field.WinningCells[i].row, field.WinningCells[i].column];
 
 				pictureBox.Size = new Size(pictureBox.Width + WINNING_CELL_SIZE_SCALER, pictureBox.Height + WINNING_CELL_SIZE_SCALER);
 				pictureBox.Location = new Point(pictureBox.Location.X - WINNING_CELL_SIZE_SCALER / 2, pictureBox.Location.Y - WINNING_CELL_SIZE_SCALER / 2);
@@ -448,7 +444,7 @@ namespace TicTacToe.Forms.Game
 			if (_pictureBoxCellHint != null)
 			{
 				Cell cellHint = FindIndexPictureBoxCell(_pictureBoxCellHint);
-				if (_field.GetCell(cellHint) == CellType.None)
+				if (field.GetCell(cellHint) == CellType.None)
 					return cellHint;
 			}
 
@@ -458,7 +454,7 @@ namespace TicTacToe.Forms.Game
 						|| _gameInfo.PictureCells[i, j].Tag?.ToString() == _tagPreviewCell.Cross)
 						return new Cell(i, j);
 
-			return _field.GetRandomEmptyCell();
+			return field.GetRandomEmptyCell();
 		}
 		#endregion
 
@@ -504,6 +500,11 @@ namespace TicTacToe.Forms.Game
 						($"Unknown game view: {player.Preferences.GameView.GetType().Name}");
 			}
 		}
+		protected void ButtonChangeView_MouseEnter(object sender, EventArgs e)
+		{
+			if (sender is IconButton button)
+				button.BackColor = BackColor;
+		}
 
 		private void SetScoreViewVisibility(bool visible, bool needToChangeScore = true)
 		{
@@ -516,7 +517,7 @@ namespace TicTacToe.Forms.Game
 			const int MINIMUM_NUMBER_OF_MOVES_TO_SHOW = 2;
 
 			_gameInfo.TimerInfo.Timer.Visible = visible;
-			if (_field.CountFilledCells() >= MINIMUM_NUMBER_OF_MOVES_TO_SHOW)
+			if (field.CountFilledCells() >= MINIMUM_NUMBER_OF_MOVES_TO_SHOW)
 				if (!visible || !_wasAssistUsed && visible)
 				{
 					_gameInfo.GameAssistsInfo.AssistantsPanel.Visible = visible;
@@ -574,7 +575,7 @@ namespace TicTacToe.Forms.Game
 			PictureBox pictureBoxLastMove = _sequenceSelectedCells[_sequenceSelectedCells.Count - 1];
 
 			Cell cellLastMove = FindIndexPictureBoxCell(pictureBoxLastMove);
-			_field.FillCell(cellLastMove, CellType.None);
+			field.FillCell(cellLastMove, CellType.None);
 			pictureBoxLastMove.Image = null;
 			pictureBoxLastMove.Cursor = Cursors.Hand;
 
@@ -590,7 +591,7 @@ namespace TicTacToe.Forms.Game
 			_wasAssistUsed = true;
 			player.CountableItemsInventory.UseItem(GameAssistType.Hint);
 			ChangeGameViewVisibility(false);
-			Cell cellHint = PerfectMoveFinder.FindCell(_field, playerCellType);
+			Cell cellHint = PerfectMoveFinder.FindCell(field, playerCellType);
 			_pictureBoxCellHint = _gameInfo.PictureCells[cellHint.row, cellHint.column];
 
 			_cancellationTokenSourceHint?.Cancel();
@@ -650,7 +651,7 @@ namespace TicTacToe.Forms.Game
 		}
 		#endregion
 
-		private void GameForm_FormClosed(object sender, FormClosedEventArgs e)
+		protected void BaseGameForm_FormClosed(object sender, FormClosedEventArgs e)
 		{
 			StopTimerToMove();
 			ManageGameAssistsEvents(false);

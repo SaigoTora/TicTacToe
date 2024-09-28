@@ -26,14 +26,13 @@ namespace TicTacToe.Forms
 
 	internal partial class CustomMessageBox : BaseForm
 	{
-		private readonly CustomTitleBar _customTitleBar;
 		private readonly ButtonEventHandlers _buttonEventHandlers = new ButtonEventHandlers();
 		private DialogResult _dialogResult = DialogResult.None;
 
 		private CustomMessageBox(string text, string caption, CustomMessageBoxButtons buttons, CustomMessageBoxIcon icon, int MaxWidth)
 		{
 			InitializeComponent();
-			_customTitleBar = new CustomTitleBar(this, caption, minimizeBox: false, maximizeBox: false);
+			customTitleBar = new CustomTitleBar(this, caption, minimizeBox: false, maximizeBox: false);
 			base.guna2BorderlessForm.SetDrag(new Control[] { this, iconPicture, labelText, flpButtons });
 			base.guna2BorderlessForm.TransparentWhileDrag = false;
 
@@ -151,7 +150,6 @@ namespace TicTacToe.Forms
 		private void CustomMessageBox_FormClosed(object sender, FormClosedEventArgs e)
 		{
 			_buttonEventHandlers.UnsubscribeAll();
-			_customTitleBar.Dispose();
 		}
 	}
 }

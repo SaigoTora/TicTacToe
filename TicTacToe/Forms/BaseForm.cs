@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using TicTacToe.Models.Utilities.FormUtilities;
 
 namespace TicTacToe.Forms
 {
@@ -68,6 +69,9 @@ namespace TicTacToe.Forms
 			}
 		}
 		#endregion
+
+		protected CustomTitleBar customTitleBar;
+
 		public BaseForm()
 		{
 			InitializeComponent();
@@ -90,8 +94,9 @@ namespace TicTacToe.Forms
 			// BaseForm
 			// 
 			this.ClientSize = new System.Drawing.Size(284, 261);
-			this.FormBorderStyle = FormBorderStyle.None;
+			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
 			this.Name = "BaseForm";
+			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.BaseForm_FormClosed);
 			this.ResumeLayout(false);
 		}
 		protected override void Dispose(bool disposing)
@@ -102,5 +107,8 @@ namespace TicTacToe.Forms
 			guna2BorderlessForm?.Dispose();
 			base.Dispose(disposing);
 		}
+
+		private void BaseForm_FormClosed(object sender, FormClosedEventArgs e)
+		{ customTitleBar?.Dispose(); }
 	}
 }

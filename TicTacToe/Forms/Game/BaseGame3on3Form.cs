@@ -11,18 +11,17 @@ namespace TicTacToe.Forms.Game
 {
 	internal partial class BaseGame3on3Form : BaseGameForm
 	{
-		private readonly CustomTitleBar _customTitleBar;
-
-		internal BaseGame3on3Form(MainForm mainForm, Player player, Bot bot, RoundManager roundManager, CellType playerCellType)
+        internal BaseGame3on3Form(MainForm mainForm, Player player, Bot bot, RoundManager roundManager, CellType playerCellType)
 			: base(mainForm, player, bot, roundManager, playerCellType)
 		{
 			InitializeComponent();
 
-			_customTitleBar = new CustomTitleBar(this, $"Round {roundManager.CurrentNumberOfRounds} / {roundManager.MaxNumberOfRounds}",
+			field = new Field(3, 3);
+			customTitleBar = new CustomTitleBar(this, $"Round {roundManager.CurrentNumberOfRounds} / {roundManager.MaxNumberOfRounds}",
 				maximizeBox: false, canFormBeClosed: false);
 			TryToDeductCoins(bot.Difficulty);
 		}
-		private void GameForm_Load(object sender, EventArgs e)
+		private void BaseGame3on3Form_Load(object sender, EventArgs e)
 		{
 			InitializeBaseGame();
 			SetColorForControls(new[] { labelPlayerName, labelScore, labelBotName },
@@ -54,8 +53,9 @@ namespace TicTacToe.Forms.Game
 			TimerInfo timerInfo = new TimerInfo(progressBarTimer, progressBarCircleTimer, TIMER_MOVE_DELAY);
 			GameAssistsInfo gameAssistsInfo = new GameAssistsInfo(pictureBoxUndoMove, pictureBoxHint,
 				pictureBoxSurrender, buttonChangeView, flpGameAssistants);
+			BaseGame3on3Form nextGameForm = new BaseGame3on3Form(mainForm, player, bot, roundManager, opponentCellType);
 			GameFormInfo gameFormInfo = new GameFormInfo(playerInfo, labelScore, pictureCells,
-				PictureBoxCell_Click, timerInfo, gameAssistsInfo);
+				PictureBoxCell_Click, timerInfo, gameAssistsInfo, nextGameForm);
 			InitializeGame(gameFormInfo);
 		}
 		private void SetPlayerNamesSize(params Label[] names)
@@ -64,9 +64,6 @@ namespace TicTacToe.Forms.Game
 				if (name.Text.Length > 15)
 					name.Font = new Font(name.Font.FontFamily, 12);
 		}
-
-		protected override BaseGameForm GetNextGameForm()
-			=> new BaseGame3on3Form(mainForm, player, bot, roundManager, opponentCellType);
 
 		#region Actions of the game
 		private async void PictureBoxCell_Click(object sender, EventArgs e)
@@ -92,10 +89,5 @@ namespace TicTacToe.Forms.Game
 			PictureBoxCell_DefaultMouseLeave(pictureBox);
 		}
 		#endregion
-
-		private void GameForm_FormClosed(object sender, FormClosedEventArgs e)
-		{
-			_customTitleBar.Dispose();
-		}
 	}
 }

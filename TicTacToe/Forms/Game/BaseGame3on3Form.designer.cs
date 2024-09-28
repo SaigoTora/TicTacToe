@@ -301,8 +301,8 @@
 			// 
 			// progressBarCircleTimer
 			// 
-			this.progressBarCircleTimer.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-			| System.Windows.Forms.AnchorStyles.Right)));
+			this.progressBarCircleTimer.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			this.progressBarCircleTimer.BackColor = System.Drawing.Color.Transparent;
 			this.progressBarCircleTimer.Backwards = true;
 			this.progressBarCircleTimer.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(150)))), ((int)(((byte)(213)))), ((int)(((byte)(218)))), ((int)(((byte)(223)))));
@@ -351,8 +351,8 @@
 			// 
 			// flpGameAssistants
 			// 
-			this.flpGameAssistants.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-			| System.Windows.Forms.AnchorStyles.Right)));
+			this.flpGameAssistants.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			this.flpGameAssistants.AutoScroll = true;
 			this.flpGameAssistants.BackColor = System.Drawing.Color.Transparent;
 			this.flpGameAssistants.Controls.Add(this.pictureBoxUndoMove);
@@ -397,8 +397,8 @@
 			// 
 			// progressBarTimer
 			// 
-			this.progressBarTimer.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-			| System.Windows.Forms.AnchorStyles.Right)));
+			this.progressBarTimer.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			this.progressBarTimer.BackColor = System.Drawing.Color.Transparent;
 			this.progressBarTimer.BorderRadius = 7;
 			this.progressBarTimer.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(150)))), ((int)(((byte)(213)))), ((int)(((byte)(218)))), ((int)(((byte)(223)))));
@@ -411,7 +411,7 @@
 			this.progressBarTimer.Value = 100;
 			this.progressBarTimer.Visible = false;
 			// 
-			// GameForm
+			// BaseGame3on3Form
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -440,14 +440,13 @@
 			this.Controls.Add(this.progressBarTimer);
 			this.Controls.Add(this.progressBarCircleTimer);
 			this.MaximizeBox = false;
-			this.Name = "GameForm";
+			this.Name = "BaseGame3on3Form";
 			this.RightToLeft = System.Windows.Forms.RightToLeft.No;
 			this.ShowIcon = false;
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Game";
 			this.TopMost = true;
-			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.GameForm_FormClosed);
-			this.Load += new System.EventHandler(this.GameForm_Load);
+			this.Load += new System.EventHandler(this.BaseGame3on3Form_Load);
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxLine3)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxLine4)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxLine2)).EndInit();

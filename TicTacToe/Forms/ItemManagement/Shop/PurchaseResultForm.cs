@@ -13,13 +13,12 @@ namespace TicTacToe.Forms.ItemManagement.Shop
 		private readonly Player _player;
 		private readonly Item _item;
 
-		private readonly CustomTitleBar _customTitleBar;
 		private readonly ButtonEventHandlers _buttonEventHandlers = new ButtonEventHandlers();
 
 		internal PurchaseResultForm(Item item, Player player)
 		{
 			InitializeComponent();
-			_customTitleBar = new CustomTitleBar(this, "Item successfully purchased", minimizeBox: false, maximizeBox: false);
+			customTitleBar = new CustomTitleBar(this, "Item successfully purchased", minimizeBox: false, maximizeBox: false);
 			base.guna2BorderlessForm.SetDrag(new Control[] { this, pictureBoxItem, labelName,
 			pictureBoxCoin, labelPrice, labelDescription });
 			base.guna2BorderlessForm.TransparentWhileDrag = false;
@@ -88,10 +87,7 @@ namespace TicTacToe.Forms.ItemManagement.Shop
 		private void ButtonOK_Click(object sender, EventArgs e)
 			=> Close();
 		private void PurchaseResultForm_FormClosed(object sender, FormClosedEventArgs e)
-		{
-			_buttonEventHandlers.UnsubscribeAll();
-			_customTitleBar.Dispose();
-		}
+			=> _buttonEventHandlers.UnsubscribeAll();
 
 	}
 }

@@ -16,7 +16,6 @@ namespace TicTacToe.Forms
 		private static readonly (Color placeholderColor, Color textColor) _foreColorTextBoxName = (Color.Gray, Color.White);
 
 		private static readonly Color _selectedAvatarColor = Color.FromArgb(71, 167, 106);
-		private readonly CustomTitleBar _customTitleBar;
 		private readonly PictureBoxEventHandlers _pictureBoxEventHandlers = new PictureBoxEventHandlers();
 		private readonly ButtonEventHandlers _buttonEventHandlers = new ButtonEventHandlers();
 		private readonly LabelEventHandlers _labelEventHandlers = new LabelEventHandlers();
@@ -28,7 +27,7 @@ namespace TicTacToe.Forms
 		{
 			InitializeComponent();
 
-			_customTitleBar = new CustomTitleBar(this, "Tic Tac Toe", Properties.Resources.ticTacToe, maximizeBox: false);
+			customTitleBar = new CustomTitleBar(this, "Tic Tac Toe", Properties.Resources.ticTacToe, maximizeBox: false);
 			_player = new Player();
 		}
 
@@ -129,7 +128,6 @@ namespace TicTacToe.Forms
 			_pictureBoxEventHandlers.UnsubscribeAll();
 			_buttonEventHandlers.UnsubscribeAll();
 			_labelEventHandlers.UnsubscribeAll();
-			_customTitleBar.Dispose();
 		}
 	}
 }

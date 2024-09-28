@@ -43,8 +43,7 @@
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Game";
 			this.TopMost = true;
-			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.GameForm_FormClosed);
-			this.Load += new System.EventHandler(this.GameForm_Load);
+			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.BaseGameForm_FormClosed);
 			this.ResumeLayout(false);
 
 		}

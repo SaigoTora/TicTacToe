@@ -14,8 +14,6 @@ namespace TicTacToe.Forms.ItemManagement.Shop
 {
 	internal partial class ShopForm : ItemManagementForm
 	{
-		private readonly CustomTitleBar _customTitleBar;
-
 		private readonly List<CountableItem> _countableItems = new List<CountableItem>();
 		private readonly List<ImageItem> _imageItems = new List<ImageItem>();
 		private readonly List<Avatar> _avatarItems = new List<Avatar>();
@@ -24,7 +22,7 @@ namespace TicTacToe.Forms.ItemManagement.Shop
 		internal ShopForm(Player player) : base(player)
 		{
 			IsResizable = true;
-			_customTitleBar = new CustomTitleBar(this, "Tic Tac Toe", Properties.Resources.shop);
+			customTitleBar = new CustomTitleBar(this, "Tic Tac Toe", Properties.Resources.shop);
 			InitializeComponent();
 
 			InitializeCreators();
@@ -239,7 +237,6 @@ namespace TicTacToe.Forms.ItemManagement.Shop
 			ManageItemCreatorEvents(false);
 			UnsubscribeFromNavigationButtonEvents(buttonPreferencesLeft,
 				buttonPreferencesRight);
-			_customTitleBar.Dispose();
 
 			Serializator.Serialize(player, Program.SerializePath, Program.EncryptKey);
 		}

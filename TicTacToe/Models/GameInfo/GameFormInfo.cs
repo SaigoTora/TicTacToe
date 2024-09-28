@@ -2,6 +2,7 @@
 using Guna.UI2.WinForms;
 using System;
 using System.Windows.Forms;
+using TicTacToe.Forms.Game;
 
 namespace TicTacToe.Models.GameInfo
 {
@@ -13,10 +14,12 @@ namespace TicTacToe.Models.GameInfo
 		internal EventHandler CellClick { get; }
 		internal TimerInfo TimerInfo { get; }
 		internal GameAssistsInfo GameAssistsInfo { get; }
+		internal BaseGameForm NextGameForm;
 
 		internal GameFormInfo(PlayerInfo playerInfo, Label score,
 			PictureBox[,] pictureCells, EventHandler cellClick,
-			TimerInfo timerInfo, GameAssistsInfo gameAssistsInfo)
+			TimerInfo timerInfo, GameAssistsInfo gameAssistsInfo,
+			BaseGameForm nextGameForm)
 		{
 			PlayerInfo = playerInfo;
 			Score = score;
@@ -24,6 +27,7 @@ namespace TicTacToe.Models.GameInfo
 			CellClick = cellClick;
 			TimerInfo = timerInfo;
 			GameAssistsInfo = gameAssistsInfo;
+			NextGameForm = nextGameForm;
 		}
 	}
 
@@ -59,6 +63,7 @@ namespace TicTacToe.Models.GameInfo
 		internal PictureBox Surrender { get; }
 		internal IconButton ButtonChangeView { get; }
 		internal FlowLayoutPanel AssistantsPanel { get; }
+
 
 		internal GameAssistsInfo(PictureBox undoMove, PictureBox hint,
 			PictureBox surrender, IconButton buttonchangeView,

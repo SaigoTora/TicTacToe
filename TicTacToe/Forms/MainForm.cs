@@ -29,7 +29,6 @@ namespace TicTacToe.Forms
 		private static readonly (Color Easy, Color Medium, Color Hard, Color Impossible) _difficultyButtonFillColor2 =
 			(Color.FromArgb(30, 129, 69), Color.FromArgb(236, 124, 38), Color.FromArgb(155, 17, 30), Color.FromArgb(83, 55, 122));
 		private readonly int _panelSettingsWidth;
-		private readonly CustomTitleBar _customTitleBar;
 		private readonly PictureBoxEventHandlers _pictureBoxEventHandlers = new PictureBoxEventHandlers();
 		private readonly ButtonEventHandlers _buttonEventHandlers = new ButtonEventHandlers();
 		private readonly LabelEventHandlers _labelEventHandlers = new LabelEventHandlers();
@@ -40,7 +39,7 @@ namespace TicTacToe.Forms
 
 		public MainForm(Player player)
 		{
-			_customTitleBar = new CustomTitleBar(this, "Tic Tac Toe", Resources.ticTacToe);
+			customTitleBar = new CustomTitleBar(this, "Tic Tac Toe", Resources.ticTacToe);
 			IsResizable = true;
 			InitializeComponent();
 
@@ -260,7 +259,6 @@ namespace TicTacToe.Forms
 			_pictureBoxEventHandlers.UnsubscribeAll();
 			_buttonEventHandlers.UnsubscribeAll();
 			_labelEventHandlers.UnsubscribeAll();
-			_customTitleBar.Dispose();
 
 			Serializator.Serialize(_player, Program.SerializePath, Program.EncryptKey);
 		}
