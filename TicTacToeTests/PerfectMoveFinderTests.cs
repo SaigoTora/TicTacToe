@@ -153,7 +153,7 @@ namespace TicTacToeTests
 			Cell result = PerfectMoveFinder.FindCell(field, CellType.Cross);
 
 			// Assert
-			Cell expectedCell = new(2, 1);
+			Cell expectedCell = new(0, 0);
 			Assert.That(result, Is.EqualTo(expectedCell), $"The resulting cell({result.row};{result.column}) " +
 				$"isn't equal to the expected one({expectedCell.row};{expectedCell.column}).");
 		}

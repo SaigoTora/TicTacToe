@@ -6,6 +6,14 @@ namespace TicTacToeLibrary
 {
 	internal class Node
 	{
+		private enum Rating : byte
+		{
+			Lose = 1,
+			Draw = 2,
+			Unknown = 3,
+			Win = 4
+		}
+
 		private static readonly Random _random = new Random();
 
 		private static int _maxDepthLevel;
@@ -15,7 +23,7 @@ namespace TicTacToeLibrary
 		private readonly int _depthLevel;
 
 		private List<Node> _children;
-		private byte _rating;
+		private Rating _rating;
 
 		internal Node(Field field, CellType childrenCellType, int maxDepthLevel)
 		{// Constructor for the first node
@@ -53,9 +61,13 @@ namespace TicTacToeLibrary
 
 						hasChildren = !_field.IsGameEnd(false);
 						CellType nextCellType = childrenCellType == CellType.Cross ? CellType.Zero : CellType.Cross;
-						_children.Add(new Node(_field, nextCellType, _depthLevel + 1, hasChildren));
+						Node child = new Node(_field, nextCellType, _depthLevel + 1, hasChildren);
+						_children.Add(child);
 
 						_field.FillCell(new Cell(i, j), CellType.None);// Returning the cell type back
+						if (child._rating == Rating.Lose && childrenCellType != _firstCellType
+							|| child._rating == Rating.Win && childrenCellType == _firstCellType)
+							return;
 					}
 		}
 		private void SetRating(CellType childrenCellType)
@@ -63,16 +75,16 @@ namespace TicTacToeLibrary
 			if (_children == null)
 			{// Rating for leaves
 				if (_field.Winner == _firstCellType)
-					_rating = 4;
+					_rating = Rating.Win;
 				else if (_field.Winner == CellType.None)
 				{
 					if (_field.CountFilledCells() == _field.GetFieldSize() * _field.GetFieldSize())
-						_rating = 2;// If all cells are filled
+						_rating = Rating.Draw;// If all cells are filled
 					else
-						_rating = 3;
+						_rating = Rating.Unknown;
 				}
 				else
-					_rating = 1;
+					_rating = Rating.Lose;
 			}
 			else
 			{// Rating for other nodes (minimax procedure)
@@ -94,11 +106,11 @@ namespace TicTacToeLibrary
 						return resultCell.Value;
 				}
 
-			byte maxRating = _children.Max(child => child._rating);
+			byte maxRating = _children.Max(child => (byte)child._rating);
 
 			List<Cell> perfectCells = new List<Cell>();
 			foreach (Node child in _children)
-				if (child._rating == maxRating)
+				if ((byte)child._rating == maxRating)
 				{
 					resultCell = _field.GetFirstCellMismatch(child._field.GetAllCells());
 					if (resultCell.HasValue)

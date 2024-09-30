@@ -1,4 +1,4 @@
-﻿namespace TicTacToe.Forms.Game
+﻿namespace TicTacToe.Forms.Game.Games3on3
 {
 	partial class BaseGame3on3Form
 	{
@@ -34,9 +34,9 @@
 			this.pictureBoxLine2 = new System.Windows.Forms.PictureBox();
 			this.pictureBoxLine1 = new System.Windows.Forms.PictureBox();
 			this.labelPlayerName = new System.Windows.Forms.Label();
-			this.labelBotName = new System.Windows.Forms.Label();
+			this.labelOpponentName = new System.Windows.Forms.Label();
 			this.pictureBoxPlayerAvatar = new System.Windows.Forms.PictureBox();
-			this.pictureBoxBotAvatar = new System.Windows.Forms.PictureBox();
+			this.pictureBoxOpponentAvatar = new System.Windows.Forms.PictureBox();
 			this.labelScore = new System.Windows.Forms.Label();
 			this.pictureBoxCell1 = new System.Windows.Forms.PictureBox();
 			this.pictureBoxCell2 = new System.Windows.Forms.PictureBox();
@@ -59,7 +59,7 @@
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxLine2)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxLine1)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxPlayerAvatar)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.pictureBoxBotAvatar)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.pictureBoxOpponentAvatar)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxCell1)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxCell2)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxCell3)).BeginInit();
@@ -127,22 +127,22 @@
 			this.labelPlayerName.Text = "Player name";
 			this.labelPlayerName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			// 
-			// labelBotName
+			// labelOpponentName
 			// 
-			this.labelBotName.BackColor = System.Drawing.Color.Transparent;
-			this.labelBotName.Font = new System.Drawing.Font("Trebuchet MS", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.labelBotName.Location = new System.Drawing.Point(384, 166);
-			this.labelBotName.Name = "labelBotName";
-			this.labelBotName.Size = new System.Drawing.Size(230, 25);
-			this.labelBotName.TabIndex = 8;
-			this.labelBotName.Text = "Bot name";
-			this.labelBotName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			this.labelOpponentName.BackColor = System.Drawing.Color.Transparent;
+			this.labelOpponentName.Font = new System.Drawing.Font("Trebuchet MS", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.labelOpponentName.Location = new System.Drawing.Point(384, 166);
+			this.labelOpponentName.Name = "labelOpponentName";
+			this.labelOpponentName.Size = new System.Drawing.Size(230, 25);
+			this.labelOpponentName.TabIndex = 8;
+			this.labelOpponentName.Text = "Opponent name";
+			this.labelOpponentName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			// 
 			// pictureBoxPlayerAvatar
 			// 
 			this.pictureBoxPlayerAvatar.AccessibleDescription = "";
 			this.pictureBoxPlayerAvatar.BackColor = System.Drawing.Color.Transparent;
-			this.pictureBoxPlayerAvatar.Image = global::TicTacToe.Properties.Resources.monkey;
+			this.pictureBoxPlayerAvatar.Image = global::TicTacToe.Properties.Resources.manAvatar1;
 			this.pictureBoxPlayerAvatar.Location = new System.Drawing.Point(44, 12);
 			this.pictureBoxPlayerAvatar.Name = "pictureBoxPlayerAvatar";
 			this.pictureBoxPlayerAvatar.Size = new System.Drawing.Size(150, 150);
@@ -150,16 +150,16 @@
 			this.pictureBoxPlayerAvatar.TabIndex = 1;
 			this.pictureBoxPlayerAvatar.TabStop = false;
 			// 
-			// pictureBoxBotAvatar
+			// pictureBoxOpponentAvatar
 			// 
-			this.pictureBoxBotAvatar.BackColor = System.Drawing.Color.Transparent;
-			this.pictureBoxBotAvatar.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxBotAvatar.Image")));
-			this.pictureBoxBotAvatar.Location = new System.Drawing.Point(424, 12);
-			this.pictureBoxBotAvatar.Name = "pictureBoxBotAvatar";
-			this.pictureBoxBotAvatar.Size = new System.Drawing.Size(150, 150);
-			this.pictureBoxBotAvatar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-			this.pictureBoxBotAvatar.TabIndex = 7;
-			this.pictureBoxBotAvatar.TabStop = false;
+			this.pictureBoxOpponentAvatar.BackColor = System.Drawing.Color.Transparent;
+			this.pictureBoxOpponentAvatar.Image = global::TicTacToe.Properties.Resources.womanAvatar1;
+			this.pictureBoxOpponentAvatar.Location = new System.Drawing.Point(424, 12);
+			this.pictureBoxOpponentAvatar.Name = "pictureBoxOpponentAvatar";
+			this.pictureBoxOpponentAvatar.Size = new System.Drawing.Size(150, 150);
+			this.pictureBoxOpponentAvatar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+			this.pictureBoxOpponentAvatar.TabIndex = 7;
+			this.pictureBoxOpponentAvatar.TabStop = false;
 			// 
 			// labelScore
 			// 
@@ -183,7 +183,6 @@
 			this.pictureBoxCell1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
 			this.pictureBoxCell1.TabIndex = 9;
 			this.pictureBoxCell1.TabStop = false;
-			this.pictureBoxCell1.Click += new System.EventHandler(this.PictureBoxCell_Click);
 			this.pictureBoxCell1.MouseEnter += new System.EventHandler(this.PictureBoxCell_MouseEnter);
 			this.pictureBoxCell1.MouseLeave += new System.EventHandler(this.PictureBoxCell_MouseLeave);
 			// 
@@ -197,7 +196,6 @@
 			this.pictureBoxCell2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
 			this.pictureBoxCell2.TabIndex = 10;
 			this.pictureBoxCell2.TabStop = false;
-			this.pictureBoxCell2.Click += new System.EventHandler(this.PictureBoxCell_Click);
 			this.pictureBoxCell2.MouseEnter += new System.EventHandler(this.PictureBoxCell_MouseEnter);
 			this.pictureBoxCell2.MouseLeave += new System.EventHandler(this.PictureBoxCell_MouseLeave);
 			// 
@@ -211,7 +209,6 @@
 			this.pictureBoxCell3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
 			this.pictureBoxCell3.TabIndex = 11;
 			this.pictureBoxCell3.TabStop = false;
-			this.pictureBoxCell3.Click += new System.EventHandler(this.PictureBoxCell_Click);
 			this.pictureBoxCell3.MouseEnter += new System.EventHandler(this.PictureBoxCell_MouseEnter);
 			this.pictureBoxCell3.MouseLeave += new System.EventHandler(this.PictureBoxCell_MouseLeave);
 			// 
@@ -225,7 +222,6 @@
 			this.pictureBoxCell4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
 			this.pictureBoxCell4.TabIndex = 12;
 			this.pictureBoxCell4.TabStop = false;
-			this.pictureBoxCell4.Click += new System.EventHandler(this.PictureBoxCell_Click);
 			this.pictureBoxCell4.MouseEnter += new System.EventHandler(this.PictureBoxCell_MouseEnter);
 			this.pictureBoxCell4.MouseLeave += new System.EventHandler(this.PictureBoxCell_MouseLeave);
 			// 
@@ -239,7 +235,6 @@
 			this.pictureBoxCell5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
 			this.pictureBoxCell5.TabIndex = 13;
 			this.pictureBoxCell5.TabStop = false;
-			this.pictureBoxCell5.Click += new System.EventHandler(this.PictureBoxCell_Click);
 			this.pictureBoxCell5.MouseEnter += new System.EventHandler(this.PictureBoxCell_MouseEnter);
 			this.pictureBoxCell5.MouseLeave += new System.EventHandler(this.PictureBoxCell_MouseLeave);
 			// 
@@ -253,7 +248,6 @@
 			this.pictureBoxCell6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
 			this.pictureBoxCell6.TabIndex = 14;
 			this.pictureBoxCell6.TabStop = false;
-			this.pictureBoxCell6.Click += new System.EventHandler(this.PictureBoxCell_Click);
 			this.pictureBoxCell6.MouseEnter += new System.EventHandler(this.PictureBoxCell_MouseEnter);
 			this.pictureBoxCell6.MouseLeave += new System.EventHandler(this.PictureBoxCell_MouseLeave);
 			// 
@@ -267,7 +261,6 @@
 			this.pictureBoxCell7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
 			this.pictureBoxCell7.TabIndex = 15;
 			this.pictureBoxCell7.TabStop = false;
-			this.pictureBoxCell7.Click += new System.EventHandler(this.PictureBoxCell_Click);
 			this.pictureBoxCell7.MouseEnter += new System.EventHandler(this.PictureBoxCell_MouseEnter);
 			this.pictureBoxCell7.MouseLeave += new System.EventHandler(this.PictureBoxCell_MouseLeave);
 			// 
@@ -281,7 +274,6 @@
 			this.pictureBoxCell8.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
 			this.pictureBoxCell8.TabIndex = 16;
 			this.pictureBoxCell8.TabStop = false;
-			this.pictureBoxCell8.Click += new System.EventHandler(this.PictureBoxCell_Click);
 			this.pictureBoxCell8.MouseEnter += new System.EventHandler(this.PictureBoxCell_MouseEnter);
 			this.pictureBoxCell8.MouseLeave += new System.EventHandler(this.PictureBoxCell_MouseLeave);
 			// 
@@ -295,7 +287,6 @@
 			this.pictureBoxCell9.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
 			this.pictureBoxCell9.TabIndex = 17;
 			this.pictureBoxCell9.TabStop = false;
-			this.pictureBoxCell9.Click += new System.EventHandler(this.PictureBoxCell_Click);
 			this.pictureBoxCell9.MouseEnter += new System.EventHandler(this.PictureBoxCell_MouseEnter);
 			this.pictureBoxCell9.MouseLeave += new System.EventHandler(this.PictureBoxCell_MouseLeave);
 			// 
@@ -417,7 +408,6 @@
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.Color.White;
 			this.ClientSize = new System.Drawing.Size(618, 822);
-			this.Controls.Add(this.flpGameAssistants);
 			this.Controls.Add(this.labelScore);
 			this.Controls.Add(this.buttonChangeView);
 			this.Controls.Add(this.pictureBoxLine3);
@@ -433,26 +423,20 @@
 			this.Controls.Add(this.pictureBoxCell3);
 			this.Controls.Add(this.pictureBoxCell2);
 			this.Controls.Add(this.pictureBoxCell1);
-			this.Controls.Add(this.pictureBoxBotAvatar);
+			this.Controls.Add(this.pictureBoxOpponentAvatar);
 			this.Controls.Add(this.pictureBoxPlayerAvatar);
-			this.Controls.Add(this.labelBotName);
+			this.Controls.Add(this.labelOpponentName);
 			this.Controls.Add(this.labelPlayerName);
 			this.Controls.Add(this.progressBarTimer);
 			this.Controls.Add(this.progressBarCircleTimer);
-			this.MaximizeBox = false;
+			this.Controls.Add(this.flpGameAssistants);
 			this.Name = "BaseGame3on3Form";
-			this.RightToLeft = System.Windows.Forms.RightToLeft.No;
-			this.ShowIcon = false;
-			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-			this.Text = "Game";
-			this.TopMost = true;
-			this.Load += new System.EventHandler(this.BaseGame3on3Form_Load);
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxLine3)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxLine4)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxLine2)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxLine1)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxPlayerAvatar)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.pictureBoxBotAvatar)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.pictureBoxOpponentAvatar)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxCell1)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxCell2)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxCell3)).EndInit();
@@ -471,15 +455,7 @@
 		}
 
 		#endregion
-		private System.Windows.Forms.PictureBox pictureBoxLine1;
-		private System.Windows.Forms.PictureBox pictureBoxLine2;
-		private System.Windows.Forms.PictureBox pictureBoxLine4;
-		private System.Windows.Forms.PictureBox pictureBoxLine3;
-		private System.Windows.Forms.Label labelPlayerName;
-		private System.Windows.Forms.Label labelBotName;
 		private System.Windows.Forms.PictureBox pictureBoxPlayerAvatar;
-		private System.Windows.Forms.PictureBox pictureBoxBotAvatar;
-		private System.Windows.Forms.Label labelScore;
 		private System.Windows.Forms.PictureBox pictureBoxCell1;
 		private System.Windows.Forms.PictureBox pictureBoxCell2;
 		private System.Windows.Forms.PictureBox pictureBoxCell3;
@@ -493,8 +469,16 @@
 		private System.Windows.Forms.PictureBox pictureBoxUndoMove;
 		private System.Windows.Forms.PictureBox pictureBoxHint;
 		private System.Windows.Forms.FlowLayoutPanel flpGameAssistants;
-		private FontAwesome.Sharp.IconButton buttonChangeView;
 		private Guna.UI2.WinForms.Guna2ProgressBar progressBarTimer;
 		private System.Windows.Forms.PictureBox pictureBoxSurrender;
+		protected System.Windows.Forms.PictureBox pictureBoxLine1;
+		protected System.Windows.Forms.PictureBox pictureBoxLine2;
+		protected System.Windows.Forms.PictureBox pictureBoxLine4;
+		protected System.Windows.Forms.PictureBox pictureBoxLine3;
+		protected System.Windows.Forms.Label labelPlayerName;
+		protected System.Windows.Forms.Label labelOpponentName;
+		protected System.Windows.Forms.Label labelScore;
+		protected System.Windows.Forms.PictureBox pictureBoxOpponentAvatar;
+		protected FontAwesome.Sharp.IconButton buttonChangeView;
 	}
 }

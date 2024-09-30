@@ -26,6 +26,7 @@ namespace TicTacToe.Forms.Game
 		protected readonly Bot bot;
 		protected readonly RoundManager roundManager;
 		protected Field field;
+		protected bool isTimerEnabled, isGameAssistsEnabled;
 		private GameFormInfo _gameInfo;
 
 		private List<PictureBox> _sequenceSelectedCells;
@@ -41,12 +42,14 @@ namespace TicTacToe.Forms.Game
 		private bool _wasAssistUsed, _isCellHintHovered,
 			_isFormClosingForNextRound, _wasPressedButtonBack;
 
-		private BaseGameForm()
+		protected BaseGameForm()
 		{ InitializeComponent(); }
-		internal BaseGameForm(MainForm mainForm, Player player, Bot bot, RoundManager roundManager, CellType playerCellType)
-			: this(mainForm, player, roundManager, playerCellType)
+		internal BaseGameForm(MainForm mainForm, Player player, Bot bot, RoundManager roundManager,
+			CellType playerCellType, bool isTimerEnabled, bool isGameAssistsEnabled)
+			: this(mainForm, player, roundManager, playerCellType, isTimerEnabled, isGameAssistsEnabled)
 		{ this.bot = bot; }
-		internal BaseGameForm(MainForm mainForm, Player player, RoundManager roundManager, CellType playerCellType)
+		internal BaseGameForm(MainForm mainForm, Player player, RoundManager roundManager,
+			CellType playerCellType, bool isTimerEnabled, bool isGameAssistsEnabled)
 		{
 			const float PREVIEW_OPACITY_LEVEL = 0.35f;
 
@@ -58,6 +61,8 @@ namespace TicTacToe.Forms.Game
 
 			this.playerCellType = playerCellType;
 			opponentCellType = playerCellType == CellType.Cross ? CellType.Zero : CellType.Cross;
+			this.isTimerEnabled = isTimerEnabled;
+			this.isGameAssistsEnabled = isGameAssistsEnabled;
 
 			_bitmapPreviewCell.Cross = Resources.cross.ChangeOpacity(PREVIEW_OPACITY_LEVEL);
 			_bitmapPreviewCell.Zero = Resources.zero.ChangeOpacity(PREVIEW_OPACITY_LEVEL);
@@ -88,6 +93,17 @@ namespace TicTacToe.Forms.Game
 				gameAssistsInfo.UndoMove, gameAssistsInfo.Hint, gameAssistsInfo.Surrender);
 		}
 
+		protected void ManagePictureCellsEventClick(bool subscribe)
+		{
+			for (int i = 0; i < _gameInfo.PictureCells.GetLength(0); i++)
+				for (int j = 0; j < _gameInfo.PictureCells.GetLength(1); j++)
+				{
+					if (subscribe)
+						_gameInfo.PictureCells[i, j].Click += _gameInfo.CellClick;
+					else
+						_gameInfo.PictureCells[i, j].Click -= _gameInfo.CellClick;
+				}
+		}
 		private void ManageGameAssistsEvents(bool subscribe)
 		{
 			if (subscribe)
@@ -111,12 +127,16 @@ namespace TicTacToe.Forms.Game
 		protected void TryToDeductCoins(Difficulty botDifficulty)
 		{
 			try
-			{ player.DeductCoins(botDifficulty); }
+			{
+				player.DeductCoins(botDifficulty);
+			}
 			catch (NotEnoughCoinsToStartGameException exception)
 			{
 				CustomMessageBox.Show(exception.Message, "Not enough coins", CustomMessageBoxButtons.OK, CustomMessageBoxIcon.Error);
 				Close();
 			}
+			catch (InvalidOperationException)
+			{ }// If an attempt is made to deduct coins again.
 		}
 		protected Bitmap GetBotAvatar(Difficulty difficulty)
 		{
@@ -357,7 +377,7 @@ namespace TicTacToe.Forms.Game
 			if (winner == CellType.None)
 				return;
 
-			const int WINNING_CELL_SIZE_SCALER = 15;
+			int WINNING_CELL_SIZE_SCALER = _gameInfo.PictureCells[0, 0].Height / 10;
 			(Color CrossBack, Color ZeroBack) = (Color.FromArgb(220, 173, 162),
 				Color.FromArgb(162, 190, 220));
 			PictureBox pictureBox;
@@ -382,13 +402,21 @@ namespace TicTacToe.Forms.Game
 		#region Timer
 		protected void StartTimerToMove()
 		{
+			if (!isTimerEnabled)
+				return;
+
 			_cancellationTokenSourceTimer?.Cancel();
 			_cancellationTokenSourceTimer = new CancellationTokenSource();
 
 			_ = TimerForMoveAsync(_cancellationTokenSourceTimer.Token);
 		}
 		protected void StopTimerToMove()
-			=> _cancellationTokenSourceTimer?.Cancel();
+		{
+			if (!isTimerEnabled)
+				return;
+
+			_cancellationTokenSourceTimer?.Cancel();
+		}
 		private async Task TimerForMoveAsync(CancellationToken cancellationToken)
 		{
 			_gameInfo.TimerInfo.CircleTimer.Maximum = _gameInfo.TimerInfo.TimerDelay;
@@ -508,7 +536,8 @@ namespace TicTacToe.Forms.Game
 
 		private void SetScoreViewVisibility(bool visible, bool needToChangeScore = true)
 		{
-			_gameInfo.TimerInfo.CircleTimer.Visible = visible;
+			if (isTimerEnabled)
+				_gameInfo.TimerInfo.CircleTimer.Visible = visible;
 			if (needToChangeScore)
 				_gameInfo.Score.Visible = visible;
 		}
@@ -516,8 +545,9 @@ namespace TicTacToe.Forms.Game
 		{
 			const int MINIMUM_NUMBER_OF_MOVES_TO_SHOW = 2;
 
-			_gameInfo.TimerInfo.Timer.Visible = visible;
-			if (field.CountFilledCells() >= MINIMUM_NUMBER_OF_MOVES_TO_SHOW)
+			if (isTimerEnabled)
+				_gameInfo.TimerInfo.Timer.Visible = visible;
+			if (isGameAssistsEnabled && field.CountFilledCells() >= MINIMUM_NUMBER_OF_MOVES_TO_SHOW)
 				if (!visible || !_wasAssistUsed && visible)
 				{
 					_gameInfo.GameAssistsInfo.AssistantsPanel.Visible = visible;
@@ -537,7 +567,8 @@ namespace TicTacToe.Forms.Game
 						_gameInfo.GameAssistsInfo.UndoMove.Visible = actualVisible;
 						break;
 					case GameAssistType.Hint:
-						_gameInfo.GameAssistsInfo.Hint.Visible = actualVisible;
+						if (field.GetFieldSize() == 3)
+							_gameInfo.GameAssistsInfo.Hint.Visible = actualVisible;
 						break;
 					case GameAssistType.Surrender:
 						_gameInfo.GameAssistsInfo.Surrender.Visible = actualVisible;
@@ -654,6 +685,7 @@ namespace TicTacToe.Forms.Game
 		protected void BaseGameForm_FormClosed(object sender, FormClosedEventArgs e)
 		{
 			StopTimerToMove();
+			ManagePictureCellsEventClick(false);
 			ManageGameAssistsEvents(false);
 			_pictureBoxEventHandlers.UnsubscribeAll();
 

@@ -84,6 +84,9 @@ namespace TicTacToe.Models.PlayerInfo
 		/// <exception cref="NotEnoughCoinsToStartGameException">If the user doesn't have enough coins, an exception will be thrown.</exception>
 		internal void DeductCoins(Difficulty botDifficulty)
 		{
+			if (deductedCoins > 0)
+				throw new InvalidOperationException("Coins have already been deducted. You cannot deduct them again!");
+
 			deductedCoins = CoinsCalculator.GetRequiredCoins(botDifficulty);
 
 			if (Coins - deductedCoins < 0)
