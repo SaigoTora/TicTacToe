@@ -25,10 +25,10 @@ namespace TicTacToe.Forms.Game.Games3on3
 			Game3on3BotForm nextGameForm = new Game3on3BotForm(mainForm, player, bot, roundManager,
 			   opponentCellType, isTimerEnabled, isGameAssistsEnabled);
 			InitializeBaseGame(PictureCell_Click, nextGameForm);
+			ManagePictureCellsEventHover(PictureCell_MouseEnter, PictureCell_MouseLeave, true);
 
 			pictureBoxOpponentAvatar.Image = GetBotAvatar(bot.Difficulty);
 			labelOpponentName.Text = bot.Name;
-
 			SetPlayerNamesSize(labelPlayerName, labelOpponentName);
 
 			if (opponentCellType == CellType.Cross)
@@ -36,15 +36,30 @@ namespace TicTacToe.Forms.Game.Games3on3
 			else
 			{
 				ChangeGameViewVisibility(true);
+				IndicateWhoseMove(playerCellType);
 				StartTimerToMove();
 			}
 		}
+
 		private async void PictureCell_Click(object sender, EventArgs e)
 		{
-			if (!(sender is PictureBox pictureBox))
-				return;
+			if (sender is PictureBox pictureBox)
+				await PictureBoxCell_DefaultClick(pictureBox, playerCellType, e != EventArgs.Empty);
+		}
+		private void PictureCell_MouseEnter(object sender, EventArgs e)
+		{
+			if (sender is PictureBox pictureBox)
+				PictureBoxCell_DefaultMouseEnter(pictureBox, playerCellType);
+		}
+		private void PictureCell_MouseLeave(object sender, EventArgs e)
+		{
+			if (sender is PictureBox pictureBox)
+				PictureBoxCell_DefaultMouseLeave(pictureBox);
+		}
 
-			await PictureBoxCell_DefaultClick(pictureBox, e != EventArgs.Empty);
+		private void Game3on3BotForm_FormClosed(object sender, FormClosedEventArgs e)
+		{
+			ManagePictureCellsEventHover(PictureCell_MouseEnter, PictureCell_MouseLeave, false);
 		}
 	}
 }

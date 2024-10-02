@@ -30,14 +30,15 @@
 		{
 			this.labelResult = new System.Windows.Forms.Label();
 			this.labelCoinsResult = new System.Windows.Forms.Label();
-			this.labelDifficultTitle = new System.Windows.Forms.Label();
-			this.labelDifficult = new System.Windows.Forms.Label();
+			this.labelDifficultyTitle = new System.Windows.Forms.Label();
+			this.labelDifficulty = new System.Windows.Forms.Label();
 			this.labelCurrentCoinsTitle = new System.Windows.Forms.Label();
 			this.labelTimeToClose = new System.Windows.Forms.Label();
 			this.pictureBoxCoin = new System.Windows.Forms.PictureBox();
 			this.labelCurrentCoins = new System.Windows.Forms.Label();
 			this.buttonBack = new Guna.UI2.WinForms.Guna2GradientButton();
 			this.buttonPlay = new Guna.UI2.WinForms.Guna2GradientButton();
+			this.labelScore = new System.Windows.Forms.Label();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxCoin)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -63,27 +64,29 @@
 			this.labelCoinsResult.TabIndex = 1;
 			this.labelCoinsResult.Text = "+999";
 			// 
-			// labelDifficultTitle
+			// labelDifficultyTitle
 			// 
-			this.labelDifficultTitle.AutoSize = true;
-			this.labelDifficultTitle.Font = new System.Drawing.Font("Trebuchet MS", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.labelDifficultTitle.ForeColor = System.Drawing.Color.White;
-			this.labelDifficultTitle.Location = new System.Drawing.Point(138, 125);
-			this.labelDifficultTitle.Name = "labelDifficultTitle";
-			this.labelDifficultTitle.Size = new System.Drawing.Size(138, 35);
-			this.labelDifficultTitle.TabIndex = 2;
-			this.labelDifficultTitle.Text = "Difficulty:";
+			this.labelDifficultyTitle.AutoSize = true;
+			this.labelDifficultyTitle.Font = new System.Drawing.Font("Trebuchet MS", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.labelDifficultyTitle.ForeColor = System.Drawing.Color.White;
+			this.labelDifficultyTitle.Location = new System.Drawing.Point(138, 125);
+			this.labelDifficultyTitle.Name = "labelDifficultyTitle";
+			this.labelDifficultyTitle.Size = new System.Drawing.Size(138, 35);
+			this.labelDifficultyTitle.TabIndex = 2;
+			this.labelDifficultyTitle.Text = "Difficulty:";
+			this.labelDifficultyTitle.Visible = false;
 			// 
-			// labelDifficult
+			// labelDifficulty
 			// 
-			this.labelDifficult.Font = new System.Drawing.Font("Trebuchet MS", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.labelDifficult.ForeColor = System.Drawing.Color.White;
-			this.labelDifficult.Location = new System.Drawing.Point(276, 125);
-			this.labelDifficult.Name = "labelDifficult";
-			this.labelDifficult.Size = new System.Drawing.Size(198, 35);
-			this.labelDifficult.TabIndex = 3;
-			this.labelDifficult.Text = "Impossible";
-			this.labelDifficult.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			this.labelDifficulty.Font = new System.Drawing.Font("Trebuchet MS", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.labelDifficulty.ForeColor = System.Drawing.Color.White;
+			this.labelDifficulty.Location = new System.Drawing.Point(276, 125);
+			this.labelDifficulty.Name = "labelDifficulty";
+			this.labelDifficulty.Size = new System.Drawing.Size(198, 35);
+			this.labelDifficulty.TabIndex = 3;
+			this.labelDifficulty.Text = "Impossible";
+			this.labelDifficulty.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			this.labelDifficulty.Visible = false;
 			// 
 			// labelCurrentCoinsTitle
 			// 
@@ -185,25 +188,38 @@
 			this.buttonPlay.Text = "Play";
 			this.buttonPlay.Click += new System.EventHandler(this.ButtonPlay_Click);
 			// 
-			// ResultForm
+			// labelScore
+			// 
+			this.labelScore.Font = new System.Drawing.Font("Lucida Console", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.labelScore.ForeColor = System.Drawing.Color.Yellow;
+			this.labelScore.Location = new System.Drawing.Point(12, 9);
+			this.labelScore.Name = "labelScore";
+			this.labelScore.Size = new System.Drawing.Size(107, 50);
+			this.labelScore.TabIndex = 10;
+			this.labelScore.Text = "Score:\r\n999:999";
+			this.labelScore.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			this.labelScore.Visible = false;
+			// 
+			// GameResultForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
 			this.ClientSize = new System.Drawing.Size(500, 420);
+			this.Controls.Add(this.labelScore);
 			this.Controls.Add(this.buttonPlay);
 			this.Controls.Add(this.buttonBack);
 			this.Controls.Add(this.pictureBoxCoin);
 			this.Controls.Add(this.labelCurrentCoins);
 			this.Controls.Add(this.labelTimeToClose);
 			this.Controls.Add(this.labelCurrentCoinsTitle);
-			this.Controls.Add(this.labelDifficult);
-			this.Controls.Add(this.labelDifficultTitle);
+			this.Controls.Add(this.labelDifficulty);
+			this.Controls.Add(this.labelDifficultyTitle);
 			this.Controls.Add(this.labelCoinsResult);
 			this.Controls.Add(this.labelResult);
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
-			this.Name = "ResultForm";
+			this.Name = "GameResultForm";
 			this.ShowInTaskbar = false;
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.TopMost = true;
@@ -219,13 +235,14 @@
 
 		private System.Windows.Forms.Label labelResult;
 		private System.Windows.Forms.Label labelCoinsResult;
-		private System.Windows.Forms.Label labelDifficultTitle;
-		private System.Windows.Forms.Label labelDifficult;
+		private System.Windows.Forms.Label labelDifficultyTitle;
+		private System.Windows.Forms.Label labelDifficulty;
 		private System.Windows.Forms.Label labelCurrentCoinsTitle;
 		private System.Windows.Forms.Label labelTimeToClose;
 		private System.Windows.Forms.PictureBox pictureBoxCoin;
 		private System.Windows.Forms.Label labelCurrentCoins;
 		private Guna.UI2.WinForms.Guna2GradientButton buttonBack;
 		private Guna.UI2.WinForms.Guna2GradientButton buttonPlay;
+		private System.Windows.Forms.Label labelScore;
 	}
 }

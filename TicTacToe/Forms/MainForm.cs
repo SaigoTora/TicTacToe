@@ -8,8 +8,6 @@ using System.Windows.Forms;
 using TicTacToe.Forms.ItemManagement.Profile;
 using TicTacToe.Forms.ItemManagement.Shop;
 using TicTacToe.Forms.Game.Games3on3;
-using TicTacToe.Forms.Game.Games5on5;
-using TicTacToe.Forms.Game.Games7on7;
 using TicTacToe.Models.GameInfo;
 using TicTacToe.Models.PlayerInfo;
 using TicTacToe.Models.Utilities;
@@ -55,7 +53,7 @@ namespace TicTacToe.Forms
 			DisplayPlayerData();
 
 			_pictureBoxEventHandlers.SubscribeToHover(pictureBoxAvatar);
-			_buttonEventHandlers.SubscribeToHover(buttonPlay, buttonProfile,
+			_buttonEventHandlers.SubscribeToHover(buttonPlay, buttonTwoPlayers, buttonProfile,
 				buttonShop, buttonExit);
 			_labelEventHandlers.SubscribeToHoverUnderline(labelAuthor);
 		}
@@ -170,6 +168,19 @@ namespace TicTacToe.Forms
 				gameForm.Show();
 			}
 		}
+		private void ButtonTwoPlayers_Click(object sender, EventArgs e)
+		{
+			RoundManager roundManager = new RoundManager((int)numericUpDownNumberOfRounds.Value);
+
+			Game3on3TwoPlayersForm gameForm = new Game3on3TwoPlayersForm(this, _player, roundManager, CellType.Cross,
+				true, Resources.mysteryAvatar, "Second Player");
+			if (!gameForm.IsDisposed)// If a player have enough coints to play
+			{
+				Hide();
+				gameForm.Show();
+			}
+		}
+
 		private void ButtonProfile_Click(object sender, EventArgs e)
 		{
 			ProfileForm profileForm = new ProfileForm(_player);

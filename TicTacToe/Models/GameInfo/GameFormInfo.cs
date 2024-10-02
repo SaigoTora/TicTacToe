@@ -2,13 +2,14 @@
 using Guna.UI2.WinForms;
 using System;
 using System.Windows.Forms;
+
 using TicTacToe.Forms.Game;
 
 namespace TicTacToe.Models.GameInfo
 {
 	internal class GameFormInfo
 	{
-		internal PlayerInfo PlayerInfo { get; }
+		internal PlayersInfo PlayersInfo { get; }
 		internal Label Score { get; }
 		internal PictureBox[,] PictureCells { get; }
 		internal EventHandler CellClick { get; }
@@ -16,12 +17,12 @@ namespace TicTacToe.Models.GameInfo
 		internal GameAssistsInfo GameAssistsInfo { get; }
 		internal BaseGameForm NextGameForm;
 
-		internal GameFormInfo(PlayerInfo playerInfo, Label score,
+		internal GameFormInfo(PlayersInfo playersInfo, Label score,
 			PictureBox[,] pictureCells, EventHandler cellClick,
 			TimerInfo timerInfo, GameAssistsInfo gameAssistsInfo,
 			BaseGameForm nextGameForm)
 		{
-			PlayerInfo = playerInfo;
+			PlayersInfo = playersInfo;
 			Score = score;
 			PictureCells = pictureCells;
 			CellClick = cellClick;
@@ -31,15 +32,17 @@ namespace TicTacToe.Models.GameInfo
 		}
 	}
 
-	internal class PlayerInfo
+	internal class PlayersInfo
 	{
-		internal PictureBox Avatar { get; }
-		internal Label Name { get; }
+		internal PictureBox PlayerAvatar { get; }
+		internal Label PlayerName { get; }
+		internal Label OpponentName { get; }
 
-		internal PlayerInfo(PictureBox avatar, Label name)
+		internal PlayersInfo(PictureBox playerAvatar, Label playerName, Label opponentName)
 		{
-			Avatar = avatar;
-			Name = name;
+			PlayerAvatar = playerAvatar;
+			PlayerName = playerName;
+			OpponentName = opponentName;
 		}
 	}
 	internal class TimerInfo

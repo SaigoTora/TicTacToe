@@ -21,13 +21,13 @@ namespace TicTacToe.Forms
 		private readonly EventHandler _backToMainForm;
 		private readonly CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
 
-		internal GameResultForm(Player player, GameResult result, bool isLastRound, EventHandler backToMainForm)
+		internal GameResultForm(Player player, RoundManager roundManager, GameResult result, bool isLastRound, EventHandler backToMainForm)
 		{
 			InitializeComponent();
 
 			customTitleBar = new CustomTitleBar(this, "Results", Properties.Resources.info, false, false, false);
-			base.guna2BorderlessForm.SetDrag(new Control[] { this, labelResult, labelCoinsResult,
-				labelDifficultTitle, labelDifficult, labelCurrentCoinsTitle, pictureBoxCoin,
+			base.guna2BorderlessForm.SetDrag(new Control[] { this, labelScore, labelResult, labelCoinsResult,
+				labelDifficultyTitle, labelDifficulty, labelCurrentCoinsTitle, pictureBoxCoin,
 				labelCurrentCoins, labelTimeToClose });
 			base.guna2BorderlessForm.TransparentWhileDrag = false;
 			_player = player;
@@ -39,6 +39,8 @@ namespace TicTacToe.Forms
 				buttonBack.Location = new Point(100, buttonBack.Location.Y);
 				buttonBack.Size = new Size(300, buttonBack.Height);
 				buttonPlay.Visible = false;
+
+				DisplayScore(roundManager);
 			}
 			_backToMainForm = backToMainForm;
 			buttonBack.Click += _backToMainForm;
@@ -48,8 +50,9 @@ namespace TicTacToe.Forms
 				ActiveControl = buttonBack;
 			_buttonEventHandlers.SubscribeToHover(buttonBack, buttonPlay);
 		}
-		internal GameResultForm(Player player, GameResult result, Difficulty difficulty, bool isLastRound, EventHandler backToMainForm)
-			: this(player, result, isLastRound, backToMainForm)
+		internal GameResultForm(Player player, RoundManager roundManager, GameResult result,
+			Difficulty difficulty, bool isLastRound, EventHandler backToMainForm)
+			: this(player, roundManager, result, isLastRound, backToMainForm)
 		{ _difficulty = difficulty; }
 
 		private void ResultForm_Load(object sender, EventArgs e)
@@ -113,18 +116,24 @@ namespace TicTacToe.Forms
 
 			(Color colorEasy, Color colorMedium, Color colorHard, Color colorImpossible) =
 				(Color.FromArgb(30, 129, 69), Color.FromArgb(236, 124, 38), Color.FromArgb(155, 17, 30), Color.FromArgb(83, 55, 122));
-			labelDifficult.Text = _difficulty.ToString();
+			labelDifficulty.Text = _difficulty.ToString();
 
+			labelDifficultyTitle.Visible = true;
+			labelDifficulty.Visible = true;
 			if (_difficulty == Difficulty.Easy)
-				labelDifficult.BackColor = colorEasy;
+				labelDifficulty.BackColor = colorEasy;
 			else if (_difficulty == Difficulty.Medium)
-				labelDifficult.BackColor = colorMedium;
+				labelDifficulty.BackColor = colorMedium;
 			else if (_difficulty == Difficulty.Hard)
-				labelDifficult.BackColor = colorHard;
+				labelDifficulty.BackColor = colorHard;
 			else if (_difficulty == Difficulty.Impossible)
-				labelDifficult.BackColor = colorImpossible;
+				labelDifficulty.BackColor = colorImpossible;
 		}
-
+		private void DisplayScore(RoundManager roundManager)
+		{
+			labelScore.Visible = true;
+			labelScore.Text = $"Score:\n{roundManager.NumberOfWinsFirstPlayer}:{roundManager.NumberOfWinsSecondPlayer}";
+		}
 
 		private void ButtonPlay_Click(object sender, EventArgs e)
 			=> Close();

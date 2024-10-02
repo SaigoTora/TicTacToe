@@ -41,12 +41,12 @@ namespace TicTacToe.Forms.Game.Games5on5
 				{ pictureBoxCell21, pictureBoxCell22, pictureBoxCell23, pictureBoxCell24, pictureBoxCell25 }
 			};
 
-			PlayerInfo playerInfo = new PlayerInfo(pictureBoxPlayerAvatar, labelPlayerName);
+			PlayersInfo playersInfo = new PlayersInfo(pictureBoxPlayerAvatar, labelPlayerName, labelOpponentName);
 			TimerInfo timerInfo = new TimerInfo(progressBarTimer, progressBarCircleTimer, TIMER_MOVE_DELAY);
 			GameAssistsInfo gameAssistsInfo = new GameAssistsInfo(pictureBoxUndoMove, pictureBoxHint,
 				pictureBoxSurrender, buttonChangeView, flpGameAssistants);
 
-			GameFormInfo gameFormInfo = new GameFormInfo(playerInfo, labelScore, pictureCells,
+			GameFormInfo gameFormInfo = new GameFormInfo(playersInfo, labelScore, pictureCells,
 				cellClick, timerInfo, gameAssistsInfo, nextGameForm);
 			InitializeGame(gameFormInfo);
 
@@ -54,21 +54,6 @@ namespace TicTacToe.Forms.Game.Games5on5
 				new Control[]{ pictureBoxLine1, pictureBoxLine2, pictureBoxLine3, pictureBoxLine4,
 				pictureBoxLine5, pictureBoxLine6, pictureBoxLine7, pictureBoxLine8, buttonChangeView });
 			ManagePictureCellsEventClick(true);
-		}
-
-		private void PictureBoxCell_MouseEnter(object sender, EventArgs e)
-		{
-			if (!(sender is PictureBox pictureBox))
-				return;
-
-			PictureBoxCell_DefaultMouseEnter(pictureBox);
-		}
-		private void PictureBoxCell_MouseLeave(object sender, EventArgs e)
-		{
-			if (!(sender is PictureBox pictureBox))
-				return;
-
-			PictureBoxCell_DefaultMouseLeave(pictureBox);
 		}
 	}
 }

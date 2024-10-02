@@ -1,4 +1,5 @@
 ﻿using FontAwesome.Sharp;
+using Guna.UI2.WinForms;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -69,6 +70,21 @@ namespace TicTacToe.Forms.Game
 		}
 
 		#region Initialization
+		protected void DisplayPlayerRoles(Guna2PictureBox playerPictureBox, Guna2PictureBox opponentPictureBox)
+		{
+			(Color markerColorZero, Color markerColorCross) = (Color.FromArgb(82, 217, 255), Color.FromArgb(255, 97, 95));
+
+			if (playerCellType == CellType.Cross)
+			{
+				playerPictureBox.FillColor = markerColorCross;
+				opponentPictureBox.FillColor = markerColorZero;
+			}
+			else
+			{
+				playerPictureBox.FillColor = markerColorZero;
+				opponentPictureBox.FillColor = markerColorCross;
+			}
+		}
 		protected void InitializeGame(GameFormInfo gameFormInfo)
 		{
 			_gameInfo = gameFormInfo;
@@ -76,17 +92,17 @@ namespace TicTacToe.Forms.Game
 			_gameInfo.Score.Text = $"{roundManager.NumberOfWinsFirstPlayer} : {roundManager.NumberOfWinsSecondPlayer}";
 			_sequenceSelectedCells = new List<PictureBox>(_gameInfo.PictureCells.Length);
 			BackColor = player.Preferences.BackgroundGame.Color;
-			InitializePlayerInfo(_gameInfo.PlayerInfo);
+			InitializePlayersInfo(_gameInfo.PlayersInfo);
 			InitializeGameAssists(_gameInfo.GameAssistsInfo);
 		}
-		private void InitializePlayerInfo(PlayerInfo playerInfo)
+		private void InitializePlayersInfo(PlayersInfo playersInfo)
 		{
-			playerInfo.Avatar.Image = player.Preferences.Avatar.Image;
-			playerInfo.Name.Text = player.Name;
+			playersInfo.PlayerAvatar.Image = player.Preferences.Avatar.Image;
+			playersInfo.PlayerName.Text = player.Name;
 		}
 		private void InitializeGameAssists(GameAssistsInfo gameAssistsInfo)
 		{
-			Color gameAssistHoverColor = Color.FromArgb(150, 229, 158, 31);
+			Color gameAssistHoverColor = Color.FromArgb(200, 240, 230, 140);
 
 			ManageGameAssistsEvents(true);
 			_pictureBoxEventHandlers.SubscribeToHover(gameAssistHoverColor,
@@ -102,6 +118,23 @@ namespace TicTacToe.Forms.Game
 						_gameInfo.PictureCells[i, j].Click += _gameInfo.CellClick;
 					else
 						_gameInfo.PictureCells[i, j].Click -= _gameInfo.CellClick;
+				}
+		}
+		protected void ManagePictureCellsEventHover(EventHandler mouseEnter, EventHandler mouseLeave, bool subscribe)
+		{
+			for (int i = 0; i < _gameInfo.PictureCells.GetLength(0); i++)
+				for (int j = 0; j < _gameInfo.PictureCells.GetLength(1); j++)
+				{
+					if (subscribe)
+					{
+						_gameInfo.PictureCells[i, j].MouseEnter += mouseEnter;
+						_gameInfo.PictureCells[i, j].MouseLeave += mouseLeave;
+					}
+					else
+					{
+						_gameInfo.PictureCells[i, j].MouseEnter -= mouseEnter;
+						_gameInfo.PictureCells[i, j].MouseLeave -= mouseLeave;
+					}
 				}
 		}
 		private void ManageGameAssistsEvents(bool subscribe)
@@ -160,20 +193,23 @@ namespace TicTacToe.Forms.Game
 			(Color darkLabels, Color lightLabels) = (Color.White, Color.Black);
 			(Color darkControls, Color lightControls) = (Color.FromArgb(200, 200, 200), Color.FromArgb(20, 20, 20));
 
-			double avgBackColor = BackColor.R * 0.299 + BackColor.G * 0.587 + BackColor.B * 0.114;
-			if (avgBackColor < byte.MaxValue / 2)
-			{// If the background color of the form is dark enough.
-				SetLabelsForeColor(labels, darkLabels);
-				SetControlsBackColor(otherControls, darkControls);
-				_gameInfo.TimerInfo.CircleTimer.Image = Resources.clockWhite;
-			}
-			else
+			if (IsGameBackLight())
 			{
 				SetLabelsForeColor(labels, lightLabels);
 				SetControlsBackColor(otherControls, lightControls);
 				_gameInfo.TimerInfo.CircleTimer.Image = Resources.clockBlack;
 			}
-
+			else
+			{
+				SetLabelsForeColor(labels, darkLabels);
+				SetControlsBackColor(otherControls, darkControls);
+				_gameInfo.TimerInfo.CircleTimer.Image = Resources.clockWhite;
+			}
+		}
+		private bool IsGameBackLight()
+		{// Checks if the game background color is light
+			double avgBackColor = BackColor.R * 0.299 + BackColor.G * 0.587 + BackColor.B * 0.114;
+			return avgBackColor >= byte.MaxValue / 2;
 		}
 		private void SetLabelsForeColor(Label[] labels, Color labelColor)
 		{
@@ -193,7 +229,8 @@ namespace TicTacToe.Forms.Game
 		#endregion
 
 		#region Actions of the game
-		protected async Task PictureBoxCell_DefaultClick(PictureBox pictureBox, bool wasClicked)
+		protected async Task PictureBoxCell_DefaultClick(PictureBox pictureBox, CellType cellType, bool wasClicked,
+			bool disablePictureCells = true)
 		{
 			_wasAssistUsed = false;
 			_isCellHintHovered = false;
@@ -202,11 +239,12 @@ namespace TicTacToe.Forms.Game
 			StopGivingHint();
 			await Task.Delay(10);// Add a delay to complete the current execution of the timer
 
-			SetPictureBoxesEnabled(false);
+			if (disablePictureCells)
+				SetPictureBoxesEnabled(false);
 			Cell cell = FindIndexPictureBoxCell(pictureBox);
-			field.FillCell(cell, playerCellType);
+			field.FillCell(cell, cellType);
 
-			FillCellWithImage(cell, playerCellType, wasClicked);
+			FillCellWithImage(cell, cellType, wasClicked);
 
 			if (field.IsGameEnd())
 				await FinishGameAsync();
@@ -217,6 +255,7 @@ namespace TicTacToe.Forms.Game
 		{
 			const int BOT_MOVE_DELAY = 600;
 
+			IndicateWhoseMove(opponentCellType);
 			SetPictureBoxesEnabled(false);
 
 			Cell botMove = bot.Move(field, opponentCellType);
@@ -231,6 +270,7 @@ namespace TicTacToe.Forms.Game
 			SetPictureBoxesEnabled(true);
 			ChangeGameViewVisibility(true);
 			StartTimerToMove();
+			IndicateWhoseMove(playerCellType);
 		}
 		private void FillCellWithImage(Cell cell, CellType cellType, bool wasClicked)
 		{
@@ -275,7 +315,34 @@ namespace TicTacToe.Forms.Game
 					_gameInfo.PictureCells[i, j].Enabled = enabled;
 		}
 
-		protected void PictureBoxCell_DefaultMouseEnter(PictureBox pictureBox)
+		protected void IndicateWhoseMove(CellType currentCellType)
+		{
+			Label playerName = _gameInfo.PlayersInfo.PlayerName;
+			Label opponentName = _gameInfo.PlayersInfo.OpponentName;
+
+			(Color moveColorLight, Color moveColorDark) =
+				(Color.Goldenrod, Color.FromArgb(255, 223, 0));
+			Color defaultColor = currentCellType == playerCellType ? playerName.ForeColor : opponentName.ForeColor;
+
+			Label activeName, inactiveName;
+			if (currentCellType == playerCellType)
+			{
+				activeName = playerName;
+				inactiveName = opponentName;
+			}
+			else
+			{
+				activeName = opponentName;
+				inactiveName = playerName;
+			}
+
+			if (IsGameBackLight())
+				activeName.ForeColor = moveColorLight;
+			else
+				activeName.ForeColor = moveColorDark;
+			inactiveName.ForeColor = defaultColor;
+		}
+		protected void PictureBoxCell_DefaultMouseEnter(PictureBox pictureBox, CellType cellType)
 		{
 			if (pictureBox == _pictureBoxCellHint)
 				_isCellHintHovered = true;
@@ -283,7 +350,7 @@ namespace TicTacToe.Forms.Game
 			if (pictureBox.Image != null)
 				return;
 
-			switch (playerCellType)
+			switch (cellType)
 			{
 				case CellType.Cross:
 					pictureBox.Image = _bitmapPreviewCell.Cross;
@@ -294,7 +361,7 @@ namespace TicTacToe.Forms.Game
 					pictureBox.Tag = _tagPreviewCell.Zero;
 					break;
 				default:
-					throw new InvalidOperationException($"Unknown cell type: {playerCellType}");
+					throw new InvalidOperationException($"Unknown cell type: {cellType}");
 			}
 		}
 		protected void PictureBoxCell_DefaultMouseLeave(PictureBox pictureBox)
@@ -366,9 +433,9 @@ namespace TicTacToe.Forms.Game
 
 			GameResultForm resultForm;
 			if (bot == null)
-				resultForm = new GameResultForm(player, gameResult, roundManager.IsLastRound(), backToMainForm);
+				resultForm = new GameResultForm(player, roundManager, gameResult, roundManager.IsLastRound(), backToMainForm);
 			else
-				resultForm = new GameResultForm(player, gameResult, bot.Difficulty, roundManager.IsLastRound(), backToMainForm);
+				resultForm = new GameResultForm(player, roundManager, gameResult, bot.Difficulty, roundManager.IsLastRound(), backToMainForm);
 			resultForm.ShowDialog();
 		}
 

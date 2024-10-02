@@ -40,15 +40,16 @@ namespace TicTacToe.Forms.Game.Games3on3
 				{ pictureBoxCell7, pictureBoxCell8, pictureBoxCell9 }
 			};
 
-			PlayerInfo playerInfo = new PlayerInfo(pictureBoxPlayerAvatar, labelPlayerName);
+			PlayersInfo playersInfo = new PlayersInfo(pictureBoxPlayerAvatar, labelPlayerName, labelOpponentName);
 			TimerInfo timerInfo = new TimerInfo(progressBarTimer, progressBarCircleTimer, TIMER_MOVE_DELAY);
 			GameAssistsInfo gameAssistsInfo = new GameAssistsInfo(pictureBoxUndoMove, pictureBoxHint,
 				pictureBoxSurrender, buttonChangeView, flpGameAssistants);
 
-			GameFormInfo gameFormInfo = new GameFormInfo(playerInfo, labelScore, pictureCells,
+			GameFormInfo gameFormInfo = new GameFormInfo(playersInfo, labelScore, pictureCells,
 				cellClick, timerInfo, gameAssistsInfo, nextGameForm);
 			InitializeGame(gameFormInfo);
 
+			DisplayPlayerRoles(pictureBoxPlayerCellTypeIndicator, pictureBoxOpponentCellTypeIndicator);
 			SetColorForControls(new[] { labelPlayerName, labelScore, labelOpponentName },
 				new Control[]{ pictureBoxLine1, pictureBoxLine2, pictureBoxLine3, pictureBoxLine4,
 				buttonChangeView });
@@ -59,21 +60,6 @@ namespace TicTacToe.Forms.Game.Games3on3
 			foreach (var name in names)
 				if (name.Text.Length > 15)
 					name.Font = new Font(name.Font.FontFamily, 12);
-		}
-
-		private void PictureBoxCell_MouseEnter(object sender, EventArgs e)
-		{
-			if (!(sender is PictureBox pictureBox))
-				return;
-
-			PictureBoxCell_DefaultMouseEnter(pictureBox);
-		}
-		private void PictureBoxCell_MouseLeave(object sender, EventArgs e)
-		{
-			if (!(sender is PictureBox pictureBox))
-				return;
-
-			PictureBoxCell_DefaultMouseLeave(pictureBox);
 		}
 	}
 }

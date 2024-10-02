@@ -34,6 +34,7 @@
 			this.labelCoins = new System.Windows.Forms.Label();
 			this.panelLeft = new Guna.UI2.WinForms.Guna2Panel();
 			this.panelMenu = new Guna.UI2.WinForms.Guna2Panel();
+			this.buttonTwoPlayers = new Guna.UI2.WinForms.Guna2GradientButton();
 			this.buttonPlay = new Guna.UI2.WinForms.Guna2GradientButton();
 			this.buttonExit = new Guna.UI2.WinForms.Guna2GradientButton();
 			this.buttonShop = new Guna.UI2.WinForms.Guna2GradientButton();
@@ -128,6 +129,7 @@
 			// 
 			// panelMenu
 			// 
+			this.panelMenu.Controls.Add(this.buttonTwoPlayers);
 			this.panelMenu.Controls.Add(this.buttonPlay);
 			this.panelMenu.Controls.Add(this.buttonExit);
 			this.panelMenu.Controls.Add(this.buttonShop);
@@ -139,6 +141,34 @@
 			this.panelMenu.Name = "panelMenu";
 			this.panelMenu.Size = new System.Drawing.Size(320, 525);
 			this.panelMenu.TabIndex = 1;
+			// 
+			// buttonTwoPlayers
+			// 
+			this.buttonTwoPlayers.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.buttonTwoPlayers.Animated = true;
+			this.buttonTwoPlayers.BackColor = System.Drawing.Color.Transparent;
+			this.buttonTwoPlayers.BorderRadius = 20;
+			this.buttonTwoPlayers.BorderStyle = System.Drawing.Drawing2D.DashStyle.Custom;
+			this.buttonTwoPlayers.BorderThickness = 1;
+			this.buttonTwoPlayers.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.buttonTwoPlayers.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+			this.buttonTwoPlayers.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+			this.buttonTwoPlayers.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+			this.buttonTwoPlayers.DisabledState.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+			this.buttonTwoPlayers.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+			this.buttonTwoPlayers.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(167)))), ((int)(((byte)(106)))));
+			this.buttonTwoPlayers.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(129)))), ((int)(((byte)(69)))));
+			this.buttonTwoPlayers.Font = new System.Drawing.Font("Cooper Black", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.buttonTwoPlayers.ForeColor = System.Drawing.Color.White;
+			this.buttonTwoPlayers.GradientMode = System.Drawing.Drawing2D.LinearGradientMode.BackwardDiagonal;
+			this.buttonTwoPlayers.Location = new System.Drawing.Point(15, 100);
+			this.buttonTwoPlayers.Name = "buttonTwoPlayers";
+			this.buttonTwoPlayers.Size = new System.Drawing.Size(280, 50);
+			this.buttonTwoPlayers.TabIndex = 4;
+			this.buttonTwoPlayers.TabStop = false;
+			this.buttonTwoPlayers.Text = "Two Players";
+			this.buttonTwoPlayers.Click += new System.EventHandler(this.ButtonTwoPlayers_Click);
 			// 
 			// buttonPlay
 			// 
@@ -188,7 +218,7 @@
 			this.buttonExit.Font = new System.Drawing.Font("Cooper Black", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.buttonExit.ForeColor = System.Drawing.Color.White;
 			this.buttonExit.GradientMode = System.Drawing.Drawing2D.LinearGradientMode.BackwardDiagonal;
-			this.buttonExit.Location = new System.Drawing.Point(15, 325);
+			this.buttonExit.Location = new System.Drawing.Point(15, 400);
 			this.buttonExit.Name = "buttonExit";
 			this.buttonExit.Size = new System.Drawing.Size(280, 50);
 			this.buttonExit.TabIndex = 3;
@@ -216,7 +246,7 @@
 			this.buttonShop.Font = new System.Drawing.Font("Cooper Black", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.buttonShop.ForeColor = System.Drawing.Color.White;
 			this.buttonShop.GradientMode = System.Drawing.Drawing2D.LinearGradientMode.BackwardDiagonal;
-			this.buttonShop.Location = new System.Drawing.Point(15, 175);
+			this.buttonShop.Location = new System.Drawing.Point(15, 250);
 			this.buttonShop.Name = "buttonShop";
 			this.buttonShop.Size = new System.Drawing.Size(280, 50);
 			this.buttonShop.TabIndex = 2;
@@ -244,7 +274,7 @@
 			this.buttonProfile.Font = new System.Drawing.Font("Cooper Black", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.buttonProfile.ForeColor = System.Drawing.Color.White;
 			this.buttonProfile.GradientMode = System.Drawing.Drawing2D.LinearGradientMode.BackwardDiagonal;
-			this.buttonProfile.Location = new System.Drawing.Point(15, 100);
+			this.buttonProfile.Location = new System.Drawing.Point(15, 170);
 			this.buttonProfile.Name = "buttonProfile";
 			this.buttonProfile.Size = new System.Drawing.Size(280, 50);
 			this.buttonProfile.TabIndex = 1;
@@ -575,5 +605,6 @@
 		private FontAwesome.Sharp.IconButton buttonHard;
 		private System.Windows.Forms.NumericUpDown numericUpDownNumberOfRounds;
 		private System.Windows.Forms.PictureBox pictureBoxCoin;
+		private Guna.UI2.WinForms.Guna2GradientButton buttonTwoPlayers;
 	}
 }

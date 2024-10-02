@@ -54,6 +54,8 @@
 			this.pictureBoxSurrender = new System.Windows.Forms.PictureBox();
 			this.buttonChangeView = new FontAwesome.Sharp.IconButton();
 			this.progressBarTimer = new Guna.UI2.WinForms.Guna2ProgressBar();
+			this.pictureBoxPlayerCellTypeIndicator = new Guna.UI2.WinForms.Guna2PictureBox();
+			this.pictureBoxOpponentCellTypeIndicator = new Guna.UI2.WinForms.Guna2PictureBox();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxLine3)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxLine4)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxLine2)).BeginInit();
@@ -73,6 +75,8 @@
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxHint)).BeginInit();
 			this.flpGameAssistants.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxSurrender)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.pictureBoxPlayerCellTypeIndicator)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.pictureBoxOpponentCellTypeIndicator)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// pictureBoxLine3
@@ -183,8 +187,6 @@
 			this.pictureBoxCell1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
 			this.pictureBoxCell1.TabIndex = 9;
 			this.pictureBoxCell1.TabStop = false;
-			this.pictureBoxCell1.MouseEnter += new System.EventHandler(this.PictureBoxCell_MouseEnter);
-			this.pictureBoxCell1.MouseLeave += new System.EventHandler(this.PictureBoxCell_MouseLeave);
 			// 
 			// pictureBoxCell2
 			// 
@@ -196,8 +198,6 @@
 			this.pictureBoxCell2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
 			this.pictureBoxCell2.TabIndex = 10;
 			this.pictureBoxCell2.TabStop = false;
-			this.pictureBoxCell2.MouseEnter += new System.EventHandler(this.PictureBoxCell_MouseEnter);
-			this.pictureBoxCell2.MouseLeave += new System.EventHandler(this.PictureBoxCell_MouseLeave);
 			// 
 			// pictureBoxCell3
 			// 
@@ -209,8 +209,6 @@
 			this.pictureBoxCell3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
 			this.pictureBoxCell3.TabIndex = 11;
 			this.pictureBoxCell3.TabStop = false;
-			this.pictureBoxCell3.MouseEnter += new System.EventHandler(this.PictureBoxCell_MouseEnter);
-			this.pictureBoxCell3.MouseLeave += new System.EventHandler(this.PictureBoxCell_MouseLeave);
 			// 
 			// pictureBoxCell4
 			// 
@@ -222,8 +220,6 @@
 			this.pictureBoxCell4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
 			this.pictureBoxCell4.TabIndex = 12;
 			this.pictureBoxCell4.TabStop = false;
-			this.pictureBoxCell4.MouseEnter += new System.EventHandler(this.PictureBoxCell_MouseEnter);
-			this.pictureBoxCell4.MouseLeave += new System.EventHandler(this.PictureBoxCell_MouseLeave);
 			// 
 			// pictureBoxCell5
 			// 
@@ -235,8 +231,6 @@
 			this.pictureBoxCell5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
 			this.pictureBoxCell5.TabIndex = 13;
 			this.pictureBoxCell5.TabStop = false;
-			this.pictureBoxCell5.MouseEnter += new System.EventHandler(this.PictureBoxCell_MouseEnter);
-			this.pictureBoxCell5.MouseLeave += new System.EventHandler(this.PictureBoxCell_MouseLeave);
 			// 
 			// pictureBoxCell6
 			// 
@@ -248,8 +242,6 @@
 			this.pictureBoxCell6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
 			this.pictureBoxCell6.TabIndex = 14;
 			this.pictureBoxCell6.TabStop = false;
-			this.pictureBoxCell6.MouseEnter += new System.EventHandler(this.PictureBoxCell_MouseEnter);
-			this.pictureBoxCell6.MouseLeave += new System.EventHandler(this.PictureBoxCell_MouseLeave);
 			// 
 			// pictureBoxCell7
 			// 
@@ -261,8 +253,6 @@
 			this.pictureBoxCell7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
 			this.pictureBoxCell7.TabIndex = 15;
 			this.pictureBoxCell7.TabStop = false;
-			this.pictureBoxCell7.MouseEnter += new System.EventHandler(this.PictureBoxCell_MouseEnter);
-			this.pictureBoxCell7.MouseLeave += new System.EventHandler(this.PictureBoxCell_MouseLeave);
 			// 
 			// pictureBoxCell8
 			// 
@@ -274,8 +264,6 @@
 			this.pictureBoxCell8.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
 			this.pictureBoxCell8.TabIndex = 16;
 			this.pictureBoxCell8.TabStop = false;
-			this.pictureBoxCell8.MouseEnter += new System.EventHandler(this.PictureBoxCell_MouseEnter);
-			this.pictureBoxCell8.MouseLeave += new System.EventHandler(this.PictureBoxCell_MouseLeave);
 			// 
 			// pictureBoxCell9
 			// 
@@ -287,8 +275,6 @@
 			this.pictureBoxCell9.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
 			this.pictureBoxCell9.TabIndex = 17;
 			this.pictureBoxCell9.TabStop = false;
-			this.pictureBoxCell9.MouseEnter += new System.EventHandler(this.PictureBoxCell_MouseEnter);
-			this.pictureBoxCell9.MouseLeave += new System.EventHandler(this.PictureBoxCell_MouseLeave);
 			// 
 			// progressBarCircleTimer
 			// 
@@ -402,12 +388,46 @@
 			this.progressBarTimer.Value = 100;
 			this.progressBarTimer.Visible = false;
 			// 
+			// pictureBoxPlayerCellTypeIndicator
+			// 
+			this.pictureBoxPlayerCellTypeIndicator.AutoRoundedCorners = true;
+			this.pictureBoxPlayerCellTypeIndicator.BackColor = System.Drawing.Color.Transparent;
+			this.pictureBoxPlayerCellTypeIndicator.BorderRadius = 2;
+			this.pictureBoxPlayerCellTypeIndicator.CustomizableEdges.BottomRight = false;
+			this.pictureBoxPlayerCellTypeIndicator.CustomizableEdges.TopRight = false;
+			this.pictureBoxPlayerCellTypeIndicator.FillColor = System.Drawing.Color.Black;
+			this.pictureBoxPlayerCellTypeIndicator.ImageRotate = 0F;
+			this.pictureBoxPlayerCellTypeIndicator.Location = new System.Drawing.Point(240, 3);
+			this.pictureBoxPlayerCellTypeIndicator.Name = "pictureBoxPlayerCellTypeIndicator";
+			this.pictureBoxPlayerCellTypeIndicator.Size = new System.Drawing.Size(70, 6);
+			this.pictureBoxPlayerCellTypeIndicator.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+			this.pictureBoxPlayerCellTypeIndicator.TabIndex = 24;
+			this.pictureBoxPlayerCellTypeIndicator.TabStop = false;
+			// 
+			// pictureBoxOpponentCellTypeIndicator
+			// 
+			this.pictureBoxOpponentCellTypeIndicator.AutoRoundedCorners = true;
+			this.pictureBoxOpponentCellTypeIndicator.BackColor = System.Drawing.Color.Transparent;
+			this.pictureBoxOpponentCellTypeIndicator.BorderRadius = 2;
+			this.pictureBoxOpponentCellTypeIndicator.CustomizableEdges.BottomLeft = false;
+			this.pictureBoxOpponentCellTypeIndicator.CustomizableEdges.TopLeft = false;
+			this.pictureBoxOpponentCellTypeIndicator.FillColor = System.Drawing.Color.Black;
+			this.pictureBoxOpponentCellTypeIndicator.ImageRotate = 0F;
+			this.pictureBoxOpponentCellTypeIndicator.Location = new System.Drawing.Point(308, 3);
+			this.pictureBoxOpponentCellTypeIndicator.Name = "pictureBoxOpponentCellTypeIndicator";
+			this.pictureBoxOpponentCellTypeIndicator.Size = new System.Drawing.Size(70, 6);
+			this.pictureBoxOpponentCellTypeIndicator.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+			this.pictureBoxOpponentCellTypeIndicator.TabIndex = 25;
+			this.pictureBoxOpponentCellTypeIndicator.TabStop = false;
+			// 
 			// BaseGame3on3Form
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.Color.White;
 			this.ClientSize = new System.Drawing.Size(618, 822);
+			this.Controls.Add(this.pictureBoxOpponentCellTypeIndicator);
+			this.Controls.Add(this.pictureBoxPlayerCellTypeIndicator);
 			this.Controls.Add(this.labelScore);
 			this.Controls.Add(this.buttonChangeView);
 			this.Controls.Add(this.pictureBoxLine3);
@@ -450,12 +470,13 @@
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxHint)).EndInit();
 			this.flpGameAssistants.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxSurrender)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.pictureBoxPlayerCellTypeIndicator)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.pictureBoxOpponentCellTypeIndicator)).EndInit();
 			this.ResumeLayout(false);
 
 		}
 
 		#endregion
-		private System.Windows.Forms.PictureBox pictureBoxPlayerAvatar;
 		private System.Windows.Forms.PictureBox pictureBoxCell1;
 		private System.Windows.Forms.PictureBox pictureBoxCell2;
 		private System.Windows.Forms.PictureBox pictureBoxCell3;
@@ -480,5 +501,8 @@
 		protected System.Windows.Forms.Label labelScore;
 		protected System.Windows.Forms.PictureBox pictureBoxOpponentAvatar;
 		protected FontAwesome.Sharp.IconButton buttonChangeView;
+		private System.Windows.Forms.PictureBox pictureBoxPlayerAvatar;
+		private Guna.UI2.WinForms.Guna2PictureBox pictureBoxPlayerCellTypeIndicator;
+		private Guna.UI2.WinForms.Guna2PictureBox pictureBoxOpponentCellTypeIndicator;
 	}
 }

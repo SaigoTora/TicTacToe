@@ -1,6 +1,6 @@
 ﻿namespace TicTacToe.Forms.Game.Games3on3
 {
-	partial class Game3on3BotForm
+	partial class Game3on3TwoPlayersForm
 	{
 		/// <summary>
 		/// Required designer variable.
@@ -30,15 +30,15 @@
 		{
 			this.SuspendLayout();
 			// 
-			// Game3on3BotForm
+			// Game3on3TwoPlayersForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(618, 822);
-			this.Name = "Game3on3BotForm";
-			this.Text = "Game3on3BotForm";
-			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Game3on3BotForm_FormClosed);
-			this.Load += new System.EventHandler(this.Game3on3BotForm_Load);
+			this.Name = "Game3on3TwoPlayersForm";
+			this.Text = "Game3on3TwoPlayersForm";
+			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Game3on3TwoPlayersForm_FormClosed);
+			this.Load += new System.EventHandler(this.Game3on3TwoPlayersForm_Load);
 			this.ResumeLayout(false);
 
 		}
