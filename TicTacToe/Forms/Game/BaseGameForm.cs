@@ -28,6 +28,7 @@ namespace TicTacToe.Forms.Game
 		protected readonly RoundManager roundManager;
 		protected Field field;
 		protected bool isTimerEnabled, isGameAssistsEnabled;
+		private readonly CoinReward _coinReward;
 		private GameFormInfo _gameInfo;
 
 		private List<PictureBox> _sequenceSelectedCells;
@@ -47,9 +48,10 @@ namespace TicTacToe.Forms.Game
 		{ InitializeComponent(); }
 		internal BaseGameForm(MainForm mainForm, Player player, Bot bot, RoundManager roundManager,
 			CellType playerCellType, bool isTimerEnabled, bool isGameAssistsEnabled)
-			: this(mainForm, player, roundManager, playerCellType, isTimerEnabled, isGameAssistsEnabled)
+			: this(mainForm, player, new CoinReward(bot.Difficulty), roundManager,
+				  playerCellType, isTimerEnabled, isGameAssistsEnabled)
 		{ this.bot = bot; }
-		internal BaseGameForm(MainForm mainForm, Player player, RoundManager roundManager,
+		internal BaseGameForm(MainForm mainForm, Player player, CoinReward coinReward, RoundManager roundManager,
 			CellType playerCellType, bool isTimerEnabled, bool isGameAssistsEnabled)
 		{
 			const float PREVIEW_OPACITY_LEVEL = 0.35f;
@@ -57,6 +59,7 @@ namespace TicTacToe.Forms.Game
 			InitializeComponent();
 
 			this.player = player;
+			_coinReward = coinReward;
 			this.roundManager = roundManager;
 			this.mainForm = mainForm;
 
@@ -393,7 +396,10 @@ namespace TicTacToe.Forms.Game
 
 			await ShowWinningCellsAsync(field.Winner);
 			await Task.Delay(WINNING_CELL_SHOW_DELAY);
-			OpenResultForm();
+
+			GameResult gameResult = EvaluateGameResult();
+			player.UpdateCoins(_coinReward, gameResult);
+			OpenResultForm(gameResult);
 
 			_isFormClosingForNextRound = true;
 			if (roundManager.IsLastRound() || _wasPressedButtonBack)
@@ -410,7 +416,7 @@ namespace TicTacToe.Forms.Game
 			}
 			Close();
 		}
-		private void OpenResultForm()
+		private GameResult EvaluateGameResult()
 		{
 			GameResult gameResult = GameResult.Draw;
 			if (field.Winner == playerCellType)
@@ -424,6 +430,10 @@ namespace TicTacToe.Forms.Game
 				roundManager.AddWinToTheSecondPlayer();
 			}
 
+			return gameResult;
+		}
+		private void OpenResultForm(GameResult gameResult)
+		{
 			void backToMainForm(object s, EventArgs e)
 			{
 				_wasPressedButtonBack = true;
@@ -433,9 +443,9 @@ namespace TicTacToe.Forms.Game
 
 			GameResultForm resultForm;
 			if (bot == null)
-				resultForm = new GameResultForm(player, roundManager, gameResult, roundManager.IsLastRound(), backToMainForm);
+				resultForm = new GameResultForm(player, _coinReward, roundManager, gameResult, backToMainForm);
 			else
-				resultForm = new GameResultForm(player, roundManager, gameResult, bot.Difficulty, roundManager.IsLastRound(), backToMainForm);
+				resultForm = new GameResultForm(player, _coinReward, roundManager, gameResult, bot.Difficulty, backToMainForm);
 			resultForm.ShowDialog();
 		}
 

@@ -165,6 +165,7 @@
       <DependentUpon>PurchaseResultForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\CustomExceptions\NotEnoughCoinsToStartGameException.cs" />
+    <Compile Include="Models\GameInfo\CoinReward.cs" />
     <Compile Include="Models\GameInfo\GameFormInfo.cs" />
     <Compile Include="Models\GameInfo\GameResult.cs" />
     <Compile Include="Models\PlayerInfo\Inventory\CountableItemsInventory.cs" />

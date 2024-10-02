@@ -49,7 +49,7 @@
 			this.labelResult.Location = new System.Drawing.Point(125, 9);
 			this.labelResult.Name = "labelResult";
 			this.labelResult.Size = new System.Drawing.Size(250, 50);
-			this.labelResult.TabIndex = 0;
+			this.labelResult.TabIndex = 1;
 			this.labelResult.Text = "Draw!";
 			this.labelResult.TextAlign = System.Drawing.ContentAlignment.TopCenter;
 			// 
@@ -61,8 +61,9 @@
 			this.labelCoinsResult.Location = new System.Drawing.Point(381, 23);
 			this.labelCoinsResult.Name = "labelCoinsResult";
 			this.labelCoinsResult.Size = new System.Drawing.Size(91, 36);
-			this.labelCoinsResult.TabIndex = 1;
+			this.labelCoinsResult.TabIndex = 2;
 			this.labelCoinsResult.Text = "+999";
+			this.labelCoinsResult.Visible = false;
 			// 
 			// labelDifficultyTitle
 			// 
@@ -72,7 +73,7 @@
 			this.labelDifficultyTitle.Location = new System.Drawing.Point(138, 125);
 			this.labelDifficultyTitle.Name = "labelDifficultyTitle";
 			this.labelDifficultyTitle.Size = new System.Drawing.Size(138, 35);
-			this.labelDifficultyTitle.TabIndex = 2;
+			this.labelDifficultyTitle.TabIndex = 3;
 			this.labelDifficultyTitle.Text = "Difficulty:";
 			this.labelDifficultyTitle.Visible = false;
 			// 
@@ -83,7 +84,7 @@
 			this.labelDifficulty.Location = new System.Drawing.Point(276, 125);
 			this.labelDifficulty.Name = "labelDifficulty";
 			this.labelDifficulty.Size = new System.Drawing.Size(198, 35);
-			this.labelDifficulty.TabIndex = 3;
+			this.labelDifficulty.TabIndex = 4;
 			this.labelDifficulty.Text = "Impossible";
 			this.labelDifficulty.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			this.labelDifficulty.Visible = false;
@@ -96,7 +97,7 @@
 			this.labelCurrentCoinsTitle.Location = new System.Drawing.Point(12, 175);
 			this.labelCurrentCoinsTitle.Name = "labelCurrentCoinsTitle";
 			this.labelCurrentCoinsTitle.Size = new System.Drawing.Size(264, 35);
-			this.labelCurrentCoinsTitle.TabIndex = 4;
+			this.labelCurrentCoinsTitle.TabIndex = 5;
 			this.labelCurrentCoinsTitle.Text = "Current coins count:";
 			// 
 			// labelTimeToClose
@@ -107,7 +108,7 @@
 			this.labelTimeToClose.Location = new System.Drawing.Point(0, 380);
 			this.labelTimeToClose.Name = "labelTimeToClose";
 			this.labelTimeToClose.Size = new System.Drawing.Size(500, 40);
-			this.labelTimeToClose.TabIndex = 9;
+			this.labelTimeToClose.TabIndex = 10;
 			this.labelTimeToClose.Text = "This window will close in: 60 sec.";
 			this.labelTimeToClose.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			// 
@@ -118,7 +119,7 @@
 			this.pictureBoxCoin.Name = "pictureBoxCoin";
 			this.pictureBoxCoin.Size = new System.Drawing.Size(37, 37);
 			this.pictureBoxCoin.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-			this.pictureBoxCoin.TabIndex = 5;
+			this.pictureBoxCoin.TabIndex = 6;
 			this.pictureBoxCoin.TabStop = false;
 			// 
 			// labelCurrentCoins
@@ -129,7 +130,7 @@
 			this.labelCurrentCoins.Location = new System.Drawing.Point(325, 177);
 			this.labelCurrentCoins.Name = "labelCurrentCoins";
 			this.labelCurrentCoins.Size = new System.Drawing.Size(149, 27);
-			this.labelCurrentCoins.TabIndex = 6;
+			this.labelCurrentCoins.TabIndex = 7;
 			this.labelCurrentCoins.Text = "999 999";
 			this.labelCurrentCoins.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
@@ -156,7 +157,7 @@
 			this.buttonBack.Location = new System.Drawing.Point(22, 300);
 			this.buttonBack.Name = "buttonBack";
 			this.buttonBack.Size = new System.Drawing.Size(200, 50);
-			this.buttonBack.TabIndex = 7;
+			this.buttonBack.TabIndex = 8;
 			this.buttonBack.TabStop = false;
 			this.buttonBack.Text = "Back";
 			// 
@@ -183,7 +184,7 @@
 			this.buttonPlay.Location = new System.Drawing.Point(278, 300);
 			this.buttonPlay.Name = "buttonPlay";
 			this.buttonPlay.Size = new System.Drawing.Size(200, 50);
-			this.buttonPlay.TabIndex = 8;
+			this.buttonPlay.TabIndex = 9;
 			this.buttonPlay.TabStop = false;
 			this.buttonPlay.Text = "Play";
 			this.buttonPlay.Click += new System.EventHandler(this.ButtonPlay_Click);
@@ -195,7 +196,7 @@
 			this.labelScore.Location = new System.Drawing.Point(12, 9);
 			this.labelScore.Name = "labelScore";
 			this.labelScore.Size = new System.Drawing.Size(107, 50);
-			this.labelScore.TabIndex = 10;
+			this.labelScore.TabIndex = 0;
 			this.labelScore.Text = "Score:\r\n999:999";
 			this.labelScore.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			this.labelScore.Visible = false;

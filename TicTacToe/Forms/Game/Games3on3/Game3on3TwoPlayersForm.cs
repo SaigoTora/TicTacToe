@@ -14,7 +14,7 @@ namespace TicTacToe.Forms.Game.Games3on3
 		private CellType _currentCellType;
 		internal Game3on3TwoPlayersForm(MainForm mainForm, Player player, RoundManager roundManager,
 					CellType playerCellType, bool isTimerEnabled, Image opponentAvatar, string opponentName)
-					: base(mainForm, player, roundManager, playerCellType, isTimerEnabled, false)
+					: base(mainForm, player, new CoinReward(), roundManager, playerCellType, isTimerEnabled, false)
 		{
 			InitializeComponent();
 

@@ -14,6 +14,8 @@ namespace TicTacToe.Forms
 	internal partial class GameResultForm : BaseForm
 	{
 		private readonly Player _player;
+		private readonly CoinReward _coinReward;
+		private readonly RoundManager _roundManager;
 		private readonly GameResult _result;
 		private readonly Difficulty? _difficulty = null;
 		private readonly ButtonEventHandlers _buttonEventHandlers = new ButtonEventHandlers();
@@ -21,7 +23,7 @@ namespace TicTacToe.Forms
 		private readonly EventHandler _backToMainForm;
 		private readonly CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
 
-		internal GameResultForm(Player player, RoundManager roundManager, GameResult result, bool isLastRound, EventHandler backToMainForm)
+		internal GameResultForm(Player player, CoinReward coinReward, RoundManager roundManager, GameResult result, EventHandler backToMainForm)
 		{
 			InitializeComponent();
 
@@ -31,16 +33,16 @@ namespace TicTacToe.Forms
 				labelCurrentCoins, labelTimeToClose });
 			base.guna2BorderlessForm.TransparentWhileDrag = false;
 			_player = player;
+			_coinReward = coinReward;
+			_roundManager = roundManager;
 			_result = result;
 
-			if (isLastRound)
+			if (_roundManager.IsLastRound())
 			{
 				buttonBack.Text = "Back to menu";
 				buttonBack.Location = new Point(100, buttonBack.Location.Y);
 				buttonBack.Size = new Size(300, buttonBack.Height);
 				buttonPlay.Visible = false;
-
-				DisplayScore(roundManager);
 			}
 			_backToMainForm = backToMainForm;
 			buttonBack.Click += _backToMainForm;
@@ -50,21 +52,35 @@ namespace TicTacToe.Forms
 				ActiveControl = buttonBack;
 			_buttonEventHandlers.SubscribeToHover(buttonBack, buttonPlay);
 		}
-		internal GameResultForm(Player player, RoundManager roundManager, GameResult result,
-			Difficulty difficulty, bool isLastRound, EventHandler backToMainForm)
-			: this(player, roundManager, result, isLastRound, backToMainForm)
+		internal GameResultForm(Player player, CoinReward coinReward, RoundManager roundManager, GameResult result,
+			Difficulty difficulty, EventHandler backToMainForm)
+			: this(player, coinReward, roundManager, result, backToMainForm)
 		{ _difficulty = difficulty; }
 
 		private void ResultForm_Load(object sender, EventArgs e)
 		{
-			DisplayGameResult();
-			DisplayCoinsResult();
-			DisplayDifficultyLabel();
-			labelCurrentCoins.Text = _player.Coins.ToString();
+			if (_roundManager.IsLastRound())
+				DisplayScore();
 
+			DisplayGameResult();
+			DisplayCoinsChange();
+			if (_difficulty.HasValue)
+				DisplayDifficultyLabel();
+			else
+			{
+				const int VERTICAL_OFFSET = -50;
+				AdjustUIForNoDifficulty(VERTICAL_OFFSET);
+			}
+
+			labelCurrentCoins.Text = $"{_player.Coins:N0}".Replace(',', ' '); ;
 			_ = DelayToCloseAsync();
 		}
 
+		private void DisplayScore()
+		{
+			labelScore.Visible = true;
+			labelScore.Text = $"Score:\n{_roundManager.NumberOfWinsFirstPlayer}:{_roundManager.NumberOfWinsSecondPlayer}";
+		}
 		private void DisplayGameResult()
 		{
 			(string textWin, string textDraw, string textLoss) = ("Win!", "Draw!", "Loss!");
@@ -89,31 +105,35 @@ namespace TicTacToe.Forms
 					throw new InvalidOperationException($"Unknown game result: {_result}");
 			}
 		}
-		private void DisplayCoinsResult()
+		private void DisplayCoinsChange()
 		{
 			(Color colorWin, Color colorLoss) = (Color.Lime, Color.Red);
-			int prevCoins = _player.Coins;
-			if (_difficulty.HasValue)
-				_player.UpdateCoins(_difficulty.Value, _result);
+			int coinUpdate = _coinReward.GetCoins(_result);
 
-			if (_player.Coins > prevCoins)
+			if (coinUpdate != 0)
 			{
-				labelCoinsResult.Text = '+' + (_player.Coins - prevCoins).ToString();
-				labelCoinsResult.ForeColor = colorWin;
-			}
-			else if (_player.Coins == prevCoins)
-				labelCoinsResult.Text = string.Empty;
-			else
-			{
-				labelCoinsResult.Text = '-' + (prevCoins - _player.Coins).ToString();
-				labelCoinsResult.ForeColor = colorLoss;
+				labelCoinsResult.Visible = true;
+				switch (_result)
+				{
+					case GameResult.Loss:
+						labelCoinsResult.Text = $"- {Math.Abs(coinUpdate)}";
+						labelCoinsResult.ForeColor = colorLoss;
+						break;
+					case GameResult.Draw:
+						labelCoinsResult.Text = string.Empty;
+						break;
+					case GameResult.Win:
+						labelCoinsResult.Text = $"+ {coinUpdate}";
+						labelCoinsResult.ForeColor = colorWin;
+						break;
+					default:
+						throw new InvalidOperationException
+							($"Unknown game result: {_result.GetType().Name}");
+				}
 			}
 		}
 		private void DisplayDifficultyLabel()
 		{
-			if (!_difficulty.HasValue)
-				return;
-
 			(Color colorEasy, Color colorMedium, Color colorHard, Color colorImpossible) =
 				(Color.FromArgb(30, 129, 69), Color.FromArgb(236, 124, 38), Color.FromArgb(155, 17, 30), Color.FromArgb(83, 55, 122));
 			labelDifficulty.Text = _difficulty.ToString();
@@ -129,11 +149,15 @@ namespace TicTacToe.Forms
 			else if (_difficulty == Difficulty.Impossible)
 				labelDifficulty.BackColor = colorImpossible;
 		}
-		private void DisplayScore(RoundManager roundManager)
+		private void AdjustUIForNoDifficulty(int verticalOffset)
 		{
-			labelScore.Visible = true;
-			labelScore.Text = $"Score:\n{roundManager.NumberOfWinsFirstPlayer}:{roundManager.NumberOfWinsSecondPlayer}";
+			MoveControlVertically(labelCurrentCoinsTitle, verticalOffset);
+			MoveControlVertically(pictureBoxCoin, verticalOffset);
+			MoveControlVertically(labelCurrentCoins, verticalOffset);
+			Size = new Size(Width, Height + verticalOffset);
 		}
+		private void MoveControlVertically(Control control, int offset)
+			=> control.Location = new Point(control.Location.X, control.Location.Y + offset);
 
 		private void ButtonPlay_Click(object sender, EventArgs e)
 			=> Close();

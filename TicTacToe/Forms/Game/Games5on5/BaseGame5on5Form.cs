@@ -19,9 +19,9 @@ namespace TicTacToe.Forms.Game.Games5on5
 
 			field = new Field(5, 4);
 		}
-		internal BaseGame5on5Form(MainForm mainForm, Player player, RoundManager roundManager,
+		internal BaseGame5on5Form(MainForm mainForm, Player player, CoinReward coinReward, RoundManager roundManager,
 			CellType playerCellType, bool isTimerEnabled, bool isGameAssistsEnabled)
-			: base(mainForm, player, roundManager, playerCellType, isTimerEnabled, isGameAssistsEnabled)
+			: base(mainForm, player, coinReward, roundManager, playerCellType, isTimerEnabled, isGameAssistsEnabled)
 		{
 			InitializeComponent();
 
