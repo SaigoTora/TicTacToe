@@ -37,15 +37,15 @@ namespace TicTacToe.Models.Utilities.FormUtilities
 		}
 		#endregion
 
-		protected override void DefaultUnsubscribe(Label pictureBox)
+		protected override void DefaultUnsubscribe(Label label)
 		{
-			pictureBox.MouseEnter -= LabelUnderline_MouseEnter;
-			pictureBox.MouseLeave -= LabelUnderline_MouseLeave;
+			label.MouseEnter -= LabelUnderline_MouseEnter;
+			label.MouseLeave -= LabelUnderline_MouseLeave;
 		}
-		internal override void Unsubscribe(Label pictureBox)
+		internal override void Unsubscribe(Label label)
 		{
-			DefaultUnsubscribe(pictureBox);
-			controls.Remove(pictureBox);
+			DefaultUnsubscribe(label);
+			controls.Remove(label);
 		}
 		internal override void UnsubscribeAll()
 		{

@@ -50,6 +50,7 @@ namespace TicTacToe.Forms.Game.Games5on5
 				cellClick, timerInfo, gameAssistsInfo, nextGameForm);
 			InitializeGame(gameFormInfo);
 
+			DisplayPlayerRoles(pictureBoxPlayerCellTypeIndicator, pictureBoxOpponentCellTypeIndicator);
 			SetColorForControls(new[] { labelPlayerName, labelScore, labelOpponentName },
 				new Control[]{ pictureBoxLine1, pictureBoxLine2, pictureBoxLine3, pictureBoxLine4,
 				pictureBoxLine5, pictureBoxLine6, pictureBoxLine7, pictureBoxLine8, buttonChangeView });

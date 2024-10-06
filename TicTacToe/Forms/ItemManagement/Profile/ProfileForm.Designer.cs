@@ -144,7 +144,7 @@
 			// 
 			// buttonChangeName
 			// 
-			this.buttonChangeName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
+			this.buttonChangeName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
 			this.buttonChangeName.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.buttonChangeName.FlatAppearance.BorderSize = 0;
 			this.buttonChangeName.FlatStyle = System.Windows.Forms.FlatStyle.Flat;

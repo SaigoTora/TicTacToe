@@ -128,11 +128,29 @@
     <Compile Include="Forms\Game\Games3on3\Game3on3BotForm.Designer.cs">
       <DependentUpon>Game3on3BotForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Game\Games5on5\Game5on5TwoPlayersForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Game\Games5on5\Game5on5TwoPlayersForm.Designer.cs">
+      <DependentUpon>Game5on5TwoPlayersForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Game\Games7on7\BaseGame7on7Form.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\Game\Games7on7\BaseGame7on7Form.Designer.cs">
       <DependentUpon>BaseGame7on7Form.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Game\Games7on7\Game7on7TwoPlayersForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Game\Games7on7\Game7on7TwoPlayersForm.Designer.cs">
+      <DependentUpon>Game7on7TwoPlayersForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Game\GameSettingsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Game\GameSettingsForm.Designer.cs">
+      <DependentUpon>GameSettingsForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\ItemManagement\ItemManagementForm.cs">
       <SubType>Form</SubType>
@@ -241,8 +259,17 @@
     <EmbeddedResource Include="Forms\Game\Games3on3\Game3on3BotForm.resx">
       <DependentUpon>Game3on3BotForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Game\Games5on5\Game5on5TwoPlayersForm.resx">
+      <DependentUpon>Game5on5TwoPlayersForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Game\Games7on7\BaseGame7on7Form.resx">
       <DependentUpon>BaseGame7on7Form.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Game\Games7on7\Game7on7TwoPlayersForm.resx">
+      <DependentUpon>Game7on7TwoPlayersForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Game\GameSettingsForm.resx">
+      <DependentUpon>GameSettingsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ItemManagement\ItemManagementForm.resx">
       <DependentUpon>ItemManagementForm.cs</DependentUpon>

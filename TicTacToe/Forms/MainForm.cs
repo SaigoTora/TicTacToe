@@ -5,9 +5,10 @@ using System.Drawing;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using TicTacToe.Forms.Game;
+using TicTacToe.Forms.Game.Games3on3;
 using TicTacToe.Forms.ItemManagement.Profile;
 using TicTacToe.Forms.ItemManagement.Shop;
-using TicTacToe.Forms.Game.Games3on3;
 using TicTacToe.Models.GameInfo;
 using TicTacToe.Models.PlayerInfo;
 using TicTacToe.Models.Utilities;
@@ -171,14 +172,8 @@ namespace TicTacToe.Forms
 		private void ButtonTwoPlayers_Click(object sender, EventArgs e)
 		{
 			RoundManager roundManager = new RoundManager((int)numericUpDownNumberOfRounds.Value);
-
-			Game3on3TwoPlayersForm gameForm = new Game3on3TwoPlayersForm(this, _player, roundManager, CellType.Cross,
-				true, Resources.mysteryAvatar, "Second Player");
-			if (!gameForm.IsDisposed)// If a player have enough coints to play
-			{
-				Hide();
-				gameForm.Show();
-			}
+			GameSettingsForm gameSettingsForm = new GameSettingsForm(this, _player, roundManager, false);
+			gameSettingsForm.ShowDialog();
 		}
 
 		private void ButtonProfile_Click(object sender, EventArgs e)
