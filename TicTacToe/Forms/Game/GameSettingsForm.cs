@@ -20,13 +20,6 @@ namespace TicTacToe.Forms.Game
 {
 	internal partial class GameSettingsForm : BaseForm
 	{
-		enum FieldSize : byte
-		{
-			Size3on3,
-			Size5on5,
-			Size7on7
-		}
-
 		private const int SELECTED_AVATAR_INDENT = 10;
 		private const string SELECTED_AVATAR_TEXT = "Selected";
 		private const string SELECTED_AVATAR_TAG = "ItemSelected";
@@ -69,11 +62,19 @@ namespace TicTacToe.Forms.Game
 		}
 		private void GameSettingsForm_Load(object sender, EventArgs e)
 		{
+			string opponentName = _player.Preferences.GamePreferences.OpponentName;
+			if (opponentName != null)
+				textBoxOpponentName.Text = opponentName;
 			textBoxOpponentName.MaxLength = PlayerValidator.MAX_NAME_LENGTH;
 			textBoxOpponentName.BackColor = BackColor;
 			CreateAvatars();
 
-			LabelFieldSize_Click(label3on3, e);
+			Label labelFieldSize = GetLabelByFieldSize(_player.Preferences.GamePreferences.FieldSize);
+			LabelFieldSize_Click(labelFieldSize, e);
+			if (buttonTimerEnabled.Visible && _player.Preferences.GamePreferences.IsTimerEnabled)
+				ButtonTimerEnabled_Click(this, EventArgs.Empty);
+			if (buttonGameAssistsEnabled.Visible && _player.Preferences.GamePreferences.IsGameAssistsEnabled)
+				ButtonGameAssistsEnabled_Click(this, EventArgs.Empty);
 		}
 
 		private void ButtonPlay_Click(object sender, EventArgs e)
@@ -98,6 +99,21 @@ namespace TicTacToe.Forms.Game
 		}
 
 		#region Field Size
+		private Label GetLabelByFieldSize(FieldSize fieldSize)
+		{
+			switch (fieldSize)
+			{
+				case FieldSize.Size3on3:
+					return label3on3;
+				case FieldSize.Size5on5:
+					return label5on5;
+				case FieldSize.Size7on7:
+					return label7on7;
+				default:
+					throw new InvalidOperationException
+						($"Unknown field size: {fieldSize}");
+			}
+		}
 		private void LabelFieldSize_Click(object sender, EventArgs e)
 		{
 			if (!(sender is Label label))
@@ -120,6 +136,7 @@ namespace TicTacToe.Forms.Game
 				SetDefaultFieldSizeLabels(label3on3, label5on5);
 				_fieldSize = FieldSize.Size7on7;
 			}
+			_player.Preferences.GamePreferences.FieldSize = _fieldSize;
 		}
 		private void SetDefaultFieldSizeLabels(params Label[] labels)
 		{
@@ -134,29 +151,25 @@ namespace TicTacToe.Forms.Game
 		#region Enable Buttons
 		private void ButtonTimerEnabled_Click(object sender, EventArgs e)
 		{
-			if (!(sender is IconButton button))
-				return;
-
 			ActiveControl = null;
 			if (!_isTimerEnabled)
-				SetActiveEnableButtonStyle(button);
+				SetActiveEnableButtonStyle(buttonTimerEnabled);
 			else
-				SetDefaultEnableButtonStyle(button);
+				SetDefaultEnableButtonStyle(buttonTimerEnabled);
 
 			_isTimerEnabled = !_isTimerEnabled;
+			_player.Preferences.GamePreferences.IsTimerEnabled = _isTimerEnabled;
 		}
 		private void ButtonGameAssistsEnabled_Click(object sender, EventArgs e)
 		{
-			if (!(sender is IconButton button))
-				return;
-
 			ActiveControl = null;
 			if (!_isGameAssistsEnabled)
-				SetActiveEnableButtonStyle(button);
+				SetActiveEnableButtonStyle(buttonGameAssistsEnabled);
 			else
-				SetDefaultEnableButtonStyle(button);
+				SetDefaultEnableButtonStyle(buttonGameAssistsEnabled);
 
 			_isGameAssistsEnabled = !_isGameAssistsEnabled;
+			_player.Preferences.GamePreferences.IsGameAssistsEnabled = _isGameAssistsEnabled;
 		}
 		private void SetActiveEnableButtonStyle(IconButton button)
 		{
@@ -234,6 +247,7 @@ namespace TicTacToe.Forms.Game
 				buttonChangeOpponentName.IconColor = _buttonChangeNameColor.Default;
 				if (_tempPlayer.Name != textBoxOpponentName.Text)
 				{
+					_player.Preferences.GamePreferences.OpponentName = textBoxOpponentName.Text;
 					CustomMessageBox.Show("The second player's nickname has been successfully changed.", "Success",
 						CustomMessageBoxButtons.OK, CustomMessageBoxIcon.OK);
 				}
@@ -269,13 +283,21 @@ namespace TicTacToe.Forms.Game
 
 		private void CreateAvatars()
 		{
+			Avatar opponentAvatar = _player.Preferences.GamePreferences.OpponentAvatar;
+
 			foreach (Item item in _player.ItemsInventory.GetItems())
 				if (item is Avatar avatar && item.Name != _player.Preferences.Avatar.Name)
 				{
 					PictureBox pictureBox = _avatarCreator.CreateItemToSelect(avatar);
 
 					if (_avatarPictureBoxes.Count == 0)
+						if (opponentAvatar == null
+							|| _player.Preferences.Avatar.Name == opponentAvatar.Name)
+							SelectAvatar(this, new ItemEventArgs(avatar, pictureBox));
+					if (opponentAvatar != null && opponentAvatar.Name != null
+						&& item.Name == opponentAvatar.Name)
 						SelectAvatar(this, new ItemEventArgs(avatar, pictureBox));
+
 					_avatarPictureBoxes.Add(pictureBox);
 				}
 		}
@@ -287,6 +309,8 @@ namespace TicTacToe.Forms.Game
 			DeselectPreviousItem(_avatarPictureBoxes);
 			DefaultSelect(selectedPicture);
 			opponentAvatarImage = selectedPicture.Image;
+			_player.Preferences.GamePreferences.OpponentAvatar =
+				(Avatar)ItemManager.GetFullItem(e.Item);
 		}
 		private void DeselectPreviousItem(List<PictureBox> list)
 		{

@@ -50,7 +50,10 @@ namespace TicTacToe.Forms
 		private void MainForm_Load(object sender, EventArgs e)
 		{
 			SetDefaultColorsForDifficultyButtons();
-			ButtonDifficulty_Click(buttonEasy, e);
+
+			Button difficultyButton = GetButtonByDificulty(_player.Preferences.GamePreferences.BotDifficulty);
+			ButtonDifficulty_Click(difficultyButton, e);
+			numericUpDownNumberOfRounds.Value = _player.Preferences.GamePreferences.NumberOfRounds;
 			DisplayPlayerData();
 
 			_pictureBoxEventHandlers.SubscribeToHover(pictureBoxAvatar);
@@ -85,6 +88,23 @@ namespace TicTacToe.Forms
 		}
 
 		#region Difficulty labels
+		private Button GetButtonByDificulty(Difficulty difficulty)
+		{
+			switch (difficulty)
+			{
+				case Difficulty.Easy:
+					return buttonEasy;
+				case Difficulty.Medium:
+					return buttonMedium;
+				case Difficulty.Hard:
+					return buttonHard;
+				case Difficulty.Impossible:
+					return buttonImpossible;
+				default:
+					throw new InvalidOperationException
+						($"Unknown difficulty: {difficulty}");
+			}
+		}
 		private void ButtonDifficulty_Click(object sender, EventArgs e)
 		{
 			if (!(sender is IconButton button))
@@ -122,6 +142,7 @@ namespace TicTacToe.Forms
 		}
 		private void SetDifficultySettings(Difficulty difficulty, Color buttonPlayFillColor, Color buttonPlayFillColor2)
 		{
+			_player.Preferences.GamePreferences.BotDifficulty = difficulty;
 			_selectedDifficulty = difficulty;
 			buttonPlay.FillColor = buttonPlayFillColor;
 			buttonPlay.FillColor2 = buttonPlayFillColor2;
@@ -227,6 +248,11 @@ namespace TicTacToe.Forms
 				iconButton.Flip = FlipOrientation.Horizontal;
 			}
 			iconButton.Enabled = true;
+		}
+		private void NumericUpDownNumberOfRounds_ValueChanged(object sender, EventArgs e)
+		{
+			_player.Preferences.GamePreferences.NumberOfRounds =
+				(int)numericUpDownNumberOfRounds.Value;
 		}
 
 		private void LabelName_MouseEnter(object sender, EventArgs e)

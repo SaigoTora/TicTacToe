@@ -274,7 +274,7 @@
 			this.buttonProfile.Font = new System.Drawing.Font("Cooper Black", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.buttonProfile.ForeColor = System.Drawing.Color.White;
 			this.buttonProfile.GradientMode = System.Drawing.Drawing2D.LinearGradientMode.BackwardDiagonal;
-			this.buttonProfile.Location = new System.Drawing.Point(15, 170);
+			this.buttonProfile.Location = new System.Drawing.Point(15, 175);
 			this.buttonProfile.Name = "buttonProfile";
 			this.buttonProfile.Size = new System.Drawing.Size(280, 50);
 			this.buttonProfile.TabIndex = 1;
@@ -548,6 +548,7 @@
             0,
             0,
             0});
+			this.numericUpDownNumberOfRounds.ValueChanged += new System.EventHandler(this.NumericUpDownNumberOfRounds_ValueChanged);
 			// 
 			// MainForm
 			// 

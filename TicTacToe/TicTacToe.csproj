@@ -186,6 +186,7 @@
     <Compile Include="Models\GameInfo\CoinReward.cs" />
     <Compile Include="Models\GameInfo\GameFormInfo.cs" />
     <Compile Include="Models\GameInfo\GameResult.cs" />
+    <Compile Include="Models\PlayerInfo\GamePreferences.cs" />
     <Compile Include="Models\PlayerInfo\Inventory\CountableItemsInventory.cs" />
     <Compile Include="Models\PlayerInfo\GameView.cs" />
     <Compile Include="Models\PlayerInfo\Inventory\IInventory.cs" />

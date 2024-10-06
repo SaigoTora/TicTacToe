@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Runtime.Serialization;
+
 using TicTacToe.Models.PlayerItem;
 
 namespace TicTacToe.Models.PlayerInfo
@@ -11,12 +12,14 @@ namespace TicTacToe.Models.PlayerInfo
 		internal Avatar Avatar;
 		internal ImageItem BackgroundMenu;
 		internal ColorItem BackgroundGame;
+		internal GamePreferences GamePreferences;
 
 		internal PlayerPreferences()
 		{
 			Avatar = ItemManager.GetDefaultAvatar();
 			BackgroundMenu = ItemManager.GetDefaultImageItem();
 			BackgroundGame = ItemManager.GetDefaultColorItem();
+			GamePreferences = new GamePreferences();
 		}
 
 		[OnDeserialized]

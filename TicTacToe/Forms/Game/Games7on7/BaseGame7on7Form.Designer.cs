@@ -587,9 +587,9 @@
 			// 
 			this.labelOpponentName.BackColor = System.Drawing.Color.Transparent;
 			this.labelOpponentName.Font = new System.Drawing.Font("Trebuchet MS", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.labelOpponentName.Location = new System.Drawing.Point(450, 166);
+			this.labelOpponentName.Location = new System.Drawing.Point(415, 166);
 			this.labelOpponentName.Name = "labelOpponentName";
-			this.labelOpponentName.Size = new System.Drawing.Size(230, 25);
+			this.labelOpponentName.Size = new System.Drawing.Size(300, 25);
 			this.labelOpponentName.TabIndex = 72;
 			this.labelOpponentName.Text = "Opponent name";
 			this.labelOpponentName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -599,9 +599,9 @@
 			this.labelPlayerName.AccessibleDescription = "";
 			this.labelPlayerName.BackColor = System.Drawing.Color.Transparent;
 			this.labelPlayerName.Font = new System.Drawing.Font("Trebuchet MS", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.labelPlayerName.Location = new System.Drawing.Point(70, 166);
+			this.labelPlayerName.Location = new System.Drawing.Point(35, 166);
 			this.labelPlayerName.Name = "labelPlayerName";
-			this.labelPlayerName.Size = new System.Drawing.Size(230, 25);
+			this.labelPlayerName.Size = new System.Drawing.Size(300, 25);
 			this.labelPlayerName.TabIndex = 66;
 			this.labelPlayerName.Text = "Player name";
 			this.labelPlayerName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
