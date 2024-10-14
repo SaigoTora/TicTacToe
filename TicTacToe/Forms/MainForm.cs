@@ -7,6 +7,7 @@ using System.Windows.Forms;
 
 using TicTacToe.Forms.Game;
 using TicTacToe.Forms.Game.Games3on3;
+using TicTacToe.Forms.Game.NetworkGame;
 using TicTacToe.Forms.ItemManagement.Profile;
 using TicTacToe.Forms.ItemManagement.Shop;
 using TicTacToe.Models.GameInfo;
@@ -51,14 +52,14 @@ namespace TicTacToe.Forms
 		{
 			SetDefaultColorsForDifficultyButtons();
 
-			Button difficultyButton = GetButtonByDificulty(_player.Preferences.GamePreferences.BotDifficulty);
+			Button difficultyButton = GetButtonByDificulty(_player.BotGameSettings.BotDifficulty);
 			ButtonDifficulty_Click(difficultyButton, e);
-			numericUpDownNumberOfRounds.Value = _player.Preferences.GamePreferences.NumberOfRounds;
+			numericUpDownNumberOfRounds.Value = _player.BotGameSettings.NumberOfRounds;
 			DisplayPlayerData();
 
 			_pictureBoxEventHandlers.SubscribeToHover(pictureBoxAvatar);
-			_buttonEventHandlers.SubscribeToHover(buttonPlay, buttonTwoPlayers, buttonProfile,
-				buttonShop, buttonExit);
+			_buttonEventHandlers.SubscribeToHover(buttonPlay, buttonTwoPlayers, buttonNetworkGame,
+				buttonProfile, buttonShop, buttonExit);
 			_labelEventHandlers.SubscribeToHoverUnderline(labelAuthor);
 		}
 
@@ -66,8 +67,8 @@ namespace TicTacToe.Forms
 		{
 			labelCoins.Text = $"{_player.Coins:N0}".Replace(',', ' ');
 			labelPlayerName.Text = _player.Name;
-			pictureBoxAvatar.Image = _player.Preferences.Avatar.Image;
-			BackgroundImage = _player.Preferences.BackgroundMenu.Image;
+			pictureBoxAvatar.Image = _player.VisualSettings.Avatar.Image;
+			BackgroundImage = _player.VisualSettings.BackgroundMenu.Image;
 		}
 		private async Task ChangeSizePanelSettingsAsync(bool needToOpen)
 		{
@@ -142,7 +143,7 @@ namespace TicTacToe.Forms
 		}
 		private void SetDifficultySettings(Difficulty difficulty, Color buttonPlayFillColor, Color buttonPlayFillColor2)
 		{
-			_player.Preferences.GamePreferences.BotDifficulty = difficulty;
+			_player.BotGameSettings.BotDifficulty = difficulty;
 			_selectedDifficulty = difficulty;
 			buttonPlay.FillColor = buttonPlayFillColor;
 			buttonPlay.FillColor2 = buttonPlayFillColor2;
@@ -193,8 +194,15 @@ namespace TicTacToe.Forms
 		private void ButtonTwoPlayers_Click(object sender, EventArgs e)
 		{
 			RoundManager roundManager = new RoundManager((int)numericUpDownNumberOfRounds.Value);
-			GameSettingsForm gameSettingsForm = new GameSettingsForm(this, _player, roundManager, false);
+			GameSettingsForm gameSettingsForm = new GameSettingsForm(this, _player, roundManager, GameSettingsForm.GameType.SinglePCGame);
 			gameSettingsForm.ShowDialog();
+		}
+		private void ButtonNetworkGame_Click(object sender, EventArgs e)
+		{
+			RoundManager roundManager = new RoundManager((int)numericUpDownNumberOfRounds.Value);
+			StartNetworkGameForm startNetworkGameForm = new StartNetworkGameForm(this, _player, roundManager);
+			Hide();
+			startNetworkGameForm.ShowDialog();
 		}
 
 		private void ButtonProfile_Click(object sender, EventArgs e)
@@ -251,8 +259,10 @@ namespace TicTacToe.Forms
 		}
 		private void NumericUpDownNumberOfRounds_ValueChanged(object sender, EventArgs e)
 		{
-			_player.Preferences.GamePreferences.NumberOfRounds =
-				(int)numericUpDownNumberOfRounds.Value;
+			int value = (int)numericUpDownNumberOfRounds.Value;
+			_player.BotGameSettings.NumberOfRounds = value;
+			_player.TwoPlayersGameSettings.NumberOfRounds = value;
+			_player.NetworkGameSettings.NumberOfRounds = value;
 		}
 
 		private void LabelName_MouseEnter(object sender, EventArgs e)

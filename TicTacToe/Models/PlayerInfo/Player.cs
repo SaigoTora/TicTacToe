@@ -3,8 +3,9 @@ using System.Runtime.Serialization;
 
 using TicTacToe.Models.CustomExceptions;
 using TicTacToe.Models.GameInfo;
-using TicTacToe.Models.PlayerItem;
+using TicTacToe.Models.GameInfo.Settings;
 using TicTacToe.Models.PlayerInfo.Inventory;
+using TicTacToe.Models.PlayerItem;
 using TicTacToeLibrary;
 
 namespace TicTacToe.Models.PlayerInfo
@@ -14,21 +15,32 @@ namespace TicTacToe.Models.PlayerInfo
 	{
 		internal string Name { get; private set; }
 		internal int Coins { get; private set; }
-		internal PlayerPreferences Preferences { get; private set; }
-		internal ItemsInventory ItemsInventory { get; private set; } = new ItemsInventory();
-		internal CountableItemsInventory CountableItemsInventory { get; private set; } = new CountableItemsInventory();
+
+		internal PlayerVisualSettings VisualSettings { get; private set; }
+		internal BotGameSettings BotGameSettings { get; private set; }
+		internal TwoPlayersGameSettings TwoPlayersGameSettings { get; private set; }
+		internal NetworkGameSettings NetworkGameSettings { get; private set; }
+
+		internal ItemsInventory ItemsInventory { get; private set; }
+		internal CountableItemsInventory CountableItemsInventory { get; private set; }
 
 		private int deductedCoins;
-		internal Player(string name, int coins, PlayerPreferences preferences)
+
+		internal Player(string name)
+			: this()
 		{
 			Name = name;
-			Coins = coins;
-			Preferences = preferences;
-			ItemsInventory.SetDefaultInventory();
 		}
 		internal Player()
 		{
-			Preferences = new PlayerPreferences();
+			VisualSettings = new PlayerVisualSettings();
+			BotGameSettings = new BotGameSettings();
+			TwoPlayersGameSettings = new TwoPlayersGameSettings();
+			NetworkGameSettings = new NetworkGameSettings();
+
+			ItemsInventory = new ItemsInventory();
+			CountableItemsInventory = new CountableItemsInventory();
+
 			ItemsInventory.SetDefaultInventory();
 		}
 
@@ -55,13 +67,13 @@ namespace TicTacToe.Models.PlayerInfo
 			switch (item)
 			{
 				case Avatar avatar:
-					Preferences.Avatar = avatar;
+					VisualSettings.Avatar = avatar;
 					break;
 				case ImageItem imageItem:
-					Preferences.BackgroundMenu = imageItem;
+					VisualSettings.BackgroundMenu = imageItem;
 					break;
 				case ColorItem colorItem:
-					Preferences.BackgroundGame = colorItem;
+					VisualSettings.BackgroundGame = colorItem;
 					break;
 				default:
 					throw new InvalidOperationException

@@ -100,7 +100,7 @@
 			this.buttonTimerEnabled.IconFont = FontAwesome.Sharp.IconFont.Auto;
 			this.buttonTimerEnabled.IconSize = 30;
 			this.buttonTimerEnabled.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			this.buttonTimerEnabled.Location = new System.Drawing.Point(42, 566);
+			this.buttonTimerEnabled.Location = new System.Drawing.Point(42, 560);
 			this.buttonTimerEnabled.Margin = new System.Windows.Forms.Padding(0);
 			this.buttonTimerEnabled.Name = "buttonTimerEnabled";
 			this.buttonTimerEnabled.Size = new System.Drawing.Size(140, 40);
@@ -128,7 +128,7 @@
 			this.buttonGameAssistsEnabled.IconFont = FontAwesome.Sharp.IconFont.Auto;
 			this.buttonGameAssistsEnabled.IconSize = 30;
 			this.buttonGameAssistsEnabled.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			this.buttonGameAssistsEnabled.Location = new System.Drawing.Point(232, 566);
+			this.buttonGameAssistsEnabled.Location = new System.Drawing.Point(232, 560);
 			this.buttonGameAssistsEnabled.Margin = new System.Windows.Forms.Padding(0);
 			this.buttonGameAssistsEnabled.Name = "buttonGameAssistsEnabled";
 			this.buttonGameAssistsEnabled.Size = new System.Drawing.Size(220, 40);

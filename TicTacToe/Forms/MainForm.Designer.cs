@@ -34,6 +34,7 @@
 			this.labelCoins = new System.Windows.Forms.Label();
 			this.panelLeft = new Guna.UI2.WinForms.Guna2Panel();
 			this.panelMenu = new Guna.UI2.WinForms.Guna2Panel();
+			this.buttonNetworkGame = new Guna.UI2.WinForms.Guna2GradientButton();
 			this.buttonTwoPlayers = new Guna.UI2.WinForms.Guna2GradientButton();
 			this.buttonPlay = new Guna.UI2.WinForms.Guna2GradientButton();
 			this.buttonExit = new Guna.UI2.WinForms.Guna2GradientButton();
@@ -129,6 +130,7 @@
 			// 
 			// panelMenu
 			// 
+			this.panelMenu.Controls.Add(this.buttonNetworkGame);
 			this.panelMenu.Controls.Add(this.buttonTwoPlayers);
 			this.panelMenu.Controls.Add(this.buttonPlay);
 			this.panelMenu.Controls.Add(this.buttonExit);
@@ -141,6 +143,34 @@
 			this.panelMenu.Name = "panelMenu";
 			this.panelMenu.Size = new System.Drawing.Size(320, 525);
 			this.panelMenu.TabIndex = 1;
+			// 
+			// buttonNetworkGame
+			// 
+			this.buttonNetworkGame.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.buttonNetworkGame.Animated = true;
+			this.buttonNetworkGame.BackColor = System.Drawing.Color.Transparent;
+			this.buttonNetworkGame.BorderRadius = 20;
+			this.buttonNetworkGame.BorderStyle = System.Drawing.Drawing2D.DashStyle.Custom;
+			this.buttonNetworkGame.BorderThickness = 1;
+			this.buttonNetworkGame.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.buttonNetworkGame.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+			this.buttonNetworkGame.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+			this.buttonNetworkGame.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+			this.buttonNetworkGame.DisabledState.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+			this.buttonNetworkGame.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+			this.buttonNetworkGame.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(133)))), ((int)(((byte)(180)))));
+			this.buttonNetworkGame.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(113)))), ((int)(((byte)(128)))));
+			this.buttonNetworkGame.Font = new System.Drawing.Font("Cooper Black", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.buttonNetworkGame.ForeColor = System.Drawing.Color.White;
+			this.buttonNetworkGame.GradientMode = System.Drawing.Drawing2D.LinearGradientMode.BackwardDiagonal;
+			this.buttonNetworkGame.Location = new System.Drawing.Point(15, 150);
+			this.buttonNetworkGame.Name = "buttonNetworkGame";
+			this.buttonNetworkGame.Size = new System.Drawing.Size(280, 50);
+			this.buttonNetworkGame.TabIndex = 5;
+			this.buttonNetworkGame.TabStop = false;
+			this.buttonNetworkGame.Text = "Local Game";
+			this.buttonNetworkGame.Click += new System.EventHandler(this.ButtonNetworkGame_Click);
 			// 
 			// buttonTwoPlayers
 			// 
@@ -157,12 +187,12 @@
 			this.buttonTwoPlayers.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
 			this.buttonTwoPlayers.DisabledState.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
 			this.buttonTwoPlayers.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-			this.buttonTwoPlayers.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(167)))), ((int)(((byte)(106)))));
-			this.buttonTwoPlayers.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(129)))), ((int)(((byte)(69)))));
+			this.buttonTwoPlayers.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(176)))), ((int)(((byte)(143)))));
+			this.buttonTwoPlayers.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(128)))), ((int)(((byte)(109)))));
 			this.buttonTwoPlayers.Font = new System.Drawing.Font("Cooper Black", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.buttonTwoPlayers.ForeColor = System.Drawing.Color.White;
 			this.buttonTwoPlayers.GradientMode = System.Drawing.Drawing2D.LinearGradientMode.BackwardDiagonal;
-			this.buttonTwoPlayers.Location = new System.Drawing.Point(15, 100);
+			this.buttonTwoPlayers.Location = new System.Drawing.Point(15, 75);
 			this.buttonTwoPlayers.Name = "buttonTwoPlayers";
 			this.buttonTwoPlayers.Size = new System.Drawing.Size(280, 50);
 			this.buttonTwoPlayers.TabIndex = 4;
@@ -190,7 +220,7 @@
 			this.buttonPlay.Font = new System.Drawing.Font("Cooper Black", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.buttonPlay.ForeColor = System.Drawing.Color.White;
 			this.buttonPlay.GradientMode = System.Drawing.Drawing2D.LinearGradientMode.BackwardDiagonal;
-			this.buttonPlay.Location = new System.Drawing.Point(15, 25);
+			this.buttonPlay.Location = new System.Drawing.Point(15, 0);
 			this.buttonPlay.Name = "buttonPlay";
 			this.buttonPlay.Size = new System.Drawing.Size(280, 50);
 			this.buttonPlay.TabIndex = 0;
@@ -200,8 +230,7 @@
 			// 
 			// buttonExit
 			// 
-			this.buttonExit.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+			this.buttonExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.buttonExit.Animated = true;
 			this.buttonExit.BackColor = System.Drawing.Color.Transparent;
 			this.buttonExit.BorderRadius = 20;
@@ -218,7 +247,7 @@
 			this.buttonExit.Font = new System.Drawing.Font("Cooper Black", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.buttonExit.ForeColor = System.Drawing.Color.White;
 			this.buttonExit.GradientMode = System.Drawing.Drawing2D.LinearGradientMode.BackwardDiagonal;
-			this.buttonExit.Location = new System.Drawing.Point(15, 400);
+			this.buttonExit.Location = new System.Drawing.Point(15, 450);
 			this.buttonExit.Name = "buttonExit";
 			this.buttonExit.Size = new System.Drawing.Size(280, 50);
 			this.buttonExit.TabIndex = 3;
@@ -246,7 +275,7 @@
 			this.buttonShop.Font = new System.Drawing.Font("Cooper Black", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.buttonShop.ForeColor = System.Drawing.Color.White;
 			this.buttonShop.GradientMode = System.Drawing.Drawing2D.LinearGradientMode.BackwardDiagonal;
-			this.buttonShop.Location = new System.Drawing.Point(15, 250);
+			this.buttonShop.Location = new System.Drawing.Point(15, 300);
 			this.buttonShop.Name = "buttonShop";
 			this.buttonShop.Size = new System.Drawing.Size(280, 50);
 			this.buttonShop.TabIndex = 2;
@@ -274,7 +303,7 @@
 			this.buttonProfile.Font = new System.Drawing.Font("Cooper Black", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.buttonProfile.ForeColor = System.Drawing.Color.White;
 			this.buttonProfile.GradientMode = System.Drawing.Drawing2D.LinearGradientMode.BackwardDiagonal;
-			this.buttonProfile.Location = new System.Drawing.Point(15, 175);
+			this.buttonProfile.Location = new System.Drawing.Point(15, 225);
 			this.buttonProfile.Name = "buttonProfile";
 			this.buttonProfile.Size = new System.Drawing.Size(280, 50);
 			this.buttonProfile.TabIndex = 1;
@@ -607,5 +636,6 @@
 		private System.Windows.Forms.NumericUpDown numericUpDownNumberOfRounds;
 		private System.Windows.Forms.PictureBox pictureBoxCoin;
 		private Guna.UI2.WinForms.Guna2GradientButton buttonTwoPlayers;
+		private Guna.UI2.WinForms.Guna2GradientButton buttonNetworkGame;
 	}
 }

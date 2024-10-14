@@ -6,20 +6,18 @@ using TicTacToe.Models.PlayerItem;
 namespace TicTacToe.Models.PlayerInfo
 {
 	[Serializable]
-	internal class PlayerPreferences
+	internal class PlayerVisualSettings
 	{
 		internal GameView GameView = GameView.Score;
 		internal Avatar Avatar;
 		internal ImageItem BackgroundMenu;
 		internal ColorItem BackgroundGame;
-		internal GamePreferences GamePreferences;
 
-		internal PlayerPreferences()
+		internal PlayerVisualSettings()
 		{
 			Avatar = ItemManager.GetDefaultAvatar();
 			BackgroundMenu = ItemManager.GetDefaultImageItem();
 			BackgroundGame = ItemManager.GetDefaultColorItem();
-			GamePreferences = new GamePreferences();
 		}
 
 		[OnDeserialized]

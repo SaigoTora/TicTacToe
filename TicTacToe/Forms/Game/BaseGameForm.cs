@@ -94,13 +94,13 @@ namespace TicTacToe.Forms.Game
 
 			_gameInfo.Score.Text = $"{roundManager.NumberOfWinsFirstPlayer} : {roundManager.NumberOfWinsSecondPlayer}";
 			_sequenceSelectedCells = new List<PictureBox>(_gameInfo.PictureCells.Length);
-			BackColor = player.Preferences.BackgroundGame.Color;
+			BackColor = player.VisualSettings.BackgroundGame.Color;
 			InitializePlayersInfo(_gameInfo.PlayersInfo);
 			InitializeGameAssists(_gameInfo.GameAssistsInfo);
 		}
 		private void InitializePlayersInfo(PlayersInfo playersInfo)
 		{
-			playersInfo.PlayerAvatar.Image = player.Preferences.Avatar.Image;
+			playersInfo.PlayerAvatar.Image = player.VisualSettings.Avatar.Image;
 			playersInfo.PlayerName.Text = player.Name;
 		}
 		private void InitializeGameAssists(GameAssistsInfo gameAssistsInfo)
@@ -569,7 +569,7 @@ namespace TicTacToe.Forms.Game
 			if (needToChangeButton)
 				_gameInfo.GameAssistsInfo.ButtonChangeView.Visible = visible;
 
-			switch (player.Preferences.GameView)
+			switch (player.VisualSettings.GameView)
 			{
 				case GameView.Score:
 					SetScoreViewVisibility(visible, needToChangeScore);
@@ -579,7 +579,7 @@ namespace TicTacToe.Forms.Game
 					break;
 				default:
 					throw new InvalidOperationException
-						($"Unknown game view: {player.Preferences.GameView.GetType().Name}");
+						($"Unknown game view: {player.VisualSettings.GameView.GetType().Name}");
 			}
 		}
 		private void ButtonChangeView_Click(object sender, EventArgs e)
@@ -590,19 +590,19 @@ namespace TicTacToe.Forms.Game
 			ChangeGameViewVisibility(false, false);
 
 			// Turn on visibility of the next view
-			switch (player.Preferences.GameView)
+			switch (player.VisualSettings.GameView)
 			{
 				case GameView.Score:
-					player.Preferences.GameView = GameView.AssistTools;
+					player.VisualSettings.GameView = GameView.AssistTools;
 					SetGameAssistsViewVisibility(true);
 					break;
 				case GameView.AssistTools:
-					player.Preferences.GameView = GameView.Score;
+					player.VisualSettings.GameView = GameView.Score;
 					SetScoreViewVisibility(true);
 					break;
 				default:
 					throw new InvalidOperationException
-						($"Unknown game view: {player.Preferences.GameView.GetType().Name}");
+						($"Unknown game view: {player.VisualSettings.GameView.GetType().Name}");
 			}
 		}
 		protected void ButtonChangeView_MouseEnter(object sender, EventArgs e)

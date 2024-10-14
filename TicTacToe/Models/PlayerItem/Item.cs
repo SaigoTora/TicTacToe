@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 
 namespace TicTacToe.Models.PlayerItem
@@ -6,6 +7,7 @@ namespace TicTacToe.Models.PlayerItem
 	[Serializable]
 	internal abstract class Item : ICloneable
 	{
+		[JsonProperty]
 		internal string Name { get; private set; }
 
 		[NonSerialized]

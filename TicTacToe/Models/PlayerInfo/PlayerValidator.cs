@@ -17,7 +17,7 @@ namespace TicTacToe.Models.PlayerInfo
 				.MinimumLength(MIN_NAME_LENGTH)
 				.MaximumLength(MAX_NAME_LENGTH)
 				.WithName(PLAYER_NAME)
-				.Must(name => !name.Any(ch => EXCEPT_NAME_CHARS.Contains(ch))) // Проверка на недопустимые символы
+				.Must(name => !name.Any(ch => EXCEPT_NAME_CHARS.Contains(ch))) // Check for invalid characters
 				.WithMessage($"'{PLAYER_NAME}' cannot contain the following characters:\n{string.Concat(EXCEPT_NAME_CHARS.Select(c => c + " "))}");
 		}
 	}

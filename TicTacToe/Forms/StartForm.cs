@@ -79,18 +79,14 @@ namespace TicTacToe.Forms
 		private void ButtonReady_Click(object sender, EventArgs e)
 		{
 			textBoxName.Text = textBoxName.Text.Trim(' ').DeleteDuplicateChars(' ');
-			_player = new Player(textBoxName.Text, _player.Coins, _player.Preferences);
+			_player = new Player(textBoxName.Text);
 
 			if (IsPlayerDataValid())
 			{
-				PlayerPreferences preferences = new PlayerPreferences();
-
 				if (_isPlayerMan)
-					preferences.Avatar = ItemManager.GetDefaultAvatar(0);
+					_player.VisualSettings.Avatar = ItemManager.GetDefaultAvatar(0);
 				else
-					preferences.Avatar = ItemManager.GetDefaultAvatar(1);
-
-				_player = new Player(_player.Name, _player.Coins, preferences);
+					_player.VisualSettings.Avatar = ItemManager.GetDefaultAvatar(1);
 
 				MainForm mainForm = new MainForm(_player);
 				mainForm.FormClosed += (s, args) => { Close(); };

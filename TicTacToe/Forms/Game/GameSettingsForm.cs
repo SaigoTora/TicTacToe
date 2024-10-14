@@ -9,7 +9,9 @@ using System.Windows.Forms;
 using TicTacToe.Forms.Game.Games3on3;
 using TicTacToe.Forms.Game.Games5on5;
 using TicTacToe.Forms.Game.Games7on7;
+using TicTacToe.Forms.Game.NetworkGame;
 using TicTacToe.Models.GameInfo;
+using TicTacToe.Models.GameInfo.Settings;
 using TicTacToe.Models.PlayerInfo;
 using TicTacToe.Models.PlayerItem;
 using TicTacToe.Models.PlayerItemCreator;
@@ -20,6 +22,12 @@ namespace TicTacToe.Forms.Game
 {
 	internal partial class GameSettingsForm : BaseForm
 	{
+		internal enum GameType : byte
+		{
+			SinglePCGame,
+			NetworkGame
+		}
+
 		private const int SELECTED_AVATAR_INDENT = 10;
 		private const string SELECTED_AVATAR_TEXT = "Selected";
 		private const string SELECTED_AVATAR_TAG = "ItemSelected";
@@ -29,8 +37,10 @@ namespace TicTacToe.Forms.Game
 		private static readonly (Color Default, Color DuringRenaming) _buttonChangeNameColor = (Color.White, Color.Yellow);
 
 		private readonly MainForm _mainForm;
+		private readonly StartNetworkGameForm _previousForm;
 		private readonly Player _player;
 		private readonly RoundManager _roundManager;
+		private readonly GameType _gameType;
 
 		private AvatarCreator _avatarCreator;
 		private readonly List<PictureBox> _avatarPictureBoxes = new List<PictureBox>();
@@ -44,58 +54,129 @@ namespace TicTacToe.Forms.Game
 		private bool _isTimerEnabled;
 		private bool _isGameAssistsEnabled;
 
-		internal GameSettingsForm(MainForm mainForm, Player player, RoundManager roundManager, bool isGameAssistsEnabled = true)
+		internal GameSettingsForm(MainForm mainForm, Player player, RoundManager roundManager,
+			GameType gameType, StartNetworkGameForm previousForm = null)
 		{
 			customTitleBar = new CustomTitleBar(this, "Game settings", minimizeBox: false, maximizeBox: false);
 			InitializeComponent();
 			_mainForm = mainForm;
+			_previousForm = previousForm;
 			_player = player;
 			_roundManager = roundManager;
-			_tempPlayer = new Player(textBoxOpponentName.Text, 0, new PlayerPreferences());
+			_gameType = gameType;
+			_tempPlayer = new Player(textBoxOpponentName.Text);
 
-			if (!isGameAssistsEnabled)
-				buttonGameAssistsEnabled.Visible = false;
-
+			SetFormElements(gameType);
 			InitializeCreator();
 			_buttonEventHandlers.SubscribeToHover(buttonPlay);
 			_labelEventHandlers.SubscribeToHoverUnderline(label3on3, label5on5, label7on7);
 		}
 		private void GameSettingsForm_Load(object sender, EventArgs e)
 		{
-			string opponentName = _player.Preferences.GamePreferences.OpponentName;
+			TwoPlayersGameSettings settings = default;
+			if (_gameType == GameType.SinglePCGame)
+				settings = _player.TwoPlayersGameSettings;
+			else if (_gameType == GameType.NetworkGame)
+				settings = _player.NetworkGameSettings;
+			string opponentName = settings.OpponentName;
 			if (opponentName != null)
 				textBoxOpponentName.Text = opponentName;
 			textBoxOpponentName.MaxLength = PlayerValidator.MAX_NAME_LENGTH;
 			textBoxOpponentName.BackColor = BackColor;
 			CreateAvatars();
 
-			Label labelFieldSize = GetLabelByFieldSize(_player.Preferences.GamePreferences.FieldSize);
+			Label labelFieldSize = GetLabelByFieldSize(settings.FieldSize);
 			LabelFieldSize_Click(labelFieldSize, e);
-			if (buttonTimerEnabled.Visible && _player.Preferences.GamePreferences.IsTimerEnabled)
+			if (buttonTimerEnabled.Visible && settings.IsTimerEnabled)
 				ButtonTimerEnabled_Click(this, EventArgs.Empty);
-			if (buttonGameAssistsEnabled.Visible && _player.Preferences.GamePreferences.IsGameAssistsEnabled)
+			if (buttonGameAssistsEnabled.Visible && settings.IsGameAssistsEnabled)
 				ButtonGameAssistsEnabled_Click(this, EventArgs.Empty);
+		}
+		private void SetFormElements(GameType gameType)
+		{
+			const int NETWORK_GAME_FORM_HEIGHT_REDUCTION = 450;
+			const int NETWORK_GAME_ENABLE_BUTTONS_OFFSET_X = 198;
+
+			switch (gameType)
+			{
+				case GameType.SinglePCGame:
+					buttonGameAssistsEnabled.Visible = false;
+					break;
+				case GameType.NetworkGame:
+					{
+						labelOpponentTitle.Visible = false;
+						textBoxOpponentName.Visible = false;
+						buttonChangeOpponentName.Visible = false;
+						flpAvatar.Visible = false;
+						buttonPlay.Text = "Create";
+						Size = new Size(Width, Height - NETWORK_GAME_FORM_HEIGHT_REDUCTION);
+						buttonTimerEnabled.Location = new Point(buttonTimerEnabled.Location.X +
+							NETWORK_GAME_ENABLE_BUTTONS_OFFSET_X, buttonTimerEnabled.Location.Y);
+						buttonGameAssistsEnabled.Location = new Point(buttonGameAssistsEnabled.Location.X +
+							NETWORK_GAME_ENABLE_BUTTONS_OFFSET_X, buttonGameAssistsEnabled.Location.Y);
+						break;
+					}
+				default:
+					throw new InvalidOperationException
+						($"Unknown game type: {gameType}");
+			}
 		}
 
 		private void ButtonPlay_Click(object sender, EventArgs e)
 		{
-			BaseGameForm gameForm = default;
-			if (_fieldSize == FieldSize.Size3on3)
-				gameForm = new Game3on3TwoPlayersForm(_mainForm, _player, _roundManager,
-					CellType.Cross, _isTimerEnabled, opponentAvatarImage, textBoxOpponentName.Text);
-			else if (_fieldSize == FieldSize.Size5on5)
-				gameForm = new Game5on5TwoPlayersForm(_mainForm, _player, _roundManager,
-					CellType.Cross, _isTimerEnabled, opponentAvatarImage, textBoxOpponentName.Text);
-			else if (_fieldSize == FieldSize.Size7on7)
-				gameForm = new Game7on7TwoPlayersForm(_mainForm, _player, _roundManager,
-					CellType.Cross, _isTimerEnabled, opponentAvatarImage, textBoxOpponentName.Text);
+			switch (_gameType)
+			{
+				case GameType.SinglePCGame:
+					ShowSinglePCGameForm();
+					break;
+				case GameType.NetworkGame:
+					ShowNetworkGameForm();
+					break;
+				default:
+					throw new InvalidOperationException
+						($"Unknown game type: {_gameType}");
+			}
+			if (_previousForm != null)
+			{
+				_previousForm.NeedToOpenMainForm = false;
+				_previousForm.Close();
+			}
+			Close();
+		}
+		private void ShowSinglePCGameForm()
+		{
+			BaseGameForm gameForm;
+			switch (_fieldSize)
+			{
+				case FieldSize.Size3on3:
+					gameForm = new Game3on3TwoPlayersForm(_mainForm, _player, _roundManager,
+						CellType.Cross, _isTimerEnabled, opponentAvatarImage, textBoxOpponentName.Text);
+					break;
+				case FieldSize.Size5on5:
+					gameForm = new Game5on5TwoPlayersForm(_mainForm, _player, _roundManager,
+						CellType.Cross, _isTimerEnabled, opponentAvatarImage, textBoxOpponentName.Text);
+					break;
+				case FieldSize.Size7on7:
+					gameForm = new Game7on7TwoPlayersForm(_mainForm, _player, _roundManager,
+						CellType.Cross, _isTimerEnabled, opponentAvatarImage, textBoxOpponentName.Text);
+					break;
+				default:
+					throw new InvalidOperationException
+						($"Unknown field size: {_fieldSize}");
+			}
 
 			if (!gameForm.IsDisposed)// If a player have enough coints to play
 			{
 				_mainForm.Hide();
 				gameForm.Show();
 			}
-			Close();
+		}
+		private void ShowNetworkGameForm()
+		{
+			GameLobbyForm gameLobbyForm = new GameLobbyForm(_mainForm, _player);
+
+			_mainForm.Hide();
+			gameLobbyForm.Show();
 		}
 
 		#region Field Size
@@ -136,7 +217,11 @@ namespace TicTacToe.Forms.Game
 				SetDefaultFieldSizeLabels(label3on3, label5on5);
 				_fieldSize = FieldSize.Size7on7;
 			}
-			_player.Preferences.GamePreferences.FieldSize = _fieldSize;
+
+			if (_gameType == GameType.SinglePCGame)
+				_player.TwoPlayersGameSettings.FieldSize = _fieldSize;
+			else if (_gameType == GameType.NetworkGame)
+				_player.NetworkGameSettings.FieldSize = _fieldSize;
 		}
 		private void SetDefaultFieldSizeLabels(params Label[] labels)
 		{
@@ -158,7 +243,10 @@ namespace TicTacToe.Forms.Game
 				SetDefaultEnableButtonStyle(buttonTimerEnabled);
 
 			_isTimerEnabled = !_isTimerEnabled;
-			_player.Preferences.GamePreferences.IsTimerEnabled = _isTimerEnabled;
+			if (_gameType == GameType.SinglePCGame)
+				_player.TwoPlayersGameSettings.IsTimerEnabled = _isTimerEnabled;
+			else if (_gameType == GameType.NetworkGame)
+				_player.NetworkGameSettings.IsTimerEnabled = _isTimerEnabled;
 		}
 		private void ButtonGameAssistsEnabled_Click(object sender, EventArgs e)
 		{
@@ -169,7 +257,10 @@ namespace TicTacToe.Forms.Game
 				SetDefaultEnableButtonStyle(buttonGameAssistsEnabled);
 
 			_isGameAssistsEnabled = !_isGameAssistsEnabled;
-			_player.Preferences.GamePreferences.IsGameAssistsEnabled = _isGameAssistsEnabled;
+			if (_gameType == GameType.SinglePCGame)
+				_player.TwoPlayersGameSettings.IsGameAssistsEnabled = _isGameAssistsEnabled;
+			else if (_gameType == GameType.NetworkGame)
+				_player.NetworkGameSettings.IsGameAssistsEnabled = _isGameAssistsEnabled;
 		}
 		private void SetActiveEnableButtonStyle(IconButton button)
 		{
@@ -225,7 +316,7 @@ namespace TicTacToe.Forms.Game
 		{
 			PlayerValidator validator = new PlayerValidator();
 
-			Player newPlayer = new Player(textBoxOpponentName.Text, _tempPlayer.Coins, _tempPlayer.Preferences);
+			Player newPlayer = new Player(textBoxOpponentName.Text);
 			ValidationResult result = validator.Validate(newPlayer);
 			if (!result.IsValid)
 			{
@@ -247,7 +338,7 @@ namespace TicTacToe.Forms.Game
 				buttonChangeOpponentName.IconColor = _buttonChangeNameColor.Default;
 				if (_tempPlayer.Name != textBoxOpponentName.Text)
 				{
-					_player.Preferences.GamePreferences.OpponentName = textBoxOpponentName.Text;
+					_player.TwoPlayersGameSettings.OpponentName = textBoxOpponentName.Text;
 					CustomMessageBox.Show("The second player's nickname has been successfully changed.", "Success",
 						CustomMessageBoxButtons.OK, CustomMessageBoxIcon.OK);
 				}
@@ -283,16 +374,16 @@ namespace TicTacToe.Forms.Game
 
 		private void CreateAvatars()
 		{
-			Avatar opponentAvatar = _player.Preferences.GamePreferences.OpponentAvatar;
+			Avatar opponentAvatar = _player.TwoPlayersGameSettings.OpponentAvatar;
 
 			foreach (Item item in _player.ItemsInventory.GetItems())
-				if (item is Avatar avatar && item.Name != _player.Preferences.Avatar.Name)
+				if (item is Avatar avatar && item.Name != _player.VisualSettings.Avatar.Name)
 				{
 					PictureBox pictureBox = _avatarCreator.CreateItemToSelect(avatar);
 
 					if (_avatarPictureBoxes.Count == 0)
 						if (opponentAvatar == null
-							|| _player.Preferences.Avatar.Name == opponentAvatar.Name)
+							|| _player.VisualSettings.Avatar.Name == opponentAvatar.Name)
 							SelectAvatar(this, new ItemEventArgs(avatar, pictureBox));
 					if (opponentAvatar != null && opponentAvatar.Name != null
 						&& item.Name == opponentAvatar.Name)
@@ -309,7 +400,7 @@ namespace TicTacToe.Forms.Game
 			DeselectPreviousItem(_avatarPictureBoxes);
 			DefaultSelect(selectedPicture);
 			opponentAvatarImage = selectedPicture.Image;
-			_player.Preferences.GamePreferences.OpponentAvatar =
+			_player.TwoPlayersGameSettings.OpponentAvatar =
 				(Avatar)ItemManager.GetFullItem(e.Item);
 		}
 		private void DeselectPreviousItem(List<PictureBox> list)

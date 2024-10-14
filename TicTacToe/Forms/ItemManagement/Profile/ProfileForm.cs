@@ -48,7 +48,7 @@ namespace TicTacToe.Forms.ItemManagement.Profile
 		private void ProfileForm_Load(object sender, EventArgs e)
 		{
 			buttonChangeName.IconColor = _buttonChangeNameColor.Default;
-			pictureBoxPlayerAvatar.Image = player.Preferences.Avatar.Image;
+			pictureBoxPlayerAvatar.Image = player.VisualSettings.Avatar.Image;
 
 			textBoxPlayerName.MaxLength = PlayerValidator.MAX_NAME_LENGTH;
 			textBoxPlayerName.Text = player.Name;
@@ -138,7 +138,7 @@ namespace TicTacToe.Forms.ItemManagement.Profile
 			PictureBox pictureBox = menuBackCreator.CreateItemToSelect(imageItem);
 			_menuBackPictureBoxes.Add(pictureBox);
 
-			if (!_isSelectedMenuBackCreated && imageItem.Name == player.Preferences.BackgroundMenu.Name)
+			if (!_isSelectedMenuBackCreated && imageItem.Name == player.VisualSettings.BackgroundMenu.Name)
 			{
 				SelectMenuBack(this, new ItemEventArgs(imageItem, pictureBox));
 				_isSelectedMenuBackCreated = true;
@@ -149,7 +149,7 @@ namespace TicTacToe.Forms.ItemManagement.Profile
 			PictureBox pictureBox = avatarCreator.CreateItemToSelect(avatar);
 			_avatarPictureBoxes.Add(pictureBox);
 
-			if (!_isSelectedAvatarCreated && avatar.Name == player.Preferences.Avatar.Name)
+			if (!_isSelectedAvatarCreated && avatar.Name == player.VisualSettings.Avatar.Name)
 			{
 				SelectAvatar(this, new ItemEventArgs(avatar, pictureBox));
 				_isSelectedAvatarCreated = true;
@@ -160,7 +160,7 @@ namespace TicTacToe.Forms.ItemManagement.Profile
 			PictureBox pictureBox = gameBackCreator.CreateItemToSelect(colorItem);
 			_gameBackPictureBoxes.Add(pictureBox);
 
-			if (!_isSelectedGameBackCreated && colorItem.Name == player.Preferences.BackgroundGame.Name)
+			if (!_isSelectedGameBackCreated && colorItem.Name == player.VisualSettings.BackgroundGame.Name)
 			{
 				SelectGameBack(this, new ItemEventArgs(colorItem, pictureBox));
 				_isSelectedGameBackCreated = true;
@@ -266,7 +266,7 @@ namespace TicTacToe.Forms.ItemManagement.Profile
 		{
 			PlayerValidator validator = new PlayerValidator();
 
-			Player newPlayer = new Player(textBoxPlayerName.Text, player.Coins, player.Preferences);
+			Player newPlayer = new Player(textBoxPlayerName.Text);
 			ValidationResult result = validator.Validate(newPlayer);
 			if (!result.IsValid)
 			{

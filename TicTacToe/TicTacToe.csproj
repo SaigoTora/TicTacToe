@@ -53,9 +53,10 @@
   <PropertyGroup>
     <StartupObject>TicTacToe.Program</StartupObject>
   </PropertyGroup>
+  <PropertyGroup />
   <ItemGroup>
     <Reference Include="FluentValidation, Version=11.0.0.0, Culture=neutral, PublicKeyToken=7de548da2fbae0f0, processorArchitecture=MSIL">
-      <HintPath>..\packages\FluentValidation.11.9.2\lib\netstandard2.0\FluentValidation.dll</HintPath>
+      <HintPath>..\packages\FluentValidation.11.10.0\lib\netstandard2.0\FluentValidation.dll</HintPath>
     </Reference>
     <Reference Include="FontAwesome.Sharp, Version=6.6.0.0, Culture=neutral, PublicKeyToken=d16d1e4e568ec10f, processorArchitecture=MSIL">
       <HintPath>..\packages\FontAwesome.Sharp.6.6.0\lib\net48\FontAwesome.Sharp.dll</HintPath>
@@ -63,14 +64,19 @@
     <Reference Include="Guna.UI2, Version=2.0.4.6, Culture=neutral, PublicKeyToken=8b9d14aa5142e261, processorArchitecture=MSIL">
       <HintPath>..\packages\Guna.UI2.WinForms.2.0.4.6\lib\net48\Guna.UI2.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Design" />
     <Reference Include="System.Management" />
-    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.3\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL" />
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
     <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
@@ -97,6 +103,12 @@
     </Compile>
     <Compile Include="Forms\CustomMessageBox.Designer.cs">
       <DependentUpon>CustomMessageBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Game\NetworkGame\GameLobbyForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Game\NetworkGame\GameLobbyForm.Designer.cs">
+      <DependentUpon>GameLobbyForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Game\Games3on3\BaseGame3on3Form.cs">
       <SubType>Form</SubType>
@@ -152,6 +164,12 @@
     <Compile Include="Forms\Game\GameSettingsForm.Designer.cs">
       <DependentUpon>GameSettingsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Game\NetworkGame\StartNetworkGameForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Game\NetworkGame\StartNetworkGameForm.Designer.cs">
+      <DependentUpon>StartNetworkGameForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\ItemManagement\ItemManagementForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -183,10 +201,18 @@
       <DependentUpon>PurchaseResultForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\CustomExceptions\NotEnoughCoinsToStartGameException.cs" />
+    <Compile Include="Models\GameClientServer\GameClient.cs" />
+    <Compile Include="Models\GameClientServer\GameServer.cs" />
+    <Compile Include="Models\GameClientServer\LobbyPreviewEventArgs.cs" />
+    <Compile Include="Models\GameClientServer\LocalNetworkScanner.cs" />
     <Compile Include="Models\GameInfo\CoinReward.cs" />
     <Compile Include="Models\GameInfo\GameFormInfo.cs" />
     <Compile Include="Models\GameInfo\GameResult.cs" />
-    <Compile Include="Models\PlayerInfo\GamePreferences.cs" />
+    <Compile Include="Models\GameInfo\Settings\BotGameSettings.cs" />
+    <Compile Include="Models\GameInfo\Settings\FieldSize.cs" />
+    <Compile Include="Models\GameInfo\Settings\GameSettings.cs" />
+    <Compile Include="Models\GameInfo\Settings\NetworkGameSettings.cs" />
+    <Compile Include="Models\GameInfo\Settings\TwoPlayersGameSettings.cs" />
     <Compile Include="Models\PlayerInfo\Inventory\CountableItemsInventory.cs" />
     <Compile Include="Models\PlayerInfo\GameView.cs" />
     <Compile Include="Models\PlayerInfo\Inventory\IInventory.cs" />
@@ -194,6 +220,7 @@
     <Compile Include="Models\PlayerItemCreator\ItemEventArgs.cs" />
     <Compile Include="Models\PlayerItem\CountableItem.cs" />
     <Compile Include="Models\PlayerItem\ItemManager.cs" />
+    <Compile Include="Models\GameClientServer\FirewallManager.cs" />
     <Compile Include="Models\Utilities\FormUtilities\ButtonEventHandlers.cs" />
     <Compile Include="Models\Utilities\FormUtilities\CustomTitleBar.cs" />
     <Compile Include="Models\Utilities\Extensions.cs" />
@@ -201,7 +228,7 @@
     <Compile Include="Models\PlayerItemCreator\AvatarCreator.cs" />
     <Compile Include="Models\PlayerItem\AvatarRarity.cs" />
     <Compile Include="Models\PlayerItem\ColorItem.cs" />
-    <Compile Include="Models\PlayerInfo\PlayerPreferences.cs" />
+    <Compile Include="Models\PlayerInfo\PlayerVisualSettings.cs" />
     <Compile Include="Models\PlayerItemCreator\ImageCreator.cs" />
     <Compile Include="Models\PlayerItem\ImageItem.cs" />
     <Compile Include="Models\PlayerInfo\Player.cs" />
@@ -243,6 +270,9 @@
     <EmbeddedResource Include="Forms\CustomMessageBox.resx">
       <DependentUpon>CustomMessageBox.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Game\NetworkGame\GameLobbyForm.resx">
+      <DependentUpon>GameLobbyForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Game\Games3on3\BaseGame3on3Form.resx">
       <DependentUpon>BaseGame3on3Form.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -271,6 +301,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Game\GameSettingsForm.resx">
       <DependentUpon>GameSettingsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Game\NetworkGame\StartNetworkGameForm.resx">
+      <DependentUpon>StartNetworkGameForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ItemManagement\ItemManagementForm.resx">
       <DependentUpon>ItemManagementForm.cs</DependentUpon>
@@ -306,7 +339,8 @@
       <DependentUpon>ShopForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <None Include="Forms\ItemManagement\ItemManagementFormDiagram.cd" />
+    <None Include="Forms\ItemManagement\ItemManagementFormsDiagram.cd" />
+    <None Include="Models\GameInfo\Settings\SettingsDiagram.cd" />
     <None Include="Models\PlayerItemCreator\ItemCreatorsDiagram.cd" />
     <None Include="Models\PlayerItem\ItemsDiagram.cd" />
     <None Include="Models\Utilities\FormUtilities\ControlEventHandlersDiagram.cd" />
@@ -620,5 +654,6 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
