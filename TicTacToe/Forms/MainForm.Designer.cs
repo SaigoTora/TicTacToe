@@ -35,7 +35,7 @@
 			this.panelLeft = new Guna.UI2.WinForms.Guna2Panel();
 			this.panelMenu = new Guna.UI2.WinForms.Guna2Panel();
 			this.buttonNetworkGame = new Guna.UI2.WinForms.Guna2GradientButton();
-			this.buttonTwoPlayers = new Guna.UI2.WinForms.Guna2GradientButton();
+			this.buttonSinglePCGame = new Guna.UI2.WinForms.Guna2GradientButton();
 			this.buttonPlay = new Guna.UI2.WinForms.Guna2GradientButton();
 			this.buttonExit = new Guna.UI2.WinForms.Guna2GradientButton();
 			this.buttonShop = new Guna.UI2.WinForms.Guna2GradientButton();
@@ -131,7 +131,7 @@
 			// panelMenu
 			// 
 			this.panelMenu.Controls.Add(this.buttonNetworkGame);
-			this.panelMenu.Controls.Add(this.buttonTwoPlayers);
+			this.panelMenu.Controls.Add(this.buttonSinglePCGame);
 			this.panelMenu.Controls.Add(this.buttonPlay);
 			this.panelMenu.Controls.Add(this.buttonExit);
 			this.panelMenu.Controls.Add(this.buttonShop);
@@ -172,33 +172,33 @@
 			this.buttonNetworkGame.Text = "Local Game";
 			this.buttonNetworkGame.Click += new System.EventHandler(this.ButtonNetworkGame_Click);
 			// 
-			// buttonTwoPlayers
+			// buttonSinglePCGame
 			// 
-			this.buttonTwoPlayers.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+			this.buttonSinglePCGame.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.buttonTwoPlayers.Animated = true;
-			this.buttonTwoPlayers.BackColor = System.Drawing.Color.Transparent;
-			this.buttonTwoPlayers.BorderRadius = 20;
-			this.buttonTwoPlayers.BorderStyle = System.Drawing.Drawing2D.DashStyle.Custom;
-			this.buttonTwoPlayers.BorderThickness = 1;
-			this.buttonTwoPlayers.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.buttonTwoPlayers.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-			this.buttonTwoPlayers.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-			this.buttonTwoPlayers.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-			this.buttonTwoPlayers.DisabledState.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-			this.buttonTwoPlayers.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-			this.buttonTwoPlayers.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(176)))), ((int)(((byte)(143)))));
-			this.buttonTwoPlayers.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(128)))), ((int)(((byte)(109)))));
-			this.buttonTwoPlayers.Font = new System.Drawing.Font("Cooper Black", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.buttonTwoPlayers.ForeColor = System.Drawing.Color.White;
-			this.buttonTwoPlayers.GradientMode = System.Drawing.Drawing2D.LinearGradientMode.BackwardDiagonal;
-			this.buttonTwoPlayers.Location = new System.Drawing.Point(15, 75);
-			this.buttonTwoPlayers.Name = "buttonTwoPlayers";
-			this.buttonTwoPlayers.Size = new System.Drawing.Size(280, 50);
-			this.buttonTwoPlayers.TabIndex = 4;
-			this.buttonTwoPlayers.TabStop = false;
-			this.buttonTwoPlayers.Text = "Two Players";
-			this.buttonTwoPlayers.Click += new System.EventHandler(this.ButtonTwoPlayers_Click);
+			this.buttonSinglePCGame.Animated = true;
+			this.buttonSinglePCGame.BackColor = System.Drawing.Color.Transparent;
+			this.buttonSinglePCGame.BorderRadius = 20;
+			this.buttonSinglePCGame.BorderStyle = System.Drawing.Drawing2D.DashStyle.Custom;
+			this.buttonSinglePCGame.BorderThickness = 1;
+			this.buttonSinglePCGame.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.buttonSinglePCGame.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+			this.buttonSinglePCGame.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+			this.buttonSinglePCGame.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+			this.buttonSinglePCGame.DisabledState.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+			this.buttonSinglePCGame.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+			this.buttonSinglePCGame.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(176)))), ((int)(((byte)(143)))));
+			this.buttonSinglePCGame.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(128)))), ((int)(((byte)(109)))));
+			this.buttonSinglePCGame.Font = new System.Drawing.Font("Cooper Black", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.buttonSinglePCGame.ForeColor = System.Drawing.Color.White;
+			this.buttonSinglePCGame.GradientMode = System.Drawing.Drawing2D.LinearGradientMode.BackwardDiagonal;
+			this.buttonSinglePCGame.Location = new System.Drawing.Point(15, 75);
+			this.buttonSinglePCGame.Name = "buttonSinglePCGame";
+			this.buttonSinglePCGame.Size = new System.Drawing.Size(280, 50);
+			this.buttonSinglePCGame.TabIndex = 4;
+			this.buttonSinglePCGame.TabStop = false;
+			this.buttonSinglePCGame.Text = "Single PC";
+			this.buttonSinglePCGame.Click += new System.EventHandler(this.ButtonSinglePCGame_Click);
 			// 
 			// buttonPlay
 			// 
@@ -635,7 +635,7 @@
 		private FontAwesome.Sharp.IconButton buttonHard;
 		private System.Windows.Forms.NumericUpDown numericUpDownNumberOfRounds;
 		private System.Windows.Forms.PictureBox pictureBoxCoin;
-		private Guna.UI2.WinForms.Guna2GradientButton buttonTwoPlayers;
+		private Guna.UI2.WinForms.Guna2GradientButton buttonSinglePCGame;
 		private Guna.UI2.WinForms.Guna2GradientButton buttonNetworkGame;
 	}
 }

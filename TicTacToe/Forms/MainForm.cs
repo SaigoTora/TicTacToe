@@ -58,7 +58,7 @@ namespace TicTacToe.Forms
 			DisplayPlayerData();
 
 			_pictureBoxEventHandlers.SubscribeToHover(pictureBoxAvatar);
-			_buttonEventHandlers.SubscribeToHover(buttonPlay, buttonTwoPlayers, buttonNetworkGame,
+			_buttonEventHandlers.SubscribeToHover(buttonPlay, buttonSinglePCGame, buttonNetworkGame,
 				buttonProfile, buttonShop, buttonExit);
 			_labelEventHandlers.SubscribeToHoverUnderline(labelAuthor);
 		}
@@ -191,7 +191,7 @@ namespace TicTacToe.Forms
 				gameForm.Show();
 			}
 		}
-		private void ButtonTwoPlayers_Click(object sender, EventArgs e)
+		private void ButtonSinglePCGame_Click(object sender, EventArgs e)
 		{
 			RoundManager roundManager = new RoundManager((int)numericUpDownNumberOfRounds.Value);
 			GameSettingsForm gameSettingsForm = new GameSettingsForm(this, _player, roundManager, GameSettingsForm.GameType.SinglePCGame);
@@ -261,7 +261,7 @@ namespace TicTacToe.Forms
 		{
 			int value = (int)numericUpDownNumberOfRounds.Value;
 			_player.BotGameSettings.NumberOfRounds = value;
-			_player.TwoPlayersGameSettings.NumberOfRounds = value;
+			_player.SinglePCGameSettings.NumberOfRounds = value;
 			_player.NetworkGameSettings.NumberOfRounds = value;
 		}
 

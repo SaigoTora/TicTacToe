@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.Globalization;
 using System.Windows.Forms;
 
@@ -9,8 +10,9 @@ namespace TicTacToe
 {
 	internal static class Program
 	{
-		internal static string SerializePath = $"{Environment.CurrentDirectory}\\playerInfo.txt";
-		internal static readonly string EncryptKey = "pR7sF2xK6lO4mN7y";
+		internal static string SerializePath = $"{Environment.CurrentDirectory}\\" +
+			$"{ConfigurationManager.AppSettings["serializePath"]}";
+		internal static readonly string EncryptKey = ConfigurationManager.AppSettings["encryptKey"];
 
 		/// <summary>
 		/// <summary>

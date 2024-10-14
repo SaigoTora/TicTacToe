@@ -116,11 +116,11 @@
     <Compile Include="Forms\Game\Games3on3\BaseGame3on3Form.designer.cs">
       <DependentUpon>BaseGame3on3Form.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Game\Games3on3\Game3on3TwoPlayersForm.cs">
+    <Compile Include="Forms\Game\Games3on3\Game3on3SinglePCForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Game\Games3on3\Game3on3TwoPlayersForm.Designer.cs">
-      <DependentUpon>Game3on3TwoPlayersForm.cs</DependentUpon>
+    <Compile Include="Forms\Game\Games3on3\Game3on3SinglePCForm.Designer.cs">
+      <DependentUpon>Game3on3SinglePCForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Game\Games5on5\BaseGame5on5Form.cs">
       <SubType>Form</SubType>
@@ -140,11 +140,11 @@
     <Compile Include="Forms\Game\Games3on3\Game3on3BotForm.Designer.cs">
       <DependentUpon>Game3on3BotForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Game\Games5on5\Game5on5TwoPlayersForm.cs">
+    <Compile Include="Forms\Game\Games5on5\Game5on5SinglePCForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Game\Games5on5\Game5on5TwoPlayersForm.Designer.cs">
-      <DependentUpon>Game5on5TwoPlayersForm.cs</DependentUpon>
+    <Compile Include="Forms\Game\Games5on5\Game5on5SinglePCForm.Designer.cs">
+      <DependentUpon>Game5on5SinglePCForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Game\Games7on7\BaseGame7on7Form.cs">
       <SubType>Form</SubType>
@@ -152,11 +152,11 @@
     <Compile Include="Forms\Game\Games7on7\BaseGame7on7Form.Designer.cs">
       <DependentUpon>BaseGame7on7Form.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Game\Games7on7\Game7on7TwoPlayersForm.cs">
+    <Compile Include="Forms\Game\Games7on7\Game7on7SinglePCForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Game\Games7on7\Game7on7TwoPlayersForm.Designer.cs">
-      <DependentUpon>Game7on7TwoPlayersForm.cs</DependentUpon>
+    <Compile Include="Forms\Game\Games7on7\Game7on7SinglePCForm.Designer.cs">
+      <DependentUpon>Game7on7SinglePCForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Game\GameSettingsForm.cs">
       <SubType>Form</SubType>
@@ -277,8 +277,8 @@
       <DependentUpon>BaseGame3on3Form.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Game\Games3on3\Game3on3TwoPlayersForm.resx">
-      <DependentUpon>Game3on3TwoPlayersForm.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Game\Games3on3\Game3on3SinglePCForm.resx">
+      <DependentUpon>Game3on3SinglePCForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Game\Games5on5\BaseGame5on5Form.resx">
       <DependentUpon>BaseGame5on5Form.cs</DependentUpon>
@@ -290,14 +290,14 @@
     <EmbeddedResource Include="Forms\Game\Games3on3\Game3on3BotForm.resx">
       <DependentUpon>Game3on3BotForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Game\Games5on5\Game5on5TwoPlayersForm.resx">
-      <DependentUpon>Game5on5TwoPlayersForm.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Game\Games5on5\Game5on5SinglePCForm.resx">
+      <DependentUpon>Game5on5SinglePCForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Game\Games7on7\BaseGame7on7Form.resx">
       <DependentUpon>BaseGame7on7Form.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Game\Games7on7\Game7on7TwoPlayersForm.resx">
-      <DependentUpon>Game7on7TwoPlayersForm.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Game\Games7on7\Game7on7SinglePCForm.resx">
+      <DependentUpon>Game7on7SinglePCForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Game\GameSettingsForm.resx">
       <DependentUpon>GameSettingsForm.cs</DependentUpon>

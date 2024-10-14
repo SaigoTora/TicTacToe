@@ -75,7 +75,7 @@ namespace TicTacToe.Forms.Game
 		{
 			TwoPlayersGameSettings settings = default;
 			if (_gameType == GameType.SinglePCGame)
-				settings = _player.TwoPlayersGameSettings;
+				settings = _player.SinglePCGameSettings;
 			else if (_gameType == GameType.NetworkGame)
 				settings = _player.NetworkGameSettings;
 			string opponentName = settings.OpponentName;
@@ -149,15 +149,15 @@ namespace TicTacToe.Forms.Game
 			switch (_fieldSize)
 			{
 				case FieldSize.Size3on3:
-					gameForm = new Game3on3TwoPlayersForm(_mainForm, _player, _roundManager,
+					gameForm = new Game3on3SinglePCForm(_mainForm, _player, _roundManager,
 						CellType.Cross, _isTimerEnabled, opponentAvatarImage, textBoxOpponentName.Text);
 					break;
 				case FieldSize.Size5on5:
-					gameForm = new Game5on5TwoPlayersForm(_mainForm, _player, _roundManager,
+					gameForm = new Game5on5SinglePCForm(_mainForm, _player, _roundManager,
 						CellType.Cross, _isTimerEnabled, opponentAvatarImage, textBoxOpponentName.Text);
 					break;
 				case FieldSize.Size7on7:
-					gameForm = new Game7on7TwoPlayersForm(_mainForm, _player, _roundManager,
+					gameForm = new Game7on7SinglePCForm(_mainForm, _player, _roundManager,
 						CellType.Cross, _isTimerEnabled, opponentAvatarImage, textBoxOpponentName.Text);
 					break;
 				default:
@@ -219,7 +219,7 @@ namespace TicTacToe.Forms.Game
 			}
 
 			if (_gameType == GameType.SinglePCGame)
-				_player.TwoPlayersGameSettings.FieldSize = _fieldSize;
+				_player.SinglePCGameSettings.FieldSize = _fieldSize;
 			else if (_gameType == GameType.NetworkGame)
 				_player.NetworkGameSettings.FieldSize = _fieldSize;
 		}
@@ -244,7 +244,7 @@ namespace TicTacToe.Forms.Game
 
 			_isTimerEnabled = !_isTimerEnabled;
 			if (_gameType == GameType.SinglePCGame)
-				_player.TwoPlayersGameSettings.IsTimerEnabled = _isTimerEnabled;
+				_player.SinglePCGameSettings.IsTimerEnabled = _isTimerEnabled;
 			else if (_gameType == GameType.NetworkGame)
 				_player.NetworkGameSettings.IsTimerEnabled = _isTimerEnabled;
 		}
@@ -258,7 +258,7 @@ namespace TicTacToe.Forms.Game
 
 			_isGameAssistsEnabled = !_isGameAssistsEnabled;
 			if (_gameType == GameType.SinglePCGame)
-				_player.TwoPlayersGameSettings.IsGameAssistsEnabled = _isGameAssistsEnabled;
+				_player.SinglePCGameSettings.IsGameAssistsEnabled = _isGameAssistsEnabled;
 			else if (_gameType == GameType.NetworkGame)
 				_player.NetworkGameSettings.IsGameAssistsEnabled = _isGameAssistsEnabled;
 		}
@@ -338,7 +338,7 @@ namespace TicTacToe.Forms.Game
 				buttonChangeOpponentName.IconColor = _buttonChangeNameColor.Default;
 				if (_tempPlayer.Name != textBoxOpponentName.Text)
 				{
-					_player.TwoPlayersGameSettings.OpponentName = textBoxOpponentName.Text;
+					_player.SinglePCGameSettings.OpponentName = textBoxOpponentName.Text;
 					CustomMessageBox.Show("The second player's nickname has been successfully changed.", "Success",
 						CustomMessageBoxButtons.OK, CustomMessageBoxIcon.OK);
 				}
@@ -374,7 +374,7 @@ namespace TicTacToe.Forms.Game
 
 		private void CreateAvatars()
 		{
-			Avatar opponentAvatar = _player.TwoPlayersGameSettings.OpponentAvatar;
+			Avatar opponentAvatar = _player.SinglePCGameSettings.OpponentAvatar;
 
 			foreach (Item item in _player.ItemsInventory.GetItems())
 				if (item is Avatar avatar && item.Name != _player.VisualSettings.Avatar.Name)
@@ -400,7 +400,7 @@ namespace TicTacToe.Forms.Game
 			DeselectPreviousItem(_avatarPictureBoxes);
 			DefaultSelect(selectedPicture);
 			opponentAvatarImage = selectedPicture.Image;
-			_player.TwoPlayersGameSettings.OpponentAvatar =
+			_player.SinglePCGameSettings.OpponentAvatar =
 				(Avatar)ItemManager.GetFullItem(e.Item);
 		}
 		private void DeselectPreviousItem(List<PictureBox> list)

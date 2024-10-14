@@ -7,13 +7,13 @@ using TicTacToe.Models.PlayerInfo;
 using TicTacToe.Models.Utilities.FormUtilities;
 using TicTacToeLibrary;
 
-namespace TicTacToe.Forms.Game.Games7on7
+namespace TicTacToe.Forms.Game.Games5on5
 {
-	internal partial class Game7on7TwoPlayersForm : BaseGame7on7Form
+	internal partial class Game5on5SinglePCForm : BaseGame5on5Form
 	{
 		private CellType _currentCellType;
 
-		internal Game7on7TwoPlayersForm(MainForm mainForm, Player player, RoundManager roundManager,
+		internal Game5on5SinglePCForm(MainForm mainForm, Player player, RoundManager roundManager,
 					CellType playerCellType, bool isTimerEnabled, Image opponentAvatar, string opponentName)
 					: base(mainForm, player, new CoinReward(), roundManager, playerCellType, isTimerEnabled, false)
 		{
@@ -25,9 +25,9 @@ namespace TicTacToe.Forms.Game.Games7on7
 			labelOpponentName.Text = opponentName;
 		}
 
-		private void Game7on7TwoPlayersForm_Load(object sender, EventArgs e)
+		private void Game5on5SinglePCForm_Load(object sender, EventArgs e)
 		{
-			Game7on7TwoPlayersForm nextGameForm = new Game7on7TwoPlayersForm(mainForm, player, roundManager,
+			Game5on5SinglePCForm nextGameForm = new Game5on5SinglePCForm(mainForm, player, roundManager,
 			   opponentCellType, isTimerEnabled, pictureBoxOpponentAvatar.Image, labelOpponentName.Text);
 			InitializeBaseGame(PictureCell_Click, nextGameForm);
 			ManagePictureCellsEventHover(PictureCell_MouseEnter, PictureCell_MouseLeave, true);
@@ -63,7 +63,7 @@ namespace TicTacToe.Forms.Game.Games7on7
 				PictureBoxCell_DefaultMouseLeave(pictureBox);
 		}
 
-		private void Game7on7TwoPlayersForm_FormClosed(object sender, FormClosedEventArgs e)
+		private void Game5on5SinglePCForm_FormClosed(object sender, FormClosedEventArgs e)
 		{
 			ManagePictureCellsEventHover(PictureCell_MouseEnter, PictureCell_MouseLeave, false);
 		}

@@ -18,7 +18,7 @@ namespace TicTacToe.Models.PlayerInfo
 
 		internal PlayerVisualSettings VisualSettings { get; private set; }
 		internal BotGameSettings BotGameSettings { get; private set; }
-		internal TwoPlayersGameSettings TwoPlayersGameSettings { get; private set; }
+		internal TwoPlayersGameSettings SinglePCGameSettings { get; private set; }
 		internal NetworkGameSettings NetworkGameSettings { get; private set; }
 
 		internal ItemsInventory ItemsInventory { get; private set; }
@@ -35,7 +35,7 @@ namespace TicTacToe.Models.PlayerInfo
 		{
 			VisualSettings = new PlayerVisualSettings();
 			BotGameSettings = new BotGameSettings();
-			TwoPlayersGameSettings = new TwoPlayersGameSettings();
+			SinglePCGameSettings = new TwoPlayersGameSettings();
 			NetworkGameSettings = new NetworkGameSettings();
 
 			ItemsInventory = new ItemsInventory();

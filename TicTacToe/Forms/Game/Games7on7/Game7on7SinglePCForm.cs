@@ -7,13 +7,13 @@ using TicTacToe.Models.PlayerInfo;
 using TicTacToe.Models.Utilities.FormUtilities;
 using TicTacToeLibrary;
 
-namespace TicTacToe.Forms.Game.Games3on3
+namespace TicTacToe.Forms.Game.Games7on7
 {
-	internal partial class Game3on3TwoPlayersForm : BaseGame3on3Form
+	internal partial class Game7on7SinglePCForm : BaseGame7on7Form
 	{
 		private CellType _currentCellType;
 
-		internal Game3on3TwoPlayersForm(MainForm mainForm, Player player, RoundManager roundManager,
+		internal Game7on7SinglePCForm(MainForm mainForm, Player player, RoundManager roundManager,
 					CellType playerCellType, bool isTimerEnabled, Image opponentAvatar, string opponentName)
 					: base(mainForm, player, new CoinReward(), roundManager, playerCellType, isTimerEnabled, false)
 		{
@@ -25,14 +25,12 @@ namespace TicTacToe.Forms.Game.Games3on3
 			labelOpponentName.Text = opponentName;
 		}
 
-		private void Game3on3TwoPlayersForm_Load(object sender, EventArgs e)
+		private void Game7on7SinglePCForm_Load(object sender, EventArgs e)
 		{
-			Game3on3TwoPlayersForm nextGameForm = new Game3on3TwoPlayersForm(mainForm, player, roundManager,
+			Game7on7SinglePCForm nextGameForm = new Game7on7SinglePCForm(mainForm, player, roundManager,
 			   opponentCellType, isTimerEnabled, pictureBoxOpponentAvatar.Image, labelOpponentName.Text);
 			InitializeBaseGame(PictureCell_Click, nextGameForm);
 			ManagePictureCellsEventHover(PictureCell_MouseEnter, PictureCell_MouseLeave, true);
-
-			SetPlayerNamesSize(labelPlayerName, labelOpponentName);
 
 			_currentCellType = playerCellType;
 			if (opponentCellType == CellType.Cross)
@@ -65,7 +63,7 @@ namespace TicTacToe.Forms.Game.Games3on3
 				PictureBoxCell_DefaultMouseLeave(pictureBox);
 		}
 
-		private void Game3on3TwoPlayersForm_FormClosed(object sender, FormClosedEventArgs e)
+		private void Game7on7SinglePCForm_FormClosed(object sender, FormClosedEventArgs e)
 		{
 			ManagePictureCellsEventHover(PictureCell_MouseEnter, PictureCell_MouseLeave, false);
 		}

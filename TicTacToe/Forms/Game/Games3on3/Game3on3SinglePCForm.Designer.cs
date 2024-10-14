@@ -1,6 +1,6 @@
-﻿namespace TicTacToe.Forms.Game.Games5on5
+﻿namespace TicTacToe.Forms.Game.Games3on3
 {
-	partial class Game5on5TwoPlayersForm
+	partial class Game3on3SinglePCForm
 	{
 		/// <summary>
 		/// Required designer variable.
@@ -30,15 +30,14 @@
 		{
 			this.SuspendLayout();
 			// 
-			// Game5on5TwoPlayersForm
+			// Game3on3SinglePCForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(825, 1010);
-			this.Name = "Game5on5TwoPlayersForm";
-			this.Text = "Game5on5TwoPlayersForm";
-			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Game5on5TwoPlayersForm_FormClosed);
-			this.Load += new System.EventHandler(this.Game5on5TwoPlayersForm_Load);
+			this.ClientSize = new System.Drawing.Size(618, 822);
+			this.Name = "Game3on3SinglePCForm";
+			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Game3on3SinglePCForm_FormClosed);
+			this.Load += new System.EventHandler(this.Game3on3SinglePCForm_Load);
 			this.ResumeLayout(false);
 
 		}
