@@ -5,7 +5,6 @@ using System.Net.NetworkInformation;
 using System.Net.Sockets;
 using System.Threading.Tasks;
 
-using TicTacToe.Forms;
 using TicTacToe.Models.GameInfo.Settings;
 
 namespace TicTacToe.Models.GameClientServer
@@ -86,7 +85,6 @@ namespace TicTacToe.Models.GameClientServer
 
 			foreach (var ip in ipAddresses)
 				tasks.Add(IsPortOpenAsync(ip));
-
 			bool[] results = await Task.WhenAll(tasks);
 
 			for (int i = 0; i < results.Length; i++)
@@ -95,7 +93,7 @@ namespace TicTacToe.Models.GameClientServer
 
 			return devicesWithOpenPort;
 		}
-		private async Task<bool> IsPortOpenAsync(IPAddress ip, int timeout = 200)
+		private async Task<bool> IsPortOpenAsync(IPAddress ip, int timeout = 300)
 		{
 			try
 			{
@@ -115,11 +113,8 @@ namespace TicTacToe.Models.GameClientServer
 					return true;
 				}
 			}
-			catch (Exception ex)
-			{
-				CustomMessageBox.Show(ex.Message);
-				return false;
-			}
+			catch
+			{ return false; }
 		}
 		private void OnCreateLobbyPreview(LobbyPreviewEventArgs e)
 		{

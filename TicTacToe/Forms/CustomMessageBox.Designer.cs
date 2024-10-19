@@ -145,7 +145,6 @@
 			this.Name = "CustomMessageBox";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.TopMost = true;
-			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.CustomMessageBox_FormClosed);
 			((System.ComponentModel.ISupportInitialize)(this.iconPicture)).EndInit();
 			this.flpButtons.ResumeLayout(false);
 			this.ResumeLayout(false);

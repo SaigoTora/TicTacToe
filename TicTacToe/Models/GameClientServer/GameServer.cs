@@ -74,7 +74,7 @@ namespace TicTacToe.Models.GameClientServer
 			NetworkGameSettings networkGameSettings = new NetworkGameSettings(settings.Description,
 				settings.CoinBet, _player.Name, _player.VisualSettings.Avatar,
 				settings.NumberOfRounds, settings.FieldSize,
-				settings.IsTimerEnabled, settings.IsGameAssistsEnabled);
+				settings.IsTimerEnabled, settings.IsGameAssistsEnabled, 0, 0);
 
 			return networkGameSettings;
 		}
