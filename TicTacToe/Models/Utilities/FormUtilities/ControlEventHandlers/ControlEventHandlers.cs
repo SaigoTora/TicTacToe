@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace TicTacToe.Models.Utilities.FormUtilities
+namespace TicTacToe.Models.Utilities.FormUtilities.ControlEventHandlers
 {
 	internal abstract class ControlEventHandlers<T> where T : Control
 	{

@@ -2,11 +2,10 @@
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace TicTacToe.Models.Utilities.FormUtilities
+namespace TicTacToe.Models.Utilities.FormUtilities.ControlEventHandlers
 {
 	internal class LabelEventHandlers : ControlEventHandlers<Label>
 	{
-
 		#region Label hover
 		internal void SubscribeToHoverUnderline(params Label[] labels)
 		{

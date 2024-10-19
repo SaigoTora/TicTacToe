@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using TicTacToe.Models.GameInfo;
 using TicTacToe.Models.PlayerInfo;
 using TicTacToe.Models.Utilities.FormUtilities;
+using TicTacToe.Models.Utilities.FormUtilities.ControlEventHandlers;
 using TicTacToeLibrary;
 
 namespace TicTacToe.Forms

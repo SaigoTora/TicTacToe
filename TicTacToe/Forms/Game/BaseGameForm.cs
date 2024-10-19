@@ -12,7 +12,7 @@ using TicTacToe.Models.GameInfo;
 using TicTacToe.Models.PlayerInfo;
 using TicTacToe.Models.PlayerItem;
 using TicTacToe.Models.Utilities;
-using TicTacToe.Models.Utilities.FormUtilities;
+using TicTacToe.Models.Utilities.FormUtilities.ControlEventHandlers;
 using TicTacToe.Properties;
 using TicTacToeLibrary;
 

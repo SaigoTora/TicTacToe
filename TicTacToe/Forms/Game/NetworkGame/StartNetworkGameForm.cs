@@ -12,6 +12,7 @@ using TicTacToe.Models.GameClientServer;
 using TicTacToe.Models.GameInfo;
 using TicTacToe.Models.PlayerInfo;
 using TicTacToe.Models.Utilities.FormUtilities;
+using TicTacToe.Models.Utilities.FormUtilities.ControlEventHandlers;
 
 namespace TicTacToe.Forms.Game.NetworkGame
 {
@@ -29,7 +30,7 @@ namespace TicTacToe.Forms.Game.NetworkGame
 		private readonly RoundManager _roundManager;
 
 		private readonly GameClient _gameClient;
-		private LocalNetworkScanner _localNetworkScanner;
+		private readonly LocalNetworkScanner _localNetworkScanner;
 		private readonly Dictionary<Guna2Panel, string> _dictionaryIP = new Dictionary<Guna2Panel, string>();
 
 		private readonly ButtonEventHandlers _buttonEventHandlers = new ButtonEventHandlers();
@@ -52,7 +53,7 @@ namespace TicTacToe.Forms.Game.NetworkGame
 		}
 		private async void StartNetworkGameForm_Load(object sender, EventArgs e)
 		{
-			_buttonEventHandlers.SubscribeToHover(buttonCreateGame);
+			_buttonEventHandlers.SubscribeToHover(buttonCreateGame, buttonJoin);
 			await ScanLocalNetworkAsync();
 
 			CreateExampleData(new System.Net.IPAddress(new byte[] { 192, 168, 1, 12 }));

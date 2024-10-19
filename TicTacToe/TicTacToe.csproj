@@ -221,10 +221,10 @@
     <Compile Include="Models\PlayerItem\CountableItem.cs" />
     <Compile Include="Models\PlayerItem\ItemManager.cs" />
     <Compile Include="Models\GameClientServer\FirewallManager.cs" />
-    <Compile Include="Models\Utilities\FormUtilities\ButtonEventHandlers.cs" />
+    <Compile Include="Models\Utilities\FormUtilities\ControlEventHandlers\ButtonEventHandlers.cs" />
     <Compile Include="Models\Utilities\FormUtilities\CustomTitleBar.cs" />
     <Compile Include="Models\Utilities\Extensions.cs" />
-    <Compile Include="Models\Utilities\FormUtilities\ControlEventHandlers.cs" />
+    <Compile Include="Models\Utilities\FormUtilities\ControlEventHandlers\ControlEventHandlers.cs" />
     <Compile Include="Models\PlayerItemCreator\AvatarCreator.cs" />
     <Compile Include="Models\PlayerItem\AvatarRarity.cs" />
     <Compile Include="Models\PlayerItem\ColorItem.cs" />
@@ -245,8 +245,8 @@
     <Compile Include="Models\PlayerItemCreator\ColorCreator.cs" />
     <Compile Include="Models\PlayerItemCreator\ItemCreator.cs" />
     <Compile Include="Models\GameInfo\CoinsCalculator.cs" />
-    <Compile Include="Models\Utilities\FormUtilities\LabelEventHandlers.cs" />
-    <Compile Include="Models\Utilities\FormUtilities\PictureBoxEventHandlers.cs" />
+    <Compile Include="Models\Utilities\FormUtilities\ControlEventHandlers\LabelEventHandlers.cs" />
+    <Compile Include="Models\Utilities\FormUtilities\ControlEventHandlers\PictureBoxEventHandlers.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Forms\Game\GameResultForm.cs">
@@ -343,7 +343,7 @@
     <None Include="Models\GameInfo\Settings\SettingsDiagram.cd" />
     <None Include="Models\PlayerItemCreator\ItemCreatorsDiagram.cd" />
     <None Include="Models\PlayerItem\ItemsDiagram.cd" />
-    <None Include="Models\Utilities\FormUtilities\ControlEventHandlersDiagram.cd" />
+    <None Include="Models\Utilities\FormUtilities\ControlEventHandlers\ControlEventHandlersDiagram.cd" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

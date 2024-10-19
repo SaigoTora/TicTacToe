@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using TicTacToe.Models.PlayerInfo;
 using TicTacToe.Models.PlayerItem;
 using TicTacToe.Models.Utilities.FormUtilities;
+using TicTacToe.Models.Utilities.FormUtilities.ControlEventHandlers;
 
 namespace TicTacToe.Forms.ItemManagement.Shop
 {
@@ -60,19 +61,19 @@ namespace TicTacToe.Forms.ItemManagement.Shop
 		}
 		private void SetBackgroundColor(Avatar avatar)
 		{
-			(Color Common, Color Rare, Color Legendary) backColor =
+			(Color Common, Color Rare, Color Legendary) =
 				(Color.FromArgb(30, 35, 30), Color.FromArgb(30, 30, 40), Color.FromArgb(25, 20, 35));
 
 			switch (avatar.Rarity)
 			{
 				case AvatarRarity.Common:
-					BackColor = backColor.Common;
+					BackColor = Common;
 					break;
 				case AvatarRarity.Rare:
-					BackColor = backColor.Rare;
+					BackColor = Rare;
 					break;
 				case AvatarRarity.Legendary:
-					BackColor = backColor.Legendary;
+					BackColor = Legendary;
 					break;
 				default:
 					break;
