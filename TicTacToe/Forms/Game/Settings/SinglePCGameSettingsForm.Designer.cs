@@ -1,6 +1,6 @@
-﻿namespace TicTacToe.Forms.Game
+﻿namespace TicTacToe.Forms.Game.Settings
 {
-	partial class GameSettingsForm
+	partial class SinglePCGameSettingsForm
 	{
 		/// <summary>
 		/// Required designer variable.
@@ -32,7 +32,6 @@
 			this.label5on5 = new System.Windows.Forms.Label();
 			this.label7on7 = new System.Windows.Forms.Label();
 			this.buttonTimerEnabled = new FontAwesome.Sharp.IconButton();
-			this.buttonGameAssistsEnabled = new FontAwesome.Sharp.IconButton();
 			this.buttonPlay = new Guna.UI2.WinForms.Guna2GradientButton();
 			this.flpAvatar = new System.Windows.Forms.FlowLayoutPanel();
 			this.buttonChangeOpponentName = new FontAwesome.Sharp.IconButton();
@@ -57,6 +56,8 @@
 			// 
 			// label5on5
 			// 
+			this.label5on5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			this.label5on5.AutoSize = true;
 			this.label5on5.BackColor = System.Drawing.Color.Transparent;
 			this.label5on5.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -114,34 +115,6 @@
 			this.buttonTimerEnabled.MouseEnter += new System.EventHandler(this.EnableButton_MouseEnter);
 			this.buttonTimerEnabled.MouseLeave += new System.EventHandler(this.EnableButton_MouseLeave);
 			// 
-			// buttonGameAssistsEnabled
-			// 
-			this.buttonGameAssistsEnabled.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.buttonGameAssistsEnabled.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(35)))), ((int)(((byte)(30)))));
-			this.buttonGameAssistsEnabled.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.buttonGameAssistsEnabled.FlatAppearance.BorderSize = 0;
-			this.buttonGameAssistsEnabled.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.buttonGameAssistsEnabled.Font = new System.Drawing.Font("Trebuchet MS", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.buttonGameAssistsEnabled.ForeColor = System.Drawing.Color.White;
-			this.buttonGameAssistsEnabled.IconChar = FontAwesome.Sharp.IconChar.Circle;
-			this.buttonGameAssistsEnabled.IconColor = System.Drawing.Color.White;
-			this.buttonGameAssistsEnabled.IconFont = FontAwesome.Sharp.IconFont.Auto;
-			this.buttonGameAssistsEnabled.IconSize = 30;
-			this.buttonGameAssistsEnabled.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			this.buttonGameAssistsEnabled.Location = new System.Drawing.Point(232, 560);
-			this.buttonGameAssistsEnabled.Margin = new System.Windows.Forms.Padding(0);
-			this.buttonGameAssistsEnabled.Name = "buttonGameAssistsEnabled";
-			this.buttonGameAssistsEnabled.Size = new System.Drawing.Size(220, 40);
-			this.buttonGameAssistsEnabled.TabIndex = 8;
-			this.buttonGameAssistsEnabled.TabStop = false;
-			this.buttonGameAssistsEnabled.Text = " Game Assists";
-			this.buttonGameAssistsEnabled.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			this.buttonGameAssistsEnabled.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-			this.buttonGameAssistsEnabled.UseVisualStyleBackColor = false;
-			this.buttonGameAssistsEnabled.Click += new System.EventHandler(this.ButtonGameAssistsEnabled_Click);
-			this.buttonGameAssistsEnabled.MouseEnter += new System.EventHandler(this.EnableButton_MouseEnter);
-			this.buttonGameAssistsEnabled.MouseLeave += new System.EventHandler(this.EnableButton_MouseLeave);
-			// 
 			// buttonPlay
 			// 
 			this.buttonPlay.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -164,7 +137,7 @@
 			this.buttonPlay.Location = new System.Drawing.Point(619, 608);
 			this.buttonPlay.Name = "buttonPlay";
 			this.buttonPlay.Size = new System.Drawing.Size(260, 50);
-			this.buttonPlay.TabIndex = 9;
+			this.buttonPlay.TabIndex = 8;
 			this.buttonPlay.TabStop = false;
 			this.buttonPlay.Text = "Play";
 			this.buttonPlay.Click += new System.EventHandler(this.ButtonPlay_Click);
@@ -215,6 +188,8 @@
 			// 
 			// labelOpponentTitle
 			// 
+			this.labelOpponentTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelOpponentTitle.AutoSize = true;
 			this.labelOpponentTitle.BackColor = System.Drawing.Color.Transparent;
 			this.labelOpponentTitle.Font = new System.Drawing.Font("Unispace", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -226,7 +201,7 @@
 			this.labelOpponentTitle.Text = "Second Player";
 			this.labelOpponentTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			// 
-			// GameSettingsForm
+			// SinglePCGameSettingsForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -237,16 +212,15 @@
 			this.Controls.Add(this.textBoxOpponentName);
 			this.Controls.Add(this.buttonPlay);
 			this.Controls.Add(this.buttonChangeOpponentName);
-			this.Controls.Add(this.buttonGameAssistsEnabled);
 			this.Controls.Add(this.buttonTimerEnabled);
 			this.Controls.Add(this.label7on7);
 			this.Controls.Add(this.label5on5);
 			this.Controls.Add(this.label3on3);
-			this.Name = "GameSettingsForm";
+			this.Name = "SinglePCGameSettingsForm";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "GameSettingsForm";
-			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.GameSettingsForm_FormClosed);
-			this.Load += new System.EventHandler(this.GameSettingsForm_Load);
+			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.SinglePCGameSettingsForm_FormClosed);
+			this.Load += new System.EventHandler(this.SinglePCGameSettingsForm_Load);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -258,7 +232,6 @@
 		private System.Windows.Forms.Label label5on5;
 		private System.Windows.Forms.Label label7on7;
 		private FontAwesome.Sharp.IconButton buttonTimerEnabled;
-		private FontAwesome.Sharp.IconButton buttonGameAssistsEnabled;
 		private Guna.UI2.WinForms.Guna2GradientButton buttonPlay;
 		private System.Windows.Forms.FlowLayoutPanel flpAvatar;
 		private FontAwesome.Sharp.IconButton buttonChangeOpponentName;

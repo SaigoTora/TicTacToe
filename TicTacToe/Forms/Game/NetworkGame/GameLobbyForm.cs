@@ -1,6 +1,7 @@
 ﻿using System.Configuration;
 
 using TicTacToe.Models.GameClientServer;
+using TicTacToe.Models.GameInfo;
 using TicTacToe.Models.PlayerInfo;
 using TicTacToe.Models.Utilities.FormUtilities;
 
@@ -10,10 +11,11 @@ namespace TicTacToe.Forms.Game.NetworkGame
 	{
 		private readonly MainForm _mainForm;
 		private readonly Player _player;
+		private readonly RoundManager _roundManager;
 		private readonly GameServer _gameServer;
 
 
-		internal GameLobbyForm(MainForm mainForm, Player player)
+		internal GameLobbyForm(MainForm mainForm, Player player, RoundManager roundManager)
 		{
 			customTitleBar = new CustomTitleBar(this, "Lobby");
 			IsResizable = true;
@@ -21,6 +23,7 @@ namespace TicTacToe.Forms.Game.NetworkGame
 
 			_mainForm = mainForm;
 			_player = player;
+			_roundManager = roundManager;
 			int port = int.Parse(ConfigurationManager.AppSettings["port"]);
 			_gameServer = new GameServer(_player, port);
 		}

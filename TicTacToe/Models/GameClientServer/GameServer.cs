@@ -72,9 +72,9 @@ namespace TicTacToe.Models.GameClientServer
 		{// The method creates a new NetworkGameSettings, where it inserts the player's avatar and nickname.
 			NetworkGameSettings settings = _player.NetworkGameSettings;
 			NetworkGameSettings networkGameSettings = new NetworkGameSettings(settings.Description,
-				settings.CoinBet, _player.Name, _player.VisualSettings.Avatar,
+				settings.CoinsBet, _player.Name, _player.VisualSettings.Avatar,
 				settings.NumberOfRounds, settings.FieldSize,
-				settings.IsTimerEnabled, settings.IsGameAssistsEnabled, 0, 0);
+				settings.IsTimerEnabled, settings.IsGameAssistsEnabled, 0);
 
 			return networkGameSettings;
 		}

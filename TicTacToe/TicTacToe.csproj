@@ -158,11 +158,17 @@
     <Compile Include="Forms\Game\Games7on7\Game7on7SinglePCForm.Designer.cs">
       <DependentUpon>Game7on7SinglePCForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Game\GameSettingsForm.cs">
+    <Compile Include="Forms\Game\Settings\NetworkGameSettingsForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Game\GameSettingsForm.Designer.cs">
-      <DependentUpon>GameSettingsForm.cs</DependentUpon>
+    <Compile Include="Forms\Game\Settings\NetworkGameSettingsForm.Designer.cs">
+      <DependentUpon>NetworkGameSettingsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Game\Settings\SinglePCGameSettingsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Game\Settings\SinglePCGameSettingsForm.Designer.cs">
+      <DependentUpon>SinglePCGameSettingsForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Game\NetworkGame\StartNetworkGameForm.cs">
       <SubType>Form</SubType>
@@ -299,8 +305,11 @@
     <EmbeddedResource Include="Forms\Game\Games7on7\Game7on7SinglePCForm.resx">
       <DependentUpon>Game7on7SinglePCForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Game\GameSettingsForm.resx">
-      <DependentUpon>GameSettingsForm.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Game\Settings\NetworkGameSettingsForm.resx">
+      <DependentUpon>NetworkGameSettingsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Game\Settings\SinglePCGameSettingsForm.resx">
+      <DependentUpon>SinglePCGameSettingsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Game\NetworkGame\StartNetworkGameForm.resx">
       <DependentUpon>StartNetworkGameForm.cs</DependentUpon>

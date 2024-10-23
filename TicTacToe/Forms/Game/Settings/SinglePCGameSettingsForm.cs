@@ -9,7 +9,6 @@ using System.Windows.Forms;
 using TicTacToe.Forms.Game.Games3on3;
 using TicTacToe.Forms.Game.Games5on5;
 using TicTacToe.Forms.Game.Games7on7;
-using TicTacToe.Forms.Game.NetworkGame;
 using TicTacToe.Models.GameInfo;
 using TicTacToe.Models.GameInfo.Settings;
 using TicTacToe.Models.PlayerInfo;
@@ -19,16 +18,10 @@ using TicTacToe.Models.Utilities.FormUtilities;
 using TicTacToe.Models.Utilities.FormUtilities.ControlEventHandlers;
 using TicTacToeLibrary;
 
-namespace TicTacToe.Forms.Game
+namespace TicTacToe.Forms.Game.Settings
 {
-	internal partial class GameSettingsForm : BaseForm
+	internal partial class SinglePCGameSettingsForm : BaseForm
 	{
-		internal enum GameType : byte
-		{
-			SinglePCGame,
-			NetworkGame
-		}
-
 		private const int SELECTED_AVATAR_INDENT = 10;
 		private const string SELECTED_AVATAR_TEXT = "Selected";
 		private const string SELECTED_AVATAR_TAG = "ItemSelected";
@@ -38,10 +31,8 @@ namespace TicTacToe.Forms.Game
 		private static readonly (Color Default, Color DuringRenaming) _buttonChangeNameColor = (Color.White, Color.Yellow);
 
 		private readonly MainForm _mainForm;
-		private readonly StartNetworkGameForm _previousForm;
 		private readonly Player _player;
 		private readonly RoundManager _roundManager;
-		private readonly GameType _gameType;
 
 		private AvatarCreator _avatarCreator;
 		private readonly List<PictureBox> _avatarPictureBoxes = new List<PictureBox>();
@@ -53,95 +44,38 @@ namespace TicTacToe.Forms.Game
 		private readonly Player _tempPlayer;
 		private FieldSize _fieldSize;
 		private bool _isTimerEnabled;
-		private bool _isGameAssistsEnabled;
 
-		internal GameSettingsForm(MainForm mainForm, Player player, RoundManager roundManager,
-			GameType gameType, StartNetworkGameForm previousForm = null)
+		internal SinglePCGameSettingsForm(MainForm mainForm, Player player, RoundManager roundManager)
 		{
-			customTitleBar = new CustomTitleBar(this, "Game settings", minimizeBox: false, maximizeBox: false);
+			customTitleBar = new CustomTitleBar(this, "Game Settings", minimizeBox: false, maximizeBox: false);
 			InitializeComponent();
 			_mainForm = mainForm;
-			_previousForm = previousForm;
 			_player = player;
 			_roundManager = roundManager;
-			_gameType = gameType;
 			_tempPlayer = new Player(textBoxOpponentName.Text);
 
-			SetFormElements(gameType);
 			InitializeCreator();
 			_buttonEventHandlers.SubscribeToHover(buttonPlay);
 			_labelEventHandlers.SubscribeToHoverUnderline(label3on3, label5on5, label7on7);
 		}
-		private void GameSettingsForm_Load(object sender, EventArgs e)
+		private void SinglePCGameSettingsForm_Load(object sender, EventArgs e)
 		{
-			TwoPlayersGameSettings settings = default;
-			if (_gameType == GameType.SinglePCGame)
-				settings = _player.SinglePCGameSettings;
-			else if (_gameType == GameType.NetworkGame)
-				settings = _player.NetworkGameSettings;
-			string opponentName = settings.OpponentName;
+			string opponentName = _player.SinglePCGameSettings.OpponentName;
 			if (opponentName != null)
 				textBoxOpponentName.Text = opponentName;
 			textBoxOpponentName.MaxLength = PlayerValidator.MAX_NAME_LENGTH;
 			textBoxOpponentName.BackColor = BackColor;
 			CreateAvatars();
 
-			Label labelFieldSize = GetLabelByFieldSize(settings.FieldSize);
+			Label labelFieldSize = GetLabelByFieldSize(_player.SinglePCGameSettings.FieldSize);
 			LabelFieldSize_Click(labelFieldSize, e);
-			if (buttonTimerEnabled.Visible && settings.IsTimerEnabled)
+			if (buttonTimerEnabled.Visible && _player.SinglePCGameSettings.IsTimerEnabled)
 				ButtonTimerEnabled_Click(this, EventArgs.Empty);
-			if (buttonGameAssistsEnabled.Visible && settings.IsGameAssistsEnabled)
-				ButtonGameAssistsEnabled_Click(this, EventArgs.Empty);
-		}
-		private void SetFormElements(GameType gameType)
-		{
-			const int NETWORK_GAME_FORM_HEIGHT_REDUCTION = 450;
-			const int NETWORK_GAME_ENABLE_BUTTONS_OFFSET_X = 198;
-
-			switch (gameType)
-			{
-				case GameType.SinglePCGame:
-					buttonGameAssistsEnabled.Visible = false;
-					break;
-				case GameType.NetworkGame:
-					{
-						labelOpponentTitle.Visible = false;
-						textBoxOpponentName.Visible = false;
-						buttonChangeOpponentName.Visible = false;
-						flpAvatar.Visible = false;
-						buttonPlay.Text = "Create";
-						Size = new Size(Width, Height - NETWORK_GAME_FORM_HEIGHT_REDUCTION);
-						buttonTimerEnabled.Location = new Point(buttonTimerEnabled.Location.X +
-							NETWORK_GAME_ENABLE_BUTTONS_OFFSET_X, buttonTimerEnabled.Location.Y);
-						buttonGameAssistsEnabled.Location = new Point(buttonGameAssistsEnabled.Location.X +
-							NETWORK_GAME_ENABLE_BUTTONS_OFFSET_X, buttonGameAssistsEnabled.Location.Y);
-						break;
-					}
-				default:
-					throw new InvalidOperationException
-						($"Unknown game type: {gameType}");
-			}
 		}
 
 		private void ButtonPlay_Click(object sender, EventArgs e)
 		{
-			switch (_gameType)
-			{
-				case GameType.SinglePCGame:
-					ShowSinglePCGameForm();
-					break;
-				case GameType.NetworkGame:
-					ShowNetworkGameForm();
-					break;
-				default:
-					throw new InvalidOperationException
-						($"Unknown game type: {_gameType}");
-			}
-			if (_previousForm != null)
-			{
-				_previousForm.NeedToOpenMainForm = false;
-				_previousForm.Close();
-			}
+			ShowSinglePCGameForm();
 			Close();
 		}
 		private void ShowSinglePCGameForm()
@@ -166,18 +100,8 @@ namespace TicTacToe.Forms.Game
 						($"Unknown field size: {_fieldSize}");
 			}
 
-			if (!gameForm.IsDisposed)// If a player have enough coints to play
-			{
-				_mainForm.Hide();
-				gameForm.Show();
-			}
-		}
-		private void ShowNetworkGameForm()
-		{
-			GameLobbyForm gameLobbyForm = new GameLobbyForm(_mainForm, _player);
-
 			_mainForm.Hide();
-			gameLobbyForm.Show();
+			gameForm.Show();
 		}
 
 		#region Field Size
@@ -219,10 +143,7 @@ namespace TicTacToe.Forms.Game
 				_fieldSize = FieldSize.Size7on7;
 			}
 
-			if (_gameType == GameType.SinglePCGame)
-				_player.SinglePCGameSettings.FieldSize = _fieldSize;
-			else if (_gameType == GameType.NetworkGame)
-				_player.NetworkGameSettings.FieldSize = _fieldSize;
+			_player.SinglePCGameSettings.FieldSize = _fieldSize;
 		}
 		private void SetDefaultFieldSizeLabels(params Label[] labels)
 		{
@@ -244,24 +165,7 @@ namespace TicTacToe.Forms.Game
 				SetDefaultEnableButtonStyle(buttonTimerEnabled);
 
 			_isTimerEnabled = !_isTimerEnabled;
-			if (_gameType == GameType.SinglePCGame)
-				_player.SinglePCGameSettings.IsTimerEnabled = _isTimerEnabled;
-			else if (_gameType == GameType.NetworkGame)
-				_player.NetworkGameSettings.IsTimerEnabled = _isTimerEnabled;
-		}
-		private void ButtonGameAssistsEnabled_Click(object sender, EventArgs e)
-		{
-			ActiveControl = null;
-			if (!_isGameAssistsEnabled)
-				SetActiveEnableButtonStyle(buttonGameAssistsEnabled);
-			else
-				SetDefaultEnableButtonStyle(buttonGameAssistsEnabled);
-
-			_isGameAssistsEnabled = !_isGameAssistsEnabled;
-			if (_gameType == GameType.SinglePCGame)
-				_player.SinglePCGameSettings.IsGameAssistsEnabled = _isGameAssistsEnabled;
-			else if (_gameType == GameType.NetworkGame)
-				_player.NetworkGameSettings.IsGameAssistsEnabled = _isGameAssistsEnabled;
+			_player.SinglePCGameSettings.IsTimerEnabled = _isTimerEnabled;
 		}
 		private void SetActiveEnableButtonStyle(IconButton button)
 		{
@@ -281,9 +185,9 @@ namespace TicTacToe.Forms.Game
 			if (!(sender is IconButton iconButton))
 				return;
 
-			if (_isTimerEnabled && iconButton == buttonTimerEnabled
-				|| _isGameAssistsEnabled && iconButton == buttonGameAssistsEnabled)
+			if (_isTimerEnabled && iconButton == buttonTimerEnabled)
 				return;
+
 			iconButton.ForeColor = _foreColorEnableButtons.Selected;
 		}
 		private void EnableButton_MouseLeave(object sender, EventArgs e)
@@ -295,7 +199,7 @@ namespace TicTacToe.Forms.Game
 		}
 		#endregion
 
-		#region Change Second Player Name
+		#region Second Player Name
 		private void ButtonChangeOpponentName_Click(object sender, EventArgs e)
 		{
 			if (textBoxOpponentName.ReadOnly)
@@ -357,7 +261,7 @@ namespace TicTacToe.Forms.Game
 			=> TryToChangeName();
 		#endregion
 
-		#region Change Second Player Avatar
+		#region Second Player Avatar
 		private void InitializeCreator()
 		{
 			const int ITEM_SIZE = 100;
@@ -449,7 +353,7 @@ namespace TicTacToe.Forms.Game
 		}
 		#endregion
 
-		private void GameSettingsForm_FormClosed(object sender, FormClosedEventArgs e)
+		private void SinglePCGameSettingsForm_FormClosed(object sender, FormClosedEventArgs e)
 		{
 			_buttonEventHandlers.UnsubscribeAll();
 			_labelEventHandlers.UnsubscribeAll();

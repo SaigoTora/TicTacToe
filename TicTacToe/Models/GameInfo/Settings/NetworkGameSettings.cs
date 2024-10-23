@@ -11,23 +11,22 @@ namespace TicTacToe.Models.GameInfo.Settings
 		[JsonProperty]
 		internal string Description;
 		[JsonProperty]
-		internal int CoinBet;
+		internal int CoinsBet;
 		[JsonProperty]
 		internal int CurrentPlayerCount;
 		[JsonProperty]
-		internal int MaxPlayerCount;
+		internal int MaxPlayerCount = 2;
 
 		internal NetworkGameSettings() : base()
 		{ }
-		internal NetworkGameSettings(string description, int coinBet, string opponentName, Avatar opponentAvatar,
+		internal NetworkGameSettings(string description, int coinsBet, string opponentName, Avatar opponentAvatar,
 			int numberOfRounds, FieldSize fieldSize, bool isTimerEnabled, bool isGameAssistsEnabled,
-			int currentPlayerCount, int maxPlayerCount)
+			int currentPlayerCount)
 			: base(opponentName, opponentAvatar, numberOfRounds, fieldSize, isTimerEnabled, isGameAssistsEnabled)
 		{
 			Description = description;
-			CoinBet = coinBet;
+			CoinsBet = coinsBet;
 			CurrentPlayerCount = currentPlayerCount;
-			MaxPlayerCount = maxPlayerCount;
 		}
 	}
 }

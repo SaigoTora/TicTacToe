@@ -5,9 +5,9 @@ using System.Drawing;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-using TicTacToe.Forms.Game;
 using TicTacToe.Forms.Game.Games3on3;
 using TicTacToe.Forms.Game.NetworkGame;
+using TicTacToe.Forms.Game.Settings;
 using TicTacToe.Forms.ItemManagement.Profile;
 using TicTacToe.Forms.ItemManagement.Shop;
 using TicTacToe.Models.GameInfo;
@@ -195,7 +195,7 @@ namespace TicTacToe.Forms
 		private void ButtonSinglePCGame_Click(object sender, EventArgs e)
 		{
 			RoundManager roundManager = new RoundManager((int)numericUpDownNumberOfRounds.Value);
-			GameSettingsForm gameSettingsForm = new GameSettingsForm(this, _player, roundManager, GameSettingsForm.GameType.SinglePCGame);
+			SinglePCGameSettingsForm gameSettingsForm = new SinglePCGameSettingsForm(this, _player, roundManager);
 			gameSettingsForm.ShowDialog();
 		}
 		private void ButtonNetworkGame_Click(object sender, EventArgs e)
