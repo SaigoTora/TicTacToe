@@ -36,7 +36,9 @@
 			this.flpAvatar = new System.Windows.Forms.FlowLayoutPanel();
 			this.buttonChangeOpponentName = new FontAwesome.Sharp.IconButton();
 			this.textBoxOpponentName = new System.Windows.Forms.TextBox();
-			this.labelOpponentTitle = new System.Windows.Forms.Label();
+			this.numericUpDownNumberOfRounds = new System.Windows.Forms.NumericUpDown();
+			this.labelNumberOfRounds = new System.Windows.Forms.Label();
+			((System.ComponentModel.ISupportInitialize)(this.numericUpDownNumberOfRounds)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// label3on3
@@ -45,7 +47,7 @@
 			this.label3on3.BackColor = System.Drawing.Color.Transparent;
 			this.label3on3.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.label3on3.Font = new System.Drawing.Font("Trebuchet MS", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.label3on3.ForeColor = System.Drawing.Color.White;
+			this.label3on3.ForeColor = System.Drawing.Color.LightGray;
 			this.label3on3.Location = new System.Drawing.Point(112, 20);
 			this.label3on3.Name = "label3on3";
 			this.label3on3.Size = new System.Drawing.Size(87, 40);
@@ -62,7 +64,7 @@
 			this.label5on5.BackColor = System.Drawing.Color.Transparent;
 			this.label5on5.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.label5on5.Font = new System.Drawing.Font("Trebuchet MS", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.label5on5.ForeColor = System.Drawing.Color.White;
+			this.label5on5.ForeColor = System.Drawing.Color.LightGray;
 			this.label5on5.Location = new System.Drawing.Point(402, 20);
 			this.label5on5.Name = "label5on5";
 			this.label5on5.Size = new System.Drawing.Size(87, 40);
@@ -78,7 +80,7 @@
 			this.label7on7.BackColor = System.Drawing.Color.Transparent;
 			this.label7on7.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.label7on7.Font = new System.Drawing.Font("Trebuchet MS", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.label7on7.ForeColor = System.Drawing.Color.White;
+			this.label7on7.ForeColor = System.Drawing.Color.LightGray;
 			this.label7on7.Location = new System.Drawing.Point(692, 20);
 			this.label7on7.Name = "label7on7";
 			this.label7on7.Size = new System.Drawing.Size(87, 40);
@@ -105,7 +107,7 @@
 			this.buttonTimerEnabled.Margin = new System.Windows.Forms.Padding(0);
 			this.buttonTimerEnabled.Name = "buttonTimerEnabled";
 			this.buttonTimerEnabled.Size = new System.Drawing.Size(140, 40);
-			this.buttonTimerEnabled.TabIndex = 7;
+			this.buttonTimerEnabled.TabIndex = 8;
 			this.buttonTimerEnabled.TabStop = false;
 			this.buttonTimerEnabled.Text = " Timer";
 			this.buttonTimerEnabled.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -134,10 +136,10 @@
 			this.buttonPlay.Font = new System.Drawing.Font("Cooper Black", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.buttonPlay.ForeColor = System.Drawing.Color.White;
 			this.buttonPlay.GradientMode = System.Drawing.Drawing2D.LinearGradientMode.BackwardDiagonal;
-			this.buttonPlay.Location = new System.Drawing.Point(619, 608);
+			this.buttonPlay.Location = new System.Drawing.Point(659, 608);
 			this.buttonPlay.Name = "buttonPlay";
-			this.buttonPlay.Size = new System.Drawing.Size(260, 50);
-			this.buttonPlay.TabIndex = 8;
+			this.buttonPlay.Size = new System.Drawing.Size(220, 50);
+			this.buttonPlay.TabIndex = 9;
 			this.buttonPlay.TabStop = false;
 			this.buttonPlay.Text = "Play";
 			this.buttonPlay.Click += new System.EventHandler(this.ButtonPlay_Click);
@@ -146,11 +148,11 @@
 			// 
 			this.flpAvatar.AutoScroll = true;
 			this.flpAvatar.BackColor = System.Drawing.Color.Transparent;
-			this.flpAvatar.Location = new System.Drawing.Point(12, 234);
+			this.flpAvatar.Location = new System.Drawing.Point(12, 264);
 			this.flpAvatar.Name = "flpAvatar";
 			this.flpAvatar.Padding = new System.Windows.Forms.Padding(10, 10, 0, 0);
 			this.flpAvatar.Size = new System.Drawing.Size(560, 280);
-			this.flpAvatar.TabIndex = 6;
+			this.flpAvatar.TabIndex = 7;
 			// 
 			// buttonChangeOpponentName
 			// 
@@ -162,10 +164,10 @@
 			this.buttonChangeOpponentName.IconColor = System.Drawing.Color.White;
 			this.buttonChangeOpponentName.IconFont = FontAwesome.Sharp.IconFont.Auto;
 			this.buttonChangeOpponentName.IconSize = 38;
-			this.buttonChangeOpponentName.Location = new System.Drawing.Point(398, 177);
+			this.buttonChangeOpponentName.Location = new System.Drawing.Point(398, 207);
 			this.buttonChangeOpponentName.Name = "buttonChangeOpponentName";
 			this.buttonChangeOpponentName.Size = new System.Drawing.Size(41, 41);
-			this.buttonChangeOpponentName.TabIndex = 5;
+			this.buttonChangeOpponentName.TabIndex = 6;
 			this.buttonChangeOpponentName.TabStop = false;
 			this.buttonChangeOpponentName.UseVisualStyleBackColor = false;
 			this.buttonChangeOpponentName.Click += new System.EventHandler(this.ButtonChangeOpponentName_Click);
@@ -176,30 +178,55 @@
 			this.textBoxOpponentName.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.textBoxOpponentName.Font = new System.Drawing.Font("Trebuchet MS", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.textBoxOpponentName.ForeColor = System.Drawing.Color.White;
-			this.textBoxOpponentName.Location = new System.Drawing.Point(42, 180);
+			this.textBoxOpponentName.Location = new System.Drawing.Point(42, 210);
 			this.textBoxOpponentName.Name = "textBoxOpponentName";
 			this.textBoxOpponentName.ReadOnly = true;
 			this.textBoxOpponentName.Size = new System.Drawing.Size(350, 34);
-			this.textBoxOpponentName.TabIndex = 4;
+			this.textBoxOpponentName.TabIndex = 5;
 			this.textBoxOpponentName.TabStop = false;
 			this.textBoxOpponentName.Text = "Player 2";
 			this.textBoxOpponentName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBoxOpponentName_KeyDown);
 			this.textBoxOpponentName.Leave += new System.EventHandler(this.TextBoxOpponentName_Leave);
 			// 
-			// labelOpponentTitle
+			// numericUpDownNumberOfRounds
 			// 
-			this.labelOpponentTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.labelOpponentTitle.AutoSize = true;
-			this.labelOpponentTitle.BackColor = System.Drawing.Color.Transparent;
-			this.labelOpponentTitle.Font = new System.Drawing.Font("Unispace", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.labelOpponentTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-			this.labelOpponentTitle.Location = new System.Drawing.Point(300, 100);
-			this.labelOpponentTitle.Name = "labelOpponentTitle";
-			this.labelOpponentTitle.Size = new System.Drawing.Size(291, 42);
-			this.labelOpponentTitle.TabIndex = 3;
-			this.labelOpponentTitle.Text = "Second Player";
-			this.labelOpponentTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			this.numericUpDownNumberOfRounds.BackColor = System.Drawing.Color.Black;
+			this.numericUpDownNumberOfRounds.Font = new System.Drawing.Font("Courier New", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.numericUpDownNumberOfRounds.ForeColor = System.Drawing.Color.White;
+			this.numericUpDownNumberOfRounds.Location = new System.Drawing.Point(283, 117);
+			this.numericUpDownNumberOfRounds.Maximum = new decimal(new int[] {
+            99,
+            0,
+            0,
+            0});
+			this.numericUpDownNumberOfRounds.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+			this.numericUpDownNumberOfRounds.Name = "numericUpDownNumberOfRounds";
+			this.numericUpDownNumberOfRounds.Size = new System.Drawing.Size(75, 38);
+			this.numericUpDownNumberOfRounds.TabIndex = 4;
+			this.numericUpDownNumberOfRounds.TabStop = false;
+			this.numericUpDownNumberOfRounds.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+			this.numericUpDownNumberOfRounds.Value = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+			this.numericUpDownNumberOfRounds.ValueChanged += new System.EventHandler(this.NumericUpDownNumberOfRounds_ValueChanged);
+			// 
+			// labelNumberOfRounds
+			// 
+			this.labelNumberOfRounds.AutoSize = true;
+			this.labelNumberOfRounds.BackColor = System.Drawing.Color.Transparent;
+			this.labelNumberOfRounds.Font = new System.Drawing.Font("Trebuchet MS", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.labelNumberOfRounds.ForeColor = System.Drawing.Color.White;
+			this.labelNumberOfRounds.Location = new System.Drawing.Point(42, 120);
+			this.labelNumberOfRounds.Name = "labelNumberOfRounds";
+			this.labelNumberOfRounds.Size = new System.Drawing.Size(241, 35);
+			this.labelNumberOfRounds.TabIndex = 3;
+			this.labelNumberOfRounds.Text = "Number of rounds:";
 			// 
 			// SinglePCGameSettingsForm
 			// 
@@ -207,7 +234,8 @@
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
 			this.ClientSize = new System.Drawing.Size(891, 670);
-			this.Controls.Add(this.labelOpponentTitle);
+			this.Controls.Add(this.numericUpDownNumberOfRounds);
+			this.Controls.Add(this.labelNumberOfRounds);
 			this.Controls.Add(this.flpAvatar);
 			this.Controls.Add(this.textBoxOpponentName);
 			this.Controls.Add(this.buttonPlay);
@@ -221,6 +249,7 @@
 			this.Text = "GameSettingsForm";
 			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.SinglePCGameSettingsForm_FormClosed);
 			this.Load += new System.EventHandler(this.SinglePCGameSettingsForm_Load);
+			((System.ComponentModel.ISupportInitialize)(this.numericUpDownNumberOfRounds)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -236,6 +265,7 @@
 		private System.Windows.Forms.FlowLayoutPanel flpAvatar;
 		private FontAwesome.Sharp.IconButton buttonChangeOpponentName;
 		private System.Windows.Forms.TextBox textBoxOpponentName;
-		private System.Windows.Forms.Label labelOpponentTitle;
+		private System.Windows.Forms.NumericUpDown numericUpDownNumberOfRounds;
+		private System.Windows.Forms.Label labelNumberOfRounds;
 	}
 }

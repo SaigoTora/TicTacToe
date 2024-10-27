@@ -26,13 +26,12 @@ namespace TicTacToe.Forms.Game.Settings
 		private const string SELECTED_AVATAR_TEXT = "Selected";
 		private const string SELECTED_AVATAR_TAG = "ItemSelected";
 
-		private static readonly (Color Default, Color Selected) _foreColorEnableButtons = (Color.Transparent, Color.Khaki);
-		private static readonly (Color Default, Color Selected) _ColorFieldSize = (Color.Transparent, Color.Green);
+		private static readonly (Color Default, Color Selected) _fieldSizeColor = (Color.Transparent, Color.Green);
+		private static readonly (Color Default, Color Selected) _enableButtonsForeColor = (Color.Transparent, Color.Khaki);
 		private static readonly (Color Default, Color DuringRenaming) _buttonChangeNameColor = (Color.White, Color.Yellow);
 
 		private readonly MainForm _mainForm;
 		private readonly Player _player;
-		private readonly RoundManager _roundManager;
 
 		private AvatarCreator _avatarCreator;
 		private readonly List<PictureBox> _avatarPictureBoxes = new List<PictureBox>();
@@ -41,18 +40,12 @@ namespace TicTacToe.Forms.Game.Settings
 		private readonly ButtonEventHandlers _buttonEventHandlers = new ButtonEventHandlers();
 		private readonly LabelEventHandlers _labelEventHandlers = new LabelEventHandlers();
 
-		private readonly Player _tempPlayer;
-		private FieldSize _fieldSize;
-		private bool _isTimerEnabled;
-
-		internal SinglePCGameSettingsForm(MainForm mainForm, Player player, RoundManager roundManager)
+		internal SinglePCGameSettingsForm(MainForm mainForm, Player player)
 		{
 			customTitleBar = new CustomTitleBar(this, "Game Settings", minimizeBox: false, maximizeBox: false);
 			InitializeComponent();
 			_mainForm = mainForm;
 			_player = player;
-			_roundManager = roundManager;
-			_tempPlayer = new Player(textBoxOpponentName.Text);
 
 			InitializeCreator();
 			_buttonEventHandlers.SubscribeToHover(buttonPlay);
@@ -60,6 +53,11 @@ namespace TicTacToe.Forms.Game.Settings
 		}
 		private void SinglePCGameSettingsForm_Load(object sender, EventArgs e)
 		{
+
+			Label labelFieldSize = GetLabelByFieldSize(_player.SinglePCGameSettings.FieldSize);
+			LabelFieldSize_Click(labelFieldSize, e);
+			numericUpDownNumberOfRounds.BackColor = BackColor;
+			numericUpDownNumberOfRounds.Value = _player.SinglePCGameSettings.NumberOfRounds;
 			string opponentName = _player.SinglePCGameSettings.OpponentName;
 			if (opponentName != null)
 				textBoxOpponentName.Text = opponentName;
@@ -67,10 +65,8 @@ namespace TicTacToe.Forms.Game.Settings
 			textBoxOpponentName.BackColor = BackColor;
 			CreateAvatars();
 
-			Label labelFieldSize = GetLabelByFieldSize(_player.SinglePCGameSettings.FieldSize);
-			LabelFieldSize_Click(labelFieldSize, e);
-			if (buttonTimerEnabled.Visible && _player.SinglePCGameSettings.IsTimerEnabled)
-				ButtonTimerEnabled_Click(this, EventArgs.Empty);
+			if (_player.SinglePCGameSettings.IsTimerEnabled)
+				SetActiveEnableButtonStyle(buttonTimerEnabled);
 		}
 
 		private void ButtonPlay_Click(object sender, EventArgs e)
@@ -81,23 +77,25 @@ namespace TicTacToe.Forms.Game.Settings
 		private void ShowSinglePCGameForm()
 		{
 			BaseGameForm gameForm;
-			switch (_fieldSize)
+			RoundManager roundManager = new RoundManager(_player.SinglePCGameSettings.NumberOfRounds);
+
+			switch (_player.SinglePCGameSettings.FieldSize)
 			{
 				case FieldSize.Size3on3:
-					gameForm = new Game3on3SinglePCForm(_mainForm, _player, _roundManager,
-						CellType.Cross, _isTimerEnabled, opponentAvatarImage, textBoxOpponentName.Text);
+					gameForm = new Game3on3SinglePCForm(_mainForm, _player, roundManager,
+						CellType.Cross, _player.SinglePCGameSettings.IsTimerEnabled, opponentAvatarImage, textBoxOpponentName.Text);
 					break;
 				case FieldSize.Size5on5:
-					gameForm = new Game5on5SinglePCForm(_mainForm, _player, _roundManager,
-						CellType.Cross, _isTimerEnabled, opponentAvatarImage, textBoxOpponentName.Text);
+					gameForm = new Game5on5SinglePCForm(_mainForm, _player, roundManager,
+						CellType.Cross, _player.SinglePCGameSettings.IsTimerEnabled, opponentAvatarImage, textBoxOpponentName.Text);
 					break;
 				case FieldSize.Size7on7:
-					gameForm = new Game7on7SinglePCForm(_mainForm, _player, _roundManager,
-						CellType.Cross, _isTimerEnabled, opponentAvatarImage, textBoxOpponentName.Text);
+					gameForm = new Game7on7SinglePCForm(_mainForm, _player, roundManager,
+						CellType.Cross, _player.SinglePCGameSettings.IsTimerEnabled, opponentAvatarImage, textBoxOpponentName.Text);
 					break;
 				default:
 					throw new InvalidOperationException
-						($"Unknown field size: {_fieldSize}");
+						($"Unknown field size: {_player.SinglePCGameSettings.FieldSize}");
 			}
 
 			_mainForm.Hide();
@@ -125,47 +123,48 @@ namespace TicTacToe.Forms.Game.Settings
 			if (!(sender is Label label))
 				return;
 
-			label.BackColor = _ColorFieldSize.Selected;
+			label.BackColor = _fieldSizeColor.Selected;
 			label.Enabled = false;
 			if (label == label3on3)
 			{
 				SetDefaultFieldSizeLabels(label5on5, label7on7);
-				_fieldSize = FieldSize.Size3on3;
+				_player.SinglePCGameSettings.FieldSize = FieldSize.Size3on3;
 			}
 			else if (label == label5on5)
 			{
 				SetDefaultFieldSizeLabels(label3on3, label7on7);
-				_fieldSize = FieldSize.Size5on5;
+				_player.SinglePCGameSettings.FieldSize = FieldSize.Size5on5;
 			}
 			else
 			{
 				SetDefaultFieldSizeLabels(label3on3, label5on5);
-				_fieldSize = FieldSize.Size7on7;
+				_player.SinglePCGameSettings.FieldSize = FieldSize.Size7on7;
 			}
-
-			_player.SinglePCGameSettings.FieldSize = _fieldSize;
 		}
 		private void SetDefaultFieldSizeLabels(params Label[] labels)
 		{
 			foreach (Label label in labels)
 			{
-				label.BackColor = _ColorFieldSize.Default;
+				label.BackColor = _fieldSizeColor.Default;
 				label.Enabled = true;
 			}
 		}
 		#endregion
 
+		private void NumericUpDownNumberOfRounds_ValueChanged(object sender, EventArgs e)
+			=> _player.SinglePCGameSettings.NumberOfRounds =
+			(int)numericUpDownNumberOfRounds.Value;
+
 		#region Enable Buttons
 		private void ButtonTimerEnabled_Click(object sender, EventArgs e)
 		{
 			ActiveControl = null;
-			if (!_isTimerEnabled)
+			if (!_player.SinglePCGameSettings.IsTimerEnabled)
 				SetActiveEnableButtonStyle(buttonTimerEnabled);
 			else
 				SetDefaultEnableButtonStyle(buttonTimerEnabled);
 
-			_isTimerEnabled = !_isTimerEnabled;
-			_player.SinglePCGameSettings.IsTimerEnabled = _isTimerEnabled;
+			_player.SinglePCGameSettings.IsTimerEnabled = !_player.SinglePCGameSettings.IsTimerEnabled;
 		}
 		private void SetActiveEnableButtonStyle(IconButton button)
 		{
@@ -185,17 +184,17 @@ namespace TicTacToe.Forms.Game.Settings
 			if (!(sender is IconButton iconButton))
 				return;
 
-			if (_isTimerEnabled && iconButton == buttonTimerEnabled)
+			if (_player.SinglePCGameSettings.IsTimerEnabled && iconButton == buttonTimerEnabled)
 				return;
 
-			iconButton.ForeColor = _foreColorEnableButtons.Selected;
+			iconButton.ForeColor = _enableButtonsForeColor.Selected;
 		}
 		private void EnableButton_MouseLeave(object sender, EventArgs e)
 		{
 			if (!(sender is IconButton iconButton))
 				return;
 
-			iconButton.ForeColor = _foreColorEnableButtons.Default;
+			iconButton.ForeColor = _enableButtonsForeColor.Default;
 		}
 		#endregion
 
@@ -209,7 +208,7 @@ namespace TicTacToe.Forms.Game.Settings
 				textBoxOpponentName.Focus();
 				textBoxOpponentName.SelectAll();
 			}
-			else if (_tempPlayer.Name == textBoxOpponentName.Text)
+			else if (_player.SinglePCGameSettings.OpponentName == textBoxOpponentName.Text)
 			{
 				buttonChangeOpponentName.IconColor = _buttonChangeNameColor.Default;
 				textBoxOpponentName.ReadOnly = true;
@@ -241,7 +240,7 @@ namespace TicTacToe.Forms.Game.Settings
 				textBoxOpponentName.ReadOnly = true;
 				ActiveControl = null;
 				buttonChangeOpponentName.IconColor = _buttonChangeNameColor.Default;
-				if (_tempPlayer.Name != textBoxOpponentName.Text)
+				if (_player.SinglePCGameSettings.OpponentName != textBoxOpponentName.Text)
 				{
 					_player.SinglePCGameSettings.OpponentName = textBoxOpponentName.Text;
 					CustomMessageBox.Show("The second player's nickname has been successfully changed.", "Success",

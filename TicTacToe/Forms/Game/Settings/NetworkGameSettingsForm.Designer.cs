@@ -30,19 +30,21 @@
 		{
 			this.numericUpDownCoinsBet = new System.Windows.Forms.NumericUpDown();
 			this.labelCoinsBet = new System.Windows.Forms.Label();
-			this.buttonPlay = new Guna.UI2.WinForms.Guna2GradientButton();
+			this.buttonCreate = new Guna.UI2.WinForms.Guna2GradientButton();
 			this.buttonGameAssistsEnabled = new FontAwesome.Sharp.IconButton();
 			this.buttonTimerEnabled = new FontAwesome.Sharp.IconButton();
 			this.label7on7 = new System.Windows.Forms.Label();
 			this.label5on5 = new System.Windows.Forms.Label();
 			this.label3on3 = new System.Windows.Forms.Label();
 			this.richTextBoxDescription = new System.Windows.Forms.RichTextBox();
-			this.labelOpponentTitle = new System.Windows.Forms.Label();
 			this.pictureBoxCoin = new System.Windows.Forms.PictureBox();
 			this.labelDescription = new System.Windows.Forms.Label();
 			this.labelDescriptionLength = new System.Windows.Forms.Label();
+			this.numericUpDownNumberOfRounds = new System.Windows.Forms.NumericUpDown();
+			this.labelNumberOfRounds = new System.Windows.Forms.Label();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownCoinsBet)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxCoin)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.numericUpDownNumberOfRounds)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// numericUpDownCoinsBet
@@ -50,7 +52,7 @@
 			this.numericUpDownCoinsBet.BackColor = System.Drawing.Color.Black;
 			this.numericUpDownCoinsBet.Font = new System.Drawing.Font("Courier New", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.numericUpDownCoinsBet.ForeColor = System.Drawing.Color.Khaki;
-			this.numericUpDownCoinsBet.Location = new System.Drawing.Point(186, 179);
+			this.numericUpDownCoinsBet.Location = new System.Drawing.Point(186, 189);
 			this.numericUpDownCoinsBet.Maximum = new decimal(new int[] {
             9999,
             0,
@@ -58,7 +60,8 @@
             0});
 			this.numericUpDownCoinsBet.Name = "numericUpDownCoinsBet";
 			this.numericUpDownCoinsBet.Size = new System.Drawing.Size(100, 38);
-			this.numericUpDownCoinsBet.TabIndex = 5;
+			this.numericUpDownCoinsBet.TabIndex = 6;
+			this.numericUpDownCoinsBet.TabStop = false;
 			this.numericUpDownCoinsBet.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
 			this.numericUpDownCoinsBet.Value = new decimal(new int[] {
             9999,
@@ -73,38 +76,38 @@
 			this.labelCoinsBet.BackColor = System.Drawing.Color.Transparent;
 			this.labelCoinsBet.Font = new System.Drawing.Font("Trebuchet MS", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.labelCoinsBet.ForeColor = System.Drawing.Color.Khaki;
-			this.labelCoinsBet.Location = new System.Drawing.Point(42, 180);
+			this.labelCoinsBet.Location = new System.Drawing.Point(42, 190);
 			this.labelCoinsBet.Name = "labelCoinsBet";
 			this.labelCoinsBet.Size = new System.Drawing.Size(138, 35);
-			this.labelCoinsBet.TabIndex = 4;
+			this.labelCoinsBet.TabIndex = 5;
 			this.labelCoinsBet.Text = "Coins bet:";
 			// 
-			// buttonPlay
+			// buttonCreate
 			// 
-			this.buttonPlay.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.buttonPlay.Animated = true;
-			this.buttonPlay.BackColor = System.Drawing.Color.Transparent;
-			this.buttonPlay.BorderRadius = 20;
-			this.buttonPlay.BorderStyle = System.Drawing.Drawing2D.DashStyle.Custom;
-			this.buttonPlay.BorderThickness = 1;
-			this.buttonPlay.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.buttonPlay.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-			this.buttonPlay.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-			this.buttonPlay.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-			this.buttonPlay.DisabledState.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-			this.buttonPlay.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-			this.buttonPlay.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(56)))), ((int)(((byte)(239)))), ((int)(((byte)(125)))));
-			this.buttonPlay.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(153)))), ((int)(((byte)(142)))));
-			this.buttonPlay.Font = new System.Drawing.Font("Cooper Black", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.buttonPlay.ForeColor = System.Drawing.Color.White;
-			this.buttonPlay.GradientMode = System.Drawing.Drawing2D.LinearGradientMode.BackwardDiagonal;
-			this.buttonPlay.Location = new System.Drawing.Point(619, 604);
-			this.buttonPlay.Name = "buttonPlay";
-			this.buttonPlay.Size = new System.Drawing.Size(260, 50);
-			this.buttonPlay.TabIndex = 12;
-			this.buttonPlay.TabStop = false;
-			this.buttonPlay.Text = "Create";
-			this.buttonPlay.Click += new System.EventHandler(this.ButtonCreate_Click);
+			this.buttonCreate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.buttonCreate.Animated = true;
+			this.buttonCreate.BackColor = System.Drawing.Color.Transparent;
+			this.buttonCreate.BorderRadius = 20;
+			this.buttonCreate.BorderStyle = System.Drawing.Drawing2D.DashStyle.Custom;
+			this.buttonCreate.BorderThickness = 1;
+			this.buttonCreate.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.buttonCreate.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+			this.buttonCreate.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+			this.buttonCreate.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+			this.buttonCreate.DisabledState.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+			this.buttonCreate.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+			this.buttonCreate.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(56)))), ((int)(((byte)(239)))), ((int)(((byte)(125)))));
+			this.buttonCreate.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(153)))), ((int)(((byte)(142)))));
+			this.buttonCreate.Font = new System.Drawing.Font("Cooper Black", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.buttonCreate.ForeColor = System.Drawing.Color.White;
+			this.buttonCreate.GradientMode = System.Drawing.Drawing2D.LinearGradientMode.BackwardDiagonal;
+			this.buttonCreate.Location = new System.Drawing.Point(659, 608);
+			this.buttonCreate.Name = "buttonCreate";
+			this.buttonCreate.Size = new System.Drawing.Size(220, 50);
+			this.buttonCreate.TabIndex = 13;
+			this.buttonCreate.TabStop = false;
+			this.buttonCreate.Text = "Create";
+			this.buttonCreate.Click += new System.EventHandler(this.ButtonCreate_Click);
 			// 
 			// buttonGameAssistsEnabled
 			// 
@@ -124,7 +127,7 @@
 			this.buttonGameAssistsEnabled.Margin = new System.Windows.Forms.Padding(0);
 			this.buttonGameAssistsEnabled.Name = "buttonGameAssistsEnabled";
 			this.buttonGameAssistsEnabled.Size = new System.Drawing.Size(220, 40);
-			this.buttonGameAssistsEnabled.TabIndex = 11;
+			this.buttonGameAssistsEnabled.TabIndex = 12;
 			this.buttonGameAssistsEnabled.TabStop = false;
 			this.buttonGameAssistsEnabled.Text = " Game Assists";
 			this.buttonGameAssistsEnabled.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -152,7 +155,7 @@
 			this.buttonTimerEnabled.Margin = new System.Windows.Forms.Padding(0);
 			this.buttonTimerEnabled.Name = "buttonTimerEnabled";
 			this.buttonTimerEnabled.Size = new System.Drawing.Size(140, 40);
-			this.buttonTimerEnabled.TabIndex = 10;
+			this.buttonTimerEnabled.TabIndex = 11;
 			this.buttonTimerEnabled.TabStop = false;
 			this.buttonTimerEnabled.Text = " Timer";
 			this.buttonTimerEnabled.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -169,7 +172,7 @@
 			this.label7on7.BackColor = System.Drawing.Color.Transparent;
 			this.label7on7.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.label7on7.Font = new System.Drawing.Font("Trebuchet MS", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.label7on7.ForeColor = System.Drawing.Color.White;
+			this.label7on7.ForeColor = System.Drawing.Color.LightGray;
 			this.label7on7.Location = new System.Drawing.Point(692, 20);
 			this.label7on7.Name = "label7on7";
 			this.label7on7.Size = new System.Drawing.Size(87, 40);
@@ -186,7 +189,7 @@
 			this.label5on5.BackColor = System.Drawing.Color.Transparent;
 			this.label5on5.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.label5on5.Font = new System.Drawing.Font("Trebuchet MS", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.label5on5.ForeColor = System.Drawing.Color.White;
+			this.label5on5.ForeColor = System.Drawing.Color.LightGray;
 			this.label5on5.Location = new System.Drawing.Point(402, 20);
 			this.label5on5.Name = "label5on5";
 			this.label5on5.Size = new System.Drawing.Size(87, 40);
@@ -201,7 +204,7 @@
 			this.label3on3.BackColor = System.Drawing.Color.Transparent;
 			this.label3on3.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.label3on3.Font = new System.Drawing.Font("Trebuchet MS", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.label3on3.ForeColor = System.Drawing.Color.White;
+			this.label3on3.ForeColor = System.Drawing.Color.LightGray;
 			this.label3on3.Location = new System.Drawing.Point(112, 20);
 			this.label3on3.Name = "label3on3";
 			this.label3on3.Size = new System.Drawing.Size(87, 40);
@@ -216,40 +219,26 @@
 			this.richTextBoxDescription.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.richTextBoxDescription.Font = new System.Drawing.Font("Trebuchet MS", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.richTextBoxDescription.ForeColor = System.Drawing.Color.Gainsboro;
-			this.richTextBoxDescription.Location = new System.Drawing.Point(42, 300);
+			this.richTextBoxDescription.Location = new System.Drawing.Point(42, 320);
 			this.richTextBoxDescription.MaxLength = 110;
 			this.richTextBoxDescription.Name = "richTextBoxDescription";
 			this.richTextBoxDescription.Size = new System.Drawing.Size(560, 180);
-			this.richTextBoxDescription.TabIndex = 8;
-			this.richTextBoxDescription.Text = "Description.";
+			this.richTextBoxDescription.TabIndex = 9;
+			this.richTextBoxDescription.TabStop = false;
+			this.richTextBoxDescription.Text = "";
 			this.richTextBoxDescription.TextChanged += new System.EventHandler(this.RichTextBoxDescription_TextChanged);
 			this.richTextBoxDescription.KeyDown += new System.Windows.Forms.KeyEventHandler(this.RichTextBoxDescription_KeyDown);
 			this.richTextBoxDescription.Leave += new System.EventHandler(this.RichTextBoxDescription_Leave);
-			// 
-			// labelOpponentTitle
-			// 
-			this.labelOpponentTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.labelOpponentTitle.AutoSize = true;
-			this.labelOpponentTitle.BackColor = System.Drawing.Color.Transparent;
-			this.labelOpponentTitle.Font = new System.Drawing.Font("Unispace", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.labelOpponentTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-			this.labelOpponentTitle.Location = new System.Drawing.Point(290, 100);
-			this.labelOpponentTitle.Name = "labelOpponentTitle";
-			this.labelOpponentTitle.Size = new System.Drawing.Size(312, 42);
-			this.labelOpponentTitle.TabIndex = 3;
-			this.labelOpponentTitle.Text = "Local Settings";
-			this.labelOpponentTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			// 
 			// pictureBoxCoin
 			// 
 			this.pictureBoxCoin.BackColor = System.Drawing.Color.Transparent;
 			this.pictureBoxCoin.Image = global::TicTacToe.Properties.Resources.coin;
-			this.pictureBoxCoin.Location = new System.Drawing.Point(292, 175);
+			this.pictureBoxCoin.Location = new System.Drawing.Point(292, 185);
 			this.pictureBoxCoin.Name = "pictureBoxCoin";
 			this.pictureBoxCoin.Size = new System.Drawing.Size(45, 45);
 			this.pictureBoxCoin.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-			this.pictureBoxCoin.TabIndex = 6;
+			this.pictureBoxCoin.TabIndex = 7;
 			this.pictureBoxCoin.TabStop = false;
 			// 
 			// labelDescription
@@ -258,10 +247,10 @@
 			this.labelDescription.BackColor = System.Drawing.Color.Transparent;
 			this.labelDescription.Font = new System.Drawing.Font("Trebuchet MS", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.labelDescription.ForeColor = System.Drawing.Color.White;
-			this.labelDescription.Location = new System.Drawing.Point(42, 260);
+			this.labelDescription.Location = new System.Drawing.Point(42, 280);
 			this.labelDescription.Name = "labelDescription";
 			this.labelDescription.Size = new System.Drawing.Size(163, 35);
-			this.labelDescription.TabIndex = 7;
+			this.labelDescription.TabIndex = 8;
 			this.labelDescription.Text = "Description:";
 			// 
 			// labelDescriptionLength
@@ -269,12 +258,52 @@
 			this.labelDescriptionLength.BackColor = System.Drawing.Color.Transparent;
 			this.labelDescriptionLength.Font = new System.Drawing.Font("Courier New", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.labelDescriptionLength.ForeColor = System.Drawing.Color.LightGray;
-			this.labelDescriptionLength.Location = new System.Drawing.Point(412, 483);
+			this.labelDescriptionLength.Location = new System.Drawing.Point(412, 503);
 			this.labelDescriptionLength.Name = "labelDescriptionLength";
 			this.labelDescriptionLength.Size = new System.Drawing.Size(190, 35);
-			this.labelDescriptionLength.TabIndex = 9;
+			this.labelDescriptionLength.TabIndex = 10;
 			this.labelDescriptionLength.Text = "99999 / 99999";
 			this.labelDescriptionLength.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+			// 
+			// numericUpDownNumberOfRounds
+			// 
+			this.numericUpDownNumberOfRounds.BackColor = System.Drawing.Color.Black;
+			this.numericUpDownNumberOfRounds.Font = new System.Drawing.Font("Courier New", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.numericUpDownNumberOfRounds.ForeColor = System.Drawing.Color.White;
+			this.numericUpDownNumberOfRounds.Location = new System.Drawing.Point(289, 118);
+			this.numericUpDownNumberOfRounds.Maximum = new decimal(new int[] {
+            99,
+            0,
+            0,
+            0});
+			this.numericUpDownNumberOfRounds.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+			this.numericUpDownNumberOfRounds.Name = "numericUpDownNumberOfRounds";
+			this.numericUpDownNumberOfRounds.Size = new System.Drawing.Size(75, 38);
+			this.numericUpDownNumberOfRounds.TabIndex = 4;
+			this.numericUpDownNumberOfRounds.TabStop = false;
+			this.numericUpDownNumberOfRounds.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+			this.numericUpDownNumberOfRounds.Value = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+			this.numericUpDownNumberOfRounds.ValueChanged += new System.EventHandler(this.NumericUpDownNumberOfRounds_ValueChanged);
+			// 
+			// labelNumberOfRounds
+			// 
+			this.labelNumberOfRounds.AutoSize = true;
+			this.labelNumberOfRounds.BackColor = System.Drawing.Color.Transparent;
+			this.labelNumberOfRounds.Font = new System.Drawing.Font("Trebuchet MS", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.labelNumberOfRounds.ForeColor = System.Drawing.Color.White;
+			this.labelNumberOfRounds.Location = new System.Drawing.Point(42, 120);
+			this.labelNumberOfRounds.Name = "labelNumberOfRounds";
+			this.labelNumberOfRounds.Size = new System.Drawing.Size(241, 35);
+			this.labelNumberOfRounds.TabIndex = 3;
+			this.labelNumberOfRounds.Text = "Number of rounds:";
 			// 
 			// NetworkGameSettingsForm
 			// 
@@ -282,14 +311,15 @@
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
 			this.ClientSize = new System.Drawing.Size(891, 670);
+			this.Controls.Add(this.numericUpDownNumberOfRounds);
+			this.Controls.Add(this.labelNumberOfRounds);
 			this.Controls.Add(this.labelDescriptionLength);
 			this.Controls.Add(this.labelDescription);
 			this.Controls.Add(this.pictureBoxCoin);
 			this.Controls.Add(this.richTextBoxDescription);
 			this.Controls.Add(this.numericUpDownCoinsBet);
 			this.Controls.Add(this.labelCoinsBet);
-			this.Controls.Add(this.labelOpponentTitle);
-			this.Controls.Add(this.buttonPlay);
+			this.Controls.Add(this.buttonCreate);
 			this.Controls.Add(this.buttonGameAssistsEnabled);
 			this.Controls.Add(this.buttonTimerEnabled);
 			this.Controls.Add(this.label7on7);
@@ -302,6 +332,7 @@
 			this.Load += new System.EventHandler(this.NetworkGameSettingsForm_Load);
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownCoinsBet)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxCoin)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.numericUpDownNumberOfRounds)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -311,16 +342,17 @@
 
 		private System.Windows.Forms.NumericUpDown numericUpDownCoinsBet;
 		private System.Windows.Forms.Label labelCoinsBet;
-		private Guna.UI2.WinForms.Guna2GradientButton buttonPlay;
+		private Guna.UI2.WinForms.Guna2GradientButton buttonCreate;
 		private FontAwesome.Sharp.IconButton buttonGameAssistsEnabled;
 		private FontAwesome.Sharp.IconButton buttonTimerEnabled;
 		private System.Windows.Forms.Label label7on7;
 		private System.Windows.Forms.Label label5on5;
 		private System.Windows.Forms.Label label3on3;
 		private System.Windows.Forms.RichTextBox richTextBoxDescription;
-		private System.Windows.Forms.Label labelOpponentTitle;
 		private System.Windows.Forms.PictureBox pictureBoxCoin;
 		private System.Windows.Forms.Label labelDescription;
 		private System.Windows.Forms.Label labelDescriptionLength;
+		private System.Windows.Forms.NumericUpDown numericUpDownNumberOfRounds;
+		private System.Windows.Forms.Label labelNumberOfRounds;
 	}
 }

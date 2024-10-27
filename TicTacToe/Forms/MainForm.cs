@@ -194,14 +194,12 @@ namespace TicTacToe.Forms
 		}
 		private void ButtonSinglePCGame_Click(object sender, EventArgs e)
 		{
-			RoundManager roundManager = new RoundManager((int)numericUpDownNumberOfRounds.Value);
-			SinglePCGameSettingsForm gameSettingsForm = new SinglePCGameSettingsForm(this, _player, roundManager);
+			SinglePCGameSettingsForm gameSettingsForm = new SinglePCGameSettingsForm(this, _player);
 			gameSettingsForm.ShowDialog();
 		}
 		private void ButtonNetworkGame_Click(object sender, EventArgs e)
 		{
-			RoundManager roundManager = new RoundManager((int)numericUpDownNumberOfRounds.Value);
-			StartNetworkGameForm startNetworkGameForm = new StartNetworkGameForm(this, _player, roundManager);
+			StartNetworkGameForm startNetworkGameForm = new StartNetworkGameForm(this, _player);
 			Hide();
 			startNetworkGameForm.ShowDialog();
 		}
@@ -209,8 +207,8 @@ namespace TicTacToe.Forms
 		private void ButtonProfile_Click(object sender, EventArgs e)
 		{
 			ProfileForm profileForm = new ProfileForm(_player);
-			profileForm.FormClosed += (s, args) => { Visible = true; };
-			Visible = false;
+			profileForm.FormClosed += (s, args) => { Show(); };
+			Hide();
 			if (WindowState == FormWindowState.Maximized)
 				profileForm.WindowState = FormWindowState.Maximized;
 			profileForm.Show();
@@ -218,8 +216,8 @@ namespace TicTacToe.Forms
 		private void ButtonShop_Click(object sender, EventArgs e)
 		{
 			ShopForm shopForm = new ShopForm(_player);
-			shopForm.FormClosed += (s, args) => { Visible = true; };
-			Visible = false;
+			shopForm.FormClosed += (s, args) => { Show(); };
+			Hide();
 			if (WindowState == FormWindowState.Maximized)
 				shopForm.WindowState = FormWindowState.Maximized;
 			shopForm.Show();
@@ -262,8 +260,6 @@ namespace TicTacToe.Forms
 		{
 			int value = (int)numericUpDownNumberOfRounds.Value;
 			_player.BotGameSettings.NumberOfRounds = value;
-			_player.SinglePCGameSettings.NumberOfRounds = value;
-			_player.NetworkGameSettings.NumberOfRounds = value;
 		}
 
 		private void LabelName_MouseEnter(object sender, EventArgs e)
