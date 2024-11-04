@@ -18,23 +18,26 @@ namespace TicTacToe.Models.GameClientServer
 		internal EventHandler<LocalPlayerEventArgs> PlayerLeftLobby;
 
 		private readonly HttpListener _httpListener;
+		private readonly int _port;
 		private readonly FirewallManager _firewallManager;
 		private readonly Player _player;
-		private readonly int _port;
+		private readonly NetworkLobbyInfo _networkLobbyInfo;
 
 		internal GameServer(Player player, int port)
 		{
 			_httpListener = new HttpListener();
 			_httpListener.Prefixes.Add($"http://+:{port}/");
-			_player = player;
 			_port = port;
-			_firewallManager = new FirewallManager($"{FIREWALL_RULE_NAME_PREFIX} {_port}");
+			_firewallManager = new FirewallManager($"{FIREWALL_RULE_NAME_PREFIX} {port}");
+			_player = player;
+			_networkLobbyInfo = new NetworkLobbyInfo(_player.NetworkGameSettings);
 		}
 
 		internal void Start()
 		{
 			_httpListener.Start();
 			_firewallManager.AddFirewallRule(_port);
+			UpdateLobbySettings();
 
 			Task.Run(() => HandleRequests());
 		}
@@ -67,16 +70,19 @@ namespace TicTacToe.Models.GameClientServer
 					{
 						string jsonData = await reader.ReadToEndAsync();
 						joinedPlayer = JsonConvert.DeserializeObject<Player>(jsonData);
+						_networkLobbyInfo.AddPlayer(clientIPAddress, joinedPlayer);
 					}
 				}
 
 				if (context.Request.HttpMethod == HttpMethod.Delete.Method)
+				{
 					OnPlayerLeftLobby(new LocalPlayerEventArgs(null, clientIPAddress));
+					_networkLobbyInfo.RemovePlayer(clientIPAddress);
+				}
 				else
 				{
-
-					NetworkGameSettings networkGameSettings = CloneAndModifySettings();
-					string response = JsonConvert.SerializeObject(networkGameSettings, Formatting.Indented);
+					UpdateLobbySettings();
+					string response = JsonConvert.SerializeObject(_networkLobbyInfo, Formatting.Indented);
 					await SendResponseToClient(context, response);
 
 					if (joinedPlayer != null && clientIPAddress != null)
@@ -94,15 +100,13 @@ namespace TicTacToe.Models.GameClientServer
 
 			await context.Response.OutputStream.WriteAsync(responseBytes, 0, responseBytes.Length);
 		}
-		private NetworkGameSettings CloneAndModifySettings()
-		{// The method creates a new NetworkGameSettings, where it inserts the player's avatar and nickname.
+		private void UpdateLobbySettings()
+		{
 			NetworkGameSettings settings = _player.NetworkGameSettings;
-			NetworkGameSettings networkGameSettings = new NetworkGameSettings(settings.Description,
+			_networkLobbyInfo.Settings = new NetworkGameSettings(settings.Description,
 				settings.CoinsBet, _player.Name, _player.VisualSettings.Avatar,
 				settings.NumberOfRounds, settings.FieldSize,
-				settings.IsTimerEnabled, settings.IsGameAssistsEnabled, 0);
-
-			return networkGameSettings;
+				settings.IsTimerEnabled, settings.IsGameAssistsEnabled);
 		}
 
 		private void OnPlayerJoined(LocalPlayerEventArgs e)

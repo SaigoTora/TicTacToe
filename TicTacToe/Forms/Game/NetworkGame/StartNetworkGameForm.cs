@@ -12,7 +12,6 @@ using System.Windows.Forms;
 
 using TicTacToe.Forms.Game.Settings;
 using TicTacToe.Models.GameClientServer;
-using TicTacToe.Models.GameInfo.Settings;
 using TicTacToe.Models.PlayerInfo;
 using TicTacToe.Models.Utilities;
 using TicTacToe.Models.Utilities.FormUtilities;
@@ -64,12 +63,12 @@ namespace TicTacToe.Forms.Game.NetworkGame
 		private void CreateLobbyPreview(object sender, LobbyPreviewEventArgs e)
 		{
 			Guna2Panel panel = CreateLobbyPreviewPanel();
-			Label labelOpponentName = CreateOpponentNameLabel($"#{Interlocked.Increment(ref _lobbyPreviewNumber)}  {e.NetworkGameSettings.OpponentName}");
-			Label labelDescription = CreateDescriptionLabel(e.NetworkGameSettings.Description);
+			Label labelOpponentName = CreateOpponentNameLabel($"#{Interlocked.Increment(ref _lobbyPreviewNumber)}  {e.NetworkLobbyInfo.Settings.OpponentName}");
+			Label labelDescription = CreateDescriptionLabel(e.NetworkLobbyInfo.Settings.Description);
 			PictureBox pictureBoxCoin = CreateCoinPictureBox();
-			Label labelCoinsBet = CreateCoinsBetLabel(e.NetworkGameSettings.CoinsBet,
+			Label labelCoinsBet = CreateCoinsBetLabel(e.NetworkLobbyInfo.Settings.CoinsBet,
 				pictureBoxCoin.Width + pictureBoxCoin.Location.X);
-			Label labelPlayers = CreatePlayersLabel(e.NetworkGameSettings.CurrentPlayerCount, e.NetworkGameSettings.MaxPlayerCount);
+			Label labelPlayers = CreatePlayersLabel(e.NetworkLobbyInfo.Players.Count + 1, e.NetworkLobbyInfo.MaxPlayerCount);
 
 			panel.Controls.Add(labelOpponentName);
 			panel.Controls.Add(labelDescription);
@@ -78,11 +77,8 @@ namespace TicTacToe.Forms.Game.NetworkGame
 			panel.Controls.Add(labelPlayers);
 
 			ManageLobbyPreviewHover(panel, true);
-			foreach (Control child in panel.Controls)
-			{
-				child.Click += LobbyPreview_Click;
-				child.DoubleClick += LobbyPreview_DoubleClick;
-			}
+			SubscribePanelClick(panel, _player.Coins >= e.NetworkLobbyInfo.Settings.CoinsBet
+				&& e.NetworkLobbyInfo.Players.Count + 1 < e.NetworkLobbyInfo.MaxPlayerCount);
 
 			_gamePanelsToIP.Add(panel, $"{e.IPAddress}:{e.Port}");
 		}
@@ -102,10 +98,27 @@ namespace TicTacToe.Forms.Game.NetworkGame
 				Margin = new Padding(0, 0, 0, PANEL_BOTTOM_MARGIN),
 				FillColor = _lobbyPreviewPanelColor.Default
 			};
-			panel.Click += LobbyPreview_Click;
-			panel.DoubleClick += LobbyPreview_DoubleClick;
 
 			return panel;
+		}
+		private void SubscribePanelClick(Guna2Panel panel, bool canJoin)
+		{
+			if (canJoin)
+			{
+				panel.Click += LobbyPreview_Click;
+				panel.DoubleClick += LobbyPreview_DoubleClick;
+				foreach (Control child in panel.Controls)
+				{
+					child.Click += LobbyPreview_Click;
+					child.DoubleClick += LobbyPreview_DoubleClick;
+				}
+			}
+			else
+			{
+				panel.Cursor = Cursors.No;
+				foreach (Control child in panel.Controls)
+					child.Cursor = Cursors.No;
+			}
 		}
 		private Label CreateOpponentNameLabel(string name)
 		{
@@ -377,8 +390,8 @@ namespace TicTacToe.Forms.Game.NetworkGame
 
 		private async void ButtonJoin_Click(object sender, EventArgs e)
 		{
-			NetworkGameSettings gameSettings = await _gameClient.JoinGameLobbyAsync(_selectedfullIPAddress, _player);
-			GameLobbyForm gameLobbyForm = new GameLobbyForm(_mainForm, _player, gameSettings, _gameClient);
+			NetworkLobbyInfo networkLobbyInfo = await _gameClient.JoinGameLobbyAsync(_selectedfullIPAddress, _player);
+			GameLobbyForm gameLobbyForm = new GameLobbyForm(_mainForm, _player, networkLobbyInfo, _gameClient);
 			gameLobbyForm.Show();
 
 			NeedToShowMainForm = false;

@@ -36,9 +36,8 @@ namespace TicTacToe.Forms.Game.NetworkGame
 
 		internal GameLobbyForm(MainForm mainForm, Player player)
 		{
-			customTitleBar = new CustomTitleBar(this, "Lobby");
-			IsResizable = true;
 			InitializeComponent();
+			customTitleBar = new CustomTitleBar(this, "Lobby", maximizeBox: false);
 
 			_mainForm = mainForm;
 			_player = player;
@@ -51,18 +50,18 @@ namespace TicTacToe.Forms.Game.NetworkGame
 			_gameServer.Start();
 			ManageServerEventHandlers(true);
 		}
-		internal GameLobbyForm(MainForm mainForm, Player player, NetworkGameSettings gameSettings, GameClient gameClient)
+		internal GameLobbyForm(MainForm mainForm, Player player, NetworkLobbyInfo networkLobbyInfo, GameClient gameClient)
 		{
-			customTitleBar = new CustomTitleBar(this, "Lobby");
-			IsResizable = true;
 			InitializeComponent();
+			customTitleBar = new CustomTitleBar(this, "Lobby", maximizeBox: false);
 
 			_mainForm = mainForm;
 			_player = player;
-			_gameClient = gameClient;
+			_syncContext = SynchronizationContext.Current;
 
+			_gameClient = gameClient;
 			MakeEnabledButtonsNonInteractive();
-			SetClientForm(gameSettings);
+			SetClientForm(networkLobbyInfo);
 		}
 		private void GameLobbyForm_Load(object sender, EventArgs e)
 			=> labelCoins.Text = $"{_player.Coins:N0}".Replace(',', ' ');
@@ -118,15 +117,22 @@ namespace TicTacToe.Forms.Game.NetworkGame
 			buttonGameAssistsEnabled.MouseLeave -= EnabledButton_MouseLeave;
 		}
 
-		private void SetClientForm(NetworkGameSettings gameSettings)
+		private void SetClientForm(NetworkLobbyInfo lobbyInfo)
 		{
-			SetClientFieldSize(gameSettings.FieldSize);
-			SetClientNumberOfRounds(gameSettings.NumberOfRounds);
-			SetClientCoinsBet(gameSettings.CoinsBet);
-			if (gameSettings.IsTimerEnabled)
+			SetClientFieldSize(lobbyInfo.Settings.FieldSize);
+			SetClientNumberOfRounds(lobbyInfo.Settings.NumberOfRounds);
+			SetClientCoinsBet(lobbyInfo.Settings.CoinsBet);
+			if (lobbyInfo.Settings.IsTimerEnabled)
 				SetActiveEnableButtonStyle(buttonTimerEnabled);
-			if (gameSettings.IsGameAssistsEnabled)
+			if (lobbyInfo.Settings.IsGameAssistsEnabled)
 				SetActiveEnableButtonStyle(buttonGameAssistsEnabled);
+
+			Player serverPlayer = new Player(lobbyInfo.Settings.OpponentName);
+			serverPlayer.VisualSettings.Avatar = lobbyInfo.Settings.OpponentAvatar;
+			PlayerJoined(this, new LocalPlayerEventArgs(serverPlayer));
+			foreach (Player player in lobbyInfo.Players)
+				PlayerJoined(this, new LocalPlayerEventArgs(player));
+
 			buttonReady.Visible = true;
 
 			_buttonEventHandlers.SubscribeToHover(buttonReady);
@@ -313,7 +319,7 @@ namespace TicTacToe.Forms.Game.NetworkGame
 				flpPlayers.Controls.Add(panel);
 
 				if (e.HasIPAddress())
-					_ipToGamePanels[e.IPAddress] = panel;
+					_ipToGamePanels.Add(e.IPAddress, panel);
 			}, null);
 		}
 

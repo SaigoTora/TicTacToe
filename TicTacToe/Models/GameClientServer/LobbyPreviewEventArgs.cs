@@ -1,22 +1,20 @@
 ﻿using System;
 using System.Net;
 
-using TicTacToe.Models.GameInfo.Settings;
-
 namespace TicTacToe.Models.GameClientServer
 {
 	internal class LobbyPreviewEventArgs : EventArgs
 	{
 		internal readonly IPAddress IPAddress;
 		internal readonly int Port;
-		internal readonly NetworkGameSettings NetworkGameSettings;
+		internal readonly NetworkLobbyInfo NetworkLobbyInfo;
 
 		public LobbyPreviewEventArgs(IPAddress ipAddress, int port,
-			NetworkGameSettings networkGameSettings)
+			NetworkLobbyInfo networkLobbyInfo)
 		{
 			IPAddress = ipAddress;
 			Port = port;
-			NetworkGameSettings = networkGameSettings;
+			NetworkLobbyInfo = networkLobbyInfo;
 		}
 	}
 }

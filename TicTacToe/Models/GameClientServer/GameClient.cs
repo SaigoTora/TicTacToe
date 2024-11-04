@@ -5,7 +5,6 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
-using TicTacToe.Models.GameInfo.Settings;
 using TicTacToe.Models.PlayerInfo;
 
 namespace TicTacToe.Models.GameClientServer
@@ -15,15 +14,15 @@ namespace TicTacToe.Models.GameClientServer
 		private static readonly HttpClient httpClient = new HttpClient();
 		private static string _serverAddress;
 
-		internal async Task<NetworkGameSettings> GetGameSettingsAsync(IPAddress ip, int port)
+		internal async Task<NetworkLobbyInfo> GetGameSettingsAsync(IPAddress ip, int port)
 		{
 			HttpResponseMessage response = await httpClient.GetAsync($"http://{ip}:{port}/game-lobby");
 			response.EnsureSuccessStatusCode();
 
 			string jsonResponse = await response.Content.ReadAsStringAsync();
-			return JsonConvert.DeserializeObject<NetworkGameSettings>(jsonResponse);
+			return JsonConvert.DeserializeObject<NetworkLobbyInfo>(jsonResponse);
 		}
-		internal async Task<NetworkGameSettings> JoinGameLobbyAsync(string fullIPAddress, Player player)
+		internal async Task<NetworkLobbyInfo> JoinGameLobbyAsync(string fullIPAddress, Player player)
 		{
 			string jsonContent = JsonConvert.SerializeObject(player, Formatting.Indented);
 
@@ -34,7 +33,7 @@ namespace TicTacToe.Models.GameClientServer
 
 				string jsonResponse = await response.Content.ReadAsStringAsync();
 				_serverAddress = fullIPAddress;
-				return JsonConvert.DeserializeObject<NetworkGameSettings>(jsonResponse);
+				return JsonConvert.DeserializeObject<NetworkLobbyInfo>(jsonResponse);
 			}
 		}
 		internal async Task LeaveGameLobbyAsync()

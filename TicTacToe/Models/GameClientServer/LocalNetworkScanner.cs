@@ -5,8 +5,6 @@ using System.Net.NetworkInformation;
 using System.Net.Sockets;
 using System.Threading.Tasks;
 
-using TicTacToe.Models.GameInfo.Settings;
-
 namespace TicTacToe.Models.GameClientServer
 {
 	internal class LocalNetworkScanner
@@ -108,8 +106,8 @@ namespace TicTacToe.Models.GameClientServer
 
 					await connectionTask;
 
-					NetworkGameSettings networkGameSettings = await _gameClient.GetGameSettingsAsync(ip, _port);
-					OnCreateLobbyPreview(new LobbyPreviewEventArgs(ip, _port, networkGameSettings));
+					NetworkLobbyInfo networkLobbyInfo = await _gameClient.GetGameSettingsAsync(ip, _port);
+					OnCreateLobbyPreview(new LobbyPreviewEventArgs(ip, _port, networkLobbyInfo));
 					return true;
 				}
 			}

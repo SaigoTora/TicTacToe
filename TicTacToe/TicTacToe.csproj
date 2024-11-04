@@ -212,6 +212,7 @@
     <Compile Include="Models\GameClientServer\LobbyPreviewEventArgs.cs" />
     <Compile Include="Models\GameClientServer\LocalNetworkScanner.cs" />
     <Compile Include="Models\GameClientServer\LocalPlayerEventArgs.cs" />
+    <Compile Include="Models\GameClientServer\NetworkLobbyInfo.cs" />
     <Compile Include="Models\GameInfo\CoinReward.cs" />
     <Compile Include="Models\GameInfo\GameFormInfo.cs" />
     <Compile Include="Models\GameInfo\GameResult.cs" />

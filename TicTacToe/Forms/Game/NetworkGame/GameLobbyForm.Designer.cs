@@ -77,7 +77,6 @@
 			// 
 			// label7on7
 			// 
-			this.label7on7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.label7on7.AutoSize = true;
 			this.label7on7.BackColor = System.Drawing.Color.Transparent;
 			this.label7on7.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -224,7 +223,6 @@
 			// 
 			// buttonGameAssistsEnabled
 			// 
-			this.buttonGameAssistsEnabled.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.buttonGameAssistsEnabled.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(35)))), ((int)(((byte)(30)))));
 			this.buttonGameAssistsEnabled.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.buttonGameAssistsEnabled.FlatAppearance.BorderSize = 0;
@@ -252,7 +250,6 @@
 			// 
 			// buttonTimerEnabled
 			// 
-			this.buttonTimerEnabled.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.buttonTimerEnabled.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(35)))), ((int)(((byte)(30)))));
 			this.buttonTimerEnabled.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.buttonTimerEnabled.FlatAppearance.BorderSize = 0;
@@ -336,13 +333,12 @@
 			// 
 			// flpPlayers
 			// 
-			this.flpPlayers.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+			this.flpPlayers.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.flpPlayers.AutoScroll = true;
-			this.flpPlayers.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(45)))));
-			this.flpPlayers.Location = new System.Drawing.Point(403, 358);
+			this.flpPlayers.BackColor = System.Drawing.Color.Transparent;
+			this.flpPlayers.Location = new System.Drawing.Point(381, 378);
 			this.flpPlayers.Name = "flpPlayers";
-			this.flpPlayers.Size = new System.Drawing.Size(250, 300);
+			this.flpPlayers.Size = new System.Drawing.Size(267, 280);
 			this.flpPlayers.TabIndex = 15;
 			this.flpPlayers.Tag = "needToMoveParentDown";
 			// 
