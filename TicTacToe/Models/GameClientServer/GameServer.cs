@@ -15,6 +15,7 @@ namespace TicTacToe.Models.GameClientServer
 	{
 		private const string FIREWALL_RULE_NAME_PREFIX = "Tic Tac Toe";
 		internal EventHandler<LocalPlayerEventArgs> PlayerJoined;
+		internal EventHandler<LocalPlayerEventArgs> PlayerLeftLobby;
 
 		private readonly HttpListener _httpListener;
 		private readonly FirewallManager _firewallManager;
@@ -54,9 +55,10 @@ namespace TicTacToe.Models.GameClientServer
 				return;
 			}
 
+			string clientIPAddress = context.Request.RemoteEndPoint?.Address.ToString();
+
 			if (context.Request.RawUrl.Contains("/game-lobby"))
 			{
-				string clientIPAddress = null;
 				Player joinedPlayer = null;
 
 				if (context.Request.HttpMethod == HttpMethod.Post.Method)
@@ -65,16 +67,21 @@ namespace TicTacToe.Models.GameClientServer
 					{
 						string jsonData = await reader.ReadToEndAsync();
 						joinedPlayer = JsonConvert.DeserializeObject<Player>(jsonData);
-						clientIPAddress = context.Request.RemoteEndPoint?.Address.ToString();
 					}
 				}
 
-				NetworkGameSettings networkGameSettings = CloneAndModifySettings();
-				string response = JsonConvert.SerializeObject(networkGameSettings, Formatting.Indented);
-				await SendResponseToClient(context, response);
+				if (context.Request.HttpMethod == HttpMethod.Delete.Method)
+					OnPlayerLeftLobby(new LocalPlayerEventArgs(null, clientIPAddress));
+				else
+				{
 
-				if (joinedPlayer != null && clientIPAddress != null)
-					OnPlayerJoined(new LocalPlayerEventArgs(joinedPlayer, clientIPAddress));
+					NetworkGameSettings networkGameSettings = CloneAndModifySettings();
+					string response = JsonConvert.SerializeObject(networkGameSettings, Formatting.Indented);
+					await SendResponseToClient(context, response);
+
+					if (joinedPlayer != null && clientIPAddress != null)
+						OnPlayerJoined(new LocalPlayerEventArgs(joinedPlayer, clientIPAddress));
+				}
 			}
 
 			context.Response.Close();
@@ -101,6 +108,11 @@ namespace TicTacToe.Models.GameClientServer
 		private void OnPlayerJoined(LocalPlayerEventArgs e)
 		{
 			var temp = System.Threading.Volatile.Read(ref PlayerJoined);
+			temp?.Invoke(this, e);
+		}
+		private void OnPlayerLeftLobby(LocalPlayerEventArgs e)
+		{
+			var temp = System.Threading.Volatile.Read(ref PlayerLeftLobby);
 			temp?.Invoke(this, e);
 		}
 

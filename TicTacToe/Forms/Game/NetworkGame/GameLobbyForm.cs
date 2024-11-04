@@ -18,13 +18,16 @@ namespace TicTacToe.Forms.Game.NetworkGame
 {
 	internal partial class GameLobbyForm : BaseForm
 	{
-		private static readonly (Color Default, Color Selected) _fieldSizeColor = (Color.Transparent, Color.Green);
-		private static readonly (Color Default, Color Selected) _enableButtonsForeColor = (Color.Transparent, Color.Khaki);
+		private static readonly (Color Default, Color Selected) _fieldSizeColor
+			= (Color.Transparent, Color.Green);
+		private static readonly (Color Default, Color Selected) _enableButtonsForeColor
+			= (Color.Transparent, Color.Khaki);
 
 		private readonly MainForm _mainForm;
 		private readonly Player _player;
 
 		private readonly GameServer _gameServer;
+		private readonly GameClient _gameClient;
 		private readonly Dictionary<string, Guna2Panel> _ipToGamePanels = new Dictionary<string, Guna2Panel>();
 
 		private readonly SynchronizationContext _syncContext;
@@ -46,9 +49,9 @@ namespace TicTacToe.Forms.Game.NetworkGame
 			_gameServer = new GameServer(_player, port);
 			SetServerForm();
 			_gameServer.Start();
-			_gameServer.PlayerJoined += PlayerJoined;
+			ManageServerEventHandlers(true);
 		}
-		internal GameLobbyForm(MainForm mainForm, Player player, NetworkGameSettings gameSettings)
+		internal GameLobbyForm(MainForm mainForm, Player player, NetworkGameSettings gameSettings, GameClient gameClient)
 		{
 			customTitleBar = new CustomTitleBar(this, "Lobby");
 			IsResizable = true;
@@ -56,6 +59,8 @@ namespace TicTacToe.Forms.Game.NetworkGame
 
 			_mainForm = mainForm;
 			_player = player;
+			_gameClient = gameClient;
+
 			MakeEnabledButtonsNonInteractive();
 			SetClientForm(gameSettings);
 		}
@@ -80,6 +85,19 @@ namespace TicTacToe.Forms.Game.NetworkGame
 
 			_buttonEventHandlers.SubscribeToHover(buttonStart);
 			_labelEventHandlers.SubscribeToHoverUnderline(label3on3, label5on5, label7on7);
+		}
+		private void ManageServerEventHandlers(bool subscribe)
+		{
+			if (subscribe)
+			{
+				_gameServer.PlayerJoined += PlayerJoined;
+				_gameServer.PlayerLeftLobby += PlayerLeftLobby;
+			}
+			else
+			{
+				_gameServer.PlayerJoined -= PlayerJoined;
+				_gameServer.PlayerLeftLobby -= PlayerLeftLobby;
+			}
 		}
 
 		#region Client Form Settings
@@ -357,6 +375,16 @@ namespace TicTacToe.Forms.Game.NetworkGame
 		}
 		#endregion
 
+		private void PlayerLeftLobby(object sender, LocalPlayerEventArgs e)
+		{
+
+			if (!string.IsNullOrEmpty(e.IPAddress))
+			{
+				_ipToGamePanels[e.IPAddress].Dispose();
+				_ipToGamePanels.Remove(e.IPAddress);
+			}
+		}
+
 		private void ButtonReady_Click(object sender, EventArgs e)
 		{
 
@@ -381,9 +409,12 @@ namespace TicTacToe.Forms.Game.NetworkGame
 
 			if (_gameServer != null)
 			{
-				_gameServer.PlayerJoined -= PlayerJoined;
+				ManageServerEventHandlers(false);
 				_gameServer?.Stop();
 			}
+			if (_gameClient != null)
+				_gameClient?.LeaveGameLobbyAsync();
+
 
 			_mainForm.Show();
 		}

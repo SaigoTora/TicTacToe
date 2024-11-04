@@ -108,7 +108,7 @@ namespace TicTacToe.Models.GameClientServer
 
 					await connectionTask;
 
-					NetworkGameSettings networkGameSettings = await _gameClient.GetGameSettings(ip, _port);
+					NetworkGameSettings networkGameSettings = await _gameClient.GetGameSettingsAsync(ip, _port);
 					OnCreateLobbyPreview(new LobbyPreviewEventArgs(ip, _port, networkGameSettings));
 					return true;
 				}

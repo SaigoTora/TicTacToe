@@ -377,8 +377,8 @@ namespace TicTacToe.Forms.Game.NetworkGame
 
 		private async void ButtonJoin_Click(object sender, EventArgs e)
 		{
-			NetworkGameSettings gameSettings = await _gameClient.JoinGameLobby(_selectedfullIPAddress, _player);
-			GameLobbyForm gameLobbyForm = new GameLobbyForm(_mainForm, _player, gameSettings);
+			NetworkGameSettings gameSettings = await _gameClient.JoinGameLobbyAsync(_selectedfullIPAddress, _player);
+			GameLobbyForm gameLobbyForm = new GameLobbyForm(_mainForm, _player, gameSettings, _gameClient);
 			gameLobbyForm.Show();
 
 			NeedToShowMainForm = false;
