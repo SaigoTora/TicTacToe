@@ -1,4 +1,6 @@
 ﻿using Newtonsoft.Json;
+using System;
+using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Text;
@@ -12,6 +14,7 @@ namespace TicTacToe.Models.GameClientServer
 	internal class GameServer
 	{
 		private const string FIREWALL_RULE_NAME_PREFIX = "Tic Tac Toe";
+		internal EventHandler<LocalPlayerEventArgs> PlayerJoined;
 
 		private readonly HttpListener _httpListener;
 		private readonly FirewallManager _firewallManager;
@@ -53,20 +56,36 @@ namespace TicTacToe.Models.GameClientServer
 
 			if (context.Request.RawUrl.Contains("/game-lobby"))
 			{
-				if (context.Request.HttpMethod == HttpMethod.Get.Method)
+				string clientIPAddress = null;
+				Player joinedPlayer = null;
+
+				if (context.Request.HttpMethod == HttpMethod.Post.Method)
 				{
-					NetworkGameSettings networkGameSettings = CloneAndModifySettings();
-					string response = JsonConvert.SerializeObject(networkGameSettings, Formatting.Indented);
-
-					byte[] responseBytes = Encoding.UTF8.GetBytes(response);
-					context.Response.StatusCode = (int)HttpStatusCode.OK;
-					context.Response.ContentLength64 = responseBytes.Length;
-
-					await context.Response.OutputStream.WriteAsync(responseBytes, 0, responseBytes.Length);
+					using (var reader = new StreamReader(context.Request.InputStream, context.Request.ContentEncoding))
+					{
+						string jsonData = await reader.ReadToEndAsync();
+						joinedPlayer = JsonConvert.DeserializeObject<Player>(jsonData);
+						clientIPAddress = context.Request.RemoteEndPoint?.Address.ToString();
+					}
 				}
+
+				NetworkGameSettings networkGameSettings = CloneAndModifySettings();
+				string response = JsonConvert.SerializeObject(networkGameSettings, Formatting.Indented);
+				await SendResponseToClient(context, response);
+
+				if (joinedPlayer != null && clientIPAddress != null)
+					OnPlayerJoined(new LocalPlayerEventArgs(joinedPlayer, clientIPAddress));
 			}
 
 			context.Response.Close();
+		}
+		private async Task SendResponseToClient(HttpListenerContext context, string response)
+		{
+			byte[] responseBytes = Encoding.UTF8.GetBytes(response);
+			context.Response.StatusCode = (int)HttpStatusCode.OK;
+			context.Response.ContentLength64 = responseBytes.Length;
+
+			await context.Response.OutputStream.WriteAsync(responseBytes, 0, responseBytes.Length);
 		}
 		private NetworkGameSettings CloneAndModifySettings()
 		{// The method creates a new NetworkGameSettings, where it inserts the player's avatar and nickname.
@@ -77,6 +96,12 @@ namespace TicTacToe.Models.GameClientServer
 				settings.IsTimerEnabled, settings.IsGameAssistsEnabled, 0);
 
 			return networkGameSettings;
+		}
+
+		private void OnPlayerJoined(LocalPlayerEventArgs e)
+		{
+			var temp = System.Threading.Volatile.Read(ref PlayerJoined);
+			temp?.Invoke(this, e);
 		}
 
 		internal void Stop()

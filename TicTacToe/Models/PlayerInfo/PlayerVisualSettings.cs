@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Runtime.Serialization;
 
 using TicTacToe.Models.PlayerItem;
@@ -9,6 +10,7 @@ namespace TicTacToe.Models.PlayerInfo
 	internal class PlayerVisualSettings
 	{
 		internal GameView GameView = GameView.Score;
+		[JsonProperty]
 		internal Avatar Avatar;
 		internal ImageItem BackgroundMenu;
 		internal ColorItem BackgroundGame;

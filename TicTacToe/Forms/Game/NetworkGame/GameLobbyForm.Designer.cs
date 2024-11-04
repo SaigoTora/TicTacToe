@@ -42,6 +42,8 @@
 			this.buttonGameAssistsEnabled = new FontAwesome.Sharp.IconButton();
 			this.buttonTimerEnabled = new FontAwesome.Sharp.IconButton();
 			this.buttonStart = new Guna.UI2.WinForms.Guna2GradientButton();
+			this.buttonReady = new Guna.UI2.WinForms.Guna2GradientButton();
+			this.flpPlayers = new System.Windows.Forms.FlowLayoutPanel();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxCoin)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownNumberOfRounds)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxCoinBet)).BeginInit();
@@ -125,7 +127,6 @@
 			// 
 			this.labelFieldSize.AutoSize = true;
 			this.labelFieldSize.BackColor = System.Drawing.Color.Transparent;
-			this.labelFieldSize.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.labelFieldSize.Font = new System.Drawing.Font("Trebuchet MS", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.labelFieldSize.ForeColor = System.Drawing.Color.White;
 			this.labelFieldSize.Location = new System.Drawing.Point(12, 20);
@@ -246,8 +247,8 @@
 			this.buttonGameAssistsEnabled.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
 			this.buttonGameAssistsEnabled.UseVisualStyleBackColor = false;
 			this.buttonGameAssistsEnabled.Click += new System.EventHandler(this.ButtonGameAssistsEnabled_Click);
-			this.buttonGameAssistsEnabled.MouseEnter += new System.EventHandler(this.EnableButton_MouseEnter);
-			this.buttonGameAssistsEnabled.MouseLeave += new System.EventHandler(this.EnableButton_MouseLeave);
+			this.buttonGameAssistsEnabled.MouseEnter += new System.EventHandler(this.EnabledButton_MouseEnter);
+			this.buttonGameAssistsEnabled.MouseLeave += new System.EventHandler(this.EnabledButton_MouseLeave);
 			// 
 			// buttonTimerEnabled
 			// 
@@ -274,8 +275,8 @@
 			this.buttonTimerEnabled.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
 			this.buttonTimerEnabled.UseVisualStyleBackColor = false;
 			this.buttonTimerEnabled.Click += new System.EventHandler(this.ButtonTimerEnabled_Click);
-			this.buttonTimerEnabled.MouseEnter += new System.EventHandler(this.EnableButton_MouseEnter);
-			this.buttonTimerEnabled.MouseLeave += new System.EventHandler(this.EnableButton_MouseLeave);
+			this.buttonTimerEnabled.MouseEnter += new System.EventHandler(this.EnabledButton_MouseEnter);
+			this.buttonTimerEnabled.MouseLeave += new System.EventHandler(this.EnabledButton_MouseLeave);
 			// 
 			// buttonStart
 			// 
@@ -299,9 +300,51 @@
 			this.buttonStart.Location = new System.Drawing.Point(659, 608);
 			this.buttonStart.Name = "buttonStart";
 			this.buttonStart.Size = new System.Drawing.Size(220, 50);
-			this.buttonStart.TabIndex = 11;
+			this.buttonStart.TabIndex = 14;
 			this.buttonStart.TabStop = false;
 			this.buttonStart.Text = "Start";
+			this.buttonStart.Visible = false;
+			this.buttonStart.Click += new System.EventHandler(this.ButtonStart_Click);
+			// 
+			// buttonReady
+			// 
+			this.buttonReady.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.buttonReady.Animated = true;
+			this.buttonReady.BackColor = System.Drawing.Color.Transparent;
+			this.buttonReady.BorderRadius = 20;
+			this.buttonReady.BorderStyle = System.Drawing.Drawing2D.DashStyle.Custom;
+			this.buttonReady.BorderThickness = 1;
+			this.buttonReady.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.buttonReady.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+			this.buttonReady.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+			this.buttonReady.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+			this.buttonReady.DisabledState.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+			this.buttonReady.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+			this.buttonReady.FillColor = System.Drawing.Color.SandyBrown;
+			this.buttonReady.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(124)))), ((int)(((byte)(38)))));
+			this.buttonReady.Font = new System.Drawing.Font("Cooper Black", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.buttonReady.ForeColor = System.Drawing.Color.White;
+			this.buttonReady.GradientMode = System.Drawing.Drawing2D.LinearGradientMode.BackwardDiagonal;
+			this.buttonReady.Location = new System.Drawing.Point(659, 608);
+			this.buttonReady.Name = "buttonReady";
+			this.buttonReady.Size = new System.Drawing.Size(220, 50);
+			this.buttonReady.TabIndex = 13;
+			this.buttonReady.TabStop = false;
+			this.buttonReady.Text = "Ready";
+			this.buttonReady.Visible = false;
+			this.buttonReady.Click += new System.EventHandler(this.ButtonReady_Click);
+			// 
+			// flpPlayers
+			// 
+			this.flpPlayers.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.flpPlayers.AutoScroll = true;
+			this.flpPlayers.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(45)))));
+			this.flpPlayers.Location = new System.Drawing.Point(403, 358);
+			this.flpPlayers.Name = "flpPlayers";
+			this.flpPlayers.Size = new System.Drawing.Size(250, 300);
+			this.flpPlayers.TabIndex = 15;
+			this.flpPlayers.Tag = "needToMoveParentDown";
 			// 
 			// GameLobbyForm
 			// 
@@ -309,6 +352,8 @@
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
 			this.ClientSize = new System.Drawing.Size(891, 670);
+			this.Controls.Add(this.flpPlayers);
+			this.Controls.Add(this.buttonReady);
 			this.Controls.Add(this.buttonStart);
 			this.Controls.Add(this.buttonGameAssistsEnabled);
 			this.Controls.Add(this.buttonTimerEnabled);
@@ -353,5 +398,7 @@
 		private FontAwesome.Sharp.IconButton buttonGameAssistsEnabled;
 		private FontAwesome.Sharp.IconButton buttonTimerEnabled;
 		private Guna.UI2.WinForms.Guna2GradientButton buttonStart;
+		private Guna.UI2.WinForms.Guna2GradientButton buttonReady;
+		private System.Windows.Forms.FlowLayoutPanel flpPlayers;
 	}
 }

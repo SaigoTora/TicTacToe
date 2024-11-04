@@ -59,19 +59,19 @@ namespace TicTacToe.Models.GameClientServer
 
 			for (int i = 1; i < 255; i++)
 			{
-				byte[] newIpBytes = (byte[])ipBytes.Clone();
-				newIpBytes[3] = (byte)i; // Changing the last byte
+				byte[] newIPBytes = (byte[])ipBytes.Clone();
+				newIPBytes[3] = (byte)i; // Changing the last byte
 
-				if (IsValidIpInSubnet(newIpBytes, ipBytes, maskBytes))
-					ipAddresses.Add(new IPAddress(newIpBytes));
+				if (IsValidIPInSubnet(newIPBytes, ipBytes, maskBytes))
+					ipAddresses.Add(new IPAddress(newIPBytes));
 			}
 
 			return ipAddresses;
 		}
-		private bool IsValidIpInSubnet(byte[] newIpBytes, byte[] baseIpBytes, byte[] maskBytes)
+		private bool IsValidIPInSubnet(byte[] newIPBytes, byte[] baseIPBytes, byte[] maskBytes)
 		{
 			for (int j = 0; j < maskBytes.Length; j++)
-				if ((newIpBytes[j] & maskBytes[j]) != (baseIpBytes[j] & maskBytes[j]))
+				if ((newIPBytes[j] & maskBytes[j]) != (baseIPBytes[j] & maskBytes[j]))
 					return false;
 
 			return true; // If all bytes match, return true

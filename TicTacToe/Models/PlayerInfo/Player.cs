@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Runtime.Serialization;
 
 using TicTacToe.Models.CustomExceptions;
@@ -13,9 +14,11 @@ namespace TicTacToe.Models.PlayerInfo
 	[Serializable]
 	internal class Player
 	{
+		[JsonProperty]
 		internal string Name { get; private set; }
 		internal int Coins { get; private set; }
 
+		[JsonProperty]
 		internal PlayerVisualSettings VisualSettings { get; private set; }
 		internal BotGameSettings BotGameSettings { get; private set; }
 		internal TwoPlayersGameSettings SinglePCGameSettings { get; private set; }

@@ -55,9 +55,14 @@ namespace TicTacToe.Forms.Game.Settings
 
 		private void ButtonCreate_Click(object sender, EventArgs e)
 		{
-			GameLobbyForm gameLobbyForm = new GameLobbyForm(_mainForm, _player);
+			if (numericUpDownNumberOfRounds.Value % 2 != 0)
+			{
+				CustomMessageBox.Show("The number of rounds must be an even number.",
+					"Error", CustomMessageBoxButtons.OK, CustomMessageBoxIcon.Error);
+				return;
+			}
 
-			_mainForm.Hide();
+			GameLobbyForm gameLobbyForm = new GameLobbyForm(_mainForm, _player);
 			gameLobbyForm.Show();
 
 			if (_previousForm != null)

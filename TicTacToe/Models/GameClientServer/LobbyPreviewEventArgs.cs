@@ -11,10 +11,10 @@ namespace TicTacToe.Models.GameClientServer
 		internal readonly int Port;
 		internal readonly NetworkGameSettings NetworkGameSettings;
 
-		public LobbyPreviewEventArgs(IPAddress iPAddress, int port,
+		public LobbyPreviewEventArgs(IPAddress ipAddress, int port,
 			NetworkGameSettings networkGameSettings)
 		{
-			IPAddress = iPAddress;
+			IPAddress = ipAddress;
 			Port = port;
 			NetworkGameSettings = networkGameSettings;
 		}
