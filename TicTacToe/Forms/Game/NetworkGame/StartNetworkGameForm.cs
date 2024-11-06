@@ -390,12 +390,24 @@ namespace TicTacToe.Forms.Game.NetworkGame
 
 		private async void ButtonJoin_Click(object sender, EventArgs e)
 		{
-			NetworkLobbyInfo networkLobbyInfo = await _gameClient.JoinGameLobbyAsync(_selectedfullIPAddress, _player);
-			GameLobbyForm gameLobbyForm = new GameLobbyForm(_mainForm, _player, networkLobbyInfo, _gameClient);
-			gameLobbyForm.Show();
+			try
+			{
+				Enabled = false;
+				NetworkLobbyInfo networkLobbyInfo = await _gameClient.JoinGameLobbyAsync(_selectedfullIPAddress, _player);
+				GameLobbyForm gameLobbyForm = new GameLobbyForm(_mainForm, _player, _gameClient);
+				gameLobbyForm.Show();
 
-			NeedToShowMainForm = false;
-			Close();
+				NeedToShowMainForm = false;
+				Close();
+			}
+			catch (System.Net.Http.HttpRequestException)
+			{
+				CustomMessageBox.Show($"Failed to connect because the player " +
+					"who created the lobby has finished waiting for players.", "Error",
+					CustomMessageBoxButtons.OK, CustomMessageBoxIcon.Error);
+				Enabled = true;
+				ButtonRefresh_Click(sender, e);
+			}
 		}
 
 		private void StartNetworkGameForm_FormClosed(object sender, FormClosedEventArgs e)

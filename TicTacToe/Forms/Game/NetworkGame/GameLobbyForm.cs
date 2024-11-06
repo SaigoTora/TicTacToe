@@ -18,6 +18,9 @@ namespace TicTacToe.Forms.Game.NetworkGame
 {
 	internal partial class GameLobbyForm : BaseForm
 	{
+		private const int LOBBY_UPDATE_INTERVAL = 2500;
+		private const string ICON_PLAYER_STATUS_TAG = "IconPlayerStatus";
+
 		private static readonly (Color Default, Color Selected) _fieldSizeColor
 			= (Color.Transparent, Color.Green);
 		private static readonly (Color Default, Color Selected) _enableButtonsForeColor
@@ -30,6 +33,8 @@ namespace TicTacToe.Forms.Game.NetworkGame
 		private readonly GameClient _gameClient;
 		private readonly Dictionary<string, Guna2Panel> _ipToGamePanels = new Dictionary<string, Guna2Panel>();
 
+		private readonly System.Threading.Timer _clientTimer;
+		private readonly PlayerLobbyStatus _clientStatus = new PlayerLobbyStatus();
 		private readonly SynchronizationContext _syncContext;
 		private readonly ButtonEventHandlers _buttonEventHandlers = new ButtonEventHandlers();
 		private readonly LabelEventHandlers _labelEventHandlers = new LabelEventHandlers();
@@ -42,7 +47,8 @@ namespace TicTacToe.Forms.Game.NetworkGame
 			_mainForm = mainForm;
 			_player = player;
 			_syncContext = SynchronizationContext.Current;
-			PlayerJoined(this, new LocalPlayerEventArgs(_player));
+			PlayerJoined(this, new NetworkPlayerEventArgs(
+				new NetworkPlayer(_player.Name, _player.VisualSettings, true)));
 
 			int port = int.Parse(ConfigurationManager.AppSettings["port"]);
 			_gameServer = new GameServer(_player, port);
@@ -50,7 +56,7 @@ namespace TicTacToe.Forms.Game.NetworkGame
 			_gameServer.Start();
 			ManageServerEventHandlers(true);
 		}
-		internal GameLobbyForm(MainForm mainForm, Player player, NetworkLobbyInfo networkLobbyInfo, GameClient gameClient)
+		internal GameLobbyForm(MainForm mainForm, Player player, GameClient gameClient)
 		{
 			InitializeComponent();
 			customTitleBar = new CustomTitleBar(this, "Lobby", maximizeBox: false);
@@ -58,10 +64,13 @@ namespace TicTacToe.Forms.Game.NetworkGame
 			_mainForm = mainForm;
 			_player = player;
 			_syncContext = SynchronizationContext.Current;
-
 			_gameClient = gameClient;
+
 			MakeEnabledButtonsNonInteractive();
-			SetClientForm(networkLobbyInfo);
+			buttonReady.Visible = true;
+			_buttonEventHandlers.SubscribeToHover(buttonReady);
+
+			_clientTimer = new System.Threading.Timer(UpdateLobbyForClient, null, 0, LOBBY_UPDATE_INTERVAL);
 		}
 		private void GameLobbyForm_Load(object sender, EventArgs e)
 			=> labelCoins.Text = $"{_player.Coins:N0}".Replace(',', ' ');
@@ -90,11 +99,13 @@ namespace TicTacToe.Forms.Game.NetworkGame
 			if (subscribe)
 			{
 				_gameServer.PlayerJoined += PlayerJoined;
+				_gameServer.PlayerStatusChanged += PlayerStatusChanged;
 				_gameServer.PlayerLeftLobby += PlayerLeftLobby;
 			}
 			else
 			{
 				_gameServer.PlayerJoined -= PlayerJoined;
+				_gameServer.PlayerStatusChanged -= PlayerStatusChanged;
 				_gameServer.PlayerLeftLobby -= PlayerLeftLobby;
 			}
 		}
@@ -119,23 +130,35 @@ namespace TicTacToe.Forms.Game.NetworkGame
 
 		private void SetClientForm(NetworkLobbyInfo lobbyInfo)
 		{
-			SetClientFieldSize(lobbyInfo.Settings.FieldSize);
-			SetClientNumberOfRounds(lobbyInfo.Settings.NumberOfRounds);
-			SetClientCoinsBet(lobbyInfo.Settings.CoinsBet);
-			if (lobbyInfo.Settings.IsTimerEnabled)
-				SetActiveEnableButtonStyle(buttonTimerEnabled);
-			if (lobbyInfo.Settings.IsGameAssistsEnabled)
-				SetActiveEnableButtonStyle(buttonGameAssistsEnabled);
+			_syncContext.Post(_ =>
+			{
+				SetClientFieldSize(lobbyInfo.Settings.FieldSize);
+				SetClientNumberOfRounds(lobbyInfo.Settings.NumberOfRounds);
+				SetClientCoinsBet(lobbyInfo.Settings.CoinsBet);
 
-			Player serverPlayer = new Player(lobbyInfo.Settings.OpponentName);
-			serverPlayer.VisualSettings.Avatar = lobbyInfo.Settings.OpponentAvatar;
-			PlayerJoined(this, new LocalPlayerEventArgs(serverPlayer));
-			foreach (Player player in lobbyInfo.Players)
-				PlayerJoined(this, new LocalPlayerEventArgs(player));
+				if (lobbyInfo.Settings.IsTimerEnabled)
+					SetActiveEnableButtonStyle(buttonTimerEnabled);
+				else
+					SetDefaultEnableButtonStyle(buttonTimerEnabled);
+				if (lobbyInfo.Settings.IsGameAssistsEnabled)
+					SetActiveEnableButtonStyle(buttonGameAssistsEnabled);
+				else
+					SetDefaultEnableButtonStyle(buttonGameAssistsEnabled);
 
-			buttonReady.Visible = true;
+				ClearPlayers();
 
-			_buttonEventHandlers.SubscribeToHover(buttonReady);
+			}, null);
+
+			PlayerVisualSettings serverVisualSettings = new PlayerVisualSettings
+			{ Avatar = lobbyInfo.Settings.OpponentAvatar };
+			NetworkPlayer serverPlayer = new NetworkPlayer(lobbyInfo.Settings.OpponentName,
+				serverVisualSettings);
+			int i = 0;
+			serverPlayer.SetReady(true);
+			PlayerJoined(this, new NetworkPlayerEventArgs(serverPlayer, (i++).ToString()));
+
+			foreach (NetworkPlayer player in lobbyInfo.Players)
+				PlayerJoined(this, new NetworkPlayerEventArgs(player, (i++).ToString()));
 		}
 		private void SetClientFieldSize(FieldSize fieldSize)
 		{
@@ -159,19 +182,29 @@ namespace TicTacToe.Forms.Game.NetworkGame
 					throw new InvalidOperationException
 						($"Unknown field size: {fieldSize}");
 			}
-			labelFieldSize.Text += "  " + field;
+			labelFieldSize.Text = "Field size:  " + field;
 		}
 		private void SetClientNumberOfRounds(int numberOfRounds)
 		{
 			numericUpDownNumberOfRounds.Visible = false;
-			labelNumberOfRounds.Text += "  " + numberOfRounds;
+			labelNumberOfRounds.Text = "Number of rounds:  " + numberOfRounds;
 		}
 		private void SetClientCoinsBet(int coinsBet)
 		{
+			const string LABEL_NAME = "labelValueCoinsBet";
+
 			numericUpDownCoinsBet.Visible = false;
 			string coinsBetText = coinsBet == 0 ?
 				"Free" :
 				$"{coinsBet:N0}".Replace(',', ' ');
+
+			foreach (Control control in Controls)// If the label has already been created
+				if (control is Label label)
+					if (label != null && label.Name == LABEL_NAME)
+					{
+						label.Text = coinsBetText;
+						return;
+					}
 
 			Label coinsLabel = new Label()
 			{
@@ -179,6 +212,7 @@ namespace TicTacToe.Forms.Game.NetworkGame
 				Size = numericUpDownCoinsBet.Size,
 				Location = numericUpDownCoinsBet.Location,
 				Text = coinsBetText,
+				Name = LABEL_NAME,
 				TextAlign = ContentAlignment.MiddleCenter,
 				ForeColor = Color.Khaki,
 				BackColor = Color.Transparent,
@@ -299,7 +333,7 @@ namespace TicTacToe.Forms.Game.NetworkGame
 		#endregion
 
 		#region Create Joined Players
-		private void PlayerJoined(object sender, LocalPlayerEventArgs e)
+		private void PlayerJoined(object sender, NetworkPlayerEventArgs e)
 		{
 			_syncContext.Post(_ =>
 			{
@@ -310,7 +344,7 @@ namespace TicTacToe.Forms.Game.NetworkGame
 				avatar = (Avatar)ItemManager.GetFullItem(avatar);
 				PictureBox pictureBoxAvatar = CreatePlayerAvatarPictureBox(avatar);
 				Label labelName = CreatePlayerNameLabel(e.Player.Name);
-				IconPictureBox iconPictureBoxReady = CreatePlayerCheckReady(false);
+				IconPictureBox iconPictureBoxReady = CreatePlayerCheckReady(e.Player.IsReady);
 
 				panel.Controls.Add(pictureBoxAvatar);
 				panel.Controls.Add(labelName);
@@ -375,15 +409,35 @@ namespace TicTacToe.Forms.Game.NetworkGame
 				IconSize = 30,
 				Location = new Point(213, 45),
 				Size = new Size(30, 30),
+				Tag = ICON_PLAYER_STATUS_TAG
 			};
+			ChangePlayerCheckReady(iconPictureBox, ready);
 
 			return iconPictureBox;
 		}
+		private void ChangePlayerCheckReady(IconPictureBox icon, bool ready)
+		{
+			if (ready)
+				icon.BackColor = Color.Green;
+			else
+				icon.BackColor = Color.Red;
+		}
 		#endregion
 
-		private void PlayerLeftLobby(object sender, LocalPlayerEventArgs e)
+		private void PlayerStatusChanged(object sender, NetworkPlayerEventArgs e)
 		{
-
+			if (!string.IsNullOrEmpty(e.IPAddress))
+			{
+				Guna2Panel panel = _ipToGamePanels[e.IPAddress];
+				foreach (Control control in panel.Controls)
+					if (control is IconPictureBox icon)
+						if (icon != null && icon.Tag != null
+							&& icon.Tag.ToString() == ICON_PLAYER_STATUS_TAG)
+							ChangePlayerCheckReady(icon, e.Player.IsReady);
+			}
+		}
+		private void PlayerLeftLobby(object sender, NetworkPlayerEventArgs e)
+		{
 			if (!string.IsNullOrEmpty(e.IPAddress))
 			{
 				_ipToGamePanels[e.IPAddress].Dispose();
@@ -391,6 +445,15 @@ namespace TicTacToe.Forms.Game.NetworkGame
 			}
 		}
 
+		private async void UpdateLobbyForClient(object state)
+		{
+			if (WindowState != FormWindowState.Minimized)
+			{
+				NetworkLobbyInfo lobbyInfo = await _gameClient.UpdateGameLobbyAsync(_clientStatus);
+				if (lobbyInfo != null)
+					SetClientForm(lobbyInfo);
+			}
+		}
 		private void ButtonReady_Click(object sender, EventArgs e)
 		{
 
@@ -404,15 +467,20 @@ namespace TicTacToe.Forms.Game.NetworkGame
 				return;
 			}
 		}
+
+		private void ClearPlayers()
+		{
+			foreach (Guna2Panel panel in _ipToGamePanels.Values)
+				panel.Dispose();
+			_ipToGamePanels.Clear();
+		}
 		private void GameLobbyForm_FormClosed(object sender, FormClosedEventArgs e)
 		{
 			_buttonEventHandlers.UnsubscribeAll();
 			_labelEventHandlers.UnsubscribeAll();
+			_clientTimer?.Dispose();
 
-			foreach (Guna2Panel panel in _ipToGamePanels.Values)
-				panel.Dispose();
-			_ipToGamePanels.Clear();
-
+			ClearPlayers();
 			if (_gameServer != null)
 			{
 				ManageServerEventHandlers(false);
@@ -420,7 +488,6 @@ namespace TicTacToe.Forms.Game.NetworkGame
 			}
 			if (_gameClient != null)
 				_gameClient?.LeaveGameLobbyAsync();
-
 
 			_mainForm.Show();
 		}

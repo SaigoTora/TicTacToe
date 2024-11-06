@@ -4,7 +4,6 @@ using System.Linq;
 using System.Runtime.Serialization;
 
 using TicTacToe.Models.GameInfo.Settings;
-using TicTacToe.Models.PlayerInfo;
 
 namespace TicTacToe.Models.GameClientServer
 {
@@ -15,19 +14,27 @@ namespace TicTacToe.Models.GameClientServer
 		[JsonProperty]
 		internal NetworkGameSettings Settings;
 		[JsonProperty]
-		private List<Player> _players = new List<Player>();
-		internal List<Player> Players => _ipToPlayers.Values.ToList();
+		private readonly List<NetworkPlayer> _players = new List<NetworkPlayer>();
+		internal List<NetworkPlayer> Players => _ipToPlayers.Values.ToList();
 
-		private readonly Dictionary<string, Player> _ipToPlayers = new Dictionary<string, Player>();
+		private readonly Dictionary<string, NetworkPlayer> _ipToPlayers = new Dictionary<string, NetworkPlayer>();
 
 		internal NetworkLobbyInfo() { }
 		internal NetworkLobbyInfo(NetworkGameSettings settings)
 		{ Settings = settings; }
 
-		internal void AddPlayer(string ipAddress, Player player)
+		internal void AddPlayer(string ipAddress, NetworkPlayer player)
 		{
 			_ipToPlayers.Add(ipAddress, player);
 			_players.Add(player);
+		}
+		internal NetworkPlayer ChangePlayerLobbyStatus(string ipAddress, PlayerLobbyStatus status)
+		{
+			NetworkPlayer player = _ipToPlayers[ipAddress];
+
+			player.SetReady(status.IsReady);
+
+			return player;
 		}
 		internal void RemovePlayer(string ipAddress)
 		{

@@ -19,7 +19,7 @@ namespace TicTacToe.Models.PlayerInfo
 		internal int Coins { get; private set; }
 
 		[JsonProperty]
-		internal PlayerVisualSettings VisualSettings { get; private set; }
+		internal PlayerVisualSettings VisualSettings { get; private protected set; }
 		internal BotGameSettings BotGameSettings { get; private set; }
 		internal TwoPlayersGameSettings SinglePCGameSettings { get; private set; }
 		internal NetworkGameSettings NetworkGameSettings { get; private set; }

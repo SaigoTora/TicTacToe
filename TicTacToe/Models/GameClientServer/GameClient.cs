@@ -12,7 +12,7 @@ namespace TicTacToe.Models.GameClientServer
 	internal class GameClient
 	{
 		private static readonly HttpClient httpClient = new HttpClient();
-		private static string _serverAddress;
+		private string _serverAddress;
 
 		internal async Task<NetworkLobbyInfo> GetGameSettingsAsync(IPAddress ip, int port)
 		{
@@ -36,13 +36,25 @@ namespace TicTacToe.Models.GameClientServer
 				return JsonConvert.DeserializeObject<NetworkLobbyInfo>(jsonResponse);
 			}
 		}
+		internal async Task<NetworkLobbyInfo> UpdateGameLobbyAsync(PlayerLobbyStatus status)
+		{
+			string jsonContent = JsonConvert.SerializeObject(status, Formatting.Indented);
+
+			using (var httpContent = new StringContent(jsonContent, Encoding.UTF8, "application/json"))
+			{
+				HttpResponseMessage response = await httpClient.PutAsync($"http://{_serverAddress}/game-lobby", httpContent);
+				response.EnsureSuccessStatusCode();
+
+				string jsonResponse = await response.Content.ReadAsStringAsync();
+				return JsonConvert.DeserializeObject<NetworkLobbyInfo>(jsonResponse);
+			}
+		}
 		internal async Task LeaveGameLobbyAsync()
 		{
 			if (string.IsNullOrEmpty(_serverAddress))
 				throw new InvalidOperationException("No server address is set. Cannot leave game lobby.");
 
-			HttpResponseMessage response = await httpClient.DeleteAsync($"http://{_serverAddress}/game-lobby");
-			response.EnsureSuccessStatusCode();
+			await httpClient.DeleteAsync($"http://{_serverAddress}/game-lobby");
 		}
 	}
 }

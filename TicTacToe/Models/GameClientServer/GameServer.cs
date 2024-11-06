@@ -14,8 +14,9 @@ namespace TicTacToe.Models.GameClientServer
 	internal class GameServer
 	{
 		private const string FIREWALL_RULE_NAME_PREFIX = "Tic Tac Toe";
-		internal EventHandler<LocalPlayerEventArgs> PlayerJoined;
-		internal EventHandler<LocalPlayerEventArgs> PlayerLeftLobby;
+		internal EventHandler<NetworkPlayerEventArgs> PlayerJoined;
+		internal EventHandler<NetworkPlayerEventArgs> PlayerStatusChanged;
+		internal EventHandler<NetworkPlayerEventArgs> PlayerLeftLobby;
 
 		private readonly HttpListener _httpListener;
 		private readonly int _port;
@@ -61,36 +62,52 @@ namespace TicTacToe.Models.GameClientServer
 			string clientIPAddress = context.Request.RemoteEndPoint?.Address.ToString();
 
 			if (context.Request.RawUrl.Contains("/game-lobby"))
+				await HandleLobbyRequest(context, clientIPAddress);
+
+			context.Response.Close();
+		}
+		private async Task HandleLobbyRequest(HttpListenerContext context,
+			string clientIPAddress)
+		{
+			NetworkPlayer joinedPlayer = null, updatedPlayer = null;
+
+			if (context.Request.HttpMethod == HttpMethod.Post.Method)
 			{
-				Player joinedPlayer = null;
-
-				if (context.Request.HttpMethod == HttpMethod.Post.Method)
+				using (var reader = new StreamReader(context.Request.InputStream, context.Request.ContentEncoding))
 				{
-					using (var reader = new StreamReader(context.Request.InputStream, context.Request.ContentEncoding))
-					{
-						string jsonData = await reader.ReadToEndAsync();
-						joinedPlayer = JsonConvert.DeserializeObject<Player>(jsonData);
-						_networkLobbyInfo.AddPlayer(clientIPAddress, joinedPlayer);
-					}
+					string jsonData = await reader.ReadToEndAsync();
+					Player player = JsonConvert.DeserializeObject<Player>(jsonData);
+					joinedPlayer = new NetworkPlayer(player.Name, player.VisualSettings);
+					_networkLobbyInfo.AddPlayer(clientIPAddress, joinedPlayer);
 				}
-
-				if (context.Request.HttpMethod == HttpMethod.Delete.Method)
+			}
+			if (context.Request.HttpMethod == HttpMethod.Put.Method)
+			{
+				using (var reader = new StreamReader(context.Request.InputStream, context.Request.ContentEncoding))
 				{
-					OnPlayerLeftLobby(new LocalPlayerEventArgs(null, clientIPAddress));
-					_networkLobbyInfo.RemovePlayer(clientIPAddress);
-				}
-				else
-				{
-					UpdateLobbySettings();
-					string response = JsonConvert.SerializeObject(_networkLobbyInfo, Formatting.Indented);
-					await SendResponseToClient(context, response);
+					string jsonData = await reader.ReadToEndAsync();
+					PlayerLobbyStatus playerStatus = JsonConvert.DeserializeObject<PlayerLobbyStatus>(jsonData);
 
-					if (joinedPlayer != null && clientIPAddress != null)
-						OnPlayerJoined(new LocalPlayerEventArgs(joinedPlayer, clientIPAddress));
+					updatedPlayer = _networkLobbyInfo.ChangePlayerLobbyStatus(clientIPAddress, playerStatus);
 				}
 			}
 
-			context.Response.Close();
+			if (context.Request.HttpMethod == HttpMethod.Delete.Method)
+			{
+				OnPlayerLeftLobby(new NetworkPlayerEventArgs(null, clientIPAddress));
+				_networkLobbyInfo.RemovePlayer(clientIPAddress);
+			}
+			else
+			{
+				UpdateLobbySettings();
+				string response = JsonConvert.SerializeObject(_networkLobbyInfo, Formatting.Indented);
+				await SendResponseToClient(context, response);
+
+				if (joinedPlayer != null && clientIPAddress != null)
+					OnPlayerJoined(new NetworkPlayerEventArgs(joinedPlayer, clientIPAddress));
+				else if (updatedPlayer != null && clientIPAddress != null)
+					OnPlayerStatusChanged(new NetworkPlayerEventArgs(updatedPlayer, clientIPAddress));
+			}
 		}
 		private async Task SendResponseToClient(HttpListenerContext context, string response)
 		{
@@ -109,12 +126,17 @@ namespace TicTacToe.Models.GameClientServer
 				settings.IsTimerEnabled, settings.IsGameAssistsEnabled);
 		}
 
-		private void OnPlayerJoined(LocalPlayerEventArgs e)
+		private void OnPlayerJoined(NetworkPlayerEventArgs e)
 		{
 			var temp = System.Threading.Volatile.Read(ref PlayerJoined);
 			temp?.Invoke(this, e);
 		}
-		private void OnPlayerLeftLobby(LocalPlayerEventArgs e)
+		private void OnPlayerStatusChanged(NetworkPlayerEventArgs e)
+		{
+			var temp = System.Threading.Volatile.Read(ref PlayerStatusChanged);
+			temp?.Invoke(this, e);
+		}
+		private void OnPlayerLeftLobby(NetworkPlayerEventArgs e)
 		{
 			var temp = System.Threading.Volatile.Read(ref PlayerLeftLobby);
 			temp?.Invoke(this, e);
