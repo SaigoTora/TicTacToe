@@ -104,11 +104,17 @@
     <Compile Include="Forms\CustomMessageBox.Designer.cs">
       <DependentUpon>CustomMessageBox.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Game\NetworkGame\GameLobbyForm.cs">
+    <Compile Include="Forms\Game\NetworkGame\GameLobbyFormClient.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Game\NetworkGame\GameLobbyForm.Designer.cs">
-      <DependentUpon>GameLobbyForm.cs</DependentUpon>
+    <Compile Include="Forms\Game\NetworkGame\GameLobbyFormClient.Designer.cs">
+      <DependentUpon>GameLobbyFormClient.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Game\NetworkGame\GameLobbyFormServer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Game\NetworkGame\GameLobbyFormServer.Designer.cs">
+      <DependentUpon>GameLobbyFormServer.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Game\Games3on3\BaseGame3on3Form.cs">
       <SubType>Form</SubType>
@@ -257,6 +263,7 @@
     <Compile Include="Models\GameInfo\CoinsCalculator.cs" />
     <Compile Include="Models\Utilities\FormUtilities\ControlEventHandlers\LabelEventHandlers.cs" />
     <Compile Include="Models\Utilities\FormUtilities\ControlEventHandlers\PictureBoxEventHandlers.cs" />
+    <Compile Include="Models\Utilities\FormUtilities\NetworkPlayerCreator.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Forms\Game\GameResultForm.cs">
@@ -280,8 +287,11 @@
     <EmbeddedResource Include="Forms\CustomMessageBox.resx">
       <DependentUpon>CustomMessageBox.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Game\NetworkGame\GameLobbyForm.resx">
-      <DependentUpon>GameLobbyForm.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Game\NetworkGame\GameLobbyFormClient.resx">
+      <DependentUpon>GameLobbyFormClient.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Game\NetworkGame\GameLobbyFormServer.resx">
+      <DependentUpon>GameLobbyFormServer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Game\Games3on3\BaseGame3on3Form.resx">
       <DependentUpon>BaseGame3on3Form.cs</DependentUpon>

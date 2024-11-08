@@ -78,6 +78,7 @@ namespace TicTacToe.Models.GameClientServer
 					string jsonData = await reader.ReadToEndAsync();
 					Player player = JsonConvert.DeserializeObject<Player>(jsonData);
 					joinedPlayer = new NetworkPlayer(player.Name, player.VisualSettings);
+					joinedPlayer.AssignId();
 					_networkLobbyInfo.AddPlayer(clientIPAddress, joinedPlayer);
 				}
 			}

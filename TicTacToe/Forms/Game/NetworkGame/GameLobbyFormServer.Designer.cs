@@ -1,6 +1,6 @@
 ﻿namespace TicTacToe.Forms.Game.NetworkGame
 {
-	partial class GameLobbyForm
+	partial class GameLobbyServerForm
 	{
 		/// <summary>
 		/// Required designer variable.
@@ -42,7 +42,6 @@
 			this.buttonGameAssistsEnabled = new FontAwesome.Sharp.IconButton();
 			this.buttonTimerEnabled = new FontAwesome.Sharp.IconButton();
 			this.buttonStart = new Guna.UI2.WinForms.Guna2GradientButton();
-			this.buttonReady = new Guna.UI2.WinForms.Guna2GradientButton();
 			this.flpPlayers = new System.Windows.Forms.FlowLayoutPanel();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxCoin)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownNumberOfRounds)).BeginInit();
@@ -300,36 +299,7 @@
 			this.buttonStart.TabIndex = 14;
 			this.buttonStart.TabStop = false;
 			this.buttonStart.Text = "Start";
-			this.buttonStart.Visible = false;
 			this.buttonStart.Click += new System.EventHandler(this.ButtonStart_Click);
-			// 
-			// buttonReady
-			// 
-			this.buttonReady.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.buttonReady.Animated = true;
-			this.buttonReady.BackColor = System.Drawing.Color.Transparent;
-			this.buttonReady.BorderRadius = 20;
-			this.buttonReady.BorderStyle = System.Drawing.Drawing2D.DashStyle.Custom;
-			this.buttonReady.BorderThickness = 1;
-			this.buttonReady.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.buttonReady.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-			this.buttonReady.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-			this.buttonReady.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-			this.buttonReady.DisabledState.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-			this.buttonReady.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-			this.buttonReady.FillColor = System.Drawing.Color.SandyBrown;
-			this.buttonReady.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(124)))), ((int)(((byte)(38)))));
-			this.buttonReady.Font = new System.Drawing.Font("Cooper Black", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.buttonReady.ForeColor = System.Drawing.Color.White;
-			this.buttonReady.GradientMode = System.Drawing.Drawing2D.LinearGradientMode.BackwardDiagonal;
-			this.buttonReady.Location = new System.Drawing.Point(659, 608);
-			this.buttonReady.Name = "buttonReady";
-			this.buttonReady.Size = new System.Drawing.Size(220, 50);
-			this.buttonReady.TabIndex = 13;
-			this.buttonReady.TabStop = false;
-			this.buttonReady.Text = "Ready";
-			this.buttonReady.Visible = false;
-			this.buttonReady.Click += new System.EventHandler(this.ButtonReady_Click);
 			// 
 			// flpPlayers
 			// 
@@ -339,17 +309,16 @@
 			this.flpPlayers.Location = new System.Drawing.Point(381, 378);
 			this.flpPlayers.Name = "flpPlayers";
 			this.flpPlayers.Size = new System.Drawing.Size(267, 280);
-			this.flpPlayers.TabIndex = 15;
+			this.flpPlayers.TabIndex = 13;
 			this.flpPlayers.Tag = "needToMoveParentDown";
 			// 
-			// GameLobbyForm
+			// GameLobbyFormServer
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
 			this.ClientSize = new System.Drawing.Size(891, 670);
 			this.Controls.Add(this.flpPlayers);
-			this.Controls.Add(this.buttonReady);
 			this.Controls.Add(this.buttonStart);
 			this.Controls.Add(this.buttonGameAssistsEnabled);
 			this.Controls.Add(this.buttonTimerEnabled);
@@ -364,11 +333,11 @@
 			this.Controls.Add(this.label3on3);
 			this.Controls.Add(this.pictureBoxCoin);
 			this.Controls.Add(this.labelCoins);
-			this.Name = "GameLobbyForm";
+			this.Name = "GameLobbyFormServer";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "GameLobbyForm";
-			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.GameLobbyForm_FormClosed);
-			this.Load += new System.EventHandler(this.GameLobbyForm_Load);
+			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.GameLobbyServerForm_FormClosed);
+			this.Load += new System.EventHandler(this.GameLobbyServerForm_Load);
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxCoin)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownNumberOfRounds)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxCoinBet)).EndInit();
@@ -394,7 +363,6 @@
 		private FontAwesome.Sharp.IconButton buttonGameAssistsEnabled;
 		private FontAwesome.Sharp.IconButton buttonTimerEnabled;
 		private Guna.UI2.WinForms.Guna2GradientButton buttonStart;
-		private Guna.UI2.WinForms.Guna2GradientButton buttonReady;
 		private System.Windows.Forms.FlowLayoutPanel flpPlayers;
 	}
 }

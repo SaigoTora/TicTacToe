@@ -394,7 +394,7 @@ namespace TicTacToe.Forms.Game.NetworkGame
 			{
 				Enabled = false;
 				NetworkLobbyInfo networkLobbyInfo = await _gameClient.JoinGameLobbyAsync(_selectedfullIPAddress, _player);
-				GameLobbyForm gameLobbyForm = new GameLobbyForm(_mainForm, _player, _gameClient);
+				GameLobbyClientForm gameLobbyForm = new GameLobbyClientForm(_mainForm, _player, _gameClient);
 				gameLobbyForm.Show();
 
 				NeedToShowMainForm = false;

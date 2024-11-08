@@ -1,56 +1,93 @@
 ﻿using FontAwesome.Sharp;
+using Guna.UI2.WinForms;
 using System;
+using System.Collections.Generic;
+using System.Configuration;
 using System.Drawing;
+using System.Threading;
 using System.Windows.Forms;
 
-using TicTacToe.Forms.Game.NetworkGame;
+using TicTacToe.Models.GameClientServer;
 using TicTacToe.Models.GameInfo.Settings;
 using TicTacToe.Models.PlayerInfo;
+using TicTacToe.Models.PlayerItem;
 using TicTacToe.Models.Utilities.FormUtilities;
 using TicTacToe.Models.Utilities.FormUtilities.ControlEventHandlers;
 
-namespace TicTacToe.Forms.Game.Settings
+namespace TicTacToe.Forms.Game.NetworkGame
 {
-	internal partial class NetworkGameSettingsForm : BaseForm
+	internal partial class GameLobbyServerForm : BaseForm
 	{
-		private static readonly (Color Default, Color Selected) _fieldSizeColor = (Color.Transparent, Color.Green);
-		private static readonly (Color Default, Color Reached) _descriptionLengthColor = (Color.LightGray, Color.Moccasin);
-		private static readonly (Color Default, Color Selected) _enableButtonsForeColor = (Color.Transparent, Color.Khaki);
+		private static readonly (Color Default, Color Selected) _fieldSizeColor
+			= (Color.Transparent, Color.Green);
+		private static readonly (Color Default, Color Selected) _enableButtonsForeColor
+			= (Color.Transparent, Color.Khaki);
 
 		private readonly MainForm _mainForm;
-		private readonly StartNetworkGameForm _previousForm;
 		private readonly Player _player;
 
+		private readonly GameServer _gameServer;
+		private readonly Dictionary<string, Guna2Panel> _ipToGamePanels = new Dictionary<string, Guna2Panel>();
+
+		private readonly SynchronizationContext _syncContext;
 		private readonly ButtonEventHandlers _buttonEventHandlers = new ButtonEventHandlers();
 		private readonly LabelEventHandlers _labelEventHandlers = new LabelEventHandlers();
 
-		internal NetworkGameSettingsForm(MainForm mainForm, Player player, StartNetworkGameForm previousForm)
+		internal GameLobbyServerForm(MainForm mainForm, Player player)
 		{
-			customTitleBar = new CustomTitleBar(this, "Local Game Settings", minimizeBox: false, maximizeBox: false);
 			InitializeComponent();
-			_mainForm = mainForm;
-			_previousForm = previousForm;
-			_player = player;
+			customTitleBar = new CustomTitleBar(this, "Lobby", maximizeBox: false);
 
-			_buttonEventHandlers.SubscribeToHover(buttonCreate);
-			_labelEventHandlers.SubscribeToHoverUnderline(label3on3, label5on5, label7on7);
+			_mainForm = mainForm;
+			_player = player;
+			_syncContext = SynchronizationContext.Current;
+
+			int port = int.Parse(ConfigurationManager.AppSettings["port"]);
+			_gameServer = new GameServer(_player, port);
 		}
-		private void NetworkGameSettingsForm_Load(object sender, EventArgs e)
+		private void GameLobbyServerForm_Load(object sender, EventArgs e)
+		{
+			labelCoins.Text = $"{_player.Coins:N0}".Replace(',', ' ');
+			PlayerJoined(this, new NetworkPlayerEventArgs(
+				new NetworkPlayer(_player.Name, _player.VisualSettings, true)));
+
+			SetServerForm();
+			_gameServer.Start();
+			ManageServerEventHandlers(true);
+		}
+
+		private void SetServerForm()
 		{
 			Label labelFieldSize = GetLabelByFieldSize(_player.NetworkGameSettings.FieldSize);
-			LabelFieldSize_Click(labelFieldSize, e);
+			LabelFieldSize_Click(labelFieldSize, EventArgs.Empty);
 			numericUpDownNumberOfRounds.BackColor = BackColor;
 			numericUpDownNumberOfRounds.Value = _player.NetworkGameSettings.NumberOfRounds;
 			numericUpDownCoinsBet.BackColor = BackColor;
-			numericUpDownCoinsBet.Value = Math.Min(_player.NetworkGameSettings.CoinsBet, _player.Coins);
+			numericUpDownCoinsBet.Value = _player.NetworkGameSettings.CoinsBet;
 			numericUpDownCoinsBet.Maximum = Math.Min(_player.Coins, numericUpDownCoinsBet.Maximum);
-			richTextBoxDescription.BackColor = BackColor;
-			richTextBoxDescription.Text = _player.NetworkGameSettings.Description;
 
 			if (_player.NetworkGameSettings.IsTimerEnabled)
 				SetActiveEnableButtonStyle(buttonTimerEnabled);
 			if (_player.NetworkGameSettings.IsGameAssistsEnabled)
 				SetActiveEnableButtonStyle(buttonGameAssistsEnabled);
+
+			_buttonEventHandlers.SubscribeToHover(buttonStart);
+			_labelEventHandlers.SubscribeToHoverUnderline(label3on3, label5on5, label7on7);
+		}
+		private void ManageServerEventHandlers(bool subscribe)
+		{
+			if (subscribe)
+			{
+				_gameServer.PlayerJoined += PlayerJoined;
+				_gameServer.PlayerStatusChanged += PlayerStatusChanged;
+				_gameServer.PlayerLeftLobby += PlayerLeftLobby;
+			}
+			else
+			{
+				_gameServer.PlayerJoined -= PlayerJoined;
+				_gameServer.PlayerStatusChanged -= PlayerStatusChanged;
+				_gameServer.PlayerLeftLobby -= PlayerLeftLobby;
+			}
 		}
 
 		#region Field Size
@@ -108,33 +145,6 @@ namespace TicTacToe.Forms.Game.Settings
 		private void NumericUpDownCoinsBet_ValueChanged(object sender, EventArgs e)
 			=> _player.NetworkGameSettings.CoinsBet = (int)numericUpDownCoinsBet.Value;
 
-		private void RichTextBoxDescription_TextChanged(object sender, EventArgs e)
-		{
-			if (richTextBoxDescription.Text.Length > 0)
-			{
-				if (richTextBoxDescription.Text.Length == richTextBoxDescription.MaxLength)
-					labelDescriptionLength.ForeColor = _descriptionLengthColor.Reached;
-				else
-					labelDescriptionLength.ForeColor = _descriptionLengthColor.Default;
-
-				labelDescriptionLength.Visible = true;
-				labelDescriptionLength.Text = $"{richTextBoxDescription.Text.Length} /" +
-					$" {richTextBoxDescription.MaxLength}";
-			}
-			else
-				labelDescriptionLength.Visible = false;
-		}
-		private void RichTextBoxDescription_KeyDown(object sender, KeyEventArgs e)
-		{
-			if (e.KeyCode == Keys.Enter)
-			{
-				e.SuppressKeyPress = true;
-				ActiveControl = null;
-			}
-		}
-		private void RichTextBoxDescription_Leave(object sender, EventArgs e)
-			=> _player.NetworkGameSettings.Description = richTextBoxDescription.Text;
-
 		#region Enable Buttons
 		private void ButtonTimerEnabled_Click(object sender, EventArgs e)
 		{
@@ -170,7 +180,7 @@ namespace TicTacToe.Forms.Game.Settings
 			button.ForeColor = Color.White;
 		}
 
-		private void EnableButton_MouseEnter(object sender, EventArgs e)
+		private void EnabledButton_MouseEnter(object sender, EventArgs e)
 		{
 			if (!(sender is IconButton iconButton))
 				return;
@@ -181,7 +191,7 @@ namespace TicTacToe.Forms.Game.Settings
 
 			iconButton.ForeColor = _enableButtonsForeColor.Selected;
 		}
-		private void EnableButton_MouseLeave(object sender, EventArgs e)
+		private void EnabledButton_MouseLeave(object sender, EventArgs e)
 		{
 			if (!(sender is IconButton iconButton))
 				return;
@@ -190,7 +200,44 @@ namespace TicTacToe.Forms.Game.Settings
 		}
 		#endregion
 
-		private void ButtonCreate_Click(object sender, EventArgs e)
+		private void PlayerJoined(object sender, NetworkPlayerEventArgs e)
+		{
+			const int PANEL_WIDTH = 244, PANEL_HEIGHT = 76;
+
+			_syncContext.Post(_ =>
+			{
+				string avatarName = e.Player.VisualSettings.Avatar.Name;
+				Avatar avatar = new Avatar(avatarName, 0, string.Empty, null, AvatarRarity.Common);
+				avatar = (Avatar)ItemManager.GetFullItem(avatar);
+				e.Player.VisualSettings.Avatar = avatar;
+
+				Guna2Panel panel = NetworkPlayerCreator.CreatePlayerPanel(e.Player,
+					new Size(PANEL_WIDTH, PANEL_HEIGHT));
+				flpPlayers.Controls.Add(panel);
+
+				if (e.HasIPAddress())
+					_ipToGamePanels.Add(e.IPAddress, panel);
+			}, null);
+		}
+
+		private void PlayerStatusChanged(object sender, NetworkPlayerEventArgs e)
+		{
+			_syncContext.Post(_ =>
+			{
+				if (!string.IsNullOrEmpty(e.IPAddress))
+					NetworkPlayerCreator.ChangePlayerPanel(_ipToGamePanels[e.IPAddress], e.Player);
+			}, null);
+		}
+		private void PlayerLeftLobby(object sender, NetworkPlayerEventArgs e)
+		{
+			if (!string.IsNullOrEmpty(e.IPAddress))
+			{
+				_ipToGamePanels[e.IPAddress].Dispose();
+				_ipToGamePanels.Remove(e.IPAddress);
+			}
+		}
+
+		private void ButtonStart_Click(object sender, EventArgs e)
 		{
 			if (numericUpDownNumberOfRounds.Value % 2 != 0)
 			{
@@ -198,22 +245,27 @@ namespace TicTacToe.Forms.Game.Settings
 					"Error", CustomMessageBoxButtons.OK, CustomMessageBoxIcon.Error);
 				return;
 			}
-
-			GameLobbyServerForm gameLobbyForm = new GameLobbyServerForm(_mainForm, _player);
-			gameLobbyForm.Show();
-
-			if (_previousForm != null)
-			{
-				_previousForm.NeedToShowMainForm = false;
-				_previousForm.Close();
-			}
-			Close();
 		}
 
-		private void NetworkGameSettingsForm_FormClosed(object sender, FormClosedEventArgs e)
+		private void ClearPlayers()
+		{
+			foreach (Guna2Panel panel in _ipToGamePanels.Values)
+				panel.Dispose();
+			_ipToGamePanels.Clear();
+		}
+		private void GameLobbyServerForm_FormClosed(object sender, FormClosedEventArgs e)
 		{
 			_buttonEventHandlers.UnsubscribeAll();
 			_labelEventHandlers.UnsubscribeAll();
+
+			ClearPlayers();
+			if (_gameServer != null)
+			{
+				ManageServerEventHandlers(false);
+				_gameServer?.Stop();
+			}
+
+			_mainForm.Show();
 		}
 	}
 }

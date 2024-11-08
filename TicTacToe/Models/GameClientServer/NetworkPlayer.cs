@@ -9,6 +9,9 @@ namespace TicTacToe.Models.GameClientServer
 	internal class NetworkPlayer : Player
 	{
 		[JsonProperty]
+		internal long Id { get; private set; }
+		private static long _id = 1;
+		[JsonProperty]
 		internal bool IsReady { get; private set; }
 
 		private NetworkPlayer() { }
@@ -22,6 +25,8 @@ namespace TicTacToe.Models.GameClientServer
 			: this(name, visualSettings, false)
 		{ VisualSettings = visualSettings; }
 
+		internal void AssignId()
+			=> Id = _id++;
 		internal void SetReady(bool ready)
 			=> IsReady = ready;
 	}

@@ -13,7 +13,7 @@ namespace TicTacToe.Models.GameClientServer
 		internal readonly int MaxPlayerCount = 2;
 		[JsonProperty]
 		internal NetworkGameSettings Settings;
-		[JsonProperty]
+		[JsonProperty(propertyName: "Players")]
 		private readonly List<NetworkPlayer> _players = new List<NetworkPlayer>();
 		internal List<NetworkPlayer> Players => _ipToPlayers.Values.ToList();
 
@@ -28,6 +28,8 @@ namespace TicTacToe.Models.GameClientServer
 			_ipToPlayers.Add(ipAddress, player);
 			_players.Add(player);
 		}
+		internal NetworkPlayer GetPlayer(long id)
+			=> _players.First((player) => player.Id == id);
 		internal NetworkPlayer ChangePlayerLobbyStatus(string ipAddress, PlayerLobbyStatus status)
 		{
 			NetworkPlayer player = _ipToPlayers[ipAddress];

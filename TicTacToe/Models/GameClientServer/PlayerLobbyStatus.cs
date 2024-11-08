@@ -9,7 +9,7 @@ namespace TicTacToe.Models.GameClientServer
 		[JsonProperty]
 		internal bool IsReady { get; private set; }
 
-		private void ChangeReady(bool ready)
+		internal void ChangeReady(bool ready)
 			=> IsReady = ready;
 	}
 }
