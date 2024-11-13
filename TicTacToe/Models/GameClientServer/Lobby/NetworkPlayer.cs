@@ -3,7 +3,7 @@ using System;
 
 using TicTacToe.Models.PlayerInfo;
 
-namespace TicTacToe.Models.GameClientServer
+namespace TicTacToe.Models.GameClientServer.Lobby
 {
 	[Serializable]
 	internal class NetworkPlayer : Player

@@ -1,22 +1,26 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.Configuration;
 using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
+using TicTacToe.Models.GameClientServer.Lobby;
 using TicTacToe.Models.PlayerInfo;
 
-namespace TicTacToe.Models.GameClientServer
+namespace TicTacToe.Models.GameClientServer.Core
 {
 	internal class GameClient
 	{
 		private static readonly HttpClient httpClient = new HttpClient();
 		private string _serverAddress;
 
+		private readonly string _gameLobbyUrl = ConfigurationManager.AppSettings["gameLobbyUrl"];
+
 		internal async Task<NetworkLobbyInfo> GetGameSettingsAsync(IPAddress ip, int port)
 		{
-			HttpResponseMessage response = await httpClient.GetAsync($"http://{ip}:{port}/game-lobby");
+			HttpResponseMessage response = await httpClient.GetAsync($"http://{ip}:{port}{_gameLobbyUrl}");
 			response.EnsureSuccessStatusCode();
 
 			string jsonResponse = await response.Content.ReadAsStringAsync();
@@ -28,7 +32,7 @@ namespace TicTacToe.Models.GameClientServer
 
 			using (var httpContent = new StringContent(jsonContent, Encoding.UTF8, "application/json"))
 			{
-				HttpResponseMessage response = await httpClient.PostAsync($"http://{fullIPAddress}/game-lobby", httpContent);
+				HttpResponseMessage response = await httpClient.PostAsync($"http://{fullIPAddress}{_gameLobbyUrl}", httpContent);
 				response.EnsureSuccessStatusCode();
 
 				string jsonResponse = await response.Content.ReadAsStringAsync();
@@ -42,7 +46,7 @@ namespace TicTacToe.Models.GameClientServer
 
 			using (var httpContent = new StringContent(jsonContent, Encoding.UTF8, "application/json"))
 			{
-				HttpResponseMessage response = await httpClient.PutAsync($"http://{_serverAddress}/game-lobby", httpContent);
+				HttpResponseMessage response = await httpClient.PutAsync($"http://{_serverAddress}{_gameLobbyUrl}", httpContent);
 				response.EnsureSuccessStatusCode();
 
 				string jsonResponse = await response.Content.ReadAsStringAsync();
@@ -54,7 +58,7 @@ namespace TicTacToe.Models.GameClientServer
 			if (string.IsNullOrEmpty(_serverAddress))
 				throw new InvalidOperationException("No server address is set. Cannot leave game lobby.");
 
-			await httpClient.DeleteAsync($"http://{_serverAddress}/game-lobby");
+			await httpClient.DeleteAsync($"http://{_serverAddress}{_gameLobbyUrl}");
 		}
 	}
 }

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Net;
 
-namespace TicTacToe.Models.GameClientServer
+namespace TicTacToe.Models.GameClientServer.Lobby
 {
 	internal class LobbyPreviewEventArgs : EventArgs
 	{

@@ -4,9 +4,12 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
-using TicTacToe.Models.GameClientServer;
+using TicTacToe.Models.GameClientServer.Core;
+using TicTacToe.Models.GameClientServer.Lobby;
+using TicTacToe.Models.GameInfo;
 using TicTacToe.Models.GameInfo.Settings;
 using TicTacToe.Models.PlayerInfo;
 using TicTacToe.Models.PlayerItem;
@@ -22,7 +25,7 @@ namespace TicTacToe.Forms.Game.NetworkGame
 		private static readonly (Color Ready, Color Cancel) _buttonFillColor2
 			= (Color.FromArgb(236, 124, 38), Color.Maroon);
 
-		private const int LOBBY_UPDATE_INTERVAL = 2500;
+		private const int LOBBY_UPDATE_INTERVAL = 2000;
 
 		private readonly MainForm _mainForm;
 		private readonly Player _player;
@@ -30,8 +33,8 @@ namespace TicTacToe.Forms.Game.NetworkGame
 		private readonly GameClient _gameClient;
 		private readonly Dictionary<long, Guna2Panel> _idToGamePanels = new Dictionary<long, Guna2Panel>();
 
-		private readonly System.Threading.Timer _clientTimer;
-		private readonly PlayerLobbyStatus _clientStatus = new PlayerLobbyStatus();
+		private readonly System.Threading.Timer _updateTimer;
+		private readonly PlayerLobbyStatus _playerStatus = new PlayerLobbyStatus();
 		private readonly SynchronizationContext _syncContext;
 		private readonly ButtonEventHandlers _buttonEventHandlers = new ButtonEventHandlers();
 		private bool _wasUpdateExceptionThrown;
@@ -46,7 +49,7 @@ namespace TicTacToe.Forms.Game.NetworkGame
 			_syncContext = SynchronizationContext.Current;
 
 			_gameClient = gameClient;
-			_clientTimer = new System.Threading.Timer(UpdateLobbyForClient, null, 0, LOBBY_UPDATE_INTERVAL);
+			_updateTimer = new System.Threading.Timer(UpdateTimerCallBack, null, 0, LOBBY_UPDATE_INTERVAL);
 		}
 		private void GameLobbyClientForm_Load(object sender, EventArgs e)
 		{
@@ -59,6 +62,14 @@ namespace TicTacToe.Forms.Game.NetworkGame
 		#region Client Form Settings
 		private void SetClientForm(NetworkLobbyInfo lobbyInfo)
 		{
+			if (lobbyInfo.HasGameStarted)
+			{
+				_updateTimer.Dispose();
+				RoundManager roundManager = new RoundManager(lobbyInfo.Settings.NumberOfRounds);
+				CustomMessageBox.Show("Game already started!");
+				return;
+			}
+
 			_syncContext.Post(_ =>
 			{
 				DisplayClientFieldSize(lobbyInfo.Settings.FieldSize);
@@ -168,13 +179,15 @@ namespace TicTacToe.Forms.Game.NetworkGame
 			_idToGamePanels.Add(player.Id, panel);
 		}
 
-		private async void UpdateLobbyForClient(object state)
+		private async void UpdateTimerCallBack(object state)
+			=> await UpdateLobbyForClient();
+		private async Task UpdateLobbyForClient()
 		{
 			if (WindowState != FormWindowState.Minimized)
 			{
 				try
 				{
-					NetworkLobbyInfo lobbyInfo = await _gameClient.UpdateGameLobbyAsync(_clientStatus);
+					NetworkLobbyInfo lobbyInfo = await _gameClient.UpdateGameLobbyAsync(_playerStatus);
 					if (lobbyInfo != null)
 						SetClientForm(lobbyInfo);
 				}
@@ -183,7 +196,7 @@ namespace TicTacToe.Forms.Game.NetworkGame
 					if (!_wasUpdateExceptionThrown)
 					{
 						_wasUpdateExceptionThrown = true;
-						_clientTimer.Dispose();
+						_updateTimer?.Dispose();
 						_syncContext.Post(_ =>
 						{
 							Close();
@@ -195,10 +208,11 @@ namespace TicTacToe.Forms.Game.NetworkGame
 				}
 			}
 		}
-		private void ButtonReady_Click(object sender, EventArgs e)
+		private async void ButtonReady_Click(object sender, EventArgs e)
 		{
-			_clientStatus.ChangeReady(!_clientStatus.IsReady);
-			if (_clientStatus.IsReady)
+			buttonReady.Enabled = false;
+			_playerStatus.ChangeReady(!_playerStatus.IsReady);
+			if (_playerStatus.IsReady)
 			{
 				buttonReady.Text = "Cancel";
 				buttonReady.FillColor = _buttonFillColor.Cancel;
@@ -210,6 +224,8 @@ namespace TicTacToe.Forms.Game.NetworkGame
 				buttonReady.FillColor = _buttonFillColor.Ready;
 				buttonReady.FillColor2 = _buttonFillColor2.Ready;
 			}
+			await UpdateLobbyForClient();
+			buttonReady.Enabled = true;
 		}
 
 		private void ClearPlayers()
@@ -221,7 +237,7 @@ namespace TicTacToe.Forms.Game.NetworkGame
 		private void GameLobbyClientForm_FormClosed(object sender, FormClosedEventArgs e)
 		{
 			_buttonEventHandlers.UnsubscribeAll();
-			_clientTimer?.Dispose();
+			_updateTimer?.Dispose();
 
 			ClearPlayers();
 			if (_gameClient != null && !_wasUpdateExceptionThrown)

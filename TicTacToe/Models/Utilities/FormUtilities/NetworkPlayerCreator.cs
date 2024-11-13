@@ -3,7 +3,7 @@ using Guna.UI2.WinForms;
 using System.Drawing;
 using System.Windows.Forms;
 
-using TicTacToe.Models.GameClientServer;
+using TicTacToe.Models.GameClientServer.Lobby;
 using TicTacToe.Models.PlayerItem;
 
 namespace TicTacToe.Models.Utilities.FormUtilities

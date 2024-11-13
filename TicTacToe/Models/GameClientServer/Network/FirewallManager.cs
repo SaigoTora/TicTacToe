@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 
-namespace TicTacToe.Models.GameClientServer
+namespace TicTacToe.Models.GameClientServer.Network
 {
 	internal class FirewallManager
 	{

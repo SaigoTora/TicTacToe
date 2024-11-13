@@ -7,7 +7,8 @@ using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
 
-using TicTacToe.Models.GameClientServer;
+using TicTacToe.Models.GameClientServer.Core;
+using TicTacToe.Models.GameClientServer.Lobby;
 using TicTacToe.Models.GameInfo.Settings;
 using TicTacToe.Models.PlayerInfo;
 using TicTacToe.Models.PlayerItem;
@@ -245,6 +246,8 @@ namespace TicTacToe.Forms.Game.NetworkGame
 					"Error", CustomMessageBoxButtons.OK, CustomMessageBoxIcon.Error);
 				return;
 			}
+
+			_gameServer.StartGame();
 		}
 
 		private void ClearPlayers()

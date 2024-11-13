@@ -11,7 +11,9 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using TicTacToe.Forms.Game.Settings;
-using TicTacToe.Models.GameClientServer;
+using TicTacToe.Models.GameClientServer.Core;
+using TicTacToe.Models.GameClientServer.Lobby;
+using TicTacToe.Models.GameClientServer.Network;
 using TicTacToe.Models.PlayerInfo;
 using TicTacToe.Models.Utilities;
 using TicTacToe.Models.Utilities.FormUtilities;

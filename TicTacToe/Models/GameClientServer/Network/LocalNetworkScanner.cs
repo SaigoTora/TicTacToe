@@ -5,7 +5,10 @@ using System.Net.NetworkInformation;
 using System.Net.Sockets;
 using System.Threading.Tasks;
 
-namespace TicTacToe.Models.GameClientServer
+using TicTacToe.Models.GameClientServer.Core;
+using TicTacToe.Models.GameClientServer.Lobby;
+
+namespace TicTacToe.Models.GameClientServer.Network
 {
 	internal class LocalNetworkScanner
 	{

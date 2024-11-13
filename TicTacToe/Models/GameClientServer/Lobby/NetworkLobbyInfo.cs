@@ -5,7 +5,7 @@ using System.Runtime.Serialization;
 
 using TicTacToe.Models.GameInfo.Settings;
 
-namespace TicTacToe.Models.GameClientServer
+namespace TicTacToe.Models.GameClientServer.Lobby
 {
 	internal class NetworkLobbyInfo
 	{
@@ -13,9 +13,11 @@ namespace TicTacToe.Models.GameClientServer
 		internal readonly int MaxPlayerCount = 2;
 		[JsonProperty]
 		internal NetworkGameSettings Settings;
-		[JsonProperty(propertyName: "Players")]
+		[JsonProperty("Players")]
 		private readonly List<NetworkPlayer> _players = new List<NetworkPlayer>();
 		internal List<NetworkPlayer> Players => _ipToPlayers.Values.ToList();
+		[JsonProperty]
+		internal bool HasGameStarted { get; private set; }
 
 		private readonly Dictionary<string, NetworkPlayer> _ipToPlayers = new Dictionary<string, NetworkPlayer>();
 
@@ -43,6 +45,8 @@ namespace TicTacToe.Models.GameClientServer
 			_players.Remove(_ipToPlayers[ipAddress]);
 			_ipToPlayers.Remove(ipAddress);
 		}
+		internal void StartGame()
+			=> HasGameStarted = true;
 
 		[OnDeserialized]
 		private void OnDeserialized(StreamingContext context)

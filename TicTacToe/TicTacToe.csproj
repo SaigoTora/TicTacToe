@@ -213,14 +213,15 @@
       <DependentUpon>PurchaseResultForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\CustomExceptions\NotEnoughCoinsToStartGameException.cs" />
-    <Compile Include="Models\GameClientServer\GameClient.cs" />
-    <Compile Include="Models\GameClientServer\GameServer.cs" />
-    <Compile Include="Models\GameClientServer\LobbyPreviewEventArgs.cs" />
-    <Compile Include="Models\GameClientServer\LocalNetworkScanner.cs" />
-    <Compile Include="Models\GameClientServer\NetworkPlayerEventArgs.cs" />
-    <Compile Include="Models\GameClientServer\NetworkLobbyInfo.cs" />
-    <Compile Include="Models\GameClientServer\NetworkPlayer.cs" />
-    <Compile Include="Models\GameClientServer\PlayerLobbyStatus.cs" />
+    <Compile Include="Models\GameClientServer\Core\GameClient.cs" />
+    <Compile Include="Models\GameClientServer\Core\GameServer.cs" />
+    <Compile Include="Models\GameClientServer\Game\MoveInfo.cs" />
+    <Compile Include="Models\GameClientServer\Lobby\LobbyPreviewEventArgs.cs" />
+    <Compile Include="Models\GameClientServer\Network\LocalNetworkScanner.cs" />
+    <Compile Include="Models\GameClientServer\Lobby\NetworkPlayerEventArgs.cs" />
+    <Compile Include="Models\GameClientServer\Lobby\NetworkLobbyInfo.cs" />
+    <Compile Include="Models\GameClientServer\Lobby\NetworkPlayer.cs" />
+    <Compile Include="Models\GameClientServer\Lobby\PlayerLobbyStatus.cs" />
     <Compile Include="Models\GameInfo\CoinReward.cs" />
     <Compile Include="Models\GameInfo\GameFormInfo.cs" />
     <Compile Include="Models\GameInfo\GameResult.cs" />
@@ -236,7 +237,7 @@
     <Compile Include="Models\PlayerItemCreator\ItemEventArgs.cs" />
     <Compile Include="Models\PlayerItem\CountableItem.cs" />
     <Compile Include="Models\PlayerItem\ItemManager.cs" />
-    <Compile Include="Models\GameClientServer\FirewallManager.cs" />
+    <Compile Include="Models\GameClientServer\Network\FirewallManager.cs" />
     <Compile Include="Models\Utilities\FormUtilities\ControlEventHandlers\ButtonEventHandlers.cs" />
     <Compile Include="Models\Utilities\FormUtilities\CustomTitleBar.cs" />
     <Compile Include="Models\Utilities\Extensions.cs" />

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TicTacToe.Models.GameClientServer
+namespace TicTacToe.Models.GameClientServer.Lobby
 {
 	internal class NetworkPlayerEventArgs : EventArgs
 	{

@@ -1,15 +1,18 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.Configuration;
 using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
+using TicTacToe.Models.GameClientServer.Lobby;
+using TicTacToe.Models.GameClientServer.Network;
 using TicTacToe.Models.GameInfo.Settings;
 using TicTacToe.Models.PlayerInfo;
 
-namespace TicTacToe.Models.GameClientServer
+namespace TicTacToe.Models.GameClientServer.Core
 {
 	internal class GameServer
 	{
@@ -42,6 +45,8 @@ namespace TicTacToe.Models.GameClientServer
 
 			Task.Run(() => HandleRequests());
 		}
+		internal void StartGame()
+			=> _networkLobbyInfo.StartGame();
 		private async Task HandleRequests()
 		{
 			while (_httpListener.IsListening)
@@ -61,7 +66,7 @@ namespace TicTacToe.Models.GameClientServer
 
 			string clientIPAddress = context.Request.RemoteEndPoint?.Address.ToString();
 
-			if (context.Request.RawUrl.Contains("/game-lobby"))
+			if (context.Request.RawUrl.Contains(ConfigurationManager.AppSettings["gameLobbyUrl"]))
 				await HandleLobbyRequest(context, clientIPAddress);
 
 			context.Response.Close();
