@@ -5,9 +5,9 @@ namespace TicTacToe.Models.GameInfo
 {
 	internal class CoinReward
 	{
-		private int CoinsForWin { get; }
-		private int CoinsForDraw { get; }
-		private int CoinsForLoss { get; }
+		internal int CoinsForWin { get; }
+		internal int CoinsForDraw { get; }
+		internal int CoinsForLoss { get; }
 
 		internal CoinReward(int coinsForWin, int coinsForDraw, int coinsForLoss)
 		{

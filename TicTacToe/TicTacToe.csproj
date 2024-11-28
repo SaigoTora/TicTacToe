@@ -104,6 +104,12 @@
     <Compile Include="Forms\CustomMessageBox.Designer.cs">
       <DependentUpon>CustomMessageBox.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Game\Games3on3\Game3on3NetworkForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Game\Games3on3\Game3on3NetworkForm.Designer.cs">
+      <DependentUpon>Game3on3NetworkForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Game\NetworkGame\GameLobbyFormClient.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -215,6 +221,8 @@
     <Compile Include="Models\CustomExceptions\NotEnoughCoinsToStartGameException.cs" />
     <Compile Include="Models\GameClientServer\Core\GameClient.cs" />
     <Compile Include="Models\GameClientServer\Core\GameServer.cs" />
+    <Compile Include="Models\GameClientServer\Game\GameInfo.cs" />
+    <Compile Include="Models\GameClientServer\Game\MoveGameEventArgs.cs" />
     <Compile Include="Models\GameClientServer\Game\MoveInfo.cs" />
     <Compile Include="Models\GameClientServer\Lobby\LobbyPreviewEventArgs.cs" />
     <Compile Include="Models\GameClientServer\Network\LocalNetworkScanner.cs" />
@@ -226,6 +234,7 @@
     <Compile Include="Models\GameInfo\GameFormInfo.cs" />
     <Compile Include="Models\GameInfo\GameResult.cs" />
     <Compile Include="Models\GameInfo\Settings\BotGameSettings.cs" />
+    <Compile Include="Models\GameInfo\Settings\FieldParser.cs" />
     <Compile Include="Models\GameInfo\Settings\FieldSize.cs" />
     <Compile Include="Models\GameInfo\Settings\GameSettings.cs" />
     <Compile Include="Models\GameInfo\Settings\NetworkGameSettings.cs" />
@@ -287,6 +296,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\CustomMessageBox.resx">
       <DependentUpon>CustomMessageBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Game\Games3on3\Game3on3NetworkForm.resx">
+      <DependentUpon>Game3on3NetworkForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Game\NetworkGame\GameLobbyFormClient.resx">
       <DependentUpon>GameLobbyFormClient.cs</DependentUpon>

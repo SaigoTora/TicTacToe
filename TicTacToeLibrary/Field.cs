@@ -1,18 +1,24 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 
 namespace TicTacToeLibrary
 {
+	[Serializable]
 	public class Field : ICloneable
 	{
 		private const int MIN_CELLS_TO_CHECK_END_GAME = 4;
-
+		[JsonIgnore]
 		public readonly int WinningCellsCount;
+		[JsonIgnore]
 		public CellType Winner { get; private set; } = CellType.None;
+		[JsonIgnore]
 		public Cell[] WinningCells { get; private set; }
-
+		[JsonProperty("Cells")]
 		private readonly CellType[,] _cells;
 
+		[JsonConstructor]
+		private Field() { }
 		public Field(int fieldSize, int winningCellsCount)
 		{
 			if (fieldSize < winningCellsCount)

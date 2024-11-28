@@ -7,13 +7,16 @@ using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
 
+using TicTacToe.Forms.Game.Games3on3;
 using TicTacToe.Models.GameClientServer.Core;
 using TicTacToe.Models.GameClientServer.Lobby;
+using TicTacToe.Models.GameInfo;
 using TicTacToe.Models.GameInfo.Settings;
 using TicTacToe.Models.PlayerInfo;
 using TicTacToe.Models.PlayerItem;
 using TicTacToe.Models.Utilities.FormUtilities;
 using TicTacToe.Models.Utilities.FormUtilities.ControlEventHandlers;
+using TicTacToeLibrary;
 
 namespace TicTacToe.Forms.Game.NetworkGame
 {
@@ -33,6 +36,8 @@ namespace TicTacToe.Forms.Game.NetworkGame
 		private readonly SynchronizationContext _syncContext;
 		private readonly ButtonEventHandlers _buttonEventHandlers = new ButtonEventHandlers();
 		private readonly LabelEventHandlers _labelEventHandlers = new LabelEventHandlers();
+
+		private bool _isGameStarted;
 
 		internal GameLobbyServerForm(MainForm mainForm, Player player)
 		{
@@ -63,9 +68,10 @@ namespace TicTacToe.Forms.Game.NetworkGame
 			LabelFieldSize_Click(labelFieldSize, EventArgs.Empty);
 			numericUpDownNumberOfRounds.BackColor = BackColor;
 			numericUpDownNumberOfRounds.Value = _player.NetworkGameSettings.NumberOfRounds;
-			numericUpDownCoinsBet.BackColor = BackColor;
-			numericUpDownCoinsBet.Value = _player.NetworkGameSettings.CoinsBet;
-			numericUpDownCoinsBet.Maximum = Math.Min(_player.Coins, numericUpDownCoinsBet.Maximum);
+			string coinsBetText = _player.NetworkGameSettings.CoinsBet == 0 ?
+				"Free" :
+				$"{_player.NetworkGameSettings.CoinsBet:N0}".Replace(',', ' ');
+			labelValueCoinsBet.Text = coinsBetText;
 
 			if (_player.NetworkGameSettings.IsTimerEnabled)
 				SetActiveEnableButtonStyle(buttonTimerEnabled);
@@ -143,8 +149,6 @@ namespace TicTacToe.Forms.Game.NetworkGame
 		private void NumericUpDownNumberOfRounds_ValueChanged(object sender, EventArgs e)
 			=> _player.NetworkGameSettings.NumberOfRounds =
 			(int)numericUpDownNumberOfRounds.Value;
-		private void NumericUpDownCoinsBet_ValueChanged(object sender, EventArgs e)
-			=> _player.NetworkGameSettings.CoinsBet = (int)numericUpDownCoinsBet.Value;
 
 		#region Enable Buttons
 		private void ButtonTimerEnabled_Click(object sender, EventArgs e)
@@ -216,6 +220,9 @@ namespace TicTacToe.Forms.Game.NetworkGame
 					new Size(PANEL_WIDTH, PANEL_HEIGHT));
 				flpPlayers.Controls.Add(panel);
 
+				if (_gameServer.GetOpponents().Count + 1 == _gameServer.GetMaxPlayerCount())
+					buttonStart.Enabled = true;
+
 				if (e.HasIPAddress())
 					_ipToGamePanels.Add(e.IPAddress, panel);
 			}, null);
@@ -233,6 +240,8 @@ namespace TicTacToe.Forms.Game.NetworkGame
 		{
 			if (!string.IsNullOrEmpty(e.IPAddress))
 			{
+				buttonStart.Enabled = false;
+
 				_ipToGamePanels[e.IPAddress].Dispose();
 				_ipToGamePanels.Remove(e.IPAddress);
 			}
@@ -246,8 +255,25 @@ namespace TicTacToe.Forms.Game.NetworkGame
 					"Error", CustomMessageBoxButtons.OK, CustomMessageBoxIcon.Error);
 				return;
 			}
+			if (!_gameServer.AllPlayersReady())
+			{
+				CustomMessageBox.Show("All players must be ready before the start of the game.",
+					"Error", CustomMessageBoxButtons.OK, CustomMessageBoxIcon.Error);
+				return;
+			}
 
+			_isGameStarted = true;
 			_gameServer.StartGame();
+			NetworkGameSettings settings = _player.NetworkGameSettings;
+			RoundManager roundManager = new RoundManager(settings.NumberOfRounds);
+			NetworkPlayer opponent = _gameServer.GetOpponents()[0];
+			Game3on3NetworkForm gameForm = new Game3on3NetworkForm(_mainForm, _player, _gameServer,
+				roundManager, settings.CoinsBet, CellType.Cross,
+				settings.IsTimerEnabled, settings.IsGameAssistsEnabled,
+				opponent.VisualSettings.Avatar.Image, opponent.Name);
+
+			Close();
+			gameForm.Show();
 		}
 
 		private void ClearPlayers()
@@ -262,13 +288,12 @@ namespace TicTacToe.Forms.Game.NetworkGame
 			_labelEventHandlers.UnsubscribeAll();
 
 			ClearPlayers();
-			if (_gameServer != null)
+			ManageServerEventHandlers(false);
+			if (!_isGameStarted)
 			{
-				ManageServerEventHandlers(false);
-				_gameServer?.Stop();
+				_gameServer.Stop();
+				_mainForm.Show();
 			}
-
-			_mainForm.Show();
 		}
 	}
 }

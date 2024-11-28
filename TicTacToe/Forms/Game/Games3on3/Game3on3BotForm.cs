@@ -34,11 +34,7 @@ namespace TicTacToe.Forms.Game.Games3on3
 			if (opponentCellType == CellType.Cross)
 				_ = BotMoveAsync();
 			else
-			{
-				ChangeGameViewVisibility(true);
-				IndicateWhoseMove(playerCellType);
-				StartTimerToMove();
-			}
+				SetupMoveTransition(playerCellType, true);
 		}
 
 		private async void PictureCell_Click(object sender, EventArgs e)

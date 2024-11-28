@@ -7,6 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using TicTacToe.Forms.Game.Games3on3;
 using TicTacToe.Models.GameClientServer.Core;
 using TicTacToe.Models.GameClientServer.Lobby;
 using TicTacToe.Models.GameInfo;
@@ -15,6 +16,7 @@ using TicTacToe.Models.PlayerInfo;
 using TicTacToe.Models.PlayerItem;
 using TicTacToe.Models.Utilities.FormUtilities;
 using TicTacToe.Models.Utilities.FormUtilities.ControlEventHandlers;
+using TicTacToeLibrary;
 
 namespace TicTacToe.Forms.Game.NetworkGame
 {
@@ -37,8 +39,7 @@ namespace TicTacToe.Forms.Game.NetworkGame
 		private readonly PlayerLobbyStatus _playerStatus = new PlayerLobbyStatus();
 		private readonly SynchronizationContext _syncContext;
 		private readonly ButtonEventHandlers _buttonEventHandlers = new ButtonEventHandlers();
-		private bool _wasUpdateExceptionThrown;
-
+		private bool _wasUpdateExceptionThrown, _isGameStarted;
 		internal GameLobbyClientForm(MainForm mainForm, Player player, GameClient gameClient)
 		{
 			InitializeComponent();
@@ -62,16 +63,24 @@ namespace TicTacToe.Forms.Game.NetworkGame
 		#region Client Form Settings
 		private void SetClientForm(NetworkLobbyInfo lobbyInfo)
 		{
-			if (lobbyInfo.HasGameStarted)
-			{
-				_updateTimer.Dispose();
-				RoundManager roundManager = new RoundManager(lobbyInfo.Settings.NumberOfRounds);
-				CustomMessageBox.Show("Game already started!");
-				return;
-			}
-
 			_syncContext.Post(_ =>
 			{
+				if (lobbyInfo.HasGameStarted)
+				{
+					_isGameStarted = true;
+					_updateTimer.Dispose();
+					RoundManager roundManager = new RoundManager(lobbyInfo.Settings.NumberOfRounds);
+					Game3on3NetworkForm gameForm = new Game3on3NetworkForm(_mainForm, _player, _gameClient,
+						roundManager, lobbyInfo.Settings.CoinsBet, CellType.Zero,
+						lobbyInfo.Settings.IsTimerEnabled, lobbyInfo.Settings.IsGameAssistsEnabled,
+						lobbyInfo.Settings.OpponentAvatar.Image, lobbyInfo.Settings.OpponentName);
+
+					Close();
+					gameForm.Show();
+
+					return;
+				}
+
 				DisplayClientFieldSize(lobbyInfo.Settings.FieldSize);
 				labelNumberOfRounds.Text = "Number of rounds:  " + lobbyInfo.Settings.NumberOfRounds;
 				DisplayClientCoinsBet(lobbyInfo.Settings.CoinsBet);
@@ -180,8 +189,8 @@ namespace TicTacToe.Forms.Game.NetworkGame
 		}
 
 		private async void UpdateTimerCallBack(object state)
-			=> await UpdateLobbyForClient();
-		private async Task UpdateLobbyForClient()
+			=> await UpdateLobbyForClientAsync();
+		private async Task UpdateLobbyForClientAsync()
 		{
 			if (WindowState != FormWindowState.Minimized)
 			{
@@ -224,7 +233,7 @@ namespace TicTacToe.Forms.Game.NetworkGame
 				buttonReady.FillColor = _buttonFillColor.Ready;
 				buttonReady.FillColor2 = _buttonFillColor2.Ready;
 			}
-			await UpdateLobbyForClient();
+			await UpdateLobbyForClientAsync();
 			buttonReady.Enabled = true;
 		}
 
@@ -240,10 +249,10 @@ namespace TicTacToe.Forms.Game.NetworkGame
 			_updateTimer?.Dispose();
 
 			ClearPlayers();
-			if (_gameClient != null && !_wasUpdateExceptionThrown)
+			if (!_wasUpdateExceptionThrown && !_isGameStarted)
 				_gameClient?.LeaveGameLobbyAsync();
-
-			_mainForm.Show();
+			if (!_isGameStarted)
+				_mainForm.Show();
 		}
 	}
 }

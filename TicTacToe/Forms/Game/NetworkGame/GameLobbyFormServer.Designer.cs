@@ -37,16 +37,15 @@
 			this.numericUpDownNumberOfRounds = new System.Windows.Forms.NumericUpDown();
 			this.labelNumberOfRounds = new System.Windows.Forms.Label();
 			this.pictureBoxCoinBet = new System.Windows.Forms.PictureBox();
-			this.numericUpDownCoinsBet = new System.Windows.Forms.NumericUpDown();
 			this.labelCoinsBet = new System.Windows.Forms.Label();
 			this.buttonGameAssistsEnabled = new FontAwesome.Sharp.IconButton();
 			this.buttonTimerEnabled = new FontAwesome.Sharp.IconButton();
 			this.buttonStart = new Guna.UI2.WinForms.Guna2GradientButton();
 			this.flpPlayers = new System.Windows.Forms.FlowLayoutPanel();
+			this.labelValueCoinsBet = new System.Windows.Forms.Label();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxCoin)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownNumberOfRounds)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxCoinBet)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.numericUpDownCoinsBet)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// pictureBoxCoin
@@ -185,29 +184,6 @@
 			this.pictureBoxCoinBet.TabIndex = 8;
 			this.pictureBoxCoinBet.TabStop = false;
 			// 
-			// numericUpDownCoinsBet
-			// 
-			this.numericUpDownCoinsBet.BackColor = System.Drawing.Color.Black;
-			this.numericUpDownCoinsBet.Font = new System.Drawing.Font("Courier New", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.numericUpDownCoinsBet.ForeColor = System.Drawing.Color.Khaki;
-			this.numericUpDownCoinsBet.Location = new System.Drawing.Point(156, 139);
-			this.numericUpDownCoinsBet.Maximum = new decimal(new int[] {
-            9999,
-            0,
-            0,
-            0});
-			this.numericUpDownCoinsBet.Name = "numericUpDownCoinsBet";
-			this.numericUpDownCoinsBet.Size = new System.Drawing.Size(100, 38);
-			this.numericUpDownCoinsBet.TabIndex = 7;
-			this.numericUpDownCoinsBet.TabStop = false;
-			this.numericUpDownCoinsBet.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-			this.numericUpDownCoinsBet.Value = new decimal(new int[] {
-            9999,
-            0,
-            0,
-            0});
-			this.numericUpDownCoinsBet.ValueChanged += new System.EventHandler(this.NumericUpDownCoinsBet_ValueChanged);
-			// 
 			// labelCoinsBet
 			// 
 			this.labelCoinsBet.AutoSize = true;
@@ -288,6 +264,7 @@
 			this.buttonStart.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
 			this.buttonStart.DisabledState.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
 			this.buttonStart.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+			this.buttonStart.Enabled = false;
 			this.buttonStart.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(56)))), ((int)(((byte)(239)))), ((int)(((byte)(125)))));
 			this.buttonStart.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(153)))), ((int)(((byte)(142)))));
 			this.buttonStart.Font = new System.Drawing.Font("Cooper Black", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -312,18 +289,30 @@
 			this.flpPlayers.TabIndex = 13;
 			this.flpPlayers.Tag = "needToMoveParentDown";
 			// 
-			// GameLobbyFormServer
+			// labelValueCoinsBet
+			// 
+			this.labelValueCoinsBet.BackColor = System.Drawing.Color.Transparent;
+			this.labelValueCoinsBet.Font = new System.Drawing.Font("Courier New", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.labelValueCoinsBet.ForeColor = System.Drawing.Color.Khaki;
+			this.labelValueCoinsBet.Location = new System.Drawing.Point(156, 139);
+			this.labelValueCoinsBet.Name = "labelValueCoinsBet";
+			this.labelValueCoinsBet.Size = new System.Drawing.Size(100, 38);
+			this.labelValueCoinsBet.TabIndex = 7;
+			this.labelValueCoinsBet.Text = "9 999";
+			this.labelValueCoinsBet.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+			// 
+			// GameLobbyServerForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
 			this.ClientSize = new System.Drawing.Size(891, 670);
+			this.Controls.Add(this.labelValueCoinsBet);
 			this.Controls.Add(this.flpPlayers);
 			this.Controls.Add(this.buttonStart);
 			this.Controls.Add(this.buttonGameAssistsEnabled);
 			this.Controls.Add(this.buttonTimerEnabled);
 			this.Controls.Add(this.pictureBoxCoinBet);
-			this.Controls.Add(this.numericUpDownCoinsBet);
 			this.Controls.Add(this.labelCoinsBet);
 			this.Controls.Add(this.numericUpDownNumberOfRounds);
 			this.Controls.Add(this.labelNumberOfRounds);
@@ -333,7 +322,7 @@
 			this.Controls.Add(this.label3on3);
 			this.Controls.Add(this.pictureBoxCoin);
 			this.Controls.Add(this.labelCoins);
-			this.Name = "GameLobbyFormServer";
+			this.Name = "GameLobbyServerForm";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "GameLobbyForm";
 			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.GameLobbyServerForm_FormClosed);
@@ -341,7 +330,6 @@
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxCoin)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownNumberOfRounds)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxCoinBet)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.numericUpDownCoinsBet)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -358,11 +346,11 @@
 		private System.Windows.Forms.NumericUpDown numericUpDownNumberOfRounds;
 		private System.Windows.Forms.Label labelNumberOfRounds;
 		private System.Windows.Forms.PictureBox pictureBoxCoinBet;
-		private System.Windows.Forms.NumericUpDown numericUpDownCoinsBet;
 		private System.Windows.Forms.Label labelCoinsBet;
 		private FontAwesome.Sharp.IconButton buttonGameAssistsEnabled;
 		private FontAwesome.Sharp.IconButton buttonTimerEnabled;
 		private Guna.UI2.WinForms.Guna2GradientButton buttonStart;
 		private System.Windows.Forms.FlowLayoutPanel flpPlayers;
+		private System.Windows.Forms.Label labelValueCoinsBet;
 	}
 }

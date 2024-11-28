@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
 using System.Net;
@@ -7,10 +8,12 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
+using TicTacToe.Models.GameClientServer.Game;
 using TicTacToe.Models.GameClientServer.Lobby;
 using TicTacToe.Models.GameClientServer.Network;
 using TicTacToe.Models.GameInfo.Settings;
 using TicTacToe.Models.PlayerInfo;
+using TicTacToeLibrary;
 
 namespace TicTacToe.Models.GameClientServer.Core
 {
@@ -20,12 +23,14 @@ namespace TicTacToe.Models.GameClientServer.Core
 		internal EventHandler<NetworkPlayerEventArgs> PlayerJoined;
 		internal EventHandler<NetworkPlayerEventArgs> PlayerStatusChanged;
 		internal EventHandler<NetworkPlayerEventArgs> PlayerLeftLobby;
+		internal EventHandler<MoveGameEventArgs> PlayerMoveGame;
 
 		private readonly HttpListener _httpListener;
 		private readonly int _port;
 		private readonly FirewallManager _firewallManager;
 		private readonly Player _player;
 		private readonly NetworkLobbyInfo _networkLobbyInfo;
+		private Game.GameInfo _gameInfo;
 
 		internal GameServer(Player player, int port)
 		{
@@ -46,7 +51,23 @@ namespace TicTacToe.Models.GameClientServer.Core
 			Task.Run(() => HandleRequests());
 		}
 		internal void StartGame()
-			=> _networkLobbyInfo.StartGame();
+		{
+			_gameInfo = new Game.GameInfo(_networkLobbyInfo.Settings.FieldSize);
+			_networkLobbyInfo.StartGame();
+		}
+		internal List<NetworkPlayer> GetOpponents()
+			=> _networkLobbyInfo.Players;
+		internal int GetMaxPlayerCount()
+			=> _networkLobbyInfo.MaxPlayerCount;
+		internal bool AllPlayersReady()
+		{
+			foreach (NetworkPlayer player in _networkLobbyInfo.Players)
+				if (!player.IsReady)
+					return false;
+
+			return true;
+		}
+
 		private async Task HandleRequests()
 		{
 			while (_httpListener.IsListening)
@@ -68,9 +89,13 @@ namespace TicTacToe.Models.GameClientServer.Core
 
 			if (context.Request.RawUrl.Contains(ConfigurationManager.AppSettings["gameLobbyUrl"]))
 				await HandleLobbyRequest(context, clientIPAddress);
+			else if (context.Request.RawUrl.Contains(ConfigurationManager.AppSettings["gameUrl"]))
+				await HandleGameRequest(context);
 
 			context.Response.Close();
 		}
+
+		#region Lobby
 		private async Task HandleLobbyRequest(HttpListenerContext context,
 			string clientIPAddress)
 		{
@@ -147,11 +172,44 @@ namespace TicTacToe.Models.GameClientServer.Core
 			var temp = System.Threading.Volatile.Read(ref PlayerLeftLobby);
 			temp?.Invoke(this, e);
 		}
+		#endregion
 
+		#region Game
+		private async Task HandleGameRequest(HttpListenerContext context)
+		{
+			MoveInfo moveInfo = null;
+
+			if (context.Request.HttpMethod == HttpMethod.Post.Method)
+			{
+				using (var reader = new StreamReader(context.Request.InputStream, context.Request.ContentEncoding))
+				{
+					string jsonData = await reader.ReadToEndAsync();
+					moveInfo = JsonConvert.DeserializeObject<MoveInfo>(jsonData);
+					Move(moveInfo);
+				}
+			}
+
+			string response = JsonConvert.SerializeObject(_gameInfo, Formatting.Indented);
+			await SendResponseToClient(context, response);
+
+			if (moveInfo != null)
+				OnPlayerMoveGame(new MoveGameEventArgs(moveInfo));
+		}
+		internal void Move(MoveInfo info)
+			=> _gameInfo.Move(info.Cell, info.CellType);
+		internal CellType WhoseMove() => _gameInfo.WhoseMove;
+
+		private void OnPlayerMoveGame(MoveGameEventArgs e)
+		{
+			var temp = System.Threading.Volatile.Read(ref PlayerMoveGame);
+			temp?.Invoke(this, e);
+		}
+		#endregion
 		internal void Stop()
 		{
 			if (_httpListener.IsListening)
 			{
+				TicTacToe.Forms.CustomMessageBox.Show("Server is stopped!");
 				_httpListener.Stop();
 				_httpListener.Close();
 				_firewallManager.RemoveFirewallRule();

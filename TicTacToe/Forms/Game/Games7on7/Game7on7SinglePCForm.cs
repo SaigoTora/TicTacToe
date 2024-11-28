@@ -36,9 +36,7 @@ namespace TicTacToe.Forms.Game.Games7on7
 			if (opponentCellType == CellType.Cross)
 				_currentCellType = CellType.Cross;
 
-			IndicateWhoseMove(_currentCellType);
-			ChangeGameViewVisibility(true);
-			StartTimerToMove();
+			SetupMoveTransition(_currentCellType, true);
 		}
 
 		private async void PictureCell_Click(object sender, EventArgs e)
@@ -48,9 +46,7 @@ namespace TicTacToe.Forms.Game.Games7on7
 
 			await PictureBoxCell_DefaultClick(pictureBox, _currentCellType, e != EventArgs.Empty, false);
 			_currentCellType = _currentCellType == CellType.Cross ? CellType.Zero : CellType.Cross;
-			IndicateWhoseMove(_currentCellType);
-			ChangeGameViewVisibility(true);
-			StartTimerToMove();
+			SetupMoveTransition(_currentCellType, true);
 		}
 		private void PictureCell_MouseEnter(object sender, EventArgs e)
 		{

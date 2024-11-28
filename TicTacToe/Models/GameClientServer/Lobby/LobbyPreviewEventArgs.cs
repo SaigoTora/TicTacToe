@@ -9,7 +9,7 @@ namespace TicTacToe.Models.GameClientServer.Lobby
 		internal readonly int Port;
 		internal readonly NetworkLobbyInfo NetworkLobbyInfo;
 
-		public LobbyPreviewEventArgs(IPAddress ipAddress, int port,
+		internal LobbyPreviewEventArgs(IPAddress ipAddress, int port,
 			NetworkLobbyInfo networkLobbyInfo)
 		{
 			IPAddress = ipAddress;

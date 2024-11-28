@@ -2,7 +2,9 @@
 using System.Drawing;
 using System.Windows.Forms;
 
+using TicTacToe.Models.GameClientServer.Core;
 using TicTacToe.Models.GameInfo;
+using TicTacToe.Models.GameInfo.Settings;
 using TicTacToe.Models.PlayerInfo;
 using TicTacToeLibrary;
 
@@ -18,7 +20,7 @@ namespace TicTacToe.Forms.Game.Games3on3
 		{
 			InitializeComponent();
 
-			field = new Field(3, 3);
+			field = FieldParser.Parse(FieldSize.Size3on3);
 		}
 		internal BaseGame3on3Form(MainForm mainForm, Player player, CoinReward coinReward, RoundManager roundManager,
 			CellType playerCellType, bool isTimerEnabled, bool isGameAssistsEnabled)
@@ -26,7 +28,23 @@ namespace TicTacToe.Forms.Game.Games3on3
 		{
 			InitializeComponent();
 
-			field = new Field(3, 3);
+			field = FieldParser.Parse(FieldSize.Size3on3);
+		}
+		internal BaseGame3on3Form(MainForm mainForm, Player player, GameServer gameServer, RoundManager roundManager,
+			int coinsBet, CellType playerCellType, bool isTimerEnabled, bool isGameAssistsEnabled)
+			: base(mainForm, player, gameServer, roundManager, coinsBet, playerCellType, isTimerEnabled, isGameAssistsEnabled)
+		{
+			InitializeComponent();
+
+			field = FieldParser.Parse(FieldSize.Size3on3);
+		}
+		internal BaseGame3on3Form(MainForm mainForm, Player player, GameClient gameClient, RoundManager roundManager,
+			int coinsBet, CellType playerCellType, bool isTimerEnabled, bool isGameAssistsEnabled)
+			: base(mainForm, player, gameClient, roundManager, coinsBet, playerCellType, isTimerEnabled, isGameAssistsEnabled)
+		{
+			InitializeComponent();
+
+			field = FieldParser.Parse(FieldSize.Size3on3);
 		}
 
 		protected void InitializeBaseGame(EventHandler cellClick, BaseGame3on3Form nextGameForm)

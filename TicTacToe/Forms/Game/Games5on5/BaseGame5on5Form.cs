@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 
 using TicTacToe.Models.GameInfo;
+using TicTacToe.Models.GameInfo.Settings;
 using TicTacToe.Models.PlayerInfo;
 using TicTacToeLibrary;
 
@@ -17,7 +18,7 @@ namespace TicTacToe.Forms.Game.Games5on5
 		{
 			InitializeComponent();
 
-			field = new Field(5, 4);
+			field = FieldParser.Parse(FieldSize.Size5on5);
 		}
 		internal BaseGame5on5Form(MainForm mainForm, Player player, CoinReward coinReward, RoundManager roundManager,
 			CellType playerCellType, bool isTimerEnabled, bool isGameAssistsEnabled)
@@ -25,7 +26,7 @@ namespace TicTacToe.Forms.Game.Games5on5
 		{
 			InitializeComponent();
 
-			field = new Field(5, 4);
+			field = FieldParser.Parse(FieldSize.Size5on5);
 		}
 
 		protected void InitializeBaseGame(EventHandler cellClick, BaseGame5on5Form nextGameForm)
