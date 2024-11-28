@@ -175,6 +175,12 @@ namespace TicTacToe.Models.GameClientServer.Core
 		#endregion
 
 		#region Game
+		internal void Move(MoveInfo info)
+			=> _gameInfo.Move(info.Cell, info.CellType);
+		internal CellType WhoseMove() => _gameInfo.WhoseMove;
+		internal void FinishGame()
+			=> _gameInfo.ClearField();
+
 		private async Task HandleGameRequest(HttpListenerContext context)
 		{
 			MoveInfo moveInfo = null;
@@ -195,9 +201,7 @@ namespace TicTacToe.Models.GameClientServer.Core
 			if (moveInfo != null)
 				OnPlayerMoveGame(new MoveGameEventArgs(moveInfo));
 		}
-		internal void Move(MoveInfo info)
-			=> _gameInfo.Move(info.Cell, info.CellType);
-		internal CellType WhoseMove() => _gameInfo.WhoseMove;
+
 
 		private void OnPlayerMoveGame(MoveGameEventArgs e)
 		{
@@ -205,6 +209,7 @@ namespace TicTacToe.Models.GameClientServer.Core
 			temp?.Invoke(this, e);
 		}
 		#endregion
+
 		internal void Stop()
 		{
 			if (_httpListener.IsListening)

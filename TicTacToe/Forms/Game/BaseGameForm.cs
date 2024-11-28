@@ -50,7 +50,7 @@ namespace TicTacToe.Forms.Game
 			_cancellationTokenSourceHint;
 		private PictureBox _pictureBoxCellHint;
 		private bool _wasAssistUsed, _isCellHintHovered,
-			_isFormClosingForNextRound, _wasPressedButtonBack;
+			_isFormClosingForNextRound, _wasPressedButtonBack, _isGameOver;
 
 		protected BaseGameForm()
 		{ InitializeComponent(); }
@@ -288,21 +288,19 @@ namespace TicTacToe.Forms.Game
 				await FinishGameAsync();
 			else if (bot != null)
 				await BotMoveAsync();
+			else if (sendMoveInfoOverNetwork && (gameServer != null || gameClient != null))
+				IndicateWhoseMove(opponentCellType);
 		}
 		private async Task NetworkMoveAsync(Cell cell)
 		{
 			MoveInfo moveInfo = new MoveInfo(cell, playerCellType);
 			if (gameServer != null)
-			{
 				gameServer.Move(moveInfo);
-				IndicateWhoseMove(opponentCellType);
-			}
 			else if (gameClient != null)
 			{
 				GameInfo gameInfo = await gameClient.MoveAsync(moveInfo);
 				if (gameInfo != null)
-					UpdateGameForClient(gameInfo);
-				IndicateWhoseMove(opponentCellType);
+					await UpdateGameForClientAsync(gameInfo);
 				_clientUpdateTimer = new System.Threading.Timer(UpdateTimerCallBack, null, 0, GAME_UPDATE_INTERVAL);
 			}
 		}
@@ -457,10 +455,10 @@ namespace TicTacToe.Forms.Game
 			try
 			{
 				GameInfo gameInfo = await gameClient.UpdateGameAsync();
-				_syncContext.Post(_ =>
+				_syncContext.Post(async _ =>
 				{
 					if (gameInfo != null)
-						UpdateGameForClient(gameInfo);
+						await UpdateGameForClientAsync(gameInfo);
 				}, null);
 			}
 			catch (System.Net.Http.HttpRequestException)
@@ -479,11 +477,11 @@ namespace TicTacToe.Forms.Game
 				//}
 			}
 		}
-		private void UpdateGameForClient(GameInfo gameInfo)
+		private async Task UpdateGameForClientAsync(GameInfo gameInfo)
 		{
-			bool wasFieldChanged = UpdateFieldAndCheckChanges(gameInfo.Field);
+			bool wasFieldChanged = await UpdateFieldAndCheckChangesAsync(gameInfo.Field);
 
-			if (gameInfo.WhoseMove == playerCellType)
+			if (gameInfo.WhoseMove == playerCellType && !_isGameOver)
 			{
 				SetPictureBoxesEnabled(true);
 				if (wasFieldChanged)
@@ -494,7 +492,7 @@ namespace TicTacToe.Forms.Game
 				}
 			}
 		}
-		private bool UpdateFieldAndCheckChanges(Field updatedField)
+		private async Task<bool> UpdateFieldAndCheckChangesAsync(Field updatedField)
 		{
 			bool wasFieldChanged = false;
 			CellType[,] cells = updatedField.GetAllCells();
@@ -514,7 +512,7 @@ namespace TicTacToe.Forms.Game
 						if (cells[i, j] == CellType.None)
 							ClearPictureBox(currentPictureBox);
 						else if (!_sequenceSelectedCells.Contains(currentPictureBox))
-							_ = PictureBoxCell_DefaultClick(currentPictureBox, cells[i, j], false, sendMoveInfoOverNetwork: false);
+							await PictureBoxCell_DefaultClick(currentPictureBox, cells[i, j], false, sendMoveInfoOverNetwork: false);
 					}
 				}
 
@@ -550,10 +548,13 @@ namespace TicTacToe.Forms.Game
 		private async Task FinishGameAsync()
 		{
 			player.ReturnCoins();
+			_clientUpdateTimer?.Dispose();
+			_isGameOver = true;
 			SetPictureBoxesEnabled(false);
 
 			await ShowWinningCellsAsync(field.Winner);
 			await Task.Delay(WINNING_CELL_SHOW_DELAY);
+			gameServer?.FinishGame();
 
 			GameResult gameResult = EvaluateGameResult();
 			player.UpdateCoins(coinReward, gameResult);

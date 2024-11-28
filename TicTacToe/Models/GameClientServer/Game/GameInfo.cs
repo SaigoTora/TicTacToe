@@ -18,6 +18,8 @@ namespace TicTacToe.Models.GameClientServer.Game
 		internal GameInfo(FieldSize fieldSize)
 			=> Field = FieldParser.Parse(fieldSize);
 
+		internal void ClearField()
+			=> Field = new Field(Field.GetFieldSize(), Field.WinningCellsCount);
 		internal void Move(Cell cell, CellType cellType)
 		{
 			Field.FillCell(cell, cellType);
