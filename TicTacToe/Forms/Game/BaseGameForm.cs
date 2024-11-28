@@ -263,9 +263,9 @@ namespace TicTacToe.Forms.Game
 
 		#region Actions of the game
 		protected async Task PictureBoxCell_DefaultClick(PictureBox pictureBox, CellType cellType, bool wasClicked,
-			bool disablePictureCells = true)
+			bool disablePictureCells = true, bool sendMoveInfoOverNetwork = true)
 		{
-			if (gameClient != null && wasClicked)
+			if (gameClient != null && sendMoveInfoOverNetwork)
 				_clientUpdateTimer.Dispose();
 
 			_wasAssistUsed = false;
@@ -281,13 +281,23 @@ namespace TicTacToe.Forms.Game
 			field.FillCell(cell, cellType);
 
 			FillCellWithImage(cell, cellType, wasClicked);
+			if (sendMoveInfoOverNetwork)
+				await NetworkMoveAsync(cell);
+
+			if (field.IsGameEnd())
+				await FinishGameAsync();
+			else if (bot != null)
+				await BotMoveAsync();
+		}
+		private async Task NetworkMoveAsync(Cell cell)
+		{
 			MoveInfo moveInfo = new MoveInfo(cell, playerCellType);
-			if (gameServer != null && wasClicked)
+			if (gameServer != null)
 			{
 				gameServer.Move(moveInfo);
 				IndicateWhoseMove(opponentCellType);
 			}
-			else if (gameClient != null && wasClicked)
+			else if (gameClient != null)
 			{
 				GameInfo gameInfo = await gameClient.MoveAsync(moveInfo);
 				if (gameInfo != null)
@@ -295,11 +305,6 @@ namespace TicTacToe.Forms.Game
 				IndicateWhoseMove(opponentCellType);
 				_clientUpdateTimer = new System.Threading.Timer(UpdateTimerCallBack, null, 0, GAME_UPDATE_INTERVAL);
 			}
-
-			if (field.IsGameEnd())
-				await FinishGameAsync();
-			else if (bot != null)
-				await BotMoveAsync();
 		}
 		protected async Task BotMoveAsync()
 		{
@@ -381,7 +386,6 @@ namespace TicTacToe.Forms.Game
 				(Color.Goldenrod, Color.FromArgb(255, 223, 0));
 			Color defaultColor = playerName.ForeColor == moveColorLight || playerName.ForeColor == moveColorDark ?
 				opponentName.ForeColor : playerName.ForeColor;
-			//Color defaultColor = currentCellType == playerCellType ? playerName.ForeColor : opponentName.ForeColor;
 
 			Label activeName, inactiveName;
 			if (currentCellType == playerCellType)
@@ -445,6 +449,7 @@ namespace TicTacToe.Forms.Game
 		#endregion
 
 		#region Network
+		#region Client
 		private async void UpdateTimerCallBack(object state)
 			=> await UpdateGameForClientAsync();
 		private async Task UpdateGameForClientAsync()
@@ -476,7 +481,7 @@ namespace TicTacToe.Forms.Game
 		}
 		private void UpdateGameForClient(GameInfo gameInfo)
 		{
-			bool wasFieldChanged = UpdateField(gameInfo.Field);
+			bool wasFieldChanged = UpdateFieldAndCheckChanges(gameInfo.Field);
 
 			if (gameInfo.WhoseMove == playerCellType)
 			{
@@ -489,26 +494,7 @@ namespace TicTacToe.Forms.Game
 				}
 			}
 		}
-		private void PlayerGameMove(object sender, MoveGameEventArgs e)
-		{
-			if (_gameFormInfo == null)
-				return;
-
-			_syncContext.Post(async _ =>
-			{
-				if (e.MoveInfo.IsMoveCancelled)
-					CustomMessageBox.Show("Move was canceled!");
-				else
-				{
-					Cell cell = e.MoveInfo.Cell;
-					PictureBox pictureBox = _gameFormInfo.PictureCells[cell.row, cell.column];
-					await PictureBoxCell_DefaultClick(pictureBox, e.MoveInfo.CellType, false);
-					SetupMoveTransition(playerCellType, true);
-				}
-				SetPictureBoxesEnabled(gameServer.WhoseMove() == playerCellType);
-			}, null);
-		}
-		private bool UpdateField(Field updatedField)
+		private bool UpdateFieldAndCheckChanges(Field updatedField)
 		{
 			bool wasFieldChanged = false;
 			CellType[,] cells = updatedField.GetAllCells();
@@ -528,12 +514,36 @@ namespace TicTacToe.Forms.Game
 						if (cells[i, j] == CellType.None)
 							ClearPictureBox(currentPictureBox);
 						else if (!_sequenceSelectedCells.Contains(currentPictureBox))
-							_ = PictureBoxCell_DefaultClick(currentPictureBox, cells[i, j], false);
+							_ = PictureBoxCell_DefaultClick(currentPictureBox, cells[i, j], false, sendMoveInfoOverNetwork: false);
 					}
 				}
 
 			return wasFieldChanged;
 		}
+		#endregion
+
+		#region Server
+		private void PlayerGameMove(object sender, MoveGameEventArgs e)
+		{
+			if (_gameFormInfo == null)
+				return;
+
+			_syncContext.Post(async _ =>
+			{
+				if (e.MoveInfo.IsMoveCancelled)
+					CustomMessageBox.Show("Move was canceled!");
+				else
+				{
+					Cell cell = e.MoveInfo.Cell;
+					PictureBox pictureBox = _gameFormInfo.PictureCells[cell.row, cell.column];
+					await PictureBoxCell_DefaultClick(pictureBox, e.MoveInfo.CellType, false, sendMoveInfoOverNetwork: false);
+					SetupMoveTransition(playerCellType, true);
+				}
+				SetPictureBoxesEnabled(gameServer.WhoseMove() == playerCellType);
+			}, null);
+		}
+		#endregion
+
 		#endregion
 
 		#region End of the game
@@ -597,7 +607,7 @@ namespace TicTacToe.Forms.Game
 				resultForm = new GameResultForm(player, coinReward, roundManager, gameResult, bot.Difficulty, backToMainForm);
 			else if (gameClient != null || gameServer != null)
 				resultForm = new GameResultForm(player, coinReward, roundManager, gameResult, backToMainForm, ActionAfterTimeOver.Play, 15);
-			else 
+			else
 				resultForm = new GameResultForm(player, coinReward, roundManager, gameResult, backToMainForm);
 
 			resultForm.ShowDialog();
