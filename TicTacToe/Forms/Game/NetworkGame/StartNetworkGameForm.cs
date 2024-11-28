@@ -126,7 +126,7 @@ namespace TicTacToe.Forms.Game.NetworkGame
 		{
 			const int LABEL_MARGIN_TOP = 6;
 
-			Label label = new Label
+			LabelNoCopy label = new LabelNoCopy
 			{
 				AutoSize = true,
 				ForeColor = Color.White,
@@ -142,7 +142,7 @@ namespace TicTacToe.Forms.Game.NetworkGame
 		{
 			const int LABEL_WIDTH = 450;
 
-			Label label = new Label
+			LabelNoCopy label = new LabelNoCopy
 			{
 				AutoSize = false,
 				Size = new Size(LABEL_WIDTH, LOBBY_PREVIEW_PANEL_HEIGHT / 2),
@@ -150,6 +150,7 @@ namespace TicTacToe.Forms.Game.NetworkGame
 				BackColor = Color.Transparent,
 				Text = description,
 				Font = new Font("Trebuchet MS", 10F, FontStyle.Regular),
+				UseMnemonic = false
 			};
 			label.Location = new Point(LOBBY_PREVIEW_LABEL_MARGIN_LEFT,
 				(LOBBY_PREVIEW_PANEL_HEIGHT + label.Height) / 3);
@@ -177,7 +178,7 @@ namespace TicTacToe.Forms.Game.NetworkGame
 			string coinsBetText = coinsBet == 0 ?
 				"Free" :
 				$"{coinsBet:N0}".Replace(',', ' ');
-			Label label = new Label
+			LabelNoCopy label = new LabelNoCopy
 			{
 				AutoSize = true,
 				ForeColor = Color.Khaki,
@@ -197,7 +198,7 @@ namespace TicTacToe.Forms.Game.NetworkGame
 			const int LABEL_MARGIN_LEFT = 650;
 			const int LABEL_WIDTH = 90;
 
-			Label label = new Label
+			LabelNoCopy label = new LabelNoCopy
 			{
 				AutoSize = false,
 				TextAlign = ContentAlignment.MiddleRight,

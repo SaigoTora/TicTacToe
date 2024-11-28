@@ -273,6 +273,9 @@
     <Compile Include="Models\GameInfo\CoinsCalculator.cs" />
     <Compile Include="Models\Utilities\FormUtilities\ControlEventHandlers\LabelEventHandlers.cs" />
     <Compile Include="Models\Utilities\FormUtilities\ControlEventHandlers\PictureBoxEventHandlers.cs" />
+    <Compile Include="Models\Utilities\FormUtilities\LabelNoCopy.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Models\Utilities\FormUtilities\NetworkPlayerCreator.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
