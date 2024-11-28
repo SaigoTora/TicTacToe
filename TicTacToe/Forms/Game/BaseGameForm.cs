@@ -23,6 +23,7 @@ namespace TicTacToe.Forms.Game
 	internal partial class BaseGameForm : BaseForm
 	{
 		private const int WINNING_CELL_SHOW_DELAY = 350;
+		private const int UNDO_MOVE_DELAY = 400;
 		private const int GAME_UPDATE_INTERVAL = 200;
 
 		protected readonly MainForm mainForm;
@@ -123,7 +124,7 @@ namespace TicTacToe.Forms.Game
 			_sequenceSelectedCells = new List<PictureBox>(_gameFormInfo.PictureCells.Length);
 			BackColor = player.VisualSettings.BackgroundGame.Color;
 			if (gameClient != null)
-				_clientUpdateTimer = new System.Threading.Timer(UpdateTimerCallBack, null, 0, GAME_UPDATE_INTERVAL);
+				StartClientUpdateTimer();
 
 			InitializePlayersInfo(_gameFormInfo.PlayersInfo);
 			InitializeGameAssists(_gameFormInfo.GameAssistsInfo);
@@ -266,7 +267,7 @@ namespace TicTacToe.Forms.Game
 			bool disablePictureCells = true, bool sendMoveInfoOverNetwork = true)
 		{
 			if (gameClient != null && sendMoveInfoOverNetwork)
-				_clientUpdateTimer.Dispose();
+				_clientUpdateTimer?.Dispose();
 
 			_wasAssistUsed = false;
 			_isCellHintHovered = false;
@@ -301,7 +302,7 @@ namespace TicTacToe.Forms.Game
 				GameInfo gameInfo = await gameClient.MoveAsync(moveInfo);
 				if (gameInfo != null)
 					await UpdateGameForClientAsync(gameInfo);
-				_clientUpdateTimer = new System.Threading.Timer(UpdateTimerCallBack, null, 0, GAME_UPDATE_INTERVAL);
+				StartClientUpdateTimer();
 			}
 		}
 		protected async Task BotMoveAsync()
@@ -448,6 +449,8 @@ namespace TicTacToe.Forms.Game
 
 		#region Network
 		#region Client
+		private void StartClientUpdateTimer()
+			=> _clientUpdateTimer = new System.Threading.Timer(UpdateTimerCallBack, null, 0, GAME_UPDATE_INTERVAL);
 		private async void UpdateTimerCallBack(object state)
 			=> await UpdateGameForClientAsync();
 		private async Task UpdateGameForClientAsync()
@@ -510,7 +513,10 @@ namespace TicTacToe.Forms.Game
 						PictureBox currentPictureBox = _gameFormInfo.PictureCells[i, j];
 
 						if (cells[i, j] == CellType.None)
+						{
+							field.FillCell(currentCell, CellType.None);
 							ClearPictureBox(currentPictureBox);
+						}
 						else if (!_sequenceSelectedCells.Contains(currentPictureBox))
 							await PictureBoxCell_DefaultClick(currentPictureBox, cells[i, j], false, sendMoveInfoOverNetwork: false);
 					}
@@ -529,7 +535,11 @@ namespace TicTacToe.Forms.Game
 			_syncContext.Post(async _ =>
 			{
 				if (e.MoveInfo.IsMoveCancelled)
-					CustomMessageBox.Show("Move was canceled!");
+				{
+					UndoLastMove();
+					await Task.Delay(UNDO_MOVE_DELAY);
+					UndoLastMove();
+				}
 				else
 				{
 					Cell cell = e.MoveInfo.Cell;
@@ -813,7 +823,8 @@ namespace TicTacToe.Forms.Game
 							_gameFormInfo.GameAssistsInfo.Hint.Visible = actualVisible;
 						break;
 					case GameAssistType.Surrender:
-						_gameFormInfo.GameAssistsInfo.Surrender.Visible = actualVisible;
+						if (gameClient == null && gameServer == null)
+							_gameFormInfo.GameAssistsInfo.Surrender.Visible = actualVisible;
 						break;
 					default:
 						throw new InvalidOperationException
@@ -826,10 +837,9 @@ namespace TicTacToe.Forms.Game
 		#region Game assistants
 		private async void PictureBoxUndoMove_Click(object sender, EventArgs e)
 		{
-			int UNDO_MOVE_DELAY = 400;
-
 			_wasAssistUsed = true;
 			player.CountableItemsInventory.UseItem(GameAssistType.UndoMove);
+			_clientUpdateTimer?.Dispose();
 			ChangeGameViewVisibility(false);
 			StopTimerToMove();
 
@@ -846,6 +856,8 @@ namespace TicTacToe.Forms.Game
 
 			StartTimerToMove();
 			TryToIndicateLastGameAssist(player.CountableItemsInventory.GetItem(GameAssistType.UndoMove));
+			if (gameClient != null)
+				StartClientUpdateTimer();
 		}
 		private void UndoLastMove()
 		{

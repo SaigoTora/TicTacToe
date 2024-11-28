@@ -176,7 +176,17 @@ namespace TicTacToe.Models.GameClientServer.Core
 
 		#region Game
 		internal void Move(MoveInfo info)
-			=> _gameInfo.Move(info.Cell, info.CellType);
+		{
+			if (info.IsMoveCancelled)
+			{
+				_gameInfo.CancelLastMove();
+				_gameInfo.CancelLastMove();
+			}
+			else
+			{
+				_gameInfo.Move(info.Cell, info.CellType);
+			}
+		}
 		internal CellType WhoseMove() => _gameInfo.WhoseMove;
 		internal void FinishGame()
 			=> _gameInfo.ClearField();
