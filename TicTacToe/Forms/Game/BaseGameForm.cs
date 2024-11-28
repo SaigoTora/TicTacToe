@@ -593,10 +593,13 @@ namespace TicTacToe.Forms.Game
 			}
 
 			GameResultForm resultForm;
-			if (bot == null)
-				resultForm = new GameResultForm(player, coinReward, roundManager, gameResult, backToMainForm);
-			else
+			if (bot != null)
 				resultForm = new GameResultForm(player, coinReward, roundManager, gameResult, bot.Difficulty, backToMainForm);
+			else if (gameClient != null || gameServer != null)
+				resultForm = new GameResultForm(player, coinReward, roundManager, gameResult, backToMainForm, ActionAfterTimeOver.Play, 15);
+			else 
+				resultForm = new GameResultForm(player, coinReward, roundManager, gameResult, backToMainForm);
+
 			resultForm.ShowDialog();
 		}
 

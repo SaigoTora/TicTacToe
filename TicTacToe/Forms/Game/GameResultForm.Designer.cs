@@ -111,6 +111,7 @@
 			this.labelTimeToClose.TabIndex = 10;
 			this.labelTimeToClose.Text = "This window will close in: 60 sec.";
 			this.labelTimeToClose.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			this.labelTimeToClose.Visible = false;
 			// 
 			// pictureBoxCoin
 			// 

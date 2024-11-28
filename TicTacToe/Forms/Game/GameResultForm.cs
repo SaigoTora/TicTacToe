@@ -12,6 +12,11 @@ using TicTacToeLibrary;
 
 namespace TicTacToe.Forms
 {
+	internal enum ActionAfterTimeOver : byte
+	{
+		BackToMenu,
+		Play
+	}
 	internal partial class GameResultForm : BaseForm
 	{
 		private readonly Player _player;
@@ -21,10 +26,12 @@ namespace TicTacToe.Forms
 		private readonly Difficulty? _difficulty = null;
 		private readonly ButtonEventHandlers _buttonEventHandlers = new ButtonEventHandlers();
 
+		private readonly ActionAfterTimeOver _actionAfterTimeOver;
 		private readonly EventHandler _backToMainForm;
 		private readonly CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
 
-		internal GameResultForm(Player player, CoinReward coinReward, RoundManager roundManager, GameResult result, EventHandler backToMainForm)
+		internal GameResultForm(Player player, CoinReward coinReward, RoundManager roundManager,
+			GameResult result, EventHandler backToMainForm)
 		{
 			InitializeComponent();
 
@@ -46,6 +53,8 @@ namespace TicTacToe.Forms
 				buttonPlay.Visible = false;
 			}
 			_backToMainForm = backToMainForm;
+			RepositionControls(false);
+
 			buttonBack.Click += _backToMainForm;
 			if (buttonPlay != null)
 				ActiveControl = buttonPlay;
@@ -53,9 +62,20 @@ namespace TicTacToe.Forms
 				ActiveControl = buttonBack;
 			_buttonEventHandlers.SubscribeToHover(buttonBack, buttonPlay);
 		}
+
+		internal GameResultForm(Player player, CoinReward coinReward, RoundManager roundManager, GameResult result,
+			EventHandler backToMainForm, ActionAfterTimeOver actionAfterTimeOver, byte? delaySecondsToClose)
+			: this(player, coinReward, roundManager, result, backToMainForm)
+		{
+			_actionAfterTimeOver = actionAfterTimeOver;
+			RepositionControls(true);
+
+			if (delaySecondsToClose.HasValue && delaySecondsToClose.Value > 0)
+				_ = DelayToCloseAsync(delaySecondsToClose.Value);
+		}
 		internal GameResultForm(Player player, CoinReward coinReward, RoundManager roundManager, GameResult result,
 			Difficulty difficulty, EventHandler backToMainForm)
-			: this(player, coinReward, roundManager, result, backToMainForm)
+			: this(player, coinReward, roundManager, result, backToMainForm, ActionAfterTimeOver.BackToMenu, 60)
 		{ _difficulty = difficulty; }
 
 		private void ResultForm_Load(object sender, EventArgs e)
@@ -73,10 +93,22 @@ namespace TicTacToe.Forms
 				AdjustUIForNoDifficulty(VERTICAL_OFFSET);
 			}
 
-			labelCurrentCoins.Text = $"{_player.Coins:N0}".Replace(',', ' '); ;
-			_ = DelayToCloseAsync();
+			labelCurrentCoins.Text = $"{_player.Coins:N0}".Replace(',', ' ');
 		}
 
+		private void RepositionControls(bool isTimerToCloseExist)
+		{
+			if (isTimerToCloseExist)
+			{
+				buttonBack.Location = new Point(buttonBack.Location.X, buttonBack.Location.Y - labelTimeToClose.Height);
+				buttonPlay.Location = new Point(buttonPlay.Location.X, buttonPlay.Location.Y - labelTimeToClose.Height);
+			}
+			else
+			{
+				buttonBack.Location = new Point(buttonBack.Location.X, buttonBack.Location.Y + labelTimeToClose.Height);
+				buttonPlay.Location = new Point(buttonPlay.Location.X, buttonPlay.Location.Y + labelTimeToClose.Height);
+			}
+		}
 		private void DisplayScore()
 		{
 			labelScore.Visible = true;
@@ -163,11 +195,11 @@ namespace TicTacToe.Forms
 		private void ButtonPlay_Click(object sender, EventArgs e)
 			=> Close();
 
-		private async Task DelayToCloseAsync()
+		private async Task DelayToCloseAsync(byte delaySeconds = 60)
 		{
-			const byte DELAY_SECONDS_TO_CLOSE = 60;
+			labelTimeToClose.Visible = true;
 
-			for (int i = DELAY_SECONDS_TO_CLOSE; i >= 1; i--)
+			for (int i = delaySeconds; i >= 1; i--)
 			{
 				if (_cancellationTokenSource.IsCancellationRequested)
 					return;
@@ -177,7 +209,17 @@ namespace TicTacToe.Forms
 			}
 
 			if (!_cancellationTokenSource.IsCancellationRequested)
-				_backToMainForm(this, EventArgs.Empty);
+			{
+				if (_actionAfterTimeOver == ActionAfterTimeOver.BackToMenu)
+					_backToMainForm(this, EventArgs.Empty);
+				else if (_actionAfterTimeOver == ActionAfterTimeOver.Play)
+				{
+					if (buttonPlay.Visible)
+						ButtonPlay_Click(this, EventArgs.Empty);
+					else
+						_backToMainForm(this, EventArgs.Empty);
+				}
+			}
 		}
 		private void ResultForm_FormClosed(object sender, FormClosedEventArgs e)
 		{
