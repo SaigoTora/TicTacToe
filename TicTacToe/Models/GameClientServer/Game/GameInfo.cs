@@ -43,6 +43,9 @@ namespace TicTacToe.Models.GameClientServer.Game
 			Field.FillCell(cell, CellType.None);
 		}
 		internal void ClearField()
-			=> Field = new Field(Field.GetFieldSize(), Field.WinningCellsCount);
+		{
+			WhoseMove = CellType.None;
+			Field = new Field(Field.GetFieldSize(), Field.WinningCellsCount);
+		}
 	}
 }

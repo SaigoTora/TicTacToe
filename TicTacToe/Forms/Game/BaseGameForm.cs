@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using TicTacToe.Models.CustomExceptions;
 using TicTacToe.Models.GameClientServer.Core;
 using TicTacToe.Models.GameClientServer.Game;
+using TicTacToe.Models.GameClientServer.Lobby;
 using TicTacToe.Models.GameInfo;
 using TicTacToe.Models.PlayerInfo;
 using TicTacToe.Models.PlayerItem;
@@ -47,11 +48,13 @@ namespace TicTacToe.Forms.Game
 		private readonly (Bitmap Cross, Bitmap Zero) _bitmapPreviewCell;
 		private readonly (string Cross, string Zero) _tagPreviewCell = ("Preview Cross", "Preview Zero");
 
+		private GameResultForm _gameResultForm;
 		private CancellationTokenSource _cancellationTokenSourceTimer,
 			_cancellationTokenSourceHint;
 		private PictureBox _pictureBoxCellHint;
 		private bool _wasAssistUsed, _isCellHintHovered,
-			_isFormClosingForNextRound, _wasPressedButtonBack, _isGameOver;
+			_isFormClosingForNextRound, _wasPressedButtonBack,
+			_isGameOver, _wasUpdateExceptionThrown;
 
 		protected BaseGameForm()
 		{ InitializeComponent(); }
@@ -63,7 +66,7 @@ namespace TicTacToe.Forms.Game
 			this.gameServer = gameServer;
 			_syncContext = SynchronizationContext.Current;
 
-			this.gameServer.PlayerMoveGame += PlayerGameMove;
+			ManageServerEventHandlers(true);
 		}
 		internal BaseGameForm(MainForm mainForm, Player player, GameClient gameClient, RoundManager roundManager,
 			int coinsBet, CellType playerCellType, bool isTimerEnabled, bool isGameAssistsEnabled)
@@ -123,6 +126,8 @@ namespace TicTacToe.Forms.Game
 			_gameFormInfo.Score.Text = $"{roundManager.NumberOfWinsFirstPlayer} : {roundManager.NumberOfWinsSecondPlayer}";
 			_sequenceSelectedCells = new List<PictureBox>(_gameFormInfo.PictureCells.Length);
 			BackColor = player.VisualSettings.BackgroundGame.Color;
+
+			gameServer?.StartGame();
 			if (gameClient != null)
 				StartClientUpdateTimer();
 
@@ -295,14 +300,23 @@ namespace TicTacToe.Forms.Game
 		private async Task NetworkMoveAsync(Cell cell)
 		{
 			MoveInfo moveInfo = new MoveInfo(cell, playerCellType);
+
 			if (gameServer != null)
 				gameServer.Move(moveInfo);
 			else if (gameClient != null)
 			{
-				GameInfo gameInfo = await gameClient.MoveAsync(moveInfo);
-				if (gameInfo != null)
-					await UpdateGameForClientAsync(gameInfo);
-				StartClientUpdateTimer();
+				try
+				{
+					GameInfo gameInfo = await gameClient.MoveAsync(moveInfo);
+					if (gameInfo != null)
+						await UpdateGameForClientAsync(gameInfo);
+					StartClientUpdateTimer();
+				}
+				catch (System.Net.Http.HttpRequestException)
+				{
+					// At this point, the error will already be caught
+					// in the client update timer
+				}
 			}
 		}
 		protected async Task BotMoveAsync()
@@ -466,18 +480,22 @@ namespace TicTacToe.Forms.Game
 			}
 			catch (System.Net.Http.HttpRequestException)
 			{
-				//if (!_wasUpdateExceptionThrown)
-				//{
-				//	_wasUpdateExceptionThrown = true;
-				//	_updateTimer?.Dispose();
-				//	_syncContext.Post(_ =>
-				//	{
-				//		Close();
-				//		CustomMessageBox.Show($"Failed to connect because the player " +
-				//		"who created the lobby has finished waiting for players.", "Error",
-				//		CustomMessageBoxButtons.OK, CustomMessageBoxIcon.Error);
-				//	}, null);
-				//}
+				if (!_wasUpdateExceptionThrown)
+				{
+					_wasUpdateExceptionThrown = true;
+					_clientUpdateTimer?.Dispose();
+
+					_syncContext.Post(_ =>
+					{
+						player.ReturnCoins();
+						player.UpdateCoins(coinReward, GameResult.Win);
+						_wasPressedButtonBack = true;
+						_gameResultForm?.Close();
+						Close();
+						CustomMessageBox.Show($"Your opponent left the game, so the victory is yours.",
+							"Game information", CustomMessageBoxButtons.OK, CustomMessageBoxIcon.Information);
+					}, null);
+				}
 			}
 		}
 		private async Task UpdateGameForClientAsync(GameInfo gameInfo)
@@ -527,6 +545,20 @@ namespace TicTacToe.Forms.Game
 		#endregion
 
 		#region Server
+		private void ManageServerEventHandlers(bool subscribe)
+		{
+			if (subscribe)
+			{
+				gameServer.PlayerMoveGame += PlayerGameMove;
+				gameServer.PlayerLeftGame += PlayerLeftGame;
+			}
+			else
+			{
+				gameServer.PlayerMoveGame -= PlayerGameMove;
+				gameServer.PlayerLeftGame -= PlayerLeftGame;
+			}
+		}
+
 		private void PlayerGameMove(object sender, MoveGameEventArgs e)
 		{
 			if (_gameFormInfo == null)
@@ -550,6 +582,22 @@ namespace TicTacToe.Forms.Game
 				SetPictureBoxesEnabled(gameServer.WhoseMove() == playerCellType);
 			}, null);
 		}
+		private void PlayerLeftGame(object sender, NetworkPlayerEventArgs e)
+		{
+			if (_gameFormInfo == null)
+				return;
+
+			_syncContext.Post(_ =>
+			{
+				player.ReturnCoins();
+				player.UpdateCoins(coinReward, GameResult.Win);
+				_wasPressedButtonBack = true;
+				_gameResultForm?.Close();
+				Close();
+				CustomMessageBox.Show($"{e.Player.Name} left the game, so the victory is yours.", "Game information",
+					CustomMessageBoxButtons.OK, CustomMessageBoxIcon.Information);
+			}, null);
+		}
 		#endregion
 
 		#endregion
@@ -557,6 +605,9 @@ namespace TicTacToe.Forms.Game
 		#region End of the game
 		private async Task FinishGameAsync()
 		{
+			if (_gameResultForm != null)
+				return;
+
 			player.ReturnCoins();
 			_clientUpdateTimer?.Dispose();
 			_isGameOver = true;
@@ -572,10 +623,7 @@ namespace TicTacToe.Forms.Game
 
 			_isFormClosingForNextRound = true;
 			if (roundManager.IsLastRound() || _wasPressedButtonBack)
-			{
 				mainForm.Show();
-				gameServer?.Stop();
-			}
 			else
 			{
 				roundManager.AddRound();
@@ -606,6 +654,9 @@ namespace TicTacToe.Forms.Game
 		}
 		private void OpenResultForm(GameResult gameResult)
 		{
+			if (_gameResultForm != null)
+				return;
+
 			void backToMainForm(object s, EventArgs e)
 			{
 				_wasPressedButtonBack = true;
@@ -613,15 +664,14 @@ namespace TicTacToe.Forms.Game
 				Close();
 			}
 
-			GameResultForm resultForm;
 			if (bot != null)
-				resultForm = new GameResultForm(player, coinReward, roundManager, gameResult, bot.Difficulty, backToMainForm);
+				_gameResultForm = new GameResultForm(player, coinReward, roundManager, gameResult, bot.Difficulty, backToMainForm);
 			else if (gameClient != null || gameServer != null)
-				resultForm = new GameResultForm(player, coinReward, roundManager, gameResult, backToMainForm, ActionAfterTimeOver.Play, 15);
+				_gameResultForm = new GameResultForm(player, coinReward, roundManager, gameResult, backToMainForm, ActionAfterTimeOver.Play, 15);
 			else
-				resultForm = new GameResultForm(player, coinReward, roundManager, gameResult, backToMainForm);
+				_gameResultForm = new GameResultForm(player, coinReward, roundManager, gameResult, backToMainForm);
 
-			resultForm.ShowDialog();
+			_gameResultForm.ShowDialog();
 		}
 
 		private async Task ShowWinningCellsAsync(CellType winner)
@@ -956,12 +1006,15 @@ namespace TicTacToe.Forms.Game
 			_pictureBoxEventHandlers.UnsubscribeAll();
 
 			if (gameServer != null)
-				gameServer.PlayerMoveGame -= PlayerGameMove;
+				ManageServerEventHandlers(false);
 
 			if (!_isFormClosingForNextRound)
 			{
-				gameClient?.LeaveGameAsync();
+				if (!roundManager.IsLastRound())
+					gameClient?.LeaveGameAsync();
+
 				gameServer?.Stop();
+				_gameResultForm?.Close();
 				mainForm.Show();
 			}
 		}

@@ -54,7 +54,6 @@ namespace TicTacToe.Forms.Game.Games3on3
 			InitializeBaseGame(PictureCell_Click, nextGameForm);
 			ManagePictureCellsEventHover(PictureCell_MouseEnter, PictureCell_MouseLeave, true);
 
-
 			SetPlayerNamesSize(labelPlayerName, labelOpponentName);
 
 			if (playerCellType == CellType.Cross)

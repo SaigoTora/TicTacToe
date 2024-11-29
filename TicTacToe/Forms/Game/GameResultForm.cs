@@ -221,6 +221,9 @@ namespace TicTacToe.Forms
 				}
 			}
 		}
+		private void ButtonBack_Click(object sender, EventArgs e)
+			=> Close();
+
 		private void ResultForm_FormClosed(object sender, FormClosedEventArgs e)
 		{
 			_cancellationTokenSource.Cancel();

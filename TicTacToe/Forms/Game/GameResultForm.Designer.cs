@@ -161,6 +161,7 @@
 			this.buttonBack.TabIndex = 8;
 			this.buttonBack.TabStop = false;
 			this.buttonBack.Text = "Back";
+			this.buttonBack.Click += new System.EventHandler(this.ButtonBack_Click);
 			// 
 			// buttonPlay
 			// 

@@ -232,7 +232,7 @@ namespace TicTacToe.Forms.Game.NetworkGame
 		{
 			_syncContext.Post(_ =>
 			{
-				if (!string.IsNullOrEmpty(e.IPAddress))
+				if (!string.IsNullOrEmpty(e.IPAddress) && _ipToGamePanels.ContainsKey(e.IPAddress))
 					NetworkPlayerCreator.ChangePlayerPanel(_ipToGamePanels[e.IPAddress], e.Player);
 			}, null);
 		}
@@ -263,7 +263,6 @@ namespace TicTacToe.Forms.Game.NetworkGame
 			}
 
 			_isGameStarted = true;
-			_gameServer.StartGame();
 			NetworkGameSettings settings = _player.NetworkGameSettings;
 			RoundManager roundManager = new RoundManager(settings.NumberOfRounds);
 			NetworkPlayer opponent = _gameServer.GetOpponents()[0];

@@ -89,10 +89,10 @@ namespace TicTacToe.Models.GameClientServer.Core
 		}
 		internal async Task LeaveGameAsync()
 		{
-			//if (string.IsNullOrEmpty(_serverAddress))
-			//	throw new InvalidOperationException("No server address is set. Cannot leave game.");
+			if (string.IsNullOrEmpty(_serverAddress))
+				throw new InvalidOperationException("No server address is set. Cannot leave game.");
 
-			//await httpClient.DeleteAsync($"http://{_serverAddress}{_gameUrl}");
+			await httpClient.DeleteAsync($"http://{_serverAddress}{_gameUrl}");
 		}
 		#endregion
 	}

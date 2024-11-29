@@ -24,6 +24,7 @@ namespace TicTacToe.Models.GameClientServer.Core
 		internal EventHandler<NetworkPlayerEventArgs> PlayerStatusChanged;
 		internal EventHandler<NetworkPlayerEventArgs> PlayerLeftLobby;
 		internal EventHandler<MoveGameEventArgs> PlayerMoveGame;
+		internal EventHandler<NetworkPlayerEventArgs> PlayerLeftGame;
 
 		private readonly HttpListener _httpListener;
 		private readonly int _port;
@@ -31,6 +32,7 @@ namespace TicTacToe.Models.GameClientServer.Core
 		private readonly Player _player;
 		private readonly NetworkLobbyInfo _networkLobbyInfo;
 		private Game.GameInfo _gameInfo;
+		private bool _readyToGetMoveInfo = false;
 
 		internal GameServer(Player player, int port)
 		{
@@ -50,11 +52,7 @@ namespace TicTacToe.Models.GameClientServer.Core
 
 			Task.Run(() => HandleRequests());
 		}
-		internal void StartGame()
-		{
-			_gameInfo = new Game.GameInfo(_networkLobbyInfo.Settings.FieldSize);
-			_networkLobbyInfo.StartGame();
-		}
+
 		internal List<NetworkPlayer> GetOpponents()
 			=> _networkLobbyInfo.Players;
 		internal int GetMaxPlayerCount()
@@ -90,7 +88,7 @@ namespace TicTacToe.Models.GameClientServer.Core
 			if (context.Request.RawUrl.Contains(ConfigurationManager.AppSettings["gameLobbyUrl"]))
 				await HandleLobbyRequest(context, clientIPAddress);
 			else if (context.Request.RawUrl.Contains(ConfigurationManager.AppSettings["gameUrl"]))
-				await HandleGameRequest(context);
+				await HandleGameRequest(context, clientIPAddress);
 
 			context.Response.Close();
 		}
@@ -125,8 +123,13 @@ namespace TicTacToe.Models.GameClientServer.Core
 
 			if (context.Request.HttpMethod == HttpMethod.Delete.Method)
 			{
-				OnPlayerLeftLobby(new NetworkPlayerEventArgs(null, clientIPAddress));
-				_networkLobbyInfo.RemovePlayer(clientIPAddress);
+				NetworkPlayer playerWhoLeftLobby = _networkLobbyInfo.GetPlayerOrNull(clientIPAddress);
+
+				if (playerWhoLeftLobby != null)
+				{
+					OnPlayerLeftLobby(new NetworkPlayerEventArgs(null, clientIPAddress));
+					_networkLobbyInfo.RemovePlayer(clientIPAddress);
+				}
 			}
 			else
 			{
@@ -175,6 +178,12 @@ namespace TicTacToe.Models.GameClientServer.Core
 		#endregion
 
 		#region Game
+		internal void StartGame()
+		{
+			_gameInfo = new Game.GameInfo(_networkLobbyInfo.Settings.FieldSize);
+			_networkLobbyInfo.StartGame();
+			_readyToGetMoveInfo = true;
+		}
 		internal void Move(MoveInfo info)
 		{
 			if (info.IsMoveCancelled)
@@ -189,9 +198,13 @@ namespace TicTacToe.Models.GameClientServer.Core
 		}
 		internal CellType WhoseMove() => _gameInfo.WhoseMove;
 		internal void FinishGame()
-			=> _gameInfo.ClearField();
+		{
+			_readyToGetMoveInfo = false;
+			_gameInfo.ClearField();
+		}
 
-		private async Task HandleGameRequest(HttpListenerContext context)
+		private async Task HandleGameRequest(HttpListenerContext context,
+			string clientIPAddress)
 		{
 			MoveInfo moveInfo = null;
 
@@ -201,15 +214,29 @@ namespace TicTacToe.Models.GameClientServer.Core
 				{
 					string jsonData = await reader.ReadToEndAsync();
 					moveInfo = JsonConvert.DeserializeObject<MoveInfo>(jsonData);
+					while (!_readyToGetMoveInfo)
+						await Task.Delay(100);
 					Move(moveInfo);
 				}
 			}
 
-			string response = JsonConvert.SerializeObject(_gameInfo, Formatting.Indented);
-			await SendResponseToClient(context, response);
+			if (context.Request.HttpMethod == HttpMethod.Delete.Method)
+			{
+				NetworkPlayer playerWhoLeftGame = _networkLobbyInfo.GetPlayerOrNull(clientIPAddress);
+				if (playerWhoLeftGame != null)
+				{
+					OnPlayerLeftGame(new NetworkPlayerEventArgs(playerWhoLeftGame, clientIPAddress));
+					_networkLobbyInfo.RemovePlayer(clientIPAddress);
+				}
+			}
+			else
+			{
+				string response = JsonConvert.SerializeObject(_gameInfo, Formatting.Indented);
+				await SendResponseToClient(context, response);
 
-			if (moveInfo != null)
-				OnPlayerMoveGame(new MoveGameEventArgs(moveInfo));
+				if (moveInfo != null)
+					OnPlayerMoveGame(new MoveGameEventArgs(moveInfo));
+			}
 		}
 
 
@@ -218,13 +245,17 @@ namespace TicTacToe.Models.GameClientServer.Core
 			var temp = System.Threading.Volatile.Read(ref PlayerMoveGame);
 			temp?.Invoke(this, e);
 		}
+		private void OnPlayerLeftGame(NetworkPlayerEventArgs e)
+		{
+			var temp = System.Threading.Volatile.Read(ref PlayerLeftGame);
+			temp?.Invoke(this, e);
+		}
 		#endregion
 
 		internal void Stop()
 		{
 			if (_httpListener.IsListening)
 			{
-				TicTacToe.Forms.CustomMessageBox.Show("Server is stopped!");
 				_httpListener.Stop();
 				_httpListener.Close();
 				_firewallManager.RemoveFirewallRule();

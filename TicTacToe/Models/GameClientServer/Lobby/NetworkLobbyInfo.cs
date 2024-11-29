@@ -40,6 +40,8 @@ namespace TicTacToe.Models.GameClientServer.Lobby
 
 			return player;
 		}
+		internal NetworkPlayer GetPlayerOrNull(string ipAddress)
+			=> _ipToPlayers?.FirstOrDefault((item) => item.Key == ipAddress).Value;
 		internal void RemovePlayer(string ipAddress)
 		{
 			_players.Remove(_ipToPlayers[ipAddress]);

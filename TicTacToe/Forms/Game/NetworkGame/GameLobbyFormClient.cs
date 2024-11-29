@@ -192,28 +192,25 @@ namespace TicTacToe.Forms.Game.NetworkGame
 			=> await UpdateLobbyForClientAsync();
 		private async Task UpdateLobbyForClientAsync()
 		{
-			if (WindowState != FormWindowState.Minimized)
+			try
 			{
-				try
+				NetworkLobbyInfo lobbyInfo = await _gameClient.UpdateGameLobbyAsync(_playerStatus);
+				if (lobbyInfo != null)
+					SetClientForm(lobbyInfo);
+			}
+			catch (System.Net.Http.HttpRequestException)
+			{
+				if (!_wasUpdateExceptionThrown)
 				{
-					NetworkLobbyInfo lobbyInfo = await _gameClient.UpdateGameLobbyAsync(_playerStatus);
-					if (lobbyInfo != null)
-						SetClientForm(lobbyInfo);
-				}
-				catch (System.Net.Http.HttpRequestException)
-				{
-					if (!_wasUpdateExceptionThrown)
+					_wasUpdateExceptionThrown = true;
+					_updateTimer?.Dispose();
+					_syncContext.Post(_ =>
 					{
-						_wasUpdateExceptionThrown = true;
-						_updateTimer?.Dispose();
-						_syncContext.Post(_ =>
-						{
-							Close();
-							CustomMessageBox.Show($"Failed to connect because the player " +
-							"who created the lobby has finished waiting for players.", "Error",
-							CustomMessageBoxButtons.OK, CustomMessageBoxIcon.Error);
-						}, null);
-					}
+						Close();
+						CustomMessageBox.Show($"Failed to connect because the player " +
+						"who created the lobby has finished waiting for players.", "Error",
+						CustomMessageBoxButtons.OK, CustomMessageBoxIcon.Error);
+					}, null);
 				}
 			}
 		}
