@@ -19,11 +19,7 @@ namespace TicTacToe.Forms.Game.Games3on3
 		{
 			InitializeComponent();
 
-			customTitleBar = new CustomTitleBar(this, $"Round {roundManager.CurrentNumberOfRounds} / " +
-				$"{roundManager.MaxNumberOfRounds}",
-				maximizeBox: false, canFormBeClosed: false);
-			pictureBoxOpponentAvatar.Image = opponentAvatar;
-			labelOpponentName.Text = opponentName;
+			DefaultInitialize(opponentAvatar, opponentName);
 		}
 		internal Game3on3NetworkForm(MainForm mainForm, Player player, GameClient gameClient, RoundManager roundManager,
 			int coinsBet, CellType playerCellType, bool isTimerEnabled, bool isGameAssistsEnabled,
@@ -32,7 +28,11 @@ namespace TicTacToe.Forms.Game.Games3on3
 		{
 			InitializeComponent();
 
-			customTitleBar = new CustomTitleBar(this, $"Round {roundManager.CurrentNumberOfRounds} /" +
+			DefaultInitialize(opponentAvatar, opponentName);
+		}
+		private void DefaultInitialize(Image opponentAvatar, string opponentName)
+		{
+			customTitleBar = new CustomTitleBar(this, $"Round {roundManager.CurrentNumberOfRounds} / " +
 				$"{roundManager.MaxNumberOfRounds}",
 				maximizeBox: false, canFormBeClosed: false);
 			pictureBoxOpponentAvatar.Image = opponentAvatar;

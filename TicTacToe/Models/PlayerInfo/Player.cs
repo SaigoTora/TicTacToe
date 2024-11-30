@@ -27,13 +27,12 @@ namespace TicTacToe.Models.PlayerInfo
 		internal ItemsInventory ItemsInventory { get; private set; }
 		internal CountableItemsInventory CountableItemsInventory { get; private set; }
 
-		private int deductedCoins;
+		[NonSerialized]
+		private int _deductedCoins;
 
 		internal Player(string name)
 			: this()
-		{
-			Name = name;
-		}
+			=> Name = name;
 		internal Player()
 		{
 			VisualSettings = new PlayerVisualSettings();
@@ -99,29 +98,43 @@ namespace TicTacToe.Models.PlayerInfo
 		/// <exception cref="NotEnoughCoinsToStartGameException">If the user doesn't have enough coins, an exception will be thrown.</exception>
 		internal void DeductCoins(Difficulty botDifficulty)
 		{
-			if (deductedCoins > 0)
+			if (_deductedCoins > 0)
 				throw new InvalidOperationException("Coins have already been deducted. You cannot deduct them again!");
 
-			deductedCoins = CoinsCalculator.GetRequiredCoins(botDifficulty);
+			_deductedCoins = CoinsCalculator.GetRequiredCoins(botDifficulty);
 
-			if (Coins - deductedCoins < 0)
+			if (Coins - _deductedCoins < 0)
 			{
 				if (botDifficulty == Difficulty.Easy)
 				{// if there are not enough coins for easy difficulty, then subtract all the coins
-					deductedCoins = Coins;
+					_deductedCoins = Coins;
 					Coins = 0;
 				}
 				else
-					throw new NotEnoughCoinsToStartGameException(deductedCoins, botDifficulty);
+					throw new NotEnoughCoinsToStartGameException(_deductedCoins, botDifficulty);
 			}
 			else
-				Coins -= deductedCoins;
+				Coins -= _deductedCoins;
+		}
+		internal void DeductCoins(int coins)
+		{
+			if (_deductedCoins > 0)
+				throw new InvalidOperationException("Coins have already been deducted. You cannot deduct them again!");
+
+			_deductedCoins = coins;
+
+			if (Coins - _deductedCoins < 0)
+				throw new NotEnoughCoinsToStartGameException(_deductedCoins);
+			else
+				Coins -= _deductedCoins;
 		}
 		internal void ReturnCoins()
 		{
-			Coins += deductedCoins;
-			deductedCoins = 0;
+			Coins += _deductedCoins;
+			ResetReductedCoins();
 		}
+		internal void ResetReductedCoins()
+			=> _deductedCoins = 0;
 
 		private void AddItemToInventory(Item item)
 		{

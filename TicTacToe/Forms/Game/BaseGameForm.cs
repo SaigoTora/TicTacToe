@@ -130,6 +130,8 @@ namespace TicTacToe.Forms.Game
 			gameServer?.StartGame();
 			if (gameClient != null)
 				StartClientUpdateTimer();
+			if ((gameServer != null || gameClient != null) && roundManager.IsFirstRound())
+				TryToDeductCoinsWithCoinReward();
 
 			InitializePlayersInfo(_gameFormInfo.PlayersInfo);
 			InitializeGameAssists(_gameFormInfo.GameAssistsInfo);
@@ -201,6 +203,20 @@ namespace TicTacToe.Forms.Game
 			try
 			{
 				player.DeductCoins(botDifficulty);
+			}
+			catch (NotEnoughCoinsToStartGameException exception)
+			{
+				CustomMessageBox.Show(exception.Message, "Not enough coins", CustomMessageBoxButtons.OK, CustomMessageBoxIcon.Error);
+				Close();
+			}
+			catch (InvalidOperationException)
+			{ }// If an attempt is made to deduct coins again.
+		}
+		protected void TryToDeductCoinsWithCoinReward()
+		{
+			try
+			{
+				player.DeductCoins(Math.Abs(coinReward.CoinsForLoss));
 			}
 			catch (NotEnoughCoinsToStartGameException exception)
 			{
@@ -492,8 +508,9 @@ namespace TicTacToe.Forms.Game
 						_wasPressedButtonBack = true;
 						_gameResultForm?.Close();
 						Close();
-						CustomMessageBox.Show($"Your opponent left the game, so the victory is yours.",
-							"Game information", CustomMessageBoxButtons.OK, CustomMessageBoxIcon.Information);
+						CustomMessageBox.Show($"Your opponent left the game, so the victory is yours. " +
+							$"You won {coinReward.CoinsForWin} coins!", "Game information",
+							CustomMessageBoxButtons.OK, CustomMessageBoxIcon.Information);
 					}, null);
 				}
 			}
@@ -594,7 +611,8 @@ namespace TicTacToe.Forms.Game
 				_wasPressedButtonBack = true;
 				_gameResultForm?.Close();
 				Close();
-				CustomMessageBox.Show($"{e.Player.Name} left the game, so the victory is yours.", "Game information",
+				CustomMessageBox.Show($"{e.Player.Name} left the game, so the victory is yours. " +
+					$"You won {coinReward.CoinsForWin} coins!", "Game information",
 					CustomMessageBoxButtons.OK, CustomMessageBoxIcon.Information);
 			}, null);
 		}
@@ -608,7 +626,6 @@ namespace TicTacToe.Forms.Game
 			if (_gameResultForm != null)
 				return;
 
-			player.ReturnCoins();
 			_clientUpdateTimer?.Dispose();
 			_isGameOver = true;
 			SetPictureBoxesEnabled(false);
@@ -618,7 +635,17 @@ namespace TicTacToe.Forms.Game
 			gameServer?.FinishGame();
 
 			GameResult gameResult = EvaluateGameResult();
-			player.UpdateCoins(coinReward, gameResult);
+			if ((gameServer != null || gameClient != null) && roundManager.IsLastRound())
+			{
+				player.ReturnCoins();
+				gameResult = UpdateCoinsForNetworkGame();
+			}
+			else if (gameServer == null && gameClient == null)
+			{
+				player.ReturnCoins();
+				player.UpdateCoins(coinReward, gameResult);
+			}
+
 			OpenResultForm(gameResult);
 
 			_isFormClosingForNextRound = true;
@@ -652,8 +679,25 @@ namespace TicTacToe.Forms.Game
 
 			return gameResult;
 		}
+		private GameResult UpdateCoinsForNetworkGame()
+		{
+			GameResult gameResult = GameResult.Draw;
+			if (roundManager.NumberOfWinsFirstPlayer > roundManager.NumberOfWinsSecondPlayer)
+				gameResult = GameResult.Win;
+			else if (roundManager.NumberOfWinsFirstPlayer < roundManager.NumberOfWinsSecondPlayer)
+				gameResult = GameResult.Loss;
+
+			CoinReward networkCoinReward = coinReward;
+			if (roundManager.HasEqualNumberOfWins())
+				networkCoinReward = new CoinReward(coinReward.CoinsForWin, roundManager.CurrentNumberOfRounds / 5, coinReward.CoinsForLoss);
+
+			player.UpdateCoins(networkCoinReward, gameResult);
+			return gameResult;
+		}
 		private void OpenResultForm(GameResult gameResult)
 		{
+			const int RESULT_FORM_CLOSE_DELAY_SECONDS = 15;
+
 			if (_gameResultForm != null)
 				return;
 
@@ -662,12 +706,28 @@ namespace TicTacToe.Forms.Game
 				_wasPressedButtonBack = true;
 				_isFormClosingForNextRound = false;
 				Close();
+
+				if (((gameServer != null || gameClient != null) && !roundManager.IsLastRound()))
+				{
+					_gameResultForm?.Hide();
+					_gameResultForm?.Close();
+					CustomMessageBox.Show("You have left the game and lost your initial bet: 20 coins!" +
+						"\nTry not to leave during local games because you will lose coins.", "Warning",
+						CustomMessageBoxButtons.OK, CustomMessageBoxIcon.Warning);
+				}
 			}
 
 			if (bot != null)
 				_gameResultForm = new GameResultForm(player, coinReward, roundManager, gameResult, bot.Difficulty, backToMainForm);
 			else if (gameClient != null || gameServer != null)
-				_gameResultForm = new GameResultForm(player, coinReward, roundManager, gameResult, backToMainForm, ActionAfterTimeOver.Play, 15);
+			{
+				CoinReward RealCoinReward = roundManager.IsLastRound() ? coinReward : new CoinReward();
+				int closeDelay = roundManager.IsLastRound() ?
+					RESULT_FORM_CLOSE_DELAY_SECONDS * 2 : RESULT_FORM_CLOSE_DELAY_SECONDS;
+
+				_gameResultForm = new GameResultForm(player, RealCoinReward, roundManager, gameResult,
+					backToMainForm, ActionAfterTimeOver.Play, (byte)closeDelay);
+			}
 			else
 				_gameResultForm = new GameResultForm(player, coinReward, roundManager, gameResult, backToMainForm);
 
@@ -1010,6 +1070,7 @@ namespace TicTacToe.Forms.Game
 
 			if (!_isFormClosingForNextRound)
 			{
+				player.ResetReductedCoins();
 				if (!roundManager.IsLastRound())
 					gameClient?.LeaveGameAsync();
 

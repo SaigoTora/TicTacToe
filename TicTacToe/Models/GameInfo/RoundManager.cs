@@ -13,7 +13,10 @@
 			CurrentNumberOfRounds = 1;
 		}
 
+		internal bool IsFirstRound() => CurrentNumberOfRounds <= 1;
 		internal bool IsLastRound() => CurrentNumberOfRounds >= MaxNumberOfRounds;
+		internal bool HasEqualNumberOfWins()
+			=> NumberOfWinsFirstPlayer == NumberOfWinsSecondPlayer;
 		internal void AddRound() => CurrentNumberOfRounds++;
 		internal void AddWinToTheFirstPlayer() => NumberOfWinsFirstPlayer++;
 		internal void AddWinToTheSecondPlayer() => NumberOfWinsSecondPlayer++;

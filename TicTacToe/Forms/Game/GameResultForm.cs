@@ -146,22 +146,15 @@ namespace TicTacToe.Forms
 			if (coinUpdate != 0)
 			{
 				labelCoinsResult.Visible = true;
-				switch (_result)
+				if (coinUpdate < 0)
 				{
-					case GameResult.Loss:
-						labelCoinsResult.Text = $"- {Math.Abs(coinUpdate)}";
-						labelCoinsResult.ForeColor = colorLoss;
-						break;
-					case GameResult.Draw:
-						labelCoinsResult.Text = string.Empty;
-						break;
-					case GameResult.Win:
-						labelCoinsResult.Text = $"+ {coinUpdate}";
-						labelCoinsResult.ForeColor = colorWin;
-						break;
-					default:
-						throw new InvalidOperationException
-							($"Unknown game result: {_result.GetType().Name}");
+					labelCoinsResult.Text = $"- {Math.Abs(coinUpdate)}";
+					labelCoinsResult.ForeColor = colorLoss;
+				}
+				else
+				{
+					labelCoinsResult.Text = $"+ {coinUpdate}";
+					labelCoinsResult.ForeColor = colorWin;
 				}
 			}
 		}
