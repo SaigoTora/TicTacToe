@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using TicTacToe.Forms.Game.Games3on3;
+using TicTacToe.Forms.Game.Games5on5;
+using TicTacToe.Forms.Game.Games7on7;
 using TicTacToe.Models.GameClientServer.Core;
 using TicTacToe.Models.GameClientServer.Lobby;
 using TicTacToe.Models.GameInfo;
@@ -69,14 +71,7 @@ namespace TicTacToe.Forms.Game.NetworkGame
 				{
 					_isGameStarted = true;
 					_updateTimer.Dispose();
-					RoundManager roundManager = new RoundManager(lobbyInfo.Settings.NumberOfRounds);
-					Game3on3NetworkForm gameForm = new Game3on3NetworkForm(_mainForm, _player, _gameClient,
-						roundManager, lobbyInfo.Settings.CoinsBet, CellType.Zero,
-						lobbyInfo.Settings.IsTimerEnabled, lobbyInfo.Settings.IsGameAssistsEnabled,
-						lobbyInfo.Settings.OpponentAvatar.Image, lobbyInfo.Settings.OpponentName);
-
-					Close();
-					gameForm.Show();
+					ShowGameForm(lobbyInfo);
 
 					return;
 				}
@@ -88,6 +83,45 @@ namespace TicTacToe.Forms.Game.NetworkGame
 					lobbyInfo.Settings.IsGameAssistsEnabled);
 				DisplayPlayers(lobbyInfo);
 			}, null);
+		}
+		private void ShowGameForm(NetworkLobbyInfo lobbyInfo)
+		{
+			BaseGameForm gameForm;
+			RoundManager roundManager = new RoundManager(lobbyInfo.Settings.NumberOfRounds);
+
+			switch (lobbyInfo.Settings.FieldSize)
+			{
+				case FieldSize.Size3on3:
+					{
+						gameForm = new Game3on3NetworkForm(_mainForm, _player, _gameClient,
+							roundManager, lobbyInfo.Settings.CoinsBet, CellType.Zero,
+							lobbyInfo.Settings.IsTimerEnabled, lobbyInfo.Settings.IsGameAssistsEnabled,
+							lobbyInfo.Settings.OpponentAvatar.Image, lobbyInfo.Settings.OpponentName);
+						break;
+					}
+				case FieldSize.Size5on5:
+					{
+						gameForm = new Game5on5NetworkForm(_mainForm, _player, _gameClient,
+							roundManager, lobbyInfo.Settings.CoinsBet, CellType.Zero,
+							lobbyInfo.Settings.IsTimerEnabled, lobbyInfo.Settings.IsGameAssistsEnabled,
+							lobbyInfo.Settings.OpponentAvatar.Image, lobbyInfo.Settings.OpponentName);
+						break;
+					}
+				case FieldSize.Size7on7:
+					{
+						gameForm = new Game7on7NetworkForm(_mainForm, _player, _gameClient,
+							roundManager, lobbyInfo.Settings.CoinsBet, CellType.Zero,
+							lobbyInfo.Settings.IsTimerEnabled, lobbyInfo.Settings.IsGameAssistsEnabled,
+							lobbyInfo.Settings.OpponentAvatar.Image, lobbyInfo.Settings.OpponentName);
+						break;
+					}
+				default:
+					throw new InvalidOperationException
+						($"Unknown field size: {_player.SinglePCGameSettings.FieldSize}");
+			}
+
+			Close();
+			gameForm.Show();
 		}
 		private void DisplayClientFieldSize(FieldSize fieldSize)
 		{

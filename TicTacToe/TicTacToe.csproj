@@ -110,6 +110,18 @@
     <Compile Include="Forms\Game\Games3on3\Game3on3NetworkForm.Designer.cs">
       <DependentUpon>Game3on3NetworkForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Game\Games5on5\Game5on5NetworkForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Game\Games5on5\Game5on5NetworkForm.Designer.cs">
+      <DependentUpon>Game5on5NetworkForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Game\Games7on7\Game7on7NetworkForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Game\Games7on7\Game7on7NetworkForm.Designer.cs">
+      <DependentUpon>Game7on7NetworkForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Game\NetworkGame\GameLobbyFormClient.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -303,6 +315,12 @@
     <EmbeddedResource Include="Forms\Game\Games3on3\Game3on3NetworkForm.resx">
       <DependentUpon>Game3on3NetworkForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Game\Games5on5\Game5on5NetworkForm.resx">
+      <DependentUpon>Game5on5NetworkForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Game\Games7on7\Game7on7NetworkForm.resx">
+      <DependentUpon>Game7on7NetworkForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Game\NetworkGame\GameLobbyFormClient.resx">
       <DependentUpon>GameLobbyFormClient.cs</DependentUpon>
     </EmbeddedResource>
@@ -378,6 +396,7 @@
       <DependentUpon>ShopForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <None Include="Forms\Game\GamesDiagram.cd" />
     <None Include="Forms\ItemManagement\ItemManagementFormsDiagram.cd" />
     <None Include="Models\GameInfo\Settings\SettingsDiagram.cd" />
     <None Include="Models\PlayerItemCreator\ItemCreatorsDiagram.cd" />

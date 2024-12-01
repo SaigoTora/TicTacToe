@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
-
+using TicTacToe.Models.GameClientServer.Core;
 using TicTacToe.Models.GameInfo;
 using TicTacToe.Models.GameInfo.Settings;
 using TicTacToe.Models.PlayerInfo;
@@ -23,6 +23,22 @@ namespace TicTacToe.Forms.Game.Games7on7
 		internal BaseGame7on7Form(MainForm mainForm, Player player, CoinReward coinReward, RoundManager roundManager,
 			CellType playerCellType, bool isTimerEnabled, bool isGameAssistsEnabled)
 			: base(mainForm, player, coinReward, roundManager, playerCellType, isTimerEnabled, isGameAssistsEnabled)
+		{
+			InitializeComponent();
+
+			field = FieldParser.Parse(FieldSize.Size7on7);
+		}
+		internal BaseGame7on7Form(MainForm mainForm, Player player, GameServer gameServer, RoundManager roundManager,
+			int coinsBet, CellType playerCellType, bool isTimerEnabled, bool isGameAssistsEnabled)
+			: base(mainForm, player, gameServer, roundManager, coinsBet, playerCellType, isTimerEnabled, isGameAssistsEnabled)
+		{
+			InitializeComponent();
+
+			field = FieldParser.Parse(FieldSize.Size7on7);
+		}
+		internal BaseGame7on7Form(MainForm mainForm, Player player, GameClient gameClient, RoundManager roundManager,
+			int coinsBet, CellType playerCellType, bool isTimerEnabled, bool isGameAssistsEnabled)
+			: base(mainForm, player, gameClient, roundManager, coinsBet, playerCellType, isTimerEnabled, isGameAssistsEnabled)
 		{
 			InitializeComponent();
 

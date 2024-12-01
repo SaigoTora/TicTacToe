@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="TicTacToe.Forms.Game.Games3on3.BaseGame3on3Form" Collapsed="true">
+    <Position X="2.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQQAECJAEQAAAgCQAABKABCAAABAAAAIAAAAQAA=</HashCode>
+      <FileName>Forms\Game\Games3on3\BaseGame3on3Form.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TicTacToe.Forms.Game.Games3on3.Game3on3BotForm" Collapsed="true">
+    <Position X="0.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAACAAgAChAAAAAAAAACAAAgAAAA=</HashCode>
+      <FileName>Forms\Game\Games3on3\Game3on3BotForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TicTacToe.Forms.Game.Games3on3.Game3on3NetworkForm" Collapsed="true">
+    <Position X="2.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAACAAgACBABAACAAEAAAAAgAAAA=</HashCode>
+      <FileName>Forms\Game\Games3on3\Game3on3NetworkForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TicTacToe.Forms.Game.Games3on3.Game3on3SinglePCForm" Collapsed="true">
+    <Position X="5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAECAgAAAAAACAAgACBAAAAAAAAAAAAAgAABA=</HashCode>
+      <FileName>Forms\Game\Games3on3\Game3on3SinglePCForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TicTacToe.Forms.Game.Games5on5.BaseGame5on5Form" Collapsed="true">
+    <Position X="8.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAECJAEQAAAgD4HwBKABCAAABAAAAIAAAAQAA=</HashCode>
+      <FileName>Forms\Game\Games5on5\BaseGame5on5Form.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TicTacToe.Forms.Game.Games5on5.Game5on5NetworkForm" Collapsed="true">
+    <Position X="7.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAACAEgACBAQAACAAAAAAAAgAAAA=</HashCode>
+      <FileName>Forms\Game\Games5on5\Game5on5NetworkForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TicTacToe.Forms.Game.Games5on5.Game5on5SinglePCForm" Collapsed="true">
+    <Position X="9.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAADAgAAAAAACAAgASBAAAAAAAAAAAAAgAAAA=</HashCode>
+      <FileName>Forms\Game\Games5on5\Game5on5SinglePCForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TicTacToe.Forms.Game.Games7on7.BaseGame7on7Form" Collapsed="true">
+    <Position X="13" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAECJAEQAAWgD4HwBKABCAAABAAAAIAAAAQAA=</HashCode>
+      <FileName>Forms\Game\Games7on7\BaseGame7on7Form.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TicTacToe.Forms.Game.Games7on7.Game7on7NetworkForm" Collapsed="true">
+    <Position X="11.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAACAAAAAAAACAAgACBAAAACAQAAAAAAgAAAA=</HashCode>
+      <FileName>Forms\Game\Games7on7\Game7on7NetworkForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TicTacToe.Forms.Game.Games7on7.Game7on7SinglePCForm" Collapsed="true">
+    <Position X="14" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAgEAAAAACAAhACBAAAAAAAAAAAAAgAAAA=</HashCode>
+      <FileName>Forms\Game\Games7on7\Game7on7SinglePCForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TicTacToe.Forms.Game.BaseGameForm" Collapsed="true">
+    <Position X="7.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEOA0NQAAPIKAC8Z0ty6khPCgQEMRgghEp8RDEECKQI=</HashCode>
+      <FileName>Forms\Game\BaseGameForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

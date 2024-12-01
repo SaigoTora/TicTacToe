@@ -8,6 +8,8 @@ using System.Threading;
 using System.Windows.Forms;
 
 using TicTacToe.Forms.Game.Games3on3;
+using TicTacToe.Forms.Game.Games5on5;
+using TicTacToe.Forms.Game.Games7on7;
 using TicTacToe.Models.GameClientServer.Core;
 using TicTacToe.Models.GameClientServer.Lobby;
 using TicTacToe.Models.GameInfo;
@@ -264,17 +266,47 @@ namespace TicTacToe.Forms.Game.NetworkGame
 
 			_isGameStarted = true;
 			NetworkGameSettings settings = _player.NetworkGameSettings;
-			RoundManager roundManager = new RoundManager(settings.NumberOfRounds);
-			NetworkPlayer opponent = _gameServer.GetOpponents()[0];
-			Game3on3NetworkForm gameForm = new Game3on3NetworkForm(_mainForm, _player, _gameServer,
-				roundManager, settings.CoinsBet, CellType.Cross,
-				settings.IsTimerEnabled, settings.IsGameAssistsEnabled,
-				opponent.VisualSettings.Avatar.Image, opponent.Name);
+			ShowGameForm(settings, new RoundManager(settings.NumberOfRounds),
+				_gameServer.GetOpponents()[0]);
+		}
+		private void ShowGameForm(NetworkGameSettings settings, RoundManager roundManager,
+			NetworkPlayer opponent)
+		{
+			BaseGameForm gameForm;
 
+			switch (settings.FieldSize)
+			{
+				case FieldSize.Size3on3:
+					{
+						gameForm = new Game3on3NetworkForm(_mainForm, _player, _gameServer,
+						roundManager, settings.CoinsBet, CellType.Cross,
+						settings.IsTimerEnabled, settings.IsGameAssistsEnabled,
+							opponent.VisualSettings.Avatar.Image, opponent.Name);
+						break;
+					}
+				case FieldSize.Size5on5:
+					{
+						gameForm = new Game5on5NetworkForm(_mainForm, _player, _gameServer,
+						roundManager, settings.CoinsBet, CellType.Cross,
+						settings.IsTimerEnabled, settings.IsGameAssistsEnabled,
+							opponent.VisualSettings.Avatar.Image, opponent.Name);
+						break;
+					}
+				case FieldSize.Size7on7:
+					{
+						gameForm = new Game7on7NetworkForm(_mainForm, _player, _gameServer,
+						roundManager, settings.CoinsBet, CellType.Cross,
+						settings.IsTimerEnabled, settings.IsGameAssistsEnabled,
+							opponent.VisualSettings.Avatar.Image, opponent.Name);
+						break;
+					}
+				default:
+					throw new InvalidOperationException
+						($"Unknown field size: {_player.SinglePCGameSettings.FieldSize}");
+			}
 			Close();
 			gameForm.Show();
 		}
-
 		private void ClearPlayers()
 		{
 			foreach (Guna2Panel panel in _ipToGamePanels.Values)
