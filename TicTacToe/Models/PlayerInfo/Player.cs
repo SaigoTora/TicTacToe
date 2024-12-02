@@ -111,7 +111,11 @@ namespace TicTacToe.Models.PlayerInfo
 					Coins = 0;
 				}
 				else
-					throw new NotEnoughCoinsToStartGameException(_deductedCoins, botDifficulty);
+				{
+					int requiredCoins = _deductedCoins;
+					_deductedCoins = 0;
+					throw new NotEnoughCoinsToStartGameException(requiredCoins, botDifficulty);
+				}
 			}
 			else
 				Coins -= _deductedCoins;
