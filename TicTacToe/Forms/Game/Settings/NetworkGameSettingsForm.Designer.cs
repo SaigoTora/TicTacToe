@@ -264,6 +264,7 @@
 			this.labelDescriptionLength.TabIndex = 10;
 			this.labelDescriptionLength.Text = "99999 / 99999";
 			this.labelDescriptionLength.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+			this.labelDescriptionLength.Visible = false;
 			// 
 			// numericUpDownNumberOfRounds
 			// 

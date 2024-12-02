@@ -38,12 +38,15 @@ namespace TicTacToe.Forms.Game.NetworkGame
 		private readonly Dictionary<long, Guna2Panel> _idToGamePanels = new Dictionary<long, Guna2Panel>();
 
 		private readonly System.Threading.Timer _updateTimer;
+		private readonly NetworkPlayerCreator _playerCreator;
 		private readonly PlayerLobbyStatus _playerStatus = new PlayerLobbyStatus();
 		private readonly SynchronizationContext _syncContext;
 		private readonly ButtonEventHandlers _buttonEventHandlers = new ButtonEventHandlers();
 		private bool _wasUpdateExceptionThrown, _isGameStarted;
 		internal GameLobbyClientForm(MainForm mainForm, Player player, GameClient gameClient)
 		{
+			const int PANEL_WIDTH = 244, PANEL_HEIGHT = 76;
+
 			InitializeComponent();
 			customTitleBar = new CustomTitleBar(this, "Lobby", maximizeBox: false);
 
@@ -53,6 +56,8 @@ namespace TicTacToe.Forms.Game.NetworkGame
 
 			_gameClient = gameClient;
 			_updateTimer = new System.Threading.Timer(UpdateTimerCallBack, null, 0, LOBBY_UPDATE_INTERVAL);
+
+			_playerCreator = new NetworkPlayerCreator(new Size(PANEL_WIDTH, PANEL_HEIGHT));
 		}
 		private void GameLobbyClientForm_Load(object sender, EventArgs e)
 		{
@@ -171,10 +176,10 @@ namespace TicTacToe.Forms.Game.NetworkGame
 					continue;
 
 				if (info.Players.Exists((p) => p.Id == id))
-					NetworkPlayerCreator.ChangePlayerPanel(_idToGamePanels[id], info.GetPlayer(id));
+					_playerCreator.ChangePlayerPanel(_idToGamePanels[id], info.GetPlayer(id));
 				else
 				{
-					_idToGamePanels[id].Dispose();
+					_playerCreator.Dispose(_idToGamePanels[id]);
 					_idToGamePanels.Remove(id);
 				}
 			}
@@ -190,7 +195,7 @@ namespace TicTacToe.Forms.Game.NetworkGame
 			serverPlayer.SetReady(true);
 
 			if (_idToGamePanels.ContainsKey(serverPlayer.Id))
-				NetworkPlayerCreator.ChangePlayerPanel(_idToGamePanels[serverPlayer.Id], serverPlayer);
+				_playerCreator.ChangePlayerPanel(_idToGamePanels[serverPlayer.Id], serverPlayer);
 			else
 				CreatePlayer(serverPlayer);
 
@@ -213,10 +218,7 @@ namespace TicTacToe.Forms.Game.NetworkGame
 
 		private void CreatePlayer(NetworkPlayer player)
 		{
-			const int PANEL_WIDTH = 244, PANEL_HEIGHT = 76;
-
-			Guna2Panel panel = NetworkPlayerCreator.CreatePlayerPanel(player,
-				new Size(PANEL_WIDTH, PANEL_HEIGHT));
+			Guna2Panel panel = _playerCreator.CreatePlayerPanel(player, false);
 			flpPlayers.Controls.Add(panel);
 
 			_idToGamePanels.Add(player.Id, panel);
@@ -230,7 +232,19 @@ namespace TicTacToe.Forms.Game.NetworkGame
 			{
 				NetworkLobbyInfo lobbyInfo = await _gameClient.UpdateGameLobbyAsync(_playerStatus);
 				if (lobbyInfo != null)
-					SetClientForm(lobbyInfo);
+				{
+					if (!lobbyInfo.Players.Exists((p) => p.Id == _gameClient.PlayerId))
+					{
+						_syncContext.Post(_ =>
+						{
+							Close();
+							CustomMessageBox.Show("You have been kicked out of the lobby.", "Kick",
+								CustomMessageBoxButtons.OK, CustomMessageBoxIcon.Information);
+						}, null);
+					}
+					else
+						SetClientForm(lobbyInfo);
+				}
 			}
 			catch (System.Net.Http.HttpRequestException)
 			{
@@ -270,8 +284,7 @@ namespace TicTacToe.Forms.Game.NetworkGame
 
 		private void ClearPlayers()
 		{
-			foreach (Guna2Panel panel in _idToGamePanels.Values)
-				panel.Dispose();
+			_playerCreator.Dispose();
 			_idToGamePanels.Clear();
 		}
 		private void GameLobbyClientForm_FormClosed(object sender, FormClosedEventArgs e)

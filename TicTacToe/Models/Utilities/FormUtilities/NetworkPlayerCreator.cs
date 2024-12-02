@@ -1,6 +1,9 @@
 ﻿using FontAwesome.Sharp;
 using Guna.UI2.WinForms;
+using System;
+using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 
 using TicTacToe.Models.GameClientServer.Lobby;
@@ -8,36 +11,56 @@ using TicTacToe.Models.PlayerItem;
 
 namespace TicTacToe.Models.Utilities.FormUtilities
 {
-	internal static class NetworkPlayerCreator
+	internal class NetworkPlayerCreator
 	{
 		private const string ICON_PLAYER_STATUS_TAG = "IconPlayerStatus";
-		private static readonly Color _panelBackColor = Color.FromArgb(50, 50, 50);
 
-		internal static Guna2Panel CreatePlayerPanel(NetworkPlayer player, Size panelSize,
-			Color? panelBackColor = null)
+		private readonly Size _panelSize;
+		private readonly Color? _panelBackColor = Color.FromArgb(50, 50, 50);
+		private readonly EventHandler _kickButtonClickHandler;
+
+		private readonly List<(Guna2Panel, IconButton)> _createdItems = new List<(Guna2Panel, IconButton)>(2);
+
+		internal NetworkPlayerCreator(Size panelSize, EventHandler kickButtonClickHandler, Color? panelBackColor = null)
+			: this(panelSize, panelBackColor)
+			=> _kickButtonClickHandler = kickButtonClickHandler;
+		internal NetworkPlayerCreator(Size panelSize, Color? panelBackColor = null)
+		{
+			_panelSize = panelSize;
+			if (panelBackColor.HasValue)
+				_panelBackColor = panelBackColor.Value;
+		}
+
+		internal Guna2Panel CreatePlayerPanel(NetworkPlayer player, bool needToCreateKickButton)
 		{
 			Guna2Panel panel = new Guna2Panel()
 			{
-				BackColor = _panelBackColor,
-				Size = panelSize,
+				BackColor = _panelBackColor.Value,
+				Size = _panelSize,
 			};
 
-			if (panelBackColor.HasValue)
-				panel.BackColor = panelBackColor.Value;
-			else
-				panel.BackColor = _panelBackColor;
+			panel.BackColor = _panelBackColor.Value;
 
 			PictureBox pictureBoxAvatar = CreatePlayerAvatarPictureBox(player.VisualSettings.Avatar);
 			Label labelName = CreatePlayerNameLabel(player.Name);
-			IconPictureBox iconPictureBoxReady = CreatePlayerCheckReady(player.IsReady);
+			IconPictureBox iconPictureBoxReady = CreatePlayerCheckReady(player.IsReady, _panelSize);
 
 			panel.Controls.Add(pictureBoxAvatar);
 			panel.Controls.Add(labelName);
 			panel.Controls.Add(iconPictureBoxReady);
 
+			IconButton kickButton = null;
+			if (needToCreateKickButton && _kickButtonClickHandler != null)
+			{
+				kickButton = CreateKickButton(panel);
+				kickButton.Click += _kickButtonClickHandler;
+				panel.Controls.Add(kickButton);
+			}
+			_createdItems.Add((panel, kickButton));
+
 			return panel;
 		}
-		internal static void ChangePlayerPanel(Guna2Panel panel, NetworkPlayer player)
+		internal void ChangePlayerPanel(Guna2Panel panel, NetworkPlayer player)
 		{
 			foreach (Control control in panel.Controls)
 				if (control is IconPictureBox icon)
@@ -46,7 +69,7 @@ namespace TicTacToe.Models.Utilities.FormUtilities
 						ChangePlayerCheckReady(icon, player.IsReady);
 		}
 
-		private static PictureBox CreatePlayerAvatarPictureBox(Avatar avatar)
+		private PictureBox CreatePlayerAvatarPictureBox(Avatar avatar)
 		{
 			PictureBox pictureBox = new PictureBox()
 			{
@@ -59,7 +82,7 @@ namespace TicTacToe.Models.Utilities.FormUtilities
 
 			return pictureBox;
 		}
-		private static Label CreatePlayerNameLabel(string name)
+		private Label CreatePlayerNameLabel(string name)
 		{
 			Label label = new Label()
 			{
@@ -76,23 +99,45 @@ namespace TicTacToe.Models.Utilities.FormUtilities
 
 			return label;
 		}
-		private static IconPictureBox CreatePlayerCheckReady(bool ready)
+		private IconPictureBox CreatePlayerCheckReady(bool ready, Size parentPanelSize)
 		{
-			IconPictureBox iconPictureBox = new IconPictureBox()
+			IconPictureBox iconReady = new IconPictureBox()
 			{
 				Anchor = AnchorStyles.Bottom | AnchorStyles.Right,
 				BackColor = Color.Transparent,
 				IconFont = IconFont.Auto,
-				IconSize = 30,
-				Location = new Point(213, 45),
-				Size = new Size(30, 30),
+				IconSize = 33,
+				Size = new Size(33, 33),
 				Tag = ICON_PLAYER_STATUS_TAG
 			};
-			ChangePlayerCheckReady(iconPictureBox, ready);
+			iconReady.Location = new Point(parentPanelSize.Width - iconReady.Size.Width,
+				parentPanelSize.Height - iconReady.Size.Height);
+			ChangePlayerCheckReady(iconReady, ready);
 
-			return iconPictureBox;
+			return iconReady;
 		}
-		private static void ChangePlayerCheckReady(IconPictureBox icon, bool ready)
+		private IconButton CreateKickButton(Guna2Panel parentPanel)
+		{
+			IconButton button = new IconButton()
+			{
+				Anchor = AnchorStyles.Top | AnchorStyles.Right,
+				BackColor = Color.FromArgb(0, parentPanel.BackColor),
+				IconFont = IconFont.Auto,
+				IconSize = 30,
+				Size = new Size(33, 33),
+				IconChar = IconChar.UserSlash,
+				IconColor = Color.FromArgb(127, 24, 13),
+				Cursor = Cursors.Hand,
+				FlatStyle = FlatStyle.Flat,
+				TabStop = false
+			};
+			button.Location = new Point(parentPanel.Width - (2 * button.Size.Width) - 3,
+				parentPanel.Height - button.Size.Height);
+			button.FlatAppearance.BorderSize = 0;
+
+			return button;
+		}
+		private void ChangePlayerCheckReady(IconPictureBox icon, bool ready)
 		{
 			if (ready)
 			{
@@ -104,6 +149,25 @@ namespace TicTacToe.Models.Utilities.FormUtilities
 				icon.IconChar = IconChar.Circle;
 				icon.IconColor = Color.Gold;
 			}
+		}
+
+		internal void Dispose(Guna2Panel panel)
+		{
+			var item = _createdItems.FirstOrDefault((i) => i.Item1 == panel);
+			item.Item1?.Dispose();
+			if (item.Item2 != null)
+				item.Item2.Click -= _kickButtonClickHandler;
+			_createdItems.Remove(item);
+		}
+		internal void Dispose()
+		{
+			foreach (var item in _createdItems)
+			{
+				item.Item1?.Dispose();
+				if (item.Item2 != null)
+					item.Item2.Click -= _kickButtonClickHandler;
+			}
+			_createdItems?.Clear();
 		}
 	}
 }

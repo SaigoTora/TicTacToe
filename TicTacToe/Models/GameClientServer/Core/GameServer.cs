@@ -55,6 +55,8 @@ namespace TicTacToe.Models.GameClientServer.Core
 
 		internal List<NetworkPlayer> GetOpponents()
 			=> _networkLobbyInfo.Players;
+		internal NetworkPlayer GetPlayerByIp(string ipAddress)
+			=> _networkLobbyInfo.GetPlayerOrNull(ipAddress);
 		internal int GetMaxPlayerCount()
 			=> _networkLobbyInfo.MaxPlayerCount;
 		internal bool AllPlayersReady()
@@ -100,37 +102,12 @@ namespace TicTacToe.Models.GameClientServer.Core
 			NetworkPlayer joinedPlayer = null, updatedPlayer = null;
 
 			if (context.Request.HttpMethod == HttpMethod.Post.Method)
-			{
-				using (var reader = new StreamReader(context.Request.InputStream, context.Request.ContentEncoding))
-				{
-					string jsonData = await reader.ReadToEndAsync();
-					Player player = JsonConvert.DeserializeObject<Player>(jsonData);
-					joinedPlayer = new NetworkPlayer(player.Name, player.VisualSettings);
-					joinedPlayer.AssignId();
-					_networkLobbyInfo.AddPlayer(clientIPAddress, joinedPlayer);
-				}
-			}
+				joinedPlayer = await HandlePostLobbyRequestAsync(context, clientIPAddress);
 			if (context.Request.HttpMethod == HttpMethod.Put.Method)
-			{
-				using (var reader = new StreamReader(context.Request.InputStream, context.Request.ContentEncoding))
-				{
-					string jsonData = await reader.ReadToEndAsync();
-					PlayerLobbyStatus playerStatus = JsonConvert.DeserializeObject<PlayerLobbyStatus>(jsonData);
-
-					updatedPlayer = _networkLobbyInfo.ChangePlayerLobbyStatus(clientIPAddress, playerStatus);
-				}
-			}
+				updatedPlayer = await HandlePutLobbyRequestAsync(context, clientIPAddress);
 
 			if (context.Request.HttpMethod == HttpMethod.Delete.Method)
-			{
-				NetworkPlayer playerWhoLeftLobby = _networkLobbyInfo.GetPlayerOrNull(clientIPAddress);
-
-				if (playerWhoLeftLobby != null)
-				{
-					OnPlayerLeftLobby(new NetworkPlayerEventArgs(null, clientIPAddress));
-					_networkLobbyInfo.RemovePlayer(clientIPAddress);
-				}
-			}
+				DeletePlayerFromLobby(clientIPAddress);
 			else
 			{
 				UpdateLobbySettings();
@@ -143,6 +120,33 @@ namespace TicTacToe.Models.GameClientServer.Core
 					OnPlayerStatusChanged(new NetworkPlayerEventArgs(updatedPlayer, clientIPAddress));
 			}
 		}
+		private async Task<NetworkPlayer> HandlePostLobbyRequestAsync(HttpListenerContext context,
+			string clientIPAddress)
+		{
+			NetworkPlayer joinedPlayer;
+			using (var reader = new StreamReader(context.Request.InputStream, context.Request.ContentEncoding))
+			{
+				string jsonData = await reader.ReadToEndAsync();
+				Player player = JsonConvert.DeserializeObject<Player>(jsonData);
+				joinedPlayer = new NetworkPlayer(player.Name, player.VisualSettings);
+				joinedPlayer.AssignId();
+				_networkLobbyInfo.AddPlayer(clientIPAddress, joinedPlayer);
+			}
+			return joinedPlayer;
+		}
+		private async Task<NetworkPlayer> HandlePutLobbyRequestAsync(HttpListenerContext context,
+			string clientIPAddress)
+		{
+			NetworkPlayer updatedPlayer;
+			using (var reader = new StreamReader(context.Request.InputStream, context.Request.ContentEncoding))
+			{
+				string jsonData = await reader.ReadToEndAsync();
+				PlayerLobbyStatus playerStatus = JsonConvert.DeserializeObject<PlayerLobbyStatus>(jsonData);
+
+				updatedPlayer = _networkLobbyInfo.ChangePlayerLobbyStatus(clientIPAddress, playerStatus);
+			}
+			return updatedPlayer;
+		}
 		private async Task SendResponseToClient(HttpListenerContext context, string response)
 		{
 			byte[] responseBytes = Encoding.UTF8.GetBytes(response);
@@ -151,6 +155,7 @@ namespace TicTacToe.Models.GameClientServer.Core
 
 			await context.Response.OutputStream.WriteAsync(responseBytes, 0, responseBytes.Length);
 		}
+
 		private void UpdateLobbySettings()
 		{
 			NetworkGameSettings settings = _player.NetworkGameSettings;
@@ -158,6 +163,16 @@ namespace TicTacToe.Models.GameClientServer.Core
 				settings.CoinsBet, _player.Name, _player.VisualSettings.Avatar,
 				settings.NumberOfRounds, settings.FieldSize,
 				settings.IsTimerEnabled, settings.IsGameAssistsEnabled);
+		}
+		internal void DeletePlayerFromLobby(string clientIPAddress)
+		{
+			NetworkPlayer playerWhoLeftLobby = _networkLobbyInfo.GetPlayerOrNull(clientIPAddress);
+
+			if (playerWhoLeftLobby != null)
+			{
+				OnPlayerLeftLobby(new NetworkPlayerEventArgs(null, clientIPAddress));
+				_networkLobbyInfo.RemovePlayer(clientIPAddress);
+			}
 		}
 
 		private void OnPlayerJoined(NetworkPlayerEventArgs e)
@@ -192,9 +207,7 @@ namespace TicTacToe.Models.GameClientServer.Core
 				_gameInfo.CancelLastMove();
 			}
 			else
-			{
 				_gameInfo.Move(info.Cell, info.CellType);
-			}
 		}
 		internal CellType WhoseMove() => _gameInfo.WhoseMove;
 		internal void FinishGame()
@@ -209,26 +222,10 @@ namespace TicTacToe.Models.GameClientServer.Core
 			MoveInfo moveInfo = null;
 
 			if (context.Request.HttpMethod == HttpMethod.Post.Method)
-			{
-				using (var reader = new StreamReader(context.Request.InputStream, context.Request.ContentEncoding))
-				{
-					string jsonData = await reader.ReadToEndAsync();
-					moveInfo = JsonConvert.DeserializeObject<MoveInfo>(jsonData);
-					while (!_readyToGetMoveInfo)
-						await Task.Delay(100);
-					Move(moveInfo);
-				}
-			}
+				moveInfo = await HandlePostGameRequestAsync(context);
 
 			if (context.Request.HttpMethod == HttpMethod.Delete.Method)
-			{
-				NetworkPlayer playerWhoLeftGame = _networkLobbyInfo.GetPlayerOrNull(clientIPAddress);
-				if (playerWhoLeftGame != null)
-				{
-					OnPlayerLeftGame(new NetworkPlayerEventArgs(playerWhoLeftGame, clientIPAddress));
-					_networkLobbyInfo.RemovePlayer(clientIPAddress);
-				}
-			}
+				DeletePlayerFromGame(clientIPAddress);
 			else
 			{
 				string response = JsonConvert.SerializeObject(_gameInfo, Formatting.Indented);
@@ -238,7 +235,28 @@ namespace TicTacToe.Models.GameClientServer.Core
 					OnPlayerMoveGame(new MoveGameEventArgs(moveInfo));
 			}
 		}
-
+		private async Task<MoveInfo> HandlePostGameRequestAsync(HttpListenerContext context)
+		{
+			MoveInfo moveInfo;
+			using (var reader = new StreamReader(context.Request.InputStream, context.Request.ContentEncoding))
+			{
+				string jsonData = await reader.ReadToEndAsync();
+				moveInfo = JsonConvert.DeserializeObject<MoveInfo>(jsonData);
+				while (!_readyToGetMoveInfo)
+					await Task.Delay(100);
+				Move(moveInfo);
+			}
+			return moveInfo;
+		}
+		private void DeletePlayerFromGame(string clientIPAddress)
+		{
+			NetworkPlayer playerWhoLeftGame = _networkLobbyInfo.GetPlayerOrNull(clientIPAddress);
+			if (playerWhoLeftGame != null)
+			{
+				OnPlayerLeftGame(new NetworkPlayerEventArgs(playerWhoLeftGame, clientIPAddress));
+				_networkLobbyInfo.RemovePlayer(clientIPAddress);
+			}
+		}
 
 		private void OnPlayerMoveGame(MoveGameEventArgs e)
 		{

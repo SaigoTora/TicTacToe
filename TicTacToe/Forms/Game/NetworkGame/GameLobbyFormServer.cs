@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Drawing;
+using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -35,6 +36,7 @@ namespace TicTacToe.Forms.Game.NetworkGame
 		private readonly GameServer _gameServer;
 		private readonly Dictionary<string, Guna2Panel> _ipToGamePanels = new Dictionary<string, Guna2Panel>();
 
+		private readonly NetworkPlayerCreator _playerCreator;
 		private readonly SynchronizationContext _syncContext;
 		private readonly ButtonEventHandlers _buttonEventHandlers = new ButtonEventHandlers();
 		private readonly LabelEventHandlers _labelEventHandlers = new LabelEventHandlers();
@@ -43,6 +45,8 @@ namespace TicTacToe.Forms.Game.NetworkGame
 
 		internal GameLobbyServerForm(MainForm mainForm, Player player)
 		{
+			const int PANEL_WIDTH = 244, PANEL_HEIGHT = 76;
+
 			InitializeComponent();
 			customTitleBar = new CustomTitleBar(this, "Lobby", maximizeBox: false);
 
@@ -52,6 +56,8 @@ namespace TicTacToe.Forms.Game.NetworkGame
 
 			int port = int.Parse(ConfigurationManager.AppSettings["port"]);
 			_gameServer = new GameServer(_player, port);
+
+			_playerCreator = new NetworkPlayerCreator(new Size(PANEL_WIDTH, PANEL_HEIGHT), PlayerKickButton_Click);
 		}
 		private void GameLobbyServerForm_Load(object sender, EventArgs e)
 		{
@@ -209,8 +215,6 @@ namespace TicTacToe.Forms.Game.NetworkGame
 
 		private void PlayerJoined(object sender, NetworkPlayerEventArgs e)
 		{
-			const int PANEL_WIDTH = 244, PANEL_HEIGHT = 76;
-
 			_syncContext.Post(_ =>
 			{
 				string avatarName = e.Player.VisualSettings.Avatar.Name;
@@ -218,9 +222,14 @@ namespace TicTacToe.Forms.Game.NetworkGame
 				avatar = (Avatar)ItemManager.GetFullItem(avatar);
 				e.Player.VisualSettings.Avatar = avatar;
 
-				Guna2Panel panel = NetworkPlayerCreator.CreatePlayerPanel(e.Player,
-					new Size(PANEL_WIDTH, PANEL_HEIGHT));
+				Guna2Panel panel;
+				if (e.HasIPAddress())
+					panel = _playerCreator.CreatePlayerPanel(e.Player, true);
+				else
+					panel = _playerCreator.CreatePlayerPanel(e.Player, false);
+
 				flpPlayers.Controls.Add(panel);
+				ActiveControl = null;
 
 				if (_gameServer.GetOpponents().Count + 1 == _gameServer.GetMaxPlayerCount())
 					buttonStart.Enabled = true;
@@ -229,13 +238,28 @@ namespace TicTacToe.Forms.Game.NetworkGame
 					_ipToGamePanels.Add(e.IPAddress, panel);
 			}, null);
 		}
+		private void PlayerKickButton_Click(object sender, EventArgs e)
+		{
+			ActiveControl = null;
 
+			if (sender is Control control && control.Parent is Guna2Panel parentPanel)
+			{
+				string ipAddress = _ipToGamePanels.FirstOrDefault((item) => item.Value == parentPanel).Key;
+				NetworkPlayer kickedPlayer = _gameServer.GetPlayerByIp(ipAddress);
+
+				if (ipAddress != null && CustomMessageBox.Show($"Are you sure you want to kick {kickedPlayer.Name} from the lobby?",
+					"Kick", CustomMessageBoxButtons.YesNo, CustomMessageBoxIcon.Question) == DialogResult.Yes)
+					_gameServer.DeletePlayerFromLobby(ipAddress);
+			}
+
+			ActiveControl = null;
+		}
 		private void PlayerStatusChanged(object sender, NetworkPlayerEventArgs e)
 		{
 			_syncContext.Post(_ =>
 			{
 				if (!string.IsNullOrEmpty(e.IPAddress) && _ipToGamePanels.ContainsKey(e.IPAddress))
-					NetworkPlayerCreator.ChangePlayerPanel(_ipToGamePanels[e.IPAddress], e.Player);
+					_playerCreator.ChangePlayerPanel(_ipToGamePanels[e.IPAddress], e.Player);
 			}, null);
 		}
 		private void PlayerLeftLobby(object sender, NetworkPlayerEventArgs e)
@@ -244,7 +268,7 @@ namespace TicTacToe.Forms.Game.NetworkGame
 			{
 				buttonStart.Enabled = false;
 
-				_ipToGamePanels[e.IPAddress].Dispose();
+				_playerCreator.Dispose(_ipToGamePanels[e.IPAddress]);
 				_ipToGamePanels.Remove(e.IPAddress);
 			}
 		}
@@ -307,10 +331,10 @@ namespace TicTacToe.Forms.Game.NetworkGame
 			Close();
 			gameForm.Show();
 		}
+
 		private void ClearPlayers()
 		{
-			foreach (Guna2Panel panel in _ipToGamePanels.Values)
-				panel.Dispose();
+			_playerCreator.Dispose();
 			_ipToGamePanels.Clear();
 		}
 		private void GameLobbyServerForm_FormClosed(object sender, FormClosedEventArgs e)

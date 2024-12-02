@@ -17,6 +17,7 @@ namespace TicTacToe.Models.GameClientServer.Core
 		private static readonly HttpClient httpClient = new HttpClient();
 		private string _serverAddress;
 
+		internal long PlayerId { get; private set; }
 		private readonly string _gameLobbyUrl = ConfigurationManager.AppSettings["gameLobbyUrl"];
 		private readonly string _gameUrl = ConfigurationManager.AppSettings["gameUrl"];
 
@@ -40,7 +41,9 @@ namespace TicTacToe.Models.GameClientServer.Core
 
 				string jsonResponse = await response.Content.ReadAsStringAsync();
 				_serverAddress = fullIPAddress;
-				return JsonConvert.DeserializeObject<NetworkLobbyInfo>(jsonResponse);
+				NetworkLobbyInfo networkLobbyInfo = JsonConvert.DeserializeObject<NetworkLobbyInfo>(jsonResponse);
+				PlayerId = networkLobbyInfo.Players[networkLobbyInfo.Players.Count - 1].Id;
+				return networkLobbyInfo;
 			}
 		}
 		internal async Task<NetworkLobbyInfo> UpdateGameLobbyAsync(PlayerLobbyStatus status)

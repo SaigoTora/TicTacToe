@@ -34,9 +34,8 @@ namespace TicTacToe.Models.GameClientServer.Lobby
 			=> _players.First((player) => player.Id == id);
 		internal NetworkPlayer ChangePlayerLobbyStatus(string ipAddress, PlayerLobbyStatus status)
 		{
-			NetworkPlayer player = _ipToPlayers[ipAddress];
-
-			player.SetReady(status.IsReady);
+			if (_ipToPlayers.TryGetValue(ipAddress, out NetworkPlayer player))
+				player.SetReady(status.IsReady);
 
 			return player;
 		}
