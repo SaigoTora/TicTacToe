@@ -104,6 +104,8 @@ namespace TicTacToe.Forms.Game
 		}
 
 		#region Initialization
+		protected string CreateFormCaption()
+			=> $"Round {roundManager.CurrentNumberOfRounds} / {roundManager.MaxNumberOfRounds}";
 		protected void DisplayPlayerRoles(Guna2PictureBox playerPictureBox, Guna2PictureBox opponentPictureBox)
 		{
 			(Color markerColorZero, Color markerColorCross) = (Color.FromArgb(82, 217, 255), Color.FromArgb(255, 97, 95));
@@ -656,6 +658,7 @@ namespace TicTacToe.Forms.Game
 				roundManager.AddRound();
 
 				BaseGameForm nextGameForm = _gameFormInfo.NextGameForm;
+				nextGameForm.customTitleBar.ChangeFormCaption(CreateFormCaption());
 				if (!nextGameForm.IsDisposed)// If a player have enough coins to play
 					nextGameForm.Show();
 				else
@@ -701,24 +704,8 @@ namespace TicTacToe.Forms.Game
 			if (_gameResultForm != null)
 				return;
 
-			void backToMainForm(object s, EventArgs e)
-			{
-				_wasPressedButtonBack = true;
-				_isFormClosingForNextRound = false;
-				Close();
-
-				if (((gameServer != null || gameClient != null) && !roundManager.IsLastRound()))
-				{
-					_gameResultForm?.Hide();
-					_gameResultForm?.Close();
-					CustomMessageBox.Show("You have left the game and lost your initial bet: 20 coins!" +
-						"\nTry not to leave during local games because you will lose coins.", "Warning",
-						CustomMessageBoxButtons.OK, CustomMessageBoxIcon.Warning);
-				}
-			}
-
 			if (bot != null)
-				_gameResultForm = new GameResultForm(player, coinReward, roundManager, gameResult, bot.Difficulty, backToMainForm);
+				_gameResultForm = new GameResultForm(player, coinReward, roundManager, gameResult, bot.Difficulty, BackToMainForm);
 			else if (gameClient != null || gameServer != null)
 			{
 				CoinReward RealCoinReward = roundManager.IsLastRound() ? coinReward : new CoinReward();
@@ -726,14 +713,28 @@ namespace TicTacToe.Forms.Game
 					RESULT_FORM_CLOSE_DELAY_SECONDS * 2 : RESULT_FORM_CLOSE_DELAY_SECONDS;
 
 				_gameResultForm = new GameResultForm(player, RealCoinReward, roundManager, gameResult,
-					backToMainForm, ActionAfterTimeOver.Play, (byte)closeDelay);
+					BackToMainForm, ActionAfterTimeOver.Play, (byte)closeDelay);
 			}
 			else
-				_gameResultForm = new GameResultForm(player, coinReward, roundManager, gameResult, backToMainForm);
+				_gameResultForm = new GameResultForm(player, coinReward, roundManager, gameResult, BackToMainForm);
 
 			_gameResultForm.ShowDialog();
 		}
+		private void BackToMainForm(object s, EventArgs e)
+		{
+			_wasPressedButtonBack = true;
+			_isFormClosingForNextRound = false;
+			Close();
 
+			if (((gameServer != null || gameClient != null) && !roundManager.IsLastRound()))
+			{
+				_gameResultForm?.Hide();
+				_gameResultForm?.Close();
+				CustomMessageBox.Show("You have left the game and lost your initial bet: 20 coins!" +
+					"\nTry not to leave during local games because you will lose coins.", "Warning",
+					CustomMessageBoxButtons.OK, CustomMessageBoxIcon.Warning);
+			}
+		}
 		private async Task ShowWinningCellsAsync(CellType winner)
 		{
 			if (winner == CellType.None)

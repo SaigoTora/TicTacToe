@@ -32,8 +32,7 @@ namespace TicTacToe.Forms.Game.Games5on5
 		}
 		private void DefaultInitialize(Image opponentAvatar, string opponentName)
 		{
-			customTitleBar = new CustomTitleBar(this, $"Round {roundManager.CurrentNumberOfRounds} / " +
-				$"{roundManager.MaxNumberOfRounds}",
+			customTitleBar = new CustomTitleBar(this, CreateFormCaption(),
 				maximizeBox: false, canFormBeClosed: false);
 			pictureBoxOpponentAvatar.Image = opponentAvatar;
 			labelOpponentName.Text = opponentName;

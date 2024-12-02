@@ -19,7 +19,7 @@ namespace TicTacToe.Forms.Game.Games3on3
 		{
 			InitializeComponent();
 
-			customTitleBar = new CustomTitleBar(this, $"Round {roundManager.CurrentNumberOfRounds} / {roundManager.MaxNumberOfRounds}",
+			customTitleBar = new CustomTitleBar(this, CreateFormCaption(),
 				maximizeBox: false, canFormBeClosed: false);
 			pictureBoxOpponentAvatar.Image = opponentAvatar;
 			labelOpponentName.Text = opponentName;
@@ -38,7 +38,7 @@ namespace TicTacToe.Forms.Game.Games3on3
 			if (opponentCellType == CellType.Cross)
 				_currentCellType = CellType.Cross;
 
-			SetupMoveTransition(_currentCellType,true);
+			SetupMoveTransition(_currentCellType, true);
 		}
 
 		private async void PictureCell_Click(object sender, EventArgs e)
