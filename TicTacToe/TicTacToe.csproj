@@ -231,6 +231,9 @@
       <DependentUpon>PurchaseResultForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\CustomExceptions\NotEnoughCoinsToStartGameException.cs" />
+    <Compile Include="Models\GameClientServer\Chat\ChatManager.cs" />
+    <Compile Include="Models\GameClientServer\Chat\ChatMessageEventArgs.cs" />
+    <Compile Include="Models\GameClientServer\Chat\Message.cs" />
     <Compile Include="Models\GameClientServer\Core\GameClient.cs" />
     <Compile Include="Models\GameClientServer\Core\GameServer.cs" />
     <Compile Include="Models\GameClientServer\Game\GameInfo.cs" />
@@ -289,6 +292,9 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Models\Utilities\FormUtilities\NetworkPlayerCreator.cs" />
+    <Compile Include="Models\Utilities\FormUtilities\NoCaretRichTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Forms\Game\GameResultForm.cs">

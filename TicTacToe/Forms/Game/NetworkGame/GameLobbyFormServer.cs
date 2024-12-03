@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using TicTacToe.Forms.Game.Games3on3;
 using TicTacToe.Forms.Game.Games5on5;
 using TicTacToe.Forms.Game.Games7on7;
+using TicTacToe.Models.GameClientServer.Chat;
 using TicTacToe.Models.GameClientServer.Core;
 using TicTacToe.Models.GameClientServer.Lobby;
 using TicTacToe.Models.GameInfo;
@@ -62,6 +63,9 @@ namespace TicTacToe.Forms.Game.NetworkGame
 		private void GameLobbyServerForm_Load(object sender, EventArgs e)
 		{
 			labelCoins.Text = $"{_player.Coins:N0}".Replace(',', ' ');
+			richTextBoxChat.SelectionIndent = 15;
+
+			DisplayMessage(new Models.GameClientServer.Chat.Message(string.Empty, "Welcome to the chat!"), false);
 			PlayerJoined(this, new NetworkPlayerEventArgs(
 				new NetworkPlayer(_player.Name, _player.VisualSettings, true)));
 
@@ -85,6 +89,7 @@ namespace TicTacToe.Forms.Game.NetworkGame
 				SetActiveEnableButtonStyle(buttonTimerEnabled);
 			if (_player.NetworkGameSettings.IsGameAssistsEnabled)
 				SetActiveEnableButtonStyle(buttonGameAssistsEnabled);
+			richTextBoxChat.BackColor = BackColor;
 
 			_buttonEventHandlers.SubscribeToHover(buttonStart);
 			_labelEventHandlers.SubscribeToHoverUnderline(label3on3, label5on5, label7on7);
@@ -96,12 +101,14 @@ namespace TicTacToe.Forms.Game.NetworkGame
 				_gameServer.PlayerJoined += PlayerJoined;
 				_gameServer.PlayerStatusChanged += PlayerStatusChanged;
 				_gameServer.PlayerLeftLobby += PlayerLeftLobby;
+				_gameServer.PlayerPostMessage += PlayerPostedMessage;
 			}
 			else
 			{
 				_gameServer.PlayerJoined -= PlayerJoined;
 				_gameServer.PlayerStatusChanged -= PlayerStatusChanged;
 				_gameServer.PlayerLeftLobby -= PlayerLeftLobby;
+				_gameServer.PlayerPostMessage -= PlayerPostedMessage;
 			}
 		}
 
@@ -213,6 +220,7 @@ namespace TicTacToe.Forms.Game.NetworkGame
 		}
 		#endregion
 
+		#region Server Event Handlers
 		private void PlayerJoined(object sender, NetworkPlayerEventArgs e)
 		{
 			_syncContext.Post(_ =>
@@ -272,6 +280,99 @@ namespace TicTacToe.Forms.Game.NetworkGame
 				_ipToGamePanels.Remove(e.IPAddress);
 			}
 		}
+		private void PlayerPostedMessage(object sender, ChatMessageEventArgs e)
+			=> DisplayMessage(e.Message, false);
+		#endregion
+
+		#region Chat
+		private void ButtonSendMessage_Click(object sender, EventArgs e)
+		{
+			textBoxMessage.Text = textBoxMessage.Text.Trim('\n', ' ');
+			if (!string.IsNullOrEmpty(textBoxMessage.Text))
+			{
+				var message = new Models.GameClientServer.Chat.Message(_player.Name, textBoxMessage.Text);
+				DisplayMessage(message, true);
+				textBoxMessage.Text = string.Empty;
+				textBoxMessage.Multiline = false;
+				_gameServer.AddMessage(message);
+			}
+		}
+		private void DisplayMessage(Models.GameClientServer.Chat.Message message, bool isOwnMessage)
+		{
+			richTextBoxChat.SelectionStart = richTextBoxChat.Text.Length;
+			if (richTextBoxChat.Text.Length > 0)
+				richTextBoxChat.SelectedText = "\r\n";
+			DisplayTimeInMessage(message.Time.ToLocalTime());
+
+			if (!string.IsNullOrEmpty(message.Sender))
+				DisplaySenderInMessage(message.Sender, isOwnMessage);
+
+			DisplayMessageText(message.Text);
+			richTextBoxChat.ScrollToCaret();
+		}
+		private void DisplayTimeInMessage(DateTime dateTime)
+		{
+			richTextBoxChat.SelectionFont = new Font(richTextBoxChat.Font.FontFamily, 10, FontStyle.Regular);
+			richTextBoxChat.SelectionColor = Color.Gray;
+			richTextBoxChat.SelectedText = $"{dateTime:HH:mm}\t";
+		}
+		private void DisplaySenderInMessage(string sender, bool isOwnMessage)
+		{
+			richTextBoxChat.SelectionFont = new Font(richTextBoxChat.Font.FontFamily, 16, FontStyle.Bold);
+			if (isOwnMessage)
+				richTextBoxChat.SelectionColor = Color.FromArgb(255, 223, 0);
+			else
+				richTextBoxChat.SelectionColor = Color.White;
+
+			richTextBoxChat.SelectedText = sender;
+
+			richTextBoxChat.SelectionFont = new Font(richTextBoxChat.Font.FontFamily, 16, FontStyle.Regular);
+			richTextBoxChat.SelectionColor = Color.White;
+			richTextBoxChat.SelectedText = ":  ";
+		}
+		private void DisplayMessageText(string text)
+		{
+			richTextBoxChat.SelectionFont = new Font(richTextBoxChat.Font.FontFamily, 16, FontStyle.Regular);
+			richTextBoxChat.SelectionColor = Color.LightGray;
+			richTextBoxChat.SelectedText = text;
+		}
+
+		private void TextBoxMessage_KeyDown(object sender, KeyEventArgs e)
+		{
+			if (e.KeyCode == Keys.Enter)
+			{
+				e.SuppressKeyPress = true;
+				ButtonSendMessage_Click(sender, e);
+			}
+		}
+		private void TextBoxMessage_TextChanged(object sender, EventArgs e)
+		{
+			BeginInvoke(new Action(() =>
+			{
+				const int MULTILINE_HEIGHT = 75;
+				const int SINGLELINE_HEIGHT = 50;
+				const int MULTILINE_Y_POSITION = 313;
+				const int SINGLELINE_Y_POSITION = 338;
+
+				textBoxMessage.AutoScroll = false;
+				Size textSize = TextRenderer.MeasureText(textBoxMessage.Text, textBoxMessage.Font);
+				bool requiresMultiline = textSize.Width > textBoxMessage.Width || textSize.Height > SINGLELINE_HEIGHT;
+
+				if (requiresMultiline)
+				{
+					textBoxMessage.Size = new Size(textBoxMessage.Width, MULTILINE_HEIGHT);
+					textBoxMessage.Location = new Point(textBoxMessage.Location.X, MULTILINE_Y_POSITION);
+					textBoxMessage.Multiline = true;
+				}
+				else
+				{
+					textBoxMessage.Size = new Size(textBoxMessage.Width, SINGLELINE_HEIGHT);
+					textBoxMessage.Location = new Point(textBoxMessage.Location.X, SINGLELINE_Y_POSITION);
+					textBoxMessage.Multiline = false;
+				}
+			}));
+		}
+		#endregion
 
 		private void ButtonStart_Click(object sender, EventArgs e)
 		{

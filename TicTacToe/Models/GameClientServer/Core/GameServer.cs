@@ -8,6 +8,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
+using TicTacToe.Models.GameClientServer.Chat;
 using TicTacToe.Models.GameClientServer.Game;
 using TicTacToe.Models.GameClientServer.Lobby;
 using TicTacToe.Models.GameClientServer.Network;
@@ -23,6 +24,8 @@ namespace TicTacToe.Models.GameClientServer.Core
 		internal EventHandler<NetworkPlayerEventArgs> PlayerJoined;
 		internal EventHandler<NetworkPlayerEventArgs> PlayerStatusChanged;
 		internal EventHandler<NetworkPlayerEventArgs> PlayerLeftLobby;
+		internal EventHandler<ChatMessageEventArgs> PlayerPostMessage;
+
 		internal EventHandler<MoveGameEventArgs> PlayerMoveGame;
 		internal EventHandler<NetworkPlayerEventArgs> PlayerLeftGame;
 
@@ -31,6 +34,7 @@ namespace TicTacToe.Models.GameClientServer.Core
 		private readonly FirewallManager _firewallManager;
 		private readonly Player _player;
 		private readonly NetworkLobbyInfo _networkLobbyInfo;
+		private readonly ChatManager _lobbyChat = new ChatManager();
 		private Game.GameInfo _gameInfo;
 		private bool _readyToGetMoveInfo = false;
 
@@ -87,7 +91,9 @@ namespace TicTacToe.Models.GameClientServer.Core
 
 			string clientIPAddress = context.Request.RemoteEndPoint?.Address.ToString();
 
-			if (context.Request.RawUrl.Contains(ConfigurationManager.AppSettings["gameLobbyUrl"]))
+			if (context.Request.RawUrl.Contains(ConfigurationManager.AppSettings["gameLobbyChatUrl"]))
+				await HandleChatRequest(context, clientIPAddress);
+			else if (context.Request.RawUrl.Contains(ConfigurationManager.AppSettings["gameLobbyUrl"]))
 				await HandleLobbyRequest(context, clientIPAddress);
 			else if (context.Request.RawUrl.Contains(ConfigurationManager.AppSettings["gameUrl"]))
 				await HandleGameRequest(context, clientIPAddress);
@@ -270,6 +276,41 @@ namespace TicTacToe.Models.GameClientServer.Core
 		}
 		#endregion
 
+		#region Chat
+		private async Task HandleChatRequest(HttpListenerContext context,
+	string clientIPAddress)
+		{
+			Message postedMessage = null;
+			if (context.Request.HttpMethod == HttpMethod.Post.Method)
+				postedMessage = await HandlePostChatRequestAsync(context);
+
+			string response = JsonConvert.SerializeObject(_lobbyChat, Formatting.Indented);
+			await SendResponseToClient(context, response);
+
+			if (postedMessage != null && clientIPAddress != null)
+				OnMessagePosted(new ChatMessageEventArgs(postedMessage));
+		}
+		private async Task<Message> HandlePostChatRequestAsync(HttpListenerContext context)
+		{
+			Message postedMessage;
+			using (var reader = new StreamReader(context.Request.InputStream, context.Request.ContentEncoding))
+			{
+				string jsonData = await reader.ReadToEndAsync();
+				postedMessage = JsonConvert.DeserializeObject<Message>(jsonData);
+				AddMessage(postedMessage);
+			}
+			return postedMessage;
+		}
+
+		internal void AddMessage(Message message)
+			=> _lobbyChat.AddMessage(message);
+
+		private void OnMessagePosted(ChatMessageEventArgs e)
+		{
+			var temp = System.Threading.Volatile.Read(ref PlayerPostMessage);
+			temp?.Invoke(this, e);
+		}
+		#endregion
 		internal void Stop()
 		{
 			if (_httpListener.IsListening)
