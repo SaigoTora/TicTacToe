@@ -64,6 +64,7 @@ namespace TicTacToe.Forms.Game.NetworkGame
 		{
 			labelCoins.Text = $"{_player.Coins:N0}".Replace(',', ' ');
 			richTextBoxChat.SelectionIndent = 15;
+			richTextBoxChat.BackColor = BackColor;
 
 			DisplayMessage(new Models.GameClientServer.Chat.Message(string.Empty, "Welcome to the chat!"), false);
 			PlayerJoined(this, new NetworkPlayerEventArgs(
@@ -89,7 +90,6 @@ namespace TicTacToe.Forms.Game.NetworkGame
 				SetActiveEnableButtonStyle(buttonTimerEnabled);
 			if (_player.NetworkGameSettings.IsGameAssistsEnabled)
 				SetActiveEnableButtonStyle(buttonGameAssistsEnabled);
-			richTextBoxChat.BackColor = BackColor;
 
 			_buttonEventHandlers.SubscribeToHover(buttonStart);
 			_labelEventHandlers.SubscribeToHoverUnderline(label3on3, label5on5, label7on7);
@@ -291,17 +291,20 @@ namespace TicTacToe.Forms.Game.NetworkGame
 			if (!string.IsNullOrEmpty(textBoxMessage.Text))
 			{
 				var message = new Models.GameClientServer.Chat.Message(_player.Name, textBoxMessage.Text);
+				_gameServer.LobbyChat.AddMessage(message);
 				DisplayMessage(message, true);
 				textBoxMessage.Text = string.Empty;
 				textBoxMessage.Multiline = false;
-				_gameServer.AddMessage(message);
 			}
 		}
 		private void DisplayMessage(Models.GameClientServer.Chat.Message message, bool isOwnMessage)
 		{
+			if (_gameServer.LobbyChat.CheckMessageLimit())
+				RemoveFirstLineFromRichTextBox();
+
 			richTextBoxChat.SelectionStart = richTextBoxChat.Text.Length;
 			if (richTextBoxChat.Text.Length > 0)
-				richTextBoxChat.SelectedText = "\r\n";
+				richTextBoxChat.SelectedText = "\n";
 			DisplayTimeInMessage(message.Time.ToLocalTime());
 
 			if (!string.IsNullOrEmpty(message.Sender))
@@ -309,6 +312,18 @@ namespace TicTacToe.Forms.Game.NetworkGame
 
 			DisplayMessageText(message.Text);
 			richTextBoxChat.ScrollToCaret();
+		}
+		private void RemoveFirstLineFromRichTextBox()
+		{
+			int firstLineEndIndex = richTextBoxChat.GetFirstCharIndexFromLine(1);
+
+			if (firstLineEndIndex > 0)
+			{
+				richTextBoxChat.Select(firstLineEndIndex, richTextBoxChat.Text.Length - firstLineEndIndex);
+				string remainingRtf = richTextBoxChat.SelectedRtf;
+
+				richTextBoxChat.Rtf = remainingRtf; // Replace the current text with a new one
+			}
 		}
 		private void DisplayTimeInMessage(DateTime dateTime)
 		{

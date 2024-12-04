@@ -39,8 +39,15 @@
 			this.buttonReady = new Guna.UI2.WinForms.Guna2GradientButton();
 			this.flpPlayers = new System.Windows.Forms.FlowLayoutPanel();
 			this.labelValueCoinsBet = new System.Windows.Forms.Label();
+			this.panelChat = new Guna.UI2.WinForms.Guna2Panel();
+			this.richTextBoxChat = new TicTacToe.Models.Utilities.FormUtilities.NoCaretRichTextBox();
+			this.buttonSendMessage = new Guna.UI2.WinForms.Guna2GradientButton();
+			this.textBoxMessage = new Guna.UI2.WinForms.Guna2TextBox();
+			this.pictureBoxLineAboveChat = new Guna.UI2.WinForms.Guna2PictureBox();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxCoin)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxCoinBet)).BeginInit();
+			this.panelChat.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.pictureBoxLineAboveChat)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// pictureBoxCoin
@@ -48,7 +55,7 @@
 			this.pictureBoxCoin.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.pictureBoxCoin.BackColor = System.Drawing.Color.Transparent;
 			this.pictureBoxCoin.Image = global::TicTacToe.Properties.Resources.coin;
-			this.pictureBoxCoin.Location = new System.Drawing.Point(837, 12);
+			this.pictureBoxCoin.Location = new System.Drawing.Point(1146, 12);
 			this.pictureBoxCoin.Name = "pictureBoxCoin";
 			this.pictureBoxCoin.Size = new System.Drawing.Size(42, 42);
 			this.pictureBoxCoin.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -61,7 +68,7 @@
 			this.labelCoins.BackColor = System.Drawing.Color.Transparent;
 			this.labelCoins.Font = new System.Drawing.Font("Courier New", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.labelCoins.ForeColor = System.Drawing.Color.Khaki;
-			this.labelCoins.Location = new System.Drawing.Point(703, 20);
+			this.labelCoins.Location = new System.Drawing.Point(1012, 20);
 			this.labelCoins.Name = "labelCoins";
 			this.labelCoins.Size = new System.Drawing.Size(130, 27);
 			this.labelCoins.TabIndex = 7;
@@ -183,10 +190,10 @@
 			this.buttonReady.Font = new System.Drawing.Font("Cooper Black", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.buttonReady.ForeColor = System.Drawing.Color.White;
 			this.buttonReady.GradientMode = System.Drawing.Drawing2D.LinearGradientMode.BackwardDiagonal;
-			this.buttonReady.Location = new System.Drawing.Point(659, 608);
+			this.buttonReady.Location = new System.Drawing.Point(968, 738);
 			this.buttonReady.Name = "buttonReady";
 			this.buttonReady.Size = new System.Drawing.Size(220, 50);
-			this.buttonReady.TabIndex = 10;
+			this.buttonReady.TabIndex = 12;
 			this.buttonReady.TabStop = false;
 			this.buttonReady.Text = "Ready";
 			this.buttonReady.Click += new System.EventHandler(this.ButtonReady_Click);
@@ -196,10 +203,10 @@
 			this.flpPlayers.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.flpPlayers.AutoScroll = true;
 			this.flpPlayers.BackColor = System.Drawing.Color.Transparent;
-			this.flpPlayers.Location = new System.Drawing.Point(381, 378);
+			this.flpPlayers.Location = new System.Drawing.Point(677, 375);
 			this.flpPlayers.Name = "flpPlayers";
-			this.flpPlayers.Size = new System.Drawing.Size(267, 280);
-			this.flpPlayers.TabIndex = 9;
+			this.flpPlayers.Size = new System.Drawing.Size(267, 390);
+			this.flpPlayers.TabIndex = 11;
 			this.flpPlayers.Tag = "needToMoveParentDown";
 			// 
 			// labelValueCoinsBet
@@ -214,12 +221,114 @@
 			this.labelValueCoinsBet.Text = "9 999";
 			this.labelValueCoinsBet.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
 			// 
+			// panelChat
+			// 
+			this.panelChat.BackColor = System.Drawing.Color.Transparent;
+			this.panelChat.Controls.Add(this.richTextBoxChat);
+			this.panelChat.Controls.Add(this.buttonSendMessage);
+			this.panelChat.Controls.Add(this.textBoxMessage);
+			this.panelChat.Location = new System.Drawing.Point(6, 375);
+			this.panelChat.Name = "panelChat";
+			this.panelChat.Size = new System.Drawing.Size(670, 390);
+			this.panelChat.TabIndex = 10;
+			this.panelChat.Tag = "needToMoveParentDown";
+			// 
+			// richTextBoxChat
+			// 
+			this.richTextBoxChat.BackColor = System.Drawing.Color.Black;
+			this.richTextBoxChat.BorderStyle = System.Windows.Forms.BorderStyle.None;
+			this.richTextBoxChat.Dock = System.Windows.Forms.DockStyle.Top;
+			this.richTextBoxChat.Font = new System.Drawing.Font("Trebuchet MS", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.richTextBoxChat.ForeColor = System.Drawing.Color.White;
+			this.richTextBoxChat.Location = new System.Drawing.Point(0, 0);
+			this.richTextBoxChat.Name = "richTextBoxChat";
+			this.richTextBoxChat.ReadOnly = true;
+			this.richTextBoxChat.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
+			this.richTextBoxChat.Size = new System.Drawing.Size(670, 300);
+			this.richTextBoxChat.TabIndex = 0;
+			this.richTextBoxChat.Text = "";
+			// 
+			// buttonSendMessage
+			// 
+			this.buttonSendMessage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.buttonSendMessage.BackColor = System.Drawing.Color.Transparent;
+			this.buttonSendMessage.BorderRadius = 4;
+			this.buttonSendMessage.BorderStyle = System.Drawing.Drawing2D.DashStyle.Custom;
+			this.buttonSendMessage.BorderThickness = 1;
+			this.buttonSendMessage.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.buttonSendMessage.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+			this.buttonSendMessage.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+			this.buttonSendMessage.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+			this.buttonSendMessage.DisabledState.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+			this.buttonSendMessage.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+			this.buttonSendMessage.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(103)))), ((int)(((byte)(126)))));
+			this.buttonSendMessage.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(83)))), ((int)(((byte)(138)))));
+			this.buttonSendMessage.Font = new System.Drawing.Font("Cooper Black", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.buttonSendMessage.ForeColor = System.Drawing.Color.White;
+			this.buttonSendMessage.GradientMode = System.Drawing.Drawing2D.LinearGradientMode.BackwardDiagonal;
+			this.buttonSendMessage.Location = new System.Drawing.Point(543, 338);
+			this.buttonSendMessage.Name = "buttonSendMessage";
+			this.buttonSendMessage.Size = new System.Drawing.Size(125, 50);
+			this.buttonSendMessage.TabIndex = 2;
+			this.buttonSendMessage.TabStop = false;
+			this.buttonSendMessage.Text = "Chat";
+			this.buttonSendMessage.Click += new System.EventHandler(this.ButtonSendMessage_Click);
+			// 
+			// textBoxMessage
+			// 
+			this.textBoxMessage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.textBoxMessage.AutoScroll = true;
+			this.textBoxMessage.BorderColor = System.Drawing.Color.DarkGray;
+			this.textBoxMessage.BorderRadius = 5;
+			this.textBoxMessage.BorderThickness = 2;
+			this.textBoxMessage.Cursor = System.Windows.Forms.Cursors.IBeam;
+			this.textBoxMessage.DefaultText = "";
+			this.textBoxMessage.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+			this.textBoxMessage.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+			this.textBoxMessage.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+			this.textBoxMessage.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+			this.textBoxMessage.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
+			this.textBoxMessage.FocusedState.BorderColor = System.Drawing.Color.Gold;
+			this.textBoxMessage.Font = new System.Drawing.Font("Trebuchet MS", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.textBoxMessage.ForeColor = System.Drawing.Color.White;
+			this.textBoxMessage.HoverState.BorderColor = System.Drawing.Color.LightGray;
+			this.textBoxMessage.Location = new System.Drawing.Point(4, 338);
+			this.textBoxMessage.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+			this.textBoxMessage.MaxLength = 300;
+			this.textBoxMessage.Name = "textBoxMessage";
+			this.textBoxMessage.PasswordChar = '\0';
+			this.textBoxMessage.PlaceholderForeColor = System.Drawing.Color.DarkGray;
+			this.textBoxMessage.PlaceholderText = "Send message";
+			this.textBoxMessage.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+			this.textBoxMessage.SelectedText = "";
+			this.textBoxMessage.Size = new System.Drawing.Size(535, 50);
+			this.textBoxMessage.TabIndex = 1;
+			this.textBoxMessage.TextChanged += new System.EventHandler(this.TextBoxMessage_TextChanged);
+			this.textBoxMessage.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBoxMessage_KeyDown);
+			// 
+			// pictureBoxLineAboveChat
+			// 
+			this.pictureBoxLineAboveChat.AutoRoundedCorners = true;
+			this.pictureBoxLineAboveChat.BackColor = System.Drawing.Color.Transparent;
+			this.pictureBoxLineAboveChat.BorderRadius = 1;
+			this.pictureBoxLineAboveChat.CustomizableEdges.BottomLeft = false;
+			this.pictureBoxLineAboveChat.CustomizableEdges.TopLeft = false;
+			this.pictureBoxLineAboveChat.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
+			this.pictureBoxLineAboveChat.ImageRotate = 0F;
+			this.pictureBoxLineAboveChat.Location = new System.Drawing.Point(0, 360);
+			this.pictureBoxLineAboveChat.Name = "pictureBoxLineAboveChat";
+			this.pictureBoxLineAboveChat.Size = new System.Drawing.Size(500, 4);
+			this.pictureBoxLineAboveChat.TabIndex = 9;
+			this.pictureBoxLineAboveChat.TabStop = false;
+			// 
 			// GameLobbyClientForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-			this.ClientSize = new System.Drawing.Size(891, 670);
+			this.ClientSize = new System.Drawing.Size(1200, 800);
+			this.Controls.Add(this.pictureBoxLineAboveChat);
+			this.Controls.Add(this.panelChat);
 			this.Controls.Add(this.labelValueCoinsBet);
 			this.Controls.Add(this.flpPlayers);
 			this.Controls.Add(this.buttonGameAssistsEnabled);
@@ -238,6 +347,8 @@
 			this.Load += new System.EventHandler(this.GameLobbyClientForm_Load);
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxCoin)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxCoinBet)).EndInit();
+			this.panelChat.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.pictureBoxLineAboveChat)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -256,5 +367,10 @@
 		private Guna.UI2.WinForms.Guna2GradientButton buttonReady;
 		private System.Windows.Forms.FlowLayoutPanel flpPlayers;
 		private System.Windows.Forms.Label labelValueCoinsBet;
+		private Guna.UI2.WinForms.Guna2Panel panelChat;
+		private Models.Utilities.FormUtilities.NoCaretRichTextBox richTextBoxChat;
+		private Guna.UI2.WinForms.Guna2GradientButton buttonSendMessage;
+		private Guna.UI2.WinForms.Guna2TextBox textBoxMessage;
+		private Guna.UI2.WinForms.Guna2PictureBox pictureBoxLineAboveChat;
 	}
 }

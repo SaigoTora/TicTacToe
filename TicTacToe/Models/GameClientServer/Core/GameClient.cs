@@ -5,7 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-
+using TicTacToe.Models.GameClientServer.Chat;
 using TicTacToe.Models.GameClientServer.Game;
 using TicTacToe.Models.GameClientServer.Lobby;
 using TicTacToe.Models.PlayerInfo;
@@ -20,6 +20,7 @@ namespace TicTacToe.Models.GameClientServer.Core
 		internal long PlayerId { get; private set; }
 		private readonly string _gameLobbyUrl = ConfigurationManager.AppSettings["gameLobbyUrl"];
 		private readonly string _gameUrl = ConfigurationManager.AppSettings["gameUrl"];
+		private readonly string _gameLobbyChatUrl = ConfigurationManager.AppSettings["gameLobbyChatUrl"];
 
 		#region Lobby
 		internal async Task<NetworkLobbyInfo> GetGameSettingsAsync(IPAddress ip, int port)
@@ -96,6 +97,30 @@ namespace TicTacToe.Models.GameClientServer.Core
 				throw new InvalidOperationException("No server address is set. Cannot leave game.");
 
 			await httpClient.DeleteAsync($"http://{_serverAddress}{_gameUrl}");
+		}
+		#endregion
+
+		#region Chat
+		internal async Task<ChatManager> SendMessageAsync(Message message)
+		{
+			string jsonContent = JsonConvert.SerializeObject(message, Formatting.Indented);
+
+			using (var httpContent = new StringContent(jsonContent, Encoding.UTF8, "application/json"))
+			{
+				HttpResponseMessage response = await httpClient.PostAsync($"http://{_serverAddress}{_gameLobbyChatUrl}", httpContent);
+				response.EnsureSuccessStatusCode();
+
+				string jsonResponse = await response.Content.ReadAsStringAsync();
+				return JsonConvert.DeserializeObject<ChatManager>(jsonResponse);
+			}
+		}
+		internal async Task<ChatManager> UpdateLobbyChatAsync()
+		{
+			HttpResponseMessage response = await httpClient.GetAsync($"http://{_serverAddress}{_gameLobbyChatUrl}");
+			response.EnsureSuccessStatusCode();
+
+			string jsonResponse = await response.Content.ReadAsStringAsync();
+			return JsonConvert.DeserializeObject<ChatManager>(jsonResponse);
 		}
 		#endregion
 	}

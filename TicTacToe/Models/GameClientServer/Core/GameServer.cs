@@ -34,7 +34,7 @@ namespace TicTacToe.Models.GameClientServer.Core
 		private readonly FirewallManager _firewallManager;
 		private readonly Player _player;
 		private readonly NetworkLobbyInfo _networkLobbyInfo;
-		private readonly ChatManager _lobbyChat = new ChatManager();
+		internal readonly ChatManager LobbyChat = new ChatManager();
 		private Game.GameInfo _gameInfo;
 		private bool _readyToGetMoveInfo = false;
 
@@ -284,7 +284,7 @@ namespace TicTacToe.Models.GameClientServer.Core
 			if (context.Request.HttpMethod == HttpMethod.Post.Method)
 				postedMessage = await HandlePostChatRequestAsync(context);
 
-			string response = JsonConvert.SerializeObject(_lobbyChat, Formatting.Indented);
+			string response = JsonConvert.SerializeObject(LobbyChat, Formatting.Indented);
 			await SendResponseToClient(context, response);
 
 			if (postedMessage != null && clientIPAddress != null)
@@ -297,13 +297,10 @@ namespace TicTacToe.Models.GameClientServer.Core
 			{
 				string jsonData = await reader.ReadToEndAsync();
 				postedMessage = JsonConvert.DeserializeObject<Message>(jsonData);
-				AddMessage(postedMessage);
+				LobbyChat.AddMessage(postedMessage);
 			}
 			return postedMessage;
 		}
-
-		internal void AddMessage(Message message)
-			=> _lobbyChat.AddMessage(message);
 
 		private void OnMessagePosted(ChatMessageEventArgs e)
 		{

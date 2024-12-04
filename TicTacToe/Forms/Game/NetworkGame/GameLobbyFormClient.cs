@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using TicTacToe.Forms.Game.Games3on3;
 using TicTacToe.Forms.Game.Games5on5;
 using TicTacToe.Forms.Game.Games7on7;
+using TicTacToe.Models.GameClientServer.Chat;
 using TicTacToe.Models.GameClientServer.Core;
 using TicTacToe.Models.GameClientServer.Lobby;
 using TicTacToe.Models.GameInfo;
@@ -35,6 +36,7 @@ namespace TicTacToe.Forms.Game.NetworkGame
 		private readonly Player _player;
 
 		private readonly GameClient _gameClient;
+		private ChatManager _lobbyChat = new ChatManager();
 		private readonly Dictionary<long, Guna2Panel> _idToGamePanels = new Dictionary<long, Guna2Panel>();
 
 		private readonly System.Threading.Timer _updateTimer;
@@ -55,6 +57,7 @@ namespace TicTacToe.Forms.Game.NetworkGame
 			_syncContext = SynchronizationContext.Current;
 
 			_gameClient = gameClient;
+			DisplayMessage(new Models.GameClientServer.Chat.Message(string.Empty, "Welcome to the chat!"), false);
 			_updateTimer = new System.Threading.Timer(UpdateTimerCallBack, null, 0, LOBBY_UPDATE_INTERVAL);
 
 			_playerCreator = new NetworkPlayerCreator(new Size(PANEL_WIDTH, PANEL_HEIGHT));
@@ -62,6 +65,8 @@ namespace TicTacToe.Forms.Game.NetworkGame
 		private void GameLobbyClientForm_Load(object sender, EventArgs e)
 		{
 			labelCoins.Text = $"{_player.Coins:N0}".Replace(',', ' ');
+			richTextBoxChat.BackColor = BackColor;
+
 			_buttonEventHandlers.SubscribeToHover(buttonReady);
 			buttonReady.FillColor = _buttonFillColor.Ready;
 			buttonReady.FillColor2 = _buttonFillColor2.Ready;
@@ -203,6 +208,111 @@ namespace TicTacToe.Forms.Game.NetworkGame
 		}
 		#endregion
 
+		#region Chat
+		private async void ButtonSendMessage_Click(object sender, EventArgs e)
+		{
+			textBoxMessage.Text = textBoxMessage.Text.Trim('\n', ' ');
+			if (!string.IsNullOrEmpty(textBoxMessage.Text))
+			{
+				var message = new Models.GameClientServer.Chat.Message(_player.Name, textBoxMessage.Text);
+				_lobbyChat = await _gameClient.SendMessageAsync(message);
+				DisplayMessage(message, true);
+				textBoxMessage.Text = string.Empty;
+				textBoxMessage.Multiline = false;
+			}
+		}
+		private void DisplayMessage(Models.GameClientServer.Chat.Message message, bool isOwnMessage)
+		{
+			if (_lobbyChat != null && _lobbyChat.CheckMessageLimit())
+				RemoveFirstLineFromRichTextBox();
+
+			richTextBoxChat.SelectionStart = richTextBoxChat.Text.Length;
+			if (richTextBoxChat.Text.Length > 0)
+				richTextBoxChat.SelectedText = "\n";
+			DisplayTimeInMessage(message.Time.ToLocalTime());
+
+			if (!string.IsNullOrEmpty(message.Sender))
+				DisplaySenderInMessage(message.Sender, isOwnMessage);
+
+			DisplayMessageText(message.Text);
+			richTextBoxChat.ScrollToCaret();
+		}
+		private void RemoveFirstLineFromRichTextBox()
+		{
+			int firstLineEndIndex = richTextBoxChat.GetFirstCharIndexFromLine(1);
+
+			if (firstLineEndIndex > 0)
+			{
+				richTextBoxChat.Select(firstLineEndIndex, richTextBoxChat.Text.Length - firstLineEndIndex);
+				string remainingRtf = richTextBoxChat.SelectedRtf;
+
+				richTextBoxChat.Rtf = remainingRtf; // Replace the current text with a new one
+			}
+		}
+		private void DisplayTimeInMessage(DateTime dateTime)
+		{
+			richTextBoxChat.SelectionFont = new Font(richTextBoxChat.Font.FontFamily, 10, FontStyle.Regular);
+			richTextBoxChat.SelectionColor = Color.Gray;
+			richTextBoxChat.SelectedText = $"{dateTime:HH:mm}\t";
+		}
+		private void DisplaySenderInMessage(string sender, bool isOwnMessage)
+		{
+			richTextBoxChat.SelectionFont = new Font(richTextBoxChat.Font.FontFamily, 16, FontStyle.Bold);
+			if (isOwnMessage)
+				richTextBoxChat.SelectionColor = Color.FromArgb(255, 223, 0);
+			else
+				richTextBoxChat.SelectionColor = Color.White;
+
+			richTextBoxChat.SelectedText = sender;
+
+			richTextBoxChat.SelectionFont = new Font(richTextBoxChat.Font.FontFamily, 16, FontStyle.Regular);
+			richTextBoxChat.SelectionColor = Color.White;
+			richTextBoxChat.SelectedText = ":  ";
+		}
+		private void DisplayMessageText(string text)
+		{
+			richTextBoxChat.SelectionFont = new Font(richTextBoxChat.Font.FontFamily, 16, FontStyle.Regular);
+			richTextBoxChat.SelectionColor = Color.LightGray;
+			richTextBoxChat.SelectedText = text;
+		}
+
+		private void TextBoxMessage_KeyDown(object sender, KeyEventArgs e)
+		{
+			if (e.KeyCode == Keys.Enter)
+			{
+				e.SuppressKeyPress = true;
+				ButtonSendMessage_Click(sender, e);
+			}
+		}
+		private void TextBoxMessage_TextChanged(object sender, EventArgs e)
+		{
+			BeginInvoke(new Action(() =>
+			{
+				const int MULTILINE_HEIGHT = 75;
+				const int SINGLELINE_HEIGHT = 50;
+				const int MULTILINE_Y_POSITION = 313;
+				const int SINGLELINE_Y_POSITION = 338;
+
+				textBoxMessage.AutoScroll = false;
+				Size textSize = TextRenderer.MeasureText(textBoxMessage.Text, textBoxMessage.Font);
+				bool requiresMultiline = textSize.Width > textBoxMessage.Width || textSize.Height > SINGLELINE_HEIGHT;
+
+				if (requiresMultiline)
+				{
+					textBoxMessage.Size = new Size(textBoxMessage.Width, MULTILINE_HEIGHT);
+					textBoxMessage.Location = new Point(textBoxMessage.Location.X, MULTILINE_Y_POSITION);
+					textBoxMessage.Multiline = true;
+				}
+				else
+				{
+					textBoxMessage.Size = new Size(textBoxMessage.Width, SINGLELINE_HEIGHT);
+					textBoxMessage.Location = new Point(textBoxMessage.Location.X, SINGLELINE_Y_POSITION);
+					textBoxMessage.Multiline = false;
+				}
+			}));
+		}
+		#endregion
+
 		private void SetActiveEnableButtonStyle(IconButton button)
 		{
 			button.IconChar = IconChar.CircleCheck;
@@ -245,6 +355,8 @@ namespace TicTacToe.Forms.Game.NetworkGame
 					else
 						SetClientForm(lobbyInfo);
 				}
+				ChatManager newLobbyChat = await _gameClient.UpdateLobbyChatAsync();
+				_syncContext.Post(_ => { UpdateChat(newLobbyChat); }, null);
 			}
 			catch (System.Net.Http.HttpRequestException)
 			{
@@ -260,6 +372,30 @@ namespace TicTacToe.Forms.Game.NetworkGame
 						CustomMessageBoxButtons.OK, CustomMessageBoxIcon.Error);
 					}, null);
 				}
+			}
+		}
+		private void UpdateChat(ChatManager newLobbyChat)
+		{
+			int indexLastMessage = _lobbyChat.GetCount() - 1;
+			int startIndex = 0;
+
+			if (indexLastMessage >= 0)
+			{
+				var LastMessageOld = _lobbyChat.GetMessage(indexLastMessage);
+				var LastMessageNew = newLobbyChat.GetMessage(newLobbyChat.GetCount() - 1);
+
+				if (LastMessageOld == LastMessageNew)
+					return;
+
+				startIndex = newLobbyChat.FindIndexByMessage(LastMessageOld) + 1;
+			}
+
+			Models.GameClientServer.Chat.Message message;
+			for (int i = startIndex; i < newLobbyChat.GetCount(); i++)
+			{
+				message = newLobbyChat.GetMessage(i);
+				_lobbyChat.AddMessage(message);
+				DisplayMessage(message, false);
 			}
 		}
 		private async void ButtonReady_Click(object sender, EventArgs e)

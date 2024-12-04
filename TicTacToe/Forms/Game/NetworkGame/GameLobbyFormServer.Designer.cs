@@ -49,10 +49,12 @@ namespace TicTacToe.Forms.Game.NetworkGame
 			this.panelChat = new Guna.UI2.WinForms.Guna2Panel();
 			this.richTextBoxChat = new TicTacToe.Models.Utilities.FormUtilities.NoCaretRichTextBox();
 			this.buttonSendMessage = new Guna.UI2.WinForms.Guna2GradientButton();
+			this.pictureBoxLineAboveChat = new Guna.UI2.WinForms.Guna2PictureBox();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxCoin)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownNumberOfRounds)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxCoinBet)).BeginInit();
 			this.panelChat.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.pictureBoxLineAboveChat)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// pictureBoxCoin
@@ -280,7 +282,7 @@ namespace TicTacToe.Forms.Game.NetworkGame
 			this.buttonStart.Location = new System.Drawing.Point(968, 715);
 			this.buttonStart.Name = "buttonStart";
 			this.buttonStart.Size = new System.Drawing.Size(220, 50);
-			this.buttonStart.TabIndex = 14;
+			this.buttonStart.TabIndex = 16;
 			this.buttonStart.TabStop = false;
 			this.buttonStart.Text = "Start";
 			this.buttonStart.Click += new System.EventHandler(this.ButtonStart_Click);
@@ -293,7 +295,7 @@ namespace TicTacToe.Forms.Game.NetworkGame
 			this.flpPlayers.Location = new System.Drawing.Point(677, 375);
 			this.flpPlayers.Name = "flpPlayers";
 			this.flpPlayers.Size = new System.Drawing.Size(267, 390);
-			this.flpPlayers.TabIndex = 13;
+			this.flpPlayers.TabIndex = 15;
 			this.flpPlayers.Tag = "needToMoveParentDown";
 			// 
 			// labelValueCoinsBet
@@ -336,7 +338,7 @@ namespace TicTacToe.Forms.Game.NetworkGame
 			this.textBoxMessage.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
 			this.textBoxMessage.SelectedText = "";
 			this.textBoxMessage.Size = new System.Drawing.Size(535, 50);
-			this.textBoxMessage.TabIndex = 16;
+			this.textBoxMessage.TabIndex = 1;
 			this.textBoxMessage.TextChanged += new System.EventHandler(this.TextBoxMessage_TextChanged);
 			this.textBoxMessage.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBoxMessage_KeyDown);
 			// 
@@ -349,7 +351,7 @@ namespace TicTacToe.Forms.Game.NetworkGame
 			this.panelChat.Location = new System.Drawing.Point(6, 375);
 			this.panelChat.Name = "panelChat";
 			this.panelChat.Size = new System.Drawing.Size(670, 390);
-			this.panelChat.TabIndex = 18;
+			this.panelChat.TabIndex = 14;
 			this.panelChat.Tag = "needToMoveParentDown";
 			// 
 			// richTextBoxChat
@@ -364,7 +366,7 @@ namespace TicTacToe.Forms.Game.NetworkGame
 			this.richTextBoxChat.ReadOnly = true;
 			this.richTextBoxChat.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
 			this.richTextBoxChat.Size = new System.Drawing.Size(670, 300);
-			this.richTextBoxChat.TabIndex = 19;
+			this.richTextBoxChat.TabIndex = 0;
 			this.richTextBoxChat.Text = "";
 			// 
 			// buttonSendMessage
@@ -388,10 +390,25 @@ namespace TicTacToe.Forms.Game.NetworkGame
 			this.buttonSendMessage.Location = new System.Drawing.Point(543, 338);
 			this.buttonSendMessage.Name = "buttonSendMessage";
 			this.buttonSendMessage.Size = new System.Drawing.Size(125, 50);
-			this.buttonSendMessage.TabIndex = 21;
+			this.buttonSendMessage.TabIndex = 2;
 			this.buttonSendMessage.TabStop = false;
 			this.buttonSendMessage.Text = "Chat";
 			this.buttonSendMessage.Click += new System.EventHandler(this.ButtonSendMessage_Click);
+			// 
+			// pictureBoxLineAboveChat
+			// 
+			this.pictureBoxLineAboveChat.AutoRoundedCorners = true;
+			this.pictureBoxLineAboveChat.BackColor = System.Drawing.Color.Transparent;
+			this.pictureBoxLineAboveChat.BorderRadius = 1;
+			this.pictureBoxLineAboveChat.CustomizableEdges.BottomLeft = false;
+			this.pictureBoxLineAboveChat.CustomizableEdges.TopLeft = false;
+			this.pictureBoxLineAboveChat.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
+			this.pictureBoxLineAboveChat.ImageRotate = 0F;
+			this.pictureBoxLineAboveChat.Location = new System.Drawing.Point(0, 360);
+			this.pictureBoxLineAboveChat.Name = "pictureBoxLineAboveChat";
+			this.pictureBoxLineAboveChat.Size = new System.Drawing.Size(500, 4);
+			this.pictureBoxLineAboveChat.TabIndex = 13;
+			this.pictureBoxLineAboveChat.TabStop = false;
 			// 
 			// GameLobbyServerForm
 			// 
@@ -399,6 +416,7 @@ namespace TicTacToe.Forms.Game.NetworkGame
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
 			this.ClientSize = new System.Drawing.Size(1200, 800);
+			this.Controls.Add(this.pictureBoxLineAboveChat);
 			this.Controls.Add(this.panelChat);
 			this.Controls.Add(this.labelValueCoinsBet);
 			this.Controls.Add(this.flpPlayers);
@@ -424,6 +442,7 @@ namespace TicTacToe.Forms.Game.NetworkGame
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownNumberOfRounds)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxCoinBet)).EndInit();
 			this.panelChat.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.pictureBoxLineAboveChat)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -450,5 +469,6 @@ namespace TicTacToe.Forms.Game.NetworkGame
 		private Guna.UI2.WinForms.Guna2Panel panelChat;
 		private Guna.UI2.WinForms.Guna2GradientButton buttonSendMessage;
 		private NoCaretRichTextBox richTextBoxChat;
+		private Guna.UI2.WinForms.Guna2PictureBox pictureBoxLineAboveChat;
 	}
 }
