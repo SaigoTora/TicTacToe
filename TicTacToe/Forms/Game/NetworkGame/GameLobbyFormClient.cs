@@ -130,6 +130,8 @@ namespace TicTacToe.Forms.Game.NetworkGame
 						($"Unknown field size: {_player.SinglePCGameSettings.FieldSize}");
 			}
 
+			if (!panelChat.IsDisposed)
+				panelChat?.Dispose();
 			Close();
 			gameForm.Show();
 		}
@@ -215,10 +217,18 @@ namespace TicTacToe.Forms.Game.NetworkGame
 			if (!string.IsNullOrEmpty(textBoxMessage.Text))
 			{
 				var message = new Models.GameClientServer.Chat.Message(_player.Name, textBoxMessage.Text);
-				_lobbyChat = await _gameClient.SendMessageAsync(message);
-				DisplayMessage(message, true);
-				textBoxMessage.Text = string.Empty;
-				textBoxMessage.Multiline = false;
+				try
+				{
+					_lobbyChat = await _gameClient.SendMessageAsync(message);
+					DisplayMessage(message, true);
+					textBoxMessage.Text = string.Empty;
+					textBoxMessage.Multiline = false;
+				}
+				catch (System.Net.Http.HttpRequestException)
+				{
+					if (!_wasUpdateExceptionThrown)
+						HandleClientRequestError();
+				}
 			}
 		}
 		private void DisplayMessage(Models.GameClientServer.Chat.Message message, bool isOwnMessage)
@@ -359,24 +369,12 @@ namespace TicTacToe.Forms.Game.NetworkGame
 				_syncContext.Post(_ =>
 				{
 					UpdateChat(newLobbyChat);
-					if (ActiveControl != textBoxMessage)
-						ActiveControl = null;
 				}, null);
 			}
 			catch (System.Net.Http.HttpRequestException)
 			{
 				if (!_wasUpdateExceptionThrown)
-				{
-					_wasUpdateExceptionThrown = true;
-					_updateTimer?.Dispose();
-					_syncContext.Post(_ =>
-					{
-						Close();
-						CustomMessageBox.Show($"Failed to connect because the player " +
-						"who created the lobby has finished waiting for players.", "Error",
-						CustomMessageBoxButtons.OK, CustomMessageBoxIcon.Error);
-					}, null);
-				}
+					HandleClientRequestError();
 			}
 		}
 		private void UpdateChat(ChatManager newLobbyChat)
@@ -402,6 +400,18 @@ namespace TicTacToe.Forms.Game.NetworkGame
 				_lobbyChat.AddMessage(message);
 				DisplayMessage(message, false);
 			}
+		}
+		private void HandleClientRequestError()
+		{
+			_wasUpdateExceptionThrown = true;
+			_updateTimer?.Dispose();
+			_syncContext.Post(_ =>
+			{
+				Close();
+				CustomMessageBox.Show($"Failed to connect because the player " +
+				"who created the lobby has finished waiting for players.", "Error",
+				CustomMessageBoxButtons.OK, CustomMessageBoxIcon.Error);
+			}, null);
 		}
 		private async void ButtonReady_Click(object sender, EventArgs e)
 		{

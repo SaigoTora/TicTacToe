@@ -270,7 +270,7 @@ namespace TicTacToe.Forms.ItemManagement.Profile
 			ValidationResult result = validator.Validate(newPlayer);
 			if (!result.IsValid)
 			{
-				CustomMessageBox.Show(result.Errors[0].ErrorMessage, "Invalid input", CustomMessageBoxButtons.OK, CustomMessageBoxIcon.Error);
+				CustomMessageBox.Show(result.Errors[0].ErrorMessage, "Invalid input", CustomMessageBoxButtons.OK, CustomMessageBoxIcon.Error, 420);
 				return false;
 			}
 			else

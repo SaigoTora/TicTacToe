@@ -188,6 +188,8 @@ namespace TicTacToe.Forms
 		private void ButtonPlay_Click(object sender, EventArgs e)
 			=> Close();
 
+		internal void CancelAutoClose()
+			=> _cancellationTokenSource.Cancel();
 		private async Task DelayToCloseAsync(byte delaySeconds = 60)
 		{
 			labelTimeToClose.Visible = true;
@@ -219,7 +221,7 @@ namespace TicTacToe.Forms
 
 		private void ResultForm_FormClosed(object sender, FormClosedEventArgs e)
 		{
-			_cancellationTokenSource.Cancel();
+			CancelAutoClose();
 			buttonBack.Click -= _backToMainForm;
 
 			_buttonEventHandlers.UnsubscribeAll();

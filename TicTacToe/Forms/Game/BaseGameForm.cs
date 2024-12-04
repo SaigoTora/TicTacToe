@@ -208,7 +208,8 @@ namespace TicTacToe.Forms.Game
 			}
 			catch (NotEnoughCoinsToStartGameException exception)
 			{
-				CustomMessageBox.Show(exception.Message, "Not enough coins", CustomMessageBoxButtons.OK, CustomMessageBoxIcon.Error);
+				CustomMessageBox.Show(exception.Message, "Not enough coins",
+					CustomMessageBoxButtons.OK, CustomMessageBoxIcon.Error);
 				Close();
 			}
 			catch (InvalidOperationException)
@@ -510,8 +511,10 @@ namespace TicTacToe.Forms.Game
 						_wasPressedButtonBack = true;
 						_gameResultForm?.Close();
 						Close();
-						CustomMessageBox.Show($"Your opponent left the game, so the victory is yours. " +
-							$"You won {coinReward.CoinsForWin} coins!", "Game information",
+						string rewardText = coinReward.CoinsForWin > 0 ?
+						$" You won {coinReward.CoinsForWin} coins!" : string.Empty;
+						CustomMessageBox.Show($"Your opponent left the game, so the victory is yours." +
+							rewardText, "Game information",
 							CustomMessageBoxButtons.OK, CustomMessageBoxIcon.Information);
 					}, null);
 				}
@@ -613,8 +616,10 @@ namespace TicTacToe.Forms.Game
 				_wasPressedButtonBack = true;
 				_gameResultForm?.Close();
 				Close();
-				CustomMessageBox.Show($"{e.Player.Name} left the game, so the victory is yours. " +
-					$"You won {coinReward.CoinsForWin} coins!", "Game information",
+				string rewardText = coinReward.CoinsForWin > 0 ?
+				$" You won {coinReward.CoinsForWin} coins!" : string.Empty;
+				CustomMessageBox.Show($"{e.Player.Name} left the game, so the victory is yours." +
+					rewardText, "Game information",
 					CustomMessageBoxButtons.OK, CustomMessageBoxIcon.Information);
 			}, null);
 		}
@@ -728,9 +733,13 @@ namespace TicTacToe.Forms.Game
 
 			if (((gameServer != null || gameClient != null) && !roundManager.IsLastRound()))
 			{
+				_gameResultForm.CancelAutoClose();
 				_gameResultForm?.Hide();
 				_gameResultForm?.Close();
-				CustomMessageBox.Show("You have left the game and lost your initial bet: 20 coins!" +
+				string coinsLostText = coinReward.CoinsForLoss != 0 ?
+					$"lost your initial bet: {Math.Abs(coinReward.CoinsForLoss)} coins!" :
+					"could have lost your original bet, but luckily there was no bet in this game.";
+				CustomMessageBox.Show($"You have left the game and " + coinsLostText +
 					"\nTry not to leave during local games because you will lose coins.", "Warning",
 					CustomMessageBoxButtons.OK, CustomMessageBoxIcon.Warning);
 			}

@@ -10,6 +10,7 @@ namespace TicTacToe.Models.PlayerInfo
 		private const string PLAYER_NAME = "Nickname";
 		private const string EXCEPT_NAME_CHARS = "!@#№%^&*()+[]{}:;'\"\\,/`<>?=";
 		private const int MIN_NAME_LENGTH = 3;
+
 		internal PlayerValidator()
 		{
 			RuleFor(player => player.Name)
@@ -18,7 +19,8 @@ namespace TicTacToe.Models.PlayerInfo
 				.MaximumLength(MAX_NAME_LENGTH)
 				.WithName(PLAYER_NAME)
 				.Must(name => !name.Any(ch => EXCEPT_NAME_CHARS.Contains(ch))) // Check for invalid characters
-				.WithMessage($"'{PLAYER_NAME}' cannot contain the following characters:\n{string.Concat(EXCEPT_NAME_CHARS.Select(c => c + " "))}");
+				.WithMessage($"'{PLAYER_NAME}' cannot contain the following characters:" +
+				$"\n{string.Concat(EXCEPT_NAME_CHARS.Select(c => c + " "))}");
 		}
 	}
 }

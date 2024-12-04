@@ -28,7 +28,8 @@ namespace TicTacToe.Forms
 	{
 		private DialogResult _dialogResult = DialogResult.None;
 
-		private CustomMessageBox(string text, string caption, CustomMessageBoxButtons buttons, CustomMessageBoxIcon icon, int MaxWidth)
+		private CustomMessageBox(string text, string caption, CustomMessageBoxButtons buttons,
+			CustomMessageBoxIcon icon, int width)
 		{
 			InitializeComponent();
 			customTitleBar = new CustomTitleBar(this, caption, minimizeBox: false, maximizeBox: false);
@@ -38,9 +39,9 @@ namespace TicTacToe.Forms
 			labelText.Text = text;
 			button1.Visible = true;
 			button2.Visible = true;
-			AdjustFormSize(MaxWidth);
 			SetButtons(buttons);
 			SetIcon(icon);
+			AdjustFormSize(width);
 		}
 		private void SetButtons(CustomMessageBoxButtons buttons)
 		{
@@ -65,7 +66,8 @@ namespace TicTacToe.Forms
 					throw new ArgumentException($"Unknown buttons: {buttons}", nameof(buttons));
 			}
 		}
-		private void SetupButton(Guna2GradientButton iconButton, string text, DialogResult dialogResult, Color FillColor, Color FillColor2)
+		private void SetupButton(Guna2GradientButton iconButton, string text,
+			DialogResult dialogResult, Color FillColor, Color FillColor2)
 		{
 			iconButton.Text = text;
 			iconButton.FillColor = FillColor;
@@ -108,29 +110,24 @@ namespace TicTacToe.Forms
 			iconPicture.IconChar = iconChar;
 			iconPicture.IconColor = iconColor;
 		}
-		private void AdjustFormSize(int maxWidth)
+		private void AdjustFormSize(int width)
 		{
-			const int PaddingHeight = 100;
-			const int PaddingWidth = 40;
+			const int PADDING_HEIGHT = 100;
 
-			Size textSize = TextRenderer.MeasureText(labelText.Text, labelText.Font, new Size(maxWidth, 0), TextFormatFlags.WordBreak);
+			Size textSize = TextRenderer.MeasureText(labelText.Text, labelText.Font,
+				new Size(width, 0), TextFormatFlags.WordBreak);
 
-			int lines = (int)Math.Ceiling((double)textSize.Width / maxWidth);
-			int additionalHeight = lines * textSize.Height;
+			int requiredHeight = textSize.Height + PADDING_HEIGHT;
+			requiredHeight = Math.Max(requiredHeight, MinimumSize.Height);
 
-			int newWidth = Math.Min(textSize.Width + PaddingWidth, maxWidth);
-			int newHeight = textSize.Height + PaddingHeight + additionalHeight;
-			newHeight = Math.Max(newHeight, MinimumSize.Height);
-
-			newWidth = newWidth < Width ? Width : newWidth;
-			Size = new Size(newWidth, newHeight);
+			ClientSize = new Size(Math.Max(width, this.Width), requiredHeight);
 		}
 
 		internal static DialogResult Show(string text, string caption = "",
 			CustomMessageBoxButtons buttons = CustomMessageBoxButtons.OK,
-			CustomMessageBoxIcon icon = CustomMessageBoxIcon.None, int maxWidth = 400)
+			CustomMessageBoxIcon icon = CustomMessageBoxIcon.None, int width = 400)
 		{
-			CustomMessageBox messageBox = new CustomMessageBox(text, caption, buttons, icon, maxWidth);
+			CustomMessageBox messageBox = new CustomMessageBox(text, caption, buttons, icon, width);
 			messageBox.ShowDialog();
 
 			return messageBox._dialogResult;

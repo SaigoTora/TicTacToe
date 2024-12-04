@@ -47,7 +47,7 @@
 			this.iconPicture.IconSize = 75;
 			this.iconPicture.Location = new System.Drawing.Point(0, 0);
 			this.iconPicture.Name = "iconPicture";
-			this.iconPicture.Size = new System.Drawing.Size(75, 107);
+			this.iconPicture.Size = new System.Drawing.Size(75, 75);
 			this.iconPicture.TabIndex = 0;
 			this.iconPicture.TabStop = false;
 			// 
@@ -60,7 +60,7 @@
 			this.labelText.Location = new System.Drawing.Point(75, 0);
 			this.labelText.Name = "labelText";
 			this.labelText.Padding = new System.Windows.Forms.Padding(0, 10, 10, 0);
-			this.labelText.Size = new System.Drawing.Size(235, 107);
+			this.labelText.Size = new System.Drawing.Size(235, 75);
 			this.labelText.TabIndex = 0;
 			this.labelText.Text = "labelText";
 			// 
@@ -71,7 +71,7 @@
 			this.flpButtons.Controls.Add(this.button1);
 			this.flpButtons.Dock = System.Windows.Forms.DockStyle.Bottom;
 			this.flpButtons.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-			this.flpButtons.Location = new System.Drawing.Point(0, 107);
+			this.flpButtons.Location = new System.Drawing.Point(0, 75);
 			this.flpButtons.Name = "flpButtons";
 			this.flpButtons.Padding = new System.Windows.Forms.Padding(0, 0, 10, 0);
 			this.flpButtons.Size = new System.Drawing.Size(310, 48);
@@ -138,10 +138,12 @@
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-			this.ClientSize = new System.Drawing.Size(310, 155);
+			this.ClientSize = new System.Drawing.Size(310, 123);
 			this.Controls.Add(this.labelText);
 			this.Controls.Add(this.iconPicture);
 			this.Controls.Add(this.flpButtons);
+			this.MaximumSize = new System.Drawing.Size(1000, 600);
+			this.MinimumSize = new System.Drawing.Size(310, 123);
 			this.Name = "CustomMessageBox";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.TopMost = true;
