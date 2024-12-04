@@ -356,7 +356,12 @@ namespace TicTacToe.Forms.Game.NetworkGame
 						SetClientForm(lobbyInfo);
 				}
 				ChatManager newLobbyChat = await _gameClient.UpdateLobbyChatAsync();
-				_syncContext.Post(_ => { UpdateChat(newLobbyChat); }, null);
+				_syncContext.Post(_ =>
+				{
+					UpdateChat(newLobbyChat);
+					if (ActiveControl != textBoxMessage)
+						ActiveControl = null;
+				}, null);
 			}
 			catch (System.Net.Http.HttpRequestException)
 			{

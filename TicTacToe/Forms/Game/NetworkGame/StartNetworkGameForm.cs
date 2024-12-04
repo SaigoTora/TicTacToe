@@ -363,7 +363,10 @@ namespace TicTacToe.Forms.Game.NetworkGame
 			gameSettingsForm.FormClosed += (s, args) =>
 			{
 				if (!IsDisposed)
+				{
 					Show();
+					ButtonRefresh_Click(sender, e);
+				}
 			};
 			Hide();
 			gameSettingsForm.Show();

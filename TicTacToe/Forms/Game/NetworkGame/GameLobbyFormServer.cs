@@ -71,7 +71,17 @@ namespace TicTacToe.Forms.Game.NetworkGame
 				new NetworkPlayer(_player.Name, _player.VisualSettings, true)));
 
 			SetServerForm();
-			_gameServer.Start();
+			try
+			{
+				_gameServer.Start();
+			}
+			catch (System.Net.HttpListenerException)
+			{
+				CustomMessageBox.Show("Failed to start the game server! " +
+					"It looks like a server is already running at this address.",
+					"Server Error", CustomMessageBoxButtons.OK, CustomMessageBoxIcon.Error);
+				Close();
+			}
 			ManageServerEventHandlers(true);
 		}
 
