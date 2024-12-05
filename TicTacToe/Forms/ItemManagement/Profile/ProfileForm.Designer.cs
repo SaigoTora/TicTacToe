@@ -40,6 +40,7 @@
 			this.pictureBoxPlayerAvatar = new System.Windows.Forms.PictureBox();
 			this.tabControl = new Guna.UI2.WinForms.Guna2TabControl();
 			this.tabPagePreferences = new System.Windows.Forms.TabPage();
+			this.buttonResetProgress = new FontAwesome.Sharp.IconButton();
 			this.panelPreviewItem = new Guna.UI2.WinForms.Guna2Panel();
 			this.labelItemCount = new System.Windows.Forms.Label();
 			this.labelDateTimePurchase = new System.Windows.Forms.Label();
@@ -113,7 +114,7 @@
 			this.flpBackgroundMenu.Name = "flpBackgroundMenu";
 			this.flpBackgroundMenu.Padding = new System.Windows.Forms.Padding(40, 10, 0, 0);
 			this.flpBackgroundMenu.Size = new System.Drawing.Size(717, 342);
-			this.flpBackgroundMenu.TabIndex = 2;
+			this.flpBackgroundMenu.TabIndex = 1;
 			// 
 			// flpAvatar
 			// 
@@ -126,7 +127,7 @@
 			this.flpAvatar.Name = "flpAvatar";
 			this.flpAvatar.Padding = new System.Windows.Forms.Padding(40, 10, 0, 0);
 			this.flpAvatar.Size = new System.Drawing.Size(717, 342);
-			this.flpAvatar.TabIndex = 3;
+			this.flpAvatar.TabIndex = 2;
 			this.flpAvatar.Visible = false;
 			// 
 			// flpBackgroundGame
@@ -140,7 +141,7 @@
 			this.flpBackgroundGame.Name = "flpBackgroundGame";
 			this.flpBackgroundGame.Padding = new System.Windows.Forms.Padding(40, 10, 0, 0);
 			this.flpBackgroundGame.Size = new System.Drawing.Size(717, 342);
-			this.flpBackgroundGame.TabIndex = 4;
+			this.flpBackgroundGame.TabIndex = 3;
 			this.flpBackgroundGame.Visible = false;
 			// 
 			// buttonChangeName
@@ -215,7 +216,7 @@
 			this.tabControl.TabButtonSelectedState.ForeColor = System.Drawing.Color.White;
 			this.tabControl.TabButtonSelectedState.InnerColor = System.Drawing.Color.SteelBlue;
 			this.tabControl.TabButtonSize = new System.Drawing.Size(400, 50);
-			this.tabControl.TabIndex = 3;
+			this.tabControl.TabIndex = 4;
 			this.tabControl.TabMenuBackColor = System.Drawing.Color.Black;
 			this.tabControl.TabMenuOrientation = Guna.UI2.WinForms.TabMenuOrientation.HorizontalTop;
 			// 
@@ -223,6 +224,7 @@
 			// 
 			this.tabPagePreferences.AutoScroll = true;
 			this.tabPagePreferences.BackColor = System.Drawing.Color.Black;
+			this.tabPagePreferences.Controls.Add(this.buttonResetProgress);
 			this.tabPagePreferences.Controls.Add(this.panelPreviewItem);
 			this.tabPagePreferences.Controls.Add(this.panelPreferenceNavigation);
 			this.tabPagePreferences.Controls.Add(this.flpBackgroundMenu);
@@ -235,6 +237,25 @@
 			this.tabPagePreferences.Size = new System.Drawing.Size(1192, 422);
 			this.tabPagePreferences.TabIndex = 0;
 			this.tabPagePreferences.Text = "Preferences";
+			// 
+			// buttonResetProgress
+			// 
+			this.buttonResetProgress.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.buttonResetProgress.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
+			this.buttonResetProgress.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.buttonResetProgress.FlatAppearance.BorderSize = 0;
+			this.buttonResetProgress.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.buttonResetProgress.IconChar = FontAwesome.Sharp.IconChar.TrashAlt;
+			this.buttonResetProgress.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(24)))), ((int)(((byte)(13)))));
+			this.buttonResetProgress.IconFont = FontAwesome.Sharp.IconFont.Auto;
+			this.buttonResetProgress.IconSize = 33;
+			this.buttonResetProgress.Location = new System.Drawing.Point(1151, 383);
+			this.buttonResetProgress.Name = "buttonResetProgress";
+			this.buttonResetProgress.Size = new System.Drawing.Size(36, 36);
+			this.buttonResetProgress.TabIndex = 5;
+			this.buttonResetProgress.TabStop = false;
+			this.buttonResetProgress.UseVisualStyleBackColor = false;
+			this.buttonResetProgress.Click += new System.EventHandler(this.ButtonResetProgress_Click);
 			// 
 			// panelPreviewItem
 			// 
@@ -251,7 +272,7 @@
 			this.panelPreviewItem.Name = "panelPreviewItem";
 			this.panelPreviewItem.Padding = new System.Windows.Forms.Padding(0, 0, 15, 0);
 			this.panelPreviewItem.Size = new System.Drawing.Size(430, 300);
-			this.panelPreviewItem.TabIndex = 0;
+			this.panelPreviewItem.TabIndex = 4;
 			this.panelPreviewItem.Visible = false;
 			// 
 			// labelItemCount
@@ -265,7 +286,7 @@
 			this.labelItemCount.Location = new System.Drawing.Point(3, 59);
 			this.labelItemCount.Name = "labelItemCount";
 			this.labelItemCount.Size = new System.Drawing.Size(281, 39);
-			this.labelItemCount.TabIndex = 6;
+			this.labelItemCount.TabIndex = 4;
 			this.labelItemCount.Text = "Count";
 			this.labelItemCount.TextAlign = System.Drawing.ContentAlignment.TopRight;
 			// 
@@ -280,7 +301,7 @@
 			this.labelDateTimePurchase.Location = new System.Drawing.Point(290, 101);
 			this.labelDateTimePurchase.Name = "labelDateTimePurchase";
 			this.labelDateTimePurchase.Size = new System.Drawing.Size(125, 39);
-			this.labelDateTimePurchase.TabIndex = 4;
+			this.labelDateTimePurchase.TabIndex = 5;
 			this.labelDateTimePurchase.Text = "Date and time of purchase";
 			this.labelDateTimePurchase.TextAlign = System.Drawing.ContentAlignment.TopCenter;
 			// 
@@ -295,7 +316,7 @@
 			this.labelDescription.Location = new System.Drawing.Point(0, 180);
 			this.labelDescription.Name = "labelDescription";
 			this.labelDescription.Size = new System.Drawing.Size(415, 120);
-			this.labelDescription.TabIndex = 5;
+			this.labelDescription.TabIndex = 6;
 			this.labelDescription.Text = "Item description\r\n";
 			this.labelDescription.TextAlign = System.Drawing.ContentAlignment.TopRight;
 			// 
@@ -365,7 +386,7 @@
 			this.panelPreferenceNavigation.Location = new System.Drawing.Point(120, 12);
 			this.panelPreferenceNavigation.Name = "panelPreferenceNavigation";
 			this.panelPreferenceNavigation.Size = new System.Drawing.Size(487, 50);
-			this.panelPreferenceNavigation.TabIndex = 1;
+			this.panelPreferenceNavigation.TabIndex = 0;
 			// 
 			// buttonPreferencesLeft
 			// 
@@ -409,7 +430,7 @@
 			this.flpGameAssistants.Name = "flpGameAssistants";
 			this.flpGameAssistants.Padding = new System.Windows.Forms.Padding(10, 10, 0, 0);
 			this.flpGameAssistants.Size = new System.Drawing.Size(600, 110);
-			this.flpGameAssistants.TabIndex = 4;
+			this.flpGameAssistants.TabIndex = 3;
 			// 
 			// ProfileForm
 			// 
@@ -468,5 +489,6 @@
 		private System.Windows.Forms.Label labelDateTimePurchase;
 		private System.Windows.Forms.FlowLayoutPanel flpGameAssistants;
 		private System.Windows.Forms.Label labelItemCount;
+		private FontAwesome.Sharp.IconButton buttonResetProgress;
 	}
 }

@@ -1,6 +1,7 @@
 ﻿using FluentValidation.Results;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -376,6 +377,28 @@ namespace TicTacToe.Forms.ItemManagement.Profile
 			labelDescription.Text = string.Empty;
 		}
 		#endregion
+
+		private void ButtonResetProgress_Click(object sender, EventArgs e)
+		{
+			ActiveControl = null;
+
+			DialogResult result = CustomMessageBox.Show("Are you sure you want to reset ALL your progress? " +
+				"All your saves will be lost FOREVER.", "Reset Progress Confirmation",
+				CustomMessageBoxButtons.YesNo, CustomMessageBoxIcon.Warning);
+			if (result == DialogResult.Yes)
+			{
+				result = CustomMessageBox.Show("Are you really sure? This action will reset " +
+					"your game progress and restart the application.", "Final Warning",
+					CustomMessageBoxButtons.YesNo, CustomMessageBoxIcon.Question);
+				if (result == DialogResult.Yes)
+				{
+					Visible = false;
+					Serializator.DeleteSerializationFile(Program.SerializePath);
+					Process.Start(Application.ExecutablePath);
+					Environment.Exit(0);
+				}
+			}
+		}
 
 		private void Profile_FormClosed(object sender, FormClosedEventArgs e)
 		{
