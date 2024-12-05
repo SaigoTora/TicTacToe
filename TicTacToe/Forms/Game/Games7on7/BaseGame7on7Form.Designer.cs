@@ -1113,7 +1113,9 @@
 			this.Controls.Add(this.progressBarCircleTimer);
 			this.Controls.Add(this.flpGameAssistants);
 			this.Controls.Add(this.labelScore);
+			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.Name = "BaseGame7on7Form";
+			this.ShowIcon = true;
 			this.Text = "BaseGame7on7Form";
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxCell33)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxCell32)).EndInit();

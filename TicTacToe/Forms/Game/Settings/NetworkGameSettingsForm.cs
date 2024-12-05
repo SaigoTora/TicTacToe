@@ -26,7 +26,8 @@ namespace TicTacToe.Forms.Game.Settings
 
 		internal NetworkGameSettingsForm(MainForm mainForm, Player player, StartNetworkGameForm previousForm)
 		{
-			customTitleBar = new CustomTitleBar(this, "Local Game Settings", minimizeBox: false, maximizeBox: false);
+			customTitleBar = new CustomTitleBar(this, "Local Game Settings", Properties.Resources.gameSettings,
+				minimizeBox: false, maximizeBox: false);
 			InitializeComponent();
 			_mainForm = mainForm;
 			_previousForm = previousForm;

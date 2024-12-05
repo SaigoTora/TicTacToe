@@ -28,6 +28,7 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StartNetworkGameForm));
 			this.buttonCreateGame = new Guna.UI2.WinForms.Guna2GradientButton();
 			this.flpLobbyPreviews = new System.Windows.Forms.FlowLayoutPanel();
 			this.buttonJoin = new Guna.UI2.WinForms.Guna2GradientButton();
@@ -131,6 +132,7 @@
 			this.Controls.Add(this.buttonJoin);
 			this.Controls.Add(this.flpLobbyPreviews);
 			this.Controls.Add(this.buttonCreateGame);
+			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.Name = "StartNetworkGameForm";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.StartNetworkGameForm_FormClosed);

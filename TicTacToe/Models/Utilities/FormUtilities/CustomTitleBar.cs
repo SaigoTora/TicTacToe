@@ -1,7 +1,7 @@
-﻿using System;
+﻿using FontAwesome.Sharp;
+using System;
 using System.Drawing;
 using System.Windows.Forms;
-using FontAwesome.Sharp;
 
 using TicTacToe.Forms;
 
@@ -41,6 +41,7 @@ namespace TicTacToe.Models.Utilities.FormUtilities
 
 			if (!string.IsNullOrWhiteSpace(formName))
 			{
+				form.Text = formName;
 				_labelCaption = CreateFormCaption(formName);
 				MainPanel.Controls.Add(_labelCaption);
 			}

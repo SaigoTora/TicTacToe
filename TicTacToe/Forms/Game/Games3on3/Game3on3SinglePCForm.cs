@@ -19,7 +19,7 @@ namespace TicTacToe.Forms.Game.Games3on3
 		{
 			InitializeComponent();
 
-			customTitleBar = new CustomTitleBar(this, CreateFormCaption(),
+			customTitleBar = new CustomTitleBar(this, GetFormCaption(),
 				maximizeBox: false, canFormBeClosed: false);
 			pictureBoxOpponentAvatar.Image = opponentAvatar;
 			labelOpponentName.Text = opponentName;

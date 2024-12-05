@@ -28,7 +28,7 @@ namespace TicTacToe.Forms
 		{
 			InitializeComponent();
 
-			customTitleBar = new CustomTitleBar(this, "Tic Tac Toe", Properties.Resources.ticTacToe, maximizeBox: false);
+			customTitleBar = new CustomTitleBar(this, "Tic Tac Toe", maximizeBox: false);
 			_player = new Player();
 		}
 

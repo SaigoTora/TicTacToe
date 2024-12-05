@@ -28,6 +28,7 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NetworkGameSettingsForm));
 			this.numericUpDownCoinsBet = new System.Windows.Forms.NumericUpDown();
 			this.labelCoinsBet = new System.Windows.Forms.Label();
 			this.buttonCreate = new Guna.UI2.WinForms.Guna2GradientButton();
@@ -326,6 +327,7 @@
 			this.Controls.Add(this.label7on7);
 			this.Controls.Add(this.label5on5);
 			this.Controls.Add(this.label3on3);
+			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.Name = "NetworkGameSettingsForm";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "NetworkGameSettingsForm";

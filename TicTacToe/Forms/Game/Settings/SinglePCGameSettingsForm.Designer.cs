@@ -28,6 +28,7 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SinglePCGameSettingsForm));
 			this.label3on3 = new System.Windows.Forms.Label();
 			this.label5on5 = new System.Windows.Forms.Label();
 			this.label7on7 = new System.Windows.Forms.Label();
@@ -244,6 +245,7 @@
 			this.Controls.Add(this.label7on7);
 			this.Controls.Add(this.label5on5);
 			this.Controls.Add(this.label3on3);
+			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.Name = "SinglePCGameSettingsForm";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "GameSettingsForm";

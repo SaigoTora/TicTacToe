@@ -166,9 +166,9 @@
 			this.Controls.Add(this.labelName);
 			this.Controls.Add(this.labelGreeting);
 			this.DoubleBuffered = true;
+			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.MaximizeBox = false;
 			this.Name = "StartForm";
-			this.ShowIcon = false;
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.StartForm_FormClosed);
 			this.Load += new System.EventHandler(this.StartForm_Load);

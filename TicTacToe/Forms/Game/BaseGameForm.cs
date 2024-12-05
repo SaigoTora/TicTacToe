@@ -104,7 +104,7 @@ namespace TicTacToe.Forms.Game
 		}
 
 		#region Initialization
-		protected string CreateFormCaption()
+		protected string GetFormCaption()
 			=> $"Round {roundManager.CurrentNumberOfRounds} / {roundManager.MaxNumberOfRounds}";
 		protected void DisplayPlayerRoles(Guna2PictureBox playerPictureBox, Guna2PictureBox opponentPictureBox)
 		{
@@ -125,6 +125,7 @@ namespace TicTacToe.Forms.Game
 		{
 			_gameFormInfo = gameFormInfo;
 
+			Icon = Resources.game;
 			_gameFormInfo.Score.Text = $"{roundManager.NumberOfWinsFirstPlayer} : {roundManager.NumberOfWinsSecondPlayer}";
 			_sequenceSelectedCells = new List<PictureBox>(_gameFormInfo.PictureCells.Length);
 			BackColor = player.VisualSettings.BackgroundGame.Color;
@@ -663,7 +664,7 @@ namespace TicTacToe.Forms.Game
 				roundManager.AddRound();
 
 				BaseGameForm nextGameForm = _gameFormInfo.NextGameForm;
-				nextGameForm.customTitleBar.ChangeFormCaption(CreateFormCaption());
+				nextGameForm.customTitleBar.ChangeFormCaption(GetFormCaption());
 				if (!nextGameForm.IsDisposed)// If a player have enough coins to play
 					nextGameForm.Show();
 				else

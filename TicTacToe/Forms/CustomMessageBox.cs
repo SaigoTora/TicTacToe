@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Windows.Forms;
 
 using TicTacToe.Models.Utilities.FormUtilities;
+using TicTacToe.Properties;
 
 namespace TicTacToe.Forms
 {
@@ -84,31 +85,35 @@ namespace TicTacToe.Forms
 			switch (icon)
 			{
 				case CustomMessageBoxIcon.None:
-					iconPicture.Visible = false;
+					{
+						iconPicture.Visible = false;
+						ShowIcon = false;
+					}
 					break;
 				case CustomMessageBoxIcon.Error:
-					SetupIcon(iconChar.Error, iconColor.Error);
+					SetupIcon(iconChar.Error, iconColor.Error, Resources.error);
 					break;
 				case CustomMessageBoxIcon.Warning:
-					SetupIcon(iconChar.Warning, iconColor.Warning);
+					SetupIcon(iconChar.Warning, iconColor.Warning, Resources.warning);
 					break;
 				case CustomMessageBoxIcon.Information:
-					SetupIcon(iconChar.Information, iconColor.Information);
+					SetupIcon(iconChar.Information, iconColor.Information, Resources.information);
 					break;
 				case CustomMessageBoxIcon.OK:
-					SetupIcon(iconChar.OK, iconColor.OK);
+					SetupIcon(iconChar.OK, iconColor.OK, Resources.success);
 					break;
 				case CustomMessageBoxIcon.Question:
-					SetupIcon(iconChar.Question, iconColor.Question);
+					SetupIcon(iconChar.Question, iconColor.Question, Resources.question);
 					break;
 				default:
 					throw new ArgumentException($"Unknown icon: {icon}", nameof(icon));
 			}
 		}
-		private void SetupIcon(IconChar iconChar, Color iconColor)
+		private void SetupIcon(IconChar iconChar, Color iconColor, System.Drawing.Icon formIcon)
 		{
 			iconPicture.IconChar = iconChar;
 			iconPicture.IconColor = iconColor;
+			Icon = formIcon;
 		}
 		private void AdjustFormSize(int width)
 		{

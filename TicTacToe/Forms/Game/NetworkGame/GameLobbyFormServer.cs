@@ -49,7 +49,7 @@ namespace TicTacToe.Forms.Game.NetworkGame
 			const int PANEL_WIDTH = 244, PANEL_HEIGHT = 76;
 
 			InitializeComponent();
-			customTitleBar = new CustomTitleBar(this, "Lobby", maximizeBox: false);
+			customTitleBar = new CustomTitleBar(this, "Lobby", Properties.Resources.lobby, maximizeBox: false);
 
 			_mainForm = mainForm;
 			_player = player;

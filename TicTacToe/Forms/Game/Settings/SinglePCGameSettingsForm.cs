@@ -42,7 +42,7 @@ namespace TicTacToe.Forms.Game.Settings
 
 		internal SinglePCGameSettingsForm(MainForm mainForm, Player player)
 		{
-			customTitleBar = new CustomTitleBar(this, "Game Settings", minimizeBox: false, maximizeBox: false);
+			customTitleBar = new CustomTitleBar(this, "Game Settings",Properties.Resources.gameSettings, minimizeBox: false, maximizeBox: false);
 			InitializeComponent();
 			_mainForm = mainForm;
 			_player = player;

@@ -28,6 +28,7 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ProfileForm));
 			this.labelBackgroundMenu = new System.Windows.Forms.Label();
 			this.labelAvatar = new System.Windows.Forms.Label();
 			this.labelBackgroundGame = new System.Windows.Forms.Label();
@@ -422,11 +423,11 @@
 			this.Controls.Add(this.textBoxPlayerName);
 			this.Controls.Add(this.pictureBoxPlayerAvatar);
 			this.Controls.Add(this.tabControl);
+			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
 			this.MinimumSize = new System.Drawing.Size(1076, 760);
 			this.Name = "ProfileForm";
-			this.ShowIcon = false;
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Profile";
 			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Profile_FormClosed);

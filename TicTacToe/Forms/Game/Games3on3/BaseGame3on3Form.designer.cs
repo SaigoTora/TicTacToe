@@ -450,7 +450,9 @@
 			this.Controls.Add(this.progressBarTimer);
 			this.Controls.Add(this.progressBarCircleTimer);
 			this.Controls.Add(this.flpGameAssistants);
+			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.Name = "BaseGame3on3Form";
+			this.ShowIcon = true;
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxLine3)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxLine4)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxLine2)).EndInit();

@@ -718,6 +718,86 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\Icons\gameIcon1.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Icons\gameIcon2.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Icons\gameIcon3.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Icons\gameIcon4.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Icons\gameIcon5.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Icons\gameIcon6.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Icons\gameIcon7.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Icons\gameIcon8.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Icons\checked.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Icons\success.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Icons\login.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Icons\profile.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Icons\profile2.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Icons\profile3.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Icons\networkSearch.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Icons\networkSearch2.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Icons\gameSettings.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Icons\gameSettings2.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Icons\lobby.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Icons\lobby2.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Icons\lobby3.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Icons\lobby4.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Icons\game.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Icons\error.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Icons\information.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Icons\question.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Icons\warning.ico" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
