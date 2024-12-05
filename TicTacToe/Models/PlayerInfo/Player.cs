@@ -17,6 +17,7 @@ namespace TicTacToe.Models.PlayerInfo
 		[JsonProperty]
 		internal string Name { get; private set; }
 		internal int Coins { get; private set; }
+		internal int DeductedCoins => _deductedCoins;
 
 		[JsonProperty]
 		internal PlayerVisualSettings VisualSettings { get; private protected set; }

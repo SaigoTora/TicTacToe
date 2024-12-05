@@ -33,8 +33,9 @@ namespace TicTacToe.Forms.Game
 		protected readonly RoundManager roundManager;
 		protected readonly CoinReward coinReward;
 		protected Field field;
-		private GameFormInfo _gameFormInfo;
 		protected bool isTimerEnabled, isGameAssistsEnabled;
+		private int _initialCoins;
+		private GameFormInfo _gameFormInfo;
 
 		protected readonly GameServer gameServer;
 		protected readonly GameClient gameClient;
@@ -91,6 +92,7 @@ namespace TicTacToe.Forms.Game
 
 			this.player = player;
 			this.coinReward = coinReward;
+			_initialCoins = player.Coins;
 			this.roundManager = roundManager;
 			this.mainForm = mainForm;
 
@@ -645,6 +647,7 @@ namespace TicTacToe.Forms.Game
 			GameResult gameResult = EvaluateGameResult();
 			if ((gameServer != null || gameClient != null) && roundManager.IsLastRound())
 			{
+				_initialCoins += player.DeductedCoins;
 				player.ReturnCoins();
 				gameResult = UpdateCoinsForNetworkGame();
 			}
@@ -664,6 +667,7 @@ namespace TicTacToe.Forms.Game
 				roundManager.AddRound();
 
 				BaseGameForm nextGameForm = _gameFormInfo.NextGameForm;
+				nextGameForm._initialCoins = player.Coins;
 				nextGameForm.customTitleBar.ChangeFormCaption(GetFormCaption());
 				if (!nextGameForm.IsDisposed)// If a player have enough coins to play
 					nextGameForm.Show();
@@ -710,19 +714,22 @@ namespace TicTacToe.Forms.Game
 			if (_gameResultForm != null)
 				return;
 
+			int coinUpdate = player.Coins - _initialCoins;
 			if (bot != null)
-				_gameResultForm = new GameResultForm(player, coinReward, roundManager, gameResult, bot.Difficulty, BackToMainForm);
+				_gameResultForm = new GameResultForm(player, coinUpdate, roundManager,
+					gameResult, bot.Difficulty, BackToMainForm);
 			else if (gameClient != null || gameServer != null)
 			{
-				CoinReward RealCoinReward = roundManager.IsLastRound() ? coinReward : new CoinReward();
 				int closeDelay = roundManager.IsLastRound() ?
 					RESULT_FORM_CLOSE_DELAY_SECONDS * 2 : RESULT_FORM_CLOSE_DELAY_SECONDS;
+				if (roundManager.IsFirstRound())
+					coinUpdate += player.DeductedCoins;
 
-				_gameResultForm = new GameResultForm(player, RealCoinReward, roundManager, gameResult,
+				_gameResultForm = new GameResultForm(player, coinUpdate, roundManager, gameResult,
 					BackToMainForm, ActionAfterTimeOver.Play, (byte)closeDelay);
 			}
 			else
-				_gameResultForm = new GameResultForm(player, coinReward, roundManager, gameResult, BackToMainForm);
+				_gameResultForm = new GameResultForm(player, coinUpdate, roundManager, gameResult, BackToMainForm);
 
 			_gameResultForm.ShowDialog();
 		}

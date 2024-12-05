@@ -20,7 +20,7 @@ namespace TicTacToe.Forms
 	internal partial class GameResultForm : BaseForm
 	{
 		private readonly Player _player;
-		private readonly CoinReward _coinReward;
+		private readonly int _coinUpdate;
 		private readonly RoundManager _roundManager;
 		private readonly GameResult _result;
 		private readonly Difficulty? _difficulty = null;
@@ -30,7 +30,7 @@ namespace TicTacToe.Forms
 		private readonly EventHandler _backToMainForm;
 		private readonly CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
 
-		internal GameResultForm(Player player, CoinReward coinReward, RoundManager roundManager,
+		internal GameResultForm(Player player, int coinUpdate, RoundManager roundManager,
 			GameResult result, EventHandler backToMainForm)
 		{
 			InitializeComponent();
@@ -41,7 +41,7 @@ namespace TicTacToe.Forms
 				labelCurrentCoins, labelTimeToClose });
 			base.guna2BorderlessForm.TransparentWhileDrag = false;
 			_player = player;
-			_coinReward = coinReward;
+			_coinUpdate = coinUpdate;
 			_roundManager = roundManager;
 			_result = result;
 
@@ -63,9 +63,9 @@ namespace TicTacToe.Forms
 			_buttonEventHandlers.SubscribeToHover(buttonBack, buttonPlay);
 		}
 
-		internal GameResultForm(Player player, CoinReward coinReward, RoundManager roundManager, GameResult result,
+		internal GameResultForm(Player player, int coinUpdate, RoundManager roundManager, GameResult result,
 			EventHandler backToMainForm, ActionAfterTimeOver actionAfterTimeOver, byte? delaySecondsToClose)
-			: this(player, coinReward, roundManager, result, backToMainForm)
+			: this(player, coinUpdate, roundManager, result, backToMainForm)
 		{
 			_actionAfterTimeOver = actionAfterTimeOver;
 			RepositionControls(true);
@@ -73,9 +73,9 @@ namespace TicTacToe.Forms
 			if (delaySecondsToClose.HasValue && delaySecondsToClose.Value > 0)
 				_ = DelayToCloseAsync(delaySecondsToClose.Value);
 		}
-		internal GameResultForm(Player player, CoinReward coinReward, RoundManager roundManager, GameResult result,
+		internal GameResultForm(Player player, int coinUpdate, RoundManager roundManager, GameResult result,
 			Difficulty difficulty, EventHandler backToMainForm)
-			: this(player, coinReward, roundManager, result, backToMainForm, ActionAfterTimeOver.BackToMenu, 60)
+			: this(player, coinUpdate, roundManager, result, backToMainForm, ActionAfterTimeOver.BackToMenu, 60)
 		{ _difficulty = difficulty; }
 
 		private void ResultForm_Load(object sender, EventArgs e)
@@ -141,19 +141,18 @@ namespace TicTacToe.Forms
 		private void DisplayCoinsChange()
 		{
 			(Color colorWin, Color colorLoss) = (Color.Lime, Color.Red);
-			int coinUpdate = _coinReward.GetCoins(_result);
 
-			if (coinUpdate != 0)
+			if (_coinUpdate != 0)
 			{
 				labelCoinsResult.Visible = true;
-				if (coinUpdate < 0)
+				if (_coinUpdate < 0)
 				{
-					labelCoinsResult.Text = $"- {Math.Abs(coinUpdate)}";
+					labelCoinsResult.Text = $"- {Math.Abs(_coinUpdate)}";
 					labelCoinsResult.ForeColor = colorLoss;
 				}
 				else
 				{
-					labelCoinsResult.Text = $"+ {coinUpdate}";
+					labelCoinsResult.Text = $"+ {_coinUpdate}";
 					labelCoinsResult.ForeColor = colorWin;
 				}
 			}
