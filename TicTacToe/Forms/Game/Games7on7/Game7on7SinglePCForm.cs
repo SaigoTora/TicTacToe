@@ -44,9 +44,11 @@ namespace TicTacToe.Forms.Game.Games7on7
 			if (!(sender is PictureBox pictureBox))
 				return;
 
+			SetPictureBoxesEnabled(false);
 			await PictureBoxCell_DefaultClick(pictureBox, _currentCellType, e != EventArgs.Empty, false);
 			_currentCellType = _currentCellType == CellType.Cross ? CellType.Zero : CellType.Cross;
 			SetupMoveTransition(_currentCellType, true);
+			SetPictureBoxesEnabled(true);
 		}
 		private void PictureCell_MouseEnter(object sender, EventArgs e)
 		{

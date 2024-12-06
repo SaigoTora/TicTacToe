@@ -51,6 +51,7 @@
     <Compile Include="Core\Field.cs" />
     <Compile Include="AI\Node.cs" />
     <Compile Include="AI\PerfectMoveFinder.cs" />
+    <Compile Include="GameLogic\GameMode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

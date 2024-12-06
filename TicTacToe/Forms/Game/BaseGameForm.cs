@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+
 using TicTacToe.Models.CustomExceptions;
 using TicTacToe.Models.GameClientServer.Core;
 using TicTacToe.Models.GameClientServer.Game;
@@ -18,12 +19,14 @@ using TicTacToe.Models.Utilities.FormUtilities.ControlEventHandlers;
 using TicTacToe.Properties;
 using TicTacToeLibrary.AI;
 using TicTacToeLibrary.Core;
+using TicTacToeLibrary.GameLogic;
 
 namespace TicTacToe.Forms.Game
 {
 	internal partial class BaseGameForm : BaseForm
 	{
 		private const int WINNING_CELL_SHOW_DELAY = 350;
+		private const int TETRIS_MODE_ANIMATION_DELAY = 250;
 		private const int UNDO_MOVE_DELAY = 400;
 		private const int GAME_UPDATE_INTERVAL = 200;
 
@@ -33,6 +36,7 @@ namespace TicTacToe.Forms.Game
 		protected readonly RoundManager roundManager;
 		protected readonly CoinReward coinReward;
 		protected Field field;
+		private readonly GameMode _gameMode = GameMode.ReverseTetris;
 		protected bool isTimerEnabled, isGameAssistsEnabled;
 		private int _initialCoins;
 		private GameFormInfo _gameFormInfo;
@@ -305,10 +309,13 @@ namespace TicTacToe.Forms.Game
 
 			if (disablePictureCells)
 				SetPictureBoxesEnabled(false);
+
 			Cell cell = FindIndexPictureBoxCell(pictureBox);
+			Image cellImage = GetCellImage(cellType);
+			cell = await FindActualCellWithAnimationAsync(cell, cellImage);
 			field.FillCell(cell, cellType);
 
-			FillCellWithImage(cell, cellType, wasClicked);
+			FillCellWithImage(cell, cellImage, wasClicked);
 			if (sendMoveInfoOverNetwork)
 				await NetworkMoveAsync(cell);
 
@@ -349,10 +356,12 @@ namespace TicTacToe.Forms.Game
 			SetPictureBoxesEnabled(false);
 
 			Cell botMove = bot.Move(field, opponentCellType);
-			field.FillCell(botMove, opponentCellType);
+			Image cellImage = GetCellImage(opponentCellType);
 			await Task.Delay(BOT_MOVE_DELAY);
+			botMove = await FindActualCellWithAnimationAsync(botMove, cellImage);
+			field.FillCell(botMove, opponentCellType);
 
-			FillCellWithImage(botMove, opponentCellType, false);
+			FillCellWithImage(botMove, cellImage, false);
 
 			if (field.IsGameEnd())
 				await FinishGameAsync();
@@ -362,19 +371,22 @@ namespace TicTacToe.Forms.Game
 			StartTimerToMove();
 			IndicateWhoseMove(playerCellType);
 		}
-		private void FillCellWithImage(Cell cell, CellType cellType, bool wasClicked)
+		private Image GetCellImage(CellType cellType)
+		{
+			if (cellType == CellType.Zero)
+				return Resources.zero;
+			else if (cellType == CellType.Cross)
+				return Resources.cross;
+			else
+				throw new InvalidOperationException($"Unknown cell type: {cellType}");
+		}
+		private void FillCellWithImage(Cell cell, Image cellImage, bool wasClicked)
 		{
 			PictureBox pictureBox = _gameFormInfo.PictureCells[cell.row, cell.column];
 			_sequenceSelectedCells.Add(pictureBox);
 			pictureBox.Tag = null;
 			pictureBox.Cursor = Cursors.Default;
-
-			if (cellType == CellType.Zero)
-				pictureBox.Image = Resources.zero;
-			else if (cellType == CellType.Cross)
-				pictureBox.Image = Resources.cross;
-			else
-				throw new InvalidOperationException($"Unknown cell type: {cellType}");
+			pictureBox.Image = cellImage;
 
 			pictureBox.Click -= _gameFormInfo.CellClick;
 
@@ -398,13 +410,81 @@ namespace TicTacToe.Forms.Game
 
 			return result;
 		}
+		private async Task<Cell> FindActualCellWithAnimationAsync(Cell selectedCell, Image cellImage)
+		{
+			Cell resultCell = selectedCell;
+
+			switch (_gameMode)
+			{
+				case GameMode.Standart:
+					break;
+				case GameMode.Tetris:
+					resultCell = await FindCellForTetrisModeAsync(selectedCell, cellImage);
+					break;
+				case GameMode.ReverseTetris:
+					resultCell = await FindCellForReverseTetrisModeAsync(selectedCell, cellImage);
+					break;
+				default:
+					throw new InvalidOperationException($"Unknown game mode: {_gameMode}");
+			}
+
+			return resultCell;
+		}
+		private async Task<Cell> FindCellForTetrisModeAsync(Cell selectedCell, Image cellImage)
+		{
+			Cell currentCell = new Cell(selectedCell.row, selectedCell.column);
+			Cell nextCell = selectedCell;
+
+			_gameFormInfo.PictureCells[currentCell.row, currentCell.column].Image = cellImage;
+
+			for (int i = selectedCell.row; i < field.GetFieldSize() - 1; i++)
+			{
+				currentCell.row = i;
+				nextCell.row = i + 1;
+
+				if (field.GetCell(nextCell) == CellType.None)
+				{
+					await Task.Delay(TETRIS_MODE_ANIMATION_DELAY);
+					_gameFormInfo.PictureCells[currentCell.row, currentCell.column].Image = null;
+					_gameFormInfo.PictureCells[nextCell.row, nextCell.column].Image = cellImage;
+				}
+				else
+					return currentCell;
+			}
+
+			return nextCell;
+		}
+		private async Task<Cell> FindCellForReverseTetrisModeAsync(Cell selectedCell, Image cellImage)
+		{
+			Cell currentCell = new Cell(selectedCell.row, selectedCell.column);
+			Cell nextCell = selectedCell;
+
+			_gameFormInfo.PictureCells[currentCell.row, currentCell.column].Image = cellImage;
+
+			for (int i = selectedCell.row; i >= 1; i--)
+			{
+				currentCell.row = i;
+				nextCell.row = i - 1;
+
+				if (field.GetCell(nextCell) == CellType.None)
+				{
+					await Task.Delay(TETRIS_MODE_ANIMATION_DELAY);
+					_gameFormInfo.PictureCells[currentCell.row, currentCell.column].Image = null;
+					_gameFormInfo.PictureCells[nextCell.row, nextCell.column].Image = cellImage;
+				}
+				else
+					return currentCell;
+			}
+
+			return nextCell;
+		}
+
 		protected void SetPictureBoxesEnabled(bool enabled)
 		{
 			for (int i = 0; i < _gameFormInfo.PictureCells.GetLength(0); i++)
 				for (int j = 0; j < _gameFormInfo.PictureCells.GetLength(1); j++)
 					_gameFormInfo.PictureCells[i, j].Enabled = enabled;
 		}
-
 		protected void SetupMoveTransition(CellType currentCellType, bool isGameViewVisible)
 		{
 			IndicateWhoseMove(currentCellType);
@@ -440,6 +520,7 @@ namespace TicTacToe.Forms.Game
 				activeName.ForeColor = moveColorDark;
 			inactiveName.ForeColor = defaultColor;
 		}
+
 		protected void PictureBoxCell_DefaultMouseEnter(PictureBox pictureBox, CellType cellType)
 		{
 			if (pictureBox == _pictureBoxCellHint)
