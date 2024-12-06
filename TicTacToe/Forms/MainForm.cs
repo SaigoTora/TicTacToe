@@ -18,6 +18,7 @@ using TicTacToe.Models.Utilities.FormUtilities.ControlEventHandlers;
 using TicTacToe.Properties;
 using TicTacToeLibrary.AI;
 using TicTacToeLibrary.Core;
+using TicTacToeLibrary.GameLogic;
 
 namespace TicTacToe.Forms
 {
@@ -186,7 +187,7 @@ namespace TicTacToe.Forms
 			Bot bot = new Bot(_selectedDifficulty);
 			RoundManager roundManager = new RoundManager((int)numericUpDownNumberOfRounds.Value);
 
-			Game3on3BotForm gameForm = new Game3on3BotForm(this, _player, bot, roundManager, CellType.Zero, true, true);
+			Game3on3BotForm gameForm = new Game3on3BotForm(this, _player, bot, roundManager, GameMode.Standart, CellType.Zero, true, true);
 			if (!gameForm.IsDisposed)// If a player have enough coints to play
 			{
 				Hide();

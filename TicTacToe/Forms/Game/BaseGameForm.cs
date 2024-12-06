@@ -36,7 +36,7 @@ namespace TicTacToe.Forms.Game
 		protected readonly RoundManager roundManager;
 		protected readonly CoinReward coinReward;
 		protected Field field;
-		private readonly GameMode _gameMode = GameMode.ReverseTetris;
+		protected readonly GameMode gameMode = GameMode.ReverseTetris;
 		protected bool isTimerEnabled, isGameAssistsEnabled;
 		private int _initialCoins;
 		private GameFormInfo _gameFormInfo;
@@ -63,45 +63,51 @@ namespace TicTacToe.Forms.Game
 
 		protected BaseGameForm()
 		{ InitializeComponent(); }
-		internal BaseGameForm(MainForm mainForm, Player player, GameServer gameServer, RoundManager roundManager,
-			int coinsBet, CellType playerCellType, bool isTimerEnabled, bool isGameAssistsEnabled)
+		internal BaseGameForm(MainForm mainForm, Player player, GameServer gameServer, int coinsBet,
+			RoundManager roundManager, GameMode gameMode, CellType playerCellType,
+			bool isTimerEnabled, bool isGameAssistsEnabled)
 			: this(mainForm, player, new CoinReward(coinsBet, 0, -coinsBet), roundManager,
-				playerCellType, isTimerEnabled, isGameAssistsEnabled)
+				gameMode, playerCellType, isTimerEnabled, isGameAssistsEnabled)
 		{
 			this.gameServer = gameServer;
 			_syncContext = SynchronizationContext.Current;
 
 			ManageServerEventHandlers(true);
 		}
-		internal BaseGameForm(MainForm mainForm, Player player, GameClient gameClient, RoundManager roundManager,
-			int coinsBet, CellType playerCellType, bool isTimerEnabled, bool isGameAssistsEnabled)
+		internal BaseGameForm(MainForm mainForm, Player player, GameClient gameClient, int coinsBet,
+			RoundManager roundManager, GameMode gameMode, CellType playerCellType,
+			bool isTimerEnabled, bool isGameAssistsEnabled)
 			: this(mainForm, player, new CoinReward(coinsBet, 0, -coinsBet), roundManager,
-				playerCellType, isTimerEnabled, isGameAssistsEnabled)
+				gameMode, playerCellType, isTimerEnabled, isGameAssistsEnabled)
 		{
 			this.gameClient = gameClient;
 			_syncContext = SynchronizationContext.Current;
 		}
 
-		internal BaseGameForm(MainForm mainForm, Player player, Bot bot, RoundManager roundManager,
-			CellType playerCellType, bool isTimerEnabled, bool isGameAssistsEnabled)
+		internal BaseGameForm(MainForm mainForm, Player player, Bot bot,
+			RoundManager roundManager, GameMode gameMode, CellType playerCellType,
+			bool isTimerEnabled, bool isGameAssistsEnabled)
 			: this(mainForm, player, new CoinReward(bot.Difficulty), roundManager,
-				  playerCellType, isTimerEnabled, isGameAssistsEnabled)
+				  gameMode, playerCellType, isTimerEnabled, isGameAssistsEnabled)
 		{ this.bot = bot; }
-		internal BaseGameForm(MainForm mainForm, Player player, CoinReward coinReward, RoundManager roundManager,
-			CellType playerCellType, bool isTimerEnabled, bool isGameAssistsEnabled)
+		internal BaseGameForm(MainForm mainForm, Player player, CoinReward coinReward,
+			RoundManager roundManager, GameMode gameMode, CellType playerCellType,
+			bool isTimerEnabled, bool isGameAssistsEnabled)
 		{
 			const float PREVIEW_OPACITY_LEVEL = 0.35f;
 
 			InitializeComponent();
 
+			this.mainForm = mainForm;
 			this.player = player;
 			this.coinReward = coinReward;
 			_initialCoins = player.Coins;
 			this.roundManager = roundManager;
-			this.mainForm = mainForm;
+			this.gameMode = gameMode;
 
 			this.playerCellType = playerCellType;
-			opponentCellType = playerCellType == CellType.Cross ? CellType.Zero : CellType.Cross;
+			opponentCellType = playerCellType == CellType.Cross ?
+				CellType.Zero : CellType.Cross;
 			this.isTimerEnabled = isTimerEnabled;
 			this.isGameAssistsEnabled = isGameAssistsEnabled;
 
@@ -414,7 +420,7 @@ namespace TicTacToe.Forms.Game
 		{
 			Cell resultCell = selectedCell;
 
-			switch (_gameMode)
+			switch (gameMode)
 			{
 				case GameMode.Standart:
 					break;
@@ -425,7 +431,7 @@ namespace TicTacToe.Forms.Game
 					resultCell = await FindCellForReverseTetrisModeAsync(selectedCell, cellImage);
 					break;
 				default:
-					throw new InvalidOperationException($"Unknown game mode: {_gameMode}");
+					throw new InvalidOperationException($"Unknown game mode: {gameMode}");
 			}
 
 			return resultCell;

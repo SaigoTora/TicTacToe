@@ -6,6 +6,7 @@ using TicTacToe.Models.GameInfo;
 using TicTacToe.Models.PlayerInfo;
 using TicTacToe.Models.Utilities.FormUtilities;
 using TicTacToeLibrary.Core;
+using TicTacToeLibrary.GameLogic;
 
 namespace TicTacToe.Forms.Game.Games7on7
 {
@@ -13,9 +14,11 @@ namespace TicTacToe.Forms.Game.Games7on7
 	{
 		private CellType _currentCellType;
 
-		internal Game7on7SinglePCForm(MainForm mainForm, Player player, RoundManager roundManager,
-					CellType playerCellType, bool isTimerEnabled, Image opponentAvatar, string opponentName)
-					: base(mainForm, player, new CoinReward(), roundManager, playerCellType, isTimerEnabled, false)
+		internal Game7on7SinglePCForm(MainForm mainForm, Player player,
+			RoundManager roundManager, GameMode gameMode, CellType playerCellType,
+			bool isTimerEnabled, Image opponentAvatar, string opponentName)
+			: base(mainForm, player, new CoinReward(), roundManager, gameMode,
+				  playerCellType, isTimerEnabled, false)
 		{
 			InitializeComponent();
 
@@ -28,7 +31,7 @@ namespace TicTacToe.Forms.Game.Games7on7
 		private void Game7on7SinglePCForm_Load(object sender, EventArgs e)
 		{
 			Game7on7SinglePCForm nextGameForm = new Game7on7SinglePCForm(mainForm, player, roundManager,
-			   opponentCellType, isTimerEnabled, pictureBoxOpponentAvatar.Image, labelOpponentName.Text);
+			   gameMode, opponentCellType, isTimerEnabled, pictureBoxOpponentAvatar.Image, labelOpponentName.Text);
 			InitializeBaseGame(PictureCell_Click, nextGameForm);
 			ManagePictureCellsEventHover(PictureCell_MouseEnter, PictureCell_MouseLeave, true);
 

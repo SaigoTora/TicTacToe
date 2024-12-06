@@ -6,14 +6,17 @@ using TicTacToe.Models.PlayerInfo;
 using TicTacToe.Models.Utilities.FormUtilities;
 using TicTacToeLibrary.AI;
 using TicTacToeLibrary.Core;
+using TicTacToeLibrary.GameLogic;
 
 namespace TicTacToe.Forms.Game.Games3on3
 {
 	internal partial class Game3on3BotForm : BaseGame3on3Form
 	{
-		internal Game3on3BotForm(MainForm mainForm, Player player, Bot bot, RoundManager roundManager,
-			CellType playerCellType, bool isTimerEnabled, bool isGameAssistsEnabled)
-			: base(mainForm, player, bot, roundManager, playerCellType, isTimerEnabled, isGameAssistsEnabled)
+		internal Game3on3BotForm(MainForm mainForm, Player player, Bot bot,
+			RoundManager roundManager, GameMode gameMode, CellType playerCellType,
+			bool isTimerEnabled, bool isGameAssistsEnabled)
+			: base(mainForm, player, bot, roundManager, gameMode, playerCellType,
+				  isTimerEnabled, isGameAssistsEnabled)
 		{
 			InitializeComponent();
 
@@ -24,7 +27,7 @@ namespace TicTacToe.Forms.Game.Games3on3
 		private void Game3on3BotForm_Load(object sender, EventArgs e)
 		{
 			Game3on3BotForm nextGameForm = new Game3on3BotForm(mainForm, player, bot, roundManager,
-			   opponentCellType, isTimerEnabled, isGameAssistsEnabled);
+			   gameMode, opponentCellType, isTimerEnabled, isGameAssistsEnabled);
 			InitializeBaseGame(PictureCell_Click, nextGameForm);
 			ManagePictureCellsEventHover(PictureCell_MouseEnter, PictureCell_MouseLeave, true);
 

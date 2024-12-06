@@ -7,24 +7,27 @@ using TicTacToe.Models.GameInfo;
 using TicTacToe.Models.PlayerInfo;
 using TicTacToe.Models.Utilities.FormUtilities;
 using TicTacToeLibrary.Core;
+using TicTacToeLibrary.GameLogic;
 
 namespace TicTacToe.Forms.Game.Games7on7
 {
 	internal partial class Game7on7NetworkForm : BaseGame7on7Form
 	{
-		internal Game7on7NetworkForm(MainForm mainForm, Player player, GameServer gameServer, RoundManager roundManager,
-					int coinsBet, CellType playerCellType, bool isTimerEnabled, bool isGameAssistsEnabled,
-					Image opponentAvatar, string opponentName)
-					: base(mainForm, player, gameServer, roundManager, coinsBet, playerCellType, isTimerEnabled, isGameAssistsEnabled)
+		internal Game7on7NetworkForm(MainForm mainForm, Player player, GameServer gameServer, int coinsBet,
+			RoundManager roundManager, GameMode gameMode, CellType playerCellType,
+			bool isTimerEnabled, bool isGameAssistsEnabled, Image opponentAvatar, string opponentName)
+			: base(mainForm, player, gameServer, coinsBet, roundManager, gameMode, playerCellType,
+				  isTimerEnabled, isGameAssistsEnabled)
 		{
 			InitializeComponent();
 
 			DefaultInitialize(opponentAvatar, opponentName);
 		}
-		internal Game7on7NetworkForm(MainForm mainForm, Player player, GameClient gameClient, RoundManager roundManager,
-			int coinsBet, CellType playerCellType, bool isTimerEnabled, bool isGameAssistsEnabled,
-			Image opponentAvatar, string opponentName)
-			: base(mainForm, player, gameClient, roundManager, coinsBet, playerCellType, isTimerEnabled, isGameAssistsEnabled)
+		internal Game7on7NetworkForm(MainForm mainForm, Player player, GameClient gameClient, int coinsBet,
+			RoundManager roundManager, GameMode gameMode, CellType playerCellType,
+			bool isTimerEnabled, bool isGameAssistsEnabled, Image opponentAvatar, string opponentName)
+			: base(mainForm, player, gameClient, coinsBet, roundManager, gameMode, playerCellType,
+				  isTimerEnabled, isGameAssistsEnabled)
 		{
 			InitializeComponent();
 
@@ -42,12 +45,12 @@ namespace TicTacToe.Forms.Game.Games7on7
 		{
 			Game7on7NetworkForm nextGameForm = null;
 			if (gameServer != null)
-				nextGameForm = new Game7on7NetworkForm(mainForm, player, gameServer, roundManager,
-					coinReward.CoinsForWin, opponentCellType, isTimerEnabled, isGameAssistsEnabled,
+				nextGameForm = new Game7on7NetworkForm(mainForm, player, gameServer, coinReward.CoinsForWin,
+					roundManager, gameMode, opponentCellType, isTimerEnabled, isGameAssistsEnabled,
 					pictureBoxOpponentAvatar.Image, labelOpponentName.Text);
 			else if (gameClient != null)
-				nextGameForm = new Game7on7NetworkForm(mainForm, player, gameClient, roundManager,
-					coinReward.CoinsForWin, opponentCellType, isTimerEnabled, isGameAssistsEnabled,
+				nextGameForm = new Game7on7NetworkForm(mainForm, player, gameClient, coinReward.CoinsForWin,
+					roundManager, gameMode, opponentCellType, isTimerEnabled, isGameAssistsEnabled,
 					pictureBoxOpponentAvatar.Image, labelOpponentName.Text);
 
 			InitializeBaseGame(PictureCell_Click, nextGameForm);

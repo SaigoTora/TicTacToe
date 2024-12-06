@@ -21,6 +21,7 @@ using TicTacToe.Models.PlayerItem;
 using TicTacToe.Models.Utilities.FormUtilities;
 using TicTacToe.Models.Utilities.FormUtilities.ControlEventHandlers;
 using TicTacToeLibrary.Core;
+using TicTacToeLibrary.GameLogic;
 
 namespace TicTacToe.Forms.Game.NetworkGame
 {
@@ -429,7 +430,7 @@ namespace TicTacToe.Forms.Game.NetworkGame
 				case FieldSize.Size3on3:
 					{
 						gameForm = new Game3on3NetworkForm(_mainForm, _player, _gameServer,
-						roundManager, settings.CoinsBet, CellType.Cross,
+						settings.CoinsBet, roundManager, GameMode.Standart, CellType.Cross,
 						settings.IsTimerEnabled, settings.IsGameAssistsEnabled,
 							opponent.VisualSettings.Avatar.Image, opponent.Name);
 						break;
@@ -437,7 +438,7 @@ namespace TicTacToe.Forms.Game.NetworkGame
 				case FieldSize.Size5on5:
 					{
 						gameForm = new Game5on5NetworkForm(_mainForm, _player, _gameServer,
-						roundManager, settings.CoinsBet, CellType.Cross,
+						settings.CoinsBet, roundManager, GameMode.Standart, CellType.Cross,
 						settings.IsTimerEnabled, settings.IsGameAssistsEnabled,
 							opponent.VisualSettings.Avatar.Image, opponent.Name);
 						break;
@@ -445,7 +446,7 @@ namespace TicTacToe.Forms.Game.NetworkGame
 				case FieldSize.Size7on7:
 					{
 						gameForm = new Game7on7NetworkForm(_mainForm, _player, _gameServer,
-						roundManager, settings.CoinsBet, CellType.Cross,
+						settings.CoinsBet, roundManager, GameMode.Standart, CellType.Cross,
 						settings.IsTimerEnabled, settings.IsGameAssistsEnabled,
 							opponent.VisualSettings.Avatar.Image, opponent.Name);
 						break;

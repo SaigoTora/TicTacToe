@@ -17,6 +17,7 @@ using TicTacToe.Models.PlayerItemCreator;
 using TicTacToe.Models.Utilities.FormUtilities;
 using TicTacToe.Models.Utilities.FormUtilities.ControlEventHandlers;
 using TicTacToeLibrary.Core;
+using TicTacToeLibrary.GameLogic;
 
 namespace TicTacToe.Forms.Game.Settings
 {
@@ -82,15 +83,15 @@ namespace TicTacToe.Forms.Game.Settings
 			switch (_player.SinglePCGameSettings.FieldSize)
 			{
 				case FieldSize.Size3on3:
-					gameForm = new Game3on3SinglePCForm(_mainForm, _player, roundManager,
+					gameForm = new Game3on3SinglePCForm(_mainForm, _player, roundManager, GameMode.Standart,
 						CellType.Cross, _player.SinglePCGameSettings.IsTimerEnabled, opponentAvatarImage, textBoxOpponentName.Text);
 					break;
 				case FieldSize.Size5on5:
-					gameForm = new Game5on5SinglePCForm(_mainForm, _player, roundManager,
+					gameForm = new Game5on5SinglePCForm(_mainForm, _player, roundManager, GameMode.Standart,
 						CellType.Cross, _player.SinglePCGameSettings.IsTimerEnabled, opponentAvatarImage, textBoxOpponentName.Text);
 					break;
 				case FieldSize.Size7on7:
-					gameForm = new Game7on7SinglePCForm(_mainForm, _player, roundManager,
+					gameForm = new Game7on7SinglePCForm(_mainForm, _player, roundManager, GameMode.Standart,
 						CellType.Cross, _player.SinglePCGameSettings.IsTimerEnabled, opponentAvatarImage, textBoxOpponentName.Text);
 					break;
 				default:

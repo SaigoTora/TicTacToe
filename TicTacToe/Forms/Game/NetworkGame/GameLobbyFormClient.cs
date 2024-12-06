@@ -20,6 +20,7 @@ using TicTacToe.Models.PlayerItem;
 using TicTacToe.Models.Utilities.FormUtilities;
 using TicTacToe.Models.Utilities.FormUtilities.ControlEventHandlers;
 using TicTacToeLibrary.Core;
+using TicTacToeLibrary.GameLogic;
 
 namespace TicTacToe.Forms.Game.NetworkGame
 {
@@ -104,7 +105,7 @@ namespace TicTacToe.Forms.Game.NetworkGame
 				case FieldSize.Size3on3:
 					{
 						gameForm = new Game3on3NetworkForm(_mainForm, _player, _gameClient,
-							roundManager, lobbyInfo.Settings.CoinsBet, CellType.Zero,
+							lobbyInfo.Settings.CoinsBet, roundManager, GameMode.Standart, CellType.Zero,
 							lobbyInfo.Settings.IsTimerEnabled, lobbyInfo.Settings.IsGameAssistsEnabled,
 							lobbyInfo.Settings.OpponentAvatar.Image, lobbyInfo.Settings.OpponentName);
 						break;
@@ -112,7 +113,7 @@ namespace TicTacToe.Forms.Game.NetworkGame
 				case FieldSize.Size5on5:
 					{
 						gameForm = new Game5on5NetworkForm(_mainForm, _player, _gameClient,
-							roundManager, lobbyInfo.Settings.CoinsBet, CellType.Zero,
+							lobbyInfo.Settings.CoinsBet, roundManager, GameMode.Standart, CellType.Zero,
 							lobbyInfo.Settings.IsTimerEnabled, lobbyInfo.Settings.IsGameAssistsEnabled,
 							lobbyInfo.Settings.OpponentAvatar.Image, lobbyInfo.Settings.OpponentName);
 						break;
@@ -120,7 +121,7 @@ namespace TicTacToe.Forms.Game.NetworkGame
 				case FieldSize.Size7on7:
 					{
 						gameForm = new Game7on7NetworkForm(_mainForm, _player, _gameClient,
-							roundManager, lobbyInfo.Settings.CoinsBet, CellType.Zero,
+							lobbyInfo.Settings.CoinsBet, roundManager, GameMode.Standart, CellType.Zero,
 							lobbyInfo.Settings.IsTimerEnabled, lobbyInfo.Settings.IsGameAssistsEnabled,
 							lobbyInfo.Settings.OpponentAvatar.Image, lobbyInfo.Settings.OpponentName);
 						break;

@@ -6,6 +6,7 @@ using TicTacToe.Models.GameInfo;
 using TicTacToe.Models.PlayerInfo;
 using TicTacToe.Models.Utilities.FormUtilities;
 using TicTacToeLibrary.Core;
+using TicTacToeLibrary.GameLogic;
 
 namespace TicTacToe.Forms.Game.Games3on3
 {
@@ -13,9 +14,11 @@ namespace TicTacToe.Forms.Game.Games3on3
 	{
 		private CellType _currentCellType;
 
-		internal Game3on3SinglePCForm(MainForm mainForm, Player player, RoundManager roundManager,
-					CellType playerCellType, bool isTimerEnabled, Image opponentAvatar, string opponentName)
-					: base(mainForm, player, new CoinReward(), roundManager, playerCellType, isTimerEnabled, false)
+		internal Game3on3SinglePCForm(MainForm mainForm, Player player,
+			RoundManager roundManager, GameMode gameMode, CellType playerCellType,
+			bool isTimerEnabled, Image opponentAvatar, string opponentName)
+			: base(mainForm, player, new CoinReward(), roundManager, gameMode, playerCellType,
+				  isTimerEnabled, false)
 		{
 			InitializeComponent();
 
@@ -28,7 +31,7 @@ namespace TicTacToe.Forms.Game.Games3on3
 		private void Game3on3SinglePCForm_Load(object sender, EventArgs e)
 		{
 			Game3on3SinglePCForm nextGameForm = new Game3on3SinglePCForm(mainForm, player, roundManager,
-			   opponentCellType, isTimerEnabled, pictureBoxOpponentAvatar.Image, labelOpponentName.Text);
+			   gameMode, opponentCellType, isTimerEnabled, pictureBoxOpponentAvatar.Image, labelOpponentName.Text);
 			InitializeBaseGame(PictureCell_Click, nextGameForm);
 			ManagePictureCellsEventHover(PictureCell_MouseEnter, PictureCell_MouseLeave, true);
 
