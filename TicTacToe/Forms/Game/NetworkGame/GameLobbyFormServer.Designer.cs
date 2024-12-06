@@ -50,6 +50,7 @@ namespace TicTacToe.Forms.Game.NetworkGame
 			this.richTextBoxChat = new TicTacToe.Models.Utilities.FormUtilities.NoCaretRichTextBox();
 			this.buttonSendMessage = new Guna.UI2.WinForms.Guna2GradientButton();
 			this.pictureBoxLineAboveChat = new Guna.UI2.WinForms.Guna2PictureBox();
+			this.comboBoxGameMode = new Guna.UI2.WinForms.Guna2ComboBox();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxCoin)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownNumberOfRounds)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxCoinBet)).BeginInit();
@@ -66,7 +67,7 @@ namespace TicTacToe.Forms.Game.NetworkGame
 			this.pictureBoxCoin.Name = "pictureBoxCoin";
 			this.pictureBoxCoin.Size = new System.Drawing.Size(42, 42);
 			this.pictureBoxCoin.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-			this.pictureBoxCoin.TabIndex = 12;
+			this.pictureBoxCoin.TabIndex = 13;
 			this.pictureBoxCoin.TabStop = false;
 			// 
 			// labelCoins
@@ -78,7 +79,7 @@ namespace TicTacToe.Forms.Game.NetworkGame
 			this.labelCoins.Location = new System.Drawing.Point(1012, 20);
 			this.labelCoins.Name = "labelCoins";
 			this.labelCoins.Size = new System.Drawing.Size(130, 27);
-			this.labelCoins.TabIndex = 11;
+			this.labelCoins.TabIndex = 12;
 			this.labelCoins.Text = "999 999";
 			this.labelCoins.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
 			// 
@@ -160,7 +161,7 @@ namespace TicTacToe.Forms.Game.NetworkGame
             0});
 			this.numericUpDownNumberOfRounds.Name = "numericUpDownNumberOfRounds";
 			this.numericUpDownNumberOfRounds.Size = new System.Drawing.Size(75, 38);
-			this.numericUpDownNumberOfRounds.TabIndex = 5;
+			this.numericUpDownNumberOfRounds.TabIndex = 6;
 			this.numericUpDownNumberOfRounds.TabStop = false;
 			this.numericUpDownNumberOfRounds.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
 			this.numericUpDownNumberOfRounds.Value = new decimal(new int[] {
@@ -179,7 +180,7 @@ namespace TicTacToe.Forms.Game.NetworkGame
 			this.labelNumberOfRounds.Location = new System.Drawing.Point(12, 80);
 			this.labelNumberOfRounds.Name = "labelNumberOfRounds";
 			this.labelNumberOfRounds.Size = new System.Drawing.Size(241, 35);
-			this.labelNumberOfRounds.TabIndex = 4;
+			this.labelNumberOfRounds.TabIndex = 5;
 			this.labelNumberOfRounds.Text = "Number of rounds:";
 			// 
 			// pictureBoxCoinBet
@@ -190,7 +191,7 @@ namespace TicTacToe.Forms.Game.NetworkGame
 			this.pictureBoxCoinBet.Name = "pictureBoxCoinBet";
 			this.pictureBoxCoinBet.Size = new System.Drawing.Size(45, 45);
 			this.pictureBoxCoinBet.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-			this.pictureBoxCoinBet.TabIndex = 8;
+			this.pictureBoxCoinBet.TabIndex = 9;
 			this.pictureBoxCoinBet.TabStop = false;
 			// 
 			// labelCoinsBet
@@ -202,7 +203,7 @@ namespace TicTacToe.Forms.Game.NetworkGame
 			this.labelCoinsBet.Location = new System.Drawing.Point(12, 140);
 			this.labelCoinsBet.Name = "labelCoinsBet";
 			this.labelCoinsBet.Size = new System.Drawing.Size(138, 35);
-			this.labelCoinsBet.TabIndex = 6;
+			this.labelCoinsBet.TabIndex = 7;
 			this.labelCoinsBet.Text = "Coins bet:";
 			// 
 			// buttonGameAssistsEnabled
@@ -222,7 +223,7 @@ namespace TicTacToe.Forms.Game.NetworkGame
 			this.buttonGameAssistsEnabled.Margin = new System.Windows.Forms.Padding(0);
 			this.buttonGameAssistsEnabled.Name = "buttonGameAssistsEnabled";
 			this.buttonGameAssistsEnabled.Size = new System.Drawing.Size(220, 40);
-			this.buttonGameAssistsEnabled.TabIndex = 10;
+			this.buttonGameAssistsEnabled.TabIndex = 11;
 			this.buttonGameAssistsEnabled.TabStop = false;
 			this.buttonGameAssistsEnabled.Text = " Game Assists";
 			this.buttonGameAssistsEnabled.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -249,7 +250,7 @@ namespace TicTacToe.Forms.Game.NetworkGame
 			this.buttonTimerEnabled.Margin = new System.Windows.Forms.Padding(0);
 			this.buttonTimerEnabled.Name = "buttonTimerEnabled";
 			this.buttonTimerEnabled.Size = new System.Drawing.Size(140, 40);
-			this.buttonTimerEnabled.TabIndex = 9;
+			this.buttonTimerEnabled.TabIndex = 10;
 			this.buttonTimerEnabled.TabStop = false;
 			this.buttonTimerEnabled.Text = " Timer";
 			this.buttonTimerEnabled.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -282,7 +283,7 @@ namespace TicTacToe.Forms.Game.NetworkGame
 			this.buttonStart.Location = new System.Drawing.Point(968, 715);
 			this.buttonStart.Name = "buttonStart";
 			this.buttonStart.Size = new System.Drawing.Size(220, 50);
-			this.buttonStart.TabIndex = 16;
+			this.buttonStart.TabIndex = 17;
 			this.buttonStart.TabStop = false;
 			this.buttonStart.Text = "Start";
 			this.buttonStart.Click += new System.EventHandler(this.ButtonStart_Click);
@@ -295,7 +296,7 @@ namespace TicTacToe.Forms.Game.NetworkGame
 			this.flpPlayers.Location = new System.Drawing.Point(677, 375);
 			this.flpPlayers.Name = "flpPlayers";
 			this.flpPlayers.Size = new System.Drawing.Size(267, 390);
-			this.flpPlayers.TabIndex = 15;
+			this.flpPlayers.TabIndex = 16;
 			this.flpPlayers.Tag = "needToMoveParentDown";
 			// 
 			// labelValueCoinsBet
@@ -306,7 +307,7 @@ namespace TicTacToe.Forms.Game.NetworkGame
 			this.labelValueCoinsBet.Location = new System.Drawing.Point(156, 139);
 			this.labelValueCoinsBet.Name = "labelValueCoinsBet";
 			this.labelValueCoinsBet.Size = new System.Drawing.Size(100, 38);
-			this.labelValueCoinsBet.TabIndex = 7;
+			this.labelValueCoinsBet.TabIndex = 8;
 			this.labelValueCoinsBet.Text = "9 999";
 			this.labelValueCoinsBet.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
 			// 
@@ -351,7 +352,7 @@ namespace TicTacToe.Forms.Game.NetworkGame
 			this.panelChat.Location = new System.Drawing.Point(6, 375);
 			this.panelChat.Name = "panelChat";
 			this.panelChat.Size = new System.Drawing.Size(670, 390);
-			this.panelChat.TabIndex = 14;
+			this.panelChat.TabIndex = 15;
 			this.panelChat.Tag = "needToMoveParentDown";
 			// 
 			// richTextBoxChat
@@ -407,8 +408,43 @@ namespace TicTacToe.Forms.Game.NetworkGame
 			this.pictureBoxLineAboveChat.Location = new System.Drawing.Point(0, 360);
 			this.pictureBoxLineAboveChat.Name = "pictureBoxLineAboveChat";
 			this.pictureBoxLineAboveChat.Size = new System.Drawing.Size(500, 4);
-			this.pictureBoxLineAboveChat.TabIndex = 13;
+			this.pictureBoxLineAboveChat.TabIndex = 14;
 			this.pictureBoxLineAboveChat.TabStop = false;
+			// 
+			// comboBoxGameMode
+			// 
+			this.comboBoxGameMode.BackColor = System.Drawing.Color.Transparent;
+			this.comboBoxGameMode.BorderColor = System.Drawing.Color.Gray;
+			this.comboBoxGameMode.BorderRadius = 7;
+			this.comboBoxGameMode.BorderThickness = 2;
+			this.comboBoxGameMode.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.comboBoxGameMode.CustomizableEdges.BottomLeft = false;
+			this.comboBoxGameMode.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+			this.comboBoxGameMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.comboBoxGameMode.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(37)))));
+			this.comboBoxGameMode.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(75)))), ((int)(((byte)(45)))));
+			this.comboBoxGameMode.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(75)))), ((int)(((byte)(45)))));
+			this.comboBoxGameMode.FocusedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
+			this.comboBoxGameMode.Font = new System.Drawing.Font("Trebuchet MS", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.comboBoxGameMode.ForeColor = System.Drawing.Color.LightGray;
+			this.comboBoxGameMode.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(43)))), ((int)(((byte)(43)))));
+			this.comboBoxGameMode.HoverState.ForeColor = System.Drawing.Color.White;
+			this.comboBoxGameMode.ItemHeight = 38;
+			this.comboBoxGameMode.Items.AddRange(new object[] {
+            "Classic",
+            "Tetris",
+            "Reverse Tetris"});
+			this.comboBoxGameMode.ItemsAppearance.ForeColor = System.Drawing.Color.White;
+			this.comboBoxGameMode.ItemsAppearance.SelectedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(75)))), ((int)(((byte)(45)))));
+			this.comboBoxGameMode.Location = new System.Drawing.Point(500, 20);
+			this.comboBoxGameMode.MaxDropDownItems = 3;
+			this.comboBoxGameMode.Name = "comboBoxGameMode";
+			this.comboBoxGameMode.Size = new System.Drawing.Size(255, 44);
+			this.comboBoxGameMode.StartIndex = 0;
+			this.comboBoxGameMode.TabIndex = 4;
+			this.comboBoxGameMode.TabStop = false;
+			this.comboBoxGameMode.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+			this.comboBoxGameMode.SelectedIndexChanged += new System.EventHandler(this.ComboBoxGameMode_SelectedIndexChanged);
 			// 
 			// GameLobbyServerForm
 			// 
@@ -416,6 +452,7 @@ namespace TicTacToe.Forms.Game.NetworkGame
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
 			this.ClientSize = new System.Drawing.Size(1200, 800);
+			this.Controls.Add(this.comboBoxGameMode);
 			this.Controls.Add(this.pictureBoxLineAboveChat);
 			this.Controls.Add(this.panelChat);
 			this.Controls.Add(this.labelValueCoinsBet);
@@ -470,5 +507,6 @@ namespace TicTacToe.Forms.Game.NetworkGame
 		private Guna.UI2.WinForms.Guna2GradientButton buttonSendMessage;
 		private NoCaretRichTextBox richTextBoxChat;
 		private Guna.UI2.WinForms.Guna2PictureBox pictureBoxLineAboveChat;
+		private Guna.UI2.WinForms.Guna2ComboBox comboBoxGameMode;
 	}
 }

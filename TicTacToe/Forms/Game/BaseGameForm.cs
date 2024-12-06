@@ -422,7 +422,7 @@ namespace TicTacToe.Forms.Game
 
 			switch (gameMode)
 			{
-				case GameMode.Standart:
+				case GameMode.Classic:
 					break;
 				case GameMode.Tetris:
 					resultCell = await FindCellForTetrisModeAsync(selectedCell, cellImage);

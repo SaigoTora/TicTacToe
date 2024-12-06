@@ -49,6 +49,7 @@
 			this.panelSettingsRight = new Guna.UI2.WinForms.Guna2Panel();
 			this.buttonShowSettings = new FontAwesome.Sharp.IconButton();
 			this.panelSettings = new Guna.UI2.WinForms.Guna2Panel();
+			this.comboBoxGameMode = new Guna.UI2.WinForms.Guna2ComboBox();
 			this.buttonImpossible = new FontAwesome.Sharp.IconButton();
 			this.buttonHard = new FontAwesome.Sharp.IconButton();
 			this.buttonMedium = new FontAwesome.Sharp.IconButton();
@@ -99,10 +100,10 @@
 			this.labelNumberOfRounds.BackColor = System.Drawing.Color.Transparent;
 			this.labelNumberOfRounds.Font = new System.Drawing.Font("Trebuchet MS", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.labelNumberOfRounds.ForeColor = System.Drawing.Color.White;
-			this.labelNumberOfRounds.Location = new System.Drawing.Point(12, 200);
+			this.labelNumberOfRounds.Location = new System.Drawing.Point(12, 205);
 			this.labelNumberOfRounds.Name = "labelNumberOfRounds";
 			this.labelNumberOfRounds.Size = new System.Drawing.Size(212, 29);
-			this.labelNumberOfRounds.TabIndex = 4;
+			this.labelNumberOfRounds.TabIndex = 5;
 			this.labelNumberOfRounds.Text = "Number of rounds:";
 			// 
 			// labelCoins
@@ -167,7 +168,7 @@
 			this.buttonNetworkGame.Location = new System.Drawing.Point(15, 150);
 			this.buttonNetworkGame.Name = "buttonNetworkGame";
 			this.buttonNetworkGame.Size = new System.Drawing.Size(280, 50);
-			this.buttonNetworkGame.TabIndex = 5;
+			this.buttonNetworkGame.TabIndex = 2;
 			this.buttonNetworkGame.TabStop = false;
 			this.buttonNetworkGame.Text = "Local Game";
 			this.buttonNetworkGame.Click += new System.EventHandler(this.ButtonNetworkGame_Click);
@@ -195,7 +196,7 @@
 			this.buttonSinglePCGame.Location = new System.Drawing.Point(15, 75);
 			this.buttonSinglePCGame.Name = "buttonSinglePCGame";
 			this.buttonSinglePCGame.Size = new System.Drawing.Size(280, 50);
-			this.buttonSinglePCGame.TabIndex = 4;
+			this.buttonSinglePCGame.TabIndex = 1;
 			this.buttonSinglePCGame.TabStop = false;
 			this.buttonSinglePCGame.Text = "Single PC";
 			this.buttonSinglePCGame.Click += new System.EventHandler(this.ButtonSinglePCGame_Click);
@@ -250,7 +251,7 @@
 			this.buttonExit.Location = new System.Drawing.Point(15, 450);
 			this.buttonExit.Name = "buttonExit";
 			this.buttonExit.Size = new System.Drawing.Size(280, 50);
-			this.buttonExit.TabIndex = 3;
+			this.buttonExit.TabIndex = 5;
 			this.buttonExit.TabStop = false;
 			this.buttonExit.Text = "Exit";
 			this.buttonExit.Click += new System.EventHandler(this.ButtonExit_Click);
@@ -278,7 +279,7 @@
 			this.buttonShop.Location = new System.Drawing.Point(15, 300);
 			this.buttonShop.Name = "buttonShop";
 			this.buttonShop.Size = new System.Drawing.Size(280, 50);
-			this.buttonShop.TabIndex = 2;
+			this.buttonShop.TabIndex = 4;
 			this.buttonShop.TabStop = false;
 			this.buttonShop.Text = "Shop";
 			this.buttonShop.Click += new System.EventHandler(this.ButtonShop_Click);
@@ -306,7 +307,7 @@
 			this.buttonProfile.Location = new System.Drawing.Point(15, 225);
 			this.buttonProfile.Name = "buttonProfile";
 			this.buttonProfile.Size = new System.Drawing.Size(280, 50);
-			this.buttonProfile.TabIndex = 1;
+			this.buttonProfile.TabIndex = 3;
 			this.buttonProfile.TabStop = false;
 			this.buttonProfile.Text = "Profile";
 			this.buttonProfile.Click += new System.EventHandler(this.ButtonProfile_Click);
@@ -430,6 +431,7 @@
 			// 
 			this.panelSettings.Anchor = System.Windows.Forms.AnchorStyles.Right;
 			this.panelSettings.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
+			this.panelSettings.Controls.Add(this.comboBoxGameMode);
 			this.panelSettings.Controls.Add(this.buttonImpossible);
 			this.panelSettings.Controls.Add(this.buttonHard);
 			this.panelSettings.Controls.Add(this.buttonMedium);
@@ -445,9 +447,44 @@
 			this.panelSettings.Size = new System.Drawing.Size(300, 380);
 			this.panelSettings.TabIndex = 0;
 			// 
+			// comboBoxGameMode
+			// 
+			this.comboBoxGameMode.BackColor = System.Drawing.Color.Transparent;
+			this.comboBoxGameMode.BorderColor = System.Drawing.Color.Gray;
+			this.comboBoxGameMode.BorderRadius = 7;
+			this.comboBoxGameMode.BorderThickness = 2;
+			this.comboBoxGameMode.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.comboBoxGameMode.CustomizableEdges.BottomLeft = false;
+			this.comboBoxGameMode.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+			this.comboBoxGameMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.comboBoxGameMode.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
+			this.comboBoxGameMode.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(75)))), ((int)(((byte)(45)))));
+			this.comboBoxGameMode.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(75)))), ((int)(((byte)(45)))));
+			this.comboBoxGameMode.FocusedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
+			this.comboBoxGameMode.Font = new System.Drawing.Font("Trebuchet MS", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.comboBoxGameMode.ForeColor = System.Drawing.Color.LightGray;
+			this.comboBoxGameMode.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
+			this.comboBoxGameMode.HoverState.ForeColor = System.Drawing.Color.White;
+			this.comboBoxGameMode.ItemHeight = 32;
+			this.comboBoxGameMode.Items.AddRange(new object[] {
+            "Classic",
+            "Tetris",
+            "Reverse Tetris"});
+			this.comboBoxGameMode.ItemsAppearance.ForeColor = System.Drawing.Color.White;
+			this.comboBoxGameMode.ItemsAppearance.SelectedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(75)))), ((int)(((byte)(45)))));
+			this.comboBoxGameMode.Location = new System.Drawing.Point(32, 265);
+			this.comboBoxGameMode.MaxDropDownItems = 3;
+			this.comboBoxGameMode.Name = "comboBoxGameMode";
+			this.comboBoxGameMode.Size = new System.Drawing.Size(235, 38);
+			this.comboBoxGameMode.StartIndex = 0;
+			this.comboBoxGameMode.TabIndex = 7;
+			this.comboBoxGameMode.TabStop = false;
+			this.comboBoxGameMode.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+			this.comboBoxGameMode.SelectedIndexChanged += new System.EventHandler(this.ComboBoxGameMode_SelectedIndexChanged);
+			// 
 			// buttonImpossible
 			// 
-			this.buttonImpossible.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(35)))), ((int)(((byte)(30)))));
+			this.buttonImpossible.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(45)))), ((int)(((byte)(30)))));
 			this.buttonImpossible.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.buttonImpossible.FlatAppearance.BorderSize = 0;
 			this.buttonImpossible.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -462,7 +499,7 @@
 			this.buttonImpossible.Margin = new System.Windows.Forms.Padding(0);
 			this.buttonImpossible.Name = "buttonImpossible";
 			this.buttonImpossible.Size = new System.Drawing.Size(160, 40);
-			this.buttonImpossible.TabIndex = 3;
+			this.buttonImpossible.TabIndex = 4;
 			this.buttonImpossible.TabStop = false;
 			this.buttonImpossible.Text = " Impossible";
 			this.buttonImpossible.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -474,7 +511,7 @@
 			// 
 			// buttonHard
 			// 
-			this.buttonHard.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(35)))), ((int)(((byte)(30)))));
+			this.buttonHard.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(45)))), ((int)(((byte)(30)))));
 			this.buttonHard.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.buttonHard.FlatAppearance.BorderSize = 0;
 			this.buttonHard.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -489,7 +526,7 @@
 			this.buttonHard.Margin = new System.Windows.Forms.Padding(0);
 			this.buttonHard.Name = "buttonHard";
 			this.buttonHard.Size = new System.Drawing.Size(160, 40);
-			this.buttonHard.TabIndex = 2;
+			this.buttonHard.TabIndex = 3;
 			this.buttonHard.TabStop = false;
 			this.buttonHard.Text = " Hard";
 			this.buttonHard.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -501,7 +538,7 @@
 			// 
 			// buttonMedium
 			// 
-			this.buttonMedium.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(35)))), ((int)(((byte)(30)))));
+			this.buttonMedium.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(45)))), ((int)(((byte)(30)))));
 			this.buttonMedium.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.buttonMedium.FlatAppearance.BorderSize = 0;
 			this.buttonMedium.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -516,7 +553,7 @@
 			this.buttonMedium.Margin = new System.Windows.Forms.Padding(0);
 			this.buttonMedium.Name = "buttonMedium";
 			this.buttonMedium.Size = new System.Drawing.Size(160, 40);
-			this.buttonMedium.TabIndex = 6;
+			this.buttonMedium.TabIndex = 2;
 			this.buttonMedium.TabStop = false;
 			this.buttonMedium.Text = " Medium";
 			this.buttonMedium.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -528,7 +565,7 @@
 			// 
 			// buttonEasy
 			// 
-			this.buttonEasy.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(35)))), ((int)(((byte)(30)))));
+			this.buttonEasy.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(45)))), ((int)(((byte)(30)))));
 			this.buttonEasy.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.buttonEasy.FlatAppearance.BorderSize = 0;
 			this.buttonEasy.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -557,7 +594,7 @@
 			// 
 			this.numericUpDownNumberOfRounds.BackColor = System.Drawing.Color.White;
 			this.numericUpDownNumberOfRounds.Font = new System.Drawing.Font("Courier New", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.numericUpDownNumberOfRounds.Location = new System.Drawing.Point(230, 200);
+			this.numericUpDownNumberOfRounds.Location = new System.Drawing.Point(230, 205);
 			this.numericUpDownNumberOfRounds.Maximum = new decimal(new int[] {
             99,
             0,
@@ -570,7 +607,7 @@
             0});
 			this.numericUpDownNumberOfRounds.Name = "numericUpDownNumberOfRounds";
 			this.numericUpDownNumberOfRounds.Size = new System.Drawing.Size(55, 29);
-			this.numericUpDownNumberOfRounds.TabIndex = 5;
+			this.numericUpDownNumberOfRounds.TabIndex = 6;
 			this.numericUpDownNumberOfRounds.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
 			this.numericUpDownNumberOfRounds.Value = new decimal(new int[] {
             2,
@@ -637,5 +674,6 @@
 		private System.Windows.Forms.PictureBox pictureBoxCoin;
 		private Guna.UI2.WinForms.Guna2GradientButton buttonSinglePCGame;
 		private Guna.UI2.WinForms.Guna2GradientButton buttonNetworkGame;
+		private Guna.UI2.WinForms.Guna2ComboBox comboBoxGameMode;
 	}
 }

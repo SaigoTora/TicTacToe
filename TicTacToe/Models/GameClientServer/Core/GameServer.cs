@@ -167,7 +167,7 @@ namespace TicTacToe.Models.GameClientServer.Core
 			NetworkGameSettings settings = _player.NetworkGameSettings;
 			_networkLobbyInfo.Settings = new NetworkGameSettings(settings.Description,
 				settings.CoinsBet, _player.Name, _player.VisualSettings.Avatar,
-				settings.NumberOfRounds, settings.FieldSize,
+				settings.NumberOfRounds, settings.FieldSize, settings.GameMode,
 				settings.IsTimerEnabled, settings.IsGameAssistsEnabled);
 		}
 		internal void DeletePlayerFromLobby(string clientIPAddress)

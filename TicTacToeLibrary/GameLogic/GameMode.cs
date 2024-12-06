@@ -2,7 +2,7 @@
 {
 	public enum GameMode : byte
 	{
-		Standart,
+		Classic,
 		Tetris,
 		ReverseTetris
 	}

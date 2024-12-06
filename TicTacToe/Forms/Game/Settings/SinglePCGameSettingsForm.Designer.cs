@@ -39,6 +39,7 @@
 			this.textBoxOpponentName = new System.Windows.Forms.TextBox();
 			this.numericUpDownNumberOfRounds = new System.Windows.Forms.NumericUpDown();
 			this.labelNumberOfRounds = new System.Windows.Forms.Label();
+			this.comboBoxGameMode = new Guna.UI2.WinForms.Guna2ComboBox();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownNumberOfRounds)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -104,11 +105,11 @@
 			this.buttonTimerEnabled.IconFont = FontAwesome.Sharp.IconFont.Auto;
 			this.buttonTimerEnabled.IconSize = 30;
 			this.buttonTimerEnabled.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			this.buttonTimerEnabled.Location = new System.Drawing.Point(42, 560);
+			this.buttonTimerEnabled.Location = new System.Drawing.Point(42, 610);
 			this.buttonTimerEnabled.Margin = new System.Windows.Forms.Padding(0);
 			this.buttonTimerEnabled.Name = "buttonTimerEnabled";
 			this.buttonTimerEnabled.Size = new System.Drawing.Size(140, 40);
-			this.buttonTimerEnabled.TabIndex = 8;
+			this.buttonTimerEnabled.TabIndex = 9;
 			this.buttonTimerEnabled.TabStop = false;
 			this.buttonTimerEnabled.Text = " Timer";
 			this.buttonTimerEnabled.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -137,10 +138,10 @@
 			this.buttonPlay.Font = new System.Drawing.Font("Cooper Black", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.buttonPlay.ForeColor = System.Drawing.Color.White;
 			this.buttonPlay.GradientMode = System.Drawing.Drawing2D.LinearGradientMode.BackwardDiagonal;
-			this.buttonPlay.Location = new System.Drawing.Point(659, 608);
+			this.buttonPlay.Location = new System.Drawing.Point(659, 658);
 			this.buttonPlay.Name = "buttonPlay";
 			this.buttonPlay.Size = new System.Drawing.Size(220, 50);
-			this.buttonPlay.TabIndex = 9;
+			this.buttonPlay.TabIndex = 10;
 			this.buttonPlay.TabStop = false;
 			this.buttonPlay.Text = "Play";
 			this.buttonPlay.Click += new System.EventHandler(this.ButtonPlay_Click);
@@ -149,11 +150,11 @@
 			// 
 			this.flpAvatar.AutoScroll = true;
 			this.flpAvatar.BackColor = System.Drawing.Color.Transparent;
-			this.flpAvatar.Location = new System.Drawing.Point(12, 264);
+			this.flpAvatar.Location = new System.Drawing.Point(12, 314);
 			this.flpAvatar.Name = "flpAvatar";
 			this.flpAvatar.Padding = new System.Windows.Forms.Padding(10, 10, 0, 0);
 			this.flpAvatar.Size = new System.Drawing.Size(560, 280);
-			this.flpAvatar.TabIndex = 7;
+			this.flpAvatar.TabIndex = 8;
 			// 
 			// buttonChangeOpponentName
 			// 
@@ -165,10 +166,10 @@
 			this.buttonChangeOpponentName.IconColor = System.Drawing.Color.White;
 			this.buttonChangeOpponentName.IconFont = FontAwesome.Sharp.IconFont.Auto;
 			this.buttonChangeOpponentName.IconSize = 38;
-			this.buttonChangeOpponentName.Location = new System.Drawing.Point(398, 207);
+			this.buttonChangeOpponentName.Location = new System.Drawing.Point(398, 257);
 			this.buttonChangeOpponentName.Name = "buttonChangeOpponentName";
 			this.buttonChangeOpponentName.Size = new System.Drawing.Size(41, 41);
-			this.buttonChangeOpponentName.TabIndex = 6;
+			this.buttonChangeOpponentName.TabIndex = 7;
 			this.buttonChangeOpponentName.TabStop = false;
 			this.buttonChangeOpponentName.UseVisualStyleBackColor = false;
 			this.buttonChangeOpponentName.Click += new System.EventHandler(this.ButtonChangeOpponentName_Click);
@@ -179,11 +180,11 @@
 			this.textBoxOpponentName.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.textBoxOpponentName.Font = new System.Drawing.Font("Trebuchet MS", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.textBoxOpponentName.ForeColor = System.Drawing.Color.White;
-			this.textBoxOpponentName.Location = new System.Drawing.Point(42, 210);
+			this.textBoxOpponentName.Location = new System.Drawing.Point(42, 260);
 			this.textBoxOpponentName.Name = "textBoxOpponentName";
 			this.textBoxOpponentName.ReadOnly = true;
 			this.textBoxOpponentName.Size = new System.Drawing.Size(350, 34);
-			this.textBoxOpponentName.TabIndex = 5;
+			this.textBoxOpponentName.TabIndex = 6;
 			this.textBoxOpponentName.TabStop = false;
 			this.textBoxOpponentName.Text = "Player 2";
 			this.textBoxOpponentName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBoxOpponentName_KeyDown);
@@ -194,7 +195,7 @@
 			this.numericUpDownNumberOfRounds.BackColor = System.Drawing.Color.Black;
 			this.numericUpDownNumberOfRounds.Font = new System.Drawing.Font("Courier New", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.numericUpDownNumberOfRounds.ForeColor = System.Drawing.Color.White;
-			this.numericUpDownNumberOfRounds.Location = new System.Drawing.Point(283, 117);
+			this.numericUpDownNumberOfRounds.Location = new System.Drawing.Point(283, 167);
 			this.numericUpDownNumberOfRounds.Maximum = new decimal(new int[] {
             99,
             0,
@@ -207,7 +208,7 @@
             0});
 			this.numericUpDownNumberOfRounds.Name = "numericUpDownNumberOfRounds";
 			this.numericUpDownNumberOfRounds.Size = new System.Drawing.Size(75, 38);
-			this.numericUpDownNumberOfRounds.TabIndex = 4;
+			this.numericUpDownNumberOfRounds.TabIndex = 5;
 			this.numericUpDownNumberOfRounds.TabStop = false;
 			this.numericUpDownNumberOfRounds.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
 			this.numericUpDownNumberOfRounds.Value = new decimal(new int[] {
@@ -223,18 +224,54 @@
 			this.labelNumberOfRounds.BackColor = System.Drawing.Color.Transparent;
 			this.labelNumberOfRounds.Font = new System.Drawing.Font("Trebuchet MS", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.labelNumberOfRounds.ForeColor = System.Drawing.Color.White;
-			this.labelNumberOfRounds.Location = new System.Drawing.Point(42, 120);
+			this.labelNumberOfRounds.Location = new System.Drawing.Point(42, 170);
 			this.labelNumberOfRounds.Name = "labelNumberOfRounds";
 			this.labelNumberOfRounds.Size = new System.Drawing.Size(241, 35);
-			this.labelNumberOfRounds.TabIndex = 3;
+			this.labelNumberOfRounds.TabIndex = 4;
 			this.labelNumberOfRounds.Text = "Number of rounds:";
+			// 
+			// comboBoxGameMode
+			// 
+			this.comboBoxGameMode.BackColor = System.Drawing.Color.Transparent;
+			this.comboBoxGameMode.BorderColor = System.Drawing.Color.Gray;
+			this.comboBoxGameMode.BorderRadius = 7;
+			this.comboBoxGameMode.BorderThickness = 2;
+			this.comboBoxGameMode.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.comboBoxGameMode.CustomizableEdges.BottomLeft = false;
+			this.comboBoxGameMode.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+			this.comboBoxGameMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.comboBoxGameMode.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(37)))));
+			this.comboBoxGameMode.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(75)))), ((int)(((byte)(45)))));
+			this.comboBoxGameMode.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(75)))), ((int)(((byte)(45)))));
+			this.comboBoxGameMode.FocusedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
+			this.comboBoxGameMode.Font = new System.Drawing.Font("Trebuchet MS", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.comboBoxGameMode.ForeColor = System.Drawing.Color.LightGray;
+			this.comboBoxGameMode.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(43)))), ((int)(((byte)(43)))));
+			this.comboBoxGameMode.HoverState.ForeColor = System.Drawing.Color.White;
+			this.comboBoxGameMode.ItemHeight = 38;
+			this.comboBoxGameMode.Items.AddRange(new object[] {
+            "Classic",
+            "Tetris",
+            "Reverse Tetris"});
+			this.comboBoxGameMode.ItemsAppearance.ForeColor = System.Drawing.Color.White;
+			this.comboBoxGameMode.ItemsAppearance.SelectedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(75)))), ((int)(((byte)(45)))));
+			this.comboBoxGameMode.Location = new System.Drawing.Point(42, 100);
+			this.comboBoxGameMode.MaxDropDownItems = 3;
+			this.comboBoxGameMode.Name = "comboBoxGameMode";
+			this.comboBoxGameMode.Size = new System.Drawing.Size(255, 44);
+			this.comboBoxGameMode.StartIndex = 0;
+			this.comboBoxGameMode.TabIndex = 3;
+			this.comboBoxGameMode.TabStop = false;
+			this.comboBoxGameMode.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+			this.comboBoxGameMode.SelectedIndexChanged += new System.EventHandler(this.ComboBoxGameMode_SelectedIndexChanged);
 			// 
 			// SinglePCGameSettingsForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-			this.ClientSize = new System.Drawing.Size(891, 670);
+			this.ClientSize = new System.Drawing.Size(891, 720);
+			this.Controls.Add(this.comboBoxGameMode);
 			this.Controls.Add(this.numericUpDownNumberOfRounds);
 			this.Controls.Add(this.labelNumberOfRounds);
 			this.Controls.Add(this.flpAvatar);
@@ -269,5 +306,6 @@
 		private System.Windows.Forms.TextBox textBoxOpponentName;
 		private System.Windows.Forms.NumericUpDown numericUpDownNumberOfRounds;
 		private System.Windows.Forms.Label labelNumberOfRounds;
+		private Guna.UI2.WinForms.Guna2ComboBox comboBoxGameMode;
 	}
 }

@@ -2,6 +2,7 @@
 using System;
 
 using TicTacToe.Models.PlayerItem;
+using TicTacToeLibrary.GameLogic;
 
 namespace TicTacToe.Models.GameInfo.Settings
 {
@@ -16,8 +17,8 @@ namespace TicTacToe.Models.GameInfo.Settings
 		internal NetworkGameSettings() : base()
 		{ }
 		internal NetworkGameSettings(string description, int coinsBet, string opponentName, Avatar opponentAvatar,
-			int numberOfRounds, FieldSize fieldSize, bool isTimerEnabled, bool isGameAssistsEnabled)
-			: base(opponentName, opponentAvatar, numberOfRounds, fieldSize, isTimerEnabled, isGameAssistsEnabled)
+			int numberOfRounds, FieldSize fieldSize, GameMode gameMode, bool isTimerEnabled, bool isGameAssistsEnabled)
+			: base(opponentName, opponentAvatar, numberOfRounds, fieldSize, gameMode, isTimerEnabled, isGameAssistsEnabled)
 		{
 			Description = description;
 			CoinsBet = coinsBet;

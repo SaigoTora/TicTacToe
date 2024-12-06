@@ -27,7 +27,7 @@ namespace TicTacToe.Forms.Game.Settings
 		private const string SELECTED_AVATAR_TEXT = "Selected";
 		private const string SELECTED_AVATAR_TAG = "ItemSelected";
 
-		private static readonly (Color Default, Color Selected) _fieldSizeColor = (Color.Transparent, Color.Green);
+		private static readonly (Color Default, Color Selected) _fieldSizeColor = (Color.Transparent, Color.FromArgb(25, 85, 55));
 		private static readonly (Color Default, Color Selected) _enableButtonsForeColor = (Color.Transparent, Color.Khaki);
 		private static readonly (Color Default, Color DuringRenaming) _buttonChangeNameColor = (Color.White, Color.Yellow);
 
@@ -57,6 +57,7 @@ namespace TicTacToe.Forms.Game.Settings
 
 			Label labelFieldSize = GetLabelByFieldSize(_player.SinglePCGameSettings.FieldSize);
 			LabelFieldSize_Click(labelFieldSize, e);
+			comboBoxGameMode.SelectedIndex = (int)_player.SinglePCGameSettings.GameMode;
 			numericUpDownNumberOfRounds.BackColor = BackColor;
 			numericUpDownNumberOfRounds.Value = _player.SinglePCGameSettings.NumberOfRounds;
 			string opponentName = _player.SinglePCGameSettings.OpponentName;
@@ -79,19 +80,20 @@ namespace TicTacToe.Forms.Game.Settings
 		{
 			BaseGameForm gameForm;
 			RoundManager roundManager = new RoundManager(_player.SinglePCGameSettings.NumberOfRounds);
+			GameMode gameMode = _player.SinglePCGameSettings.GameMode;
 
 			switch (_player.SinglePCGameSettings.FieldSize)
 			{
 				case FieldSize.Size3on3:
-					gameForm = new Game3on3SinglePCForm(_mainForm, _player, roundManager, GameMode.Standart,
+					gameForm = new Game3on3SinglePCForm(_mainForm, _player, roundManager, gameMode,
 						CellType.Cross, _player.SinglePCGameSettings.IsTimerEnabled, opponentAvatarImage, textBoxOpponentName.Text);
 					break;
 				case FieldSize.Size5on5:
-					gameForm = new Game5on5SinglePCForm(_mainForm, _player, roundManager, GameMode.Standart,
+					gameForm = new Game5on5SinglePCForm(_mainForm, _player, roundManager, gameMode,
 						CellType.Cross, _player.SinglePCGameSettings.IsTimerEnabled, opponentAvatarImage, textBoxOpponentName.Text);
 					break;
 				case FieldSize.Size7on7:
-					gameForm = new Game7on7SinglePCForm(_mainForm, _player, roundManager, GameMode.Standart,
+					gameForm = new Game7on7SinglePCForm(_mainForm, _player, roundManager, gameMode,
 						CellType.Cross, _player.SinglePCGameSettings.IsTimerEnabled, opponentAvatarImage, textBoxOpponentName.Text);
 					break;
 				default:
@@ -152,6 +154,8 @@ namespace TicTacToe.Forms.Game.Settings
 		}
 		#endregion
 
+		private void ComboBoxGameMode_SelectedIndexChanged(object sender, EventArgs e)
+			=> _player.SinglePCGameSettings.GameMode = (GameMode)comboBoxGameMode.SelectedIndex;
 		private void NumericUpDownNumberOfRounds_ValueChanged(object sender, EventArgs e)
 			=> _player.SinglePCGameSettings.NumberOfRounds =
 			(int)numericUpDownNumberOfRounds.Value;

@@ -1,6 +1,7 @@
 ﻿using System;
 
 using TicTacToeLibrary.AI;
+using TicTacToeLibrary.GameLogic;
 
 namespace TicTacToe.Models.GameInfo.Settings
 {
@@ -12,8 +13,8 @@ namespace TicTacToe.Models.GameInfo.Settings
 		internal BotGameSettings() : base()
 		{ }
 		internal BotGameSettings(Difficulty botDifficulty, int numberOfRounds, FieldSize fieldSize,
-			bool isTimerEnabled, bool isGameAssistsEnabled)
-			: base(numberOfRounds, fieldSize, isTimerEnabled, isGameAssistsEnabled)
+			GameMode gameMode, bool isTimerEnabled, bool isGameAssistsEnabled)
+			: base(numberOfRounds, fieldSize, gameMode, isTimerEnabled, isGameAssistsEnabled)
 		{
 			BotDifficulty = botDifficulty;
 		}

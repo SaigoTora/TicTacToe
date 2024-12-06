@@ -1,6 +1,8 @@
 ﻿using Newtonsoft.Json;
 using System;
 
+using TicTacToeLibrary.GameLogic;
+
 namespace TicTacToe.Models.GameInfo.Settings
 {
 	[Serializable]
@@ -11,6 +13,8 @@ namespace TicTacToe.Models.GameInfo.Settings
 		[JsonProperty]
 		internal FieldSize FieldSize = FieldSize.Size3on3;
 		[JsonProperty]
+		internal GameMode GameMode;
+		[JsonProperty]
 		internal bool IsTimerEnabled;
 		[JsonProperty]
 		internal bool IsGameAssistsEnabled;
@@ -18,10 +22,11 @@ namespace TicTacToe.Models.GameInfo.Settings
 		internal GameSettings()
 		{ }
 		internal GameSettings(int numberOfRounds, FieldSize fieldSize,
-			bool isTimerEnabled, bool isGameAssistsEnabled)
+			GameMode gameMode, bool isTimerEnabled, bool isGameAssistsEnabled)
 		{
 			NumberOfRounds = numberOfRounds;
 			FieldSize = fieldSize;
+			GameMode = gameMode;
 			IsTimerEnabled = isTimerEnabled;
 			IsGameAssistsEnabled = isGameAssistsEnabled;
 		}

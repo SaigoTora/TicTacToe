@@ -89,6 +89,7 @@ namespace TicTacToe.Forms.Game.NetworkGame
 
 				DisplayClientFieldSize(lobbyInfo.Settings.FieldSize);
 				labelNumberOfRounds.Text = "Number of rounds:  " + lobbyInfo.Settings.NumberOfRounds;
+				labelGameMode.Text = "Game mode:  " + lobbyInfo.Settings.GameMode.ToString();
 				DisplayClientCoinsBet(lobbyInfo.Settings.CoinsBet);
 				DisplayEnableButtons(lobbyInfo.Settings.IsTimerEnabled,
 					lobbyInfo.Settings.IsGameAssistsEnabled);
@@ -99,13 +100,14 @@ namespace TicTacToe.Forms.Game.NetworkGame
 		{
 			BaseGameForm gameForm;
 			RoundManager roundManager = new RoundManager(lobbyInfo.Settings.NumberOfRounds);
+			GameMode gameMode = lobbyInfo.Settings.GameMode;
 
 			switch (lobbyInfo.Settings.FieldSize)
 			{
 				case FieldSize.Size3on3:
 					{
 						gameForm = new Game3on3NetworkForm(_mainForm, _player, _gameClient,
-							lobbyInfo.Settings.CoinsBet, roundManager, GameMode.Standart, CellType.Zero,
+							lobbyInfo.Settings.CoinsBet, roundManager, gameMode, CellType.Zero,
 							lobbyInfo.Settings.IsTimerEnabled, lobbyInfo.Settings.IsGameAssistsEnabled,
 							lobbyInfo.Settings.OpponentAvatar.Image, lobbyInfo.Settings.OpponentName);
 						break;
@@ -113,7 +115,7 @@ namespace TicTacToe.Forms.Game.NetworkGame
 				case FieldSize.Size5on5:
 					{
 						gameForm = new Game5on5NetworkForm(_mainForm, _player, _gameClient,
-							lobbyInfo.Settings.CoinsBet, roundManager, GameMode.Standart, CellType.Zero,
+							lobbyInfo.Settings.CoinsBet, roundManager, gameMode, CellType.Zero,
 							lobbyInfo.Settings.IsTimerEnabled, lobbyInfo.Settings.IsGameAssistsEnabled,
 							lobbyInfo.Settings.OpponentAvatar.Image, lobbyInfo.Settings.OpponentName);
 						break;
@@ -121,7 +123,7 @@ namespace TicTacToe.Forms.Game.NetworkGame
 				case FieldSize.Size7on7:
 					{
 						gameForm = new Game7on7NetworkForm(_mainForm, _player, _gameClient,
-							lobbyInfo.Settings.CoinsBet, roundManager, GameMode.Standart, CellType.Zero,
+							lobbyInfo.Settings.CoinsBet, roundManager, gameMode, CellType.Zero,
 							lobbyInfo.Settings.IsTimerEnabled, lobbyInfo.Settings.IsGameAssistsEnabled,
 							lobbyInfo.Settings.OpponentAvatar.Image, lobbyInfo.Settings.OpponentName);
 						break;

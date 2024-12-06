@@ -8,12 +8,13 @@ using TicTacToe.Models.GameInfo.Settings;
 using TicTacToe.Models.PlayerInfo;
 using TicTacToe.Models.Utilities.FormUtilities;
 using TicTacToe.Models.Utilities.FormUtilities.ControlEventHandlers;
+using TicTacToeLibrary.GameLogic;
 
 namespace TicTacToe.Forms.Game.Settings
 {
 	internal partial class NetworkGameSettingsForm : BaseForm
 	{
-		private static readonly (Color Default, Color Selected) _fieldSizeColor = (Color.Transparent, Color.Green);
+		private static readonly (Color Default, Color Selected) _fieldSizeColor = (Color.Transparent, Color.FromArgb(25, 85, 55));
 		private static readonly (Color Default, Color Reached) _descriptionLengthColor = (Color.LightGray, Color.Moccasin);
 		private static readonly (Color Default, Color Selected) _enableButtonsForeColor = (Color.Transparent, Color.Khaki);
 
@@ -40,6 +41,7 @@ namespace TicTacToe.Forms.Game.Settings
 		{
 			Label labelFieldSize = GetLabelByFieldSize(_player.NetworkGameSettings.FieldSize);
 			LabelFieldSize_Click(labelFieldSize, e);
+			comboBoxGameMode.SelectedIndex = (int)_player.NetworkGameSettings.GameMode;
 			numericUpDownNumberOfRounds.BackColor = BackColor;
 			numericUpDownNumberOfRounds.Value = _player.NetworkGameSettings.NumberOfRounds;
 			numericUpDownCoinsBet.BackColor = BackColor;
@@ -103,6 +105,8 @@ namespace TicTacToe.Forms.Game.Settings
 		}
 		#endregion
 
+		private void ComboBoxGameMode_SelectedIndexChanged(object sender, EventArgs e)
+			=> _player.NetworkGameSettings.GameMode = (GameMode)comboBoxGameMode.SelectedIndex;
 		private void NumericUpDownNumberOfRounds_ValueChanged(object sender, EventArgs e)
 			=> _player.NetworkGameSettings.NumberOfRounds =
 			(int)numericUpDownNumberOfRounds.Value;

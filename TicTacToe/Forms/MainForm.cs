@@ -58,6 +58,7 @@ namespace TicTacToe.Forms
 			Button difficultyButton = GetButtonByDificulty(_player.BotGameSettings.BotDifficulty);
 			ButtonDifficulty_Click(difficultyButton, e);
 			numericUpDownNumberOfRounds.Value = _player.BotGameSettings.NumberOfRounds;
+			comboBoxGameMode.SelectedIndex = (int)_player.BotGameSettings.GameMode;
 			DisplayPlayerData();
 
 			_pictureBoxEventHandlers.SubscribeToHover(pictureBoxAvatar);
@@ -187,7 +188,8 @@ namespace TicTacToe.Forms
 			Bot bot = new Bot(_selectedDifficulty);
 			RoundManager roundManager = new RoundManager((int)numericUpDownNumberOfRounds.Value);
 
-			Game3on3BotForm gameForm = new Game3on3BotForm(this, _player, bot, roundManager, GameMode.Standart, CellType.Zero, true, true);
+			Game3on3BotForm gameForm = new Game3on3BotForm(this, _player, bot,
+				roundManager, _player.BotGameSettings.GameMode, CellType.Zero, true, true);
 			if (!gameForm.IsDisposed)// If a player have enough coints to play
 			{
 				Hide();
@@ -263,6 +265,8 @@ namespace TicTacToe.Forms
 			int value = (int)numericUpDownNumberOfRounds.Value;
 			_player.BotGameSettings.NumberOfRounds = value;
 		}
+		private void ComboBoxGameMode_SelectedIndexChanged(object sender, EventArgs e)
+			=> _player.BotGameSettings.GameMode = (GameMode)comboBoxGameMode.SelectedIndex;
 
 		private void LabelName_MouseEnter(object sender, EventArgs e)
 		{

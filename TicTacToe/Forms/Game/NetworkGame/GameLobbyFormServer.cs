@@ -28,7 +28,7 @@ namespace TicTacToe.Forms.Game.NetworkGame
 	internal partial class GameLobbyServerForm : BaseForm
 	{
 		private static readonly (Color Default, Color Selected) _fieldSizeColor
-			= (Color.Transparent, Color.Green);
+			= (Color.Transparent, Color.FromArgb(25, 85, 55));
 		private static readonly (Color Default, Color Selected) _enableButtonsForeColor
 			= (Color.Transparent, Color.Khaki);
 
@@ -90,6 +90,7 @@ namespace TicTacToe.Forms.Game.NetworkGame
 		{
 			Label labelFieldSize = GetLabelByFieldSize(_player.NetworkGameSettings.FieldSize);
 			LabelFieldSize_Click(labelFieldSize, EventArgs.Empty);
+			comboBoxGameMode.SelectedIndex = (int)_player.NetworkGameSettings.GameMode;
 			numericUpDownNumberOfRounds.BackColor = BackColor;
 			numericUpDownNumberOfRounds.Value = _player.NetworkGameSettings.NumberOfRounds;
 			string coinsBetText = _player.NetworkGameSettings.CoinsBet == 0 ?
@@ -172,6 +173,8 @@ namespace TicTacToe.Forms.Game.NetworkGame
 		}
 		#endregion
 
+		private void ComboBoxGameMode_SelectedIndexChanged(object sender, EventArgs e)
+			=> _player.NetworkGameSettings.GameMode = (GameMode)comboBoxGameMode.SelectedIndex;
 		private void NumericUpDownNumberOfRounds_ValueChanged(object sender, EventArgs e)
 			=> _player.NetworkGameSettings.NumberOfRounds =
 			(int)numericUpDownNumberOfRounds.Value;
@@ -430,7 +433,7 @@ namespace TicTacToe.Forms.Game.NetworkGame
 				case FieldSize.Size3on3:
 					{
 						gameForm = new Game3on3NetworkForm(_mainForm, _player, _gameServer,
-						settings.CoinsBet, roundManager, GameMode.Standart, CellType.Cross,
+						settings.CoinsBet, roundManager, settings.GameMode, CellType.Cross,
 						settings.IsTimerEnabled, settings.IsGameAssistsEnabled,
 							opponent.VisualSettings.Avatar.Image, opponent.Name);
 						break;
@@ -438,7 +441,7 @@ namespace TicTacToe.Forms.Game.NetworkGame
 				case FieldSize.Size5on5:
 					{
 						gameForm = new Game5on5NetworkForm(_mainForm, _player, _gameServer,
-						settings.CoinsBet, roundManager, GameMode.Standart, CellType.Cross,
+						settings.CoinsBet, roundManager, settings.GameMode, CellType.Cross,
 						settings.IsTimerEnabled, settings.IsGameAssistsEnabled,
 							opponent.VisualSettings.Avatar.Image, opponent.Name);
 						break;
@@ -446,7 +449,7 @@ namespace TicTacToe.Forms.Game.NetworkGame
 				case FieldSize.Size7on7:
 					{
 						gameForm = new Game7on7NetworkForm(_mainForm, _player, _gameServer,
-						settings.CoinsBet, roundManager, GameMode.Standart, CellType.Cross,
+						settings.CoinsBet, roundManager, settings.GameMode, CellType.Cross,
 						settings.IsTimerEnabled, settings.IsGameAssistsEnabled,
 							opponent.VisualSettings.Avatar.Image, opponent.Name);
 						break;

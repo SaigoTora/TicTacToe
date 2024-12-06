@@ -43,6 +43,7 @@
 			this.labelDescriptionLength = new System.Windows.Forms.Label();
 			this.numericUpDownNumberOfRounds = new System.Windows.Forms.NumericUpDown();
 			this.labelNumberOfRounds = new System.Windows.Forms.Label();
+			this.comboBoxGameMode = new Guna.UI2.WinForms.Guna2ComboBox();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownCoinsBet)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxCoin)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownNumberOfRounds)).BeginInit();
@@ -53,7 +54,7 @@
 			this.numericUpDownCoinsBet.BackColor = System.Drawing.Color.Black;
 			this.numericUpDownCoinsBet.Font = new System.Drawing.Font("Courier New", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.numericUpDownCoinsBet.ForeColor = System.Drawing.Color.Khaki;
-			this.numericUpDownCoinsBet.Location = new System.Drawing.Point(186, 189);
+			this.numericUpDownCoinsBet.Location = new System.Drawing.Point(186, 239);
 			this.numericUpDownCoinsBet.Maximum = new decimal(new int[] {
             9999,
             0,
@@ -61,7 +62,7 @@
             0});
 			this.numericUpDownCoinsBet.Name = "numericUpDownCoinsBet";
 			this.numericUpDownCoinsBet.Size = new System.Drawing.Size(100, 38);
-			this.numericUpDownCoinsBet.TabIndex = 6;
+			this.numericUpDownCoinsBet.TabIndex = 7;
 			this.numericUpDownCoinsBet.TabStop = false;
 			this.numericUpDownCoinsBet.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
 			this.numericUpDownCoinsBet.Value = new decimal(new int[] {
@@ -77,10 +78,10 @@
 			this.labelCoinsBet.BackColor = System.Drawing.Color.Transparent;
 			this.labelCoinsBet.Font = new System.Drawing.Font("Trebuchet MS", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.labelCoinsBet.ForeColor = System.Drawing.Color.Khaki;
-			this.labelCoinsBet.Location = new System.Drawing.Point(42, 190);
+			this.labelCoinsBet.Location = new System.Drawing.Point(42, 240);
 			this.labelCoinsBet.Name = "labelCoinsBet";
 			this.labelCoinsBet.Size = new System.Drawing.Size(138, 35);
-			this.labelCoinsBet.TabIndex = 5;
+			this.labelCoinsBet.TabIndex = 6;
 			this.labelCoinsBet.Text = "Coins bet:";
 			// 
 			// buttonCreate
@@ -102,10 +103,10 @@
 			this.buttonCreate.Font = new System.Drawing.Font("Cooper Black", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.buttonCreate.ForeColor = System.Drawing.Color.White;
 			this.buttonCreate.GradientMode = System.Drawing.Drawing2D.LinearGradientMode.BackwardDiagonal;
-			this.buttonCreate.Location = new System.Drawing.Point(659, 608);
+			this.buttonCreate.Location = new System.Drawing.Point(659, 658);
 			this.buttonCreate.Name = "buttonCreate";
 			this.buttonCreate.Size = new System.Drawing.Size(220, 50);
-			this.buttonCreate.TabIndex = 13;
+			this.buttonCreate.TabIndex = 14;
 			this.buttonCreate.TabStop = false;
 			this.buttonCreate.Text = "Create";
 			this.buttonCreate.Click += new System.EventHandler(this.ButtonCreate_Click);
@@ -124,11 +125,11 @@
 			this.buttonGameAssistsEnabled.IconFont = FontAwesome.Sharp.IconFont.Auto;
 			this.buttonGameAssistsEnabled.IconSize = 30;
 			this.buttonGameAssistsEnabled.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			this.buttonGameAssistsEnabled.Location = new System.Drawing.Point(232, 556);
+			this.buttonGameAssistsEnabled.Location = new System.Drawing.Point(232, 606);
 			this.buttonGameAssistsEnabled.Margin = new System.Windows.Forms.Padding(0);
 			this.buttonGameAssistsEnabled.Name = "buttonGameAssistsEnabled";
 			this.buttonGameAssistsEnabled.Size = new System.Drawing.Size(220, 40);
-			this.buttonGameAssistsEnabled.TabIndex = 12;
+			this.buttonGameAssistsEnabled.TabIndex = 13;
 			this.buttonGameAssistsEnabled.TabStop = false;
 			this.buttonGameAssistsEnabled.Text = " Game Assists";
 			this.buttonGameAssistsEnabled.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -152,11 +153,11 @@
 			this.buttonTimerEnabled.IconFont = FontAwesome.Sharp.IconFont.Auto;
 			this.buttonTimerEnabled.IconSize = 30;
 			this.buttonTimerEnabled.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			this.buttonTimerEnabled.Location = new System.Drawing.Point(42, 556);
+			this.buttonTimerEnabled.Location = new System.Drawing.Point(42, 606);
 			this.buttonTimerEnabled.Margin = new System.Windows.Forms.Padding(0);
 			this.buttonTimerEnabled.Name = "buttonTimerEnabled";
 			this.buttonTimerEnabled.Size = new System.Drawing.Size(140, 40);
-			this.buttonTimerEnabled.TabIndex = 11;
+			this.buttonTimerEnabled.TabIndex = 12;
 			this.buttonTimerEnabled.TabStop = false;
 			this.buttonTimerEnabled.Text = " Timer";
 			this.buttonTimerEnabled.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -220,11 +221,11 @@
 			this.richTextBoxDescription.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.richTextBoxDescription.Font = new System.Drawing.Font("Trebuchet MS", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.richTextBoxDescription.ForeColor = System.Drawing.Color.Gainsboro;
-			this.richTextBoxDescription.Location = new System.Drawing.Point(42, 320);
+			this.richTextBoxDescription.Location = new System.Drawing.Point(42, 370);
 			this.richTextBoxDescription.MaxLength = 110;
 			this.richTextBoxDescription.Name = "richTextBoxDescription";
 			this.richTextBoxDescription.Size = new System.Drawing.Size(560, 180);
-			this.richTextBoxDescription.TabIndex = 9;
+			this.richTextBoxDescription.TabIndex = 10;
 			this.richTextBoxDescription.TabStop = false;
 			this.richTextBoxDescription.Text = "";
 			this.richTextBoxDescription.TextChanged += new System.EventHandler(this.RichTextBoxDescription_TextChanged);
@@ -235,11 +236,11 @@
 			// 
 			this.pictureBoxCoin.BackColor = System.Drawing.Color.Transparent;
 			this.pictureBoxCoin.Image = global::TicTacToe.Properties.Resources.coin;
-			this.pictureBoxCoin.Location = new System.Drawing.Point(292, 185);
+			this.pictureBoxCoin.Location = new System.Drawing.Point(292, 235);
 			this.pictureBoxCoin.Name = "pictureBoxCoin";
 			this.pictureBoxCoin.Size = new System.Drawing.Size(45, 45);
 			this.pictureBoxCoin.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-			this.pictureBoxCoin.TabIndex = 7;
+			this.pictureBoxCoin.TabIndex = 8;
 			this.pictureBoxCoin.TabStop = false;
 			// 
 			// labelDescription
@@ -248,10 +249,10 @@
 			this.labelDescription.BackColor = System.Drawing.Color.Transparent;
 			this.labelDescription.Font = new System.Drawing.Font("Trebuchet MS", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.labelDescription.ForeColor = System.Drawing.Color.White;
-			this.labelDescription.Location = new System.Drawing.Point(42, 280);
+			this.labelDescription.Location = new System.Drawing.Point(42, 320);
 			this.labelDescription.Name = "labelDescription";
 			this.labelDescription.Size = new System.Drawing.Size(163, 35);
-			this.labelDescription.TabIndex = 8;
+			this.labelDescription.TabIndex = 9;
 			this.labelDescription.Text = "Description:";
 			// 
 			// labelDescriptionLength
@@ -259,10 +260,10 @@
 			this.labelDescriptionLength.BackColor = System.Drawing.Color.Transparent;
 			this.labelDescriptionLength.Font = new System.Drawing.Font("Courier New", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.labelDescriptionLength.ForeColor = System.Drawing.Color.LightGray;
-			this.labelDescriptionLength.Location = new System.Drawing.Point(412, 503);
+			this.labelDescriptionLength.Location = new System.Drawing.Point(412, 553);
 			this.labelDescriptionLength.Name = "labelDescriptionLength";
 			this.labelDescriptionLength.Size = new System.Drawing.Size(190, 35);
-			this.labelDescriptionLength.TabIndex = 10;
+			this.labelDescriptionLength.TabIndex = 11;
 			this.labelDescriptionLength.Text = "99999 / 99999";
 			this.labelDescriptionLength.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
 			this.labelDescriptionLength.Visible = false;
@@ -272,7 +273,7 @@
 			this.numericUpDownNumberOfRounds.BackColor = System.Drawing.Color.Black;
 			this.numericUpDownNumberOfRounds.Font = new System.Drawing.Font("Courier New", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.numericUpDownNumberOfRounds.ForeColor = System.Drawing.Color.White;
-			this.numericUpDownNumberOfRounds.Location = new System.Drawing.Point(289, 118);
+			this.numericUpDownNumberOfRounds.Location = new System.Drawing.Point(289, 168);
 			this.numericUpDownNumberOfRounds.Maximum = new decimal(new int[] {
             99,
             0,
@@ -285,7 +286,7 @@
             0});
 			this.numericUpDownNumberOfRounds.Name = "numericUpDownNumberOfRounds";
 			this.numericUpDownNumberOfRounds.Size = new System.Drawing.Size(75, 38);
-			this.numericUpDownNumberOfRounds.TabIndex = 4;
+			this.numericUpDownNumberOfRounds.TabIndex = 5;
 			this.numericUpDownNumberOfRounds.TabStop = false;
 			this.numericUpDownNumberOfRounds.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
 			this.numericUpDownNumberOfRounds.Value = new decimal(new int[] {
@@ -301,18 +302,54 @@
 			this.labelNumberOfRounds.BackColor = System.Drawing.Color.Transparent;
 			this.labelNumberOfRounds.Font = new System.Drawing.Font("Trebuchet MS", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.labelNumberOfRounds.ForeColor = System.Drawing.Color.White;
-			this.labelNumberOfRounds.Location = new System.Drawing.Point(42, 120);
+			this.labelNumberOfRounds.Location = new System.Drawing.Point(42, 170);
 			this.labelNumberOfRounds.Name = "labelNumberOfRounds";
 			this.labelNumberOfRounds.Size = new System.Drawing.Size(241, 35);
-			this.labelNumberOfRounds.TabIndex = 3;
+			this.labelNumberOfRounds.TabIndex = 4;
 			this.labelNumberOfRounds.Text = "Number of rounds:";
+			// 
+			// comboBoxGameMode
+			// 
+			this.comboBoxGameMode.BackColor = System.Drawing.Color.Transparent;
+			this.comboBoxGameMode.BorderColor = System.Drawing.Color.Gray;
+			this.comboBoxGameMode.BorderRadius = 7;
+			this.comboBoxGameMode.BorderThickness = 2;
+			this.comboBoxGameMode.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.comboBoxGameMode.CustomizableEdges.BottomLeft = false;
+			this.comboBoxGameMode.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+			this.comboBoxGameMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.comboBoxGameMode.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(37)))));
+			this.comboBoxGameMode.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(75)))), ((int)(((byte)(45)))));
+			this.comboBoxGameMode.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(75)))), ((int)(((byte)(45)))));
+			this.comboBoxGameMode.FocusedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
+			this.comboBoxGameMode.Font = new System.Drawing.Font("Trebuchet MS", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.comboBoxGameMode.ForeColor = System.Drawing.Color.LightGray;
+			this.comboBoxGameMode.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(43)))), ((int)(((byte)(43)))));
+			this.comboBoxGameMode.HoverState.ForeColor = System.Drawing.Color.White;
+			this.comboBoxGameMode.ItemHeight = 38;
+			this.comboBoxGameMode.Items.AddRange(new object[] {
+            "Classic",
+            "Tetris",
+            "Reverse Tetris"});
+			this.comboBoxGameMode.ItemsAppearance.ForeColor = System.Drawing.Color.White;
+			this.comboBoxGameMode.ItemsAppearance.SelectedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(75)))), ((int)(((byte)(45)))));
+			this.comboBoxGameMode.Location = new System.Drawing.Point(42, 100);
+			this.comboBoxGameMode.MaxDropDownItems = 3;
+			this.comboBoxGameMode.Name = "comboBoxGameMode";
+			this.comboBoxGameMode.Size = new System.Drawing.Size(255, 44);
+			this.comboBoxGameMode.StartIndex = 0;
+			this.comboBoxGameMode.TabIndex = 3;
+			this.comboBoxGameMode.TabStop = false;
+			this.comboBoxGameMode.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+			this.comboBoxGameMode.SelectedIndexChanged += new System.EventHandler(this.ComboBoxGameMode_SelectedIndexChanged);
 			// 
 			// NetworkGameSettingsForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-			this.ClientSize = new System.Drawing.Size(891, 670);
+			this.ClientSize = new System.Drawing.Size(891, 720);
+			this.Controls.Add(this.comboBoxGameMode);
 			this.Controls.Add(this.numericUpDownNumberOfRounds);
 			this.Controls.Add(this.labelNumberOfRounds);
 			this.Controls.Add(this.labelDescriptionLength);
@@ -357,5 +394,6 @@
 		private System.Windows.Forms.Label labelDescriptionLength;
 		private System.Windows.Forms.NumericUpDown numericUpDownNumberOfRounds;
 		private System.Windows.Forms.Label labelNumberOfRounds;
+		private Guna.UI2.WinForms.Guna2ComboBox comboBoxGameMode;
 	}
 }

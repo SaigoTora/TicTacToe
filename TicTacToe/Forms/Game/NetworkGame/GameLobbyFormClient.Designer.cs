@@ -44,6 +44,7 @@
 			this.buttonSendMessage = new Guna.UI2.WinForms.Guna2GradientButton();
 			this.textBoxMessage = new Guna.UI2.WinForms.Guna2TextBox();
 			this.pictureBoxLineAboveChat = new Guna.UI2.WinForms.Guna2PictureBox();
+			this.labelGameMode = new System.Windows.Forms.Label();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxCoin)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxCoinBet)).BeginInit();
 			this.panelChat.SuspendLayout();
@@ -59,7 +60,7 @@
 			this.pictureBoxCoin.Name = "pictureBoxCoin";
 			this.pictureBoxCoin.Size = new System.Drawing.Size(42, 42);
 			this.pictureBoxCoin.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-			this.pictureBoxCoin.TabIndex = 8;
+			this.pictureBoxCoin.TabIndex = 9;
 			this.pictureBoxCoin.TabStop = false;
 			// 
 			// labelCoins
@@ -71,7 +72,7 @@
 			this.labelCoins.Location = new System.Drawing.Point(1012, 20);
 			this.labelCoins.Name = "labelCoins";
 			this.labelCoins.Size = new System.Drawing.Size(130, 27);
-			this.labelCoins.TabIndex = 7;
+			this.labelCoins.TabIndex = 8;
 			this.labelCoins.Text = "999 999";
 			this.labelCoins.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
 			// 
@@ -97,7 +98,7 @@
 			this.labelNumberOfRounds.Location = new System.Drawing.Point(12, 80);
 			this.labelNumberOfRounds.Name = "labelNumberOfRounds";
 			this.labelNumberOfRounds.Size = new System.Drawing.Size(241, 35);
-			this.labelNumberOfRounds.TabIndex = 1;
+			this.labelNumberOfRounds.TabIndex = 2;
 			this.labelNumberOfRounds.Text = "Number of rounds:";
 			// 
 			// pictureBoxCoinBet
@@ -108,7 +109,7 @@
 			this.pictureBoxCoinBet.Name = "pictureBoxCoinBet";
 			this.pictureBoxCoinBet.Size = new System.Drawing.Size(45, 45);
 			this.pictureBoxCoinBet.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-			this.pictureBoxCoinBet.TabIndex = 4;
+			this.pictureBoxCoinBet.TabIndex = 5;
 			this.pictureBoxCoinBet.TabStop = false;
 			// 
 			// labelCoinsBet
@@ -120,7 +121,7 @@
 			this.labelCoinsBet.Location = new System.Drawing.Point(12, 140);
 			this.labelCoinsBet.Name = "labelCoinsBet";
 			this.labelCoinsBet.Size = new System.Drawing.Size(138, 35);
-			this.labelCoinsBet.TabIndex = 2;
+			this.labelCoinsBet.TabIndex = 3;
 			this.labelCoinsBet.Text = "Coins bet:";
 			// 
 			// buttonGameAssistsEnabled
@@ -140,7 +141,7 @@
 			this.buttonGameAssistsEnabled.Margin = new System.Windows.Forms.Padding(0);
 			this.buttonGameAssistsEnabled.Name = "buttonGameAssistsEnabled";
 			this.buttonGameAssistsEnabled.Size = new System.Drawing.Size(220, 40);
-			this.buttonGameAssistsEnabled.TabIndex = 6;
+			this.buttonGameAssistsEnabled.TabIndex = 7;
 			this.buttonGameAssistsEnabled.TabStop = false;
 			this.buttonGameAssistsEnabled.Text = " Game Assists";
 			this.buttonGameAssistsEnabled.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -164,7 +165,7 @@
 			this.buttonTimerEnabled.Margin = new System.Windows.Forms.Padding(0);
 			this.buttonTimerEnabled.Name = "buttonTimerEnabled";
 			this.buttonTimerEnabled.Size = new System.Drawing.Size(140, 40);
-			this.buttonTimerEnabled.TabIndex = 5;
+			this.buttonTimerEnabled.TabIndex = 6;
 			this.buttonTimerEnabled.TabStop = false;
 			this.buttonTimerEnabled.Text = " Timer";
 			this.buttonTimerEnabled.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -193,7 +194,7 @@
 			this.buttonReady.Location = new System.Drawing.Point(968, 738);
 			this.buttonReady.Name = "buttonReady";
 			this.buttonReady.Size = new System.Drawing.Size(220, 50);
-			this.buttonReady.TabIndex = 12;
+			this.buttonReady.TabIndex = 13;
 			this.buttonReady.TabStop = false;
 			this.buttonReady.Text = "Ready";
 			this.buttonReady.Click += new System.EventHandler(this.ButtonReady_Click);
@@ -206,7 +207,7 @@
 			this.flpPlayers.Location = new System.Drawing.Point(677, 375);
 			this.flpPlayers.Name = "flpPlayers";
 			this.flpPlayers.Size = new System.Drawing.Size(267, 390);
-			this.flpPlayers.TabIndex = 11;
+			this.flpPlayers.TabIndex = 12;
 			this.flpPlayers.Tag = "needToMoveParentDown";
 			// 
 			// labelValueCoinsBet
@@ -217,7 +218,7 @@
 			this.labelValueCoinsBet.Location = new System.Drawing.Point(156, 139);
 			this.labelValueCoinsBet.Name = "labelValueCoinsBet";
 			this.labelValueCoinsBet.Size = new System.Drawing.Size(100, 38);
-			this.labelValueCoinsBet.TabIndex = 3;
+			this.labelValueCoinsBet.TabIndex = 4;
 			this.labelValueCoinsBet.Text = "9 999";
 			this.labelValueCoinsBet.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
 			// 
@@ -230,7 +231,7 @@
 			this.panelChat.Location = new System.Drawing.Point(6, 375);
 			this.panelChat.Name = "panelChat";
 			this.panelChat.Size = new System.Drawing.Size(670, 390);
-			this.panelChat.TabIndex = 10;
+			this.panelChat.TabIndex = 11;
 			this.panelChat.Tag = "needToMoveParentDown";
 			// 
 			// richTextBoxChat
@@ -318,8 +319,21 @@
 			this.pictureBoxLineAboveChat.Location = new System.Drawing.Point(0, 360);
 			this.pictureBoxLineAboveChat.Name = "pictureBoxLineAboveChat";
 			this.pictureBoxLineAboveChat.Size = new System.Drawing.Size(500, 4);
-			this.pictureBoxLineAboveChat.TabIndex = 9;
+			this.pictureBoxLineAboveChat.TabIndex = 10;
 			this.pictureBoxLineAboveChat.TabStop = false;
+			// 
+			// labelGameMode
+			// 
+			this.labelGameMode.AutoSize = true;
+			this.labelGameMode.BackColor = System.Drawing.Color.Transparent;
+			this.labelGameMode.Font = new System.Drawing.Font("Trebuchet MS", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.labelGameMode.ForeColor = System.Drawing.Color.White;
+			this.labelGameMode.Location = new System.Drawing.Point(500, 20);
+			this.labelGameMode.Name = "labelGameMode";
+			this.labelGameMode.Size = new System.Drawing.Size(168, 35);
+			this.labelGameMode.TabIndex = 1;
+			this.labelGameMode.Text = "Game mode:";
+			this.labelGameMode.TextAlign = System.Drawing.ContentAlignment.TopCenter;
 			// 
 			// GameLobbyClientForm
 			// 
@@ -327,6 +341,7 @@
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
 			this.ClientSize = new System.Drawing.Size(1200, 800);
+			this.Controls.Add(this.labelGameMode);
 			this.Controls.Add(this.pictureBoxLineAboveChat);
 			this.Controls.Add(this.panelChat);
 			this.Controls.Add(this.labelValueCoinsBet);
@@ -372,5 +387,6 @@
 		private Guna.UI2.WinForms.Guna2GradientButton buttonSendMessage;
 		private Guna.UI2.WinForms.Guna2TextBox textBoxMessage;
 		private Guna.UI2.WinForms.Guna2PictureBox pictureBoxLineAboveChat;
+		private System.Windows.Forms.Label labelGameMode;
 	}
 }
