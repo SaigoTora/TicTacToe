@@ -6,7 +6,8 @@ using TicTacToe.Models.GameClientServer.Core;
 using TicTacToe.Models.GameInfo;
 using TicTacToe.Models.GameInfo.Settings;
 using TicTacToe.Models.PlayerInfo;
-using TicTacToeLibrary;
+using TicTacToeLibrary.AI;
+using TicTacToeLibrary.Core;
 
 namespace TicTacToe.Forms.Game.Games3on3
 {

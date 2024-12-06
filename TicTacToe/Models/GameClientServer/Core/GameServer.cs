@@ -14,7 +14,7 @@ using TicTacToe.Models.GameClientServer.Lobby;
 using TicTacToe.Models.GameClientServer.Network;
 using TicTacToe.Models.GameInfo.Settings;
 using TicTacToe.Models.PlayerInfo;
-using TicTacToeLibrary;
+using TicTacToeLibrary.Core;
 
 namespace TicTacToe.Models.GameClientServer.Core
 {

@@ -5,7 +5,7 @@ using System.Windows.Forms;
 using TicTacToe.Models.GameInfo;
 using TicTacToe.Models.PlayerInfo;
 using TicTacToe.Models.Utilities.FormUtilities;
-using TicTacToeLibrary;
+using TicTacToeLibrary.Core;
 
 namespace TicTacToe.Forms.Game.Games7on7
 {

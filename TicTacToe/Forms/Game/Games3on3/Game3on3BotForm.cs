@@ -4,7 +4,8 @@ using System.Windows.Forms;
 using TicTacToe.Models.GameInfo;
 using TicTacToe.Models.PlayerInfo;
 using TicTacToe.Models.Utilities.FormUtilities;
-using TicTacToeLibrary;
+using TicTacToeLibrary.AI;
+using TicTacToeLibrary.Core;
 
 namespace TicTacToe.Forms.Game.Games3on3
 {

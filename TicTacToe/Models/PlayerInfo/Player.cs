@@ -7,7 +7,7 @@ using TicTacToe.Models.GameInfo;
 using TicTacToe.Models.GameInfo.Settings;
 using TicTacToe.Models.PlayerInfo.Inventory;
 using TicTacToe.Models.PlayerItem;
-using TicTacToeLibrary;
+using TicTacToeLibrary.AI;
 
 namespace TicTacToe.Models.PlayerInfo
 {

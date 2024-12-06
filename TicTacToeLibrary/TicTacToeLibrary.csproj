@@ -44,13 +44,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Bot.cs" />
-    <Compile Include="Cell.cs" />
-    <Compile Include="CellType.cs" />
-    <Compile Include="Difficulty.cs" />
-    <Compile Include="Field.cs" />
-    <Compile Include="Node.cs" />
-    <Compile Include="PerfectMoveFinder.cs" />
+    <Compile Include="AI\Bot.cs" />
+    <Compile Include="Core\Cell.cs" />
+    <Compile Include="Core\CellType.cs" />
+    <Compile Include="AI\Difficulty.cs" />
+    <Compile Include="Core\Field.cs" />
+    <Compile Include="AI\Node.cs" />
+    <Compile Include="AI\PerfectMoveFinder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

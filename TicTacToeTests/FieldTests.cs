@@ -1,4 +1,4 @@
-using TicTacToeLibrary;
+using TicTacToeLibrary.Core;
 
 namespace TicTacToeTests;
 

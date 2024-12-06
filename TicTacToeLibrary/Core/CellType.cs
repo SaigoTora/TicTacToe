@@ -1,4 +1,4 @@
-﻿namespace TicTacToeLibrary
+﻿namespace TicTacToeLibrary.Core
 {
 	public enum CellType : byte
 	{

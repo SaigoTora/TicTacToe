@@ -16,7 +16,7 @@ using TicTacToe.Models.PlayerItem;
 using TicTacToe.Models.PlayerItemCreator;
 using TicTacToe.Models.Utilities.FormUtilities;
 using TicTacToe.Models.Utilities.FormUtilities.ControlEventHandlers;
-using TicTacToeLibrary;
+using TicTacToeLibrary.Core;
 
 namespace TicTacToe.Forms.Game.Settings
 {
@@ -42,7 +42,7 @@ namespace TicTacToe.Forms.Game.Settings
 
 		internal SinglePCGameSettingsForm(MainForm mainForm, Player player)
 		{
-			customTitleBar = new CustomTitleBar(this, "Game Settings",Properties.Resources.gameSettings, minimizeBox: false, maximizeBox: false);
+			customTitleBar = new CustomTitleBar(this, "Game Settings", Properties.Resources.gameSettings, minimizeBox: false, maximizeBox: false);
 			InitializeComponent();
 			_mainForm = mainForm;
 			_player = player;

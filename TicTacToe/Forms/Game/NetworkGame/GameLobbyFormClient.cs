@@ -19,7 +19,7 @@ using TicTacToe.Models.PlayerInfo;
 using TicTacToe.Models.PlayerItem;
 using TicTacToe.Models.Utilities.FormUtilities;
 using TicTacToe.Models.Utilities.FormUtilities.ControlEventHandlers;
-using TicTacToeLibrary;
+using TicTacToeLibrary.Core;
 
 namespace TicTacToe.Forms.Game.NetworkGame
 {

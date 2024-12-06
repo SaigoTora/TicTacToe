@@ -1,4 +1,6 @@
-﻿namespace TicTacToeLibrary
+﻿using TicTacToeLibrary.Core;
+
+namespace TicTacToeLibrary.AI
 {
 	public static class PerfectMoveFinder
 	{

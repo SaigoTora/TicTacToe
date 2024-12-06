@@ -1,5 +1,6 @@
 ﻿using System;
-using TicTacToeLibrary;
+
+using TicTacToeLibrary.AI;
 
 namespace TicTacToe.Models.GameInfo
 {

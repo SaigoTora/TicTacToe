@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace TicTacToeLibrary
+using TicTacToeLibrary.Core;
+
+namespace TicTacToeLibrary.AI
 {
 	internal class Node
 	{

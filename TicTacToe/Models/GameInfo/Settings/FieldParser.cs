@@ -1,6 +1,6 @@
 ﻿using System;
 
-using TicTacToeLibrary;
+using TicTacToeLibrary.Core;
 
 namespace TicTacToe.Models.GameInfo.Settings
 {

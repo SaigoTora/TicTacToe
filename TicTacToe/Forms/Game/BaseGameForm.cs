@@ -6,7 +6,6 @@ using System.Drawing;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
 using TicTacToe.Models.CustomExceptions;
 using TicTacToe.Models.GameClientServer.Core;
 using TicTacToe.Models.GameClientServer.Game;
@@ -17,7 +16,8 @@ using TicTacToe.Models.PlayerItem;
 using TicTacToe.Models.Utilities;
 using TicTacToe.Models.Utilities.FormUtilities.ControlEventHandlers;
 using TicTacToe.Properties;
-using TicTacToeLibrary;
+using TicTacToeLibrary.AI;
+using TicTacToeLibrary.Core;
 
 namespace TicTacToe.Forms.Game
 {

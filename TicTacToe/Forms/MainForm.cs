@@ -16,7 +16,8 @@ using TicTacToe.Models.Utilities;
 using TicTacToe.Models.Utilities.FormUtilities;
 using TicTacToe.Models.Utilities.FormUtilities.ControlEventHandlers;
 using TicTacToe.Properties;
-using TicTacToeLibrary;
+using TicTacToeLibrary.AI;
+using TicTacToeLibrary.Core;
 
 namespace TicTacToe.Forms
 {

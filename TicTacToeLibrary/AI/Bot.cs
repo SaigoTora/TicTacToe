@@ -1,6 +1,7 @@
 ﻿using System;
+using TicTacToeLibrary.Core;
 
-namespace TicTacToeLibrary
+namespace TicTacToeLibrary.AI
 {
 	public class Bot
 	{

@@ -1,4 +1,4 @@
-﻿namespace TicTacToeLibrary
+﻿namespace TicTacToeLibrary.AI
 {
 	public enum Difficulty : byte
 	{

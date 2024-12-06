@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 
-using TicTacToeLibrary;
+using TicTacToeLibrary.Core;
 
 namespace TicTacToe.Models.GameClientServer.Game
 {

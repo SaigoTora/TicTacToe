@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace TicTacToeLibrary
+namespace TicTacToeLibrary.Core
 {
 	[Serializable]
 	public class Field : ICloneable

@@ -1,4 +1,5 @@
-﻿using TicTacToeLibrary;
+﻿using TicTacToeLibrary.AI;
+using TicTacToeLibrary.Core;
 
 namespace TicTacToeTests;
 
