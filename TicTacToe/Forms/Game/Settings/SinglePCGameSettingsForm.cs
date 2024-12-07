@@ -27,7 +27,7 @@ namespace TicTacToe.Forms.Game.Settings
 		private const string SELECTED_AVATAR_TEXT = "Selected";
 		private const string SELECTED_AVATAR_TAG = "ItemSelected";
 
-		private static readonly (Color Default, Color Selected) _fieldSizeColor = (Color.Transparent, Color.FromArgb(25, 85, 55));
+		private static readonly (Color Default, Color Selected) _fieldSizeColor = (Color.Transparent, Color.FromArgb(25, 100, 55));
 		private static readonly (Color Default, Color Selected) _enableButtonsForeColor = (Color.Transparent, Color.Khaki);
 		private static readonly (Color Default, Color DuringRenaming) _buttonChangeNameColor = (Color.White, Color.Yellow);
 

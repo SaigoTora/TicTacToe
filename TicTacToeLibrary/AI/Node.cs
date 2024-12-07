@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 using TicTacToeLibrary.Core;
+using TicTacToeLibrary.GameLogic;
 
 namespace TicTacToeLibrary.AI
 {
@@ -18,8 +19,9 @@ namespace TicTacToeLibrary.AI
 
 		private static readonly Random _random = new Random();
 
-		private static int _maxDepthLevel;
-		private static CellType _firstCellType;
+		private readonly int _maxDepthLevel;
+		private readonly CellType _firstCellType;
+		private readonly GameMode _gameMode;
 
 		private readonly Field _field;
 		private readonly int _depthLevel;
@@ -27,19 +29,24 @@ namespace TicTacToeLibrary.AI
 		private List<Node> _children;
 		private Rating _rating;
 
-		internal Node(Field field, CellType childrenCellType, int maxDepthLevel)
+		internal Node(Field field, CellType firstCellType, int maxDepthLevel, GameMode gameMode)
 		{// Constructor for the first node
 			_field = (Field)field.Clone();
 
-			_firstCellType = childrenCellType;
+			_firstCellType = firstCellType;
 			_maxDepthLevel = maxDepthLevel;
+			_gameMode = gameMode;
 
-			CreateChildren(childrenCellType);
+			CreateChildren(firstCellType);
 
-			SetRating(childrenCellType);
+			SetRating(firstCellType);
 		}
-		internal Node(Field field, CellType childrenCellType, int depthLevel, bool hasChildren)
+		internal Node(Node parentNode, Field field, CellType childrenCellType, int depthLevel, bool hasChildren)
 		{// Constructor for other nodes
+			_firstCellType = parentNode._firstCellType;
+			_maxDepthLevel = parentNode._maxDepthLevel;
+			_gameMode = parentNode._gameMode;
+
 			_field = (Field)field.Clone();
 			_depthLevel = depthLevel;
 
@@ -57,13 +64,13 @@ namespace TicTacToeLibrary.AI
 
 			for (int i = 0; i < fieldSize; i++)
 				for (int j = 0; j < fieldSize; j++)
-					if (_field.GetCell(new Cell(i, j)) == CellType.None)
+					if (_field.IsCellValidForGameMode(new Cell(i, j), _gameMode))
 					{
 						_field.FillCell(new Cell(i, j), childrenCellType);// Temporarily fill the cell
 
 						hasChildren = !_field.IsGameEnd(false);
 						CellType nextCellType = childrenCellType == CellType.Cross ? CellType.Zero : CellType.Cross;
-						Node child = new Node(_field, nextCellType, _depthLevel + 1, hasChildren);
+						Node child = new Node(this, _field, nextCellType, _depthLevel + 1, hasChildren);
 						_children.Add(child);
 
 						_field.FillCell(new Cell(i, j), CellType.None);// Returning the cell type back

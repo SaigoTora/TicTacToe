@@ -1,5 +1,6 @@
 ﻿using TicTacToeLibrary.AI;
 using TicTacToeLibrary.Core;
+using TicTacToeLibrary.GameLogic;
 
 namespace TicTacToeTests
 {
@@ -14,6 +15,7 @@ namespace TicTacToeTests
 		public void TestFindCell_ZeroD3_1()
 		{
 			// Arrange
+			GameMode gameMode = GameMode.Classic;
 			CellType[,] cells = new CellType[3, 3]
 			{
 				{ CellType.Cross, CellType.None, CellType.Zero },
@@ -23,7 +25,7 @@ namespace TicTacToeTests
 
 			// Act
 			Field field = TestHelper.CreateAndSetField(cells, 3);
-			Cell result = PerfectMoveFinder.FindCell(field, CellType.Zero);
+			Cell result = PerfectMoveFinder.FindCell(field, CellType.Zero, gameMode);
 
 			// Assert
 			Cell expectedCell = new(2, 2);
@@ -34,6 +36,7 @@ namespace TicTacToeTests
 		public void TestFindCell_ZeroD3_2()
 		{
 			// Arrange
+			GameMode gameMode = GameMode.Classic;
 			CellType[,] cells = new CellType[3, 3]
 			{
 				{ CellType.None, CellType.Cross, CellType.Cross },
@@ -43,7 +46,7 @@ namespace TicTacToeTests
 
 			// Act
 			Field field = TestHelper.CreateAndSetField(cells, 3);
-			Cell result = PerfectMoveFinder.FindCell(field, CellType.Zero);
+			Cell result = PerfectMoveFinder.FindCell(field, CellType.Zero, gameMode);
 
 			// Assert
 			Cell expectedCell = new(0, 0);
@@ -54,6 +57,7 @@ namespace TicTacToeTests
 		public void TestFindCell_ZeroD3_3()
 		{
 			// Arrange
+			GameMode gameMode = GameMode.Classic;
 			CellType[,] cells = new CellType[3, 3]
 			{
 				{ CellType.Cross, CellType.Cross, CellType.Zero },
@@ -63,7 +67,7 @@ namespace TicTacToeTests
 
 			// Act
 			Field field = TestHelper.CreateAndSetField(cells, 3);
-			Cell result = PerfectMoveFinder.FindCell(field, CellType.Zero);
+			Cell result = PerfectMoveFinder.FindCell(field, CellType.Zero, gameMode);
 
 			// Assert
 			Cell expectedCell = new(1, 2);
@@ -74,6 +78,7 @@ namespace TicTacToeTests
 		public void TestFindCell_ZeroD3_4()
 		{
 			// Arrange
+			GameMode gameMode = GameMode.Classic;
 			CellType[,] cells = new CellType[3, 3]
 			{
 				{ CellType.None, CellType.Zero, CellType.Cross },
@@ -83,7 +88,7 @@ namespace TicTacToeTests
 
 			// Act
 			Field field = TestHelper.CreateAndSetField(cells, 3);
-			Cell result = PerfectMoveFinder.FindCell(field, CellType.Zero);
+			Cell result = PerfectMoveFinder.FindCell(field, CellType.Zero, gameMode);
 
 			// Assert
 			Cell expectedCell = new(1, 0);
@@ -95,6 +100,7 @@ namespace TicTacToeTests
 		public void TestFindCell_MaxDepth3ZeroD5_1()
 		{
 			// Arrange
+			GameMode gameMode = GameMode.Classic;
 			CellType[,] cells = new CellType[5, 5]
 			{
 				{ CellType.Cross, CellType.None, CellType.None, CellType.Zero, CellType.Zero },
@@ -106,7 +112,7 @@ namespace TicTacToeTests
 
 			// Act
 			Field field = TestHelper.CreateAndSetField(cells, 4);
-			Cell result = PerfectMoveFinder.FindCell(field, CellType.Zero, 3);
+			Cell result = PerfectMoveFinder.FindCell(field, CellType.Zero, gameMode, 3);
 
 			// Assert
 			Cell expectedCell = new(1, 1);
@@ -117,6 +123,7 @@ namespace TicTacToeTests
 		public void TestFindCell_MaxDepth3ZeroD5_2()
 		{
 			// Arrange
+			GameMode gameMode = GameMode.Classic;
 			CellType[,] cells = new CellType[5, 5]
 			{
 				{ CellType.Zero, CellType.None, CellType.None, CellType.None, CellType.None },
@@ -128,7 +135,7 @@ namespace TicTacToeTests
 
 			// Act
 			Field field = TestHelper.CreateAndSetField(cells, 4);
-			Cell result = PerfectMoveFinder.FindCell(field, CellType.Zero, 3);
+			Cell result = PerfectMoveFinder.FindCell(field, CellType.Zero, gameMode, 3);
 
 			// Assert
 			Cell expectedCell = new(4, 3);
@@ -142,6 +149,7 @@ namespace TicTacToeTests
 		public void TestFindCell_CrossD3_1()
 		{
 			// Arrange
+			GameMode gameMode = GameMode.Classic;
 			CellType[,] cells = new CellType[3, 3]
 			{
 				{ CellType.None, CellType.Cross, CellType.None },
@@ -151,7 +159,7 @@ namespace TicTacToeTests
 
 			// Act
 			Field field = TestHelper.CreateAndSetField(cells, 3);
-			Cell result = PerfectMoveFinder.FindCell(field, CellType.Cross);
+			Cell result = PerfectMoveFinder.FindCell(field, CellType.Cross, gameMode);
 
 			// Assert
 			Cell expectedCell = new(0, 0);
@@ -162,6 +170,7 @@ namespace TicTacToeTests
 		public void TestFindCell_CrossD3_2()
 		{
 			// Arrange
+			GameMode gameMode = GameMode.Classic;
 			CellType[,] cells = new CellType[3, 3]
 			{
 				{ CellType.Cross, CellType.Zero, CellType.Cross },
@@ -171,7 +180,7 @@ namespace TicTacToeTests
 
 			// Act
 			Field field = TestHelper.CreateAndSetField(cells, 3);
-			Cell result = PerfectMoveFinder.FindCell(field, CellType.Cross);
+			Cell result = PerfectMoveFinder.FindCell(field, CellType.Cross, gameMode);
 
 			// Assert
 			Cell expectedCell = new(1, 0);
@@ -182,6 +191,7 @@ namespace TicTacToeTests
 		public void TestFindCell_CrossD3_3()
 		{
 			// Arrange
+			GameMode gameMode = GameMode.Classic;
 			CellType[,] cells = new CellType[3, 3]
 			{
 				{ CellType.Zero, CellType.Cross, CellType.Zero },
@@ -191,7 +201,7 @@ namespace TicTacToeTests
 
 			// Act
 			Field field = TestHelper.CreateAndSetField(cells, 3);
-			Cell result = PerfectMoveFinder.FindCell(field, CellType.Cross);
+			Cell result = PerfectMoveFinder.FindCell(field, CellType.Cross, gameMode);
 
 			// Assert
 			Cell expectedCell = new(2, 2);
@@ -202,6 +212,7 @@ namespace TicTacToeTests
 		public void TestFindCell_CrossD3_4()
 		{
 			// Arrange
+			GameMode gameMode = GameMode.Classic;
 			CellType[,] cells = new CellType[3, 3]
 			{
 				{ CellType.Zero, CellType.Cross, CellType.Zero },
@@ -211,7 +222,7 @@ namespace TicTacToeTests
 
 			// Act
 			Field field = TestHelper.CreateAndSetField(cells, 3);
-			Cell result = PerfectMoveFinder.FindCell(field, CellType.Cross);
+			Cell result = PerfectMoveFinder.FindCell(field, CellType.Cross, gameMode);
 
 			// Assert
 			Cell expectedCell = new(2, 1);
@@ -223,6 +234,7 @@ namespace TicTacToeTests
 		public void TestFindCell_MaxDepth3CrossD5_1()
 		{
 			// Arrange
+			GameMode gameMode = GameMode.Classic;
 			CellType[,] cells = new CellType[5, 5]
 			{
 				{ CellType.Cross, CellType.None, CellType.None, CellType.None, CellType.Zero },
@@ -234,7 +246,7 @@ namespace TicTacToeTests
 
 			// Act
 			Field field = TestHelper.CreateAndSetField(cells, 4);
-			Cell result = PerfectMoveFinder.FindCell(field, CellType.Cross, 3);
+			Cell result = PerfectMoveFinder.FindCell(field, CellType.Cross, gameMode, 3);
 
 			// Assert
 			Cell expectedCell = new(3, 1);
@@ -245,6 +257,7 @@ namespace TicTacToeTests
 		public void TestFindCell_MaxDepth3CrossD5_2()
 		{
 			// Arrange
+			GameMode gameMode = GameMode.Classic;
 			CellType[,] cells = new CellType[5, 5]
 			{
 				{ CellType.Cross, CellType.None, CellType.None, CellType.None, CellType.Cross },
@@ -256,7 +269,7 @@ namespace TicTacToeTests
 
 			// Act
 			Field field = TestHelper.CreateAndSetField(cells, 4);
-			Cell result = PerfectMoveFinder.FindCell(field, CellType.Cross, 3);
+			Cell result = PerfectMoveFinder.FindCell(field, CellType.Cross, gameMode, 3);
 
 			// Assert
 			Cell expectedCell = new(3, 3);

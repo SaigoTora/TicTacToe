@@ -1,5 +1,6 @@
 ﻿using TicTacToeLibrary.AI;
 using TicTacToeLibrary.Core;
+using TicTacToeLibrary.GameLogic;
 
 namespace TicTacToeTests;
 
@@ -17,6 +18,7 @@ public class BotTests
 		// Arrange
 		Difficulty difficult = Difficulty.Easy;
 		CellType botCellType = CellType.Cross;
+		GameMode gameMode = GameMode.Classic;
 		CellType[,] cells = new CellType[3, 3]
 		{
 			{ CellType.Cross, CellType.Cross, CellType.None },
@@ -28,7 +30,7 @@ public class BotTests
 		Field field = TestHelper.CreateAndSetField(cells, 3);
 
 		// Act
-		Cell result = bot.Move(field, botCellType);
+		Cell result = bot.Move(field, botCellType, gameMode);
 
 		// Assert
 		Cell expectedCell = new(0, 2);
@@ -41,6 +43,7 @@ public class BotTests
 		// Arrange
 		Difficulty difficult = Difficulty.Easy;
 		CellType botCellType = CellType.Zero;
+		GameMode gameMode = GameMode.Classic;
 		CellType[,] cells = new CellType[3, 3]
 		{
 			{ CellType.Cross, CellType.Zero, CellType.Cross },
@@ -52,7 +55,7 @@ public class BotTests
 		Field field = TestHelper.CreateAndSetField(cells, 3);
 
 		// Act
-		Cell result = bot.Move(field, botCellType);
+		Cell result = bot.Move(field, botCellType, gameMode);
 
 		// Assert
 		Cell expectedCell = new(1, 1);
@@ -66,6 +69,7 @@ public class BotTests
 		// Arrange
 		Difficulty difficult = Difficulty.Easy;
 		CellType botCellType = CellType.Cross;
+		GameMode gameMode = GameMode.Classic;
 		CellType[,] cells = new CellType[5, 5]
 		{
 			{ CellType.None, CellType.None, CellType.None, CellType.None, CellType.None },
@@ -79,7 +83,7 @@ public class BotTests
 		Field field = TestHelper.CreateAndSetField(cells, 4);
 
 		// Act
-		Cell result = bot.Move(field, botCellType);
+		Cell result = bot.Move(field, botCellType, gameMode);
 
 		// Assert
 		Cell expectedCell = new(3, 2);
@@ -92,6 +96,7 @@ public class BotTests
 		// Arrange
 		Difficulty difficult = Difficulty.Easy;
 		CellType botCellType = CellType.Zero;
+		GameMode gameMode = GameMode.Classic;
 		CellType[,] cells = new CellType[5, 5]
 		{
 			{ CellType.Cross, CellType.Cross, CellType.Cross, CellType.None, CellType.None },
@@ -105,7 +110,7 @@ public class BotTests
 		Field field = TestHelper.CreateAndSetField(cells, 4);
 
 		// Act
-		Cell result = bot.Move(field, botCellType);
+		Cell result = bot.Move(field, botCellType, gameMode);
 
 		// Assert
 		Cell expectedCell = new(2, 3);
@@ -121,6 +126,7 @@ public class BotTests
 		// Arrange
 		Difficulty difficult = Difficulty.Medium;
 		CellType botCellType = CellType.Zero;
+		GameMode gameMode = GameMode.Classic;
 		CellType[,] cells = new CellType[3, 3]
 		{
 			{ CellType.Cross, CellType.None, CellType.Cross },
@@ -132,7 +138,7 @@ public class BotTests
 		Field field = TestHelper.CreateAndSetField(cells, 3);
 
 		// Act
-		Cell result = bot.Move(field, botCellType);
+		Cell result = bot.Move(field, botCellType, gameMode);
 
 		// Assert
 		Cell expectedCell = new(1, 0);
@@ -145,6 +151,7 @@ public class BotTests
 		// Arrange
 		Difficulty difficult = Difficulty.Medium;
 		CellType botCellType = CellType.Cross;
+		GameMode gameMode = GameMode.Classic;
 		CellType[,] cells = new CellType[3, 3]
 		{
 			{ CellType.Cross, CellType.Zero, CellType.None },
@@ -156,7 +163,7 @@ public class BotTests
 		Field field = TestHelper.CreateAndSetField(cells, 3);
 
 		// Act
-		Cell result = bot.Move(field, botCellType);
+		Cell result = bot.Move(field, botCellType, gameMode);
 
 		// Assert
 		Cell expectedCell = new(1, 1);
@@ -170,6 +177,7 @@ public class BotTests
 		// Arrange
 		Difficulty difficult = Difficulty.Medium;
 		CellType botCellType = CellType.Zero;
+		GameMode gameMode = GameMode.Classic;
 		CellType[,] cells = new CellType[5, 5]
 		{
 			{ CellType.Cross, CellType.Cross, CellType.None, CellType.None, CellType.None },
@@ -183,7 +191,7 @@ public class BotTests
 		Field field = TestHelper.CreateAndSetField(cells, 4);
 
 		// Act
-		Cell result = bot.Move(field, botCellType);
+		Cell result = bot.Move(field, botCellType, gameMode);
 
 		// Assert
 		Cell expectedCell = new(3, 2);
@@ -199,6 +207,7 @@ public class BotTests
 		// Arrange
 		Difficulty difficult = Difficulty.Hard;
 		CellType botCellType = CellType.Cross;
+		GameMode gameMode = GameMode.Classic;
 		CellType[,] cells = new CellType[3, 3]
 		{
 			{ CellType.None, CellType.None, CellType.Cross },
@@ -210,7 +219,7 @@ public class BotTests
 		Field field = TestHelper.CreateAndSetField(cells, 3);
 
 		// Act
-		Cell result = bot.Move(field, botCellType);
+		Cell result = bot.Move(field, botCellType, gameMode);
 
 		// Assert
 		Cell expectedCell = new(2, 2);
@@ -223,6 +232,7 @@ public class BotTests
 		// Arrange
 		Difficulty difficult = Difficulty.Hard;
 		CellType botCellType = CellType.Zero;
+		GameMode gameMode = GameMode.Classic;
 		CellType[,] cells = new CellType[3, 3]
 		{
 			{ CellType.Cross, CellType.None, CellType.Zero },
@@ -234,7 +244,7 @@ public class BotTests
 		Field field = TestHelper.CreateAndSetField(cells, 3);
 
 		// Act
-		Cell result = bot.Move(field, botCellType);
+		Cell result = bot.Move(field, botCellType, gameMode);
 
 		// Assert
 		Cell expectedCell = new(1, 1);
@@ -248,6 +258,7 @@ public class BotTests
 		// Arrange
 		Difficulty difficult = Difficulty.Hard;
 		CellType botCellType = CellType.Cross;
+		GameMode gameMode = GameMode.Classic;
 		CellType[,] cells = new CellType[5, 5]
 		{
 			{ CellType.None, CellType.Zero, CellType.Zero, CellType.None, CellType.Zero },
@@ -261,7 +272,7 @@ public class BotTests
 		Field field = TestHelper.CreateAndSetField(cells, 4);
 
 		// Act
-		Cell result = bot.Move(field, botCellType);
+		Cell result = bot.Move(field, botCellType, gameMode);
 
 		// Assert
 		Cell expectedCell = new(2, 2);
@@ -278,6 +289,7 @@ public class BotTests
 		// Arrange
 		Difficulty difficult = Difficulty.Hard;
 		CellType botCellType = CellType.Cross;
+		GameMode gameMode = GameMode.Classic;
 		CellType[,] cells = new CellType[3, 3]
 		{
 			{ CellType.Cross, CellType.None, CellType.None },
@@ -289,7 +301,7 @@ public class BotTests
 		Field field = TestHelper.CreateAndSetField(cells, 3);
 
 		// Act
-		Cell result = bot.Move(field, botCellType);
+		Cell result = bot.Move(field, botCellType, gameMode);
 
 		// Assert
 		Cell expectedCell = new(2, 1);
@@ -302,6 +314,7 @@ public class BotTests
 		// Arrange
 		Difficulty difficult = Difficulty.Hard;
 		CellType botCellType = CellType.Zero;
+		GameMode gameMode = GameMode.Classic;
 		CellType[,] cells = new CellType[3, 3]
 		{
 			{ CellType.Cross, CellType.None, CellType.None },
@@ -313,7 +326,7 @@ public class BotTests
 		Field field = TestHelper.CreateAndSetField(cells, 3);
 
 		// Act
-		Cell result = bot.Move(field, botCellType);
+		Cell result = bot.Move(field, botCellType, gameMode);
 
 		// Assert
 		Cell expectedCell = new(1, 0);
@@ -326,6 +339,7 @@ public class BotTests
 		// Arrange
 		Difficulty difficult = Difficulty.Hard;
 		CellType botCellType = CellType.Cross;
+		GameMode gameMode = GameMode.Classic;
 		CellType[,] cells = new CellType[3, 3]
 		{
 			{ CellType.Zero, CellType.None, CellType.Cross },
@@ -337,7 +351,7 @@ public class BotTests
 		Field field = TestHelper.CreateAndSetField(cells, 3);
 
 		// Act
-		Cell result = bot.Move(field, botCellType);
+		Cell result = bot.Move(field, botCellType, gameMode);
 
 		// Assert
 		Cell expectedCell = new(2, 2);
@@ -350,6 +364,7 @@ public class BotTests
 		// Arrange
 		Difficulty difficult = Difficulty.Hard;
 		CellType botCellType = CellType.Zero;
+		GameMode gameMode = GameMode.Classic;
 		CellType[,] cells = new CellType[3, 3]
 		{
 			{ CellType.None, CellType.None, CellType.None },
@@ -361,7 +376,7 @@ public class BotTests
 		Field field = TestHelper.CreateAndSetField(cells, 3);
 
 		// Act
-		Cell result = bot.Move(field, botCellType);
+		Cell result = bot.Move(field, botCellType, gameMode);
 
 		// Assert
 		Cell expectedCell = new(0, 0);
@@ -374,6 +389,7 @@ public class BotTests
 		// Arrange
 		Difficulty difficult = Difficulty.Hard;
 		CellType botCellType = CellType.Cross;
+		GameMode gameMode = GameMode.Classic;
 		CellType[,] cells = new CellType[3, 3]
 		{
 			{ CellType.None, CellType.None, CellType.Zero },
@@ -385,7 +401,7 @@ public class BotTests
 		Field field = TestHelper.CreateAndSetField(cells, 3);
 
 		// Act
-		Cell result = bot.Move(field, botCellType);
+		Cell result = bot.Move(field, botCellType, gameMode);
 
 		// Assert
 		Cell expectedCell = new(2, 0);
@@ -398,6 +414,7 @@ public class BotTests
 		// Arrange
 		Difficulty difficult = Difficulty.Hard;
 		CellType botCellType = CellType.Zero;
+		GameMode gameMode = GameMode.Classic;
 		CellType[,] cells = new CellType[3, 3]
 		{
 			{ CellType.Cross, CellType.None, CellType.None },
@@ -409,7 +426,7 @@ public class BotTests
 		Field field = TestHelper.CreateAndSetField(cells, 3);
 
 		// Act
-		Cell result = bot.Move(field, botCellType);
+		Cell result = bot.Move(field, botCellType, gameMode);
 
 		// Assert
 		Cell expectedCell = new(0, 2);
@@ -423,6 +440,7 @@ public class BotTests
 		// Arrange
 		Difficulty difficult = Difficulty.Hard;
 		CellType botCellType = CellType.Cross;
+		GameMode gameMode = GameMode.Classic;
 		CellType[,] cells = new CellType[5, 5]
 		{
 			{ CellType.Cross, CellType.None, CellType.None, CellType.None, CellType.None },
@@ -436,7 +454,7 @@ public class BotTests
 		Field field = TestHelper.CreateAndSetField(cells, 4);
 
 		// Act
-		Cell result = bot.Move(field, botCellType);
+		Cell result = bot.Move(field, botCellType, gameMode);
 
 		// Assert
 		Cell expectedCell = new(1, 2);
@@ -449,6 +467,7 @@ public class BotTests
 		// Arrange
 		Difficulty difficult = Difficulty.Hard;
 		CellType botCellType = CellType.Zero;
+		GameMode gameMode = GameMode.Classic;
 		CellType[,] cells = new CellType[5, 5]
 		{
 			{ CellType.None, CellType.None, CellType.None, CellType.Zero, CellType.Cross },
@@ -462,7 +481,7 @@ public class BotTests
 		Field field = TestHelper.CreateAndSetField(cells, 4);
 
 		// Act
-		Cell result = bot.Move(field, botCellType);
+		Cell result = bot.Move(field, botCellType, gameMode);
 
 		// Assert
 		Cell expectedCell = new(1, 4);
@@ -475,6 +494,7 @@ public class BotTests
 		// Arrange
 		Difficulty difficult = Difficulty.Hard;
 		CellType botCellType = CellType.Cross;
+		GameMode gameMode = GameMode.Classic;
 		CellType[,] cells = new CellType[5, 5]
 		{
 			{ CellType.None, CellType.Cross, CellType.Cross, CellType.None, CellType.Zero },
@@ -488,7 +508,7 @@ public class BotTests
 		Field field = TestHelper.CreateAndSetField(cells, 4);
 
 		// Act
-		Cell result = bot.Move(field, botCellType);
+		Cell result = bot.Move(field, botCellType, gameMode);
 
 		// Assert
 		Cell expectedCell = new(3, 3);
@@ -501,6 +521,7 @@ public class BotTests
 		// Arrange
 		Difficulty difficult = Difficulty.Hard;
 		CellType botCellType = CellType.Zero;
+		GameMode gameMode = GameMode.Classic;
 		CellType[,] cells = new CellType[5, 5]
 		{
 			{ CellType.None, CellType.None, CellType.None, CellType.Cross, CellType.None },
@@ -514,7 +535,7 @@ public class BotTests
 		Field field = TestHelper.CreateAndSetField(cells, 4);
 
 		// Act
-		Cell result = bot.Move(field, botCellType);
+		Cell result = bot.Move(field, botCellType, gameMode);
 
 		// Assert
 		Cell expectedCell = new(1, 2);

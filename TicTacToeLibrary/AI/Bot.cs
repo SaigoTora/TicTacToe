@@ -1,5 +1,7 @@
 ﻿using System;
+
 using TicTacToeLibrary.Core;
+using TicTacToeLibrary.GameLogic;
 
 namespace TicTacToeLibrary.AI
 {
@@ -61,15 +63,14 @@ namespace TicTacToeLibrary.AI
 			}
 		}
 
-		public Cell Move(Field field, CellType botCellType)
+		public Cell Move(Field field, CellType botCellType, GameMode gameMode)
 		{
 			if (botCellType == CellType.None)
 				throw new ArgumentException($"{nameof(botCellType)} cannot be equal {botCellType}");
 
-			CellType[,] cells = field.GetAllCells();
 			if (Difficulty != Difficulty.Impossible)
 			{
-				Cell? attackCell = AttackMove(cells, botCellType, field.WinningCellsCount);
+				Cell? attackCell = AttackMove(field, botCellType, field.WinningCellsCount, gameMode);
 				if (attackCell.HasValue)
 					return attackCell.Value;
 			}
@@ -79,7 +80,7 @@ namespace TicTacToeLibrary.AI
 				|| Difficulty == Difficulty.Medium && randomPercent <= MEDIUM_BOT_DEFENSE_PERCENTAGE
 				|| Difficulty == Difficulty.Hard)
 			{
-				Cell? defenseCell = DefenseMove(cells, botCellType, field.WinningCellsCount);
+				Cell? defenseCell = DefenseMove(field, botCellType, field.WinningCellsCount, gameMode);
 				if (defenseCell.HasValue)
 					return defenseCell.Value;
 			}
@@ -88,69 +89,92 @@ namespace TicTacToeLibrary.AI
 			if (Difficulty == Difficulty.Medium && randomPercent <= MEDIUM_BOT_PERFECT_MOVE_PERCENTAGE
 				|| Difficulty == Difficulty.Hard && randomPercent <= HARD_BOT_PERFECT_MOVE_PERCENTAGE
 				|| Difficulty == Difficulty.Impossible && randomPercent <= IMPOSSIBLE_BOT_PERFECT_MOVE_PERCENTAGE)
-				return PerfectMoveFinder.FindCell(field, botCellType);
+				return PerfectMoveFinder.FindCell(field, botCellType, gameMode);
 
 			return field.GetRandomEmptyCell();
 		}
-		private Cell? DefenseMove(CellType[,] cells, CellType botCellType, int winningCellsCount)
+		private Cell? DefenseMove(Field field, CellType botCellType,
+			int winningCellsCount, GameMode gameMode)
 		{// Defense against a player's winning move
+			CellType[,] cells = field.GetAllCells();
 			CellType playerCellType = botCellType == CellType.Cross ? CellType.Zero : CellType.Cross;
 
 			for (int i = 0; i < cells.GetLength(0); i++)
 				for (int j = 0; j < cells.GetLength(1); j++)
-					if (cells[i, j] == CellType.None && NearToFull(cells, i, j, playerCellType, winningCellsCount))
+					if (field.IsCellValidForGameMode(new Cell(i, j), gameMode)
+						&& NearToFull(cells, i, j, playerCellType, winningCellsCount))
 						return new Cell(i, j);
 
 			return null;
 		}
-		private Cell? AttackMove(CellType[,] cells, CellType botCellType, int winningCellsCount)
+		private Cell? AttackMove(Field field, CellType botCellType,
+			int winningCellsCount, GameMode gameMode)
 		{// Attack (last move to win)
+			CellType[,] cells = field.GetAllCells();
+
 			for (int i = 0; i < cells.GetLength(0); i++)
 				for (int j = 0; j < cells.GetLength(1); j++)
-					if (cells[i, j] == CellType.None && NearToFull(cells, i, j, botCellType, winningCellsCount))
+					if (field.IsCellValidForGameMode(new Cell(i, j), gameMode)
+						&& NearToFull(cells, i, j, botCellType, winningCellsCount))
 						return new Cell(i, j);
 
 			return null;
 		}
 		private bool NearToFull(CellType[,] cells, int row, int column, CellType cellType, int winningCellsCount)
-		{// Method that returns true if it finds n cells of type cellType in a row, where n = winningCellsCount - 1
+		{
 			int rowCount = cells.GetLength(0);
 			int columnCount = cells.GetLength(1);
 
-			// Local function for counting matches
-			int CheckDirection(int rowStep, int colStep)
-			{
-				int count = 0;
-				int i = row + rowStep;
-				int j = column + colStep;
-
-				while (i >= 0 && i < rowCount && j >= 0 && j < columnCount
-					&& cells[i, j] == cellType)
-				{
-					count++;
-					i += rowStep;
-					j += colStep;
-				}
-				return count;
-			}
-
 			// Horizontal check (left and right)
-			int countNeededCells = CheckDirection(0, -1) + CheckDirection(0, 1);
-			if (countNeededCells >= winningCellsCount - 1) return true;
+			if (IsDirectionFull(cells, row, column, cellType, winningCellsCount,
+				rowCount, columnCount, 0, -1, 0, 1))
+				return true;
 
 			// Vertical check (down and up)
-			countNeededCells = CheckDirection(-1, 0) + CheckDirection(1, 0);
-			if (countNeededCells >= winningCellsCount - 1) return true;
+			if (IsDirectionFull(cells, row, column, cellType, winningCellsCount,
+				rowCount, columnCount, -1, 0, 1, 0))
+				return true;
 
 			// Diagonal check (left up and right down)
-			countNeededCells = CheckDirection(-1, -1) + CheckDirection(1, 1);
-			if (countNeededCells >= winningCellsCount - 1) return true;
+			if (IsDirectionFull(cells, row, column, cellType, winningCellsCount,
+				rowCount, columnCount, -1, -1, 1, 1))
+				return true;
 
 			// Diagonal check (right up and left down)
-			countNeededCells = CheckDirection(-1, 1) + CheckDirection(1, -1);
-			if (countNeededCells >= winningCellsCount - 1) return true;
+			if (IsDirectionFull(cells, row, column, cellType, winningCellsCount,
+				rowCount, columnCount, -1, 1, 1, -1))
+				return true;
 
 			return false;
+		}
+		private bool IsDirectionFull(CellType[,] cells, int row, int column,
+			CellType cellType, int winningCellsCount, int rowCount, int columnCount,
+			int rowStep1, int colStep1, int rowStep2, int colStep2)
+		{
+			int countNeededCells = CountMatches(cells, row, column, cellType,
+									rowCount, columnCount, rowStep1, colStep1)
+								 + CountMatches(cells, row, column, cellType,
+										rowCount, columnCount, rowStep2, colStep2);
+
+			return countNeededCells >= winningCellsCount - 1;
+		}
+		private int CountMatches(CellType[,] cells, int row, int column,
+			CellType cellType, int rowCount, int columnCount,
+			int rowStep, int colStep)
+		{
+			int count = 0;
+			int i = row + rowStep;
+			int j = column + colStep;
+
+			while (i >= 0 && i < rowCount && j >= 0 && j < columnCount
+				&& cells[i, j] == cellType)
+			{
+				count++;
+				i += rowStep;
+				j += colStep;
+			}
+
+			return count;
 		}
 	}
 }

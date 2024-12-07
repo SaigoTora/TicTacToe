@@ -14,7 +14,7 @@ namespace TicTacToe.Forms.Game.Settings
 {
 	internal partial class NetworkGameSettingsForm : BaseForm
 	{
-		private static readonly (Color Default, Color Selected) _fieldSizeColor = (Color.Transparent, Color.FromArgb(25, 85, 55));
+		private static readonly (Color Default, Color Selected) _fieldSizeColor = (Color.Transparent, Color.FromArgb(25, 100, 55));
 		private static readonly (Color Default, Color Reached) _descriptionLengthColor = (Color.LightGray, Color.Moccasin);
 		private static readonly (Color Default, Color Selected) _enableButtonsForeColor = (Color.Transparent, Color.Khaki);
 

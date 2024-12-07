@@ -30,6 +30,7 @@ namespace TicTacToe.Forms.Game
 		private const int UNDO_MOVE_DELAY = 400;
 		private const int GAME_UPDATE_INTERVAL = 200;
 
+		private static readonly Random random = new Random();
 		protected readonly MainForm mainForm;
 		protected readonly Player player;
 		protected readonly Bot bot;
@@ -361,7 +362,12 @@ namespace TicTacToe.Forms.Game
 			IndicateWhoseMove(opponentCellType);
 			SetPictureBoxesEnabled(false);
 
-			Cell botMove = bot.Move(field, opponentCellType);
+			Cell botMove = bot.Move(field, opponentCellType, gameMode);
+			if (gameMode == GameMode.Tetris)
+				botMove = new Cell(random.Next(0, botMove.row + 1), botMove.column);
+			else if (gameMode == GameMode.ReverseTetris)
+				botMove = new Cell(random.Next(botMove.row, field.GetFieldSize()), botMove.column);
+
 			Image cellImage = GetCellImage(opponentCellType);
 			await Task.Delay(BOT_MOVE_DELAY);
 			botMove = await FindActualCellWithAnimationAsync(botMove, cellImage);
@@ -1102,7 +1108,7 @@ namespace TicTacToe.Forms.Game
 			_wasAssistUsed = true;
 			player.CountableItemsInventory.UseItem(GameAssistType.Hint);
 			ChangeGameViewVisibility(false);
-			Cell cellHint = PerfectMoveFinder.FindCell(field, playerCellType);
+			Cell cellHint = PerfectMoveFinder.FindCell(field, playerCellType, gameMode);
 			_pictureBoxCellHint = _gameFormInfo.PictureCells[cellHint.row, cellHint.column];
 
 			_cancellationTokenSourceHint?.Cancel();

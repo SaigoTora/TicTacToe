@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 
+using TicTacToeLibrary.GameLogic;
+
 namespace TicTacToeLibrary.Core
 {
 	[Serializable]
@@ -42,6 +44,24 @@ namespace TicTacToeLibrary.Core
 			=> _cells[cell.row, cell.column];
 		public void FillCell(Cell cell, CellType cellType)
 			=> _cells[cell.row, cell.column] = cellType;
+		public bool IsCellValidForGameMode(Cell cell, GameMode gameMode)
+		{
+			bool isCellEmpty = _cells[cell.row, cell.column] == CellType.None;
+
+			switch (gameMode)
+			{
+				case GameMode.Classic:
+					return isCellEmpty;
+				case GameMode.Tetris:
+					return isCellEmpty && (cell.row == _cells.GetLength(0) - 1
+						|| _cells[cell.row + 1, cell.column] != CellType.None);
+				case GameMode.ReverseTetris:
+					return isCellEmpty && (cell.row == 0
+						|| _cells[cell.row - 1, cell.column] != CellType.None);
+				default:
+					throw new InvalidOperationException($"Unknown game mode: {gameMode}");
+			}
+		}
 
 		public object Clone()
 		{
