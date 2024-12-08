@@ -286,6 +286,7 @@
 			this.Controls.Add(this.pictureBoxCoin);
 			this.Controls.Add(this.labelCoins);
 			this.Controls.Add(this.tabControl);
+			this.KeyPreview = true;
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
 			this.MinimumSize = new System.Drawing.Size(1076, 786);
@@ -294,6 +295,7 @@
 			this.Text = "Shop";
 			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Shop_FormClosed);
 			this.Load += new System.EventHandler(this.ShopForm_Load);
+			this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ShopForm_KeyDown);
 			this.tabControl.ResumeLayout(false);
 			this.tabPagePreferences.ResumeLayout(false);
 			this.panelPreferenceNavigation.ResumeLayout(false);

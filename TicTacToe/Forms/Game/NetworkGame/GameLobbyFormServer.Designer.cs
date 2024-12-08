@@ -471,11 +471,13 @@ namespace TicTacToe.Forms.Game.NetworkGame
 			this.Controls.Add(this.label3on3);
 			this.Controls.Add(this.pictureBoxCoin);
 			this.Controls.Add(this.labelCoins);
+			this.KeyPreview = true;
 			this.Name = "GameLobbyServerForm";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "GameLobbyForm";
 			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.GameLobbyServerForm_FormClosed);
 			this.Load += new System.EventHandler(this.GameLobbyServerForm_Load);
+			this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.GameLobbyServerForm_KeyDown);
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxCoin)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownNumberOfRounds)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxCoinBet)).EndInit();

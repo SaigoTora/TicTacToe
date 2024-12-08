@@ -283,11 +283,13 @@
 			this.Controls.Add(this.label5on5);
 			this.Controls.Add(this.label3on3);
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+			this.KeyPreview = true;
 			this.Name = "SinglePCGameSettingsForm";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "GameSettingsForm";
 			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.SinglePCGameSettingsForm_FormClosed);
 			this.Load += new System.EventHandler(this.SinglePCGameSettingsForm_Load);
+			this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SinglePCGameSettingsForm_KeyDown);
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownNumberOfRounds)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();

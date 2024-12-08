@@ -1192,6 +1192,19 @@ namespace TicTacToe.Forms.Game
 		}
 		#endregion
 
+		private void BaseGameForm_KeyDown(object sender, KeyEventArgs e)
+		{
+			if (e.KeyCode == Keys.Escape && !_isGameOver)
+			{
+				string lossInfo = player.DeductedCoins > 0 ?
+					$"\nIf you exit, you will lose {player.DeductedCoins} points!"
+					: string.Empty;
+				DialogResult result = CustomMessageBox.Show("Are you sure you want to exit the game?" + lossInfo, "Exit",
+					CustomMessageBoxButtons.YesNo, CustomMessageBoxIcon.Question);
+				if (result == DialogResult.Yes)
+					Close();
+			}
+		}
 		protected void BaseGameForm_FormClosed(object sender, FormClosedEventArgs e)
 		{
 			StopTimerToMove();

@@ -232,6 +232,11 @@ namespace TicTacToe.Forms.ItemManagement.Shop
 				flpBackgroundGame.Controls.Add(InitializeLabelEmpty(EMPTY_TEXT_BACK_GAME));
 		}
 
+		private void ShopForm_KeyDown(object sender, KeyEventArgs e)
+		{
+			if (e.KeyCode == Keys.Escape)
+				Close();
+		}
 		private void Shop_FormClosed(object sender, FormClosedEventArgs e)
 		{
 			ManageItemCreatorEvents(false);

@@ -133,10 +133,12 @@
 			this.Controls.Add(this.flpLobbyPreviews);
 			this.Controls.Add(this.buttonCreateGame);
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+			this.KeyPreview = true;
 			this.Name = "StartNetworkGameForm";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.StartNetworkGameForm_FormClosed);
 			this.Load += new System.EventHandler(this.StartNetworkGameForm_Load);
+			this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.StartNetworkGameForm_KeyDown);
 			this.ResumeLayout(false);
 
 		}

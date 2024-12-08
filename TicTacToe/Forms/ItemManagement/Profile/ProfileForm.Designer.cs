@@ -568,7 +568,7 @@
 			this.labelNetworkLossesTitle.AutoSize = true;
 			this.labelNetworkLossesTitle.BackColor = System.Drawing.Color.Transparent;
 			this.labelNetworkLossesTitle.Font = new System.Drawing.Font("Trebuchet MS", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.labelNetworkLossesTitle.ForeColor = System.Drawing.Color.Red;
+			this.labelNetworkLossesTitle.ForeColor = System.Drawing.Color.Maroon;
 			this.labelNetworkLossesTitle.Location = new System.Drawing.Point(8, 240);
 			this.labelNetworkLossesTitle.Name = "labelNetworkLossesTitle";
 			this.labelNetworkLossesTitle.Size = new System.Drawing.Size(90, 29);
@@ -620,7 +620,7 @@
 			this.labelNetworkWinsTitle.AutoSize = true;
 			this.labelNetworkWinsTitle.BackColor = System.Drawing.Color.Transparent;
 			this.labelNetworkWinsTitle.Font = new System.Drawing.Font("Trebuchet MS", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.labelNetworkWinsTitle.ForeColor = System.Drawing.Color.Lime;
+			this.labelNetworkWinsTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(167)))), ((int)(((byte)(106)))));
 			this.labelNetworkWinsTitle.Location = new System.Drawing.Point(8, 170);
 			this.labelNetworkWinsTitle.Name = "labelNetworkWinsTitle";
 			this.labelNetworkWinsTitle.Size = new System.Drawing.Size(72, 29);
@@ -733,7 +733,7 @@
 			this.labelBotLossesTitle.AutoSize = true;
 			this.labelBotLossesTitle.BackColor = System.Drawing.Color.Transparent;
 			this.labelBotLossesTitle.Font = new System.Drawing.Font("Trebuchet MS", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.labelBotLossesTitle.ForeColor = System.Drawing.Color.Red;
+			this.labelBotLossesTitle.ForeColor = System.Drawing.Color.Maroon;
 			this.labelBotLossesTitle.Location = new System.Drawing.Point(8, 240);
 			this.labelBotLossesTitle.Name = "labelBotLossesTitle";
 			this.labelBotLossesTitle.Size = new System.Drawing.Size(90, 29);
@@ -785,7 +785,7 @@
 			this.labelBotWinsTitle.AutoSize = true;
 			this.labelBotWinsTitle.BackColor = System.Drawing.Color.Transparent;
 			this.labelBotWinsTitle.Font = new System.Drawing.Font("Trebuchet MS", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.labelBotWinsTitle.ForeColor = System.Drawing.Color.Lime;
+			this.labelBotWinsTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(167)))), ((int)(((byte)(106)))));
 			this.labelBotWinsTitle.Location = new System.Drawing.Point(8, 170);
 			this.labelBotWinsTitle.Name = "labelBotWinsTitle";
 			this.labelBotWinsTitle.Size = new System.Drawing.Size(72, 29);
@@ -836,6 +836,7 @@
 			this.Controls.Add(this.pictureBoxPlayerAvatar);
 			this.Controls.Add(this.tabControl);
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+			this.KeyPreview = true;
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
 			this.MinimumSize = new System.Drawing.Size(1076, 760);
@@ -844,6 +845,7 @@
 			this.Text = "Profile";
 			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Profile_FormClosed);
 			this.Load += new System.EventHandler(this.ProfileForm_Load);
+			this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ProfileForm_KeyDown);
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxPlayerAvatar)).EndInit();
 			this.tabControl.ResumeLayout(false);
 			this.tabPagePreferences.ResumeLayout(false);

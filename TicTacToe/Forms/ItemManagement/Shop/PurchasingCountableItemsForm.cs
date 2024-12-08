@@ -68,6 +68,11 @@ namespace TicTacToe.Forms.ItemManagement.Shop
 		private void NumericUpDownNumberOfItems_ValueChanged(object sender, EventArgs e)
 			=> labelPrice.Text = (_item.Price * numericUpDownNumberOfItems.Value).ToString();
 
+		private void PurchasingCountableItemsForm_KeyDown(object sender, KeyEventArgs e)
+		{
+			if (e.KeyCode == Keys.Escape)
+				Close();
+		}
 		private void PurchaseResultForm_FormClosed(object sender, FormClosedEventArgs e)
 			=> _buttonEventHandlers.UnsubscribeAll();
 	}

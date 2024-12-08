@@ -87,8 +87,13 @@ namespace TicTacToe.Forms.ItemManagement.Shop
 		}
 		private void ButtonOK_Click(object sender, EventArgs e)
 			=> Close();
+
+		private void PurchaseResultForm_KeyDown(object sender, KeyEventArgs e)
+		{
+			if (e.KeyCode == Keys.Escape)
+				Close();
+		}
 		private void PurchaseResultForm_FormClosed(object sender, FormClosedEventArgs e)
 			=> _buttonEventHandlers.UnsubscribeAll();
-
 	}
 }

@@ -357,6 +357,11 @@ namespace TicTacToe.Forms.Game.Settings
 		}
 		#endregion
 
+		private void SinglePCGameSettingsForm_KeyDown(object sender, KeyEventArgs e)
+		{
+			if (e.KeyCode == Keys.Escape)
+				Close();
+		}
 		private void SinglePCGameSettingsForm_FormClosed(object sender, FormClosedEventArgs e)
 		{
 			_buttonEventHandlers.UnsubscribeAll();

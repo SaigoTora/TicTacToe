@@ -492,6 +492,11 @@ namespace TicTacToe.Forms.ItemManagement.Profile
 			}
 		}
 
+		private void ProfileForm_KeyDown(object sender, KeyEventArgs e)
+		{
+			if (e.KeyCode == Keys.Escape)
+				Close();
+		}
 		private void Profile_FormClosed(object sender, FormClosedEventArgs e)
 		{
 			ManageItemCreatorEvents(false);

@@ -173,10 +173,12 @@
 			this.Controls.Add(this.labelName);
 			this.Controls.Add(this.pictureBoxItem);
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+			this.KeyPreview = true;
 			this.Name = "PurchaseResultForm";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "PurchaseResultForm";
 			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.PurchaseResultForm_FormClosed);
+			this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.PurchaseResultForm_KeyDown);
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxItem)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxCoin)).EndInit();
 			this.ResumeLayout(false);

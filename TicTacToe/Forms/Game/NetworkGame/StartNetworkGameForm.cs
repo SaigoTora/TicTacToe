@@ -416,6 +416,11 @@ namespace TicTacToe.Forms.Game.NetworkGame
 			}
 		}
 
+		private void StartNetworkGameForm_KeyDown(object sender, KeyEventArgs e)
+		{
+			if (e.KeyCode == Keys.Escape)
+				Close();
+		}
 		private void StartNetworkGameForm_FormClosed(object sender, FormClosedEventArgs e)
 		{
 			ClearLobbyPreviews();

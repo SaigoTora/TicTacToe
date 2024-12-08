@@ -38,6 +38,7 @@
 			this.BackColor = System.Drawing.Color.White;
 			this.ClientSize = new System.Drawing.Size(618, 822);
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+			this.KeyPreview = true;
 			this.MaximizeBox = false;
 			this.Name = "BaseGameForm";
 			this.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -45,6 +46,7 @@
 			this.Text = "Game";
 			this.TopMost = true;
 			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.BaseGameForm_FormClosed);
+			this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.BaseGameForm_KeyDown);
 			this.ResumeLayout(false);
 
 		}

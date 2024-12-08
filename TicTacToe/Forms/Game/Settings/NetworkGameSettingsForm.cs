@@ -215,6 +215,11 @@ namespace TicTacToe.Forms.Game.Settings
 			Close();
 		}
 
+		private void NetworkGameSettingsForm_KeyDown(object sender, KeyEventArgs e)
+		{
+			if (e.KeyCode == Keys.Escape)
+				Close();
+		}
 		private void NetworkGameSettingsForm_FormClosed(object sender, FormClosedEventArgs e)
 		{
 			_buttonEventHandlers.UnsubscribeAll();

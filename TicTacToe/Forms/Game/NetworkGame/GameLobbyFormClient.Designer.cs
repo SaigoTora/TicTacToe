@@ -355,11 +355,13 @@
 			this.Controls.Add(this.pictureBoxCoin);
 			this.Controls.Add(this.labelCoins);
 			this.Controls.Add(this.buttonReady);
+			this.KeyPreview = true;
 			this.Name = "GameLobbyClientForm";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "GameLobbyForm";
 			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.GameLobbyClientForm_FormClosed);
 			this.Load += new System.EventHandler(this.GameLobbyClientForm_Load);
+			this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.GameLobbyClientForm_KeyDown);
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxCoin)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxCoinBet)).EndInit();
 			this.panelChat.ResumeLayout(false);

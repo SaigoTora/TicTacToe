@@ -167,11 +167,13 @@
 			this.Controls.Add(this.labelGreeting);
 			this.DoubleBuffered = true;
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+			this.KeyPreview = true;
 			this.MaximizeBox = false;
 			this.Name = "StartForm";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.StartForm_FormClosed);
 			this.Load += new System.EventHandler(this.StartForm_Load);
+			this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.StartForm_KeyDown);
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxMan)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxWoman)).EndInit();
 			this.ResumeLayout(false);

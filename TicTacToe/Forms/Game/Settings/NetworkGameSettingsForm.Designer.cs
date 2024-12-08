@@ -366,11 +366,13 @@
 			this.Controls.Add(this.label5on5);
 			this.Controls.Add(this.label3on3);
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+			this.KeyPreview = true;
 			this.Name = "NetworkGameSettingsForm";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "NetworkGameSettingsForm";
 			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.NetworkGameSettingsForm_FormClosed);
 			this.Load += new System.EventHandler(this.NetworkGameSettingsForm_Load);
+			this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.NetworkGameSettingsForm_KeyDown);
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownCoinsBet)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxCoin)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownNumberOfRounds)).EndInit();

@@ -121,6 +121,11 @@ namespace TicTacToe.Forms
 			}
 		}
 
+		private void StartForm_KeyDown(object sender, KeyEventArgs e)
+		{
+			if (e.KeyCode == Keys.Escape)
+				Close();
+		}
 		private void StartForm_FormClosed(object sender, FormClosedEventArgs e)
 		{
 			_pictureBoxEventHandlers.UnsubscribeAll();

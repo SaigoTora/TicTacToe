@@ -467,6 +467,16 @@ namespace TicTacToe.Forms.Game.NetworkGame
 			_playerCreator.Dispose();
 			_ipToGamePanels.Clear();
 		}
+		private void GameLobbyServerForm_KeyDown(object sender, KeyEventArgs e)
+		{
+			if (e.KeyCode == Keys.Escape)
+			{
+				DialogResult result = CustomMessageBox.Show("Are you sure you want to leave this lobby?", "Exit",
+					CustomMessageBoxButtons.YesNo, CustomMessageBoxIcon.Question);
+				if (result == DialogResult.Yes)
+					Close();
+			}
+		}
 		private void GameLobbyServerForm_FormClosed(object sender, FormClosedEventArgs e)
 		{
 			_buttonEventHandlers.UnsubscribeAll();
@@ -480,5 +490,7 @@ namespace TicTacToe.Forms.Game.NetworkGame
 				_mainForm.Show();
 			}
 		}
+
+
 	}
 }

@@ -300,7 +300,11 @@ namespace TicTacToe.Forms
 			if (Visible)
 				DisplayPlayerData();
 		}
-
+		private void MainForm_KeyDown(object sender, KeyEventArgs e)
+		{
+			if (e.KeyCode == Keys.Escape)
+				ButtonExit_Click(sender, e);
+		}
 		private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
 		{
 			_pictureBoxEventHandlers.UnsubscribeAll();

@@ -624,6 +624,7 @@
 			this.ClientSize = new System.Drawing.Size(1130, 750);
 			this.Controls.Add(this.panelMain);
 			this.ForeColor = System.Drawing.Color.Transparent;
+			this.KeyPreview = true;
 			this.MinimumSize = new System.Drawing.Size(1024, 700);
 			this.Name = "MainForm";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -631,6 +632,7 @@
 			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
 			this.Load += new System.EventHandler(this.MainForm_Load);
 			this.VisibleChanged += new System.EventHandler(this.Menu_VisibleChanged);
+			this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MainForm_KeyDown);
 			this.panelLeft.ResumeLayout(false);
 			this.panelMenu.ResumeLayout(false);
 			this.panelProfile.ResumeLayout(false);
