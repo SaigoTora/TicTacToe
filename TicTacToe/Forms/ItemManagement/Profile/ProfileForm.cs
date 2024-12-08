@@ -11,6 +11,7 @@ using TicTacToe.Models.PlayerItem;
 using TicTacToe.Models.PlayerItemCreator;
 using TicTacToe.Models.Utilities;
 using TicTacToe.Models.Utilities.FormUtilities;
+using TicTacToe.Models.Utilities.FormUtilities.ControlEventHandlers;
 
 namespace TicTacToe.Forms.ItemManagement.Profile
 {
@@ -21,8 +22,12 @@ namespace TicTacToe.Forms.ItemManagement.Profile
 		private const string SELECTED_ITEM_TEXT = "Selected";
 		private const string SELECTED_PICTURE_TAG = "ItemSelected";
 
-		private static readonly (Color Default, Color DuringRenaming) _buttonChangeNameColor = (Color.White, Color.Yellow);
+		private static readonly (Color Default, Color DuringRenaming) _buttonChangeNameColor =
+			(Color.White, Color.Yellow);
+		private static readonly (Color AboveHalf, Color BelowHalf) _winRateColor =
+			(Color.FromArgb(71, 167, 106), Color.Maroon);
 
+		private readonly LabelEventHandlers _labelEventHandlers = new LabelEventHandlers();
 		private readonly List<PictureBox> _menuBackPictureBoxes = new List<PictureBox>();
 		private readonly List<PictureBox> _gameBackPictureBoxes = new List<PictureBox>();
 		private readonly List<PictureBox> _avatarPictureBoxes = new List<PictureBox>();
@@ -58,8 +63,11 @@ namespace TicTacToe.Forms.ItemManagement.Profile
 			tabControl.TabButtonSelectedState.FillColor = BackColor;
 			tabControl.TabMenuBackColor = BackColor;
 			tabPagePreferences.BackColor = BackColor;
+			tabPageStats.BackColor = BackColor;
 
+			FillStatistics();
 			CreateItems();
+			_labelEventHandlers.SubscribeToHoverUnderline(labelBotStats, labelNetworkStats);
 			SubscribeToNavigationButtonEvents(buttonPreferencesLeft,
 				buttonPreferencesRight);
 		}
@@ -110,6 +118,90 @@ namespace TicTacToe.Forms.ItemManagement.Profile
 				gameAssistantsCreator.MouseLeave -= MouseLeaveItem;
 			}
 		}
+
+		#region Statistics
+		private void FillStatistics()
+		{
+			FillBotStatistics();
+			FillNetworkStatistics();
+
+			if (player.BotStats.TotalGames > 0 && player.NetworkStats.TotalGames > 0)
+				pictureBoxLineBetweenStats.Visible = true;
+		}
+		private void FillBotStatistics()
+		{
+			if (player.BotStats.TotalGames <= 0)
+			{
+				panelBotStats.Visible = false;
+				return;
+			}
+
+			labelBotTotalGames.Text = player.BotStats.TotalGames.ToString();
+			labelBotWinRate.Text = player.BotStats.WinRate.ToString("F2") + " %";
+			if (player.BotStats.WinRate > 50)
+				labelBotWinRate.ForeColor = _winRateColor.AboveHalf;
+			else if (player.BotStats.WinRate < 50)
+				labelBotWinRate.ForeColor = _winRateColor.BelowHalf;
+
+			FillWinsDrawsLosses(player.BotStats, labelBotWinsTitle, labelBotWins,
+				labelBotDrawsTitle, labelBotDraws, labelBotLossesTitle, labelBotLosses);
+		}
+		private void FillNetworkStatistics()
+		{
+			if (player.NetworkStats.TotalGames <= 0)
+			{
+				panelNetworkStats.Visible = false;
+				return;
+			}
+
+			labelNetworkTotalGames.Text = player.NetworkStats.TotalGames.ToString();
+			labelNetworkWinRate.Text = player.NetworkStats.WinRate.ToString("F2") + " %";
+			if (player.NetworkStats.WinRate > 50)
+				labelNetworkWinRate.ForeColor = _winRateColor.AboveHalf;
+			else if (player.NetworkStats.WinRate < 50)
+				labelNetworkWinRate.ForeColor = _winRateColor.BelowHalf;
+
+			FillWinsDrawsLosses(player.NetworkStats, labelNetworkWinsTitle, labelNetworkWins,
+				labelNetworkDrawsTitle, labelNetworkDraws, labelNetworkLossesTitle, labelNetworkLosses);
+		}
+		private void FillWinsDrawsLosses(PlayerStats stats, Label winsTitle, Label wins,
+			Label drawsTitle, Label draws, Label lossesTitle, Label losses)
+		{
+			if (stats.Wins > 0)
+				wins.Text = stats.Wins.ToString();
+			else
+			{
+				winsTitle.Visible = false;
+				wins.Visible = false;
+			}
+
+			if (stats.Draws > 0)
+				draws.Text = stats.Draws.ToString();
+			else
+			{
+				drawsTitle.Visible = false;
+				draws.Visible = false;
+			}
+			if (stats.Losses > 0)
+				losses.Text = stats.Losses.ToString();
+			else
+			{
+				lossesTitle.Visible = false;
+				losses.Visible = false;
+			}
+		}
+
+		private void LabelBotStats_Click(object sender, EventArgs e)
+		{
+			CustomMessageBox.Show("Statistics for games with a bot are calculated for each ROUND.",
+				"Information", CustomMessageBoxButtons.OK, CustomMessageBoxIcon.Information);
+		}
+		private void LabelNetworkStats_Click(object sender, EventArgs e)
+		{
+			CustomMessageBox.Show("Statistics for network games are calculated for each MATCH.",
+				"Information", CustomMessageBoxButtons.OK, CustomMessageBoxIcon.Information);
+		}
+		#endregion
 
 		#region Create items
 		private void CreateItems()
@@ -403,6 +495,7 @@ namespace TicTacToe.Forms.ItemManagement.Profile
 		private void Profile_FormClosed(object sender, FormClosedEventArgs e)
 		{
 			ManageItemCreatorEvents(false);
+			_labelEventHandlers.UnsubscribeAll();
 			UnsubscribeFromNavigationButtonEvents(buttonPreferencesLeft,
 				buttonPreferencesRight);
 

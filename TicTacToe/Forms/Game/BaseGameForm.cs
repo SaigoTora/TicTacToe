@@ -319,6 +319,7 @@ namespace TicTacToe.Forms.Game
 
 			Cell cell = FindIndexPictureBoxCell(pictureBox);
 			Image cellImage = GetCellImage(cellType);
+			pictureBox.Tag = string.Empty;
 			cell = await FindActualCellWithAnimationAsync(cell, cellImage);
 			field.FillCell(cell, cellType);
 
@@ -743,11 +744,13 @@ namespace TicTacToe.Forms.Game
 				_initialCoins += player.DeductedCoins;
 				player.ReturnCoins();
 				gameResult = UpdateCoinsForNetworkGame();
+				player.NetworkStats.AddGameResult(gameResult);
 			}
-			else if (gameServer == null && gameClient == null)
+			else if (bot != null && gameServer == null && gameClient == null)
 			{
 				player.ReturnCoins();
 				player.UpdateCoins(coinReward, gameResult);
+				player.BotStats.AddGameResult(gameResult);
 			}
 
 			OpenResultForm(gameResult);

@@ -28,6 +28,9 @@ namespace TicTacToe.Models.PlayerInfo
 		internal ItemsInventory ItemsInventory { get; private set; }
 		internal CountableItemsInventory CountableItemsInventory { get; private set; }
 
+		internal PlayerStats BotStats = new PlayerStats();
+		internal PlayerStats NetworkStats = new PlayerStats();
+
 		[NonSerialized]
 		private int _deductedCoins;
 

@@ -258,6 +258,7 @@
     <Compile Include="Models\PlayerInfo\GameView.cs" />
     <Compile Include="Models\PlayerInfo\Inventory\IInventory.cs" />
     <Compile Include="Models\PlayerInfo\Inventory\ItemsInventory.cs" />
+    <Compile Include="Models\PlayerInfo\PlayerStats.cs" />
     <Compile Include="Models\PlayerItemCreator\ItemEventArgs.cs" />
     <Compile Include="Models\PlayerItem\CountableItem.cs" />
     <Compile Include="Models\PlayerItem\ItemManager.cs" />

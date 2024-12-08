@@ -40,7 +40,6 @@
 			this.pictureBoxPlayerAvatar = new System.Windows.Forms.PictureBox();
 			this.tabControl = new Guna.UI2.WinForms.Guna2TabControl();
 			this.tabPagePreferences = new System.Windows.Forms.TabPage();
-			this.buttonResetProgress = new FontAwesome.Sharp.IconButton();
 			this.panelPreviewItem = new Guna.UI2.WinForms.Guna2Panel();
 			this.labelItemCount = new System.Windows.Forms.Label();
 			this.labelDateTimePurchase = new System.Windows.Forms.Label();
@@ -52,6 +51,33 @@
 			this.panelPreferenceNavigation = new Guna.UI2.WinForms.Guna2Panel();
 			this.buttonPreferencesLeft = new FontAwesome.Sharp.IconButton();
 			this.buttonPreferencesRight = new FontAwesome.Sharp.IconButton();
+			this.tabPageStats = new System.Windows.Forms.TabPage();
+			this.pictureBoxLineBetweenStats = new Guna.UI2.WinForms.Guna2PictureBox();
+			this.panelNetworkStats = new Guna.UI2.WinForms.Guna2Panel();
+			this.labelNetworkWinRate = new System.Windows.Forms.Label();
+			this.labelNetworkTotalGames = new System.Windows.Forms.Label();
+			this.labelNetworkLosses = new System.Windows.Forms.Label();
+			this.labelNetworkDraws = new System.Windows.Forms.Label();
+			this.labelNetworkWins = new System.Windows.Forms.Label();
+			this.labelNetworkStats = new System.Windows.Forms.Label();
+			this.labelNetworkLossesTitle = new System.Windows.Forms.Label();
+			this.labelNetworkTotalGamesTitle = new System.Windows.Forms.Label();
+			this.labelNetworkDrawsTitle = new System.Windows.Forms.Label();
+			this.labelNetworkWinRateTitle = new System.Windows.Forms.Label();
+			this.labelNetworkWinsTitle = new System.Windows.Forms.Label();
+			this.panelBotStats = new Guna.UI2.WinForms.Guna2Panel();
+			this.labelBotWinRate = new System.Windows.Forms.Label();
+			this.labelBotTotalGames = new System.Windows.Forms.Label();
+			this.labelBotLosses = new System.Windows.Forms.Label();
+			this.labelBotDraws = new System.Windows.Forms.Label();
+			this.labelBotWins = new System.Windows.Forms.Label();
+			this.labelBotStats = new System.Windows.Forms.Label();
+			this.labelBotLossesTitle = new System.Windows.Forms.Label();
+			this.labelBotTotalGamesTitle = new System.Windows.Forms.Label();
+			this.labelBotDrawsTitle = new System.Windows.Forms.Label();
+			this.labelBotWinRateTitle = new System.Windows.Forms.Label();
+			this.labelBotWinsTitle = new System.Windows.Forms.Label();
+			this.buttonResetProgress = new FontAwesome.Sharp.IconButton();
 			this.flpGameAssistants = new System.Windows.Forms.FlowLayoutPanel();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxPlayerAvatar)).BeginInit();
 			this.tabControl.SuspendLayout();
@@ -60,6 +86,10 @@
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxCoin)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxItem)).BeginInit();
 			this.panelPreferenceNavigation.SuspendLayout();
+			this.tabPageStats.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.pictureBoxLineBetweenStats)).BeginInit();
+			this.panelNetworkStats.SuspendLayout();
+			this.panelBotStats.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// labelBackgroundMenu
@@ -195,21 +225,22 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.tabControl.Controls.Add(this.tabPagePreferences);
+			this.tabControl.Controls.Add(this.tabPageStats);
 			this.tabControl.ItemSize = new System.Drawing.Size(400, 50);
 			this.tabControl.Location = new System.Drawing.Point(0, 300);
 			this.tabControl.Name = "tabControl";
 			this.tabControl.SelectedIndex = 0;
 			this.tabControl.Size = new System.Drawing.Size(1200, 480);
 			this.tabControl.TabButtonHoverState.BorderColor = System.Drawing.Color.Empty;
-			this.tabControl.TabButtonHoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(52)))), ((int)(((byte)(70)))));
-			this.tabControl.TabButtonHoverState.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
+			this.tabControl.TabButtonHoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
+			this.tabControl.TabButtonHoverState.Font = new System.Drawing.Font("Trebuchet MS", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.tabControl.TabButtonHoverState.ForeColor = System.Drawing.Color.White;
 			this.tabControl.TabButtonHoverState.InnerColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(52)))), ((int)(((byte)(70)))));
-			this.tabControl.TabButtonIdleState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(42)))), ((int)(((byte)(57)))));
-			this.tabControl.TabButtonIdleState.FillColor = System.Drawing.Color.Black;
-			this.tabControl.TabButtonIdleState.Font = new System.Drawing.Font("Trebuchet MS", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.tabControl.TabButtonIdleState.BorderColor = System.Drawing.Color.Transparent;
+			this.tabControl.TabButtonIdleState.FillColor = System.Drawing.Color.Transparent;
+			this.tabControl.TabButtonIdleState.Font = new System.Drawing.Font("Trebuchet MS", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.tabControl.TabButtonIdleState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(160)))), ((int)(((byte)(167)))));
-			this.tabControl.TabButtonIdleState.InnerColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(42)))), ((int)(((byte)(57)))));
+			this.tabControl.TabButtonIdleState.InnerColor = System.Drawing.Color.Transparent;
 			this.tabControl.TabButtonSelectedState.BorderColor = System.Drawing.Color.Empty;
 			this.tabControl.TabButtonSelectedState.FillColor = System.Drawing.Color.Black;
 			this.tabControl.TabButtonSelectedState.Font = new System.Drawing.Font("Trebuchet MS", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -224,7 +255,6 @@
 			// 
 			this.tabPagePreferences.AutoScroll = true;
 			this.tabPagePreferences.BackColor = System.Drawing.Color.Black;
-			this.tabPagePreferences.Controls.Add(this.buttonResetProgress);
 			this.tabPagePreferences.Controls.Add(this.panelPreviewItem);
 			this.tabPagePreferences.Controls.Add(this.panelPreferenceNavigation);
 			this.tabPagePreferences.Controls.Add(this.flpBackgroundMenu);
@@ -237,25 +267,6 @@
 			this.tabPagePreferences.Size = new System.Drawing.Size(1192, 422);
 			this.tabPagePreferences.TabIndex = 0;
 			this.tabPagePreferences.Text = "Preferences";
-			// 
-			// buttonResetProgress
-			// 
-			this.buttonResetProgress.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.buttonResetProgress.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
-			this.buttonResetProgress.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.buttonResetProgress.FlatAppearance.BorderSize = 0;
-			this.buttonResetProgress.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.buttonResetProgress.IconChar = FontAwesome.Sharp.IconChar.TrashAlt;
-			this.buttonResetProgress.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(24)))), ((int)(((byte)(13)))));
-			this.buttonResetProgress.IconFont = FontAwesome.Sharp.IconFont.Auto;
-			this.buttonResetProgress.IconSize = 33;
-			this.buttonResetProgress.Location = new System.Drawing.Point(1151, 383);
-			this.buttonResetProgress.Name = "buttonResetProgress";
-			this.buttonResetProgress.Size = new System.Drawing.Size(36, 36);
-			this.buttonResetProgress.TabIndex = 5;
-			this.buttonResetProgress.TabStop = false;
-			this.buttonResetProgress.UseVisualStyleBackColor = false;
-			this.buttonResetProgress.Click += new System.EventHandler(this.ButtonResetProgress_Click);
 			// 
 			// panelPreviewItem
 			// 
@@ -422,6 +433,385 @@
 			this.buttonPreferencesRight.TabStop = false;
 			this.buttonPreferencesRight.UseVisualStyleBackColor = false;
 			// 
+			// tabPageStats
+			// 
+			this.tabPageStats.AutoScroll = true;
+			this.tabPageStats.BackColor = System.Drawing.Color.Black;
+			this.tabPageStats.Controls.Add(this.pictureBoxLineBetweenStats);
+			this.tabPageStats.Controls.Add(this.panelNetworkStats);
+			this.tabPageStats.Controls.Add(this.panelBotStats);
+			this.tabPageStats.Location = new System.Drawing.Point(4, 54);
+			this.tabPageStats.Name = "tabPageStats";
+			this.tabPageStats.Padding = new System.Windows.Forms.Padding(3);
+			this.tabPageStats.Size = new System.Drawing.Size(1192, 422);
+			this.tabPageStats.TabIndex = 1;
+			this.tabPageStats.Text = "Statistics";
+			// 
+			// pictureBoxLineBetweenStats
+			// 
+			this.pictureBoxLineBetweenStats.AutoRoundedCorners = true;
+			this.pictureBoxLineBetweenStats.BackColor = System.Drawing.Color.Transparent;
+			this.pictureBoxLineBetweenStats.BorderRadius = 1;
+			this.pictureBoxLineBetweenStats.CustomizableEdges.BottomLeft = false;
+			this.pictureBoxLineBetweenStats.CustomizableEdges.TopLeft = false;
+			this.pictureBoxLineBetweenStats.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+			this.pictureBoxLineBetweenStats.ImageRotate = 0F;
+			this.pictureBoxLineBetweenStats.Location = new System.Drawing.Point(414, 6);
+			this.pictureBoxLineBetweenStats.Name = "pictureBoxLineBetweenStats";
+			this.pictureBoxLineBetweenStats.Size = new System.Drawing.Size(4, 400);
+			this.pictureBoxLineBetweenStats.TabIndex = 1;
+			this.pictureBoxLineBetweenStats.TabStop = false;
+			this.pictureBoxLineBetweenStats.Visible = false;
+			// 
+			// panelNetworkStats
+			// 
+			this.panelNetworkStats.BackColor = System.Drawing.Color.Transparent;
+			this.panelNetworkStats.Controls.Add(this.labelNetworkWinRate);
+			this.panelNetworkStats.Controls.Add(this.labelNetworkTotalGames);
+			this.panelNetworkStats.Controls.Add(this.labelNetworkLosses);
+			this.panelNetworkStats.Controls.Add(this.labelNetworkDraws);
+			this.panelNetworkStats.Controls.Add(this.labelNetworkWins);
+			this.panelNetworkStats.Controls.Add(this.labelNetworkStats);
+			this.panelNetworkStats.Controls.Add(this.labelNetworkLossesTitle);
+			this.panelNetworkStats.Controls.Add(this.labelNetworkTotalGamesTitle);
+			this.panelNetworkStats.Controls.Add(this.labelNetworkDrawsTitle);
+			this.panelNetworkStats.Controls.Add(this.labelNetworkWinRateTitle);
+			this.panelNetworkStats.Controls.Add(this.labelNetworkWinsTitle);
+			this.panelNetworkStats.Location = new System.Drawing.Point(425, 6);
+			this.panelNetworkStats.Name = "panelNetworkStats";
+			this.panelNetworkStats.Size = new System.Drawing.Size(400, 400);
+			this.panelNetworkStats.TabIndex = 2;
+			this.panelNetworkStats.Tag = "";
+			// 
+			// labelNetworkWinRate
+			// 
+			this.labelNetworkWinRate.AutoSize = true;
+			this.labelNetworkWinRate.BackColor = System.Drawing.Color.Transparent;
+			this.labelNetworkWinRate.Font = new System.Drawing.Font("Trebuchet MS", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.labelNetworkWinRate.ForeColor = System.Drawing.Color.Gainsboro;
+			this.labelNetworkWinRate.Location = new System.Drawing.Point(165, 115);
+			this.labelNetworkWinRate.Name = "labelNetworkWinRate";
+			this.labelNetworkWinRate.Size = new System.Drawing.Size(27, 29);
+			this.labelNetworkWinRate.TabIndex = 4;
+			this.labelNetworkWinRate.Text = "0";
+			this.labelNetworkWinRate.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+			// 
+			// labelNetworkTotalGames
+			// 
+			this.labelNetworkTotalGames.AutoSize = true;
+			this.labelNetworkTotalGames.BackColor = System.Drawing.Color.Transparent;
+			this.labelNetworkTotalGames.Font = new System.Drawing.Font("Trebuchet MS", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.labelNetworkTotalGames.ForeColor = System.Drawing.Color.White;
+			this.labelNetworkTotalGames.Location = new System.Drawing.Point(165, 75);
+			this.labelNetworkTotalGames.Name = "labelNetworkTotalGames";
+			this.labelNetworkTotalGames.Size = new System.Drawing.Size(27, 29);
+			this.labelNetworkTotalGames.TabIndex = 2;
+			this.labelNetworkTotalGames.Text = "0";
+			this.labelNetworkTotalGames.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+			// 
+			// labelNetworkLosses
+			// 
+			this.labelNetworkLosses.AutoSize = true;
+			this.labelNetworkLosses.BackColor = System.Drawing.Color.Transparent;
+			this.labelNetworkLosses.Font = new System.Drawing.Font("Trebuchet MS", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.labelNetworkLosses.ForeColor = System.Drawing.Color.White;
+			this.labelNetworkLosses.Location = new System.Drawing.Point(165, 240);
+			this.labelNetworkLosses.Name = "labelNetworkLosses";
+			this.labelNetworkLosses.Size = new System.Drawing.Size(27, 29);
+			this.labelNetworkLosses.TabIndex = 10;
+			this.labelNetworkLosses.Text = "0";
+			this.labelNetworkLosses.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+			// 
+			// labelNetworkDraws
+			// 
+			this.labelNetworkDraws.AutoSize = true;
+			this.labelNetworkDraws.BackColor = System.Drawing.Color.Transparent;
+			this.labelNetworkDraws.Font = new System.Drawing.Font("Trebuchet MS", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.labelNetworkDraws.ForeColor = System.Drawing.Color.White;
+			this.labelNetworkDraws.Location = new System.Drawing.Point(165, 205);
+			this.labelNetworkDraws.Name = "labelNetworkDraws";
+			this.labelNetworkDraws.Size = new System.Drawing.Size(27, 29);
+			this.labelNetworkDraws.TabIndex = 8;
+			this.labelNetworkDraws.Text = "0";
+			this.labelNetworkDraws.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+			// 
+			// labelNetworkWins
+			// 
+			this.labelNetworkWins.AutoSize = true;
+			this.labelNetworkWins.BackColor = System.Drawing.Color.Transparent;
+			this.labelNetworkWins.Font = new System.Drawing.Font("Trebuchet MS", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.labelNetworkWins.ForeColor = System.Drawing.Color.White;
+			this.labelNetworkWins.Location = new System.Drawing.Point(165, 170);
+			this.labelNetworkWins.Name = "labelNetworkWins";
+			this.labelNetworkWins.Size = new System.Drawing.Size(27, 29);
+			this.labelNetworkWins.TabIndex = 6;
+			this.labelNetworkWins.Text = "0";
+			this.labelNetworkWins.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+			// 
+			// labelNetworkStats
+			// 
+			this.labelNetworkStats.AutoSize = true;
+			this.labelNetworkStats.BackColor = System.Drawing.Color.Transparent;
+			this.labelNetworkStats.Cursor = System.Windows.Forms.Cursors.Help;
+			this.labelNetworkStats.Font = new System.Drawing.Font("Unispace", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.labelNetworkStats.ForeColor = System.Drawing.Color.White;
+			this.labelNetworkStats.Location = new System.Drawing.Point(8, 8);
+			this.labelNetworkStats.Name = "labelNetworkStats";
+			this.labelNetworkStats.Size = new System.Drawing.Size(141, 35);
+			this.labelNetworkStats.TabIndex = 0;
+			this.labelNetworkStats.Text = "Network";
+			this.labelNetworkStats.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+			this.labelNetworkStats.Click += new System.EventHandler(this.LabelNetworkStats_Click);
+			// 
+			// labelNetworkLossesTitle
+			// 
+			this.labelNetworkLossesTitle.AutoSize = true;
+			this.labelNetworkLossesTitle.BackColor = System.Drawing.Color.Transparent;
+			this.labelNetworkLossesTitle.Font = new System.Drawing.Font("Trebuchet MS", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.labelNetworkLossesTitle.ForeColor = System.Drawing.Color.Red;
+			this.labelNetworkLossesTitle.Location = new System.Drawing.Point(8, 240);
+			this.labelNetworkLossesTitle.Name = "labelNetworkLossesTitle";
+			this.labelNetworkLossesTitle.Size = new System.Drawing.Size(90, 29);
+			this.labelNetworkLossesTitle.TabIndex = 9;
+			this.labelNetworkLossesTitle.Text = "Losses:";
+			this.labelNetworkLossesTitle.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+			// 
+			// labelNetworkTotalGamesTitle
+			// 
+			this.labelNetworkTotalGamesTitle.AutoSize = true;
+			this.labelNetworkTotalGamesTitle.BackColor = System.Drawing.Color.Transparent;
+			this.labelNetworkTotalGamesTitle.Font = new System.Drawing.Font("Trebuchet MS", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.labelNetworkTotalGamesTitle.ForeColor = System.Drawing.Color.Gainsboro;
+			this.labelNetworkTotalGamesTitle.Location = new System.Drawing.Point(8, 75);
+			this.labelNetworkTotalGamesTitle.Name = "labelNetworkTotalGamesTitle";
+			this.labelNetworkTotalGamesTitle.Size = new System.Drawing.Size(151, 29);
+			this.labelNetworkTotalGamesTitle.TabIndex = 1;
+			this.labelNetworkTotalGamesTitle.Text = "Total games:";
+			this.labelNetworkTotalGamesTitle.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+			// 
+			// labelNetworkDrawsTitle
+			// 
+			this.labelNetworkDrawsTitle.AutoSize = true;
+			this.labelNetworkDrawsTitle.BackColor = System.Drawing.Color.Transparent;
+			this.labelNetworkDrawsTitle.Font = new System.Drawing.Font("Trebuchet MS", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.labelNetworkDrawsTitle.ForeColor = System.Drawing.Color.Gainsboro;
+			this.labelNetworkDrawsTitle.Location = new System.Drawing.Point(8, 205);
+			this.labelNetworkDrawsTitle.Name = "labelNetworkDrawsTitle";
+			this.labelNetworkDrawsTitle.Size = new System.Drawing.Size(87, 29);
+			this.labelNetworkDrawsTitle.TabIndex = 7;
+			this.labelNetworkDrawsTitle.Text = "Draws:";
+			this.labelNetworkDrawsTitle.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+			// 
+			// labelNetworkWinRateTitle
+			// 
+			this.labelNetworkWinRateTitle.AutoSize = true;
+			this.labelNetworkWinRateTitle.BackColor = System.Drawing.Color.Transparent;
+			this.labelNetworkWinRateTitle.Font = new System.Drawing.Font("Trebuchet MS", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.labelNetworkWinRateTitle.ForeColor = System.Drawing.Color.Gainsboro;
+			this.labelNetworkWinRateTitle.Location = new System.Drawing.Point(8, 115);
+			this.labelNetworkWinRateTitle.Name = "labelNetworkWinRateTitle";
+			this.labelNetworkWinRateTitle.Size = new System.Drawing.Size(119, 29);
+			this.labelNetworkWinRateTitle.TabIndex = 3;
+			this.labelNetworkWinRateTitle.Text = "Win Rate:";
+			this.labelNetworkWinRateTitle.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+			// 
+			// labelNetworkWinsTitle
+			// 
+			this.labelNetworkWinsTitle.AutoSize = true;
+			this.labelNetworkWinsTitle.BackColor = System.Drawing.Color.Transparent;
+			this.labelNetworkWinsTitle.Font = new System.Drawing.Font("Trebuchet MS", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.labelNetworkWinsTitle.ForeColor = System.Drawing.Color.Lime;
+			this.labelNetworkWinsTitle.Location = new System.Drawing.Point(8, 170);
+			this.labelNetworkWinsTitle.Name = "labelNetworkWinsTitle";
+			this.labelNetworkWinsTitle.Size = new System.Drawing.Size(72, 29);
+			this.labelNetworkWinsTitle.TabIndex = 5;
+			this.labelNetworkWinsTitle.Text = "Wins:";
+			this.labelNetworkWinsTitle.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+			// 
+			// panelBotStats
+			// 
+			this.panelBotStats.BackColor = System.Drawing.Color.Transparent;
+			this.panelBotStats.Controls.Add(this.labelBotWinRate);
+			this.panelBotStats.Controls.Add(this.labelBotTotalGames);
+			this.panelBotStats.Controls.Add(this.labelBotLosses);
+			this.panelBotStats.Controls.Add(this.labelBotDraws);
+			this.panelBotStats.Controls.Add(this.labelBotWins);
+			this.panelBotStats.Controls.Add(this.labelBotStats);
+			this.panelBotStats.Controls.Add(this.labelBotLossesTitle);
+			this.panelBotStats.Controls.Add(this.labelBotTotalGamesTitle);
+			this.panelBotStats.Controls.Add(this.labelBotDrawsTitle);
+			this.panelBotStats.Controls.Add(this.labelBotWinRateTitle);
+			this.panelBotStats.Controls.Add(this.labelBotWinsTitle);
+			this.panelBotStats.Location = new System.Drawing.Point(8, 6);
+			this.panelBotStats.Name = "panelBotStats";
+			this.panelBotStats.Size = new System.Drawing.Size(400, 400);
+			this.panelBotStats.TabIndex = 0;
+			this.panelBotStats.Tag = "";
+			// 
+			// labelBotWinRate
+			// 
+			this.labelBotWinRate.AutoSize = true;
+			this.labelBotWinRate.BackColor = System.Drawing.Color.Transparent;
+			this.labelBotWinRate.Font = new System.Drawing.Font("Trebuchet MS", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.labelBotWinRate.ForeColor = System.Drawing.Color.Gainsboro;
+			this.labelBotWinRate.Location = new System.Drawing.Point(165, 115);
+			this.labelBotWinRate.Name = "labelBotWinRate";
+			this.labelBotWinRate.Size = new System.Drawing.Size(27, 29);
+			this.labelBotWinRate.TabIndex = 4;
+			this.labelBotWinRate.Text = "0";
+			this.labelBotWinRate.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+			// 
+			// labelBotTotalGames
+			// 
+			this.labelBotTotalGames.AutoSize = true;
+			this.labelBotTotalGames.BackColor = System.Drawing.Color.Transparent;
+			this.labelBotTotalGames.Font = new System.Drawing.Font("Trebuchet MS", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.labelBotTotalGames.ForeColor = System.Drawing.Color.White;
+			this.labelBotTotalGames.Location = new System.Drawing.Point(165, 75);
+			this.labelBotTotalGames.Name = "labelBotTotalGames";
+			this.labelBotTotalGames.Size = new System.Drawing.Size(27, 29);
+			this.labelBotTotalGames.TabIndex = 2;
+			this.labelBotTotalGames.Text = "0";
+			this.labelBotTotalGames.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+			// 
+			// labelBotLosses
+			// 
+			this.labelBotLosses.AutoSize = true;
+			this.labelBotLosses.BackColor = System.Drawing.Color.Transparent;
+			this.labelBotLosses.Font = new System.Drawing.Font("Trebuchet MS", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.labelBotLosses.ForeColor = System.Drawing.Color.White;
+			this.labelBotLosses.Location = new System.Drawing.Point(165, 240);
+			this.labelBotLosses.Name = "labelBotLosses";
+			this.labelBotLosses.Size = new System.Drawing.Size(27, 29);
+			this.labelBotLosses.TabIndex = 10;
+			this.labelBotLosses.Text = "0";
+			this.labelBotLosses.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+			// 
+			// labelBotDraws
+			// 
+			this.labelBotDraws.AutoSize = true;
+			this.labelBotDraws.BackColor = System.Drawing.Color.Transparent;
+			this.labelBotDraws.Font = new System.Drawing.Font("Trebuchet MS", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.labelBotDraws.ForeColor = System.Drawing.Color.White;
+			this.labelBotDraws.Location = new System.Drawing.Point(165, 205);
+			this.labelBotDraws.Name = "labelBotDraws";
+			this.labelBotDraws.Size = new System.Drawing.Size(27, 29);
+			this.labelBotDraws.TabIndex = 8;
+			this.labelBotDraws.Text = "0";
+			this.labelBotDraws.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+			// 
+			// labelBotWins
+			// 
+			this.labelBotWins.AutoSize = true;
+			this.labelBotWins.BackColor = System.Drawing.Color.Transparent;
+			this.labelBotWins.Font = new System.Drawing.Font("Trebuchet MS", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.labelBotWins.ForeColor = System.Drawing.Color.White;
+			this.labelBotWins.Location = new System.Drawing.Point(165, 170);
+			this.labelBotWins.Name = "labelBotWins";
+			this.labelBotWins.Size = new System.Drawing.Size(27, 29);
+			this.labelBotWins.TabIndex = 6;
+			this.labelBotWins.Text = "0";
+			this.labelBotWins.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+			// 
+			// labelBotStats
+			// 
+			this.labelBotStats.AutoSize = true;
+			this.labelBotStats.BackColor = System.Drawing.Color.Transparent;
+			this.labelBotStats.Cursor = System.Windows.Forms.Cursors.Help;
+			this.labelBotStats.Font = new System.Drawing.Font("Unispace", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.labelBotStats.ForeColor = System.Drawing.Color.White;
+			this.labelBotStats.Location = new System.Drawing.Point(8, 8);
+			this.labelBotStats.Name = "labelBotStats";
+			this.labelBotStats.Size = new System.Drawing.Size(69, 35);
+			this.labelBotStats.TabIndex = 0;
+			this.labelBotStats.Text = "BOT";
+			this.labelBotStats.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+			this.labelBotStats.Click += new System.EventHandler(this.LabelBotStats_Click);
+			// 
+			// labelBotLossesTitle
+			// 
+			this.labelBotLossesTitle.AutoSize = true;
+			this.labelBotLossesTitle.BackColor = System.Drawing.Color.Transparent;
+			this.labelBotLossesTitle.Font = new System.Drawing.Font("Trebuchet MS", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.labelBotLossesTitle.ForeColor = System.Drawing.Color.Red;
+			this.labelBotLossesTitle.Location = new System.Drawing.Point(8, 240);
+			this.labelBotLossesTitle.Name = "labelBotLossesTitle";
+			this.labelBotLossesTitle.Size = new System.Drawing.Size(90, 29);
+			this.labelBotLossesTitle.TabIndex = 9;
+			this.labelBotLossesTitle.Text = "Losses:";
+			this.labelBotLossesTitle.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+			// 
+			// labelBotTotalGamesTitle
+			// 
+			this.labelBotTotalGamesTitle.AutoSize = true;
+			this.labelBotTotalGamesTitle.BackColor = System.Drawing.Color.Transparent;
+			this.labelBotTotalGamesTitle.Font = new System.Drawing.Font("Trebuchet MS", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.labelBotTotalGamesTitle.ForeColor = System.Drawing.Color.Gainsboro;
+			this.labelBotTotalGamesTitle.Location = new System.Drawing.Point(8, 75);
+			this.labelBotTotalGamesTitle.Name = "labelBotTotalGamesTitle";
+			this.labelBotTotalGamesTitle.Size = new System.Drawing.Size(151, 29);
+			this.labelBotTotalGamesTitle.TabIndex = 1;
+			this.labelBotTotalGamesTitle.Text = "Total games:";
+			this.labelBotTotalGamesTitle.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+			// 
+			// labelBotDrawsTitle
+			// 
+			this.labelBotDrawsTitle.AutoSize = true;
+			this.labelBotDrawsTitle.BackColor = System.Drawing.Color.Transparent;
+			this.labelBotDrawsTitle.Font = new System.Drawing.Font("Trebuchet MS", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.labelBotDrawsTitle.ForeColor = System.Drawing.Color.Gainsboro;
+			this.labelBotDrawsTitle.Location = new System.Drawing.Point(8, 205);
+			this.labelBotDrawsTitle.Name = "labelBotDrawsTitle";
+			this.labelBotDrawsTitle.Size = new System.Drawing.Size(87, 29);
+			this.labelBotDrawsTitle.TabIndex = 7;
+			this.labelBotDrawsTitle.Text = "Draws:";
+			this.labelBotDrawsTitle.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+			// 
+			// labelBotWinRateTitle
+			// 
+			this.labelBotWinRateTitle.AutoSize = true;
+			this.labelBotWinRateTitle.BackColor = System.Drawing.Color.Transparent;
+			this.labelBotWinRateTitle.Font = new System.Drawing.Font("Trebuchet MS", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.labelBotWinRateTitle.ForeColor = System.Drawing.Color.Gainsboro;
+			this.labelBotWinRateTitle.Location = new System.Drawing.Point(8, 115);
+			this.labelBotWinRateTitle.Name = "labelBotWinRateTitle";
+			this.labelBotWinRateTitle.Size = new System.Drawing.Size(119, 29);
+			this.labelBotWinRateTitle.TabIndex = 3;
+			this.labelBotWinRateTitle.Text = "Win Rate:";
+			this.labelBotWinRateTitle.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+			// 
+			// labelBotWinsTitle
+			// 
+			this.labelBotWinsTitle.AutoSize = true;
+			this.labelBotWinsTitle.BackColor = System.Drawing.Color.Transparent;
+			this.labelBotWinsTitle.Font = new System.Drawing.Font("Trebuchet MS", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.labelBotWinsTitle.ForeColor = System.Drawing.Color.Lime;
+			this.labelBotWinsTitle.Location = new System.Drawing.Point(8, 170);
+			this.labelBotWinsTitle.Name = "labelBotWinsTitle";
+			this.labelBotWinsTitle.Size = new System.Drawing.Size(72, 29);
+			this.labelBotWinsTitle.TabIndex = 5;
+			this.labelBotWinsTitle.Text = "Wins:";
+			this.labelBotWinsTitle.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+			// 
+			// buttonResetProgress
+			// 
+			this.buttonResetProgress.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.buttonResetProgress.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
+			this.buttonResetProgress.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.buttonResetProgress.FlatAppearance.BorderSize = 0;
+			this.buttonResetProgress.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.buttonResetProgress.IconChar = FontAwesome.Sharp.IconChar.TrashAlt;
+			this.buttonResetProgress.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(24)))), ((int)(((byte)(13)))));
+			this.buttonResetProgress.IconFont = FontAwesome.Sharp.IconFont.Auto;
+			this.buttonResetProgress.IconSize = 33;
+			this.buttonResetProgress.Location = new System.Drawing.Point(5, 211);
+			this.buttonResetProgress.Name = "buttonResetProgress";
+			this.buttonResetProgress.Size = new System.Drawing.Size(36, 36);
+			this.buttonResetProgress.TabIndex = 5;
+			this.buttonResetProgress.TabStop = false;
+			this.buttonResetProgress.UseVisualStyleBackColor = false;
+			this.buttonResetProgress.Click += new System.EventHandler(this.ButtonResetProgress_Click);
+			// 
 			// flpGameAssistants
 			// 
 			this.flpGameAssistants.AutoScroll = true;
@@ -439,6 +829,7 @@
 			this.AutoScroll = true;
 			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(20)))));
 			this.ClientSize = new System.Drawing.Size(1200, 780);
+			this.Controls.Add(this.buttonResetProgress);
 			this.Controls.Add(this.flpGameAssistants);
 			this.Controls.Add(this.buttonChangeName);
 			this.Controls.Add(this.textBoxPlayerName);
@@ -460,6 +851,12 @@
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxCoin)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxItem)).EndInit();
 			this.panelPreferenceNavigation.ResumeLayout(false);
+			this.tabPageStats.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.pictureBoxLineBetweenStats)).EndInit();
+			this.panelNetworkStats.ResumeLayout(false);
+			this.panelNetworkStats.PerformLayout();
+			this.panelBotStats.ResumeLayout(false);
+			this.panelBotStats.PerformLayout();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -490,5 +887,31 @@
 		private System.Windows.Forms.FlowLayoutPanel flpGameAssistants;
 		private System.Windows.Forms.Label labelItemCount;
 		private FontAwesome.Sharp.IconButton buttonResetProgress;
+		private System.Windows.Forms.TabPage tabPageStats;
+		private System.Windows.Forms.Label labelBotLossesTitle;
+		private System.Windows.Forms.Label labelBotDrawsTitle;
+		private System.Windows.Forms.Label labelBotWinsTitle;
+		private System.Windows.Forms.Label labelBotWinRateTitle;
+		private System.Windows.Forms.Label labelBotTotalGamesTitle;
+		private System.Windows.Forms.Label labelBotStats;
+		private Guna.UI2.WinForms.Guna2Panel panelBotStats;
+		private System.Windows.Forms.Label labelBotWins;
+		private System.Windows.Forms.Label labelBotLosses;
+		private System.Windows.Forms.Label labelBotDraws;
+		private System.Windows.Forms.Label labelBotTotalGames;
+		private System.Windows.Forms.Label labelBotWinRate;
+		private Guna.UI2.WinForms.Guna2Panel panelNetworkStats;
+		private System.Windows.Forms.Label labelNetworkWinRate;
+		private System.Windows.Forms.Label labelNetworkTotalGames;
+		private System.Windows.Forms.Label labelNetworkLosses;
+		private System.Windows.Forms.Label labelNetworkDraws;
+		private System.Windows.Forms.Label labelNetworkWins;
+		private System.Windows.Forms.Label labelNetworkStats;
+		private System.Windows.Forms.Label labelNetworkLossesTitle;
+		private System.Windows.Forms.Label labelNetworkTotalGamesTitle;
+		private System.Windows.Forms.Label labelNetworkDrawsTitle;
+		private System.Windows.Forms.Label labelNetworkWinRateTitle;
+		private System.Windows.Forms.Label labelNetworkWinsTitle;
+		private Guna.UI2.WinForms.Guna2PictureBox pictureBoxLineBetweenStats;
 	}
 }
