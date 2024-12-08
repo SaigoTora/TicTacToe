@@ -51,6 +51,7 @@ namespace TicTacToeLibrary.Core
 			switch (gameMode)
 			{
 				case GameMode.Classic:
+				case GameMode.Swap:
 					return isCellEmpty;
 				case GameMode.Tetris:
 					return isCellEmpty && (cell.row == _cells.GetLength(0) - 1

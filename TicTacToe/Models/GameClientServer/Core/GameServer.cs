@@ -201,7 +201,7 @@ namespace TicTacToe.Models.GameClientServer.Core
 		#region Game
 		internal void StartGame()
 		{
-			_gameInfo = new Game.GameInfo(_networkLobbyInfo.Settings.FieldSize);
+			_gameInfo = new Game.GameInfo(_networkLobbyInfo.Settings.FieldSize, _networkLobbyInfo.Settings.GameMode);
 			_networkLobbyInfo.StartGame();
 			_readyToGetMoveInfo = true;
 		}

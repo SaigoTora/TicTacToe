@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 using TicTacToe.Models.GameInfo.Settings;
 using TicTacToeLibrary.Core;
+using TicTacToeLibrary.GameLogic;
 
 namespace TicTacToe.Models.GameClientServer.Game
 {
@@ -15,19 +16,24 @@ namespace TicTacToe.Models.GameClientServer.Game
 		[JsonProperty]
 		internal CellType WhoseMove { get; private set; } = CellType.Cross;
 		private readonly Stack<Cell> _sequenceCells;
+		private readonly GameMode _gameMode;
 
 		private GameInfo() { }
-		internal GameInfo(FieldSize fieldSize)
+		internal GameInfo(FieldSize fieldSize, GameMode gameMode)
 		{
 			Field = FieldParser.Parse(fieldSize);
 			_sequenceCells = new Stack<Cell>(Field.GetAllCells().Length);
+			_gameMode = gameMode;
 		}
 
 		internal void Move(Cell cell, CellType cellType)
 		{
 			Field.FillCell(cell, cellType);
 			_sequenceCells.Push(cell);
-			ChangeWhoseMove(cellType);
+			if (_gameMode == GameMode.Swap && Field.CountFilledCells() % 2 == 0)
+				return;
+			else
+				ChangeWhoseMove(cellType);
 		}
 		private void ChangeWhoseMove(CellType cellType)
 		{

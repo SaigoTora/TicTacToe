@@ -37,7 +37,7 @@ namespace TicTacToe.Forms.Game
 		protected readonly RoundManager roundManager;
 		protected readonly CoinReward coinReward;
 		protected Field field;
-		protected readonly GameMode gameMode = GameMode.ReverseTetris;
+		protected readonly GameMode gameMode;
 		protected bool isTimerEnabled, isGameAssistsEnabled;
 		private int _initialCoins;
 		private GameFormInfo _gameFormInfo;
@@ -50,13 +50,14 @@ namespace TicTacToe.Forms.Game
 		private List<PictureBox> _sequenceSelectedCells;
 		private readonly PictureBoxEventHandlers _pictureBoxEventHandlers = new PictureBoxEventHandlers();
 
-		protected readonly CellType playerCellType, opponentCellType;
+		protected CellType playerCellType, opponentCellType;
 		private readonly (Bitmap Cross, Bitmap Zero) _bitmapPreviewCell;
 		private readonly (string Cross, string Zero) _tagPreviewCell = ("Preview Cross", "Preview Zero");
 
 		private GameResultForm _gameResultForm;
 		private CancellationTokenSource _cancellationTokenSourceTimer,
 			_cancellationTokenSourceHint;
+		private Guna2PictureBox _playerPictureBoxRole, _opponentPictureBoxRole;
 		private PictureBox _pictureBoxCellHint;
 		private bool _wasAssistUsed, _isCellHintHovered,
 			_isFormClosingForNextRound, _wasPressedButtonBack,
@@ -121,7 +122,12 @@ namespace TicTacToe.Forms.Game
 			=> $"Round {roundManager.CurrentNumberOfRounds} / {roundManager.MaxNumberOfRounds}";
 		protected void DisplayPlayerRoles(Guna2PictureBox playerPictureBox, Guna2PictureBox opponentPictureBox)
 		{
+			if (playerPictureBox == null || opponentPictureBox == null)
+				return;
+
 			(Color markerColorZero, Color markerColorCross) = (Color.FromArgb(82, 217, 255), Color.FromArgb(255, 97, 95));
+			_playerPictureBoxRole = playerPictureBox;
+			_opponentPictureBoxRole = opponentPictureBox;
 
 			if (playerCellType == CellType.Cross)
 			{
@@ -333,6 +339,12 @@ namespace TicTacToe.Forms.Game
 				await BotMoveAsync();
 			else if (sendMoveInfoOverNetwork && (gameServer != null || gameClient != null))
 				IndicateWhoseMove(opponentCellType);
+
+			if (gameMode == GameMode.Swap && field.CountFilledCells() % 2 == 0)
+			{
+				SwapCellTypes();
+				DisplayPlayerRoles(_playerPictureBoxRole, _opponentPictureBoxRole);
+			}
 		}
 		private async Task NetworkMoveAsync(Cell cell)
 		{
@@ -430,6 +442,7 @@ namespace TicTacToe.Forms.Game
 			switch (gameMode)
 			{
 				case GameMode.Classic:
+				case GameMode.Swap:
 					break;
 				case GameMode.Tetris:
 					resultCell = await FindCellForTetrisModeAsync(selectedCell, cellImage);
@@ -490,6 +503,12 @@ namespace TicTacToe.Forms.Game
 			}
 
 			return nextCell;
+		}
+		private void SwapCellTypes()
+		{
+			CellType tempCellType = playerCellType;
+			playerCellType = opponentCellType;
+			opponentCellType = tempCellType;
 		}
 
 		protected void SetPictureBoxesEnabled(bool enabled)
@@ -631,6 +650,8 @@ namespace TicTacToe.Forms.Game
 					StartTimerToMove();
 				}
 			}
+			else
+				SetPictureBoxesEnabled(false);
 		}
 		private async Task<bool> UpdateFieldAndCheckChangesAsync(Field updatedField)
 		{

@@ -89,7 +89,7 @@ namespace TicTacToe.Forms.Game.NetworkGame
 
 				DisplayClientFieldSize(lobbyInfo.Settings.FieldSize);
 				labelNumberOfRounds.Text = "Number of rounds:  " + lobbyInfo.Settings.NumberOfRounds;
-				labelGameMode.Text = "Game mode:  " + lobbyInfo.Settings.GameMode.ToString();
+				DisplayGameMode(lobbyInfo.Settings.GameMode);
 				DisplayClientCoinsBet(lobbyInfo.Settings.CoinsBet);
 				DisplayEnableButtons(lobbyInfo.Settings.IsTimerEnabled,
 					lobbyInfo.Settings.IsGameAssistsEnabled);
@@ -158,6 +158,31 @@ namespace TicTacToe.Forms.Game.NetworkGame
 						($"Unknown field size: {fieldSize}");
 			}
 			labelFieldSize.Text = "Field size:  " + field;
+		}
+		private void DisplayGameMode(GameMode gameMode)
+		{
+			string gameModeText;
+
+			switch (gameMode)
+			{
+				case GameMode.Classic:
+					gameModeText = "Classic";
+					break;
+				case GameMode.Tetris:
+					gameModeText = "Tetris";
+					break;
+				case GameMode.ReverseTetris:
+					gameModeText = "Reverse Tetris";
+					break;
+				case GameMode.Swap:
+					gameModeText = "Swap";
+					break;
+				default:
+					throw new InvalidOperationException
+						($"Unknown field size: {gameMode}");
+			}
+			labelGameMode.Text = "Game mode:  " + gameModeText;
+
 		}
 		private void DisplayClientCoinsBet(int coinsBet)
 		{

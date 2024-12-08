@@ -4,6 +4,7 @@
 	{
 		Classic,
 		Tetris,
-		ReverseTetris
+		ReverseTetris,
+		Swap
 	}
 }

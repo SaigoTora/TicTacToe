@@ -330,7 +330,8 @@
 			this.comboBoxGameMode.Items.AddRange(new object[] {
             "Classic",
             "Tetris",
-            "Reverse Tetris"});
+            "Reverse Tetris",
+            "Swap"});
 			this.comboBoxGameMode.ItemsAppearance.ForeColor = System.Drawing.Color.White;
 			this.comboBoxGameMode.ItemsAppearance.SelectedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(75)))), ((int)(((byte)(45)))));
 			this.comboBoxGameMode.Location = new System.Drawing.Point(42, 100);
