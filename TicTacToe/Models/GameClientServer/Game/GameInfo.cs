@@ -35,7 +35,7 @@ namespace TicTacToe.Models.GameClientServer.Game
 			else
 				ChangeWhoseMove(cellType);
 		}
-		private void ChangeWhoseMove(CellType cellType)
+		internal void ChangeWhoseMove(CellType cellType)
 		{
 			if (cellType == CellType.Cross)
 				WhoseMove = CellType.Zero;

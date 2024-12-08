@@ -15,6 +15,7 @@ using TicTacToe.Models.GameClientServer.Network;
 using TicTacToe.Models.GameInfo.Settings;
 using TicTacToe.Models.PlayerInfo;
 using TicTacToeLibrary.Core;
+using TicTacToeLibrary.GameLogic;
 
 namespace TicTacToe.Models.GameClientServer.Core
 {
@@ -211,6 +212,9 @@ namespace TicTacToe.Models.GameClientServer.Core
 			{
 				_gameInfo.CancelLastMove();
 				_gameInfo.CancelLastMove();
+
+				if (_networkLobbyInfo.Settings.GameMode == GameMode.Swap)
+					_gameInfo.ChangeWhoseMove(_gameInfo.WhoseMove);
 			}
 			else
 				_gameInfo.Move(info.Cell, info.CellType);

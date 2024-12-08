@@ -656,6 +656,7 @@ namespace TicTacToe.Forms.Game
 		private async Task<bool> UpdateFieldAndCheckChangesAsync(Field updatedField)
 		{
 			bool wasFieldChanged = false;
+			int numberOfClearedClls = 0;
 			CellType[,] cells = updatedField.GetAllCells();
 			Cell currentCell = new Cell(0, 0);
 
@@ -674,11 +675,19 @@ namespace TicTacToe.Forms.Game
 						{
 							field.FillCell(currentCell, CellType.None);
 							ClearPictureBox(currentPictureBox);
+							numberOfClearedClls++;
 						}
 						else if (!_sequenceSelectedCells.Contains(currentPictureBox))
 							await PictureBoxCell_DefaultClick(currentPictureBox, cells[i, j], false, sendMoveInfoOverNetwork: false);
 					}
 				}
+
+			if (gameMode == GameMode.Swap && numberOfClearedClls > 0
+				&& numberOfClearedClls % 2 == 0)
+			{
+				SwapCellTypes();
+				DisplayPlayerRoles(_playerPictureBoxRole, _opponentPictureBoxRole);
+			}
 
 			return wasFieldChanged;
 		}
@@ -711,6 +720,12 @@ namespace TicTacToe.Forms.Game
 					UndoLastMove();
 					await Task.Delay(UNDO_MOVE_DELAY);
 					UndoLastMove();
+
+					if (gameMode == GameMode.Swap)
+					{
+						SwapCellTypes();
+						DisplayPlayerRoles(_playerPictureBoxRole, _opponentPictureBoxRole);
+					}
 				}
 				else
 				{
@@ -866,7 +881,7 @@ namespace TicTacToe.Forms.Game
 					"could have lost your original bet, but luckily there was no bet in this game.";
 				CustomMessageBox.Show($"You have left the game and " + coinsLostText +
 					"\nTry not to leave during local games because you will lose coins.", "Warning",
-					CustomMessageBoxButtons.OK, CustomMessageBoxIcon.Warning);
+					CustomMessageBoxButtons.OK, CustomMessageBoxIcon.Warning, 465);
 			}
 		}
 		private async Task ShowWinningCellsAsync(CellType winner)
@@ -1098,6 +1113,11 @@ namespace TicTacToe.Forms.Game
 				gameServer.Move(moveInfo);
 			else if (gameClient != null)
 				await gameClient.MoveAsync(moveInfo);
+			if (gameMode == GameMode.Swap)
+			{
+				SwapCellTypes();
+				DisplayPlayerRoles(_playerPictureBoxRole, _opponentPictureBoxRole);
+			}
 
 			StartTimerToMove();
 			TryToIndicateLastGameAssist(player.CountableItemsInventory.GetItem(GameAssistType.UndoMove));
