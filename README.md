@@ -1,16 +1,30 @@
-
 # Description
-This project offers users the opportunity to play the classic game of **Tic Tac Toe**, with some exciting elements to make the game more interesting.  
-To enhance the gameplay, virtual coins were introduced. Users earn coins by defeating the bot, with several difficulty levels available.  
-The more difficult the bot, the more coins you can earn for winning. However, if you lose, the number of coins will decrease.  
-The earned coins can be spent in the game store on useful items.
+Play the classic game of **Tic Tac Toe** with fun new features that make every match more exciting and rewarding!
+
+- **Earn coins** by:  
+  - Playing against a bot with adjustable difficulty. The harder the bot, the more coins you win — but losing costs you coins.  
+  - Competing in local games, where coins are earned if you win more rounds than your opponent. In this mode, you either lose your bet or win **double your bet**!
+
+- **Spend coins** in the shop to:  
+  - Customize your game with avatars, menu backgrounds, and board colors.  
+  - Purchase helpful game assistants to boost your chances of winning.
+
+- **Choose your gameplay mode:**  
+  - Play with a friend on **one PC**.  
+  - Compete in **local network matches**.  
+  - Explore unique **game modes** for extra fun.
+
+- **Track your progress** with detailed game stats to see how you improve over time.
+
+Experience Tic Tac Toe like never before!
 
 # Technology stack
 The project is developed in the **C#** programming language using **Windows Forms** to create the user interface.  
 The following NuGet packages were integrated during the development process:
-- **FluentValidation 11.9.2** — for convenient and flexible data validation.
+- **FluentValidation 11.10.0** — for convenient and flexible data validation.
 - **FontAwesome.Sharp 6.6.0** — to improve the visual part of the interface with icons.
 - **Guna.UI2.WinForms 2.0.4.6** — to improve the aesthetics and functionality of the interface elements.
+- **Newtonsoft.Json 13.0.3** — for converting objects to JSON format for transmission via HTTP methods.
 
 # Installing and running the project
 
@@ -33,11 +47,13 @@ The project uses several NuGet packages. To install them:
 2. Press **F5** to run the project in debug mode, or select **"Run without debugging"** (**Ctrl + F5**) for a normal run.
 
 # Instructions for use
-1. When you start the game, a start form opens, where you need to enter your game nickname and select an initial avatar.
-2. After clicking the **"Ready"** button, the game menu will open, in which the following options are available:
-   - **Start the game** — start a new match.
-   - **Select game parameters** — adjust the bot difficulty, number of rounds, and other parameters.
+1. When you start the game, the start form will appear. Enter your game nickname and choose an initial avatar.
+2. After clicking the "Ready" button, the game menu will open. The following options will be available:
+   - **Play** — start a new game against the bot.
+   - **Select Game Parameters** — configure bot difficulty, number of rounds, and game mode for playing with the bot.
+   - **Single PC** — play a two-player game on a single PC.
+   - **Local Game** — start a game on a local network.
    - **Profile** — view and change personal information.
-   - **Shop** — purchase in-game items for earned coins.
+   - **Shop** — purchase in-game items using earned coins.
 
 That's all. Good luck and have fun!
