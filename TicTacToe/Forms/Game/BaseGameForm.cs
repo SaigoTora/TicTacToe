@@ -28,7 +28,7 @@ namespace TicTacToe.Forms.Game
 		private const int WINNING_CELL_SHOW_DELAY = 350;
 		private const int TETRIS_MODE_ANIMATION_DELAY = 250;
 		private const int UNDO_MOVE_DELAY = 400;
-		private const int GAME_UPDATE_INTERVAL = 1;
+		private const int GAME_UPDATE_INTERVAL = 200;
 
 		private static readonly Random random = new Random();
 		protected readonly MainForm mainForm;
@@ -45,6 +45,7 @@ namespace TicTacToe.Forms.Game
 		protected readonly GameServer gameServer;
 		protected readonly GameClient gameClient;
 		private System.Threading.Timer _clientUpdateTimer;
+		private readonly object _updateTimerLock = new object();
 		private readonly SynchronizationContext _syncContext;
 
 		private List<PictureBox> _sequenceSelectedCells;
@@ -358,7 +359,7 @@ namespace TicTacToe.Forms.Game
 				{
 					GameInfo gameInfo = await gameClient.MoveAsync(moveInfo);
 					if (gameInfo != null)
-						await UpdateGameForClientAsync(gameInfo);
+						UpdateGameForClientAsync(gameInfo);
 					StartClientUpdateTimer();
 				}
 				catch (System.Net.Http.HttpRequestException)
@@ -607,10 +608,10 @@ namespace TicTacToe.Forms.Game
 			try
 			{
 				GameInfo gameInfo = await gameClient.UpdateGameAsync();
-				_syncContext.Post(async _ =>
+				_syncContext.Post(_ =>
 				{
 					if (gameInfo != null)
-						await UpdateGameForClientAsync(gameInfo);
+						UpdateGameForClientAsync(gameInfo);
 				}, null);
 			}
 			catch (System.Net.Http.HttpRequestException)
@@ -636,9 +637,9 @@ namespace TicTacToe.Forms.Game
 				}
 			}
 		}
-		private async Task UpdateGameForClientAsync(GameInfo gameInfo)
+		private void UpdateGameForClientAsync(GameInfo gameInfo)
 		{
-			bool wasFieldChanged = await UpdateFieldAndCheckChangesAsync(gameInfo.Field);
+			bool wasFieldChanged = UpdateFieldAndCheckChangesAsync(gameInfo.Field);
 
 			if (gameInfo.WhoseMove == playerCellType && !_isGameOver)
 			{
@@ -653,34 +654,38 @@ namespace TicTacToe.Forms.Game
 			else if (field.CountFilledCells() > 0)
 				SetPictureBoxesEnabled(false);
 		}
-		private async Task<bool> UpdateFieldAndCheckChangesAsync(Field updatedField)
+		private bool UpdateFieldAndCheckChangesAsync(Field updatedField)
 		{
 			bool wasFieldChanged = false;
 			int numberOfClearedClls = 0;
-			CellType[,] cells = updatedField.GetAllCells();
-			Cell currentCell = new Cell(0, 0);
+			lock (_updateTimerLock)
+			{
+				CellType[,] cells = updatedField.GetAllCells();
+				Cell currentCell = new Cell(0, 0);
 
-			for (int i = 0; i < cells.GetLength(0); i++)
-				for (int j = 0; j < cells.GetLength(1); j++)
-				{
-					currentCell.row = i;
-					currentCell.column = j;
-
-					if (field.GetCell(currentCell) != cells[i, j])
+				for (int i = 0; i < cells.GetLength(0); i++)
+					for (int j = 0; j < cells.GetLength(1); j++)
 					{
-						wasFieldChanged = true;
-						PictureBox currentPictureBox = _gameFormInfo.PictureCells[i, j];
+						currentCell.row = i;
+						currentCell.column = j;
 
-						if (cells[i, j] == CellType.None)
+						if (field.GetCell(currentCell) != cells[i, j])
 						{
-							field.FillCell(currentCell, CellType.None);
-							ClearPictureBox(currentPictureBox);
-							numberOfClearedClls++;
+							wasFieldChanged = true;
+							PictureBox currentPictureBox = _gameFormInfo.PictureCells[i, j];
+
+							if (cells[i, j] == CellType.None)
+							{
+								field.FillCell(currentCell, CellType.None);
+								ClearPictureBox(currentPictureBox);
+								numberOfClearedClls++;
+							}
+							else if (!_sequenceSelectedCells.Contains(currentPictureBox))
+								_ = PictureBoxCell_DefaultClick(currentPictureBox, cells[i, j],
+									false, sendMoveInfoOverNetwork: false);
 						}
-						else if (!_sequenceSelectedCells.Contains(currentPictureBox))
-							await PictureBoxCell_DefaultClick(currentPictureBox, cells[i, j], false, sendMoveInfoOverNetwork: false);
 					}
-				}
+			}
 
 			if (gameMode == GameMode.Swap && numberOfClearedClls > 0
 				&& numberOfClearedClls % 2 == 0)
