@@ -80,6 +80,8 @@ namespace TicTacToe.Forms
 		}
 		private void ButtonReady_Click(object sender, EventArgs e)
 		{
+			const int FIRST_TIME_COIN_REWARD = 100;
+
 			textBoxName.Text = textBoxName.Text.Trim(' ').DeleteDuplicateChars(' ');
 			_player = new Player(textBoxName.Text);
 
@@ -89,11 +91,15 @@ namespace TicTacToe.Forms
 					_player.VisualSettings.Avatar = ItemManager.GetDefaultAvatar(0);
 				else
 					_player.VisualSettings.Avatar = ItemManager.GetDefaultAvatar(1);
+				_player.AddCoins(FIRST_TIME_COIN_REWARD);
 
 				MainForm mainForm = new MainForm(_player);
 				mainForm.FormClosed += (s, args) => { Close(); };
 
 				Visible = false;
+				CustomMessageBox.Show($"Congratulations! You've received {FIRST_TIME_COIN_REWARD} " +
+					$"coins for your first login.",
+					"Coin Reward", CustomMessageBoxButtons.OK, CustomMessageBoxIcon.Information);
 				mainForm.Show();
 			}
 		}

@@ -1243,7 +1243,7 @@ namespace TicTacToe.Forms.Game
 
 			if (!_isFormClosingForNextRound)
 			{
-				player.ResetReductedCoins();
+				player.ResetDeductedCoins();
 				if (!roundManager.IsLastRound())
 					gameClient?.LeaveGameAsync();
 

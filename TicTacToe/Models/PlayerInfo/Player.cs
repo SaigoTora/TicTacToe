@@ -87,6 +87,11 @@ namespace TicTacToe.Models.PlayerInfo
 			}
 		}
 
+		internal void AddCoins(int amount)
+		{
+			if (amount > 0)
+				Coins += amount;
+		}
 		internal void UpdateCoins(CoinReward coinReward, GameResult gameResult)
 		{
 			Coins += coinReward.GetCoins(gameResult);
@@ -139,9 +144,9 @@ namespace TicTacToe.Models.PlayerInfo
 		internal void ReturnCoins()
 		{
 			Coins += _deductedCoins;
-			ResetReductedCoins();
+			ResetDeductedCoins();
 		}
-		internal void ResetReductedCoins()
+		internal void ResetDeductedCoins()
 			=> _deductedCoins = 0;
 
 		private void AddItemToInventory(Item item)
