@@ -28,7 +28,7 @@ namespace TicTacToe.Forms.Game
 		private const int WINNING_CELL_SHOW_DELAY = 350;
 		private const int TETRIS_MODE_ANIMATION_DELAY = 250;
 		private const int UNDO_MOVE_DELAY = 400;
-		private const int GAME_UPDATE_INTERVAL = 200;
+		private const int GAME_UPDATE_INTERVAL = 1;
 
 		private static readonly Random random = new Random();
 		protected readonly MainForm mainForm;
@@ -650,7 +650,7 @@ namespace TicTacToe.Forms.Game
 					StartTimerToMove();
 				}
 			}
-			else
+			else if (field.CountFilledCells() > 0)
 				SetPictureBoxesEnabled(false);
 		}
 		private async Task<bool> UpdateFieldAndCheckChangesAsync(Field updatedField)
