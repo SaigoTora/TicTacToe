@@ -252,7 +252,7 @@ namespace TicTacToe.Forms.Game.NetworkGame
 					textBoxMessage.Text = string.Empty;
 					textBoxMessage.Multiline = false;
 				}
-				catch (System.Net.Http.HttpRequestException)
+				catch (Exception ex) when (ex is TaskCanceledException || ex is System.Net.Http.HttpRequestException)
 				{
 					if (!_wasUpdateExceptionThrown)
 						HandleClientRequestError();
@@ -399,7 +399,7 @@ namespace TicTacToe.Forms.Game.NetworkGame
 					UpdateChat(newLobbyChat);
 				}, null);
 			}
-			catch (System.Net.Http.HttpRequestException)
+			catch (Exception ex) when (ex is TaskCanceledException || ex is System.Net.Http.HttpRequestException)
 			{
 				if (!_wasUpdateExceptionThrown)
 					HandleClientRequestError();

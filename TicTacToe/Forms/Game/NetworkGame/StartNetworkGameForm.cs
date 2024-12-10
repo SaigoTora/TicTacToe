@@ -406,7 +406,7 @@ namespace TicTacToe.Forms.Game.NetworkGame
 				NeedToShowMainForm = false;
 				Close();
 			}
-			catch (System.Net.Http.HttpRequestException)
+			catch (Exception ex) when (ex is TaskCanceledException || ex is System.Net.Http.HttpRequestException)
 			{
 				CustomMessageBox.Show($"Failed to connect because the player " +
 					"who created the lobby has finished waiting for players.", "Error",

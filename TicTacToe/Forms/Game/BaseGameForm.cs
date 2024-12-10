@@ -362,7 +362,7 @@ namespace TicTacToe.Forms.Game
 						UpdateGameForClientAsync(gameInfo);
 					StartClientUpdateTimer();
 				}
-				catch (System.Net.Http.HttpRequestException)
+				catch (Exception ex) when (ex is TaskCanceledException || ex is System.Net.Http.HttpRequestException)
 				{
 					// At this point, the error will already be caught
 					// in the client update timer
@@ -614,7 +614,7 @@ namespace TicTacToe.Forms.Game
 						UpdateGameForClientAsync(gameInfo);
 				}, null);
 			}
-			catch (System.Net.Http.HttpRequestException)
+			catch (Exception ex) when (ex is TaskCanceledException || ex is System.Net.Http.HttpRequestException)
 			{
 				if (!_wasUpdateExceptionThrown)
 				{

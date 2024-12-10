@@ -14,13 +14,21 @@ namespace TicTacToe.Models.GameClientServer.Core
 {
 	internal class GameClient
 	{
-		private static readonly HttpClient httpClient = new HttpClient();
+		private static readonly HttpClient httpClient;
 		private string _serverAddress;
 
 		internal long PlayerId { get; private set; }
 		private readonly string _gameLobbyUrl = ConfigurationManager.AppSettings["gameLobbyUrl"];
 		private readonly string _gameUrl = ConfigurationManager.AppSettings["gameUrl"];
 		private readonly string _gameLobbyChatUrl = ConfigurationManager.AppSettings["gameLobbyChatUrl"];
+
+		static GameClient()
+		{
+			httpClient = new HttpClient()
+			{
+				Timeout = TimeSpan.FromSeconds(3)
+			};
+		}
 
 		#region Lobby
 		internal async Task<NetworkLobbyInfo> GetGameSettingsAsync(IPAddress ip, int port)
