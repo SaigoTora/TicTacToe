@@ -33,6 +33,8 @@ namespace TicTacToe.Forms.ItemManagement.Shop
 			numericUpDownNumberOfItems.BackColor = BackColor;
 			numericUpDownNumberOfItems.Maximum = Math.Min(numericUpDownNumberOfItems.Maximum, _player.Coins / _item.Price);
 			ActiveControl = buttonBack;
+			SetFormSize(_player.VisualSettings.WindowSize);
+
 			_buttonEventHandlers.SubscribeToHover(buttonBuy, buttonBack);
 		}
 		private void SetItemValues(CountableItem item)

@@ -54,7 +54,7 @@
 			this.numericUpDownCoinsBet.BackColor = System.Drawing.Color.Black;
 			this.numericUpDownCoinsBet.Font = new System.Drawing.Font("Courier New", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.numericUpDownCoinsBet.ForeColor = System.Drawing.Color.Khaki;
-			this.numericUpDownCoinsBet.Location = new System.Drawing.Point(186, 239);
+			this.numericUpDownCoinsBet.Location = new System.Drawing.Point(200, 239);
 			this.numericUpDownCoinsBet.Maximum = new decimal(new int[] {
             9999,
             0,
@@ -86,7 +86,6 @@
 			// 
 			// buttonCreate
 			// 
-			this.buttonCreate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonCreate.Animated = true;
 			this.buttonCreate.BackColor = System.Drawing.Color.Transparent;
 			this.buttonCreate.BorderRadius = 20;
@@ -103,7 +102,7 @@
 			this.buttonCreate.Font = new System.Drawing.Font("Cooper Black", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.buttonCreate.ForeColor = System.Drawing.Color.White;
 			this.buttonCreate.GradientMode = System.Drawing.Drawing2D.LinearGradientMode.BackwardDiagonal;
-			this.buttonCreate.Location = new System.Drawing.Point(659, 658);
+			this.buttonCreate.Location = new System.Drawing.Point(659, 600);
 			this.buttonCreate.Name = "buttonCreate";
 			this.buttonCreate.Size = new System.Drawing.Size(220, 50);
 			this.buttonCreate.TabIndex = 14;
@@ -113,7 +112,6 @@
 			// 
 			// buttonGameAssistsEnabled
 			// 
-			this.buttonGameAssistsEnabled.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.buttonGameAssistsEnabled.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(35)))), ((int)(((byte)(30)))));
 			this.buttonGameAssistsEnabled.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.buttonGameAssistsEnabled.FlatAppearance.BorderSize = 0;
@@ -125,7 +123,7 @@
 			this.buttonGameAssistsEnabled.IconFont = FontAwesome.Sharp.IconFont.Auto;
 			this.buttonGameAssistsEnabled.IconSize = 30;
 			this.buttonGameAssistsEnabled.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			this.buttonGameAssistsEnabled.Location = new System.Drawing.Point(232, 606);
+			this.buttonGameAssistsEnabled.Location = new System.Drawing.Point(232, 610);
 			this.buttonGameAssistsEnabled.Margin = new System.Windows.Forms.Padding(0);
 			this.buttonGameAssistsEnabled.Name = "buttonGameAssistsEnabled";
 			this.buttonGameAssistsEnabled.Size = new System.Drawing.Size(220, 40);
@@ -141,7 +139,6 @@
 			// 
 			// buttonTimerEnabled
 			// 
-			this.buttonTimerEnabled.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.buttonTimerEnabled.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(35)))), ((int)(((byte)(30)))));
 			this.buttonTimerEnabled.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.buttonTimerEnabled.FlatAppearance.BorderSize = 0;
@@ -153,7 +150,7 @@
 			this.buttonTimerEnabled.IconFont = FontAwesome.Sharp.IconFont.Auto;
 			this.buttonTimerEnabled.IconSize = 30;
 			this.buttonTimerEnabled.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			this.buttonTimerEnabled.Location = new System.Drawing.Point(42, 606);
+			this.buttonTimerEnabled.Location = new System.Drawing.Point(42, 610);
 			this.buttonTimerEnabled.Margin = new System.Windows.Forms.Padding(0);
 			this.buttonTimerEnabled.Name = "buttonTimerEnabled";
 			this.buttonTimerEnabled.Size = new System.Drawing.Size(140, 40);
@@ -169,7 +166,6 @@
 			// 
 			// label7on7
 			// 
-			this.label7on7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.label7on7.AutoSize = true;
 			this.label7on7.BackColor = System.Drawing.Color.Transparent;
 			this.label7on7.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -236,7 +232,7 @@
 			// 
 			this.pictureBoxCoin.BackColor = System.Drawing.Color.Transparent;
 			this.pictureBoxCoin.Image = global::TicTacToe.Properties.Resources.coin;
-			this.pictureBoxCoin.Location = new System.Drawing.Point(292, 235);
+			this.pictureBoxCoin.Location = new System.Drawing.Point(306, 235);
 			this.pictureBoxCoin.Name = "pictureBoxCoin";
 			this.pictureBoxCoin.Size = new System.Drawing.Size(45, 45);
 			this.pictureBoxCoin.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -273,7 +269,7 @@
 			this.numericUpDownNumberOfRounds.BackColor = System.Drawing.Color.Black;
 			this.numericUpDownNumberOfRounds.Font = new System.Drawing.Font("Courier New", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.numericUpDownNumberOfRounds.ForeColor = System.Drawing.Color.White;
-			this.numericUpDownNumberOfRounds.Location = new System.Drawing.Point(289, 168);
+			this.numericUpDownNumberOfRounds.Location = new System.Drawing.Point(320, 168);
 			this.numericUpDownNumberOfRounds.Maximum = new decimal(new int[] {
             99,
             0,
@@ -349,7 +345,7 @@
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-			this.ClientSize = new System.Drawing.Size(891, 720);
+			this.ClientSize = new System.Drawing.Size(890, 680);
 			this.Controls.Add(this.comboBoxGameMode);
 			this.Controls.Add(this.numericUpDownNumberOfRounds);
 			this.Controls.Add(this.labelNumberOfRounds);

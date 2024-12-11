@@ -38,7 +38,6 @@ namespace TicTacToe.Forms.ItemManagement.Profile
 
 		internal ProfileForm(Player player) : base(player)
 		{
-			IsResizable = true;
 			customTitleBar = new CustomTitleBar(this, $"{player.Name}");
 			InitializeComponent();
 
@@ -59,6 +58,7 @@ namespace TicTacToe.Forms.ItemManagement.Profile
 			textBoxPlayerName.MaxLength = PlayerValidator.MAX_NAME_LENGTH;
 			textBoxPlayerName.Text = player.Name;
 			textBoxPlayerName.BackColor = BackColor;
+			comboBoxWindowSize.SelectedIndex = (int)player.VisualSettings.WindowSize;
 
 			tabControl.TabButtonSelectedState.FillColor = BackColor;
 			tabControl.TabMenuBackColor = BackColor;
@@ -67,6 +67,7 @@ namespace TicTacToe.Forms.ItemManagement.Profile
 
 			FillStatistics();
 			CreateItems();
+
 			_labelEventHandlers.SubscribeToHoverUnderline(labelBotStats, labelNetworkStats);
 			SubscribeToNavigationButtonEvents(buttonPreferencesLeft,
 				buttonPreferencesRight);
@@ -491,6 +492,8 @@ namespace TicTacToe.Forms.ItemManagement.Profile
 				}
 			}
 		}
+		private void ComboBoxWindowSize_SelectedIndexChanged(object sender, EventArgs e)
+			=> player.VisualSettings.WindowSize = (WindowSize)comboBoxWindowSize.SelectedIndex;
 
 		private void ProfileForm_KeyDown(object sender, KeyEventArgs e)
 		{

@@ -589,7 +589,7 @@
 			this.labelOpponentName.Font = new System.Drawing.Font("Trebuchet MS", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.labelOpponentName.Location = new System.Drawing.Point(415, 166);
 			this.labelOpponentName.Name = "labelOpponentName";
-			this.labelOpponentName.Size = new System.Drawing.Size(300, 25);
+			this.labelOpponentName.Size = new System.Drawing.Size(300, 32);
 			this.labelOpponentName.TabIndex = 72;
 			this.labelOpponentName.Text = "Opponent name";
 			this.labelOpponentName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -601,7 +601,7 @@
 			this.labelPlayerName.Font = new System.Drawing.Font("Trebuchet MS", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.labelPlayerName.Location = new System.Drawing.Point(35, 166);
 			this.labelPlayerName.Name = "labelPlayerName";
-			this.labelPlayerName.Size = new System.Drawing.Size(300, 25);
+			this.labelPlayerName.Size = new System.Drawing.Size(300, 32);
 			this.labelPlayerName.TabIndex = 66;
 			this.labelPlayerName.Text = "Player name";
 			this.labelPlayerName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -621,8 +621,6 @@
 			// 
 			// progressBarCircleTimer
 			// 
-			this.progressBarCircleTimer.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
 			this.progressBarCircleTimer.BackColor = System.Drawing.Color.Transparent;
 			this.progressBarCircleTimer.Backwards = true;
 			this.progressBarCircleTimer.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(150)))), ((int)(((byte)(213)))), ((int)(((byte)(218)))), ((int)(((byte)(223)))));
@@ -645,8 +643,6 @@
 			// 
 			// flpGameAssistants
 			// 
-			this.flpGameAssistants.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
 			this.flpGameAssistants.AutoScroll = true;
 			this.flpGameAssistants.BackColor = System.Drawing.Color.Transparent;
 			this.flpGameAssistants.Controls.Add(this.pictureBoxUndoMove);
@@ -675,7 +671,7 @@
 			// labelScore
 			// 
 			this.labelScore.BackColor = System.Drawing.Color.Transparent;
-			this.labelScore.Font = new System.Drawing.Font("Lucida Console", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.labelScore.Font = new System.Drawing.Font("Lucida Console", 33.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.labelScore.Location = new System.Drawing.Point(260, 115);
 			this.labelScore.Name = "labelScore";
 			this.labelScore.Size = new System.Drawing.Size(230, 47);
@@ -686,8 +682,6 @@
 			// 
 			// progressBarTimer
 			// 
-			this.progressBarTimer.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
 			this.progressBarTimer.BackColor = System.Drawing.Color.Transparent;
 			this.progressBarTimer.BorderRadius = 7;
 			this.progressBarTimer.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(150)))), ((int)(((byte)(213)))), ((int)(((byte)(218)))), ((int)(((byte)(223)))));
@@ -1040,7 +1034,7 @@
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(750, 955);
+			this.ClientSize = new System.Drawing.Size(745, 950);
 			this.Controls.Add(this.progressBarTimer);
 			this.Controls.Add(this.pictureBoxOpponentCellTypeIndicator);
 			this.Controls.Add(this.pictureBoxPlayerCellTypeIndicator);
@@ -1111,11 +1105,10 @@
 			this.Controls.Add(this.labelOpponentName);
 			this.Controls.Add(this.labelPlayerName);
 			this.Controls.Add(this.progressBarCircleTimer);
-			this.Controls.Add(this.flpGameAssistants);
 			this.Controls.Add(this.labelScore);
+			this.Controls.Add(this.flpGameAssistants);
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.Name = "BaseGame7on7Form";
-			this.ShowIcon = true;
 			this.Text = "BaseGame7on7Form";
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxCell33)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxCell32)).EndInit();

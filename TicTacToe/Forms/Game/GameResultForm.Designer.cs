@@ -107,7 +107,7 @@
 			this.labelTimeToClose.ForeColor = System.Drawing.Color.White;
 			this.labelTimeToClose.Location = new System.Drawing.Point(0, 380);
 			this.labelTimeToClose.Name = "labelTimeToClose";
-			this.labelTimeToClose.Size = new System.Drawing.Size(500, 40);
+			this.labelTimeToClose.Size = new System.Drawing.Size(520, 40);
 			this.labelTimeToClose.TabIndex = 10;
 			this.labelTimeToClose.Text = "This window will close in: 60 sec.";
 			this.labelTimeToClose.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -116,7 +116,7 @@
 			// pictureBoxCoin
 			// 
 			this.pictureBoxCoin.Image = global::TicTacToe.Properties.Resources.coin;
-			this.pictureBoxCoin.Location = new System.Drawing.Point(282, 172);
+			this.pictureBoxCoin.Location = new System.Drawing.Point(317, 172);
 			this.pictureBoxCoin.Name = "pictureBoxCoin";
 			this.pictureBoxCoin.Size = new System.Drawing.Size(37, 37);
 			this.pictureBoxCoin.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -128,17 +128,15 @@
 			this.labelCurrentCoins.BackColor = System.Drawing.Color.Transparent;
 			this.labelCurrentCoins.Font = new System.Drawing.Font("Courier New", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.labelCurrentCoins.ForeColor = System.Drawing.Color.Khaki;
-			this.labelCurrentCoins.Location = new System.Drawing.Point(325, 177);
+			this.labelCurrentCoins.Location = new System.Drawing.Point(360, 171);
 			this.labelCurrentCoins.Name = "labelCurrentCoins";
-			this.labelCurrentCoins.Size = new System.Drawing.Size(149, 27);
+			this.labelCurrentCoins.Size = new System.Drawing.Size(149, 39);
 			this.labelCurrentCoins.TabIndex = 7;
 			this.labelCurrentCoins.Text = "999 999";
 			this.labelCurrentCoins.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
 			// buttonBack
 			// 
-			this.buttonBack.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonBack.Animated = true;
 			this.buttonBack.BackColor = System.Drawing.Color.Transparent;
 			this.buttonBack.BorderRadius = 20;
@@ -165,8 +163,6 @@
 			// 
 			// buttonPlay
 			// 
-			this.buttonPlay.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonPlay.Animated = true;
 			this.buttonPlay.BackColor = System.Drawing.Color.Transparent;
 			this.buttonPlay.BorderRadius = 20;
@@ -208,7 +204,7 @@
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-			this.ClientSize = new System.Drawing.Size(500, 420);
+			this.ClientSize = new System.Drawing.Size(520, 420);
 			this.Controls.Add(this.labelScore);
 			this.Controls.Add(this.buttonPlay);
 			this.Controls.Add(this.buttonBack);

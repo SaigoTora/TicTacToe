@@ -40,6 +40,8 @@
 			this.pictureBoxPlayerAvatar = new System.Windows.Forms.PictureBox();
 			this.tabControl = new Guna.UI2.WinForms.Guna2TabControl();
 			this.tabPagePreferences = new System.Windows.Forms.TabPage();
+			this.labelWindowSize = new System.Windows.Forms.Label();
+			this.comboBoxWindowSize = new Guna.UI2.WinForms.Guna2ComboBox();
 			this.panelPreviewItem = new Guna.UI2.WinForms.Guna2Panel();
 			this.labelItemCount = new System.Windows.Forms.Label();
 			this.labelDateTimePurchase = new System.Windows.Forms.Label();
@@ -135,42 +137,39 @@
 			// 
 			// flpBackgroundMenu
 			// 
-			this.flpBackgroundMenu.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+			this.flpBackgroundMenu.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
 			this.flpBackgroundMenu.AutoScroll = true;
 			this.flpBackgroundMenu.BackColor = System.Drawing.Color.Transparent;
-			this.flpBackgroundMenu.Location = new System.Drawing.Point(8, 80);
+			this.flpBackgroundMenu.Location = new System.Drawing.Point(8, 56);
 			this.flpBackgroundMenu.Name = "flpBackgroundMenu";
 			this.flpBackgroundMenu.Padding = new System.Windows.Forms.Padding(40, 10, 0, 0);
-			this.flpBackgroundMenu.Size = new System.Drawing.Size(717, 342);
+			this.flpBackgroundMenu.Size = new System.Drawing.Size(717, 290);
 			this.flpBackgroundMenu.TabIndex = 1;
 			// 
 			// flpAvatar
 			// 
-			this.flpAvatar.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+			this.flpAvatar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
 			this.flpAvatar.AutoScroll = true;
 			this.flpAvatar.BackColor = System.Drawing.Color.Transparent;
-			this.flpAvatar.Location = new System.Drawing.Point(8, 80);
+			this.flpAvatar.Location = new System.Drawing.Point(8, 56);
 			this.flpAvatar.Name = "flpAvatar";
 			this.flpAvatar.Padding = new System.Windows.Forms.Padding(40, 10, 0, 0);
-			this.flpAvatar.Size = new System.Drawing.Size(717, 342);
+			this.flpAvatar.Size = new System.Drawing.Size(717, 290);
 			this.flpAvatar.TabIndex = 2;
 			this.flpAvatar.Visible = false;
 			// 
 			// flpBackgroundGame
 			// 
-			this.flpBackgroundGame.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+			this.flpBackgroundGame.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
 			this.flpBackgroundGame.AutoScroll = true;
 			this.flpBackgroundGame.BackColor = System.Drawing.Color.Transparent;
-			this.flpBackgroundGame.Location = new System.Drawing.Point(8, 80);
+			this.flpBackgroundGame.Location = new System.Drawing.Point(8, 56);
 			this.flpBackgroundGame.Name = "flpBackgroundGame";
 			this.flpBackgroundGame.Padding = new System.Windows.Forms.Padding(40, 10, 0, 0);
-			this.flpBackgroundGame.Size = new System.Drawing.Size(717, 342);
+			this.flpBackgroundGame.Size = new System.Drawing.Size(717, 290);
 			this.flpBackgroundGame.TabIndex = 3;
 			this.flpBackgroundGame.Visible = false;
 			// 
@@ -227,10 +226,10 @@
 			this.tabControl.Controls.Add(this.tabPagePreferences);
 			this.tabControl.Controls.Add(this.tabPageStats);
 			this.tabControl.ItemSize = new System.Drawing.Size(400, 50);
-			this.tabControl.Location = new System.Drawing.Point(0, 300);
+			this.tabControl.Location = new System.Drawing.Point(0, 292);
 			this.tabControl.Name = "tabControl";
 			this.tabControl.SelectedIndex = 0;
-			this.tabControl.Size = new System.Drawing.Size(1200, 480);
+			this.tabControl.Size = new System.Drawing.Size(1200, 458);
 			this.tabControl.TabButtonHoverState.BorderColor = System.Drawing.Color.Empty;
 			this.tabControl.TabButtonHoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
 			this.tabControl.TabButtonHoverState.Font = new System.Drawing.Font("Trebuchet MS", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -247,14 +246,15 @@
 			this.tabControl.TabButtonSelectedState.ForeColor = System.Drawing.Color.White;
 			this.tabControl.TabButtonSelectedState.InnerColor = System.Drawing.Color.SteelBlue;
 			this.tabControl.TabButtonSize = new System.Drawing.Size(400, 50);
-			this.tabControl.TabIndex = 4;
+			this.tabControl.TabIndex = 5;
 			this.tabControl.TabMenuBackColor = System.Drawing.Color.Black;
 			this.tabControl.TabMenuOrientation = Guna.UI2.WinForms.TabMenuOrientation.HorizontalTop;
 			// 
 			// tabPagePreferences
 			// 
-			this.tabPagePreferences.AutoScroll = true;
 			this.tabPagePreferences.BackColor = System.Drawing.Color.Black;
+			this.tabPagePreferences.Controls.Add(this.labelWindowSize);
+			this.tabPagePreferences.Controls.Add(this.comboBoxWindowSize);
 			this.tabPagePreferences.Controls.Add(this.panelPreviewItem);
 			this.tabPagePreferences.Controls.Add(this.panelPreferenceNavigation);
 			this.tabPagePreferences.Controls.Add(this.flpBackgroundMenu);
@@ -264,13 +264,62 @@
 			this.tabPagePreferences.Location = new System.Drawing.Point(4, 54);
 			this.tabPagePreferences.Name = "tabPagePreferences";
 			this.tabPagePreferences.Padding = new System.Windows.Forms.Padding(3);
-			this.tabPagePreferences.Size = new System.Drawing.Size(1192, 422);
+			this.tabPagePreferences.Size = new System.Drawing.Size(1192, 400);
 			this.tabPagePreferences.TabIndex = 0;
 			this.tabPagePreferences.Text = "Preferences";
 			// 
+			// labelWindowSize
+			// 
+			this.labelWindowSize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.labelWindowSize.AutoSize = true;
+			this.labelWindowSize.BackColor = System.Drawing.Color.Transparent;
+			this.labelWindowSize.Font = new System.Drawing.Font("Trebuchet MS", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.labelWindowSize.ForeColor = System.Drawing.Color.White;
+			this.labelWindowSize.Location = new System.Drawing.Point(894, -18);
+			this.labelWindowSize.Name = "labelWindowSize";
+			this.labelWindowSize.Size = new System.Drawing.Size(124, 24);
+			this.labelWindowSize.TabIndex = 5;
+			this.labelWindowSize.Text = "Window Size:";
+			// 
+			// comboBoxWindowSize
+			// 
+			this.comboBoxWindowSize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.comboBoxWindowSize.BackColor = System.Drawing.Color.Transparent;
+			this.comboBoxWindowSize.BorderColor = System.Drawing.Color.Gray;
+			this.comboBoxWindowSize.BorderRadius = 5;
+			this.comboBoxWindowSize.BorderThickness = 2;
+			this.comboBoxWindowSize.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.comboBoxWindowSize.CustomizableEdges.BottomLeft = false;
+			this.comboBoxWindowSize.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+			this.comboBoxWindowSize.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.comboBoxWindowSize.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(37)))));
+			this.comboBoxWindowSize.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(75)))), ((int)(((byte)(45)))));
+			this.comboBoxWindowSize.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(75)))), ((int)(((byte)(45)))));
+			this.comboBoxWindowSize.FocusedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
+			this.comboBoxWindowSize.Font = new System.Drawing.Font("Trebuchet MS", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.comboBoxWindowSize.ForeColor = System.Drawing.Color.LightGray;
+			this.comboBoxWindowSize.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(43)))), ((int)(((byte)(43)))));
+			this.comboBoxWindowSize.HoverState.ForeColor = System.Drawing.Color.White;
+			this.comboBoxWindowSize.ItemHeight = 30;
+			this.comboBoxWindowSize.Items.AddRange(new object[] {
+            "Small",
+            "Medium",
+            "Large"});
+			this.comboBoxWindowSize.ItemsAppearance.ForeColor = System.Drawing.Color.White;
+			this.comboBoxWindowSize.ItemsAppearance.SelectedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(75)))), ((int)(((byte)(45)))));
+			this.comboBoxWindowSize.Location = new System.Drawing.Point(1024, -24);
+			this.comboBoxWindowSize.MaxDropDownItems = 3;
+			this.comboBoxWindowSize.Name = "comboBoxWindowSize";
+			this.comboBoxWindowSize.Size = new System.Drawing.Size(160, 36);
+			this.comboBoxWindowSize.StartIndex = 0;
+			this.comboBoxWindowSize.TabIndex = 5;
+			this.comboBoxWindowSize.TabStop = false;
+			this.comboBoxWindowSize.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+			this.comboBoxWindowSize.SelectedIndexChanged += new System.EventHandler(this.ComboBoxWindowSize_SelectedIndexChanged);
+			// 
 			// panelPreviewItem
 			// 
-			this.panelPreviewItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.panelPreviewItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.panelPreviewItem.BackColor = System.Drawing.Color.Transparent;
 			this.panelPreviewItem.Controls.Add(this.labelItemCount);
 			this.panelPreviewItem.Controls.Add(this.labelDateTimePurchase);
@@ -283,7 +332,7 @@
 			this.panelPreviewItem.Name = "panelPreviewItem";
 			this.panelPreviewItem.Padding = new System.Windows.Forms.Padding(0, 0, 15, 0);
 			this.panelPreviewItem.Size = new System.Drawing.Size(430, 300);
-			this.panelPreviewItem.TabIndex = 4;
+			this.panelPreviewItem.TabIndex = 6;
 			this.panelPreviewItem.Visible = false;
 			// 
 			// labelItemCount
@@ -386,8 +435,6 @@
 			// 
 			// panelPreferenceNavigation
 			// 
-			this.panelPreferenceNavigation.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
 			this.panelPreferenceNavigation.BackColor = System.Drawing.Color.Transparent;
 			this.panelPreferenceNavigation.Controls.Add(this.buttonPreferencesLeft);
 			this.panelPreferenceNavigation.Controls.Add(this.buttonPreferencesRight);
@@ -443,7 +490,7 @@
 			this.tabPageStats.Location = new System.Drawing.Point(4, 54);
 			this.tabPageStats.Name = "tabPageStats";
 			this.tabPageStats.Padding = new System.Windows.Forms.Padding(3);
-			this.tabPageStats.Size = new System.Drawing.Size(1192, 422);
+			this.tabPageStats.Size = new System.Drawing.Size(1192, 400);
 			this.tabPageStats.TabIndex = 1;
 			this.tabPageStats.Text = "Statistics";
 			// 
@@ -795,7 +842,6 @@
 			// 
 			// buttonResetProgress
 			// 
-			this.buttonResetProgress.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonResetProgress.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
 			this.buttonResetProgress.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.buttonResetProgress.FlatAppearance.BorderSize = 0;
@@ -807,7 +853,7 @@
 			this.buttonResetProgress.Location = new System.Drawing.Point(5, 211);
 			this.buttonResetProgress.Name = "buttonResetProgress";
 			this.buttonResetProgress.Size = new System.Drawing.Size(36, 36);
-			this.buttonResetProgress.TabIndex = 5;
+			this.buttonResetProgress.TabIndex = 4;
 			this.buttonResetProgress.TabStop = false;
 			this.buttonResetProgress.UseVisualStyleBackColor = false;
 			this.buttonResetProgress.Click += new System.EventHandler(this.ButtonResetProgress_Click);
@@ -826,9 +872,8 @@
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.AutoScroll = true;
 			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(20)))));
-			this.ClientSize = new System.Drawing.Size(1200, 780);
+			this.ClientSize = new System.Drawing.Size(1200, 750);
 			this.Controls.Add(this.buttonResetProgress);
 			this.Controls.Add(this.flpGameAssistants);
 			this.Controls.Add(this.buttonChangeName);
@@ -839,7 +884,6 @@
 			this.KeyPreview = true;
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
-			this.MinimumSize = new System.Drawing.Size(1076, 760);
 			this.Name = "ProfileForm";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Profile";
@@ -849,6 +893,7 @@
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxPlayerAvatar)).EndInit();
 			this.tabControl.ResumeLayout(false);
 			this.tabPagePreferences.ResumeLayout(false);
+			this.tabPagePreferences.PerformLayout();
 			this.panelPreviewItem.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxCoin)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxItem)).EndInit();
@@ -915,5 +960,7 @@
 		private System.Windows.Forms.Label labelNetworkWinRateTitle;
 		private System.Windows.Forms.Label labelNetworkWinsTitle;
 		private Guna.UI2.WinForms.Guna2PictureBox pictureBoxLineBetweenStats;
+		private Guna.UI2.WinForms.Guna2ComboBox comboBoxWindowSize;
+		private System.Windows.Forms.Label labelWindowSize;
 	}
 }

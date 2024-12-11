@@ -37,7 +37,6 @@
 			// 
 			// buttonCreateGame
 			// 
-			this.buttonCreateGame.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.buttonCreateGame.Animated = true;
 			this.buttonCreateGame.AutoRoundedCorners = true;
 			this.buttonCreateGame.BackColor = System.Drawing.Color.Transparent;
@@ -65,8 +64,6 @@
 			// 
 			// flpLobbyPreviews
 			// 
-			this.flpLobbyPreviews.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
 			this.flpLobbyPreviews.AutoScroll = true;
 			this.flpLobbyPreviews.BackColor = System.Drawing.Color.Transparent;
 			this.flpLobbyPreviews.Location = new System.Drawing.Point(12, 53);
@@ -77,7 +74,6 @@
 			// 
 			// buttonJoin
 			// 
-			this.buttonJoin.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonJoin.Animated = true;
 			this.buttonJoin.BackColor = System.Drawing.Color.Transparent;
 			this.buttonJoin.BorderRadius = 20;

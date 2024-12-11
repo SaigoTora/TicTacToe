@@ -52,7 +52,6 @@
 			// 
 			// labelName
 			// 
-			this.labelName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelName.BackColor = System.Drawing.Color.Transparent;
 			this.labelName.Cursor = System.Windows.Forms.Cursors.Arrow;
 			this.labelName.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -66,7 +65,6 @@
 			// 
 			// labelPrice
 			// 
-			this.labelPrice.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelPrice.BackColor = System.Drawing.Color.Transparent;
 			this.labelPrice.Cursor = System.Windows.Forms.Cursors.Arrow;
 			this.labelPrice.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -80,7 +78,6 @@
 			// 
 			// pictureBoxCoin
 			// 
-			this.pictureBoxCoin.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.pictureBoxCoin.BackColor = System.Drawing.Color.Transparent;
 			this.pictureBoxCoin.Image = global::TicTacToe.Properties.Resources.coin;
 			this.pictureBoxCoin.Location = new System.Drawing.Point(268, 82);
@@ -105,8 +102,6 @@
 			// 
 			// buttonOK
 			// 
-			this.buttonOK.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonOK.Animated = true;
 			this.buttonOK.BackColor = System.Drawing.Color.Transparent;
 			this.buttonOK.BorderRadius = 20;
@@ -133,8 +128,6 @@
 			// 
 			// buttonSelect
 			// 
-			this.buttonSelect.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonSelect.Animated = true;
 			this.buttonSelect.BackColor = System.Drawing.Color.Transparent;
 			this.buttonSelect.BorderRadius = 20;

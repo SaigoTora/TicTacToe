@@ -11,6 +11,7 @@ namespace TicTacToe.Models.Utilities.FormUtilities
 	{
 		private const string TAG_TO_MOVE_PARENT_CONTROL_DOWN = "needToMoveParentDown";
 		private const int DEFAULT_PANEL_HEIGHT = 35;
+		private const string MAIN_PANEL_NAME = "panelCustomTitleBar";
 
 		private static readonly Font _formNameFont = new Font("Segoe UI", 10F);
 		private static readonly Color _defaultPanelColor = Color.FromArgb(31, 31, 31);
@@ -99,6 +100,7 @@ namespace TicTacToe.Models.Utilities.FormUtilities
 		{
 			const int LEFT_PADDING = 6;
 
+			MainPanel.Name = MAIN_PANEL_NAME;
 			MainPanel.BackColor = _defaultPanelColor;
 			MainPanel.Dock = DockStyle.Top;
 			MainPanel.Size = new Size(0, DEFAULT_PANEL_HEIGHT);

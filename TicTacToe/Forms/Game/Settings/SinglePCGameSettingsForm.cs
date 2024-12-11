@@ -65,6 +65,7 @@ namespace TicTacToe.Forms.Game.Settings
 				textBoxOpponentName.Text = opponentName;
 			textBoxOpponentName.MaxLength = PlayerValidator.MAX_NAME_LENGTH;
 			textBoxOpponentName.BackColor = BackColor;
+			SetFormSize(_player.VisualSettings.WindowSize);
 			CreateAvatars();
 
 			if (_player.SinglePCGameSettings.IsTimerEnabled)

@@ -103,7 +103,6 @@ namespace TicTacToe.Models.Utilities.FormUtilities
 		{
 			IconPictureBox iconReady = new IconPictureBox()
 			{
-				Anchor = AnchorStyles.Bottom | AnchorStyles.Right,
 				BackColor = Color.Transparent,
 				IconFont = IconFont.Auto,
 				IconSize = 33,
@@ -120,7 +119,6 @@ namespace TicTacToe.Models.Utilities.FormUtilities
 		{
 			IconButton button = new IconButton()
 			{
-				Anchor = AnchorStyles.Top | AnchorStyles.Right,
 				BackColor = Color.FromArgb(0, parentPanel.BackColor),
 				IconFont = IconFont.Auto,
 				IconSize = 30,

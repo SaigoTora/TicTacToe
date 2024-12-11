@@ -60,6 +60,8 @@ namespace TicTacToe.Forms
 			numericUpDownNumberOfRounds.Value = _player.BotGameSettings.NumberOfRounds;
 			comboBoxGameMode.SelectedIndex = (int)_player.BotGameSettings.GameMode;
 			DisplayPlayerData();
+			if (_player.VisualSettings.WindowSize == WindowSize.Small)
+				Size = MinimumSize;
 
 			_pictureBoxEventHandlers.SubscribeToHover(pictureBoxAvatar);
 			_buttonEventHandlers.SubscribeToHover(buttonPlay, buttonSinglePCGame, buttonNetworkGame,
@@ -298,7 +300,11 @@ namespace TicTacToe.Forms
 		private void Menu_VisibleChanged(object sender, EventArgs e)
 		{
 			if (Visible)
+			{
 				DisplayPlayerData();
+				if (_player.VisualSettings.WindowSize == WindowSize.Small)
+					Size = MinimumSize;
+			}
 		}
 		private void MainForm_KeyDown(object sender, KeyEventArgs e)
 		{

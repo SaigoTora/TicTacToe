@@ -89,7 +89,7 @@ namespace TicTacToe.Forms.Game.Games3on3
 		{
 			foreach (var name in names)
 				if (name.Text.Length > 15)
-					name.Font = new Font(name.Font.FontFamily, 12);
+					name.Font = new Font(name.Font.FontFamily, name.Font.Size - 6);
 		}
 	}
 }

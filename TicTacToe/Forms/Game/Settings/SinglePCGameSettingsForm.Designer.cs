@@ -77,7 +77,6 @@
 			// 
 			// label7on7
 			// 
-			this.label7on7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.label7on7.AutoSize = true;
 			this.label7on7.BackColor = System.Drawing.Color.Transparent;
 			this.label7on7.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -93,7 +92,6 @@
 			// 
 			// buttonTimerEnabled
 			// 
-			this.buttonTimerEnabled.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.buttonTimerEnabled.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(35)))), ((int)(((byte)(30)))));
 			this.buttonTimerEnabled.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.buttonTimerEnabled.FlatAppearance.BorderSize = 0;
@@ -121,7 +119,6 @@
 			// 
 			// buttonPlay
 			// 
-			this.buttonPlay.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonPlay.Animated = true;
 			this.buttonPlay.BackColor = System.Drawing.Color.Transparent;
 			this.buttonPlay.BorderRadius = 20;
@@ -138,7 +135,7 @@
 			this.buttonPlay.Font = new System.Drawing.Font("Cooper Black", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.buttonPlay.ForeColor = System.Drawing.Color.White;
 			this.buttonPlay.GradientMode = System.Drawing.Drawing2D.LinearGradientMode.BackwardDiagonal;
-			this.buttonPlay.Location = new System.Drawing.Point(659, 658);
+			this.buttonPlay.Location = new System.Drawing.Point(659, 600);
 			this.buttonPlay.Name = "buttonPlay";
 			this.buttonPlay.Size = new System.Drawing.Size(220, 50);
 			this.buttonPlay.TabIndex = 10;
@@ -153,7 +150,7 @@
 			this.flpAvatar.Location = new System.Drawing.Point(12, 314);
 			this.flpAvatar.Name = "flpAvatar";
 			this.flpAvatar.Padding = new System.Windows.Forms.Padding(10, 10, 0, 0);
-			this.flpAvatar.Size = new System.Drawing.Size(560, 280);
+			this.flpAvatar.Size = new System.Drawing.Size(577, 280);
 			this.flpAvatar.TabIndex = 8;
 			// 
 			// buttonChangeOpponentName
@@ -195,7 +192,7 @@
 			this.numericUpDownNumberOfRounds.BackColor = System.Drawing.Color.Black;
 			this.numericUpDownNumberOfRounds.Font = new System.Drawing.Font("Courier New", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.numericUpDownNumberOfRounds.ForeColor = System.Drawing.Color.White;
-			this.numericUpDownNumberOfRounds.Location = new System.Drawing.Point(283, 167);
+			this.numericUpDownNumberOfRounds.Location = new System.Drawing.Point(320, 167);
 			this.numericUpDownNumberOfRounds.Maximum = new decimal(new int[] {
             99,
             0,
@@ -270,7 +267,7 @@
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-			this.ClientSize = new System.Drawing.Size(891, 720);
+			this.ClientSize = new System.Drawing.Size(890, 680);
 			this.Controls.Add(this.comboBoxGameMode);
 			this.Controls.Add(this.numericUpDownNumberOfRounds);
 			this.Controls.Add(this.labelNumberOfRounds);

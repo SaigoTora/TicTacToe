@@ -144,6 +144,7 @@ namespace TicTacToe.Forms.Game
 		protected void InitializeGame(GameFormInfo gameFormInfo)
 		{
 			_gameFormInfo = gameFormInfo;
+			SetFormSize(player.VisualSettings.WindowSize);
 
 			Icon = Resources.game;
 			_gameFormInfo.Score.Text = $"{roundManager.NumberOfWinsFirstPlayer} : {roundManager.NumberOfWinsSecondPlayer}";
@@ -506,11 +507,8 @@ namespace TicTacToe.Forms.Game
 			return nextCell;
 		}
 		private void SwapCellTypes()
-		{
-			CellType tempCellType = playerCellType;
-			playerCellType = opponentCellType;
-			opponentCellType = tempCellType;
-		}
+			=> (opponentCellType, playerCellType) =
+			(playerCellType, opponentCellType);
 
 		protected void SetPictureBoxesEnabled(bool enabled)
 		{

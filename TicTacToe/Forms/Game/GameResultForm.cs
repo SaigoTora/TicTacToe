@@ -53,7 +53,7 @@ namespace TicTacToe.Forms
 				buttonPlay.Visible = false;
 			}
 			_backToMainForm = backToMainForm;
-			RepositionControls(false);
+			RepositionButtons(true);
 
 			buttonBack.Click += _backToMainForm;
 			if (buttonPlay != null)
@@ -68,7 +68,6 @@ namespace TicTacToe.Forms
 			: this(player, coinUpdate, roundManager, result, backToMainForm)
 		{
 			_actionAfterTimeOver = actionAfterTimeOver;
-			RepositionControls(true);
 
 			if (delaySecondsToClose.HasValue && delaySecondsToClose.Value > 0)
 				_ = DelayToCloseAsync(delaySecondsToClose.Value);
@@ -76,7 +75,10 @@ namespace TicTacToe.Forms
 		internal GameResultForm(Player player, int coinUpdate, RoundManager roundManager, GameResult result,
 			Difficulty difficulty, EventHandler backToMainForm)
 			: this(player, coinUpdate, roundManager, result, backToMainForm, ActionAfterTimeOver.BackToMenu, 60)
-		{ _difficulty = difficulty; }
+		{
+			_difficulty = difficulty;
+			RepositionButtons(false);
+		}
 
 		private void ResultForm_Load(object sender, EventArgs e)
 		{
@@ -94,19 +96,22 @@ namespace TicTacToe.Forms
 			}
 
 			labelCurrentCoins.Text = $"{_player.Coins:N0}".Replace(',', ' ');
+			SetFormSize(_player.VisualSettings.WindowSize);
 		}
 
-		private void RepositionControls(bool isTimerToCloseExist)
+		private void RepositionButtons(bool moveUp)
 		{
-			if (isTimerToCloseExist)
+			int offset = labelTimeToClose.Height;
+
+			if (moveUp)
 			{
-				buttonBack.Location = new Point(buttonBack.Location.X, buttonBack.Location.Y - labelTimeToClose.Height);
-				buttonPlay.Location = new Point(buttonPlay.Location.X, buttonPlay.Location.Y - labelTimeToClose.Height);
+				buttonBack.Location = new Point(buttonBack.Location.X, buttonBack.Location.Y - offset);
+				buttonPlay.Location = new Point(buttonPlay.Location.X, buttonPlay.Location.Y - offset);
 			}
 			else
 			{
-				buttonBack.Location = new Point(buttonBack.Location.X, buttonBack.Location.Y + labelTimeToClose.Height);
-				buttonPlay.Location = new Point(buttonPlay.Location.X, buttonPlay.Location.Y + labelTimeToClose.Height);
+				buttonBack.Location = new Point(buttonBack.Location.X, buttonBack.Location.Y + offset);
+				buttonPlay.Location = new Point(buttonPlay.Location.X, buttonPlay.Location.Y + offset);
 			}
 		}
 		private void DisplayScore()

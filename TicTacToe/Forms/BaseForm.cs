@@ -1,5 +1,9 @@
-﻿using System;
+﻿using FontAwesome.Sharp;
+using Guna.UI2.WinForms;
+using System;
+using System.Drawing;
 using System.Windows.Forms;
+using TicTacToe.Models.PlayerInfo;
 using TicTacToe.Models.Utilities.FormUtilities;
 
 namespace TicTacToe.Forms
@@ -70,6 +74,7 @@ namespace TicTacToe.Forms
 		}
 		#endregion
 
+		private readonly (int Small, int Medium) sizePercentage = (69, 87);
 		protected CustomTitleBar customTitleBar;
 
 		public BaseForm()
@@ -98,7 +103,102 @@ namespace TicTacToe.Forms
 			this.Name = "BaseForm";
 			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.BaseForm_FormClosed);
 			this.ResumeLayout(false);
+
 		}
+
+		protected void SetFormSize(WindowSize windowSize)
+			=> SetControlSize(windowSize, this);
+		protected void SetControlSize(WindowSize windowSize, Control control)
+		{
+			float reduceFontSize = GetFontSizeReduction(windowSize);
+
+			switch (windowSize)
+			{
+				case WindowSize.Small:
+					{
+						ReduceControlElements(control, sizePercentage.Small, reduceFontSize);
+						break;
+					}
+				case WindowSize.Medium:
+					{
+						ReduceControlElements(control, sizePercentage.Medium, reduceFontSize);
+						break;
+					}
+				case WindowSize.Large:
+					break;
+				default:
+					throw new InvalidOperationException($"Unknown window size: {windowSize}");
+			}
+		}
+		protected float GetFontSizeReduction(WindowSize windowSize)
+		{
+			(float reduceFontSizeSmall, float reduceFontSizeMedium, float reduceFontSizeLarge) =
+				(4, 3, 0);
+
+			switch (windowSize)
+			{
+				case WindowSize.Small:
+					return reduceFontSizeSmall;
+				case WindowSize.Medium:
+					return reduceFontSizeMedium;
+				case WindowSize.Large:
+					return reduceFontSizeLarge;
+				default:
+					throw new InvalidOperationException($"Unknown window size: {windowSize}");
+			}
+		}
+
+		private void ReduceControlElements(Control control, int percentage, float reduceFontSize)
+		{
+			if (control.Name == customTitleBar.MainPanel.Name)
+				return;
+
+			if (!(control is Guna2TabControl))
+				ReduceControl(control, percentage, reduceFontSize);
+
+			if (control.Controls.Count > 0)
+				foreach (Control childControl in control.Controls)
+					ReduceControlElements(childControl, percentage, reduceFontSize);
+		}
+		private void ReduceControl(Control control, int percentage, float reduceFontSize)
+		{
+			control.Size = new Size(GetNumberByPercentage(control.Width, percentage, true),
+				GetNumberByPercentage(control.Height, percentage, true));
+
+			if (control is BaseForm form)
+				form.Location = new Point(
+					(Screen.PrimaryScreen.WorkingArea.Width - this.Width) / 2,
+					(Screen.PrimaryScreen.WorkingArea.Height - this.Height) / 2
+				);
+			else
+				control.Location = new Point(GetNumberByPercentage(control.Location.X, percentage, false),
+					GetNumberByPercentage(control.Location.Y, percentage, false));
+
+			if (control is Label || control is RichTextBox || control is TextBox
+				|| control is Guna2ComboBox)
+				control.Font = ReduceFontSize(control.Font, reduceFontSize);
+			if (control is IconButton iconButton)
+			{
+				iconButton.IconSize = GetNumberByPercentage(iconButton.IconSize, percentage, true);
+				iconButton.Font = ReduceFontSize(iconButton.Font, reduceFontSize + reduceFontSize);
+			}
+			if (control is Guna2GradientButton button)
+			{
+				button.BorderRadius = GetNumberByPercentage(button.BorderRadius, percentage, false);
+				button.Font = new Font(button.Font.FontFamily, GetNumberByPercentage((int)button.Font.Size, percentage, true));
+			}
+			if (control is Guna2CircleProgressBar progressBar)
+				progressBar.ImageSize = new Size(GetNumberByPercentage(progressBar.ImageSize.Width, percentage, true),
+				GetNumberByPercentage(progressBar.ImageSize.Height, percentage, true));
+		}
+		private Font ReduceFontSize(Font font, float reduceFontSize)
+			=> new Font(font.FontFamily, font.Size - reduceFontSize);
+		private int GetNumberByPercentage(int number, int percentage, bool roundUp)
+		{
+			double result = (double)number * percentage / 100;
+			return roundUp ? (int)Math.Ceiling(result) : (int)Math.Floor(result);
+		}
+
 		protected override void Dispose(bool disposing)
 		{
 			if (disposing && (components != null))

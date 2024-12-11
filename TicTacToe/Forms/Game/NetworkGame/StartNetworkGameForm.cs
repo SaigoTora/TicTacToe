@@ -57,6 +57,7 @@ namespace TicTacToe.Forms.Game.NetworkGame
 		}
 		private async void StartNetworkGameForm_Load(object sender, EventArgs e)
 		{
+			SetFormSize(_player.VisualSettings.WindowSize);
 			_buttonEventHandlers.SubscribeToHover(buttonCreateGame, buttonJoin);
 			await ScanLocalNetworkAsync();
 		}
@@ -77,6 +78,7 @@ namespace TicTacToe.Forms.Game.NetworkGame
 			panel.Controls.Add(pictureBoxCoin);
 			panel.Controls.Add(labelCoinsBet);
 			panel.Controls.Add(labelPlayers);
+			SetControlSize(_player.VisualSettings.WindowSize, panel);
 
 			ManageLobbyPreviewHover(panel, true);
 			SubscribePanelClick(panel, _player.Coins >= e.NetworkLobbyInfo.Settings.CoinsBet
@@ -86,14 +88,18 @@ namespace TicTacToe.Forms.Game.NetworkGame
 		}
 		private Guna2Panel CreateLobbyPreviewPanel()
 		{
+			const int PARENT_WIDTH = 776;
+			const int PARENT_MARGIN_RIGHT = 3;
+			const int PARENT_MARGIN_LEFT = 3;
+
 			const int PANEL_WIDTH_MARGIN = 17;// Indentation to fit the slider
 			const int PANEL_BOTTOM_MARGIN = 12;
 
 			Guna2Panel panel = new Guna2Panel
 			{
 				Parent = flpLobbyPreviews,
-				Size = new Size(flpLobbyPreviews.Width -
-				flpLobbyPreviews.Margin.Right - flpLobbyPreviews.Margin.Left - PANEL_WIDTH_MARGIN,
+				Size = new Size(PARENT_WIDTH -
+				PARENT_MARGIN_RIGHT - PARENT_MARGIN_LEFT - PANEL_WIDTH_MARGIN,
 				LOBBY_PREVIEW_PANEL_HEIGHT),
 				AutoRoundedCorners = true,
 				Cursor = Cursors.Hand,
@@ -149,7 +155,7 @@ namespace TicTacToe.Forms.Game.NetworkGame
 				ForeColor = Color.Gainsboro,
 				BackColor = Color.Transparent,
 				Text = description,
-				Font = new Font("Trebuchet MS", 10F, FontStyle.Regular),
+				Font = new Font("Trebuchet MS", 12F, FontStyle.Regular),
 				UseMnemonic = false
 			};
 			label.Location = new Point(LOBBY_PREVIEW_LABEL_MARGIN_LEFT,

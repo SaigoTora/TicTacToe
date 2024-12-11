@@ -30,6 +30,8 @@ namespace TicTacToe.Forms.ItemManagement.Shop
 			_player = player;
 			_item = item;
 			ActiveControl = buttonOK;
+			SetFormSize(_player.VisualSettings.WindowSize);
+
 			_buttonEventHandlers.SubscribeToHover(buttonOK, buttonSelect);
 		}
 		private void SetItemValues(Item item)

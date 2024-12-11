@@ -49,6 +49,7 @@ namespace TicTacToe.Forms.Game.Settings
 			numericUpDownCoinsBet.Maximum = Math.Min(_player.Coins, numericUpDownCoinsBet.Maximum);
 			richTextBoxDescription.BackColor = BackColor;
 			richTextBoxDescription.Text = _player.NetworkGameSettings.Description;
+			SetFormSize(_player.VisualSettings.WindowSize);
 
 			if (_player.NetworkGameSettings.IsTimerEnabled)
 				SetActiveEnableButtonStyle(buttonTimerEnabled);

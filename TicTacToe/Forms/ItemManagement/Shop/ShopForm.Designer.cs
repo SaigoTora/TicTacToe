@@ -58,10 +58,10 @@
 			this.tabControl.Controls.Add(this.tabPagePreferences);
 			this.tabControl.Controls.Add(this.tabPageGameAssistants);
 			this.tabControl.ItemSize = new System.Drawing.Size(400, 50);
-			this.tabControl.Location = new System.Drawing.Point(0, 300);
+			this.tabControl.Location = new System.Drawing.Point(0, 257);
 			this.tabControl.Name = "tabControl";
 			this.tabControl.SelectedIndex = 0;
-			this.tabControl.Size = new System.Drawing.Size(1200, 520);
+			this.tabControl.Size = new System.Drawing.Size(1200, 493);
 			this.tabControl.TabButtonHoverState.BorderColor = System.Drawing.Color.Empty;
 			this.tabControl.TabButtonHoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
 			this.tabControl.TabButtonHoverState.Font = new System.Drawing.Font("Trebuchet MS", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -94,14 +94,12 @@
 			this.tabPagePreferences.Location = new System.Drawing.Point(4, 54);
 			this.tabPagePreferences.Name = "tabPagePreferences";
 			this.tabPagePreferences.Padding = new System.Windows.Forms.Padding(3);
-			this.tabPagePreferences.Size = new System.Drawing.Size(1192, 462);
+			this.tabPagePreferences.Size = new System.Drawing.Size(1192, 435);
 			this.tabPagePreferences.TabIndex = 0;
 			this.tabPagePreferences.Text = "Design Elements";
 			// 
 			// panelPreferenceNavigation
 			// 
-			this.panelPreferenceNavigation.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
 			this.panelPreferenceNavigation.BackColor = System.Drawing.Color.Transparent;
 			this.panelPreferenceNavigation.Controls.Add(this.buttonPreferencesLeft);
 			this.panelPreferenceNavigation.Controls.Add(this.buttonPreferencesRight);
@@ -190,42 +188,39 @@
 			// 
 			// flpBackgroundMenu
 			// 
-			this.flpBackgroundMenu.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+			this.flpBackgroundMenu.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.flpBackgroundMenu.AutoScroll = true;
 			this.flpBackgroundMenu.BackColor = System.Drawing.Color.Transparent;
-			this.flpBackgroundMenu.Location = new System.Drawing.Point(249, 80);
+			this.flpBackgroundMenu.Location = new System.Drawing.Point(247, 44);
 			this.flpBackgroundMenu.Name = "flpBackgroundMenu";
 			this.flpBackgroundMenu.Padding = new System.Windows.Forms.Padding(40, 10, 0, 0);
-			this.flpBackgroundMenu.Size = new System.Drawing.Size(700, 340);
+			this.flpBackgroundMenu.Size = new System.Drawing.Size(701, 302);
 			this.flpBackgroundMenu.TabIndex = 1;
 			// 
 			// flpAvatar
 			// 
-			this.flpAvatar.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+			this.flpAvatar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.flpAvatar.AutoScroll = true;
 			this.flpAvatar.BackColor = System.Drawing.Color.Transparent;
-			this.flpAvatar.Location = new System.Drawing.Point(249, 80);
+			this.flpAvatar.Location = new System.Drawing.Point(247, 44);
 			this.flpAvatar.Name = "flpAvatar";
 			this.flpAvatar.Padding = new System.Windows.Forms.Padding(40, 10, 0, 0);
-			this.flpAvatar.Size = new System.Drawing.Size(700, 340);
+			this.flpAvatar.Size = new System.Drawing.Size(701, 302);
 			this.flpAvatar.TabIndex = 2;
 			this.flpAvatar.Visible = false;
 			// 
 			// flpBackgroundGame
 			// 
-			this.flpBackgroundGame.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+			this.flpBackgroundGame.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.flpBackgroundGame.AutoScroll = true;
 			this.flpBackgroundGame.BackColor = System.Drawing.Color.Transparent;
-			this.flpBackgroundGame.Location = new System.Drawing.Point(249, 80);
+			this.flpBackgroundGame.Location = new System.Drawing.Point(247, 44);
 			this.flpBackgroundGame.Name = "flpBackgroundGame";
 			this.flpBackgroundGame.Padding = new System.Windows.Forms.Padding(40, 10, 0, 0);
-			this.flpBackgroundGame.Size = new System.Drawing.Size(700, 340);
+			this.flpBackgroundGame.Size = new System.Drawing.Size(701, 302);
 			this.flpBackgroundGame.TabIndex = 3;
 			this.flpBackgroundGame.Visible = false;
 			// 
@@ -282,14 +277,13 @@
 			this.AutoScroll = true;
 			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(20)))));
 			this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-			this.ClientSize = new System.Drawing.Size(1200, 820);
+			this.ClientSize = new System.Drawing.Size(1200, 750);
 			this.Controls.Add(this.pictureBoxCoin);
 			this.Controls.Add(this.labelCoins);
 			this.Controls.Add(this.tabControl);
 			this.KeyPreview = true;
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
-			this.MinimumSize = new System.Drawing.Size(1076, 786);
 			this.Name = "ShopForm";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Shop";

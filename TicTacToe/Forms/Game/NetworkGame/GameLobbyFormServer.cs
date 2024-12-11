@@ -40,7 +40,6 @@ namespace TicTacToe.Forms.Game.NetworkGame
 
 		private readonly NetworkPlayerCreator _playerCreator;
 		private readonly SynchronizationContext _syncContext;
-		private readonly ButtonEventHandlers _buttonEventHandlers = new ButtonEventHandlers();
 		private readonly LabelEventHandlers _labelEventHandlers = new LabelEventHandlers();
 
 		private bool _isGameStarted;
@@ -59,6 +58,7 @@ namespace TicTacToe.Forms.Game.NetworkGame
 			int port = int.Parse(ConfigurationManager.AppSettings["port"]);
 			_gameServer = new GameServer(_player, port);
 
+			SetFormSize(_player.VisualSettings.WindowSize);
 			_playerCreator = new NetworkPlayerCreator(new Size(PANEL_WIDTH, PANEL_HEIGHT), PlayerKickButton_Click);
 		}
 		private void GameLobbyServerForm_Load(object sender, EventArgs e)
@@ -83,6 +83,7 @@ namespace TicTacToe.Forms.Game.NetworkGame
 					"Server Error", CustomMessageBoxButtons.OK, CustomMessageBoxIcon.Error);
 				Close();
 			}
+
 			ManageServerEventHandlers(true);
 		}
 
@@ -103,7 +104,6 @@ namespace TicTacToe.Forms.Game.NetworkGame
 			if (_player.NetworkGameSettings.IsGameAssistsEnabled)
 				SetActiveEnableButtonStyle(buttonGameAssistsEnabled);
 
-			_buttonEventHandlers.SubscribeToHover(buttonStart);
 			_labelEventHandlers.SubscribeToHoverUnderline(label3on3, label5on5, label7on7);
 		}
 		private void ManageServerEventHandlers(bool subscribe)
@@ -258,6 +258,7 @@ namespace TicTacToe.Forms.Game.NetworkGame
 
 				if (e.HasIPAddress())
 					_ipToGamePanels.Add(e.IPAddress, panel);
+				SetControlSize(_player.VisualSettings.WindowSize, panel);
 			}, null);
 		}
 		private void PlayerKickButton_Click(object sender, EventArgs e)
@@ -319,12 +320,13 @@ namespace TicTacToe.Forms.Game.NetworkGame
 			richTextBoxChat.SelectionStart = richTextBoxChat.Text.Length;
 			if (richTextBoxChat.Text.Length > 0)
 				richTextBoxChat.SelectedText = "\n";
-			DisplayTimeInMessage(message.Time.ToLocalTime());
+			float reduceFontSize = GetFontSizeReduction(_player.VisualSettings.WindowSize);
+			DisplayTimeInMessage(message.Time.ToLocalTime(), reduceFontSize);
 
 			if (!string.IsNullOrEmpty(message.Sender))
-				DisplaySenderInMessage(message.Sender, isOwnMessage);
+				DisplaySenderInMessage(message.Sender, isOwnMessage, reduceFontSize);
 
-			DisplayMessageText(message.Text);
+			DisplayMessageText(message.Text, reduceFontSize);
 			richTextBoxChat.ScrollToCaret();
 		}
 		private void RemoveFirstLineFromRichTextBox()
@@ -339,15 +341,15 @@ namespace TicTacToe.Forms.Game.NetworkGame
 				richTextBoxChat.Rtf = remainingRtf; // Replace the current text with a new one
 			}
 		}
-		private void DisplayTimeInMessage(DateTime dateTime)
+		private void DisplayTimeInMessage(DateTime dateTime, float reduceFontSize)
 		{
-			richTextBoxChat.SelectionFont = new Font(richTextBoxChat.Font.FontFamily, 10, FontStyle.Regular);
+			richTextBoxChat.SelectionFont = new Font(richTextBoxChat.Font.FontFamily, 10 - reduceFontSize, FontStyle.Regular);
 			richTextBoxChat.SelectionColor = Color.Gray;
 			richTextBoxChat.SelectedText = $"{dateTime:HH:mm}\t";
 		}
-		private void DisplaySenderInMessage(string sender, bool isOwnMessage)
+		private void DisplaySenderInMessage(string sender, bool isOwnMessage, float reduceFontSize)
 		{
-			richTextBoxChat.SelectionFont = new Font(richTextBoxChat.Font.FontFamily, 16, FontStyle.Bold);
+			richTextBoxChat.SelectionFont = new Font(richTextBoxChat.Font.FontFamily, 16 - reduceFontSize, FontStyle.Bold);
 			if (isOwnMessage)
 				richTextBoxChat.SelectionColor = Color.FromArgb(255, 223, 0);
 			else
@@ -355,13 +357,13 @@ namespace TicTacToe.Forms.Game.NetworkGame
 
 			richTextBoxChat.SelectedText = sender;
 
-			richTextBoxChat.SelectionFont = new Font(richTextBoxChat.Font.FontFamily, 16, FontStyle.Regular);
+			richTextBoxChat.SelectionFont = new Font(richTextBoxChat.Font.FontFamily, 16 - reduceFontSize, FontStyle.Regular);
 			richTextBoxChat.SelectionColor = Color.White;
 			richTextBoxChat.SelectedText = ":  ";
 		}
-		private void DisplayMessageText(string text)
+		private void DisplayMessageText(string text, float reduceFontSize)
 		{
-			richTextBoxChat.SelectionFont = new Font(richTextBoxChat.Font.FontFamily, 16, FontStyle.Regular);
+			richTextBoxChat.SelectionFont = new Font(richTextBoxChat.Font.FontFamily, 16 - reduceFontSize, FontStyle.Regular);
 			richTextBoxChat.SelectionColor = Color.LightGray;
 			richTextBoxChat.SelectedText = text;
 		}
@@ -376,6 +378,9 @@ namespace TicTacToe.Forms.Game.NetworkGame
 		}
 		private void TextBoxMessage_TextChanged(object sender, EventArgs e)
 		{
+			if (_player.VisualSettings.WindowSize != WindowSize.Large)
+				return;
+
 			BeginInvoke(new Action(() =>
 			{
 				const int MULTILINE_HEIGHT = 75;
@@ -479,7 +484,6 @@ namespace TicTacToe.Forms.Game.NetworkGame
 		}
 		private void GameLobbyServerForm_FormClosed(object sender, FormClosedEventArgs e)
 		{
-			_buttonEventHandlers.UnsubscribeAll();
 			_labelEventHandlers.UnsubscribeAll();
 
 			ClearPlayers();

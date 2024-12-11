@@ -9,6 +9,7 @@ namespace TicTacToe.Models.PlayerInfo
 	[Serializable]
 	internal class PlayerVisualSettings
 	{
+		internal WindowSize WindowSize = WindowSize.Large;
 		internal GameView GameView = GameView.Score;
 		[JsonProperty]
 		internal Avatar Avatar;

@@ -625,7 +625,7 @@
 			this.Controls.Add(this.panelMain);
 			this.ForeColor = System.Drawing.Color.Transparent;
 			this.KeyPreview = true;
-			this.MinimumSize = new System.Drawing.Size(1024, 700);
+			this.MinimumSize = new System.Drawing.Size(1024, 710);
 			this.Name = "MainForm";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Tic Tac Toe";

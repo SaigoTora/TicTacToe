@@ -21,7 +21,6 @@ namespace TicTacToe.Forms.ItemManagement.Shop
 
 		internal ShopForm(Player player) : base(player)
 		{
-			IsResizable = true;
 			customTitleBar = new CustomTitleBar(this, "Tic Tac Toe", Properties.Resources.shop);
 			InitializeComponent();
 

@@ -60,7 +60,6 @@ namespace TicTacToe.Forms.Game.NetworkGame
 			// 
 			// pictureBoxCoin
 			// 
-			this.pictureBoxCoin.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.pictureBoxCoin.BackColor = System.Drawing.Color.Transparent;
 			this.pictureBoxCoin.Image = global::TicTacToe.Properties.Resources.coin;
 			this.pictureBoxCoin.Location = new System.Drawing.Point(1146, 12);
@@ -72,13 +71,12 @@ namespace TicTacToe.Forms.Game.NetworkGame
 			// 
 			// labelCoins
 			// 
-			this.labelCoins.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelCoins.BackColor = System.Drawing.Color.Transparent;
 			this.labelCoins.Font = new System.Drawing.Font("Courier New", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.labelCoins.ForeColor = System.Drawing.Color.Khaki;
-			this.labelCoins.Location = new System.Drawing.Point(1012, 20);
+			this.labelCoins.Location = new System.Drawing.Point(942, 20);
 			this.labelCoins.Name = "labelCoins";
-			this.labelCoins.Size = new System.Drawing.Size(130, 27);
+			this.labelCoins.Size = new System.Drawing.Size(200, 27);
 			this.labelCoins.TabIndex = 12;
 			this.labelCoins.Text = "999 999";
 			this.labelCoins.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -100,8 +98,6 @@ namespace TicTacToe.Forms.Game.NetworkGame
 			// 
 			// label5on5
 			// 
-			this.label5on5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
 			this.label5on5.AutoSize = true;
 			this.label5on5.BackColor = System.Drawing.Color.Transparent;
 			this.label5on5.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -148,7 +144,7 @@ namespace TicTacToe.Forms.Game.NetworkGame
 			this.numericUpDownNumberOfRounds.BackColor = System.Drawing.Color.Black;
 			this.numericUpDownNumberOfRounds.Font = new System.Drawing.Font("Courier New", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.numericUpDownNumberOfRounds.ForeColor = System.Drawing.Color.White;
-			this.numericUpDownNumberOfRounds.Location = new System.Drawing.Point(259, 78);
+			this.numericUpDownNumberOfRounds.Location = new System.Drawing.Point(290, 78);
 			this.numericUpDownNumberOfRounds.Maximum = new decimal(new int[] {
             99,
             0,
@@ -262,7 +258,6 @@ namespace TicTacToe.Forms.Game.NetworkGame
 			// 
 			// buttonStart
 			// 
-			this.buttonStart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonStart.Animated = true;
 			this.buttonStart.BackColor = System.Drawing.Color.Transparent;
 			this.buttonStart.BorderRadius = 20;
@@ -290,7 +285,6 @@ namespace TicTacToe.Forms.Game.NetworkGame
 			// 
 			// flpPlayers
 			// 
-			this.flpPlayers.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.flpPlayers.AutoScroll = true;
 			this.flpPlayers.BackColor = System.Drawing.Color.Transparent;
 			this.flpPlayers.Location = new System.Drawing.Point(677, 375);
@@ -313,7 +307,6 @@ namespace TicTacToe.Forms.Game.NetworkGame
 			// 
 			// textBoxMessage
 			// 
-			this.textBoxMessage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.textBoxMessage.AutoScroll = true;
 			this.textBoxMessage.BorderColor = System.Drawing.Color.DarkGray;
 			this.textBoxMessage.BorderRadius = 5;
@@ -326,11 +319,11 @@ namespace TicTacToe.Forms.Game.NetworkGame
 			this.textBoxMessage.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
 			this.textBoxMessage.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
 			this.textBoxMessage.FocusedState.BorderColor = System.Drawing.Color.Gold;
-			this.textBoxMessage.Font = new System.Drawing.Font("Trebuchet MS", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.textBoxMessage.Font = new System.Drawing.Font("Trebuchet MS", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.textBoxMessage.ForeColor = System.Drawing.Color.White;
 			this.textBoxMessage.HoverState.BorderColor = System.Drawing.Color.LightGray;
 			this.textBoxMessage.Location = new System.Drawing.Point(4, 338);
-			this.textBoxMessage.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+			this.textBoxMessage.Margin = new System.Windows.Forms.Padding(4, 5, 4, 4);
 			this.textBoxMessage.MaxLength = 300;
 			this.textBoxMessage.Name = "textBoxMessage";
 			this.textBoxMessage.PasswordChar = '\0';
@@ -338,7 +331,7 @@ namespace TicTacToe.Forms.Game.NetworkGame
 			this.textBoxMessage.PlaceholderText = "Send message";
 			this.textBoxMessage.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
 			this.textBoxMessage.SelectedText = "";
-			this.textBoxMessage.Size = new System.Drawing.Size(535, 50);
+			this.textBoxMessage.Size = new System.Drawing.Size(525, 50);
 			this.textBoxMessage.TabIndex = 1;
 			this.textBoxMessage.TextChanged += new System.EventHandler(this.TextBoxMessage_TextChanged);
 			this.textBoxMessage.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBoxMessage_KeyDown);
@@ -347,7 +340,6 @@ namespace TicTacToe.Forms.Game.NetworkGame
 			// 
 			this.panelChat.BackColor = System.Drawing.Color.Transparent;
 			this.panelChat.Controls.Add(this.richTextBoxChat);
-			this.panelChat.Controls.Add(this.buttonSendMessage);
 			this.panelChat.Controls.Add(this.textBoxMessage);
 			this.panelChat.Location = new System.Drawing.Point(6, 375);
 			this.panelChat.Name = "panelChat";
@@ -372,7 +364,6 @@ namespace TicTacToe.Forms.Game.NetworkGame
 			// 
 			// buttonSendMessage
 			// 
-			this.buttonSendMessage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonSendMessage.BackColor = System.Drawing.Color.Transparent;
 			this.buttonSendMessage.BorderRadius = 4;
 			this.buttonSendMessage.BorderStyle = System.Drawing.Drawing2D.DashStyle.Custom;
@@ -385,10 +376,10 @@ namespace TicTacToe.Forms.Game.NetworkGame
 			this.buttonSendMessage.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
 			this.buttonSendMessage.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(103)))), ((int)(((byte)(126)))));
 			this.buttonSendMessage.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(83)))), ((int)(((byte)(138)))));
-			this.buttonSendMessage.Font = new System.Drawing.Font("Cooper Black", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.buttonSendMessage.Font = new System.Drawing.Font("Cooper Black", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.buttonSendMessage.ForeColor = System.Drawing.Color.White;
 			this.buttonSendMessage.GradientMode = System.Drawing.Drawing2D.LinearGradientMode.BackwardDiagonal;
-			this.buttonSendMessage.Location = new System.Drawing.Point(543, 338);
+			this.buttonSendMessage.Location = new System.Drawing.Point(545, 713);
 			this.buttonSendMessage.Name = "buttonSendMessage";
 			this.buttonSendMessage.Size = new System.Drawing.Size(125, 50);
 			this.buttonSendMessage.TabIndex = 2;
@@ -451,9 +442,12 @@ namespace TicTacToe.Forms.Game.NetworkGame
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.AutoSize = true;
+			this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
 			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
 			this.ClientSize = new System.Drawing.Size(1200, 800);
 			this.Controls.Add(this.comboBoxGameMode);
+			this.Controls.Add(this.buttonSendMessage);
 			this.Controls.Add(this.pictureBoxLineAboveChat);
 			this.Controls.Add(this.panelChat);
 			this.Controls.Add(this.labelValueCoinsBet);

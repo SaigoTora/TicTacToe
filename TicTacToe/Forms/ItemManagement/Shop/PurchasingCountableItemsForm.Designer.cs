@@ -55,7 +55,6 @@
 			// 
 			// labelName
 			// 
-			this.labelName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelName.BackColor = System.Drawing.Color.Transparent;
 			this.labelName.Cursor = System.Windows.Forms.Cursors.Arrow;
 			this.labelName.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -69,7 +68,6 @@
 			// 
 			// labelPrice
 			// 
-			this.labelPrice.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelPrice.BackColor = System.Drawing.Color.Transparent;
 			this.labelPrice.Cursor = System.Windows.Forms.Cursors.Arrow;
 			this.labelPrice.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -83,7 +81,6 @@
 			// 
 			// pictureBoxCoin
 			// 
-			this.pictureBoxCoin.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.pictureBoxCoin.BackColor = System.Drawing.Color.Transparent;
 			this.pictureBoxCoin.Image = global::TicTacToe.Properties.Resources.coin;
 			this.pictureBoxCoin.Location = new System.Drawing.Point(268, 82);
@@ -108,8 +105,6 @@
 			// 
 			// buttonBuy
 			// 
-			this.buttonBuy.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonBuy.Animated = true;
 			this.buttonBuy.BackColor = System.Drawing.Color.Transparent;
 			this.buttonBuy.BorderRadius = 20;
@@ -136,8 +131,6 @@
 			// 
 			// buttonBack
 			// 
-			this.buttonBack.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonBack.Animated = true;
 			this.buttonBack.BackColor = System.Drawing.Color.Transparent;
 			this.buttonBack.BorderRadius = 20;
@@ -168,7 +161,7 @@
 			this.numericUpDownNumberOfItems.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.numericUpDownNumberOfItems.Font = new System.Drawing.Font("Courier New", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.numericUpDownNumberOfItems.ForeColor = System.Drawing.Color.White;
-			this.numericUpDownNumberOfItems.Location = new System.Drawing.Point(592, 188);
+			this.numericUpDownNumberOfItems.Location = new System.Drawing.Point(625, 188);
 			this.numericUpDownNumberOfItems.Minimum = new decimal(new int[] {
             1,
             0,
@@ -187,7 +180,6 @@
 			// 
 			// labelNumberOfItems
 			// 
-			this.labelNumberOfItems.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelNumberOfItems.AutoSize = true;
 			this.labelNumberOfItems.BackColor = System.Drawing.Color.Transparent;
 			this.labelNumberOfItems.Cursor = System.Windows.Forms.Cursors.Arrow;
